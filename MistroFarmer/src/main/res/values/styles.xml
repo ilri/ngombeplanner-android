@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Mistro" parent="@style/Theme.Sherlock.Light">
+        <item name="actionBarItemBackground">@drawable/selectable_background_mistro</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Mistro</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Mistro</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Mistro</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Mistro</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Mistro</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_mistro</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_mistro</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Mistro</item>
+    </style>
+
+    <style name="ActionBar.Solid.Mistro" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
+        <item name="background">@drawable/ab_solid_mistro</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_mistro</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_mistro</item>
+        <item name="progressBarStyle">@style/ProgressBar.Mistro</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Mistro" parent="@style/Widget.Sherlock.Light.ActionBar">
+        <item name="background">@drawable/ab_transparent_mistro</item>
+        <item name="progressBarStyle">@style/ProgressBar.Mistro</item>
+    </style>
+
+    <style name="PopupMenu.Mistro" parent="@style/Widget.Sherlock.Light.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_mistro</item>
+    </style>
+
+    <style name="DropDownListView.Mistro" parent="@style/Widget.Sherlock.Light.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_mistro</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Mistro" parent="@style/Widget.Sherlock.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_mistro</item>
+    </style>
+
+    <style name="DropDownNav.Mistro" parent="@style/Widget.Sherlock.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/spinner_background_ab_mistro</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_mistro</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_mistro</item>
+    </style>
+
+    <style name="ProgressBar.Mistro" parent="@style/Widget.Sherlock.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_mistro</item>
+    </style>
+
+    <style name="ActionButton.CloseMode.Mistro" parent="@style/Widget.Sherlock.Light.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_mistro</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Mistro.Widget" parent="@style/Theme.Sherlock">
+        <item name="popupMenuStyle">@style/PopupMenu.Mistro</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Mistro</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="buttonBarStyle">@style/ButtonBar</item>
+        <item name="buttonBarButtonStyle">@style/ButtonBarButton</item>
+    </style>
+
+    <style name="ButtonBar">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:background">@android:drawable/bottom_bar</item>
+    </style>
+
+    <style name="ButtonBarButton" />
+
+</resources>

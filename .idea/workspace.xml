@@ -1,0 +1,1296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayoutPreviewToolWindow">
+    <option name="state">
+      <GlobalState />
+    </option>
+  </component>
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <target>android-18</target>
+      </config>
+    </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_farmer_registration.xml">
+        <config>
+          <device>3.2in QVGA (ADP2)</device>
+          <theme>@style/Theme.Mistro</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_landing.xml">
+        <config>
+          <device>3.2in QVGA (ADP2)</device>
+          <theme>@style/Theme.Mistro</theme>
+        </config>
+      </layout>
+    </layouts>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="225ed8cc-ff69-42a3-8530-e367063c6aef" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-fest/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-fest/src/main/java/org/fest/assertions/api/ACTIONBARSHERLOCK.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-fest/src/main/java/org/fest/assertions/api/com/actionbarsherlock/app/ActionBarAssert.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-fest/src/main/java/org/fest/assertions/api/com/actionbarsherlock/view/ActionModeAssert.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-fest/src/main/java/org/fest/assertions/api/com/actionbarsherlock/view/MenuAssert.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-fest/src/main/java/org/fest/assertions/api/com/actionbarsherlock/view/MenuItemAssert.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/project.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-af/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-am/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-ar/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-be/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-bg/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-ca/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-cs/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-da/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-de/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-el/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-en-rGB/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-es-rUS/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-es/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-et/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-fa/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-fi/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-fr/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-he/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-hi/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-hr/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-hu/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-in/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-it/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-iw/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-ja/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-ko/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-lt/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-lv/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-ms/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-nb/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-nl/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-pl/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-pt-rBR/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-pt-rPT/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-pt/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-ro/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-ru/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-sk/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-sl/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-sr/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-sv/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-sw/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-th/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-tl/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-tr/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-uk/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-vi/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-zh-rCN/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-zh-rTW/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/res/values-zu/abs__strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/src/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-i18n/strings.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/libs/android-support-v4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/project.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/bg_striped_img.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/bg_striped_split_img.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/ic_compose.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/ic_compose_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/ic_launcher_settings.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/ic_magnifying_glass.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/ic_refresh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/ic_refresh_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/ic_search.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/ic_search_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/ic_title_share_default.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-hdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-ldpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/bg_striped_img.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/bg_striped_split_img.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/ic_compose.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/ic_compose_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/ic_launcher_settings.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/ic_magnifying_glass.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/ic_refresh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/ic_refresh_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/ic_search.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/ic_search_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-mdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-xhdpi/bg_striped_img.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-xhdpi/bg_striped_split_img.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-xhdpi/ic_launcher_settings.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable-xhdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable/bg_striped.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/drawable/bg_striped_split.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout-large-land/feature_toggles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/action_modes.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/collapsible_edittext.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/context_menus.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/custom_view.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/feature_toggles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/iprogress.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/list_navigation.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/overlay.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/preferences.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/progress.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/settings_action_provider.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/tab_custom_view.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/tab_navigation.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/layout/text.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/menu/settings_action_provider.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/menu/share_action_provider.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/raw/robot.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/values/arrays.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/values/colors.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/values/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/values/themes.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/res/xml/preferences.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/ActionItems.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/ActionModes.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/ActionModesNoActionBar.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/ActionProviders.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/CollapsibleActionItem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/ContextMenus.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/CustomNavigation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/FeatureToggles.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/IndeterminateProgress.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/ListNavigation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/Overlay.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/Preference.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/Progress.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/SampleList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/SearchViews.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/ShareActionProviders.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/Simple.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/SplitActionItems.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/SplitActionModes.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/StaticAttachment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/Styled.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/SubMenus.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/TabNavigation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/demos/src/com/actionbarsherlock/sample/demos/TabNavigationCollapsed.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/libs/android-support-v4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/project.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/anim/decelerate_quint.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/anim/fragment_slide_left_enter.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/anim/fragment_slide_left_exit.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/anim/fragment_slide_right_enter.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/anim/fragment_slide_right_exit.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-hdpi/alert_dialog_icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-hdpi/ic_compose.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-hdpi/ic_compose_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-hdpi/ic_refresh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-hdpi/ic_refresh_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-hdpi/ic_search.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-hdpi/ic_search_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-hdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-ldpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-mdpi/alert_dialog_icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-mdpi/ic_compose.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-mdpi/ic_compose_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-mdpi/ic_refresh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-mdpi/ic_refresh_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-mdpi/ic_search.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-mdpi/ic_search_inverse.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-mdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/drawable-xhdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout-land/fragment_arguments_support.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout-land/fragment_layout_support.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_arguments_support.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_context_menu.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_dialog.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_dialog_or_activity.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_hide_show_support.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_layout_support.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_menu.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_pager.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_pager_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_retain_instance.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_stack.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_tabs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/fragment_tabs_pager.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/hello_world.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/labeled_text_edit.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/list_item_icon_text.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/receive_result.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/send_result.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/layout/simple_list_item_checkable_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/menu/shortcuts.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/values/attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/values/colors.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/res/values/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/CheckableFrameLayout.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/Cheeses.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentAlertDialogSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentArgumentsSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentContextMenuSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentCustomAnimationSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentDialogOrActivitySupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentDialogSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentHideShowSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentLayoutSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentListArraySupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentMenuSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentPagerSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentReceiveResultSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentRetainInstanceSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentStackSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentStatePagerSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentTabs.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/FragmentTabsPager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/LoaderCursorSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/LoaderCustomSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/LoaderThrottleSupport.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/SampleList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/SendResult.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/fragments/src/com/actionbarsherlock/sample/fragments/Shakespeare.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/libs/android-support-v4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/project.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/anim/issue331_refresh.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/drawable-hdpi/ic_refresh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/drawable-hdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/drawable-ldpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/drawable-mdpi/ic_refresh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/drawable-mdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/drawable-xhdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/layout/issue240.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/layout/issue272_fragment_pager.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/layout/issue272_fragment_pager_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/layout/issue331_action_view.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/layout/issue738_spinner_dropdown_item.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/layout/issue882.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/menu/issue659.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/values/issue379.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/values/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/res/xml/searchable_issue659.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/src/com/actionbarsherlock/sample/knownbugs/Issue240.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/src/com/actionbarsherlock/sample/knownbugs/Issue272.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/src/com/actionbarsherlock/sample/knownbugs/Issue331.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/src/com/actionbarsherlock/sample/knownbugs/Issue379.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/src/com/actionbarsherlock/sample/knownbugs/Issue435.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/src/com/actionbarsherlock/sample/knownbugs/Issue659.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/src/com/actionbarsherlock/sample/knownbugs/Issue659SuggestionsProvider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/src/com/actionbarsherlock/sample/knownbugs/Issue738.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/src/com/actionbarsherlock/sample/knownbugs/Issue882.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/known-bugs/src/com/actionbarsherlock/sample/knownbugs/SampleList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/libs/android-support-v4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/libs/guice-3.0-no_aop.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/libs/javax.inject-1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/libs/roboguice-2.0b4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/libs/roboguice-sherlock-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/project.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/res/anim/expletive_animation.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/res/drawable-hdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/res/drawable-ldpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/res/drawable-mdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/res/drawable-xhdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/res/layout/fight_evil.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/res/layout/main.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/res/values/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/src/com/actionbarsherlock/sample/roboguice/activity/AstroboyMasterConsole.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/src/com/actionbarsherlock/sample/roboguice/activity/FightForcesOfEvilActivity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/src/com/actionbarsherlock/sample/roboguice/controller/Astroboy.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/roboguice/src/com/actionbarsherlock/sample/roboguice/controller/AstroboyRemoteControl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/libs/android-support-v4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/libs/nineoldandroids-2.2.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/project.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-hdpi/ic_stat_android.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-hdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-ldpi/ic_stat_android.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-ldpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_btn_check_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_btn_check_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_btn_radio_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_btn_radio_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_menu_dropdown_panel_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_spinner_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_spinner_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_tab_selected_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_tab_selected_pressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ad_tab_unselected_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/btn_check_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/btn_check_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/btn_radio_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/btn_radio_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ic_menu_refresh_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ic_menu_star_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/ic_stat_android.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/spinner_default_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-mdpi/spinner_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable-xhdpi/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable/actionbar_tab_bg.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable/ad_action_bar_gradient_bak.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable/ad_btn_check_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable/ad_btn_radio_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable/ad_selectable_background.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable/ad_spinner_background_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable/rounded_rect.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/drawable/selected_background.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/layout/indeterminate_progress_action.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/layout/main.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/menu/main_menu.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/values/arrays.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/values/colors.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/values/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/values/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/res/values/styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/src/com/actionbarsherlock/sample/styled/MainActivity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-samples/styled/src/com/actionbarsherlock/sample/styled/RoundedColourFragment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/test/com/actionbarsherlock/internal/ResourcesCompatTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/CNAME" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/_config.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/_layouts/default.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/development.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/download.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/faq.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/favicon.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/humans.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/merch-and-donations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/migration.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/robots.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/samples.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/sitemap.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/1120.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.battlelancer.seriesguide.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.battlelancer.seriesguide_01_2.3.4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.battlelancer.seriesguide_01_2.3.4.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.battlelancer.seriesguide_01_3.0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.battlelancer.seriesguide_01_3.0.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.battlelancer.seriesguide_02_2.3.4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.battlelancer.seriesguide_02_2.3.4.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.battlelancer.seriesguide_02_3.0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.battlelancer.seriesguide_02_3.0.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.github.mobile.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.joelapenna.foursquared.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/apps/com.squareup.cardcase.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/black_linen_v2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/border.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/controls.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/css3-mediaqueries.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/down_grey.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/feature.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/feature_01.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/feature_02.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/feature_03.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/icon_web.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/ie.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/jquery.colorbox-min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/jquery.cross-slide.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/loading_background.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/logo.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/logo_small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/mascot.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/merch.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/octocat.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/overlay.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/ribbon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_01_1.6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_01_1.6.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_01_2.3.3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_01_2.3.3.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_01_3.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_01_3.1.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_02_1.6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_02_1.6.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_02_2.3.3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_02_2.3.3.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_02_3.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/featuredemo_02_3.1.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/shakespeare_01_1.6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/shakespeare_01_1.6.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/shakespeare_01_2.3.3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/shakespeare_01_2.3.3.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/shakespeare_01_3.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/shakespeare_01_3.1.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/shakespeare_02_2.3.3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/shakespeare_02_2.3.3.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/shakespeare_03_2.3.3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/shakespeare_03_2.3.3.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_01_1.6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_01_1.6.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_01_2.3.3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_01_2.3.3.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_01_3.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_01_3.1.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_02_1.6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_02_1.6.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_02_2.3.3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_02_2.3.3.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_02_3.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/samples/styled_02_3.1.thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/showdown.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/static/styles.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/support.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/theming.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/usage.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" />
+    </list>
+    <ignored path="MistroFarmer.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="Commander">
+    <leftPanel />
+    <rightPanel />
+    <splitter proportion="0.5" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DebuggerManager">
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_rules />
+    <ui_properties />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="MistroFarmer" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="strings_en.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="50" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FarmerRegistrationActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="74" selection-start="1031" selection-end="1031" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="882">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_farmer_registration.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_farmer_registration.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="40" selection-start="3179" selection-end="3179" vertical-scroll-proportion="0.26855123" vertical-offset="982" max-vertical-offset="1584">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_landing.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_landing.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="43" selection-start="773" selection-end="773" vertical-scroll-proportion="-10.928572" vertical-offset="0" max-vertical-offset="468">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dimens.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/dimens.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="0" selection-start="859" selection-end="859" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="396">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="0" selection-start="720" selection-end="720" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="666">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LandingActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="39" selection-start="994" selection-end="994" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
+              <folding>
+                <element signature="e#1175#1192#0" expanded="true" />
+                <element signature="e#1230#1250#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/libraries/ActionBarSherlock" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="tasksExpandState">
+      <map>
+        <entry key="" value="true" />
+      </map>
+    </option>
+    <option name="availableProjects">
+      <map>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="MistroFarmerProject" />
+              <option name="path" value="$PROJECT_DIR$" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="actionbarsherlock" />
+                <option name="path" value="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock" />
+              </ExternalProjectPojo>
+              <ExternalProjectPojo>
+                <option name="name" value="MistroFarmerProject" />
+                <option name="path" value="$PROJECT_DIR$" />
+              </ExternalProjectPojo>
+              <ExternalProjectPojo>
+                <option name="name" value="MistroFarmer" />
+                <option name="path" value="$PROJECT_DIR$/MistroFarmer" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="modificationStamps">
+      <map>
+        <entry key="$PROJECT_DIR$" value="1374931916442" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/drawable/btn_cab_done_mistro.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/drawable/pressed_background_mistro.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/drawable/progress_horizontal_mistro.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/drawable/selectable_background_mistro.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/drawable/spinner_background_ab_mistro.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/drawable/tab_indicator_ab_mistro.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmerProject.iml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_landing.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_farmer_registration.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-1" />
+    <option name="y" value="-4" />
+    <option name="width" value="1368" />
+    <option name="height" value="773" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmerProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmerProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmerProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmerProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmerProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmerProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmerProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistroFarmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="farmer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libraries/ActionBarSherlock" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0149C2251000B019" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="JellyBean_HIGH" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/MistroFarmer/src/main/res/drawable-xhdpi" />
+      <recent name="$PROJECT_DIR$/MistroFarmer/src/main/res/drawable-mdpi" />
+      <recent name="$PROJECT_DIR$/MistroFarmer/src/main/res/drawable-hdpi" />
+      <recent name="$PROJECT_DIR$/MistroFarmer/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Android Application.MistroFarmer">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="MistroFarmer" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="MistroFarmer" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <RunnerSettings RunnerId="AndroidDebugRunner" />
+      <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Android Application.MistroFarmer" />
+    </list>
+    <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="225ed8cc-ff69-42a3-8530-e367063c6aef" name="Default" comment="" />
+      <created>1374931918597</created>
+      <updated>1374931918597</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1" y="-4" width="1368" height="773" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32852808" sideWeight="0.60032105" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.39967898" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32744783" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32954547" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32954547" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32905295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32905295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32905295" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4552352" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.34510434" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32744783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="UPDATE_FILTER_SCOPE_NAME" />
+    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
+    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
+    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/drawable/progress_horizontal_mistro.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/drawable/pressed_background_mistro.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="389" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/drawable/btn_cab_done_mistro.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="11" selection-start="431" selection-end="431" vertical-scroll-proportion="0.21212122" vertical-offset="0" max-vertical-offset="594" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/drawable/ab_background_textured_mistro.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="389" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values-v14/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="78" selection-start="1592" selection-end="1592" vertical-scroll-proportion="0.5151515" vertical-offset="144" max-vertical-offset="738">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="816" selection-end="816" vertical-scroll-proportion="0.36363637" vertical-offset="0" max-vertical-offset="1206">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="720" selection-end="720" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="666">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="859" selection-end="859" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="396">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_landing.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="43" selection-start="773" selection-end="773" vertical-scroll-proportion="-10.928572" vertical-offset="0" max-vertical-offset="468">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmerProject.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="9" selection-start="491" selection-end="491" vertical-scroll-proportion="0.33333334" vertical-offset="0" max-vertical-offset="594">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="30" selection-start="265" selection-end="265" vertical-scroll-proportion="0.18181819" vertical-offset="0" max-vertical-offset="594">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="50" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="39" selection-start="994" selection-end="994" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
+          <folding>
+            <element signature="e#1175#1192#0" expanded="true" />
+            <element signature="e#1230#1250#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="74" selection-start="1031" selection-end="1031" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="882">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_farmer_registration.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="40" selection-start="3179" selection-end="3179" vertical-scroll-proportion="0.26855123" vertical-offset="982" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+  </component>
+</project>
+

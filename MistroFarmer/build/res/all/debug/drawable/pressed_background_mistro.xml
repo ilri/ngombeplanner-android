@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="@color/pressed_mistro" />
+</shape>
+<!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/drawable/pressed_background_mistro.xml -->

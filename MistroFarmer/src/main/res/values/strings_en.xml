@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="login_en">Login</string>
+    <string name="register_en">Register</string>
+    <string name="full_name_en">Full Name</string>
+    <string name="mobile_number_en">Mobile Number</string>
+    <string name="extension_p_en">Extension Personnel</string>
+    <string name="number_of_cows_en">Number of Cows</string>
+
+</resources>
