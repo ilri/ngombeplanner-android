@@ -23,8 +23,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.cgiar.ilri.mistro.farmer.FarmerRegistrationActivity"
-            android:label="@string/title_activity_farmer_registration" >
+            android:name="org.cgiar.ilri.mistro.farmer.FarmerRegistrationActivity" >
+        </activity>
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.CowRegistrationActivity" >
         </activity>
     </application>
 

@@ -61,7 +61,7 @@
             android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
             android:textSize="@dimen/normal_text_size"/>
         <EditText
-            android:id="@+id/number_of_cows_tv"
+            android:id="@+id/number_of_cows_et"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"

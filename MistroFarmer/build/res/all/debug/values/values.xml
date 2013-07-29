@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string-array name="sex_array_en">
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml -->
     <attr name="background" format="reference|color" />
     <attr name="backgroundSplit" format="reference|color" />
@@ -528,18 +533,38 @@
     <string name="abs__shareactionprovider_share_with_application">Share with <ns1:g id="application_name" example="Bluetooth">%s</ns1:g></string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="action_settings">Settings</string>
+    <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="age_en">Age</string>
+    <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="app_name">Mistro Farmer</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="breed_en">Breed</string>
+    <string name="cow_registration_en">Cow Registration, Cow</string>
+    <string name="dam_en">Dam</string>
+    <string name="dam_registration_en">Dam Registration</string>
+    <string name="date_of_birth_en">Date of Birth</string>
+    <string name="deformity_en">Deformity</string>
+    <string name="ear_tag_number_en">Ear Tag Number</string>
     <string name="extension_p_en">Extension Personnel</string>
+    <string name="farmer_registration_en">Farmer Registration</string>
+    <string name="finish_en">Finish</string>
     <string name="full_name_en">Full Name</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="hello_world">Hello world!</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="login_en">Login</string>
     <string name="mobile_number_en">Mobile Number</string>
+    <string name="name_en">Name</string>
+    <string name="next_en">Next</string>
     <string name="number_of_cows_en">Number of Cows</string>
+    <string name="okay_en">Okay</string>
+    <string name="previous_en">Previous</string>
     <string name="register_en">Register</string>
+    <string name="sex_en">Sex</string>
+    <string name="sire_en">Sire</string>
+    <string name="sire_registration_en">Sire Registration</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
+    <string name="title_activity_cow_registration">Cow Registration</string>
     <string name="title_activity_farmer_registration">Register Farmer</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml -->
     <style name="ActionBar.Solid.Mistro" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">

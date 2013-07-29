@@ -10,7 +10,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:label="@string/title_activity_farmer_registration" android:name="org.cgiar.ilri.mistro.farmer.FarmerRegistrationActivity">
+        <activity android:name="org.cgiar.ilri.mistro.farmer.FarmerRegistrationActivity">
+        </activity>
+        <activity android:name="org.cgiar.ilri.mistro.farmer.CowRegistrationActivity">
         </activity>
     </application>
 
