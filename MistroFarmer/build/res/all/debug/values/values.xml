@@ -2,6 +2,11 @@
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string-array name="age_type_array_en">
+        <item>Days</item>
+        <item>Weeks</item>
+        <item>Years</item>
+    </string-array>
     <string-array name="sex_array_en">
         <item>Female</item>
         <item>Male</item>

@@ -1,8 +1,10 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     private TextView fullNameTV;
     private TextView extensionPersonnelTV;
     private TextView mobileNumberTV;
+    private EditText mobileNumberET;
     private TextView numberOfCowsTV;
     private EditText numberOfCowsET;
     private Button registerButton;
@@ -33,6 +36,9 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         fullNameTV=(TextView)this.findViewById(R.id.full_name_tv);
         extensionPersonnelTV=(TextView)this.findViewById(R.id.extension_personnel_tv);
         mobileNumberTV=(TextView)this.findViewById(R.id.mobile_number_tv);
+        mobileNumberET=(EditText)this.findViewById(R.id.mobile_number_et);
+        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        mobileNumberET.setText(telephonyManager.getLine1Number());
         numberOfCowsTV=(TextView)this.findViewById(R.id.number_of_cows_tv);
         numberOfCowsET=(EditText)this.findViewById(R.id.number_of_cows_et);
         registerButton=(Button)this.findViewById(R.id.register_button);

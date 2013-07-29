@@ -5064,6 +5064,19 @@ Male
                 </string>
                 <string name="mobile_number_en" >Mobile Number
                 </string>
+
+                <string-array name="age_type_array_en" >
+                    <item>
+Days
+                    </item>
+                    <item>
+Weeks
+                    </item>
+                    <item>
+Years
+                    </item>
+                </string-array>
+
                 <string name="sex_en" >Sex
                 </string>
                 <string name="farmer_registration_en" >Farmer Registration

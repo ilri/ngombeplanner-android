@@ -28,5 +28,10 @@
     <string name="cow_registration_en">Cow Registration, Cow</string>
     <string name="dam_registration_en">Dam Registration</string>
     <string name="sire_registration_en">Sire Registration</string>
+    <string-array name="age_type_array_en">
+        <item>Days</item>
+        <item>Weeks</item>
+        <item>Years</item>
+    </string-array>
 
 </resources>
