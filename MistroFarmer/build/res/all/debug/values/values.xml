@@ -36,11 +36,11 @@
         <item>Crooked feet</item>
         <item>Clef palate</item>
     </string-array>
-    <string-array name="sex_array_en">
-        <item>Female</item>
-        <item>Male</item>
+    <string-array name="service_types_array_en">
+        <item>Artificial Insemination</item>
+        <item>Bull</item>
     </string-array>
-    <string-array name="sex_en">
+    <string-array name="sex_array_en">
         <item>Female</item>
         <item>Male</item>
     </string-array>
@@ -599,6 +599,7 @@
     <string name="okay_en">Okay</string>
     <string name="previous_en">Previous</string>
     <string name="register_en">Register</string>
+    <string name="service_type_used_en">Service Type Used</string>
     <string name="sex_en">Sex</string>
     <string name="sire_en">Sire</string>
     <string name="sire_registration_en">Sire Registration</string>

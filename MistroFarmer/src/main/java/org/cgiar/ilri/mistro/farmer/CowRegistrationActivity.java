@@ -56,7 +56,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private TextView deformityTV;
     private EditText deformityET;
     private TextView sireTV;
+    private EditText sireET;
     private TextView damTV;
+    private EditText damET;
     private Button previousButton;
     private Button nextButton;
     private boolean monitorAgeChange=true;
@@ -70,6 +72,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private ListView deformityLV;
     private Button dialogDeformityOkayB;
     private String[] deformities;
+    private TextView serviceTypeTV;
+    private Spinner serviceTypeS;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -82,11 +86,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         if(bundle!=null)
         {
             mode=bundle.getInt(KEY_MODE);
-            if(mode==MODE_COW)
-            {
-                index=bundle.getInt(KEY_INDEX);
-                numberOfCows=bundle.getInt(KEY_NUMBER_OF_COWS);
-            }
+            index=bundle.getInt(KEY_INDEX);
+            numberOfCows=bundle.getInt(KEY_NUMBER_OF_COWS);
         }
         else
         {
@@ -109,16 +110,17 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         breedET.setOnFocusChangeListener(this);
         sexTV=(TextView)this.findViewById(R.id.sex_tv);
         sexS=(Spinner)this.findViewById(R.id.sex_s);
-        if(mode==MODE_DAM||mode==MODE_SIRE)//TODO: remember to auto set sex in datastructure if dam or sire
-        {
-            sexTV.setVisibility(TextView.GONE);
-            sexS.setVisibility(Spinner.GONE);
-        }
         deformityTV=(TextView)this.findViewById(R.id.deformity_tv);
         deformityET=(EditText)this.findViewById(R.id.deformity_et);
         deformityET.setOnFocusChangeListener(this);
         sireTV=(TextView)this.findViewById(R.id.sire_tv);
+        sireET=(EditText)this.findViewById(R.id.sire_et);
+        sireET.setOnFocusChangeListener(this);
         damTV=(TextView)this.findViewById(R.id.dam_tv);
+        damET=(EditText)this.findViewById(R.id.dam_et);
+        damET.setOnFocusChangeListener(this);
+        serviceTypeTV=(TextView)this.findViewById(R.id.service_type_tv);
+        serviceTypeS=(Spinner)this.findViewById(R.id.service_type_s);
         previousButton=(Button)this.findViewById(R.id.previous_button);
         previousButton.setOnClickListener(this);
         if(mode==MODE_DAM||mode==MODE_SIRE||index==0)
@@ -144,6 +146,20 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         deformityLV =(ListView) deformityDialog.findViewById(R.id.deformity_lv);
         deformityLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         dialogDeformityOkayB =(Button) deformityDialog.findViewById(R.id.dialog_deformity_okay_b);
+        if(mode==MODE_DAM||mode==MODE_SIRE)//TODO: remember to auto set sex in datastructure if dam or sire
+        {
+            sexTV.setVisibility(TextView.GONE);
+            sexS.setVisibility(Spinner.GONE);
+            damTV.setVisibility(TextView.GONE);
+            damET.setVisibility(EditText.GONE);
+            sireTV.setVisibility(TextView.GONE);
+            sireET.setVisibility(EditText.GONE);
+        }
+        if(mode==MODE_SIRE)
+        {
+            serviceTypeTV.setVisibility(TextView.VISIBLE);
+            serviceTypeS.setVisibility(Spinner.VISIBLE);
+        }
 
         //init text in child views
         initTextInViews(localeCode);
@@ -181,6 +197,10 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             deformityTV.setText(R.string.deformity_en);
             sireTV.setText(R.string.sire_en);
             damTV.setText(R.string.dam_en);
+            serviceTypeTV.setText(R.string.service_type_used_en);
+            ArrayAdapter<CharSequence> serviceTypesAdapter=ArrayAdapter.createFromResource(this,R.array.service_types_array_en,android.R.layout.simple_spinner_item);
+            serviceTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            serviceTypeS.setAdapter(serviceTypesAdapter);
             previousButton.setText(R.string.previous_en);
             if(mode==MODE_SIRE||mode==MODE_DAM)
             {
@@ -240,7 +260,15 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                     startActivity(intent);
                 }
             }
-        }//TODO: implement for sire and dam
+            else//go back to cow
+            {
+                Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
+                intent.putExtra(KEY_MODE,MODE_COW);
+                intent.putExtra(KEY_INDEX,index);
+                intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+                startActivity(intent);
+            }
+        }
         else if(view==dialogBreedOkayB)
         {
             String selectedBreeds="";
@@ -423,6 +451,22 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         else if(view==deformityET&&hasFocus)
         {
             deformityDialog.show();
+        }
+        else if(view==sireET)
+        {
+            Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
+            intent.putExtra(KEY_MODE,MODE_SIRE);
+            intent.putExtra(KEY_INDEX,index);
+            intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+            startActivity(intent);
+        }
+        else if(view==damET)
+        {
+            Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
+            intent.putExtra(KEY_MODE,MODE_DAM);
+            intent.putExtra(KEY_INDEX,index);
+            intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+            startActivity(intent);
         }
     }
 
