@@ -332,7 +332,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
     {
-        String dateString=String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(year);
+        String dateString=String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear+1)+"/"+String.valueOf(year);//TODO: this might be a bug
         dateOfBirthET.setText(dateString);
         setAgeFromDate(dateString);
     }
