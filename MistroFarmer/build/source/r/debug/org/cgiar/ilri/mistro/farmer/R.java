@@ -12,7 +12,10 @@ public final class R {
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int age_type_array_en=0x7f040000;
-        public static final int sex_array_en=0x7f040001;
+        public static final int breeds_array_en=0x7f040001;
+        public static final int deformities_array_en=0x7f040002;
+        public static final int sex_array_en=0x7f040003;
+        public static final int sex_en=0x7f040004;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -706,14 +709,15 @@ containing a value of this type.
         public static final int abs__bright_foreground_disabled_holo_light=0x7f060003;
         public static final int abs__bright_foreground_holo_dark=0x7f060004;
         public static final int abs__bright_foreground_holo_light=0x7f060005;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f060008;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f060009;
-        public static final int abs__primary_text_holo_dark=0x7f06000a;
-        public static final int abs__primary_text_holo_light=0x7f06000b;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f060009;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f06000a;
+        public static final int abs__primary_text_holo_dark=0x7f06000b;
+        public static final int abs__primary_text_holo_light=0x7f06000c;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/colors.xml 
          */
         public static final int black_overlay=0x7f060006;
         public static final int pressed_mistro=0x7f060007;
+        public static final int text_input_color=0x7f060008;
     }
     public static final class dimen {
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-land/values.xml 
@@ -945,18 +949,23 @@ containing a value of this type.
         public static final int abs__textButton=0x7f070013;
         public static final int abs__title=0x7f07001b;
         public static final int abs__up=0x7f07000f;
-        public static final int action_settings=0x7f070051;
+        public static final int action_settings=0x7f070056;
         public static final int age_et=0x7f070037;
         public static final int age_s=0x7f070038;
         public static final int age_tv=0x7f070036;
         public static final int breed_et=0x7f07003c;
+        public static final int breed_lv=0x7f070052;
         public static final int breed_tv=0x7f07003b;
         public static final int dam_et=0x7f070044;
         public static final int dam_tv=0x7f070043;
         public static final int date_of_birth_et=0x7f07003a;
         public static final int date_of_birth_tv=0x7f070039;
         public static final int deformity_et=0x7f070040;
+        public static final int deformity_lv=0x7f070054;
         public static final int deformity_tv=0x7f07003f;
+        public static final int dialog_breed_okay_b=0x7f070053;
+        public static final int dialog_breed_sv=0x7f070051;
+        public static final int dialog_deformity_okay_b=0x7f070055;
         public static final int disableHome=0x7f070008;
         public static final int ear_tag_number_et=0x7f070035;
         public static final int ear_tag_number_tv=0x7f070034;
@@ -1021,8 +1030,10 @@ containing a value of this type.
         public static final int activity_cow_registration=0x7f030015;
         public static final int activity_farmer_registration=0x7f030016;
         public static final int activity_landing=0x7f030017;
-        public static final int sherlock_spinner_dropdown_item=0x7f030018;
-        public static final int sherlock_spinner_item=0x7f030019;
+        public static final int dialog_breed=0x7f030018;
+        public static final int dialog_deformity=0x7f030019;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001a;
+        public static final int sherlock_spinner_item=0x7f03001b;
     }
     public static final class menu {
         public static final int cow_registration=0x7f0c0000;

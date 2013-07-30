@@ -7,7 +7,40 @@
         <item>Weeks</item>
         <item>Years</item>
     </string-array>
+    <string-array name="breeds_array_en">
+        <item>Ayrshire</item>
+        <item>Boran</item>
+        <item>Charolais</item>
+        <item>Aberdeen Angus</item>
+        <item>Simmental</item>
+        <item>Friesian</item>
+        <item>Guernsey</item>
+        <item>Hereford</item>
+        <item>Jersey</item>
+        <item>Ankole</item>
+        <item>Limousine</item>
+        <item>Brahman</item>
+        <item>Santa Getrude</item>
+        <item>Piemontese</item>
+        <item>Red Poll</item>
+        <item>Sahiwal</item>
+        <item>Nganda</item>
+        <item>Fleckviah</item>
+        <item>Brown Swiss</item>
+        <item>Zebu</item>
+    </string-array>
+    <string-array name="deformities_array_en">
+        <item>Blind</item>
+        <item>Lame</item>
+        <item>Abnormal teat number</item>
+        <item>Crooked feet</item>
+        <item>Clef palate</item>
+    </string-array>
     <string-array name="sex_array_en">
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
+    <string-array name="sex_en">
         <item>Female</item>
         <item>Male</item>
     </string-array>
@@ -35,6 +68,7 @@
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/colors.xml -->
     <color name="black_overlay">#66000000</color>
     <color name="pressed_mistro">#CC96AA39</color>
+    <color name="text_input_color">#527270</color>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/attrs.xml -->
     <declare-styleable name="ButtonBarContainerTheme">
         <attr name="buttonBarStyle" format="reference" />
@@ -500,7 +534,7 @@
     <dimen name="abs__search_view_preferred_width">320dip</dimen>
     <dimen name="abs__search_view_text_min_width">160dip</dimen>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/dimens.xml -->
-    <dimen name="activity_f_r_edit_text_margin_left">5dp</dimen>
+    <dimen name="activity_f_r_edit_text_margin_left">15dp</dimen>
     <dimen name="activity_f_r_edit_text_margin_top">5dp</dimen>
     <dimen name="activity_f_r_text_view_margin_top">18dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>

@@ -1,16 +1,20 @@
 package org.cgiar.ilri.mistro.farmer;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,15 +50,26 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private TextView dateOfBirthTV;
     private EditText dateOfBirthET;
     private TextView breedTV;
+    private EditText breedET;
     private TextView sexTV;
     private Spinner sexS;
     private TextView deformityTV;
+    private EditText deformityET;
     private TextView sireTV;
     private TextView damTV;
     private Button previousButton;
     private Button nextButton;
     private boolean monitorAgeChange=true;
     private DatePickerDialog datePickerDialog;
+    private Dialog breedDialog;
+    private ScrollView breedDialogSV;
+    private ListView breedLV;
+    private Button dialogBreedOkayB;
+    private String[] breeds;
+    private Dialog deformityDialog;
+    private ListView deformityLV;
+    private Button dialogDeformityOkayB;
+    private String[] deformities;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -90,6 +105,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         dateOfBirthET=(EditText)this.findViewById(R.id.date_of_birth_et);
         dateOfBirthET.setOnFocusChangeListener(this);
         breedTV=(TextView)this.findViewById(R.id.breed_tv);
+        breedET=(EditText)this.findViewById(R.id.breed_et);
+        breedET.setOnFocusChangeListener(this);
         sexTV=(TextView)this.findViewById(R.id.sex_tv);
         sexS=(Spinner)this.findViewById(R.id.sex_s);
         if(mode==MODE_DAM||mode==MODE_SIRE)//TODO: remember to auto set sex in datastructure if dam or sire
@@ -98,6 +115,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             sexS.setVisibility(Spinner.GONE);
         }
         deformityTV=(TextView)this.findViewById(R.id.deformity_tv);
+        deformityET=(EditText)this.findViewById(R.id.deformity_et);
+        deformityET.setOnFocusChangeListener(this);
         sireTV=(TextView)this.findViewById(R.id.sire_tv);
         damTV=(TextView)this.findViewById(R.id.dam_tv);
         previousButton=(Button)this.findViewById(R.id.previous_button);
@@ -108,6 +127,23 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         }
         nextButton=(Button)this.findViewById(R.id.next_button);
         nextButton.setOnClickListener(this);
+        breedDialog=new Dialog(this);
+        breedDialog.setContentView(R.layout.dialog_breed);
+        dialogBreedOkayB=(Button)breedDialog.findViewById(R.id.dialog_breed_okay_b);
+        dialogBreedOkayB.setOnClickListener(this);
+        /*WindowManager.LayoutParams dialogLayoutParams=new WindowManager.LayoutParams();
+        dialogLayoutParams.copyFrom(breedDialog.getWindow().getAttributes());
+        dialogLayoutParams.width=WindowManager.LayoutParams.MATCH_PARENT;
+        dialogLayoutParams.height=WindowManager.LayoutParams.MATCH_PARENT;
+        breedDialog.getWindow().setAttributes(dialogLayoutParams);*/
+        breedDialogSV=(ScrollView)breedDialog.findViewById(R.id.dialog_breed_sv);
+        breedLV=(ListView)breedDialog.findViewById(R.id.breed_lv);
+        breedLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        deformityDialog =new Dialog(this);
+        deformityDialog.setContentView(R.layout.dialog_deformity);
+        deformityLV =(ListView) deformityDialog.findViewById(R.id.deformity_lv);
+        deformityLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        dialogDeformityOkayB =(Button) deformityDialog.findViewById(R.id.dialog_deformity_okay_b);
 
         //init text in child views
         initTextInViews(localeCode);
@@ -161,7 +197,17 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                     nextButton.setText(R.string.next_en);
                 }
             }
-
+            breedDialog.setTitle(R.string.breed_en);
+            breeds=getResources().getStringArray(R.array.breeds_array_en);
+            ArrayAdapter<String> breedArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,breeds);
+            breedLV.setAdapter(breedArrayAdapter);
+            dialogBreedOkayB.setText(R.string.okay_en);
+            deformityDialog.setTitle(R.string.deformity_en);
+            deformities=getResources().getStringArray(R.array.deformities_array_en);
+            ArrayAdapter<String> deformityArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,deformities);
+            deformityLV.setAdapter(deformityArrayAdapter);
+            dialogDeformityOkayB.setText(R.string.okay_en);
+            dialogDeformityOkayB.setOnClickListener(this);
         }
     }
 
@@ -195,6 +241,49 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 }
             }
         }//TODO: implement for sire and dam
+        else if(view==dialogBreedOkayB)
+        {
+            String selectedBreeds="";
+            SparseBooleanArray checkedBreeds=breedLV.getCheckedItemPositions();
+            for (int i=0; i<breedLV.getCount();i++)
+            {
+                if(checkedBreeds.get(i))
+                {
+                    if(!selectedBreeds.equals(""))
+                    {
+                        selectedBreeds=selectedBreeds+", "+breeds[i];
+                    }
+                    else
+                    {
+                        selectedBreeds=breeds[i];
+                    }
+                }
+            }
+            breedET.setText(selectedBreeds);
+            breedDialog.dismiss();
+
+        }
+        else if(view==dialogDeformityOkayB)
+        {
+            String selectedDeformities="";
+            SparseBooleanArray checkedDeformities=deformityLV.getCheckedItemPositions();
+            for (int i=0; i<deformityLV.getCount();i++)
+            {
+                if(checkedDeformities.get(i))
+                {
+                    if(!selectedDeformities.equals(""))
+                    {
+                        selectedDeformities=selectedDeformities+", "+deformities[i];
+                    }
+                    else
+                    {
+                        selectedDeformities=deformities[i];
+                    }
+                }
+            }
+            deformityET.setText(selectedDeformities);
+            deformityDialog.dismiss();
+        }
 
 
     }
@@ -326,6 +415,14 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             calendar.setTime(date);
             datePickerDialog=new DatePickerDialog(this,this,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
             datePickerDialog.show();
+        }
+        else if(view==breedET&&hasFocus)
+        {
+            breedDialog.show();
+        }
+        else if(view==deformityET&&hasFocus)
+        {
+            deformityDialog.show();
         }
     }
 

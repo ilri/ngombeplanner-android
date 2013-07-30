@@ -9,7 +9,7 @@
     <dimen name="activity_padding_bottom">15dp</dimen>
     <dimen name="activity_padding_side">20dp</dimen>
     <dimen name="activity_f_r_edit_text_margin_top">5dp</dimen>
-    <dimen name="activity_f_r_edit_text_margin_left">5dp</dimen>
+    <dimen name="activity_f_r_edit_text_margin_left">15dp</dimen>
     <dimen name="activity_f_r_text_view_margin_top">18dp</dimen>
     <dimen name="normal_button_layout_height">50dp</dimen>
     <dimen name="normal_button_padding_side">15dp</dimen>

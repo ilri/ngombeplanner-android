@@ -33,5 +33,34 @@
         <item>Weeks</item>
         <item>Years</item>
     </string-array>
+    <string-array name="breeds_array_en">
+        <item>Ayrshire</item>
+        <item>Boran</item>
+        <item>Charolais</item>
+        <item>Aberdeen Angus</item>
+        <item>Simmental</item>
+        <item>Friesian</item>
+        <item>Guernsey</item>
+        <item>Hereford</item>
+        <item>Jersey</item>
+        <item>Ankole</item>
+        <item>Limousine</item>
+        <item>Brahman</item>
+        <item>Santa Getrude</item>
+        <item>Piemontese</item>
+        <item>Red Poll</item>
+        <item>Sahiwal</item>
+        <item>Nganda</item>
+        <item>Fleckviah</item>
+        <item>Brown Swiss</item>
+        <item>Zebu</item>
+    </string-array>
+    <string-array name="deformities_array_en">
+        <item>Blind</item>
+        <item>Lame</item>
+        <item>Abnormal teat number</item>
+        <item>Crooked feet</item>
+        <item>Clef palate</item>
+    </string-array>
 
 </resources>
