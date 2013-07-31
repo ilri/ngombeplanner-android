@@ -47,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:visibility="gone"
             android:textSize="@dimen/normal_text_size"/>
 
         <LinearLayout
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
                 android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+                android:visibility="gone"
                 android:orientation="horizontal">
             <EditText
                     android:id="@+id/age_et"

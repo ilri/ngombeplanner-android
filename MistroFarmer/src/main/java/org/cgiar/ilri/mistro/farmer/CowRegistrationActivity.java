@@ -2,6 +2,7 @@ package org.cgiar.ilri.mistro.farmer;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
+import java.lang.reflect.Field;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,6 +39,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     public static final int MODE_COW=0;
     public static final int MODE_SIRE=1;
     public static final int MODE_DAM=2;
+    private final String dateFormat="MM/yyyy";
 
     private int mode;
     private int index;
@@ -105,20 +109,25 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         dateOfBirthTV=(TextView)this.findViewById(R.id.date_of_birth_tv);
         dateOfBirthET=(EditText)this.findViewById(R.id.date_of_birth_et);
         dateOfBirthET.setOnFocusChangeListener(this);
+        dateOfBirthET.setOnClickListener(this);
         breedTV=(TextView)this.findViewById(R.id.breed_tv);
         breedET=(EditText)this.findViewById(R.id.breed_et);
         breedET.setOnFocusChangeListener(this);
+        breedET.setOnClickListener(this);
         sexTV=(TextView)this.findViewById(R.id.sex_tv);
         sexS=(Spinner)this.findViewById(R.id.sex_s);
         deformityTV=(TextView)this.findViewById(R.id.deformity_tv);
         deformityET=(EditText)this.findViewById(R.id.deformity_et);
         deformityET.setOnFocusChangeListener(this);
+        deformityET.setOnClickListener(this);
         sireTV=(TextView)this.findViewById(R.id.sire_tv);
         sireET=(EditText)this.findViewById(R.id.sire_et);
         sireET.setOnFocusChangeListener(this);
+        sireET.setOnClickListener(this);
         damTV=(TextView)this.findViewById(R.id.dam_tv);
         damET=(EditText)this.findViewById(R.id.dam_et);
         damET.setOnFocusChangeListener(this);
+        damET.setOnClickListener(this);
         serviceTypeTV=(TextView)this.findViewById(R.id.service_type_tv);
         serviceTypeS=(Spinner)this.findViewById(R.id.service_type_s);
         previousButton=(Button)this.findViewById(R.id.previous_button);
@@ -312,9 +321,81 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             deformityET.setText(selectedDeformities);
             deformityDialog.dismiss();
         }
-
-
+        else if(view==dateOfBirthET)
+        {
+            dateOfBirthETClicked();
+        }
+        else if(view==breedET)
+        {
+            breedETClicked();
+        }
+        else if(view==deformityET)
+        {
+            deformityETClicked();
+        }
+        else if(view==sireET)
+        {
+            sireETClicked();
+        }
+        else if(view==damET)
+        {
+            damETClicked();
+        }
     }
+
+    private void dateOfBirthETClicked()
+    {
+        Date date=null;
+        if(dateOfBirthET.getText().toString().length()>0)
+        {
+            try
+            {
+                date=new SimpleDateFormat(dateFormat, Locale.ENGLISH).parse(dateOfBirthET.getText().toString());
+            }
+            catch (ParseException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if(date==null)
+        {
+            date=new Date();
+        }
+        Calendar calendar=new GregorianCalendar();
+        calendar.setTime(date);
+        datePickerDialog=new DatePickerDialog(this,this,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        //datePickerDialog=createDialogWithoutDateField(this,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
+    private void breedETClicked()
+    {
+        breedDialog.show();
+    }
+
+    private void deformityETClicked()
+    {
+        deformityDialog.show();
+    }
+
+    private void sireETClicked()
+    {
+        Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
+        intent.putExtra(KEY_MODE,MODE_SIRE);
+        intent.putExtra(KEY_INDEX,index);
+        intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+        startActivity(intent);
+    }
+
+    private void damETClicked()
+    {
+        Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
+        intent.putExtra(KEY_MODE,MODE_DAM);
+        intent.putExtra(KEY_INDEX,index);
+        intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+        startActivity(intent);
+    }
+
 
     private String getDateFromAge()
     {
@@ -337,7 +418,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             long nowMilliseconds=new Date().getTime();
             long pastDateMilliseconds=nowMilliseconds-milliseconds;
             Date pastDate=new Date(pastDateMilliseconds);
-            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat(dateFormat);
             return simpleDateFormat.format(pastDate);
         }
         return null;
@@ -346,7 +427,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private void setAgeFromDate(String dateString)
     {
         monitorAgeChange=false;
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat(dateFormat);
         Date enteredDate=new Date();
         try
         {
@@ -397,6 +478,37 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             dateOfBirthET.setText(getDateFromAge());
         }
     }
+    private DatePickerDialog createDialogWithoutDateField(DatePickerDialog.OnDateSetListener dateSetListener, int cyear, int cmonth, int cday){
+
+    DatePickerDialog dpd = new DatePickerDialog(this, dateSetListener,cyear,cmonth, cday);
+    try
+    {
+        Field[] datePickerDialogFields = dpd.getClass().getDeclaredFields();
+        for (Field datePickerDialogField : datePickerDialogFields)
+        {
+            if (datePickerDialogField.getName().equals("mDatePicker"))
+            {
+                datePickerDialogField.setAccessible(true);
+                DatePicker datePicker = (DatePicker) datePickerDialogField.get(dpd);
+                Field datePickerFields[] = datePickerDialogField.getType().getDeclaredFields();
+                for (Field datePickerField : datePickerFields)
+                {
+                    if ("mDayPicker".equals(datePickerField.getName()))
+                    {
+                        datePickerField.setAccessible(true);
+                        Object dayPicker = new Object();
+                        dayPicker = datePickerField.get(datePicker);
+                        ((View) dayPicker).setVisibility(View.GONE);
+                    }
+                }
+            }
+
+        }
+    }catch(Exception ex){
+    }
+    return dpd;
+
+}
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -423,50 +535,23 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     {
         if(view==dateOfBirthET&&hasFocus)
         {
-            Date date=null;
-            if(dateOfBirthET.getText().toString().length()>0)
-            {
-                try
-                {
-                    date=new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(dateOfBirthET.getText().toString());
-                }
-                catch (ParseException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            if(date==null)
-            {
-                date=new Date();
-            }
-            Calendar calendar=new GregorianCalendar();
-            calendar.setTime(date);
-            datePickerDialog=new DatePickerDialog(this,this,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
-            datePickerDialog.show();
+            dateOfBirthETClicked();
         }
         else if(view==breedET&&hasFocus)
         {
-            breedDialog.show();
+            breedETClicked();
         }
         else if(view==deformityET&&hasFocus)
         {
-            deformityDialog.show();
+            deformityETClicked();
         }
         else if(view==sireET)
         {
-            Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
-            intent.putExtra(KEY_MODE,MODE_SIRE);
-            intent.putExtra(KEY_INDEX,index);
-            intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
-            startActivity(intent);
+            sireETClicked();
         }
         else if(view==damET)
         {
-            Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
-            intent.putExtra(KEY_MODE,MODE_DAM);
-            intent.putExtra(KEY_INDEX,index);
-            intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
-            startActivity(intent);
+            damETClicked();
         }
     }
 
@@ -477,4 +562,6 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         dateOfBirthET.setText(dateString);
         setAgeFromDate(dateString);
     }
+
+
 }

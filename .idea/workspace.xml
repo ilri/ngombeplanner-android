@@ -463,12 +463,9 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/usage.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" afterPath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_cow_registration.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_cow_registration.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MistroFarmer.iws" />
@@ -538,19 +535,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="strings_en.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="strings_en.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="18" selection-start="2572" selection-end="2572" vertical-scroll-proportion="0.75757575" vertical-offset="756" max-vertical-offset="1386">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FarmerRegistrationActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="39" selection-start="1896" selection-end="1896" vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1656">
+            <state line="48" column="34" selection-start="1934" selection-end="1934" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1386">
               <folding />
             </state>
           </provider>
@@ -559,7 +547,7 @@
       <file leaf-file-name="activity_farmer_registration.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_farmer_registration.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="55" selection-start="3701" selection-end="3701" vertical-scroll-proportion="-7.357143" vertical-offset="1090" max-vertical-offset="1656">
+            <state line="72" column="55" selection-start="3701" selection-end="3701" vertical-scroll-proportion="0.0" vertical-offset="1090" max-vertical-offset="1656">
               <folding />
             </state>
           </provider>
@@ -568,28 +556,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CowRegistrationActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CowRegistrationActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="467" column="61" selection-start="17954" selection-end="17954" vertical-scroll-proportion="-15.851851" vertical-offset="7978" max-vertical-offset="8748">
+            <state line="500" column="68" selection-start="19466" selection-end="19466" vertical-scroll-proportion="0.59205776" vertical-offset="8672" max-vertical-offset="10314">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7046#7100#0" expanded="true" />
-                <element signature="e#7446#7462#0" expanded="true" />
-                <element signature="e#7500#7526#0" expanded="true" />
-                <element signature="e#7555#7570#0" expanded="true" />
-                <element signature="e#7906#7931#0" expanded="true" />
-                <element signature="e#7962#7979#0" expanded="true" />
-                <element signature="e#8008#8023#0" expanded="true" />
-                <element signature="e#8349#8370#0" expanded="true" />
-                <element signature="e#8400#8416#0" expanded="true" />
-                <element signature="e#8445#8460#0" expanded="true" />
-                <element signature="e#8892#8912#0" expanded="true" />
-                <element signature="e#9012#9028#0" expanded="true" />
-                <element signature="e#9185#9203#0" expanded="true" />
-                <element signature="e#9302#9318#0" expanded="true" />
-                <element signature="e#9548#9556#0" expanded="true" />
-                <element signature="e#9945#9953#0" expanded="true" />
+                <element signature="e#7403#7457#0" expanded="true" />
+                <element signature="e#7803#7819#0" expanded="true" />
+                <element signature="e#7857#7883#0" expanded="true" />
+                <element signature="e#7912#7927#0" expanded="true" />
+                <element signature="e#8263#8288#0" expanded="true" />
+                <element signature="e#8319#8336#0" expanded="true" />
+                <element signature="e#8365#8380#0" expanded="true" />
+                <element signature="e#8706#8727#0" expanded="true" />
+                <element signature="e#8757#8773#0" expanded="true" />
+                <element signature="e#8802#8817#0" expanded="true" />
+                <element signature="e#8854#8883#0" expanded="true" />
+                <element signature="e#9249#9269#0" expanded="true" />
+                <element signature="e#9369#9385#0" expanded="true" />
+                <element signature="e#9542#9560#0" expanded="true" />
+                <element signature="e#9659#9675#0" expanded="true" />
+                <element signature="e#10066#10082#0" expanded="true" />
+                <element signature="e#10480#10496#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -598,7 +587,7 @@
       <file leaf-file-name="dialog_breed.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_breed.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="47" selection-start="431" selection-end="431" vertical-scroll-proportion="-5.785714" vertical-offset="0" max-vertical-offset="504">
+            <state line="8" column="21" selection-start="383" selection-end="383" vertical-scroll-proportion="-5.142857" vertical-offset="0" max-vertical-offset="504">
               <folding />
             </state>
           </provider>
@@ -610,7 +599,7 @@
       <file leaf-file-name="activity_cow_registration.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="178" column="36" selection-start="9160" selection-end="9160" vertical-scroll-proportion="-14.428572" vertical-offset="2800" max-vertical-offset="3906">
+            <state line="58" column="49" selection-start="3005" selection-end="3005" vertical-scroll-proportion="5.142857" vertical-offset="1188" max-vertical-offset="3942">
               <folding />
             </state>
           </provider>
@@ -622,7 +611,7 @@
       <file leaf-file-name="dimens.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/dimens.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="55" selection-start="654" selection-end="654" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
+            <state line="11" column="55" selection-start="654" selection-end="654" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="396">
               <folding />
             </state>
           </provider>
@@ -631,7 +620,7 @@
       <file leaf-file-name="colors.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/colors.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="50" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="216">
+            <state line="5" column="50" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="216">
               <folding />
             </state>
           </provider>
@@ -640,7 +629,7 @@
       <file leaf-file-name="dialog_deformity.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_deformity.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="46" selection-start="577" selection-end="577" vertical-scroll-proportion="-7.714286" vertical-offset="0" max-vertical-offset="486">
+            <state line="12" column="46" selection-start="577" selection-end="577" vertical-scroll-proportion="0.0" vertical-offset="198" max-vertical-offset="486">
               <folding />
             </state>
           </provider>
@@ -652,7 +641,7 @@
       <file leaf-file-name="activity_landing.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_landing.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="43" selection-start="773" selection-end="773" vertical-scroll-proportion="-10.928572" vertical-offset="0" max-vertical-offset="468">
+            <state line="17" column="43" selection-start="773" selection-end="773" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="468">
               <folding />
             </state>
           </provider>
@@ -732,8 +721,8 @@
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_farmer_registration.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
       </list>
     </option>
@@ -773,8 +762,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1188,11 +1177,11 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.45530304" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.34510434" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32744783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1257,13 +1246,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="816" selection-end="816" vertical-scroll-proportion="0.36363637" vertical-offset="0" max-vertical-offset="1206">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmerProject.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="9" selection-start="491" selection-end="491" vertical-scroll-proportion="0.33333334" vertical-offset="0" max-vertical-offset="594" />
@@ -1283,9 +1265,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="39" selection-start="994" selection-end="994" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
-          <folding />
-        </state>
+        <state line="31" column="39" selection-start="994" selection-end="994" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/AndroidManifest.xml">
@@ -1302,19 +1282,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_landing.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="43" selection-start="773" selection-end="773" vertical-scroll-proportion="-10.928572" vertical-offset="0" max-vertical-offset="468">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_deformity.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="46" selection-start="577" selection-end="577" vertical-scroll-proportion="-7.714286" vertical-offset="0" max-vertical-offset="486">
+        <state line="12" column="46" selection-start="577" selection-end="577" vertical-scroll-proportion="0.0" vertical-offset="198" max-vertical-offset="486">
           <folding />
         </state>
       </provider>
@@ -1331,7 +1301,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_farmer_registration.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="55" selection-start="3701" selection-end="3701" vertical-scroll-proportion="-7.357143" vertical-offset="1090" max-vertical-offset="1656">
+        <state line="72" column="55" selection-start="3701" selection-end="3701" vertical-scroll-proportion="0.0" vertical-offset="1090" max-vertical-offset="1656">
           <folding />
         </state>
       </provider>
@@ -1346,9 +1316,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_breed.xml">
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_landing.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="47" selection-start="431" selection-end="431" vertical-scroll-proportion="-5.785714" vertical-offset="0" max-vertical-offset="504">
+        <state line="17" column="43" selection-start="773" selection-end="773" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="468">
           <folding />
         </state>
       </provider>
@@ -1356,9 +1326,33 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="34" selection-start="1934" selection-end="1934" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1386">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-18/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4180" column="16" selection-start="161856" selection-end="161856" vertical-scroll-proportion="0.33333334" vertical-offset="73368" max-vertical-offset="336636">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="178" column="36" selection-start="9160" selection-end="9160" vertical-scroll-proportion="-14.428572" vertical-offset="2800" max-vertical-offset="3906">
+        <state line="58" column="49" selection-start="3005" selection-end="3005" vertical-scroll-proportion="5.142857" vertical-offset="1188" max-vertical-offset="3942">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_breed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="21" selection-start="383" selection-end="383" vertical-scroll-proportion="-5.142857" vertical-offset="0" max-vertical-offset="504">
           <folding />
         </state>
       </provider>
@@ -1368,33 +1362,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="467" column="61" selection-start="17954" selection-end="17954" vertical-scroll-proportion="-15.851851" vertical-offset="7978" max-vertical-offset="8748">
+        <state line="500" column="68" selection-start="19466" selection-end="19466" vertical-scroll-proportion="0.59205776" vertical-offset="8672" max-vertical-offset="10314">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7046#7100#0" expanded="true" />
-            <element signature="e#7446#7462#0" expanded="true" />
-            <element signature="e#7500#7526#0" expanded="true" />
-            <element signature="e#7555#7570#0" expanded="true" />
-            <element signature="e#7906#7931#0" expanded="true" />
-            <element signature="e#7962#7979#0" expanded="true" />
-            <element signature="e#8008#8023#0" expanded="true" />
-            <element signature="e#8349#8370#0" expanded="true" />
-            <element signature="e#8400#8416#0" expanded="true" />
-            <element signature="e#8445#8460#0" expanded="true" />
-            <element signature="e#8892#8912#0" expanded="true" />
-            <element signature="e#9012#9028#0" expanded="true" />
-            <element signature="e#9185#9203#0" expanded="true" />
-            <element signature="e#9302#9318#0" expanded="true" />
-            <element signature="e#9548#9556#0" expanded="true" />
-            <element signature="e#9945#9953#0" expanded="true" />
+            <element signature="e#7403#7457#0" expanded="true" />
+            <element signature="e#7803#7819#0" expanded="true" />
+            <element signature="e#7857#7883#0" expanded="true" />
+            <element signature="e#7912#7927#0" expanded="true" />
+            <element signature="e#8263#8288#0" expanded="true" />
+            <element signature="e#8319#8336#0" expanded="true" />
+            <element signature="e#8365#8380#0" expanded="true" />
+            <element signature="e#8706#8727#0" expanded="true" />
+            <element signature="e#8757#8773#0" expanded="true" />
+            <element signature="e#8802#8817#0" expanded="true" />
+            <element signature="e#8854#8883#0" expanded="true" />
+            <element signature="e#9249#9269#0" expanded="true" />
+            <element signature="e#9369#9385#0" expanded="true" />
+            <element signature="e#9542#9560#0" expanded="true" />
+            <element signature="e#9659#9675#0" expanded="true" />
+            <element signature="e#10066#10082#0" expanded="true" />
+            <element signature="e#10480#10496#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="18" selection-start="2572" selection-end="2572" vertical-scroll-proportion="0.75757575" vertical-offset="756" max-vertical-offset="1386">
-          <folding />
         </state>
       </provider>
     </entry>
