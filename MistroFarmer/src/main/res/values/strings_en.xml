@@ -61,12 +61,15 @@
         <item>Abnormal teat number</item>
         <item>Crooked feet</item>
         <item>Clef palate</item>
+        <item>Other</item>
     </string-array>
     <string name="service_type_used_en">Service Type Used</string>
     <string-array name="service_types_array_en">
         <item>Artificial Insemination</item>
         <item>Bull</item>
     </string-array>
-    <string name="maximum_of_four_breed">A maximum of four breeds</string>
+    <string name="maximum_of_four_breeds_en">A maximum of four breeds</string>
+    <string name="country_of_origin_en">Country of Origin</string>
+    <string name="specify_en">Specify</string>
 
 </resources>

@@ -13,6 +13,13 @@
                     android:id="@+id/deformity_lv"
                     android:layout_height="300dp"
                     android:layout_width="match_parent"/>
+            <EditText
+                android:id="@+id/specify_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+                android:visibility="gone"
+                android:inputType="textCapSentences"/>
         </LinearLayout>
     </ScrollView>
     <Button

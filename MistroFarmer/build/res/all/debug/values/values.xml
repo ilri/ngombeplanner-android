@@ -35,6 +35,7 @@
         <item>Abnormal teat number</item>
         <item>Crooked feet</item>
         <item>Clef palate</item>
+        <item>Other</item>
     </string-array>
     <string-array name="service_types_array_en">
         <item>Artificial Insemination</item>
@@ -578,6 +579,7 @@
     <string name="app_name">Mistro Farmer</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="breed_en">Breed</string>
+    <string name="country_of_origin_en">Country of Origin</string>
     <string name="cow_registration_en">Cow Registration, Cow</string>
     <string name="dam_en">Dam</string>
     <string name="dam_registration_en">Dam Registration</string>
@@ -592,7 +594,7 @@
     <string name="hello_world">Hello world!</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="login_en">Login</string>
-    <string name="maximum_of_four_breed">A maximum of four breeds</string>
+    <string name="maximum_of_four_breeds_en">A maximum of four breeds</string>
     <string name="mobile_number_en">Mobile Number</string>
     <string name="name_en">Name</string>
     <string name="next_en">Next</string>
@@ -604,6 +606,7 @@
     <string name="sex_en">Sex</string>
     <string name="sire_en">Sire</string>
     <string name="sire_registration_en">Sire Registration</string>
+    <string name="specify_en">Specify</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="title_activity_cow_registration">Cow Registration</string>
     <string name="title_activity_farmer_registration">Register Farmer</string>

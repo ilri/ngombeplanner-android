@@ -180,6 +180,23 @@
             android:textColor="@color/text_input_color"
             android:visibility="gone"
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
+        <TextView
+            android:id="@+id/country_of_origin_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:visibility="gone"
+            android:textSize="@dimen/normal_text_size"/>
+        <AutoCompleteTextView
+            android:id="@+id/country_of_origin_actv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:textSize="@dimen/normal_text_size"
+            android:textColor="@color/text_input_color"
+            android:visibility="gone"
+            android:inputType="textCapWords|textPersonName"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -2,7 +2,6 @@ package org.cgiar.ilri.mistro.farmer;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,7 +22,6 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 
 import java.lang.reflect.Field;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,6 +44,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private int numberOfCows;
     private String localeCode;
     private int selectedBreeds=0;
+    private String maxSelectedBreedsWarning;
+    private String deformityOSpecifyText;
 
     private TextView nameTV;
     private TextView earTagNumberTV;
@@ -75,10 +75,13 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private String[] breeds;
     private Dialog deformityDialog;
     private ListView deformityLV;
+    private EditText specifyET;
     private Button dialogDeformityOkayB;
     private String[] deformities;
     private TextView serviceTypeTV;
     private Spinner serviceTypeS;
+    private TextView countryOfOriginTV;
+    private EditText countryOfOriginACTV;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -131,6 +134,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         damET.setOnClickListener(this);
         serviceTypeTV=(TextView)this.findViewById(R.id.service_type_tv);
         serviceTypeS=(Spinner)this.findViewById(R.id.service_type_s);
+        countryOfOriginTV=(TextView)this.findViewById(R.id.country_of_origin_tv);
+        countryOfOriginACTV =(EditText)this.findViewById(R.id.country_of_origin_actv);
         previousButton=(Button)this.findViewById(R.id.previous_button);
         previousButton.setOnClickListener(this);
         if(mode==MODE_DAM||mode==MODE_SIRE||index==0)
@@ -156,6 +161,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         deformityDialog.setContentView(R.layout.dialog_deformity);
         deformityLV =(ListView) deformityDialog.findViewById(R.id.deformity_lv);
         deformityLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        deformityLV.setOnItemClickListener(this);
+        specifyET=(EditText)deformityDialog.findViewById(R.id.specify_et);
         dialogDeformityOkayB =(Button) deformityDialog.findViewById(R.id.dialog_deformity_okay_b);
         if(mode==MODE_DAM||mode==MODE_SIRE)//TODO: remember to auto set sex in datastructure if dam or sire
         {
@@ -165,6 +172,10 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             damET.setVisibility(EditText.GONE);
             sireTV.setVisibility(TextView.GONE);
             sireET.setVisibility(EditText.GONE);
+            deformityTV.setVisibility(TextView.GONE);
+            deformityET.setVisibility(EditText.GONE);
+            countryOfOriginACTV.setVisibility(EditText.VISIBLE);
+            countryOfOriginTV.setVisibility(TextView.VISIBLE);
         }
         if(mode==MODE_SIRE)
         {
@@ -212,6 +223,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             ArrayAdapter<CharSequence> serviceTypesAdapter=ArrayAdapter.createFromResource(this,R.array.service_types_array_en,android.R.layout.simple_spinner_item);
             serviceTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             serviceTypeS.setAdapter(serviceTypesAdapter);
+            countryOfOriginTV.setText(R.string.country_of_origin_en);
             previousButton.setText(R.string.previous_en);
             if(mode==MODE_SIRE||mode==MODE_DAM)
             {
@@ -237,8 +249,10 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             deformities=getResources().getStringArray(R.array.deformities_array_en);
             ArrayAdapter<String> deformityArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,deformities);
             deformityLV.setAdapter(deformityArrayAdapter);
+            specifyET.setHint(R.string.specify_en);
             dialogDeformityOkayB.setText(R.string.okay_en);
             dialogDeformityOkayB.setOnClickListener(this);
+            maxSelectedBreedsWarning=this.getResources().getString(R.string.maximum_of_four_breeds_en);
         }
     }
 
@@ -322,6 +336,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             }
             deformityET.setText(selectedDeformities);
             deformityDialog.dismiss();
+            deformityOSpecifyText=specifyET.getText().toString();
         }
         else if(view==dateOfBirthET)
         {
@@ -378,7 +393,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             breedLV.setItemChecked(i,false);
         }
         String breedETString=breedET.getText().toString();
-        if(!breedETString.equals("")||!breedETString.equals(null))
+        if(!breedETString.equals(null)||!breedETString.equals(""))
         {
             String[] selectedBreeds=breedETString.split(", ");
             //for all of the breeds check if breed is in selected breeds
@@ -401,6 +416,33 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
 
     private void deformityETClicked()
     {
+        //uncheck everything in listview
+        for (int i=0;i<deformityLV.getCount();i++)
+        {
+            deformityLV.setItemChecked(i,false);
+        }
+        String deformityETString=deformityET.getText().toString();
+        if(!deformityETString.equals(null)||!deformityETString.equals(""))
+        {
+            String[] selectedDeformities=deformityETString.split(", ");
+            for (int i=0;i<deformities.length;i++)
+            {
+                String currentDeformity=deformities[i];
+                for (int j=0;j<selectedDeformities.length;j++)
+                {
+                    if(currentDeformity.equals(selectedDeformities[j]))
+                    {
+                        deformityLV.setItemChecked(i,true);
+                        if (i==deformities.length-1)
+                        {
+                            specifyET.setVisibility(EditText.VISIBLE);
+                            specifyET.setText(deformityOSpecifyText);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
         deformityDialog.show();
     }
 
@@ -593,20 +635,39 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        if(breedLV.isItemChecked(position))
+        if(parent==breedLV)
         {
-            selectedBreeds++;
+            if(breedLV.isItemChecked(position))
+            {
+                selectedBreeds++;
+            }
+            else
+            {
+                selectedBreeds--;
+            }
+            if(selectedBreeds>4)
+            {
+                breedLV.setItemChecked(position,false);
+                selectedBreeds--;
+                Toast.makeText(this,maxSelectedBreedsWarning,Toast.LENGTH_LONG).show();
+            }
         }
-        else
+        else if(parent==deformityLV)
         {
-            selectedBreeds--;
+            if(position==deformities.length-1)//last deformity. should be other
+            {
+                if(deformityLV.isItemChecked(position))
+                {
+                    specifyET.setVisibility(EditText.VISIBLE);
+                }
+                else
+                {
+                    specifyET.setVisibility(EditText.GONE);
+                    specifyET.setText("");
+                }
+            }
         }
-        if(selectedBreeds>4)
-        {
-            breedLV.setItemChecked(position,false);
-            selectedBreeds--;
-            Toast.makeText(this,this.getResources().getString(R.string.maximum_of_four_breed),Toast.LENGTH_LONG).show();
-        }
+
 
     }
 }
