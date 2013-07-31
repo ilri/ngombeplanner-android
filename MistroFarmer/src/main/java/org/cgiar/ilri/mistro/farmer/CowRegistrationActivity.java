@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener,TextWatcher,AdapterView.OnItemSelectedListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener
+public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener,TextWatcher,AdapterView.OnItemSelectedListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener,ListView.OnItemClickListener
 {
     public static final String KEY_MODE="mode";
     public static final String KEY_INDEX="index";
@@ -45,6 +45,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private int index;
     private int numberOfCows;
     private String localeCode;
+    private int selectedBreeds=0;
 
     private TextView nameTV;
     private TextView earTagNumberTV;
@@ -150,6 +151,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         breedDialogSV=(ScrollView)breedDialog.findViewById(R.id.dialog_breed_sv);
         breedLV=(ListView)breedDialog.findViewById(R.id.breed_lv);
         breedLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        breedLV.setOnItemClickListener(this);
         deformityDialog =new Dialog(this);
         deformityDialog.setContentView(R.layout.dialog_deformity);
         deformityLV =(ListView) deformityDialog.findViewById(R.id.deformity_lv);
@@ -370,6 +372,30 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
 
     private void breedETClicked()
     {
+        //uncheck everything in listview
+        for (int i=0; i<breedLV.getCount();i++)
+        {
+            breedLV.setItemChecked(i,false);
+        }
+        String breedETString=breedET.getText().toString();
+        if(!breedETString.equals("")||!breedETString.equals(null))
+        {
+            String[] selectedBreeds=breedETString.split(", ");
+            //for all of the breeds check if breed is in selected breeds
+            for(int i=0; i<breeds.length;i++)
+            {
+                String currentBreed=breeds[i];
+                for(int j=0; j<selectedBreeds.length;j++)
+                {
+
+                    if(currentBreed.equals(selectedBreeds[j]))
+                    {
+                        breedLV.setItemChecked(i,true);
+                        break;
+                    }
+                }
+            }
+        }
         breedDialog.show();
     }
 
@@ -564,4 +590,23 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        if(breedLV.isItemChecked(position))
+        {
+            selectedBreeds++;
+        }
+        else
+        {
+            selectedBreeds--;
+        }
+        if(selectedBreeds>4)
+        {
+            breedLV.setItemChecked(position,false);
+            selectedBreeds--;
+            Toast.makeText(this,this.getResources().getString(R.string.maximum_of_four_breed),Toast.LENGTH_LONG).show();
+        }
+
+    }
 }

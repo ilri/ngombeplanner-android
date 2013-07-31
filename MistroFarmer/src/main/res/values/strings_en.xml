@@ -67,5 +67,6 @@
         <item>Artificial Insemination</item>
         <item>Bull</item>
     </string-array>
+    <string name="maximum_of_four_breed">A maximum of four breeds</string>
 
 </resources>
