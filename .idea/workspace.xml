@@ -40,6 +40,7 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Unnamed-0" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="225ed8cc-ff69-42a3-8530-e367063c6aef" name="Default" comment="">
@@ -494,6 +495,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -530,7 +532,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -543,7 +544,7 @@
       <file leaf-file-name="strings_en.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="37" selection-start="2810" selection-end="2810" vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1458">
+            <state line="72" column="29" selection-start="2739" selection-end="2739" vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="1584">
               <folding />
             </state>
           </provider>
@@ -552,7 +553,7 @@
       <file leaf-file-name="activity_farmer_registration.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_farmer_registration.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="55" selection-start="3701" selection-end="3701" vertical-scroll-proportion="-7.357143" vertical-offset="1090" max-vertical-offset="1656">
+            <state line="72" column="55" selection-start="3701" selection-end="3701" vertical-scroll-proportion="-9.285714" vertical-offset="1036" max-vertical-offset="1656">
               <folding />
             </state>
           </provider>
@@ -564,26 +565,32 @@
       <file leaf-file-name="CowRegistrationActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="438" column="69" selection-start="17878" selection-end="17878" vertical-scroll-proportion="0.6425993" vertical-offset="7528" max-vertical-offset="12222">
+            <state line="750" column="13" selection-start="30420" selection-end="30420" vertical-scroll-proportion="4.2977624" vertical-offset="10499" max-vertical-offset="14742">
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#8182#8236#0" expanded="true" />
-                <element signature="e#8582#8598#0" expanded="true" />
-                <element signature="e#8636#8662#0" expanded="true" />
-                <element signature="e#8691#8706#0" expanded="true" />
-                <element signature="e#9042#9067#0" expanded="true" />
-                <element signature="e#9098#9115#0" expanded="true" />
-                <element signature="e#9144#9159#0" expanded="true" />
-                <element signature="e#9485#9506#0" expanded="true" />
-                <element signature="e#9536#9552#0" expanded="true" />
-                <element signature="e#9581#9596#0" expanded="true" />
-                <element signature="e#9633#9662#0" expanded="true" />
-                <element signature="e#10098#10118#0" expanded="true" />
-                <element signature="e#10218#10234#0" expanded="true" />
-                <element signature="e#10391#10409#0" expanded="true" />
-                <element signature="e#10508#10524#0" expanded="true" />
-                <element signature="e#10915#10931#0" expanded="true" />
-                <element signature="e#11381#11397#0" expanded="true" />
+                <element signature="e#15157#15211#0" expanded="true" />
+                <element signature="e#15564#15588#0" expanded="true" />
+                <element signature="e#15684#15704#0" expanded="true" />
+                <element signature="e#15734#15750#0" expanded="true" />
+                <element signature="e#15788#15814#0" expanded="true" />
+                <element signature="e#15843#15858#0" expanded="true" />
+                <element signature="e#16194#16219#0" expanded="true" />
+                <element signature="e#16250#16267#0" expanded="true" />
+                <element signature="e#16296#16311#0" expanded="true" />
+                <element signature="e#16637#16658#0" expanded="true" />
+                <element signature="e#16688#16704#0" expanded="true" />
+                <element signature="e#16733#16748#0" expanded="true" />
+                <element signature="e#16785#16814#0" expanded="true" />
+                <element signature="e#17679#17708#0" expanded="true" />
+                <element signature="e#17746#17766#0" expanded="true" />
+                <element signature="e#17866#17882#0" expanded="true" />
+                <element signature="e#18039#18057#0" expanded="true" />
+                <element signature="e#18156#18172#0" expanded="true" />
+                <element signature="e#18402#18410#0" expanded="true" />
+                <element signature="e#18563#18579#0" expanded="true" />
+                <element signature="e#18799#18807#0" expanded="true" />
+                <element signature="e#18966#18985#0" expanded="true" />
+                <element signature="e#19029#19045#0" expanded="true" />
+                <element signature="e#19144#19209#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -592,7 +599,7 @@
       <file leaf-file-name="dialog_breed.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_breed.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="21" selection-start="383" selection-end="383" vertical-scroll-proportion="-5.142857" vertical-offset="0" max-vertical-offset="504">
+            <state line="8" column="21" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="504">
               <folding />
             </state>
           </provider>
@@ -604,7 +611,7 @@
       <file leaf-file-name="activity_cow_registration.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="190" column="51" selection-start="9748" selection-end="9748" vertical-scroll-proportion="-9.285714" vertical-offset="3160" max-vertical-offset="4248">
+            <state line="62" column="39" selection-start="3168" selection-end="3168" vertical-scroll-proportion="-17.642857" vertical-offset="622" max-vertical-offset="5166">
               <folding />
             </state>
           </provider>
@@ -634,7 +641,7 @@
       <file leaf-file-name="dialog_deformity.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_deformity.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="40" selection-start="986" selection-end="986" vertical-scroll-proportion="-12.857142" vertical-offset="0" max-vertical-offset="612">
+            <state line="22" column="54" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="630">
               <folding />
             </state>
           </provider>
@@ -725,8 +732,8 @@
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_farmer_registration.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_deformity.xml" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
       </list>
@@ -767,7 +774,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -941,6 +947,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -959,11 +966,11 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="JellyBean_HIGH" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1166,7 +1173,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32905295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15781488" sideWeight="0.60032105" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15705615" sideWeight="0.60032105" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.39967898" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32744783" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1296,6 +1303,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-18/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4180" column="16" selection-start="161856" selection-end="161856" vertical-scroll-proportion="0.33333334" vertical-offset="73368" max-vertical-offset="336636">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_breed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="21" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="504">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/os/Handler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="78" column="0" selection-start="3379" selection-end="3379" vertical-scroll-proportion="3.562982" vertical-offset="0" max-vertical-offset="1494" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_landing.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="43" selection-start="773" selection-end="773" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="468">
@@ -1306,43 +1335,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-18/android/view/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4180" column="16" selection-start="161856" selection-end="161856" vertical-scroll-proportion="0.33333334" vertical-offset="73368" max-vertical-offset="336636">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_breed.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="21" selection-start="383" selection-end="383" vertical-scroll-proportion="-5.142857" vertical-offset="0" max-vertical-offset="504">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/os/Handler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="0" selection-start="3379" selection-end="3379" vertical-scroll-proportion="3.562982" vertical-offset="0" max-vertical-offset="1494">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="190" column="51" selection-start="9748" selection-end="9748" vertical-scroll-proportion="-9.285714" vertical-offset="3160" max-vertical-offset="4248">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_deformity.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="40" selection-start="986" selection-end="986" vertical-scroll-proportion="-12.857142" vertical-offset="0" max-vertical-offset="612">
+        <state line="22" column="54" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="630">
           <folding />
         </state>
       </provider>
@@ -1352,7 +1347,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_farmer_registration.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="55" selection-start="3701" selection-end="3701" vertical-scroll-proportion="-7.357143" vertical-offset="1090" max-vertical-offset="1656">
+        <state line="72" column="55" selection-start="3701" selection-end="3701" vertical-scroll-proportion="-9.285714" vertical-offset="1036" max-vertical-offset="1656">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="39" selection-start="3168" selection-end="3168" vertical-scroll-proportion="-17.642857" vertical-offset="622" max-vertical-offset="5166">
           <folding />
         </state>
       </provider>
@@ -1362,33 +1367,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="37" selection-start="2810" selection-end="2810" vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1458">
+        <state line="72" column="29" selection-start="2739" selection-end="2739" vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="1584">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="438" column="69" selection-start="17878" selection-end="17878" vertical-scroll-proportion="0.6425993" vertical-offset="7528" max-vertical-offset="12222">
+        <state line="750" column="13" selection-start="30420" selection-end="30420" vertical-scroll-proportion="4.2977624" vertical-offset="10499" max-vertical-offset="14742">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#8182#8236#0" expanded="true" />
-            <element signature="e#8582#8598#0" expanded="true" />
-            <element signature="e#8636#8662#0" expanded="true" />
-            <element signature="e#8691#8706#0" expanded="true" />
-            <element signature="e#9042#9067#0" expanded="true" />
-            <element signature="e#9098#9115#0" expanded="true" />
-            <element signature="e#9144#9159#0" expanded="true" />
-            <element signature="e#9485#9506#0" expanded="true" />
-            <element signature="e#9536#9552#0" expanded="true" />
-            <element signature="e#9581#9596#0" expanded="true" />
-            <element signature="e#9633#9662#0" expanded="true" />
-            <element signature="e#10098#10118#0" expanded="true" />
-            <element signature="e#10218#10234#0" expanded="true" />
-            <element signature="e#10391#10409#0" expanded="true" />
-            <element signature="e#10508#10524#0" expanded="true" />
-            <element signature="e#10915#10931#0" expanded="true" />
-            <element signature="e#11381#11397#0" expanded="true" />
+            <element signature="e#15157#15211#0" expanded="true" />
+            <element signature="e#15564#15588#0" expanded="true" />
+            <element signature="e#15684#15704#0" expanded="true" />
+            <element signature="e#15734#15750#0" expanded="true" />
+            <element signature="e#15788#15814#0" expanded="true" />
+            <element signature="e#15843#15858#0" expanded="true" />
+            <element signature="e#16194#16219#0" expanded="true" />
+            <element signature="e#16250#16267#0" expanded="true" />
+            <element signature="e#16296#16311#0" expanded="true" />
+            <element signature="e#16637#16658#0" expanded="true" />
+            <element signature="e#16688#16704#0" expanded="true" />
+            <element signature="e#16733#16748#0" expanded="true" />
+            <element signature="e#16785#16814#0" expanded="true" />
+            <element signature="e#17679#17708#0" expanded="true" />
+            <element signature="e#17746#17766#0" expanded="true" />
+            <element signature="e#17866#17882#0" expanded="true" />
+            <element signature="e#18039#18057#0" expanded="true" />
+            <element signature="e#18156#18172#0" expanded="true" />
+            <element signature="e#18402#18410#0" expanded="true" />
+            <element signature="e#18563#18579#0" expanded="true" />
+            <element signature="e#18799#18807#0" expanded="true" />
+            <element signature="e#18966#18985#0" expanded="true" />
+            <element signature="e#19029#19045#0" expanded="true" />
+            <element signature="e#19144#19209#0" expanded="true" />
           </folding>
         </state>
       </provider>

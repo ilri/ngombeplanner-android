@@ -10,6 +10,7 @@ import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -47,8 +48,16 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private String maxSelectedBreedsWarning;
     private String deformityOSpecifyText;
 
+    private TextView strawNumberTV;
+    private EditText strawNumberET;
+    private TextView embryoNumberTV;
+    private EditText embryoNumberET;
+    private TextView vetUsedTV;
+    private EditText vetUsedET;
     private TextView nameTV;
+    private EditText nameET;
     private TextView earTagNumberTV;
+    private EditText earTagNumberET;
     private TextView ageTV;
     private Spinner ageS;
     private EditText ageET;
@@ -81,7 +90,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private TextView serviceTypeTV;
     private Spinner serviceTypeS;
     private TextView countryOfOriginTV;
-    private EditText countryOfOriginACTV;
+    private AutoCompleteTextView countryOfOriginACTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -103,8 +113,16 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         }
 
         //init child views
+        strawNumberTV=(TextView)this.findViewById(R.id.straw_number_tv);
+        strawNumberET=(EditText)this.findViewById(R.id.straw_number_et);
+        embryoNumberTV=(TextView)this.findViewById(R.id.embryo_number_tv);
+        embryoNumberET=(EditText)this.findViewById(R.id.embryo_number_et);
+        vetUsedTV=(TextView)this.findViewById(R.id.vet_used_tv);
+        vetUsedET=(EditText)this.findViewById(R.id.vet_used_et);
         nameTV=(TextView)this.findViewById(R.id.name_tv);
+        nameET=(EditText)this.findViewById(R.id.name_et);
         earTagNumberTV=(TextView)this.findViewById(R.id.ear_tag_number_tv);
+        earTagNumberET=(EditText)this.findViewById(R.id.ear_tag_number_et);
         ageTV=(TextView)this.findViewById(R.id.age_tv);
         ageS=(Spinner)this.findViewById(R.id.age_s);
         ageS.setOnItemSelectedListener(this);
@@ -134,14 +152,15 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         damET.setOnClickListener(this);
         serviceTypeTV=(TextView)this.findViewById(R.id.service_type_tv);
         serviceTypeS=(Spinner)this.findViewById(R.id.service_type_s);
+        serviceTypeS.setOnItemSelectedListener(this);
         countryOfOriginTV=(TextView)this.findViewById(R.id.country_of_origin_tv);
-        countryOfOriginACTV =(EditText)this.findViewById(R.id.country_of_origin_actv);
+        countryOfOriginACTV =(AutoCompleteTextView)this.findViewById(R.id.country_of_origin_actv);
         previousButton=(Button)this.findViewById(R.id.previous_button);
         previousButton.setOnClickListener(this);
-        if(mode==MODE_DAM||mode==MODE_SIRE||index==0)
+        /*if(mode==MODE_DAM||mode==MODE_SIRE||index==0)
         {
             previousButton.setVisibility(Button.INVISIBLE);
-        }
+        }*/
         nextButton=(Button)this.findViewById(R.id.next_button);
         nextButton.setOnClickListener(this);
         breedDialog=new Dialog(this);
@@ -164,7 +183,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         deformityLV.setOnItemClickListener(this);
         specifyET=(EditText)deformityDialog.findViewById(R.id.specify_et);
         dialogDeformityOkayB =(Button) deformityDialog.findViewById(R.id.dialog_deformity_okay_b);
-        if(mode==MODE_DAM||mode==MODE_SIRE)//TODO: remember to auto set sex in datastructure if dam or sire
+        /*if(mode==MODE_DAM||mode==MODE_SIRE)//TODO: remember to auto set sex in datastructure if dam or sire
         {
             sexTV.setVisibility(TextView.GONE);
             sexS.setVisibility(Spinner.GONE);
@@ -181,10 +200,142 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         {
             serviceTypeTV.setVisibility(TextView.VISIBLE);
             serviceTypeS.setVisibility(Spinner.VISIBLE);
-        }
+        }*/
 
         //init text in child views
         initTextInViews(localeCode);
+        resetMode();
+    }
+
+    private void resetMode()
+    {
+        if(mode==MODE_DAM)
+        {
+            sexTV.setVisibility(TextView.GONE);
+            sexS.setVisibility(Spinner.GONE);
+            damTV.setVisibility(TextView.GONE);
+            damET.setVisibility(EditText.GONE);
+            sireTV.setVisibility(TextView.GONE);
+            sireET.setVisibility(EditText.GONE);
+            deformityTV.setVisibility(TextView.GONE);
+            deformityET.setVisibility(EditText.GONE);
+            countryOfOriginACTV.setVisibility(EditText.VISIBLE);
+            countryOfOriginTV.setVisibility(TextView.VISIBLE);
+
+            serviceTypeTV.setVisibility(TextView.VISIBLE);
+            serviceTypeS.setVisibility(Spinner.VISIBLE);
+
+            previousButton.setVisibility(Button.INVISIBLE);
+
+            embryoNumberTV.setVisibility(TextView.VISIBLE);
+            embryoNumberET.setVisibility(EditText.VISIBLE);
+            vetUsedTV.setVisibility(TextView.VISIBLE);
+            vetUsedET.setVisibility(EditText.VISIBLE);
+            serviceTypeModeHandler(serviceTypeS.getSelectedItemPosition());
+        }
+        else if(mode==MODE_SIRE)
+        {
+            sexTV.setVisibility(TextView.GONE);
+            sexS.setVisibility(Spinner.GONE);
+            damTV.setVisibility(TextView.GONE);
+            damET.setVisibility(EditText.GONE);
+            sireTV.setVisibility(TextView.GONE);
+            sireET.setVisibility(EditText.GONE);
+            deformityTV.setVisibility(TextView.GONE);
+            deformityET.setVisibility(EditText.GONE);
+            countryOfOriginACTV.setVisibility(EditText.VISIBLE);
+            countryOfOriginTV.setVisibility(TextView.VISIBLE);
+
+            serviceTypeTV.setVisibility(TextView.VISIBLE);
+            serviceTypeS.setVisibility(Spinner.VISIBLE);
+
+            previousButton.setVisibility(Button.INVISIBLE);
+
+            strawNumberTV.setVisibility(TextView.VISIBLE);
+            strawNumberET.setVisibility(EditText.VISIBLE);
+            vetUsedTV.setVisibility(TextView.VISIBLE);
+            vetUsedET.setVisibility(EditText.VISIBLE);
+            serviceTypeModeHandler(serviceTypeS.getSelectedItemPosition());
+        }
+    }
+
+    private void serviceTypeModeHandler(int serviceTypeIndex)
+    {
+       if(mode==MODE_SIRE)
+       {
+           if(serviceTypeIndex==0)//bull
+           {
+               strawNumberTV.setVisibility(TextView.GONE);
+               strawNumberET.setVisibility(EditText.GONE);
+               vetUsedTV.setVisibility(TextView.GONE);
+               vetUsedET.setVisibility(EditText.GONE);
+               nameTV.setVisibility(TextView.VISIBLE);
+               nameET.setVisibility(EditText.VISIBLE);
+               earTagNumberTV.setVisibility(TextView.VISIBLE);
+               earTagNumberET.setVisibility(EditText.VISIBLE);
+               dateOfBirthTV.setVisibility(TextView.VISIBLE);
+               dateOfBirthET.setVisibility(EditText.VISIBLE);
+               breedTV.setVisibility(TextView.VISIBLE);
+               breedET.setVisibility(EditText.VISIBLE);
+               countryOfOriginTV.setVisibility(TextView.VISIBLE);
+               countryOfOriginACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+
+           }
+           else if(serviceTypeIndex==1)//artificial insemination
+           {
+               strawNumberTV.setVisibility(TextView.VISIBLE);
+               strawNumberET.setVisibility(EditText.VISIBLE);
+               vetUsedTV.setVisibility(TextView.VISIBLE);
+               vetUsedET.setVisibility(EditText.VISIBLE);
+               nameTV.setVisibility(TextView.GONE);
+               nameET.setVisibility(EditText.GONE);
+               earTagNumberTV.setVisibility(TextView.GONE);
+               earTagNumberET.setVisibility(EditText.GONE);
+               dateOfBirthTV.setVisibility(TextView.GONE);
+               dateOfBirthET.setVisibility(EditText.GONE);
+               breedTV.setVisibility(TextView.GONE);
+               breedET.setVisibility(EditText.GONE);
+               countryOfOriginTV.setVisibility(TextView.GONE);
+               countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
+           }
+       }
+       else if(mode==MODE_DAM)
+       {
+           if(serviceTypeIndex==0)//cow
+           {
+               embryoNumberTV.setVisibility(TextView.GONE);
+               embryoNumberET.setVisibility(EditText.GONE);
+               vetUsedTV.setVisibility(TextView.GONE);
+               vetUsedET.setVisibility(EditText.GONE);
+               nameTV.setVisibility(TextView.VISIBLE);
+               nameET.setVisibility(EditText.VISIBLE);
+               earTagNumberTV.setVisibility(TextView.VISIBLE);
+               earTagNumberET.setVisibility(EditText.VISIBLE);
+               dateOfBirthTV.setVisibility(TextView.VISIBLE);
+               dateOfBirthET.setVisibility(EditText.VISIBLE);
+               breedTV.setVisibility(TextView.VISIBLE);
+               breedET.setVisibility(EditText.VISIBLE);
+               countryOfOriginTV.setVisibility(TextView.VISIBLE);
+               countryOfOriginACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+           }
+           else if(serviceTypeIndex==1)//embryo transfer
+           {
+               embryoNumberTV.setVisibility(TextView.VISIBLE);
+               embryoNumberET.setVisibility(EditText.VISIBLE);
+               vetUsedTV.setVisibility(TextView.VISIBLE);
+               vetUsedET.setVisibility(EditText.VISIBLE);
+               nameTV.setVisibility(TextView.GONE);
+               nameET.setVisibility(EditText.GONE);
+               earTagNumberTV.setVisibility(TextView.GONE);
+               earTagNumberET.setVisibility(EditText.GONE);
+               dateOfBirthTV.setVisibility(TextView.GONE);
+               dateOfBirthET.setVisibility(EditText.GONE);
+               breedTV.setVisibility(TextView.GONE);
+               breedET.setVisibility(EditText.GONE);
+               countryOfOriginTV.setVisibility(TextView.GONE);
+               countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
+           }
+       }
     }
 
     private void initTextInViews(String localeCode)
@@ -204,6 +355,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             {
                 setTitle(R.string.dam_registration_en);
             }
+            strawNumberTV.setText(R.string.straw_number_en);
+            embryoNumberTV.setText(R.string.embryo_number_en);
+            vetUsedTV.setText(R.string.vet_used_en);
             nameTV.setText(R.string.name_en);
             earTagNumberTV.setText(R.string.ear_tag_number_en);
             ageTV.setText(R.string.age_en);
@@ -220,9 +374,19 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             sireTV.setText(R.string.sire_en);
             damTV.setText(R.string.dam_en);
             serviceTypeTV.setText(R.string.service_type_used_en);
-            ArrayAdapter<CharSequence> serviceTypesAdapter=ArrayAdapter.createFromResource(this,R.array.service_types_array_en,android.R.layout.simple_spinner_item);
-            serviceTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            serviceTypeS.setAdapter(serviceTypesAdapter);
+            ArrayAdapter<CharSequence> serviceTypesAdapter=null;
+            if(mode==MODE_SIRE)
+            {
+                serviceTypesAdapter=ArrayAdapter.createFromResource(this,R.array.service_types_sire_array_en,android.R.layout.simple_spinner_item);
+                serviceTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                serviceTypeS.setAdapter(serviceTypesAdapter);
+            }
+            else if(mode==MODE_DAM)
+            {
+                serviceTypesAdapter=ArrayAdapter.createFromResource(this,R.array.service_types_dam_array_en,android.R.layout.simple_spinner_item);
+                serviceTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                serviceTypeS.setAdapter(serviceTypesAdapter);
+            }
             countryOfOriginTV.setText(R.string.country_of_origin_en);
             previousButton.setText(R.string.previous_en);
             if(mode==MODE_SIRE||mode==MODE_DAM)
@@ -588,6 +752,10 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 dateOfBirthET.setText(getDateFromAge());
             }
 
+        }
+        else if(parent==serviceTypeS)
+        {
+            serviceTypeModeHandler(serviceTypeS.getSelectedItemPosition());
         }
 
     }

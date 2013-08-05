@@ -14,8 +14,9 @@ public final class R {
         public static final int age_type_array_en=0x7f040000;
         public static final int breeds_array_en=0x7f040001;
         public static final int deformities_array_en=0x7f040002;
-        public static final int service_types_array_en=0x7f040003;
-        public static final int sex_array_en=0x7f040004;
+        public static final int service_types_dam_array_en=0x7f040003;
+        public static final int service_types_sire_array_en=0x7f040004;
+        public static final int sex_array_en=0x7f040005;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -949,58 +950,64 @@ containing a value of this type.
         public static final int abs__textButton=0x7f070013;
         public static final int abs__title=0x7f07001b;
         public static final int abs__up=0x7f07000f;
-        public static final int action_settings=0x7f07005b;
-        public static final int age_et=0x7f070037;
-        public static final int age_s=0x7f070038;
-        public static final int age_tv=0x7f070036;
-        public static final int breed_et=0x7f07003c;
-        public static final int breed_lv=0x7f070056;
-        public static final int breed_tv=0x7f07003b;
-        public static final int country_of_origin_actv=0x7f070048;
-        public static final int country_of_origin_tv=0x7f070047;
-        public static final int dam_et=0x7f070044;
-        public static final int dam_tv=0x7f070043;
-        public static final int date_of_birth_et=0x7f07003a;
-        public static final int date_of_birth_tv=0x7f070039;
-        public static final int deformity_et=0x7f070040;
-        public static final int deformity_lv=0x7f070058;
-        public static final int deformity_tv=0x7f07003f;
-        public static final int dialog_breed_okay_b=0x7f070057;
-        public static final int dialog_breed_sv=0x7f070055;
-        public static final int dialog_deformity_okay_b=0x7f07005a;
+        public static final int action_settings=0x7f070061;
+        public static final int age_et=0x7f07003f;
+        public static final int age_s=0x7f070040;
+        public static final int age_tv=0x7f07003e;
+        public static final int breed_et=0x7f070044;
+        public static final int breed_lv=0x7f07005c;
+        public static final int breed_tv=0x7f070043;
+        public static final int country_of_origin_actv=0x7f07004e;
+        public static final int country_of_origin_tv=0x7f07004d;
+        public static final int dam_et=0x7f07004c;
+        public static final int dam_tv=0x7f07004b;
+        public static final int date_of_birth_et=0x7f070042;
+        public static final int date_of_birth_tv=0x7f070041;
+        public static final int deformity_et=0x7f070048;
+        public static final int deformity_lv=0x7f07005e;
+        public static final int deformity_tv=0x7f070047;
+        public static final int dialog_breed_okay_b=0x7f07005d;
+        public static final int dialog_breed_sv=0x7f07005b;
+        public static final int dialog_deformity_okay_b=0x7f070060;
         public static final int disableHome=0x7f070008;
-        public static final int ear_tag_number_et=0x7f070035;
-        public static final int ear_tag_number_tv=0x7f070034;
+        public static final int ear_tag_number_et=0x7f07003d;
+        public static final int ear_tag_number_tv=0x7f07003c;
         public static final int edit_query=0x7f070026;
-        public static final int extension_personnel_et=0x7f07004e;
-        public static final int extension_personnel_tv=0x7f07004d;
-        public static final int full_name_et=0x7f07004c;
-        public static final int full_name_tv=0x7f07004b;
+        public static final int embryo_number_et=0x7f070037;
+        public static final int embryo_number_tv=0x7f070036;
+        public static final int extension_personnel_et=0x7f070054;
+        public static final int extension_personnel_tv=0x7f070053;
+        public static final int full_name_et=0x7f070052;
+        public static final int full_name_tv=0x7f070051;
         public static final int homeAsUp=0x7f070005;
         public static final int listMode=0x7f070001;
-        public static final int login_button=0x7f070054;
-        public static final int mobile_number_et=0x7f070050;
-        public static final int mobile_number_tv=0x7f07004f;
-        public static final int name_et=0x7f070033;
-        public static final int name_tv=0x7f070032;
-        public static final int next_button=0x7f07004a;
+        public static final int login_button=0x7f07005a;
+        public static final int mobile_number_et=0x7f070056;
+        public static final int mobile_number_tv=0x7f070055;
+        public static final int name_et=0x7f07003b;
+        public static final int name_tv=0x7f07003a;
+        public static final int next_button=0x7f070050;
         public static final int normal=0x7f070000;
-        public static final int number_of_cows_et=0x7f070052;
-        public static final int number_of_cows_tv=0x7f070051;
-        public static final int previous_button=0x7f070049;
-        public static final int register_button=0x7f070053;
-        public static final int service_type_s=0x7f070046;
-        public static final int service_type_tv=0x7f070045;
-        public static final int sex_s=0x7f07003e;
-        public static final int sex_tv=0x7f07003d;
+        public static final int number_of_cows_et=0x7f070058;
+        public static final int number_of_cows_tv=0x7f070057;
+        public static final int previous_button=0x7f07004f;
+        public static final int register_button=0x7f070059;
+        public static final int service_type_s=0x7f070033;
+        public static final int service_type_tv=0x7f070032;
+        public static final int sex_s=0x7f070046;
+        public static final int sex_tv=0x7f070045;
         public static final int showCustom=0x7f070007;
         public static final int showHome=0x7f070004;
         public static final int showTitle=0x7f070006;
-        public static final int sire_et=0x7f070042;
-        public static final int sire_tv=0x7f070041;
-        public static final int specify_et=0x7f070059;
+        public static final int sire_et=0x7f07004a;
+        public static final int sire_tv=0x7f070049;
+        public static final int specify_et=0x7f07005f;
+        public static final int straw_number_et=0x7f070035;
+        public static final int straw_number_tv=0x7f070034;
         public static final int tabMode=0x7f070002;
         public static final int useLogo=0x7f070003;
+        public static final int vet_used_et=0x7f070039;
+        public static final int vet_used_tv=0x7f070038;
         public static final int wrap_content=0x7f070009;
     }
     public static final class integer {
@@ -1077,33 +1084,38 @@ containing a value of this type.
         public static final int date_of_birth_en=0x7f0a0015;
         public static final int deformity_en=0x7f0a0016;
         public static final int ear_tag_number_en=0x7f0a0017;
-        public static final int extension_p_en=0x7f0a0018;
-        public static final int farmer_registration_en=0x7f0a0019;
-        public static final int finish_en=0x7f0a001a;
-        public static final int full_name_en=0x7f0a001b;
+        public static final int embryo_number_en=0x7f0a0018;
+        public static final int extension_p_en=0x7f0a0019;
+        public static final int farmer_registration_en=0x7f0a001a;
+        public static final int finish_en=0x7f0a001b;
+        public static final int full_name_en=0x7f0a001c;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int hello_world=0x7f0a001c;
+        public static final int hello_world=0x7f0a001d;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int login_en=0x7f0a001d;
-        public static final int maximum_of_four_breeds_en=0x7f0a001e;
-        public static final int mobile_number_en=0x7f0a001f;
-        public static final int name_en=0x7f0a0020;
-        public static final int next_en=0x7f0a0021;
-        public static final int number_of_cows_en=0x7f0a0022;
-        public static final int okay_en=0x7f0a0023;
-        public static final int previous_en=0x7f0a0024;
-        public static final int register_en=0x7f0a0025;
-        public static final int service_type_used_en=0x7f0a0026;
-        public static final int sex_en=0x7f0a0027;
-        public static final int sire_en=0x7f0a0028;
-        public static final int sire_registration_en=0x7f0a0029;
-        public static final int specify_en=0x7f0a002a;
+        public static final int login_en=0x7f0a001e;
+        public static final int maximum_of_four_breeds_en=0x7f0a001f;
+        public static final int mobile_number_en=0x7f0a0020;
+        public static final int name_en=0x7f0a0021;
+        public static final int next_en=0x7f0a0022;
+        public static final int number_of_cows_en=0x7f0a0023;
+        public static final int okay_en=0x7f0a0024;
+        public static final int previous_en=0x7f0a0025;
+        public static final int register_en=0x7f0a0026;
+        public static final int service_type_used_en=0x7f0a0027;
+        public static final int sex_en=0x7f0a0028;
+        public static final int sire_en=0x7f0a0029;
+        public static final int sire_registration_en=0x7f0a002a;
+        public static final int specify_en=0x7f0a002b;
+        public static final int straw_number_en=0x7f0a002c;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int title_activity_cow_registration=0x7f0a002b;
-        public static final int title_activity_farmer_registration=0x7f0a002c;
+        public static final int title_activity_cow_registration=0x7f0a002d;
+        public static final int title_activity_farmer_registration=0x7f0a002e;
+        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int vet_used_en=0x7f0a002f;
     }
     public static final class style {
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 

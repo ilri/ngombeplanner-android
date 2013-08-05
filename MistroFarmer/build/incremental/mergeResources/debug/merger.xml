@@ -4480,9 +4480,6 @@ true
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
-                path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values-sw600dp/dimens.xml"
-                qualifiers="sw600dp" />
-            <file
                 name="ab_stacked_solid_mistro"
                 path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/drawable-mdpi/ab_stacked_solid_mistro.9.png"
                 qualifiers="mdpi"
@@ -5031,6 +5028,22 @@ true
             <file
                 path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml"
                 qualifiers="" >
+                <string-array name="service_types_sire_array_en" >
+                    <item>
+Bull
+                    </item>
+                    <item>
+Artificial Insemination
+                    </item>
+                </string-array>
+                <string-array name="service_types_dam_array_en" >
+                    <item>
+Cow
+                    </item>
+                    <item>
+Embryo Transfer
+                    </item>
+                </string-array>
                 <string-array name="breeds_array_en" >
                     <item>
 Ayrshire
@@ -5110,16 +5123,8 @@ Zebu
                 </string>
                 <string name="breed_en" >Breed
                 </string>
-
-                <string-array name="sex_en" >
-                    <item>
-Female
-                    </item>
-                    <item>
-Male
-                    </item>
-                </string-array>
-
+                <string name="straw_number_en" >Straw Number
+                </string>
                 <string name="mobile_number_en" >Mobile Number
                 </string>
                 <string name="sex_en" >Sex
@@ -5146,16 +5151,8 @@ Male
                 </string>
                 <string name="extension_p_en" >Extension Personnel
                 </string>
-
-                <string-array name="service_types_array_en" >
-                    <item>
-Artificial Insemination
-                    </item>
-                    <item>
-Bull
-                    </item>
-                </string-array>
-
+                <string name="vet_used_en" >Vet Used
+                </string>
                 <string name="dam_registration_en" >Dam Registration
                 </string>
                 <string name="finish_en" >Finish
@@ -5191,8 +5188,6 @@ Years
                 </string>
                 <string name="dam_en" >Dam
                 </string>
-                <string name="maximum_of_four_breed" >A maximum of four breeds
-                </string>
 
                 <string-array name="deformities_array_en" >
                     <item>
@@ -5214,6 +5209,9 @@ Clef palate
 Other
                     </item>
                 </string-array>
+
+                <string name="embryo_number_en" >Embryo Number
+                </string>
             </file>
             <file
                 path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/attrs.xml"

@@ -37,9 +37,13 @@
         <item>Clef palate</item>
         <item>Other</item>
     </string-array>
-    <string-array name="service_types_array_en">
-        <item>Artificial Insemination</item>
+    <string-array name="service_types_dam_array_en">
+        <item>Cow</item>
+        <item>Embryo Transfer</item>
+    </string-array>
+    <string-array name="service_types_sire_array_en">
         <item>Bull</item>
+        <item>Artificial Insemination</item>
     </string-array>
     <string-array name="sex_array_en">
         <item>Female</item>
@@ -586,6 +590,7 @@
     <string name="date_of_birth_en">Date of Birth</string>
     <string name="deformity_en">Deformity</string>
     <string name="ear_tag_number_en">Ear Tag Number</string>
+    <string name="embryo_number_en">Embryo Number</string>
     <string name="extension_p_en">Extension Personnel</string>
     <string name="farmer_registration_en">Farmer Registration</string>
     <string name="finish_en">Finish</string>
@@ -607,9 +612,12 @@
     <string name="sire_en">Sire</string>
     <string name="sire_registration_en">Sire Registration</string>
     <string name="specify_en">Specify</string>
+    <string name="straw_number_en">Straw Number</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="title_activity_cow_registration">Cow Registration</string>
     <string name="title_activity_farmer_registration">Register Farmer</string>
+    <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="vet_used_en">Vet Used</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml -->
     <style name="ActionBar.Solid.Mistro" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
         <item name="background">@drawable/ab_solid_mistro</item>

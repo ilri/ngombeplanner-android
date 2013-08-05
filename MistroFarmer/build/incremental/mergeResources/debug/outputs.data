@@ -1,7 +1,7 @@
 # incremental data. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-1375275018000 71900 343fdd3c6dc5dbfa56209a044baf8031aab45d7e /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/values/values.xml
+1375690190000 72324 26fa05a5c172dc240066655f5153650f1b41870f /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/values/values.xml
 1375005954000 180 64fad8567ab0fd70a701c8018bdf36a45d363dd3 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-xhdpi/abs__progress_secondary_holo_dark.9.png
 1375005955000 175 ba08405819616f97f12201e58bc3601221868c66 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-mdpi/abs__list_pressed_holo_dark.9.png
 1375179926000 4395 b02721f119dac2d775ffbeda588d48b2df9d0875 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/layout/activity_farmer_registration.xml
@@ -69,7 +69,7 @@
 1375005955000 1239 587d269ce929665b64f9909ff9fb3ed5cd8e4baf /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-xhdpi/abs__progress_primary_holo_dark.9.png
 1375005954000 236 7698c1e813ab8513ce2b9378f21463b41a1408bc /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-xhdpi/abs__ab_stacked_solid_dark_holo.9.png
 1375005954000 176 015c96cb01d59aa5256f8d0baf49169a7c86eb1e /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-hdpi/abs__list_pressed_holo_dark.9.png
-1375275018000 1407 24309b2fe16c075a57263cac229640a8daff6295 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/layout/dialog_deformity.xml
+1375276284000 1467 2b1010e09e12b6819b64130aca35d21c8d10e03a /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/layout/dialog_deformity.xml
 1375005955000 203 1fa432002aa5acb2f9bfab535525c3832b143aa5 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-hdpi/abs__list_selector_disabled_holo_dark.9.png
 1375005955000 156 632099d0d1e36143f68c43b0b3002813a3285ac7 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-hdpi/abs__tab_selected_focused_holo.9.png
 1375005955000 183 a945ea5b5350b7eaee55198f0e2589a575a444e8 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-mdpi/abs__btn_cab_done_pressed_holo_dark.9.png
@@ -163,7 +163,7 @@
 1375005955000 155 db67cb28486c7c5609c59fa5bbb71e08ecc51c7a /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-hdpi/abs__tab_selected_pressed_holo.9.png
 1375005954000 175 fee53dfaaa82f4c8c2d1cc11dcbf83b240b2f713 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-mdpi/abs__list_longpressed_holo.9.png
 1375005955000 1020 90dbdeeee7e2d8136ce4cee8eb07ccf942db93f1 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-mdpi/abs__ic_go.png
-1375274123000 11758 233694b212f77bae9cef9ea2355645b4688c7b76 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/layout/activity_cow_registration.xml
+1375690189000 14381 064c57e14e4924369409642d2d35e86042d63637 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/layout/activity_cow_registration.xml
 1375005954000 199 64490f07999c430e51bb084dfa8a1337af146efb /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-mdpi/cab_background_bottom_mistro.9.png
 1375005955000 609 2fc843b4ec00ac17f7f014c76afd068d10dc5372 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-xhdpi/abs__spinner_ab_focused_holo_light.9.png
 1375005955000 175 6b7993ecef72162ce059064c9076f0abfd86d6e6 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-mdpi/progress_secondary_mistro.9.png

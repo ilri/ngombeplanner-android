@@ -64,12 +64,19 @@
         <item>Other</item>
     </string-array>
     <string name="service_type_used_en">Service Type Used</string>
-    <string-array name="service_types_array_en">
-        <item>Artificial Insemination</item>
+    <string-array name="service_types_sire_array_en">
         <item>Bull</item>
+        <item>Artificial Insemination</item>
+    </string-array>
+    <string-array name="service_types_dam_array_en">
+        <item>Cow</item>
+        <item>Embryo Transfer</item>
     </string-array>
     <string name="maximum_of_four_breeds_en">A maximum of four breeds</string>
     <string name="country_of_origin_en">Country of Origin</string>
     <string name="specify_en">Specify</string>
+    <string name="straw_number_en">Straw Number</string>
+    <string name="vet_used_en">Vet Used</string>
+    <string name="embryo_number_en">Embryo Number</string>
 
 </resources>

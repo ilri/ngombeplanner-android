@@ -19,6 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
                 android:visibility="gone"
+                android:textColor="@color/text_input_color"
                 android:inputType="textCapSentences"/>
         </LinearLayout>
     </ScrollView>
