@@ -47,7 +47,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     public static final int MODE_COW=0;
     public static final int MODE_SIRE=1;
     public static final int MODE_DAM=2;
-    private final String dateFormat="MM/yyyy";
+    private final String dateFormat="dd/MM/yyyy";
 
     private int mode;
     private int index;
@@ -818,6 +818,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
 
     private void setAgeFromDate(String dateString)
     {
+        Log.d(TAG,"date entered : "+dateString);
         monitorAgeChange=false;
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat(dateFormat);
         Date enteredDate=new Date();
@@ -830,7 +831,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             e.printStackTrace();
         }
         Date today=new Date();
+        Log.d(TAG,"today's date : "+today.toString());
         long millisecondDifference=today.getTime()-enteredDate.getTime();
+        Log.d(TAG,"millisecond difference : "+String.valueOf(millisecondDifference));
         if(millisecondDifference>0&&millisecondDifference<604800000L)//less than one week
         {
             int days=(int)(millisecondDifference/86400000L);
