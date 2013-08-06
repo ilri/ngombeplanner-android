@@ -583,6 +583,7 @@
     <string name="app_name">Mistro Farmer</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="breed_en">Breed</string>
+    <string name="cancel_en">Cancel</string>
     <string name="country_of_origin_en">Country of Origin</string>
     <string name="cow_registration_en">Cow Registration, Cow</string>
     <string name="dam_en">Dam</string>
@@ -591,6 +592,8 @@
     <string name="deformity_en">Deformity</string>
     <string name="ear_tag_number_en">Ear Tag Number</string>
     <string name="embryo_number_en">Embryo Number</string>
+    <string name="enable_gps_en">Enable GPS</string>
+    <string name="enable_network_en">Enable Internet</string>
     <string name="extension_p_en">Extension Personnel</string>
     <string name="farmer_registration_en">Farmer Registration</string>
     <string name="finish_en">Finish</string>
@@ -606,6 +609,8 @@
     <string name="number_of_cows_en">Number of Cows</string>
     <string name="okay_en">Okay</string>
     <string name="previous_en">Previous</string>
+    <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
+    <string name="reason_for_enabling_network">You need to enable the internet on this phone to register. Press Okay to enable the internet</string>
     <string name="register_en">Register</string>
     <string name="service_type_used_en">Service Type Used</string>
     <string name="sex_en">Sex</string>

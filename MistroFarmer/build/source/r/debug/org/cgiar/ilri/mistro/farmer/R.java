@@ -1077,45 +1077,50 @@ containing a value of this type.
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int breed_en=0x7f0a0010;
-        public static final int country_of_origin_en=0x7f0a0011;
-        public static final int cow_registration_en=0x7f0a0012;
-        public static final int dam_en=0x7f0a0013;
-        public static final int dam_registration_en=0x7f0a0014;
-        public static final int date_of_birth_en=0x7f0a0015;
-        public static final int deformity_en=0x7f0a0016;
-        public static final int ear_tag_number_en=0x7f0a0017;
-        public static final int embryo_number_en=0x7f0a0018;
-        public static final int extension_p_en=0x7f0a0019;
-        public static final int farmer_registration_en=0x7f0a001a;
-        public static final int finish_en=0x7f0a001b;
-        public static final int full_name_en=0x7f0a001c;
+        public static final int cancel_en=0x7f0a0011;
+        public static final int country_of_origin_en=0x7f0a0012;
+        public static final int cow_registration_en=0x7f0a0013;
+        public static final int dam_en=0x7f0a0014;
+        public static final int dam_registration_en=0x7f0a0015;
+        public static final int date_of_birth_en=0x7f0a0016;
+        public static final int deformity_en=0x7f0a0017;
+        public static final int ear_tag_number_en=0x7f0a0018;
+        public static final int embryo_number_en=0x7f0a0019;
+        public static final int enable_gps_en=0x7f0a001a;
+        public static final int enable_network_en=0x7f0a001b;
+        public static final int extension_p_en=0x7f0a001c;
+        public static final int farmer_registration_en=0x7f0a001d;
+        public static final int finish_en=0x7f0a001e;
+        public static final int full_name_en=0x7f0a001f;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int hello_world=0x7f0a001d;
+        public static final int hello_world=0x7f0a0020;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int login_en=0x7f0a001e;
-        public static final int maximum_of_four_breeds_en=0x7f0a001f;
-        public static final int mobile_number_en=0x7f0a0020;
-        public static final int name_en=0x7f0a0021;
-        public static final int next_en=0x7f0a0022;
-        public static final int number_of_cows_en=0x7f0a0023;
-        public static final int okay_en=0x7f0a0024;
-        public static final int previous_en=0x7f0a0025;
-        public static final int register_en=0x7f0a0026;
-        public static final int service_type_used_en=0x7f0a0027;
-        public static final int sex_en=0x7f0a0028;
-        public static final int sire_en=0x7f0a0029;
-        public static final int sire_registration_en=0x7f0a002a;
-        public static final int specify_en=0x7f0a002b;
-        public static final int straw_number_en=0x7f0a002c;
+        public static final int login_en=0x7f0a0021;
+        public static final int maximum_of_four_breeds_en=0x7f0a0022;
+        public static final int mobile_number_en=0x7f0a0023;
+        public static final int name_en=0x7f0a0024;
+        public static final int next_en=0x7f0a0025;
+        public static final int number_of_cows_en=0x7f0a0026;
+        public static final int okay_en=0x7f0a0027;
+        public static final int previous_en=0x7f0a0028;
+        public static final int reason_for_enabling_gps_en=0x7f0a0029;
+        public static final int reason_for_enabling_network=0x7f0a002a;
+        public static final int register_en=0x7f0a002b;
+        public static final int service_type_used_en=0x7f0a002c;
+        public static final int sex_en=0x7f0a002d;
+        public static final int sire_en=0x7f0a002e;
+        public static final int sire_registration_en=0x7f0a002f;
+        public static final int specify_en=0x7f0a0030;
+        public static final int straw_number_en=0x7f0a0031;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int title_activity_cow_registration=0x7f0a002d;
-        public static final int title_activity_farmer_registration=0x7f0a002e;
+        public static final int title_activity_cow_registration=0x7f0a0032;
+        public static final int title_activity_farmer_registration=0x7f0a0033;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int vet_used_en=0x7f0a002f;
+        public static final int vet_used_en=0x7f0a0034;
     }
     public static final class style {
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 

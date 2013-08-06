@@ -78,5 +78,10 @@
     <string name="straw_number_en">Straw Number</string>
     <string name="vet_used_en">Vet Used</string>
     <string name="embryo_number_en">Embryo Number</string>
+    <string name="enable_gps_en">Enable GPS</string>
+    <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
+    <string name="cancel_en">Cancel</string>
+    <string name="enable_network_en">Enable Internet</string>
+    <string name="reason_for_enabling_network">You need to enable the internet on this phone to register. Press Okay to enable the internet</string>
 
 </resources>
