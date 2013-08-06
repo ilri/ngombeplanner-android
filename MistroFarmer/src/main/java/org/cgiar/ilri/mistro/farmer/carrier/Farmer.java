@@ -2,6 +2,7 @@ package org.cgiar.ilri.mistro.farmer.carrier;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,19 +13,28 @@ import java.util.List;
  */
 public class Farmer implements Parcelable, Serializable
 {
-    public static final String KEY="farmer";
+    public static final String TAG="Farmer";
+    public static final String PARCELABLE_KEY="farmer";
     private String fullName;
     private String extensionPersonnel;
     private String mobileNumber;
     private List<Cow> cows;
+    private String longitude;
+    private String latitude;
 
     public Farmer()
     {
+        fullName="";
+        extensionPersonnel="";
+        mobileNumber="";
         this.cows=new ArrayList<Cow>();
+        longitude="";
+        latitude="";
     }
 
     public Farmer(Parcel source)
     {
+        this();
         readFromParcel(source);
     }
 
@@ -43,14 +53,81 @@ public class Farmer implements Parcelable, Serializable
         this.mobileNumber = mobileNumber;
     }
 
+    public int getCowNumber()
+    {
+        return cows.size();
+    }
+
+    public void setCowNumber(int number)
+    {
+        this.cows=new ArrayList<Cow>();
+        for (int i=0;i<number;i++)
+        {
+            cows.add(new Cow(true));
+        }
+    }
+
     public void setCows(List<Cow> cows)
     {
         this.cows = cows;
+    }
+    public void setCow(Cow cow, int index)
+    {
+        if(index<cows.size())
+        {
+            cows.set(index,cow);
+        }
+        else
+        {
+            Log.e(TAG,"Trying to add cow in index greater than size of Cow list");
+        }
     }
 
     public void addCow(Cow cow)
     {
         this.cows.add(cow);
+    }
+
+    public void setLongitude(String longitude)
+    {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(String latitude)
+    {
+        this.latitude = latitude;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getExtensionPersonnel() {
+        return extensionPersonnel;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public List<Cow> getCows() {
+        return cows;
+    }
+
+    public Cow getCow(int index)
+    {
+        if(index<cows.size())
+            return cows.get(index);
+        else
+            return null;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
     }
 
     @Override
@@ -66,6 +143,8 @@ public class Farmer implements Parcelable, Serializable
         dest.writeString(extensionPersonnel);
         dest.writeString(mobileNumber);
         dest.writeTypedList(cows);
+        dest.writeString(longitude);
+        dest.writeString(latitude);
     }
 
     public void readFromParcel(Parcel in)
@@ -74,6 +153,8 @@ public class Farmer implements Parcelable, Serializable
         this.extensionPersonnel=in.readString();
         this.mobileNumber=in.readString();
         in.readTypedList(cows,Cow.CREATOR);
+        this.longitude=in.readString();
+        this.latitude=in.readString();
     }
 
     public static final Creator<Farmer> CREATOR=new Creator<Farmer>()

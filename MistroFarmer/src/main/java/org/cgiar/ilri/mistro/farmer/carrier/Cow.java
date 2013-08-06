@@ -2,6 +2,7 @@ package org.cgiar.ilri.mistro.farmer.carrier;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public class Cow implements Parcelable, Serializable
 {
+    public static final String TAG="Cow";
     public static final int SEX_MALE=0;
     public static final int SEX_FEMALE=1;
     private String name;
@@ -23,15 +25,28 @@ public class Cow implements Parcelable, Serializable
     private Sire sire;
     private Dam dam;
     private String countryOfOrigin;
+    private boolean isNotDamOrSire;
 
-    public Cow()
+    public Cow(boolean isNotDamOrSire)
     {
+        name="";
+        earTagNumber="";
+        dateOfBirth="";
         this.breeds=new ArrayList<String>();
+        sex=-1;
         this.deformities=new ArrayList<String>();
+        this.isNotDamOrSire=isNotDamOrSire;
+        if(isNotDamOrSire)//LOL, brings StackOverflowError if you init sire object inside sire object
+        {
+            sire=new Sire();
+            dam=new Dam();
+        }
+        countryOfOrigin="";
     }
 
     public Cow(Parcel in)
     {
+        this(true);
         readFromParcel(in);
     }
 
@@ -98,6 +113,47 @@ public class Cow implements Parcelable, Serializable
         this.countryOfOrigin = countryOfOrigin;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getEarTagNumber() {
+        return earTagNumber;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public List<String> getBreeds() {
+        return breeds;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public List<String> getDeformities() {
+        return deformities;
+    }
+
+    public Sire getSire() {
+        return sire;//TODO: handle nullpointerexception
+    }
+
+    public Dam getDam()
+    {
+        if(dam==null)
+        {
+            Log.d(TAG,"dam is null");
+        }
+        return dam;
+    }
+
+    public String getCountryOfOrigin() {
+        return countryOfOrigin;
+    }
+
     @Override
     public int describeContents()
     {
@@ -113,8 +169,17 @@ public class Cow implements Parcelable, Serializable
         dest.writeStringList(breeds);
         dest.writeInt(sex);
         dest.writeStringList(deformities);
-        dest.writeSerializable(sire);
-        dest.writeSerializable(dam);
+        if(isNotDamOrSire)
+        {
+            dest.writeInt(1);
+            dest.writeSerializable(sire);
+            dest.writeSerializable(dam);
+        }
+        else
+        {
+            dest.writeInt(0);
+        }
+
         dest.writeString(countryOfOrigin);
     }
 
@@ -126,8 +191,18 @@ public class Cow implements Parcelable, Serializable
         in.readStringList(breeds);
         sex=in.readInt();
         in.readStringList(deformities);
-        sire=(Sire)in.readSerializable();
-        dam=(Dam)in.readSerializable();
+        int x=in.readInt();
+        if(x==1)//isnotsireordam
+        {
+            this.isNotDamOrSire=true;
+            sire=(Sire)in.readSerializable();
+            dam=(Dam)in.readSerializable();
+        }
+        else
+        {
+            this.isNotDamOrSire=false;
+        }
+
         countryOfOrigin=in.readString();
     }
 

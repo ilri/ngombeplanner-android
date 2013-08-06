@@ -17,13 +17,16 @@ public class Dam extends Cow implements Serializable
 
     public Dam()
     {
-        super();
+        super(false);
         setSex(SEX_FEMALE);
+        serviceType=-1;
+        embryoNumber="";
+        vetUsed="";
     }
 
     public Dam(Parcel source)
     {
-        //super(source);
+        this();
         readFromParcel(source);
     }
 
@@ -40,6 +43,18 @@ public class Dam extends Cow implements Serializable
     public void setVetUsed(String vetUsed)
     {
         this.vetUsed = vetUsed;
+    }
+
+    public int getServiceType() {
+        return serviceType;
+    }
+
+    public String getEmbryoNumber() {
+        return embryoNumber;
+    }
+
+    public String getVetUsed() {
+        return vetUsed;
     }
 
     @Override

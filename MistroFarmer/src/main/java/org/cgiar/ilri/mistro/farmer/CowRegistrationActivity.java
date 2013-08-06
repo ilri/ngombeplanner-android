@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,16 +24,23 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
+import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.Dam;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+import org.cgiar.ilri.mistro.farmer.carrier.Sire;
+
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener,TextWatcher,AdapterView.OnItemSelectedListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener,ListView.OnItemClickListener
 {
+    public static final String TAG="CowRegistrationActivity";
     public static final String KEY_MODE="mode";
     public static final String KEY_INDEX="index";
     public static final String KEY_NUMBER_OF_COWS="numberOfCows";
@@ -48,6 +56,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private int selectedBreeds=0;
     private String maxSelectedBreedsWarning;
     private String deformityOSpecifyText;
+    private Cow thisCow;
+    private Farmer farmer;
 
     private TextView strawNumberTV;
     private EditText strawNumberET;
@@ -184,28 +194,122 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         deformityLV.setOnItemClickListener(this);
         specifyET=(EditText)deformityDialog.findViewById(R.id.specify_et);
         dialogDeformityOkayB =(Button) deformityDialog.findViewById(R.id.dialog_deformity_okay_b);
-        /*if(mode==MODE_DAM||mode==MODE_SIRE)//TODO: remember to auto set sex in datastructure if dam or sire
-        {
-            sexTV.setVisibility(TextView.GONE);
-            sexS.setVisibility(Spinner.GONE);
-            damTV.setVisibility(TextView.GONE);
-            damET.setVisibility(EditText.GONE);
-            sireTV.setVisibility(TextView.GONE);
-            sireET.setVisibility(EditText.GONE);
-            deformityTV.setVisibility(TextView.GONE);
-            deformityET.setVisibility(EditText.GONE);
-            countryOfOriginACTV.setVisibility(EditText.VISIBLE);
-            countryOfOriginTV.setVisibility(TextView.VISIBLE);
-        }
-        if(mode==MODE_SIRE)
-        {
-            serviceTypeTV.setVisibility(TextView.VISIBLE);
-            serviceTypeS.setVisibility(Spinner.VISIBLE);
-        }*/
 
         //init text in child views
         initTextInViews(localeCode);
         resetMode();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        Bundle bundle=this.getIntent().getExtras();
+        if(bundle!=null)
+        {
+            farmer=bundle.getParcelable(Farmer.PARCELABLE_KEY);
+            if(mode==MODE_COW)
+            {
+                if(farmer!=null)
+                    thisCow=farmer.getCow(index);
+                else
+                    Log.d(TAG,"Farmer object is null");
+            }
+            else if(mode==MODE_DAM)
+            {
+                if(farmer!=null)
+                    thisCow=farmer.getCow(index).getDam();
+                else
+                    Log.d(TAG,"Farmer object is null");
+            }
+            else if(mode==MODE_SIRE)
+            {
+                if(farmer!=null)
+                    thisCow=farmer.getCow(index).getSire();
+                else
+                    Log.d(TAG,"Farmer object is null");
+            }
+        }
+        if(thisCow!=null)
+        {
+            nameET.setText(thisCow.getName());
+            earTagNumberET.setText(thisCow.getEarTagNumber());
+            dateOfBirthET.setText(thisCow.getDateOfBirth());
+            List<String> savedBreeds=thisCow.getBreeds();
+            String breed="";
+            for (int i=0;i<savedBreeds.size();i++)
+            {
+                if(i==0)
+                {
+                    breed=savedBreeds.get(i);
+                }
+                else
+                {
+                    breed=breed+", "+savedBreeds.get(i);
+                }
+            }
+            breedET.setText(breed);
+            if(thisCow.getSex()==Cow.SEX_FEMALE)
+            {
+                sexS.setSelection(0);
+            }
+            else
+            {
+                sexS.setSelection(1);
+            }
+            List<String> savedDeformities=thisCow.getDeformities();
+            String deformity="";
+            for (int i=0;i<savedDeformities.size();i++)
+            {
+                if(i==0)
+                {
+                    deformity=savedDeformities.get(i);
+                }
+                else
+                {
+                    deformity=deformity+", "+savedDeformities.get(i);
+                }
+            }
+            deformityET.setText(deformity);
+            Sire sire=thisCow.getSire();
+            if(sire!=null)
+            {
+                sireET.setText(sire.getName());
+            }
+            Dam dam=thisCow.getDam();
+            if(dam!=null)
+            {
+                damET.setText(dam.getName());
+            }
+            countryOfOriginACTV.setText(thisCow.getCountryOfOrigin());
+            if(mode==MODE_DAM)
+            {
+                if(((Dam) thisCow).getServiceType()==Dam.SERVICE_TYPE_COW)
+                {
+                    serviceTypeS.setSelection(0);
+                }
+                else
+                {
+                    serviceTypeS.setSelection(1);
+                }
+                embryoNumberET.setText(((Dam) thisCow).getEmbryoNumber());
+                vetUsedET.setText(((Dam) thisCow).getVetUsed());
+            }
+            else if(mode==MODE_SIRE)
+            {
+                if(((Sire)thisCow).getServiceType()==Sire.SERVICE_TYPE_BULL)
+                {
+                    serviceTypeS.setSelection(0);
+                }
+                else
+                {
+                    serviceTypeS.setSelection(1);
+                }
+                strawNumberET.setText(((Sire)thisCow).getStrawNumber());
+                vetUsedET.setText(((Sire)thisCow).getVetUsed());
+            }
+        }
     }
 
     private void resetMode()
@@ -426,19 +530,27 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     {
         if(view==previousButton)
         {
+            cacheThisCow();
             Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
             intent.putExtra(KEY_MODE,MODE_COW);
             intent.putExtra(KEY_INDEX,index-1);
             intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+            Bundle bundle=new Bundle();
+            bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
         else if(view==nextButton)
         {
+            cacheThisCow();
+            Bundle bundle=new Bundle();
+            bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
             if(mode==MODE_COW)
             {
                 if(index==numberOfCows-1)//last cow
                 {
                     Intent intent=new Intent(CowRegistrationActivity.this, LandingActivity.class);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
                 else
@@ -447,6 +559,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                     intent.putExtra(KEY_MODE,MODE_COW);
                     intent.putExtra(KEY_INDEX,index+1);
                     intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             }
@@ -455,7 +568,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
                 intent.putExtra(KEY_MODE,MODE_COW);
                 intent.putExtra(KEY_INDEX,index);
-                intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+                intent.putExtra(KEY_NUMBER_OF_COWS, numberOfCows);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         }
@@ -613,19 +727,27 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
 
     private void sireETClicked()
     {
+        cacheThisCow();
         Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
         intent.putExtra(KEY_MODE,MODE_SIRE);
         intent.putExtra(KEY_INDEX,index);
         intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+        Bundle bundle=new Bundle();
+        bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
     private void damETClicked()
     {
+        cacheThisCow();
         Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
         intent.putExtra(KEY_MODE,MODE_DAM);
         intent.putExtra(KEY_INDEX,index);
         intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+        Bundle bundle=new Bundle();
+        bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -838,5 +960,70 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         }
 
 
+    }
+
+    private void cacheThisCow()
+    {
+        if(thisCow==null)
+        {
+            if(mode==MODE_COW)
+            {
+                thisCow=new Cow(true);
+            }
+            else if(mode==MODE_SIRE)
+            {
+                thisCow=new Sire();
+            }
+            else if(mode==MODE_DAM)
+            {
+                thisCow=new Dam();
+            }
+        }
+        thisCow.setName(nameET.getText().toString());
+        thisCow.setEarTagNumber(earTagNumberET.getText().toString());
+        thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
+        thisCow.setBreeds(breedET.getText().toString().split(", "));
+        if(sexS.getSelectedItemPosition()==0)
+        {
+            thisCow.setSex(Cow.SEX_FEMALE);
+        }
+        else
+        {
+            thisCow.setSex(Cow.SEX_MALE);
+        }
+        thisCow.setDeformities(deformityET.getText().toString().split(", "));
+        thisCow.setCountryOfOrigin(countryOfOriginACTV.getText().toString());
+        if(mode==MODE_DAM)
+        {
+            if(serviceTypeS.getSelectedItemPosition()==0)
+            {
+                ((Dam)thisCow).setServiceType(Dam.SERVICE_TYPE_COW);
+            }
+            else
+            {
+                ((Dam)thisCow).setServiceType(Dam.SERVICE_TYPE_ET);
+            }
+            ((Dam)thisCow).setEmbryoNumber(embryoNumberET.getText().toString());
+            ((Dam)thisCow).setVetUsed(vetUsedET.getText().toString());
+            farmer.getCow(index).setDam((Dam)thisCow);
+        }
+        else if(mode==MODE_SIRE)
+        {
+            if(serviceTypeS.getSelectedItemPosition()==0)
+            {
+                ((Sire)thisCow).setServiceType(Sire.SERVICE_TYPE_BULL);
+            }
+            else
+            {
+                ((Sire)thisCow).setServiceType(Sire.SERVICE_TYPE_AI);
+            }
+            ((Sire)thisCow).setStrawNumber(strawNumberET.getText().toString());
+            ((Sire)thisCow).setVetUsed(vetUsedET.getText().toString());
+            farmer.getCow(index).setSire((Sire)thisCow);
+        }
+        else if(mode==MODE_COW)
+        {
+            farmer.setCow(thisCow,index);
+        }
     }
 }

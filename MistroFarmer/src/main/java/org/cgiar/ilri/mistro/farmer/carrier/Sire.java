@@ -17,12 +17,16 @@ public class Sire extends Cow implements Serializable
 
     public Sire()
     {
-        super();
+        super(false);
         setSex(SEX_MALE);
+        serviceType=-1;
+        strawNumber="";
+        vetUsed="";
     }
 
     public Sire(Parcel source)
     {
+        this();
         readFromParcel(source);
     }
 
@@ -39,6 +43,18 @@ public class Sire extends Cow implements Serializable
     public void setVetUsed(String vetUsed)
     {
         this.vetUsed = vetUsed;
+    }
+
+    public int getServiceType() {
+        return serviceType;
+    }
+
+    public String getStrawNumber() {
+        return strawNumber;
+    }
+
+    public String getVetUsed() {
+        return vetUsed;
     }
 
     @Override
