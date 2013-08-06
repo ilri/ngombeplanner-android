@@ -2,6 +2,9 @@ package org.cgiar.ilri.mistro.farmer.carrier;
 
 import android.os.Parcel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -89,4 +92,22 @@ public class Sire extends Cow implements Serializable
             return new Sire[size];
         }
     };
+
+    @Override
+    public JSONObject getJsonObject()
+    {
+        JSONObject jsonObject=super.getJsonObject();
+        try
+        {
+            jsonObject.put("type","sire");
+            jsonObject.put("serviceType",serviceType);
+            jsonObject.put("strawNumber",((strawNumber==null) ? "":strawNumber));
+            jsonObject.put("vetUsed",((vetUsed==null) ? "":vetUsed));
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
 }

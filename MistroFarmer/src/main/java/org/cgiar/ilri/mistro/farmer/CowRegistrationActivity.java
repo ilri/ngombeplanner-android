@@ -136,9 +136,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         earTagNumberET=(EditText)this.findViewById(R.id.ear_tag_number_et);
         ageTV=(TextView)this.findViewById(R.id.age_tv);
         ageS=(Spinner)this.findViewById(R.id.age_s);
-        ageS.setOnItemSelectedListener(this);
+        //ageS.setOnItemSelectedListener(this);
         ageET=(EditText)this.findViewById(R.id.age_et);
-        ageET.addTextChangedListener(this);
+        //ageET.addTextChangedListener(this);
         dateOfBirthTV=(TextView)this.findViewById(R.id.date_of_birth_tv);
         dateOfBirthET=(EditText)this.findViewById(R.id.date_of_birth_et);
         dateOfBirthET.setOnFocusChangeListener(this);
@@ -236,6 +236,19 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             nameET.setText(thisCow.getName());
             earTagNumberET.setText(thisCow.getEarTagNumber());
             dateOfBirthET.setText(thisCow.getDateOfBirth());
+            ageET.setText((thisCow.getAge()==-1) ? "":String.valueOf(thisCow.getAge()));
+            if(thisCow.getAgeType()==Cow.AGE_TYPE_DAY)
+            {
+                ageS.setSelection(0);
+            }
+            else if(thisCow.getAgeType()==Cow.AGE_TYPE_WEEK)
+            {
+                ageS.setSelection(1);
+            }
+            else if(thisCow.getAgeType()==Cow.AGE_TYPE_YEAR)
+            {
+                ageS.setSelection(2);
+            }
             List<String> savedBreeds=thisCow.getBreeds();
             String breed="";
             for (int i=0;i<savedBreeds.size();i++)
@@ -275,12 +288,22 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             Sire sire=thisCow.getSire();
             if(sire!=null)
             {
-                sireET.setText(sire.getName());
+                if(sire.getName()!=null||sire.getName().length()>0)
+                    sireET.setText(sire.getName());
+                else if(sire.getEarTagNumber()!=null||sire.getEarTagNumber().length()>0)
+                    damET.setText(sire.getEarTagNumber());
+                else if(sire.getStrawNumber()!=null||sire.getStrawNumber().length()>0)
+                    damET.setText(sire.getStrawNumber());
             }
             Dam dam=thisCow.getDam();
             if(dam!=null)
             {
-                damET.setText(dam.getName());
+                if(dam.getName()!=null||dam.getName().length()>0)
+                    damET.setText(dam.getName());
+                else if(dam.getEarTagNumber()!=null||dam.getEarTagNumber().length()>0)
+                    damET.setText(dam.getEarTagNumber());
+                else if(dam.getEmbryoNumber()!=null||dam.getEmbryoNumber().length()>0)
+                    damET.setText(dam.getEmbryoNumber());
             }
             countryOfOriginACTV.setText(thisCow.getCountryOfOrigin());
             if(mode==MODE_DAM)
@@ -380,6 +403,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                earTagNumberET.setVisibility(EditText.VISIBLE);
                dateOfBirthTV.setVisibility(TextView.VISIBLE);
                dateOfBirthET.setVisibility(EditText.VISIBLE);
+               ageTV.setVisibility(TextView.VISIBLE);
+               ageET.setVisibility(EditText.VISIBLE);
+               ageS.setVisibility(Spinner.VISIBLE);
                breedTV.setVisibility(TextView.VISIBLE);
                breedET.setVisibility(EditText.VISIBLE);
                countryOfOriginTV.setVisibility(TextView.VISIBLE);
@@ -398,6 +424,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                earTagNumberET.setVisibility(EditText.GONE);
                dateOfBirthTV.setVisibility(TextView.GONE);
                dateOfBirthET.setVisibility(EditText.GONE);
+               ageTV.setVisibility(TextView.GONE);
+               ageET.setVisibility(EditText.GONE);
+               ageS.setVisibility(Spinner.GONE);
                breedTV.setVisibility(TextView.GONE);
                breedET.setVisibility(EditText.GONE);
                countryOfOriginTV.setVisibility(TextView.GONE);
@@ -418,6 +447,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                earTagNumberET.setVisibility(EditText.VISIBLE);
                dateOfBirthTV.setVisibility(TextView.VISIBLE);
                dateOfBirthET.setVisibility(EditText.VISIBLE);
+               ageS.setVisibility(Spinner.VISIBLE);
+               ageTV.setVisibility(TextView.VISIBLE);
+               ageET.setVisibility(EditText.VISIBLE);
                breedTV.setVisibility(TextView.VISIBLE);
                breedET.setVisibility(EditText.VISIBLE);
                countryOfOriginTV.setVisibility(TextView.VISIBLE);
@@ -435,6 +467,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                earTagNumberET.setVisibility(EditText.GONE);
                dateOfBirthTV.setVisibility(TextView.GONE);
                dateOfBirthET.setVisibility(EditText.GONE);
+               ageTV.setVisibility(TextView.GONE);
+               ageET.setVisibility(EditText.GONE);
+               ageS.setVisibility(Spinner.GONE);
                breedTV.setVisibility(TextView.GONE);
                breedET.setVisibility(EditText.GONE);
                countryOfOriginTV.setVisibility(TextView.GONE);
@@ -549,6 +584,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             {
                 if(index==numberOfCows-1)//last cow
                 {
+                    Log.d(TAG, farmer.getJsonObject().toString());
+                    //TODO: send to server
                     Intent intent=new Intent(CowRegistrationActivity.this, LandingActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
@@ -982,6 +1019,19 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         thisCow.setName(nameET.getText().toString());
         thisCow.setEarTagNumber(earTagNumberET.getText().toString());
         thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
+        thisCow.setAge((ageET.getText().toString()==null||ageET.getText().toString().length()==0) ? -1:Integer.parseInt(ageET.getText().toString()));
+        if(ageS.getSelectedItemPosition()==0)
+        {
+            thisCow.setAgeType(Cow.AGE_TYPE_DAY);
+        }
+        else if(ageS.getSelectedItemPosition()==1)
+        {
+            thisCow.setAgeType(Cow.AGE_TYPE_WEEK);
+        }
+        else if(ageS.getSelectedItemPosition()==2)
+        {
+            thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
+        }
         thisCow.setBreeds(breedET.getText().toString().split(", "));
         if(sexS.getSelectedItemPosition()==0)
         {

@@ -4,6 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -171,4 +175,28 @@ public class Farmer implements Parcelable, Serializable
             return new Farmer[size];
         }
     };
+
+    public JSONObject getJsonObject()
+    {
+        JSONObject jsonObject=new JSONObject();
+        try
+        {
+            jsonObject.put("fullName",((fullName==null) ? "":fullName));
+            jsonObject.put("extensionPersonnel",((extensionPersonnel==null) ? "":extensionPersonnel));
+            jsonObject.put("mobileNumber",((mobileNumber==null) ? "":mobileNumber));
+            JSONArray cowsJsonArray=new JSONArray();
+            for (int i=0;i<cows.size();i++)
+            {
+                cowsJsonArray.put(i,cows.get(i).getJsonObject());
+            }
+            jsonObject.put("cows",cowsJsonArray);
+            jsonObject.put("longitude",((longitude==null) ? "":longitude));
+            jsonObject.put("latitude",((latitude==null) ? "":latitude));
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return  jsonObject;
+    }
 }

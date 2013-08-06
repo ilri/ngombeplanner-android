@@ -28,6 +28,21 @@
             android:textColor="@color/text_input_color"
             android:inputType="textCapWords|textPersonName"/>
         <TextView
+                android:id="@+id/mobile_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+                android:textSize="@dimen/normal_text_size"/>
+        <EditText
+                android:id="@+id/mobile_number_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+                android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+                android:inputType="phone"
+                android:textColor="@color/text_input_color"
+                android:textSize="@dimen/normal_text_size"/>
+        <TextView
             android:id="@+id/extension_personnel_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,21 +57,6 @@
             android:textSize="@dimen/normal_text_size"
             android:textColor="@color/text_input_color"
             android:inputType="textCapWords|textPersonName"/>
-        <TextView
-            android:id="@+id/mobile_number_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
-            android:textSize="@dimen/normal_text_size"/>
-        <EditText
-            android:id="@+id/mobile_number_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
-            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
-            android:inputType="phone"
-            android:textColor="@color/text_input_color"
-            android:textSize="@dimen/normal_text_size"/>
         <TextView
             android:id="@+id/number_of_cows_tv"
             android:layout_width="wrap_content"

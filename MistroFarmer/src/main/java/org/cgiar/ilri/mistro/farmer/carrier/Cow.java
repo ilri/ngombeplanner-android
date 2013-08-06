@@ -4,9 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.JarInputStream;
 
 /**
  * Created by jason on 8/5/13.
@@ -16,9 +21,14 @@ public class Cow implements Parcelable, Serializable
     public static final String TAG="Cow";
     public static final int SEX_MALE=0;
     public static final int SEX_FEMALE=1;
+    public static final int AGE_TYPE_DAY=0;
+    public static final int AGE_TYPE_WEEK=1;
+    public static final int AGE_TYPE_YEAR=2;
     private String name;
     private String earTagNumber;
     private String dateOfBirth;
+    private int age;
+    private int ageType;
     private List<String> breeds;
     private int sex;
     private List<String> deformities;
@@ -32,6 +42,8 @@ public class Cow implements Parcelable, Serializable
         name="";
         earTagNumber="";
         dateOfBirth="";
+        age=-1;
+        ageType=-1;
         this.breeds=new ArrayList<String>();
         sex=-1;
         this.deformities=new ArrayList<String>();
@@ -63,6 +75,16 @@ public class Cow implements Parcelable, Serializable
     public void setDateOfBirth(String dateOfBirth)
     {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setAge(int age)
+    {
+        this.age=age;
+    }
+
+    public void setAgeType(int ageType)
+    {
+        this.ageType=ageType;
     }
 
     public void setBreeds(String[] breeds)
@@ -125,6 +147,16 @@ public class Cow implements Parcelable, Serializable
         return dateOfBirth;
     }
 
+    public int getAge()
+    {
+        return age;
+    }
+
+    public int getAgeType()
+    {
+        return  ageType;
+    }
+
     public List<String> getBreeds() {
         return breeds;
     }
@@ -166,6 +198,8 @@ public class Cow implements Parcelable, Serializable
         dest.writeString(name);
         dest.writeString(earTagNumber);
         dest.writeString(dateOfBirth);
+        dest.writeInt(age);
+        dest.writeInt(ageType);
         dest.writeStringList(breeds);
         dest.writeInt(sex);
         dest.writeStringList(deformities);
@@ -188,6 +222,8 @@ public class Cow implements Parcelable, Serializable
         name=in.readString();
         earTagNumber=in.readString();
         dateOfBirth=in.readString();
+        age=in.readInt();
+        ageType=in.readInt();
         in.readStringList(breeds);
         sex=in.readInt();
         in.readStringList(deformities);
@@ -220,4 +256,41 @@ public class Cow implements Parcelable, Serializable
             return new Cow[size];
         }
     };
+
+    public JSONObject getJsonObject()
+    {
+        JSONObject jsonObject=new JSONObject();
+        try
+        {
+            jsonObject.put("name",((name==null) ? "":name));
+            jsonObject.put("earTagNumber",((earTagNumber==null) ? "":earTagNumber));
+            jsonObject.put("dateOfBirth",((dateOfBirth==null) ? "":dateOfBirth));
+            jsonObject.put("age",age);
+            jsonObject.put("ageType",ageType);
+            JSONArray breedJsonArray=new JSONArray();
+            for(int i=0;i<breeds.size();i++)
+            {
+                breedJsonArray.put(i,breeds.get(i));
+            }
+            jsonObject.put("breeds",breedJsonArray);
+            jsonObject.put("sex",sex);
+            JSONArray deformityJsonArray=new JSONArray();
+            for(int i=0;i<deformities.size();i++)
+            {
+                deformityJsonArray.put(i,deformities.get(i));
+            }
+            jsonObject.put("deformities",deformityJsonArray);
+            if(isNotDamOrSire)
+            {
+                jsonObject.put("type","cow");
+                jsonObject.put("sire",((sire==null) ? "":sire.getJsonObject()));
+                jsonObject.put("dam",((dam==null) ? "":dam.getJsonObject()));
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
 }

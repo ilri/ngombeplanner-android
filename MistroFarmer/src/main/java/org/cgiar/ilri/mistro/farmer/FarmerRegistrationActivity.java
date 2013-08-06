@@ -108,7 +108,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         farmer.setFullName(fullNameET.getText().toString());
         farmer.setExtensionPersonnel(extensionPersonnelET.getText().toString());
         farmer.setMobileNumber(mobileNumberET.getText().toString());
-        farmer.setCowNumber(Integer.parseInt(numberOfCowsET.getText().toString()));
+        farmer.setCowNumber((numberOfCowsET.getText().toString()==null||numberOfCowsET.getText().toString().length()==0) ? 0:Integer.parseInt(numberOfCowsET.getText().toString()));//Integer.parseInt(numberOfCowsET.getText().toString())
         //TODO:save gps coordinates
     }
 
@@ -133,8 +133,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             }
             else
             {
+                Log.d(TAG, farmer.getJsonObject().toString());
                 Intent intent=new Intent(FarmerRegistrationActivity.this,LandingActivity.class);
-                //TODO: push farmer to server
                 startActivity(intent);
             }
         }
