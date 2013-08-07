@@ -91,5 +91,8 @@
     <string name="logging_in_from_different_device_en">It appears that you are logging in from an unusual device. Do you still want to login?</string>
     <string name="yes_en">Yes</string>
     <string name="no_en">No</string>
+    <string name="milk_production_en">Milk Production</string>
+    <string name="events_en">Events</string>
+    <string name="main_menu_en">Main Menu</string>
 
 </resources>

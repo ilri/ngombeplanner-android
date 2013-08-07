@@ -60,6 +60,16 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         initTextInViews(localeCode);
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if(loginDialog.isShowing())
+        {
+            loginDialog.dismiss();
+        }
+    }
+
     private void initTextInViews(String localeCode)
     {
         if(localeCode.equals("en"))

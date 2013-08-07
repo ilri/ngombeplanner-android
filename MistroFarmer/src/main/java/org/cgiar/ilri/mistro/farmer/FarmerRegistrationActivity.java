@@ -68,6 +68,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         mobileNumberTV=(TextView)this.findViewById(R.id.mobile_number_tv);
         mobileNumberET=(EditText)this.findViewById(R.id.mobile_number_et);
         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        Toast.makeText(this,telephonyManager.getSimSerialNumber(),Toast.LENGTH_LONG).show();
         mobileNumberET.setText(telephonyManager.getLine1Number());
         numberOfCowsTV=(TextView)this.findViewById(R.id.number_of_cows_tv);
         numberOfCowsET=(EditText)this.findViewById(R.id.number_of_cows_et);

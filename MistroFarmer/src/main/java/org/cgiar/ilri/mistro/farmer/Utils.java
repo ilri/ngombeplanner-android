@@ -31,6 +31,7 @@ public class Utils
                 .setPositiveButton(okayText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                         Intent intent = new Intent(context, LandingActivity.class);
                         context.startActivity(intent);
                     }
@@ -52,6 +53,7 @@ public class Utils
                     {
                         if(nextActivity!=null)
                         {
+                            dialog.dismiss();
                             Intent intent = new Intent(context,nextActivity);
                             context.startActivity(intent);
                         }
@@ -71,6 +73,7 @@ public class Utils
                 {
                     if(nextActivityNeg!=null)
                     {
+                        dialog.dismiss();
                         Intent intent = new Intent(context,nextActivityNeg);
                         context.startActivity(intent);
                     }

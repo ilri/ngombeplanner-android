@@ -20,7 +20,9 @@
         </activity>
         <activity android:name="org.cgiar.ilri.mistro.farmer.CowRegistrationActivity">
         </activity>
-        <activity android:label="@string/title_activity_main_menu" android:name="org.cgiar.ilri.mistro.farmer.MainMenu">
+        <activity android:name="org.cgiar.ilri.mistro.farmer.MainMenu">
+        </activity>
+        <activity android:label="@string/title_activity_milk_production" android:name="org.cgiar.ilri.mistro.farmer.MilkProductionActivity">
         </activity>
     </application>
 
