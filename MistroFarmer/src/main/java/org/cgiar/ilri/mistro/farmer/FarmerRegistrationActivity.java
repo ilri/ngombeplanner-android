@@ -179,8 +179,6 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
                 if (DataHandler.checkNetworkConnection(this, networkAlertTitle, networkAlertText, okayText))
                 {
                     sendDataToServer(farmer.getJsonObject());
-                    Intent intent=new Intent(FarmerRegistrationActivity.this,LandingActivity.class);
-                    startActivity(intent);
                 }
             }
         }
@@ -269,15 +267,30 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         @Override
         protected Boolean doInBackground(JSONObject... params)
         {
+            Log.d(TAG,"sending registration data to server");
+            String responseString=DataHandler.sendDataToServer(params[0].toString(),DataHandler.FARMER_REGISTRATION_URL);
+            if(responseString!=null && responseString.equals(DataHandler.ACKNOWLEDGE_OK))
+            {
+                return true;
+            }
             return false;
         }
 
         @Override
-        protected void onPostExecute(Boolean aBoolean)
+        protected void onPostExecute(Boolean result)
         {
-            super.onPostExecute(aBoolean);
+            super.onPostExecute(result);
+            if(result)
+            {
+                Log.d(TAG,"data successfully sent to server");
+                Intent intent=new Intent(FarmerRegistrationActivity.this,LandingActivity.class);
+                startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(FarmerRegistrationActivity.this,"something went wrong",Toast.LENGTH_LONG).show();
+            }
         }
     }
-
 
 }

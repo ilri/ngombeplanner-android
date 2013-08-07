@@ -3,6 +3,7 @@ package org.cgiar.ilri.mistro.farmer;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,10 +25,12 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
+import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.Dam;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.cgiar.ilri.mistro.farmer.carrier.Sire;
+import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
@@ -58,6 +61,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private String deformityOSpecifyText;
     private Cow thisCow;
     private Farmer farmer;
+    private String networkAlertTitle;
+    private String networkAlertText;
+    private String okayText;
 
     private TextView strawNumberTV;
     private EditText strawNumberET;
@@ -557,6 +563,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             dialogDeformityOkayB.setText(R.string.okay_en);
             dialogDeformityOkayB.setOnClickListener(this);
             maxSelectedBreedsWarning=this.getResources().getString(R.string.maximum_of_four_breeds_en);
+            networkAlertTitle=getResources().getString(R.string.enable_network_en);
+            networkAlertText=getResources().getString(R.string.reason_for_enabling_network);
+            okayText=getResources().getString(R.string.okay_en);
         }
     }
 
@@ -586,9 +595,10 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 {
                     Log.d(TAG, farmer.getJsonObject().toString());
                     //TODO: send to server
-                    Intent intent=new Intent(CowRegistrationActivity.this, LandingActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    if (DataHandler.checkNetworkConnection(this, networkAlertTitle, networkAlertText, okayText))
+                    {
+                        sendDataToServer(farmer.getJsonObject());
+                    }
                 }
                 else
                 {
@@ -1022,7 +1032,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         thisCow.setName(nameET.getText().toString());
         thisCow.setEarTagNumber(earTagNumberET.getText().toString());
         thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
-        thisCow.setAge((ageET.getText().toString()==null||ageET.getText().toString().length()==0) ? -1:Integer.parseInt(ageET.getText().toString()));
+        thisCow.setAge((ageET.getText().toString() == null || ageET.getText().toString().length() == 0) ? -1 : Integer.parseInt(ageET.getText().toString()));
         if(ageS.getSelectedItemPosition()==0)
         {
             thisCow.setAgeType(Cow.AGE_TYPE_DAY);
@@ -1077,6 +1087,44 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         else if(mode==MODE_COW)
         {
             farmer.setCow(thisCow,index);
+        }
+    }
+
+    private void sendDataToServer(JSONObject jsonObject)
+    {
+        ServerRegistrationThread serverRegistrationThread=new ServerRegistrationThread();
+        serverRegistrationThread.execute(jsonObject);
+    }
+
+    private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,Boolean>
+    {
+
+        @Override
+        protected Boolean doInBackground(JSONObject... params)
+        {
+            Log.d(TAG,"sending registration data to server");
+            String responseString=DataHandler.sendDataToServer(params[0].toString(),DataHandler.FARMER_REGISTRATION_URL);
+            if(responseString!=null && responseString.equals(DataHandler.ACKNOWLEDGE_OK))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result)
+        {
+            super.onPostExecute(result);
+            if(result)
+            {
+                Log.d(TAG,"data successfully sent to server");
+                Intent intent=new Intent(CowRegistrationActivity.this,LandingActivity.class);
+                startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(CowRegistrationActivity.this,"something went wrong",Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
