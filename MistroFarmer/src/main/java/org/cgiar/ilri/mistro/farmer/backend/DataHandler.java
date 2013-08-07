@@ -9,6 +9,8 @@ import android.net.NetworkInfo;
 import android.provider.Settings;
 import android.util.Log;
 
+import org.cgiar.ilri.mistro.farmer.R;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -38,8 +40,18 @@ public class DataHandler
     private static final int HTTP_RESPONSE_TIMEOUT =20000;
     private static final String BASE_URL="http://192.168.2.232/mistro";//"http://10.0.2.2/";//TODO: configure baseURL
     public static final String FARMER_REGISTRATION_URL="/farmer/registration.php";
-    public static boolean checkNetworkConnection(final Context context, String alertTitle, String alertText, String okayText)
+    public static final String FARMER_AUTHENTICATION_URL="/farmer/authentication.php";
+    public static boolean checkNetworkConnection(final Context context, String localeCode)
     {
+        String alertTitle="";
+        String alertText="";
+        String okayText="";
+        if(localeCode.equals("en"))
+        {
+            alertTitle=context.getResources().getString(R.string.enable_network_en);
+            alertText=context.getResources().getString(R.string.reason_for_enabling_network_en);
+            okayText=context.getResources().getString(R.string.okay_en);
+        }
         ConnectivityManager connectivityManager=(ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
         if(networkInfo==null)//no network connection

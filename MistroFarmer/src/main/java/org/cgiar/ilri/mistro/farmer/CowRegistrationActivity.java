@@ -564,7 +564,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             dialogDeformityOkayB.setOnClickListener(this);
             maxSelectedBreedsWarning=this.getResources().getString(R.string.maximum_of_four_breeds_en);
             networkAlertTitle=getResources().getString(R.string.enable_network_en);
-            networkAlertText=getResources().getString(R.string.reason_for_enabling_network);
+            networkAlertText=getResources().getString(R.string.reason_for_enabling_network_en);
             okayText=getResources().getString(R.string.okay_en);
         }
     }
@@ -595,7 +595,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 {
                     Log.d(TAG, farmer.getJsonObject().toString());
                     //TODO: send to server
-                    if (DataHandler.checkNetworkConnection(this, networkAlertTitle, networkAlertText, okayText))
+                    if (DataHandler.checkNetworkConnection(this, localeCode))
                     {
                         sendDataToServer(farmer.getJsonObject());
                     }
@@ -1118,8 +1118,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             if(result)
             {
                 Log.d(TAG,"data successfully sent to server");
-                Intent intent=new Intent(CowRegistrationActivity.this,LandingActivity.class);
-                startActivity(intent);
+                Utils.showSuccessfullRegistration(CowRegistrationActivity.this,localeCode);
+                //Intent intent=new Intent(CowRegistrationActivity.this,LandingActivity.class);
+                //startActivity(intent);
             }
             else
             {

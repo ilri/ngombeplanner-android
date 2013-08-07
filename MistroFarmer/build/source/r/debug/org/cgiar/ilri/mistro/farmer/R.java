@@ -950,7 +950,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f070013;
         public static final int abs__title=0x7f07001b;
         public static final int abs__up=0x7f07000f;
-        public static final int action_settings=0x7f070061;
+        public static final int action_settings=0x7f070064;
         public static final int age_et=0x7f07003f;
         public static final int age_s=0x7f070040;
         public static final int age_tv=0x7f07003e;
@@ -969,6 +969,7 @@ containing a value of this type.
         public static final int dialog_breed_okay_b=0x7f07005d;
         public static final int dialog_breed_sv=0x7f07005b;
         public static final int dialog_deformity_okay_b=0x7f070060;
+        public static final int dialog_login_login_b=0x7f070063;
         public static final int disableHome=0x7f070008;
         public static final int ear_tag_number_et=0x7f07003d;
         public static final int ear_tag_number_tv=0x7f07003c;
@@ -977,6 +978,8 @@ containing a value of this type.
         public static final int embryo_number_tv=0x7f070036;
         public static final int extension_personnel_et=0x7f070056;
         public static final int extension_personnel_tv=0x7f070055;
+        public static final int farmer_id_et=0x7f070062;
+        public static final int farmer_id_tv=0x7f070061;
         public static final int full_name_et=0x7f070052;
         public static final int full_name_tv=0x7f070051;
         public static final int homeAsUp=0x7f070005;
@@ -1042,14 +1045,17 @@ containing a value of this type.
         public static final int activity_cow_registration=0x7f030015;
         public static final int activity_farmer_registration=0x7f030016;
         public static final int activity_landing=0x7f030017;
-        public static final int dialog_breed=0x7f030018;
-        public static final int dialog_deformity=0x7f030019;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001a;
-        public static final int sherlock_spinner_item=0x7f03001b;
+        public static final int activity_main_menu=0x7f030018;
+        public static final int dialog_breed=0x7f030019;
+        public static final int dialog_deformity=0x7f03001a;
+        public static final int dialog_login=0x7f03001b;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001c;
+        public static final int sherlock_spinner_item=0x7f03001d;
     }
     public static final class menu {
         public static final int cow_registration=0x7f0c0000;
         public static final int farmer_registration=0x7f0c0001;
+        public static final int main_menu=0x7f0c0002;
     }
     public static final class string {
         public static final int abs__action_bar_home_description=0x7f0a0000;
@@ -1088,39 +1094,48 @@ containing a value of this type.
         public static final int embryo_number_en=0x7f0a0019;
         public static final int enable_gps_en=0x7f0a001a;
         public static final int enable_network_en=0x7f0a001b;
-        public static final int extension_p_en=0x7f0a001c;
-        public static final int farmer_registration_en=0x7f0a001d;
-        public static final int finish_en=0x7f0a001e;
-        public static final int full_name_en=0x7f0a001f;
+        public static final int enter_your_mistro_id_en=0x7f0a001c;
+        public static final int extension_p_en=0x7f0a001d;
+        public static final int failed_to_authenticate_en=0x7f0a001e;
+        public static final int farmer_registration_en=0x7f0a001f;
+        public static final int finish_en=0x7f0a0020;
+        public static final int full_name_en=0x7f0a0021;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int hello_world=0x7f0a0020;
+        public static final int hello_world=0x7f0a0022;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int login_en=0x7f0a0021;
-        public static final int maximum_of_four_breeds_en=0x7f0a0022;
-        public static final int mobile_number_en=0x7f0a0023;
-        public static final int name_en=0x7f0a0024;
-        public static final int next_en=0x7f0a0025;
-        public static final int number_of_cows_en=0x7f0a0026;
-        public static final int okay_en=0x7f0a0027;
-        public static final int previous_en=0x7f0a0028;
-        public static final int reason_for_enabling_gps_en=0x7f0a0029;
-        public static final int reason_for_enabling_network=0x7f0a002a;
-        public static final int register_en=0x7f0a002b;
-        public static final int service_type_used_en=0x7f0a002c;
-        public static final int sex_en=0x7f0a002d;
-        public static final int sire_en=0x7f0a002e;
-        public static final int sire_registration_en=0x7f0a002f;
-        public static final int specify_en=0x7f0a0030;
-        public static final int straw_number_en=0x7f0a0031;
+        public static final int logging_in_from_different_device_en=0x7f0a0023;
+        public static final int login_en=0x7f0a0024;
+        public static final int maximum_of_four_breeds_en=0x7f0a0025;
+        public static final int mobile_number_en=0x7f0a0026;
+        public static final int name_en=0x7f0a0027;
+        public static final int next_en=0x7f0a0028;
+        public static final int no_en=0x7f0a0029;
+        public static final int number_of_cows_en=0x7f0a002a;
+        public static final int okay_en=0x7f0a002b;
+        public static final int previous_en=0x7f0a002c;
+        public static final int reason_for_enabling_gps_en=0x7f0a002d;
+        public static final int reason_for_enabling_network_en=0x7f0a002e;
+        public static final int register_en=0x7f0a002f;
+        public static final int service_type_used_en=0x7f0a0030;
+        public static final int sex_en=0x7f0a0031;
+        public static final int sire_en=0x7f0a0032;
+        public static final int sire_registration_en=0x7f0a0033;
+        public static final int specify_en=0x7f0a0034;
+        public static final int straw_number_en=0x7f0a0035;
+        public static final int successful_registration_en=0x7f0a0036;
+        public static final int successful_registration_instructions_en=0x7f0a0037;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int title_activity_cow_registration=0x7f0a0032;
-        public static final int title_activity_farmer_registration=0x7f0a0033;
+        public static final int title_activity_cow_registration=0x7f0a0038;
+        public static final int title_activity_farmer_registration=0x7f0a0039;
+        public static final int title_activity_main_menu=0x7f0a003a;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int vet_used_en=0x7f0a0034;
+        public static final int vet_used_en=0x7f0a003b;
+        public static final int yes_en=0x7f0a003c;
+        public static final int your_mistro_id_en=0x7f0a003d;
     }
     public static final class style {
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 

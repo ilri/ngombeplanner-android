@@ -82,6 +82,14 @@
     <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
     <string name="cancel_en">Cancel</string>
     <string name="enable_network_en">Enable Internet</string>
-    <string name="reason_for_enabling_network">You need to enable the internet on this phone to register. Press Okay to enable the internet</string>
+    <string name="reason_for_enabling_network_en">You need to enable the internet on this phone to register. Press Okay to enable the internet</string>
+    <string name="successful_registration_en">Successful Registration</string>
+    <string name="successful_registration_instructions_en">You have been successfully registered. You will receive an SMS instructing you on how to login</string>
+    <string name="your_mistro_id_en">Your Mistro ID</string>
+    <string name="enter_your_mistro_id_en">Please enter your Mistro ID</string>
+    <string name="failed_to_authenticate_en">Unable to authenticate you. Please try logging in again</string>
+    <string name="logging_in_from_different_device_en">It appears that you are logging in from an unusual device. Do you still want to login?</string>
+    <string name="yes_en">Yes</string>
+    <string name="no_en">No</string>
 
 </resources>

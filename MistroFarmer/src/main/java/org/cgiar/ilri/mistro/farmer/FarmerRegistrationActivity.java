@@ -135,7 +135,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             okayText=getResources().getString(R.string.okay_en);
             cancelText=getResources().getString(R.string.cancel_en);
             networkAlertTitle=getResources().getString(R.string.enable_network_en);
-            networkAlertText=getResources().getString(R.string.reason_for_enabling_network);
+            networkAlertText=getResources().getString(R.string.reason_for_enabling_network_en);
         }
     }
 
@@ -176,7 +176,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             else
             {
                 Log.d(TAG, farmer.getJsonObject().toString());
-                if (DataHandler.checkNetworkConnection(this, networkAlertTitle, networkAlertText, okayText))
+                if (DataHandler.checkNetworkConnection(this, localeCode))
                 {
                     sendDataToServer(farmer.getJsonObject());
                 }
@@ -283,8 +283,9 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             if(result)
             {
                 Log.d(TAG,"data successfully sent to server");
-                Intent intent=new Intent(FarmerRegistrationActivity.this,LandingActivity.class);
-                startActivity(intent);
+                Utils.showSuccessfullRegistration(FarmerRegistrationActivity.this,localeCode);
+                //Intent intent=new Intent(FarmerRegistrationActivity.this,LandingActivity.class);
+                //startActivity(intent);
             }
             else
             {

@@ -7,9 +7,10 @@
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="16" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -27,11 +28,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="org.cgiar.ilri.mistro.farmer.FarmerRegistrationActivity" >
+        <activity android:name="org.cgiar.ilri.mistro.farmer.FarmerRegistrationActivity" >
+        </activity>
+        <activity android:name="org.cgiar.ilri.mistro.farmer.CowRegistrationActivity" >
         </activity>
         <activity
-            android:name="org.cgiar.ilri.mistro.farmer.CowRegistrationActivity" >
+            android:name="org.cgiar.ilri.mistro.farmer.MainMenu"
+            android:label="@string/title_activity_main_menu" >
         </activity>
     </application>
 

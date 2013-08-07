@@ -594,23 +594,27 @@
     <string name="embryo_number_en">Embryo Number</string>
     <string name="enable_gps_en">Enable GPS</string>
     <string name="enable_network_en">Enable Internet</string>
+    <string name="enter_your_mistro_id_en">Please enter your Mistro ID</string>
     <string name="extension_p_en">Extension Personnel</string>
+    <string name="failed_to_authenticate_en">Unable to authenticate you. Please try logging in again</string>
     <string name="farmer_registration_en">Farmer Registration</string>
     <string name="finish_en">Finish</string>
     <string name="full_name_en">Full Name</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="hello_world">Hello world!</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="logging_in_from_different_device_en">It appears that you are logging in from an unusual device. Do you still want to login?</string>
     <string name="login_en">Login</string>
     <string name="maximum_of_four_breeds_en">A maximum of four breeds</string>
     <string name="mobile_number_en">Mobile Number</string>
     <string name="name_en">Name</string>
     <string name="next_en">Next</string>
+    <string name="no_en">No</string>
     <string name="number_of_cows_en">Number of Cows</string>
     <string name="okay_en">Okay</string>
     <string name="previous_en">Previous</string>
     <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
-    <string name="reason_for_enabling_network">You need to enable the internet on this phone to register. Press Okay to enable the internet</string>
+    <string name="reason_for_enabling_network_en">You need to enable the internet on this phone to register. Press Okay to enable the internet</string>
     <string name="register_en">Register</string>
     <string name="service_type_used_en">Service Type Used</string>
     <string name="sex_en">Sex</string>
@@ -618,11 +622,16 @@
     <string name="sire_registration_en">Sire Registration</string>
     <string name="specify_en">Specify</string>
     <string name="straw_number_en">Straw Number</string>
+    <string name="successful_registration_en">Successful Registration</string>
+    <string name="successful_registration_instructions_en">You have been successfully registered. You will receive an SMS instructing you on how to login</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="title_activity_cow_registration">Cow Registration</string>
     <string name="title_activity_farmer_registration">Register Farmer</string>
+    <string name="title_activity_main_menu">Main Menu</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="vet_used_en">Vet Used</string>
+    <string name="yes_en">Yes</string>
+    <string name="your_mistro_id_en">Your Mistro ID</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml -->
     <style name="ActionBar.Solid.Mistro" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
         <item name="background">@drawable/ab_solid_mistro</item>
