@@ -68,7 +68,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         mobileNumberTV=(TextView)this.findViewById(R.id.mobile_number_tv);
         mobileNumberET=(EditText)this.findViewById(R.id.mobile_number_et);
         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        Toast.makeText(this,telephonyManager.getSimSerialNumber(),Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,telephonyManager.getSimSerialNumber(),Toast.LENGTH_LONG).show();
         mobileNumberET.setText(telephonyManager.getLine1Number());
         numberOfCowsTV=(TextView)this.findViewById(R.id.number_of_cows_tv);
         numberOfCowsET=(EditText)this.findViewById(R.id.number_of_cows_et);
@@ -152,6 +152,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         farmer.setCowNumber((numberOfCowsET.getText().toString()==null||numberOfCowsET.getText().toString().length()==0) ? 0:Integer.parseInt(numberOfCowsET.getText().toString()));//Integer.parseInt(numberOfCowsET.getText().toString())
         farmer.setLatitude(latitude);
         farmer.setLongitude(longitude);
+        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        farmer.setSimCardSN(telephonyManager.getSimSerialNumber());
         //TODO:save gps coordinates
     }
 

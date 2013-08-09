@@ -9,20 +9,20 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application android:allowBackup="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/Theme.Mistro">
-        <activity android:label="@string/app_name" android:name="org.cgiar.ilri.mistro.farmer.LandingActivity">
+        <activity android:label="@string/app_name" android:name="org.cgiar.ilri.mistro.farmer.LandingActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="org.cgiar.ilri.mistro.farmer.FarmerRegistrationActivity">
+        <activity android:name="org.cgiar.ilri.mistro.farmer.FarmerRegistrationActivity" android:screenOrientation="portrait">
         </activity>
-        <activity android:name="org.cgiar.ilri.mistro.farmer.CowRegistrationActivity">
+        <activity android:name="org.cgiar.ilri.mistro.farmer.CowRegistrationActivity" android:screenOrientation="portrait">
         </activity>
-        <activity android:name="org.cgiar.ilri.mistro.farmer.MainMenu">
+        <activity android:name="org.cgiar.ilri.mistro.farmer.MainMenu" android:screenOrientation="portrait">
         </activity>
-        <activity android:label="@string/title_activity_milk_production" android:name="org.cgiar.ilri.mistro.farmer.MilkProductionActivity">
+        <activity android:name="org.cgiar.ilri.mistro.farmer.MilkProductionActivity" android:screenOrientation="portrait">
         </activity>
     </application>
 

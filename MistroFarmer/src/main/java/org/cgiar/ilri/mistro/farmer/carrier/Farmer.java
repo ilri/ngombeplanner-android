@@ -25,6 +25,7 @@ public class Farmer implements Parcelable, Serializable
     private List<Cow> cows;
     private String longitude;
     private String latitude;
+    private String simCardSN;
 
     public Farmer()
     {
@@ -34,6 +35,7 @@ public class Farmer implements Parcelable, Serializable
         this.cows=new ArrayList<Cow>();
         longitude="";
         latitude="";
+        simCardSN ="";
     }
 
     public Farmer(Parcel source)
@@ -102,6 +104,11 @@ public class Farmer implements Parcelable, Serializable
         this.latitude = latitude;
     }
 
+    public void setSimCardSN(String simCardSN)
+    {
+        this.simCardSN = simCardSN;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -134,6 +141,11 @@ public class Farmer implements Parcelable, Serializable
         return latitude;
     }
 
+    public String getSimCardSN()
+    {
+        return simCardSN;
+    }
+
     @Override
     public int describeContents()
     {
@@ -149,6 +161,7 @@ public class Farmer implements Parcelable, Serializable
         dest.writeTypedList(cows);
         dest.writeString(longitude);
         dest.writeString(latitude);
+        dest.writeString(simCardSN);
     }
 
     public void readFromParcel(Parcel in)
@@ -159,6 +172,7 @@ public class Farmer implements Parcelable, Serializable
         in.readTypedList(cows,Cow.CREATOR);
         this.longitude=in.readString();
         this.latitude=in.readString();
+        this.simCardSN =in.readString();
     }
 
     public static final Creator<Farmer> CREATOR=new Creator<Farmer>()
@@ -192,6 +206,7 @@ public class Farmer implements Parcelable, Serializable
             jsonObject.put("cows",cowsJsonArray);
             jsonObject.put("longitude",((longitude==null) ? "":longitude));
             jsonObject.put("latitude",((latitude==null) ? "":latitude));
+            jsonObject.put("simCardSN",((simCardSN ==null) ? "": simCardSN));
         }
         catch (JSONException e)
         {

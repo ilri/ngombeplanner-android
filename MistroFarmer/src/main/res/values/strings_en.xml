@@ -2,6 +2,7 @@
 <resources>
 
     <string name="login_en">Login</string>
+    <string name="login_anyway_en">Login Anyway</string>
     <string name="register_en">Register</string>
     <string name="full_name_en">Full Name</string>
     <string name="mobile_number_en">Mobile Number</string>
@@ -88,11 +89,16 @@
     <string name="your_mistro_id_en">Your Mistro ID</string>
     <string name="enter_your_mistro_id_en">Please enter your Mistro ID</string>
     <string name="failed_to_authenticate_en">Unable to authenticate you. Please try logging in again</string>
-    <string name="logging_in_from_different_device_en">It appears that you are logging in from an unusual device. Do you still want to login?</string>
+    <string name="logging_in_from_different_device_en">It appears like you are logging in from an unusual device. Do you still want to login?</string>
     <string name="yes_en">Yes</string>
     <string name="no_en">No</string>
     <string name="milk_production_en">Milk Production</string>
     <string name="events_en">Events</string>
     <string name="main_menu_en">Main Menu</string>
-
+    <string name="sim_card_not_registered_en">You are using a Sim card that has not been used before in this system.</string>
+    <string name="sim_card_registration_en">Sim Card Registration</string>
+    <string name="new_mobile_number_en">New Mobile Number</string>
+    <string name="old_mobile_number_en">Old Mobile Number</string>
+    <string name="old_number_not_in_system_en">It appears like your old mobile number is not registered in the system. Contact the system admin for more details.</string>
+    <string name="welcome_en">Welcome</string>
 </resources>

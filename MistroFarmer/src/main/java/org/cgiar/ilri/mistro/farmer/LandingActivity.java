@@ -1,7 +1,9 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,10 +25,6 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
     private String localeCode;
     private Button loginButton;
     private Button registerButton;
-    private Dialog loginDialog;
-    private TextView farmerIdTV;
-    private EditText farmerIdET;
-    private Button dialogLoginLoginB;
     private boolean loginSessionOn=false;
     private String loginText;
     private String unsuccessfulAuthText;
@@ -34,6 +32,17 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
     private String fromAnotherDevWarning;
     private String yesText;
     private String noText;
+    private String loginAnywayText;
+    private String registerText;
+    private Dialog changeSystemSimCardDialog;
+    private TextView oldMobileNumberTV;
+    private EditText oldMobileNumberET;
+    private TextView newMobileNumberTV;
+    private EditText newMobileNumberET;
+    private Button changeSystemSimCardB;
+    private String simCardRegistrationText;
+    private String oldNumberNotInSystemText;
+    private String welcomeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,13 +57,16 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         loginButton.setOnClickListener(this);
         registerButton=(Button)this.findViewById(R.id.register_button);
         registerButton.setOnClickListener(this);
-
-        loginDialog=new Dialog(this);
-        loginDialog.setContentView(R.layout.dialog_login);
-        farmerIdTV=(TextView)loginDialog.findViewById(R.id.farmer_id_tv);
-        farmerIdET=(EditText)loginDialog.findViewById(R.id.farmer_id_et);
-        dialogLoginLoginB=(Button)loginDialog.findViewById(R.id.dialog_login_login_b);
-        dialogLoginLoginB.setOnClickListener(this);
+        changeSystemSimCardDialog=new Dialog(this);
+        changeSystemSimCardDialog.setContentView(R.layout.dialog_change_system_sim_card);
+        oldMobileNumberTV =(TextView)changeSystemSimCardDialog.findViewById(R.id.old_mobile_number_tv);
+        oldMobileNumberET =(EditText)changeSystemSimCardDialog.findViewById(R.id.old_mobile_number_et);
+        changeSystemSimCardB=(Button)changeSystemSimCardDialog.findViewById(R.id.dialog_change_system_ok_b);
+        changeSystemSimCardB.setOnClickListener(this);
+        newMobileNumberTV=(TextView)changeSystemSimCardDialog.findViewById(R.id.new_mobile_number_tv);
+        newMobileNumberET=(EditText)changeSystemSimCardDialog.findViewById(R.id.new_mobile_number_et);
+        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        newMobileNumberET.setText(telephonyManager.getLine1Number());
 
         //init text according to locale
         initTextInViews(localeCode);
@@ -64,10 +76,6 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
     protected void onResume()
     {
         super.onResume();
-        if(loginDialog.isShowing())
-        {
-            loginDialog.dismiss();
-        }
     }
 
     private void initTextInViews(String localeCode)
@@ -76,16 +84,28 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         {
             loginButton.setText(R.string.login_en);
             registerButton.setText(R.string.register_en);
-            loginDialog.setTitle(R.string.login_en);
-            farmerIdTV.setText(R.string.your_mistro_id_en);
-            dialogLoginLoginB.setText(R.string.login_en);
             loginText=getResources().getString(R.string.login_en);
-            unsuccessfulAuthText=getResources().getString(R.string.failed_to_authenticate_en);
+            unsuccessfulAuthText=getResources().getString(R.string.sim_card_not_registered_en);
             okayText=getResources().getString(R.string.okay_en);
             fromAnotherDevWarning=getResources().getString(R.string.logging_in_from_different_device_en);
             yesText=getResources().getString(R.string.yes_en);
             noText=getResources().getString(R.string.no_en);
+            loginAnywayText=getResources().getString(R.string.login_anyway_en);
+            registerText=getResources().getString(R.string.register_en);
+            oldMobileNumberTV.setText(R.string.old_mobile_number_en);
+            newMobileNumberTV.setText(R.string.new_mobile_number_en);
+            changeSystemSimCardDialog.setTitle(R.string.sim_card_registration_en);
+            changeSystemSimCardB.setText(R.string.okay_en);
+            simCardRegistrationText=getResources().getString(R.string.sim_card_registration_en);
+            oldNumberNotInSystemText=getResources().getString(R.string.old_number_not_in_system_en);
+            welcomeText=getResources().getString(R.string.welcome_en);
         }
+    }
+
+    private void startRegistrationActivity()
+    {
+        Intent intent=new Intent(LandingActivity.this,FarmerRegistrationActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -93,41 +113,39 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
     {
         if(view==registerButton)
         {
-            Intent intent=new Intent(LandingActivity.this,FarmerRegistrationActivity.class);
-            startActivity(intent);
+            startRegistrationActivity();
         }
         else if(view==loginButton)
         {
             if(!loginSessionOn)
             {
-                loginDialog.show();
+                //loginDialog.show();
+                authenticateUser();
             }
         }
-        else if(view==dialogLoginLoginB)
+        else if(view==changeSystemSimCardB)
         {
-            authenticateUser();
+            registerSimCard();
         }
     }
+
+
 
     private void authenticateUser()
     {
         if(DataHandler.checkNetworkConnection(this,localeCode))
         {
-            if(farmerIdET.getText().toString()!=null&&farmerIdET.getText().toString().length()>0)
+            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+            if(telephonyManager.getSimSerialNumber()!=null)
             {
-                TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
                 UserAuthenticationThread authenticationThread=new UserAuthenticationThread();
-                authenticationThread.execute(farmerIdET.getText().toString(), telephonyManager.getLine1Number());
-            }
-            else
-            {
-                Toast.makeText(this,getResources().getString(R.string.enter_your_mistro_id_en),Toast.LENGTH_LONG).show();
+                authenticationThread.execute(telephonyManager.getSimSerialNumber());
             }
 
         }
     }
 
-    private class UserAuthenticationThread extends AsyncTask<String,Integer,Integer>
+    private class UserAuthenticationThread extends AsyncTask<String,Integer,String>
     {
         @Override
         protected void onPreExecute()
@@ -137,46 +155,126 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         }
 
         @Override
-        protected Integer doInBackground(String... params)
+        protected String doInBackground(String... params)
         {
             JSONObject jsonObject=new JSONObject();
             try
             {
-                jsonObject.put("farmerID",params[0]);
-                jsonObject.put("mobileNumber",params[1]);
+                jsonObject.put("simCardSN",params[0]);
+                //jsonObject.put("mobileNumber",params[1]);
                 String result = DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_AUTHENTICATION_URL);
-                return Integer.parseInt(result);
+                return result;
             }
             catch (JSONException e)
             {
                 e.printStackTrace();
             }
-            return -1;
+            return null;
         }
 
         @Override
-        protected void onPostExecute(Integer result)
+        protected void onPostExecute(String result)
         {
             super.onPostExecute(result);
             loginSessionOn=false;
-            if(result==0)//user not authenticated
+            if(result==null)
             {
-                Utils.showGenericAlertDialog(LandingActivity.this,loginText,unsuccessfulAuthText,okayText,null,null,null);
+                Toast.makeText(LandingActivity.this,"Server Error",Toast.LENGTH_LONG).show();
             }
-            else if(result==1)
+            else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED))
             {
-                Utils.showGenericAlertDialog(LandingActivity.this,loginText,fromAnotherDevWarning,yesText,noText,MainMenu.class,null);
-            }
-            else if(result==2)
-            {
-                loginDialog.dismiss();
-                Intent intent=new Intent(LandingActivity.this,MainMenu.class);
-                startActivity(intent);
-                Toast.makeText(LandingActivity.this,"User authenticated in normal phone",Toast.LENGTH_LONG).show();
+                showRegisterOrLoginDialog();
             }
             else
             {
+                Toast.makeText(LandingActivity.this, welcomeText,Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(LandingActivity.this,MainMenu.class);
+                startActivity(intent);
+            }
+        }
+
+        private void showRegisterOrLoginDialog()
+        {
+            AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(LandingActivity.this);
+            alertDialogBuilder.setTitle(loginText);
+            alertDialogBuilder
+                    .setMessage(unsuccessfulAuthText)
+                    .setCancelable(true)
+                    .setPositiveButton(loginAnywayText, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            changeSystemSimCardDialog.show();
+                        }
+                    })
+                    .setNegativeButton(registerText, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            startRegistrationActivity();
+                        }
+                    });
+            AlertDialog alertDialog=alertDialogBuilder.create();
+            alertDialog.show();
+        }
+    }
+
+    private void registerSimCard()
+    {
+        if(DataHandler.checkNetworkConnection(this,localeCode))
+        {
+            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+            if(telephonyManager.getSimSerialNumber()!=null)
+            {
+                SimCardRegistrationThread simCardRegistrationThread=new SimCardRegistrationThread();
+                simCardRegistrationThread.execute(oldMobileNumberET.getText().toString(),newMobileNumberET.getText().toString(),telephonyManager.getSimSerialNumber());
+            }
+
+        }
+    }
+
+    private class SimCardRegistrationThread extends AsyncTask<String,Integer,String>
+    {
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+
+            JSONObject jsonObject=new JSONObject();
+            try
+            {
+                String result=null;
+                jsonObject.put("oldMobileNumber",params[0]);
+                jsonObject.put("newMobileNumber",params[1]);
+                jsonObject.put("newSimCardSN",params[2]);
+                result= DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_SIM_CARD_REGISTRATION_URL);
+                return result;
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+            super.onPostExecute(result);
+            if(result==null)
+            {
                 Toast.makeText(LandingActivity.this,"Server Error",Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED))
+            {
+                Utils.showGenericAlertDialog(LandingActivity.this,simCardRegistrationText,oldNumberNotInSystemText,okayText,null,null,null);
+            }
+            else if(result.equals(DataHandler.CODE_SIM_CARD_REGISTERED))
+            {
+                changeSystemSimCardDialog.dismiss();
+                authenticateUser();
             }
         }
     }

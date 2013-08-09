@@ -35,12 +35,15 @@ import java.util.List;
 public class DataHandler
 {
     public static final String ACKNOWLEDGE_OK="ok";
+    public static final String CODE_USER_NOT_AUTHENTICATED="43322";
+    public static final String CODE_SIM_CARD_REGISTERED="83242";
     private static final String TAG="DataHandler";
     private static final int HTTP_POST_TIMEOUT =20000;
     private static final int HTTP_RESPONSE_TIMEOUT =20000;
     private static final String BASE_URL="http://192.168.2.232/mistro";//"http://10.0.2.2/";//TODO: configure baseURL
     public static final String FARMER_REGISTRATION_URL="/farmer/registration.php";
     public static final String FARMER_AUTHENTICATION_URL="/farmer/authentication.php";
+    public static final String FARMER_SIM_CARD_REGISTRATION_URL="/farmer/simCardRegistration.php";
     public static boolean checkNetworkConnection(final Context context, String localeCode)
     {
         String alertTitle="";

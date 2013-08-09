@@ -4344,11 +4344,6 @@ true
                 qualifiers=""
                 type="layout" />
             <file
-                name="dialog_login"
-                path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/layout/dialog_login.xml"
-                qualifiers=""
-                type="layout" />
-            <file
                 name="activity_cow_registration"
                 path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/layout/activity_cow_registration.xml"
                 qualifiers=""
@@ -5051,6 +5046,8 @@ true
                 </string>
                 <string name="okay_en" >Okay
                 </string>
+                <string name="new_mobile_number_en" >New Mobile Number
+                </string>
                 <string name="maximum_of_four_breeds_en" >A maximum of four breeds
                 </string>
                 <string name="next_en" >Next
@@ -5061,7 +5058,9 @@ true
                 </string>
                 <string name="successful_registration_instructions_en" >You have been successfully registered. You will receive an SMS instructing you on how to login
                 </string>
-                <string name="logging_in_from_different_device_en" >It appears that you are logging in from an unusual device. Do you still want to login?
+                <string name="logging_in_from_different_device_en" >It appears like you are logging in from an unusual device. Do you still want to login?
+                </string>
+                <string name="old_mobile_number_en" >Old Mobile Number
                 </string>
                 <string name="sex_en" >Sex
                 </string>
@@ -5081,6 +5080,8 @@ Male
                     </item>
                 </string-array>
 
+                <string name="welcome_en" >Welcome
+                </string>
                 <string name="cow_registration_en" >Cow Registration, Cow
                 </string>
                 <string name="extension_p_en" >Extension Personnel
@@ -5099,11 +5100,15 @@ Male
                 </string>
                 <string name="login_en" >Login
                 </string>
+                <string name="old_number_not_in_system_en" >It appears like your old mobile number is not in the system. Contact the system admin for more details.
+                </string>
                 <string name="enable_network_en" >Enable Internet
                 </string>
                 <string name="main_menu_en" >Main Menu
                 </string>
                 <string name="previous_en" >Previous
+                </string>
+                <string name="login_anyway_en" >Login Anyway
                 </string>
 
                 <string-array name="deformities_array_en" >
@@ -5227,6 +5232,8 @@ Zebu
                 </string>
                 <string name="mobile_number_en" >Mobile Number
                 </string>
+                <string name="sim_card_registration_en" >Sim Card Registration
+                </string>
                 <string name="enable_gps_en" >Enable GPS
                 </string>
                 <string name="name_en" >Name
@@ -5239,11 +5246,13 @@ Zebu
                 </string>
                 <string name="reason_for_enabling_gps_en" >You need to enable your GPS before register. Press Okay to enable GPS
                 </string>
+                <string name="sim_card_not_registered_en" >You are using a Sim card that has not been used before in this system.
+                </string>
                 <string name="ear_tag_number_en" >Ear Tag Number
                 </string>
-                <string name="country_of_origin_en" >Country of Origin
-                </string>
                 <string name="sire_registration_en" >Sire Registration
+                </string>
+                <string name="country_of_origin_en" >Country of Origin
                 </string>
 
                 <string-array name="age_type_array_en" >
@@ -5464,6 +5473,11 @@ true
                 path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/menu/milk_production.xml"
                 qualifiers=""
                 type="menu" />
+            <file
+                name="dialog_change_system_sim_card"
+                path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/layout/dialog_change_system_sim_card.xml"
+                qualifiers=""
+                type="layout" />
         </source>
         <source path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/rs/debug" />
     </dataSet>

@@ -18,9 +18,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Mistro" >
+        android:theme="@style/Theme.Mistro">
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.LandingActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,15 +29,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="org.cgiar.ilri.mistro.farmer.FarmerRegistrationActivity" >
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.FarmerRegistrationActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name="org.cgiar.ilri.mistro.farmer.CowRegistrationActivity" >
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.CowRegistrationActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name="org.cgiar.ilri.mistro.farmer.MainMenu" >
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.MainMenu"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.MilkProductionActivity"
-            android:label="@string/title_activity_milk_production" >
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
