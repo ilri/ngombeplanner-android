@@ -24,6 +24,8 @@
         </activity>
         <activity android:name="org.cgiar.ilri.mistro.farmer.MilkProductionActivity" android:screenOrientation="portrait">
         </activity>
+        <activity android:label="@string/title_activity_milk_procution_history" android:name="org.cgiar.ilri.mistro.farmer.MilkProcutionHistoryActivity">
+        </activity>
     </application>
 
 </manifest>

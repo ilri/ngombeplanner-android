@@ -597,6 +597,7 @@
     <string name="cow_registration_en">Cow Registration, Cow</string>
     <string name="dam_en">Dam</string>
     <string name="dam_registration_en">Dam Registration</string>
+    <string name="date_en">Date</string>
     <string name="date_of_birth_en">Date of Birth</string>
     <string name="deformity_en">Deformity</string>
     <string name="ear_tag_number_en">Ear Tag Number</string>
@@ -625,6 +626,7 @@
     <string name="name_en">Name</string>
     <string name="new_mobile_number_en">New Mobile Number</string>
     <string name="next_en">Next</string>
+    <string name="no_data_received_en">No data received</string>
     <string name="no_en">No</string>
     <string name="number_of_cows_en">Number of Cows</string>
     <string name="okay_en">Okay</string>
@@ -652,6 +654,7 @@
     <string name="title_activity_cow_registration">Cow Registration</string>
     <string name="title_activity_farmer_registration">Register Farmer</string>
     <string name="title_activity_main_menu">Main Menu</string>
+    <string name="title_activity_milk_procution_history">Production History</string>
     <string name="title_activity_milk_production">Milk Production</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="vet_used_en">Vet Used</string>

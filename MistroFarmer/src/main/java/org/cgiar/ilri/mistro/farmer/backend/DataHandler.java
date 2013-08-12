@@ -35,6 +35,7 @@ import java.util.List;
 public class DataHandler
 {
     public static final String ACKNOWLEDGE_OK="533783";
+    public static final String NO_DATA="77732";
     public static final String DATA_ERROR="934342";
     public static final String CODE_USER_NOT_AUTHENTICATED="43322";
     public static final String CODE_SIM_CARD_REGISTERED="83242";
@@ -47,6 +48,7 @@ public class DataHandler
     public static final String FARMER_SIM_CARD_REGISTRATION_URL="/farmer/simCardRegistration.php";
     public static final String FARMER_FETCH_COW_IDENTIFIERS_URL="/farmer/fetchCowIdentifiers.php";
     public static final String FARMER_ADD_MILK_PRODUCTION_URL="/farmer/addMilkProduction.php";
+    public static final String FARMER_FETCH_MILK_PRODUCTION_HISTORY_URL="/farmer/fetchMilkProductionHistory.php";
     public static boolean checkNetworkConnection(final Context context, String localeCode)
     {
         String alertTitle="";

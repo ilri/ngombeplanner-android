@@ -8,5 +8,6 @@
     <string name="title_activity_cow_registration">Cow Registration</string>
     <string name="title_activity_main_menu">Main Menu</string>
     <string name="title_activity_milk_production">Milk Production</string>
+    <string name="title_activity_milk_procution_history">Production History</string>
 
 </resources>

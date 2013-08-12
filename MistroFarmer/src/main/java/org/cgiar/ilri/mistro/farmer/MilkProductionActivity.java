@@ -2,6 +2,7 @@ package org.cgiar.ilri.mistro.farmer;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -25,7 +26,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
 {
     private static final String TAG="MilkProductionActivity";
     private Button addProductionB;
-    private Button producitonHistoryB;
+    private Button productionHistoryB;
     private String localeCode;
     private Dialog addMilkProductionDialog;
     private TextView cowTV;
@@ -50,7 +51,8 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
 
         addProductionB=(Button)this.findViewById(R.id.add_production_b);
         addProductionB.setOnClickListener(this);
-        producitonHistoryB=(Button)this.findViewById(R.id.production_history_b);
+        productionHistoryB =(Button)this.findViewById(R.id.production_history_b);
+        productionHistoryB.setOnClickListener(this);
         addMilkProductionDialog=new Dialog(this);
         addMilkProductionDialog.setContentView(R.layout.dialog_add_milk_production);
         cowTV=(TextView)addMilkProductionDialog.findViewById(R.id.cow_tv);
@@ -73,7 +75,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         {
             this.setTitle(R.string.milk_production_en);
             addProductionB.setText(R.string.add_production_en);
-            producitonHistoryB.setText(R.string.production_history_en);
+            productionHistoryB.setText(R.string.production_history_en);
             addMilkProductionDialog.setTitle(R.string.add_production_en);
             cowTV.setText(R.string.cow_en);
             timeTV.setText(R.string.time_en);
@@ -98,6 +100,11 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         else if(view==addMilkProductionAddB)
         {
             sendMilkProductionData();
+        }
+        else if(view==productionHistoryB)
+        {
+            Intent intent=new Intent(MilkProductionActivity.this,MilkProcutionHistoryActivity.class);
+            startActivity(intent);
         }
     }
 

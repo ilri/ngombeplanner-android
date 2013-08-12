@@ -116,4 +116,6 @@
     <string name="enter_quantity_of_milk_produced_en">Please enter the quantity of the milk produced in KGs</string>
     <string name="information_successfully_sent_to_server_en">Information successfully sent to server</string>
     <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
+    <string name="date_en">Date</string>
+    <string name="no_data_received_en">No data received</string>
 </resources>
