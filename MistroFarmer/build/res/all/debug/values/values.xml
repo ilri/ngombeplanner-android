@@ -657,9 +657,11 @@
     <string name="title_activity_milk_procution_history">Production History</string>
     <string name="title_activity_milk_production">Milk Production</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="today_en">Today</string>
     <string name="vet_used_en">Vet Used</string>
     <string name="welcome_en">Welcome</string>
     <string name="yes_en">Yes</string>
+    <string name="yesterday_en">Yesterday</string>
     <string name="your_mistro_id_en">Your Mistro ID</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml -->
     <style name="ActionBar.Solid.Mistro" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">

@@ -1,7 +1,7 @@
 # incremental data. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-1376299837000 75417 9a03679dcde30d8995fb73a1a179cfe98e83b239 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/values/values.xml
+1376301418000 75511 5b2e1b3c4ee0789aa3591a2aade296146da242db /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/values/values.xml
 1376288347000 180 64fad8567ab0fd70a701c8018bdf36a45d363dd3 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-xhdpi/abs__progress_secondary_holo_dark.9.png
 1376288348000 175 ba08405819616f97f12201e58bc3601221868c66 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/drawable-mdpi/abs__list_pressed_holo_dark.9.png
 1376288348000 4447 331a2eda0ec885e810f4b39e0bd39ecb33b1a354 /home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/res/all/debug/layout/activity_farmer_registration.xml

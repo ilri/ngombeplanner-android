@@ -22,7 +22,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MilkProcutionHistoryActivity extends SherlockActivity
@@ -38,6 +41,8 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
     private DisplayMetrics metrics;
     private TableLayout productionHistoryTL;
     private String[] times;
+    private String todayText;
+    private String yesterdayText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,6 +74,8 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
             quantityTV.setText(R.string.quantity_en);
             noDataWarning=getResources().getString(R.string.no_data_received_en);
             times=getResources().getStringArray(R.array.milking_times_en);
+            todayText=getResources().getString(R.string.today_en);
+            yesterdayText=getResources().getString(R.string.yesterday_en);
         }
     }
 
@@ -203,7 +210,21 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
                 }
                 tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,tableRowHeight));
 
-                final TextView date=generateTextView(jsonObject.getString("date"),3424+jsonObject.getInt("id")+332,tableRowHeight,tableTextSize);
+                SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+                Date milkingDate=dateFormat.parse(jsonObject.getString("date"));
+                Date today=new Date();
+                long dateDifference=(today.getTime()-milkingDate.getTime())/86400000;
+                String dateText=jsonObject.getString("date");
+                if(dateDifference<1)
+                {
+                    dateText=todayText;
+                }
+                else if(dateDifference>=1&&dateDifference<2)
+                {
+                    dateText=yesterdayText;
+                }
+
+                final TextView date=generateTextView(dateText,3424+jsonObject.getInt("id")+332,tableRowHeight,tableTextSize);
                 tableRow.addView(date);
 
                 final View rowSeparator1=generateRowSeparator(3424+jsonObject.getInt("id")+3322,tableRowHeight);
@@ -228,6 +249,10 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
 
             }
             catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+            catch (ParseException e)
             {
                 e.printStackTrace();
             }

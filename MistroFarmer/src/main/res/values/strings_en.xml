@@ -118,4 +118,6 @@
     <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
     <string name="date_en">Date</string>
     <string name="no_data_received_en">No data received</string>
+    <string name="today_en">Today</string>
+    <string name="yesterday_en">Yesterday</string>
 </resources>

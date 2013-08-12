@@ -534,10 +534,12 @@ int string title_activity_farmer_registration 0x7f0a004d
 int string title_activity_main_menu 0x7f0a004e
 int string title_activity_milk_procution_history 0x7f0a004f
 int string title_activity_milk_production 0x7f0a0050
-int string vet_used_en 0x7f0a0051
-int string welcome_en 0x7f0a0052
-int string yes_en 0x7f0a0053
-int string your_mistro_id_en 0x7f0a0054
+int string today_en 0x7f0a0051
+int string vet_used_en 0x7f0a0052
+int string welcome_en 0x7f0a0053
+int string yes_en 0x7f0a0054
+int string yesterday_en 0x7f0a0055
+int string your_mistro_id_en 0x7f0a0056
 int style ActionBar_Solid_Mistro 0x7f0b0000
 int style ActionBar_Transparent_Mistro 0x7f0b0001
 int style ActionBarTabStyle_Mistro 0x7f0b0002

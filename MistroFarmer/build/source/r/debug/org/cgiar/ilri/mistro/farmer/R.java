@@ -1177,10 +1177,12 @@ containing a value of this type.
         public static final int title_activity_milk_production=0x7f0a0050;
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int vet_used_en=0x7f0a0051;
-        public static final int welcome_en=0x7f0a0052;
-        public static final int yes_en=0x7f0a0053;
-        public static final int your_mistro_id_en=0x7f0a0054;
+        public static final int today_en=0x7f0a0051;
+        public static final int vet_used_en=0x7f0a0052;
+        public static final int welcome_en=0x7f0a0053;
+        public static final int yes_en=0x7f0a0054;
+        public static final int yesterday_en=0x7f0a0055;
+        public static final int your_mistro_id_en=0x7f0a0056;
     }
     public static final class style {
         /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 
