@@ -12,14 +12,13 @@
     <Button
         android:id="@+id/add_production_b"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/normal_button_layout_height"/>
-    <TextView
-        android:id="@+id/history_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="History"
-        
-        android:layout_marginTop="20dp"/>
+        android:layout_height="@dimen/normal_button_layout_height"
+        android:layout_marginTop="120dp"/>
+    <Button
+        android:id="@+id/production_history_b"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_button_layout_height"
+        android:layout_marginTop="40dp"/>
 
 
 </LinearLayout>

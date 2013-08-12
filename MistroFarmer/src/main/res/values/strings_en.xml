@@ -83,7 +83,7 @@
     <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
     <string name="cancel_en">Cancel</string>
     <string name="enable_network_en">Enable Internet</string>
-    <string name="reason_for_enabling_network_en">You need to enable the internet on this phone to register. Press Okay to enable the internet</string>
+    <string name="reason_for_enabling_network_en">This application requires an internet connection for it to work/. Press Okay to enable the internet</string>
     <string name="successful_registration_en">Successful Registration</string>
     <string name="successful_registration_instructions_en">You have been successfully registered. You will receive an SMS instructing you on how to login</string>
     <string name="your_mistro_id_en">Your Mistro ID</string>
@@ -101,4 +101,19 @@
     <string name="old_mobile_number_en">Old Mobile Number</string>
     <string name="old_number_not_in_system_en">It appears like your old mobile number is not registered in the system. Contact the system admin for more details.</string>
     <string name="welcome_en">Welcome</string>
+    <string name="add_production_en">Add Production</string>
+    <string name="production_history_en">Production History</string>
+    <string name="cow_en">Cow</string>
+    <string name="time_en">Time</string>
+    <string name="quantity_en">Quantity (kg)</string>
+    <string name="add_en">Add</string>
+    <string-array name="milking_times_en">
+        <item>Morning</item>
+        <item>Afternoon</item>
+        <item>Evening</item>
+        <item>Combined</item>
+    </string-array>
+    <string name="enter_quantity_of_milk_produced_en">Please enter the quantity of the milk produced in KGs</string>
+    <string name="information_successfully_sent_to_server_en">Information successfully sent to server</string>
+    <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
 </resources>

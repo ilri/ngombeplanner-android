@@ -1,11 +1,13 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
-public class MainMenu extends SherlockActivity
+public class MainMenu extends SherlockActivity implements View.OnClickListener
 {
     private static final String TAG="MainMenu";
     private String localeCode;
@@ -20,6 +22,7 @@ public class MainMenu extends SherlockActivity
         localeCode="en";
 
         milkProductionB=(Button)this.findViewById(R.id.milk_production_b);
+        milkProductionB.setOnClickListener(this);
         eventsB =(Button)this.findViewById(R.id.events_b);
 
         initTextInViews(localeCode);
@@ -32,6 +35,16 @@ public class MainMenu extends SherlockActivity
             this.setTitle(R.string.main_menu_en);
             milkProductionB.setText(R.string.milk_production_en);
             eventsB.setText(R.string.events_en);
+        }
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        if(view==milkProductionB)
+        {
+            Intent intent=new Intent(this,MilkProductionActivity.class);
+            startActivity(intent);
         }
     }
 }

@@ -37,6 +37,12 @@
         <item>Clef palate</item>
         <item>Other</item>
     </string-array>
+    <string-array name="milking_times_en">
+        <item>Morning</item>
+        <item>Afternoon</item>
+        <item>Evening</item>
+        <item>Combined</item>
+    </string-array>
     <string-array name="service_types_dam_array_en">
         <item>Cow</item>
         <item>Embryo Transfer</item>
@@ -578,6 +584,8 @@
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="action_settings">Settings</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="add_en">Add</string>
+    <string name="add_production_en">Add Production</string>
     <string name="age_en">Age</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="app_name">Mistro Farmer</string>
@@ -585,6 +593,7 @@
     <string name="breed_en">Breed</string>
     <string name="cancel_en">Cancel</string>
     <string name="country_of_origin_en">Country of Origin</string>
+    <string name="cow_en">Cow</string>
     <string name="cow_registration_en">Cow Registration, Cow</string>
     <string name="dam_en">Dam</string>
     <string name="dam_registration_en">Dam Registration</string>
@@ -594,6 +603,7 @@
     <string name="embryo_number_en">Embryo Number</string>
     <string name="enable_gps_en">Enable GPS</string>
     <string name="enable_network_en">Enable Internet</string>
+    <string name="enter_quantity_of_milk_produced_en">Please enter the quantity of the milk produced in KGs</string>
     <string name="enter_your_mistro_id_en">Please enter your Mistro ID</string>
     <string name="events_en">Events</string>
     <string name="extension_p_en">Extension Personnel</string>
@@ -604,6 +614,7 @@
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="hello_world">Hello world!</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="information_successfully_sent_to_server_en">Information successfully sent to server</string>
     <string name="logging_in_from_different_device_en">It appears like you are logging in from an unusual device. Do you still want to login?</string>
     <string name="login_anyway_en">Login Anyway</string>
     <string name="login_en">Login</string>
@@ -618,10 +629,13 @@
     <string name="number_of_cows_en">Number of Cows</string>
     <string name="okay_en">Okay</string>
     <string name="old_mobile_number_en">Old Mobile Number</string>
-    <string name="old_number_not_in_system_en">It appears like your old mobile number is not in the system. Contact the system admin for more details.</string>
+    <string name="old_number_not_in_system_en">It appears like your old mobile number is not registered in the system. Contact the system admin for more details.</string>
     <string name="previous_en">Previous</string>
+    <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
+    <string name="production_history_en">Production History</string>
+    <string name="quantity_en">Quantity (kg)</string>
     <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
-    <string name="reason_for_enabling_network_en">You need to enable the internet on this phone to register. Press Okay to enable the internet</string>
+    <string name="reason_for_enabling_network_en">This application requires an internet connection for it to work/. Press Okay to enable the internet</string>
     <string name="register_en">Register</string>
     <string name="service_type_used_en">Service Type Used</string>
     <string name="sex_en">Sex</string>
@@ -633,6 +647,7 @@
     <string name="straw_number_en">Straw Number</string>
     <string name="successful_registration_en">Successful Registration</string>
     <string name="successful_registration_instructions_en">You have been successfully registered. You will receive an SMS instructing you on how to login</string>
+    <string name="time_en">Time</string>
     <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="title_activity_cow_registration">Cow Registration</string>
     <string name="title_activity_farmer_registration">Register Farmer</string>
