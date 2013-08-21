@@ -69,7 +69,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
         if(localeCode.equals("en"))
         {
             dateTV.setText(R.string.date_en);
-            cowNameTV.setText(R.string.name_en);
+            cowNameTV.setText(R.string.cow_en);
             timeTV.setText(R.string.time_en);
             quantityTV.setText(R.string.quantity_en);
             noDataWarning=getResources().getString(R.string.no_data_received_en);
@@ -230,6 +230,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
                 final View rowSeparator1=generateRowSeparator(3424+jsonObject.getInt("id")+3322,tableRowHeight);
                 tableRow.addView(rowSeparator1);
 
+                //TODO: check if name is null and use ear tag number
                 final TextView name=generateTextView(jsonObject.getString("name"),3424+jsonObject.getInt("id")+432,tableRowHeight,tableTextSize);
                 tableRow.addView(name);
 

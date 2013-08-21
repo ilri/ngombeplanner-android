@@ -604,8 +604,14 @@
     <string name="embryo_number_en">Embryo Number</string>
     <string name="enable_gps_en">Enable GPS</string>
     <string name="enable_network_en">Enable Internet</string>
+    <string name="enter_ear_tag_no_or_name_en">Please enter the cow\'s Ear Tag Number or Name</string>
+    <string name="enter_ear_tag_number_en">Please enter the cow\'s Ear Tag Number</string>
+    <string name="enter_embryo_number_en">Please enter the Dam\'s embryo number</string>
     <string name="enter_quantity_of_milk_produced_en">Please enter the quantity of the milk produced in KGs</string>
+    <string name="enter_straw_number_en">Please enter the Sire\'s straw number</string>
     <string name="enter_your_mistro_id_en">Please enter your Mistro ID</string>
+    <string name="enter_your_mobile_no_en">Please enter your phone number</string>
+    <string name="enter_your_name_en">Please enter your name</string>
     <string name="events_en">Events</string>
     <string name="extension_p_en">Extension Personnel</string>
     <string name="failed_to_authenticate_en">Unable to authenticate you. Please try logging in again</string>

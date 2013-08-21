@@ -108,6 +108,10 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private Spinner serviceTypeS;
     private TextView countryOfOriginTV;
     private AutoCompleteTextView countryOfOriginACTV;
+    private String earTagNoETEmptyWarning;
+    private String cowIdentifierEmptyWarning;
+    private String strawNoETEmptyWarning;
+    private String embryoNoETEmptyWarning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -566,6 +570,10 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             networkAlertTitle=getResources().getString(R.string.enable_network_en);
             networkAlertText=getResources().getString(R.string.reason_for_enabling_network_en);
             okayText=getResources().getString(R.string.okay_en);
+            earTagNoETEmptyWarning=getResources().getString(R.string.enter_ear_tag_number_en);
+            cowIdentifierEmptyWarning=getResources().getString(R.string.enter_ear_tag_no_or_name_en);
+            strawNoETEmptyWarning=getResources().getString(R.string.enter_straw_number_en);
+            embryoNoETEmptyWarning=getResources().getString(R.string.enter_embryo_number_en);
         }
     }
 
@@ -586,38 +594,41 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         }
         else if(view==nextButton)
         {
-            cacheThisCow();
-            Bundle bundle=new Bundle();
-            bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
-            if(mode==MODE_COW)
+            if(validateInput())
             {
-                if(index==numberOfCows-1)//last cow
+                cacheThisCow();
+                Bundle bundle=new Bundle();
+                bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
+                if(mode==MODE_COW)
                 {
-                    Log.d(TAG, farmer.getJsonObject().toString());
-                    //TODO: send to server
-                    if (DataHandler.checkNetworkConnection(this, localeCode))
+                    if(index==numberOfCows-1)//last cow
                     {
-                        sendDataToServer(farmer.getJsonObject());
+                        Log.d(TAG, farmer.getJsonObject().toString());
+                        //TODO: send to server
+                        if (DataHandler.checkNetworkConnection(this, localeCode))
+                        {
+                            sendDataToServer(farmer.getJsonObject());
+                        }
+                    }
+                    else
+                    {
+                        Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
+                        intent.putExtra(KEY_MODE,MODE_COW);
+                        intent.putExtra(KEY_INDEX,index+1);
+                        intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                     }
                 }
-                else
+                else//go back to cow
                 {
                     Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
                     intent.putExtra(KEY_MODE,MODE_COW);
-                    intent.putExtra(KEY_INDEX,index+1);
-                    intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+                    intent.putExtra(KEY_INDEX,index);
+                    intent.putExtra(KEY_NUMBER_OF_COWS, numberOfCows);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
-            }
-            else//go back to cow
-            {
-                Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
-                intent.putExtra(KEY_MODE,MODE_COW);
-                intent.putExtra(KEY_INDEX,index);
-                intent.putExtra(KEY_NUMBER_OF_COWS, numberOfCows);
-                intent.putExtras(bundle);
-                startActivity(intent);
             }
         }
         else if(view==dialogBreedOkayB)
@@ -1010,6 +1021,61 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         }
 
 
+    }
+
+    private boolean validateInput()
+    {
+        String earTagNumberText=earTagNumberET.getText().toString();
+        String nameText=nameET.getText().toString();
+        if(mode==MODE_COW)
+        {
+            if(earTagNumberText==null||earTagNumberText.equals(""))
+            {
+                Toast.makeText(this,earTagNoETEmptyWarning,Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+        else if(mode==MODE_SIRE)
+        {
+            if(serviceTypeS.getSelectedItemPosition()==0)//bull
+            {
+                if((earTagNumberText==null||earTagNumberText.equals("")) && (nameText==null||nameText.equals("")))
+                {
+                    Toast.makeText(this,cowIdentifierEmptyWarning,Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            }
+            else//AI used
+            {
+                String strawNoText=strawNumberET.getText().toString();
+                if(strawNoText==null||strawNoText.equals(""))
+                {
+                    Toast.makeText(this,strawNoETEmptyWarning,Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            }
+        }
+        else if(mode==MODE_DAM)
+        {
+            if(serviceTypeS.getSelectedItemPosition()==0)//cow used
+            {
+                if((earTagNumberText==null||earTagNumberText.equals("")) && (nameText==null||nameText.equals("")))
+                {
+                    Toast.makeText(this,cowIdentifierEmptyWarning,Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            }
+            else//embryo transfer used
+            {
+                String embryoNoText=embryoNumberET.getText().toString();
+                if(embryoNoText==null||embryoNoText.equals(""))
+                {
+                    Toast.makeText(this,embryoNoETEmptyWarning,Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private void cacheThisCow()

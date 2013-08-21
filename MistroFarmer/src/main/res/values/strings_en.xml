@@ -120,4 +120,10 @@
     <string name="no_data_received_en">No data received</string>
     <string name="today_en">Today</string>
     <string name="yesterday_en">Yesterday</string>
+    <string name="enter_your_name_en">Please enter your name</string>
+    <string name="enter_your_mobile_no_en">Please enter your phone number</string>
+    <string name="enter_ear_tag_number_en">Please enter the cow\'s Ear Tag Number</string>
+    <string name="enter_ear_tag_no_or_name_en">Please enter the cow\'s Ear Tag Number or Name</string>
+    <string name="enter_straw_number_en">Please enter the Sire\'s straw number</string>
+    <string name="enter_embryo_number_en">Please enter the Dam\'s embryo number</string>
 </resources>

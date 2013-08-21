@@ -49,6 +49,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     private String cancelText;
     private String networkAlertTitle;
     private String networkAlertText;
+    private String nameETEmptyWarning;
+    private String mobileNoETEmptyWarning;
     private  LocationManager locationManager;
 
     private Farmer farmer;
@@ -137,6 +139,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             cancelText=getResources().getString(R.string.cancel_en);
             networkAlertTitle=getResources().getString(R.string.enable_network_en);
             networkAlertText=getResources().getString(R.string.reason_for_enabling_network_en);
+            nameETEmptyWarning=getResources().getString(R.string.enter_your_name_en);
+            mobileNoETEmptyWarning=getResources().getString(R.string.enter_your_mobile_no_en);
         }
     }
 
@@ -162,26 +166,29 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     {
         if(view==registerButton)
         {
-            cacheFarmer();
-            String numberOfCowsString=numberOfCowsET.getText().toString();
-            if(numberOfCowsString!=null && numberOfCowsString.length()>0 && Integer.parseInt(numberOfCowsString)>0)
+            if(validateInput())
             {
-                int numberOfCows=Integer.valueOf(numberOfCowsString);
-                Intent intent=new Intent(FarmerRegistrationActivity.this,CowRegistrationActivity.class);
-                intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
-                intent.putExtra(CowRegistrationActivity.KEY_INDEX,0);
-                intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS,numberOfCows);
-                Bundle bundle=new Bundle();
-                bundle.putParcelable(Farmer.PARCELABLE_KEY, farmer);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-            else
-            {
-                Log.d(TAG, farmer.getJsonObject().toString());
-                if (DataHandler.checkNetworkConnection(this, localeCode))
+                cacheFarmer();
+                String numberOfCowsString=numberOfCowsET.getText().toString();
+                if(numberOfCowsString!=null && numberOfCowsString.length()>0 && Integer.parseInt(numberOfCowsString)>0)
                 {
-                    sendDataToServer(farmer.getJsonObject());
+                    int numberOfCows=Integer.valueOf(numberOfCowsString);
+                    Intent intent=new Intent(FarmerRegistrationActivity.this,CowRegistrationActivity.class);
+                    intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
+                    intent.putExtra(CowRegistrationActivity.KEY_INDEX,0);
+                    intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS,numberOfCows);
+                    Bundle bundle=new Bundle();
+                    bundle.putParcelable(Farmer.PARCELABLE_KEY, farmer);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Log.d(TAG, farmer.getJsonObject().toString());
+                    if (DataHandler.checkNetworkConnection(this, localeCode))
+                    {
+                        sendDataToServer(farmer.getJsonObject());
+                    }
                 }
             }
         }
@@ -192,7 +199,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
         if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
         {
-            Toast.makeText(this,"gps started",Toast.LENGTH_LONG).show();
+            //Toast.makeText(this,"gps started",Toast.LENGTH_LONG).show();
             Criteria criteria=new Criteria();
             String provider=locationManager.getBestProvider(criteria,false);
             Location location=locationManager.getLastKnownLocation(provider);
@@ -238,6 +245,23 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     {
         ServerRegistrationThread serverRegistrationThread=new ServerRegistrationThread();
         serverRegistrationThread.execute(jsonObject);
+    }
+
+    private boolean validateInput()
+    {
+        String nameText=fullNameET.getText().toString();
+        if(nameText==null || nameText.equals(""))
+        {
+            Toast.makeText(this,nameETEmptyWarning,Toast.LENGTH_LONG).show();
+            return false;
+        }
+        String mobileNumberText=mobileNumberET.getText().toString();
+        if(mobileNumberText==null||mobileNumberText.equals(""))
+        {
+            Toast.makeText(this,mobileNoETEmptyWarning,Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     @Override
