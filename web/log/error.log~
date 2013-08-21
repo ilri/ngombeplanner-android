@@ -1,0 +1,11 @@
+2013-08-07 09:50:28 farmer/registration.php  
+2013-08-07 09:52:44 farmer/registration.php  
+2013-08-07 09:54:17 farmer/registration.php  
+2013-08-07 09:54:30 farmer/registration.php  
+2013-08-07 09:55:53 farmer/registration.php  
+2013-08-07 09:59:15 farmer/registration.php  
+2013-08-07 10:03:12 farmer/registration.php 1  
+2013-08-07 10:03:12 farmer/registration.php 2  INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel`,`date_added`) VALUES('Jason','0721','36.9947278406471','-1.2017782498151064','Extension P','2013-08-07 10:03:12')
+2013-08-07 10:03:50 farmer/registration.php 1  
+2013-08-07 10:03:50 farmer/registration.php 2  INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel`,`date_added`) VALUES('Jason','0721','36.9947278406471','-1.2017782498151064','Extension P','2013-08-07 10:03:50')
+2013-08-07 10:04:37 farmer/registration.php 2  INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel`,`date_added`) VALUES('Jason','0721','36.9947278406471','-1.2017782498151064','Extension P','2013-08-07 10:04:37')

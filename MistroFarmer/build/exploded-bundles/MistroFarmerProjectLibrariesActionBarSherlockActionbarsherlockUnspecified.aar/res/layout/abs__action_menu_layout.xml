@@ -21,4 +21,4 @@
      android:divider="?attr/actionBarDivider"
      android:dividerPadding="12dip"
      android:gravity="center_vertical" />
-<!-- From: file:/home/jason/android-studio/MistroFarmerProject/libraries/ActionBarSherlock/actionbarsherlock/res/layout/abs__action_menu_layout.xml -->
+<!-- From: file:/home/jason/public_html/MistroFarmerProject/libraries/ActionBarSherlock/actionbarsherlock/res/layout/abs__action_menu_layout.xml -->

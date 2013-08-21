@@ -24,4 +24,4 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:ellipsize="marquee" />
-<!-- From: file:/home/jason/android-studio/MistroFarmerProject/libraries/ActionBarSherlock/actionbarsherlock/res/layout-v14/sherlock_spinner_item.xml --><!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/layout-v14/sherlock_spinner_item.xml -->
+<!-- From: file:/home/jason/public_html/MistroFarmerProject/libraries/ActionBarSherlock/actionbarsherlock/res/layout-v14/sherlock_spinner_item.xml --><!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/layout-v14/sherlock_spinner_item.xml -->

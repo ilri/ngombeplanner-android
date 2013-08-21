@@ -85,4 +85,4 @@
         android:layout_height="@dimen/normal_button_layout_height"
         android:layout_marginTop="10dp"/>
 
-</LinearLayout><!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/layout/dialog_add_milk_production.xml -->
+</LinearLayout><!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/layout/dialog_add_milk_production.xml -->

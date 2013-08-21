@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values-v11/styles.xml -->
+    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v11/styles.xml -->
     <style name="ActionBar.Solid.Mistro" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
         <item name="android:background">@drawable/ab_solid_mistro</item>
         <!--
@@ -27,7 +27,7 @@
         <item name="buttonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="buttonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
     </style>
-    <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v11/values.xml -->
+    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v11/values.xml -->
     <style name="Sherlock.__Theme" parent="android:Theme.Holo">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
@@ -37,7 +37,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
     </style>
-    <!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values-v11/styles.xml -->
+    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v11/styles.xml -->
     <style name="Theme.Mistro" parent="@style/Theme.Sherlock.Light">
 
         <!-- <item name="android:actionBarItemBackground">@drawable/selectable_background_mistro</item> -->

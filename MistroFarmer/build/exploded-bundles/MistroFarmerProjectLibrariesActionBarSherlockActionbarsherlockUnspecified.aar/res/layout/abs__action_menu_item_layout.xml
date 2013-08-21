@@ -54,4 +54,4 @@
             android:paddingRight="4dip"
             android:focusable="false" />
 </com.actionbarsherlock.internal.view.menu.ActionMenuItemView>
-<!-- From: file:/home/jason/android-studio/MistroFarmerProject/libraries/ActionBarSherlock/actionbarsherlock/res/layout/abs__action_menu_item_layout.xml -->
+<!-- From: file:/home/jason/public_html/MistroFarmerProject/libraries/ActionBarSherlock/actionbarsherlock/res/layout/abs__action_menu_item_layout.xml -->

@@ -87,4 +87,4 @@
               android:layout_above="@android:id/text2" />
 
 </RelativeLayout>
-<!-- From: file:/home/jason/android-studio/MistroFarmerProject/libraries/ActionBarSherlock/actionbarsherlock/res/layout/abs__search_dropdown_item_icons_2line.xml -->
+<!-- From: file:/home/jason/public_html/MistroFarmerProject/libraries/ActionBarSherlock/actionbarsherlock/res/layout/abs__search_dropdown_item_icons_2line.xml -->

@@ -9,7 +9,7 @@ package org.cgiar.ilri.mistro.farmer;
 
 public final class R {
     public static final class array {
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int age_type_array_en=0x7f040000;
         public static final int breeds_array_en=0x7f040001;
@@ -167,7 +167,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int activityChooserViewStyle=0x7f010061;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -693,10 +693,10 @@ containing a value of this type.
         public static final int windowSplitActionBar=0x7f01005f;
     }
     public static final class bool {
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w480dp/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w480dp/values.xml 
          */
         public static final int abs__action_bar_embed_tabs=0x7f050000;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-sw600dp/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-sw600dp/values.xml 
          */
         public static final int abs__action_bar_expanded_action_views_exclusive=0x7f050001;
         public static final int abs__config_actionMenuItemAllCaps=0x7f050002;
@@ -715,19 +715,19 @@ containing a value of this type.
         public static final int abs__primary_text_disable_only_holo_light=0x7f06000a;
         public static final int abs__primary_text_holo_dark=0x7f06000b;
         public static final int abs__primary_text_holo_light=0x7f06000c;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/colors.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/colors.xml 
          */
         public static final int black_overlay=0x7f060006;
         public static final int pressed_mistro=0x7f060007;
         public static final int text_input_color=0x7f060008;
     }
     public static final class dimen {
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-land/values.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-hdpi-1024x600/values.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-mdpi-1024x600/values.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-land-hdpi-1024x600/values.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-land-mdpi-1024x600/values.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-xlarge/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-land/values.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-hdpi-1024x600/values.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-mdpi-1024x600/values.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-land-hdpi-1024x600/values.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-land-mdpi-1024x600/values.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-xlarge/values.xml 
          */
         public static final int abs__action_bar_default_height=0x7f080000;
         public static final int abs__action_bar_icon_vertical_padding=0x7f080001;
@@ -744,12 +744,12 @@ containing a value of this type.
         public static final int abs__dropdownitem_text_padding_right=0x7f08000a;
         public static final int abs__search_view_preferred_width=0x7f08000b;
         public static final int abs__search_view_text_min_width=0x7f08000c;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/dimens.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/dimens.xml 
          */
         public static final int activity_f_r_edit_text_margin_left=0x7f08000d;
         public static final int activity_f_r_edit_text_margin_top=0x7f08000e;
         public static final int activity_f_r_text_view_margin_top=0x7f08000f;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values-sw720dp-land/dimens.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-sw720dp-land/dimens.xml 
          */
         public static final int activity_horizontal_margin=0x7f080010;
         public static final int activity_landing_btn_layout_height=0x7f080011;
@@ -915,7 +915,7 @@ containing a value of this type.
         public static final int abs__action_bar_subtitle=0x7f070011;
         public static final int abs__action_bar_title=0x7f070010;
         public static final int abs__action_context_bar=0x7f070021;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
          */
         public static final int abs__action_menu_divider=0x7f07000a;
         public static final int abs__action_menu_presenter=0x7f07000b;
@@ -1031,9 +1031,9 @@ containing a value of this type.
         public static final int wrap_content=0x7f070009;
     }
     public static final class integer {
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w360dp/values.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w500dp/values.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w600dp/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w360dp/values.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w500dp/values.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w600dp/values.xml 
          */
         public static final int abs__max_action_buttons=0x7f090000;
     }
@@ -1093,18 +1093,18 @@ containing a value of this type.
         public static final int abs__searchview_description_voice=0x7f0a000a;
         public static final int abs__shareactionprovider_share_with=0x7f0a000b;
         public static final int abs__shareactionprovider_share_with_application=0x7f0a000c;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
         public static final int action_settings=0x7f0a000d;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int add_en=0x7f0a000e;
         public static final int add_production_en=0x7f0a000f;
         public static final int age_en=0x7f0a0010;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
         public static final int app_name=0x7f0a0011;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int breed_en=0x7f0a0012;
         public static final int cancel_en=0x7f0a0013;
@@ -1134,10 +1134,10 @@ containing a value of this type.
         public static final int farmer_registration_en=0x7f0a002b;
         public static final int finish_en=0x7f0a002c;
         public static final int full_name_en=0x7f0a002d;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
         public static final int hello_world=0x7f0a002e;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int information_successfully_sent_to_server_en=0x7f0a002f;
         public static final int logging_in_from_different_device_en=0x7f0a0030;
@@ -1174,14 +1174,14 @@ containing a value of this type.
         public static final int successful_registration_en=0x7f0a004f;
         public static final int successful_registration_instructions_en=0x7f0a0050;
         public static final int time_en=0x7f0a0051;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
         public static final int title_activity_cow_registration=0x7f0a0052;
         public static final int title_activity_farmer_registration=0x7f0a0053;
         public static final int title_activity_main_menu=0x7f0a0054;
         public static final int title_activity_milk_procution_history=0x7f0a0055;
         public static final int title_activity_milk_production=0x7f0a0056;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int today_en=0x7f0a0057;
         public static final int vet_used_en=0x7f0a0058;
@@ -1191,9 +1191,9 @@ containing a value of this type.
         public static final int your_mistro_id_en=0x7f0a005c;
     }
     public static final class style {
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values-v11/styles.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values-v14/styles.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v11/styles.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v14/styles.xml 
          */
         public static final int ActionBar_Solid_Mistro=0x7f0b0000;
         public static final int ActionBar_Transparent_Mistro=0x7f0b0001;
@@ -1207,11 +1207,11 @@ containing a value of this type.
         public static final int FullscreenTheme=0x7f0b0008;
         public static final int PopupMenu_Mistro=0x7f0b0009;
         public static final int ProgressBar_Mistro=0x7f0b000a;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
          */
         public static final int Sherlock___TextAppearance_Small=0x7f0b000b;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v11/values.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v11/values.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml 
          */
         public static final int Sherlock___Theme=0x7f0b000c;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0b000d;
@@ -1249,18 +1249,18 @@ containing a value of this type.
         public static final int TextAppearance_Sherlock_Widget_PopupMenu_Large=0x7f0b002d;
         public static final int TextAppearance_Sherlock_Widget_PopupMenu_Small=0x7f0b002e;
         public static final int TextAppearance_Sherlock_Widget_TextView_SpinnerItem=0x7f0b002f;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values-v11/styles.xml 
- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values-v14/styles.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v11/styles.xml 
+ From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v14/styles.xml 
          */
         public static final int Theme_Mistro=0x7f0b0030;
         public static final int Theme_Mistro_Widget=0x7f0b0031;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
          */
         public static final int Theme_Sherlock=0x7f0b0032;
         public static final int Theme_Sherlock_Light=0x7f0b0033;
         public static final int Theme_Sherlock_Light_DarkActionBar=0x7f0b0034;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml 
          */
         public static final int Theme_Sherlock_Light_NoActionBar=0x7f0b0035;
         public static final int Theme_Sherlock_NoActionBar=0x7f0b0036;
@@ -1313,7 +1313,7 @@ containing a value of this type.
         public static final int Widget_Sherlock_TextView_SpinnerItem=0x7f0b0065;
     }
     public static final class styleable {
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/res/values/attrs.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/attrs.xml 
            <p>Includes the following attributes:</p>
            <table>
            <colgroup align="left" />
@@ -1348,7 +1348,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name android:buttonBarStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarStyle = 0;
-        /**  From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
            <p>Includes the following attributes:</p>
            <table>
            <colgroup align="left" />

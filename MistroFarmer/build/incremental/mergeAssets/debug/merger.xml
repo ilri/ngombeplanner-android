@@ -2,13 +2,13 @@
 <merger>
 
     <dataSet config="MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar" >
-        <source path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/assets" />
+        <source path="/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/assets" />
     </dataSet>
     <dataSet config="main" >
-        <source path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/main/assets" />
+        <source path="/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="/home/jason/android-studio/MistroFarmerProject/MistroFarmer/src/debug/assets" />
+        <source path="/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/debug/assets" />
     </dataSet>
 
 </merger>

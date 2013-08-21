@@ -58,4 +58,4 @@ the Action Bar enabled overlaying application content.
                   android:visibility="gone"
                   android:gravity="center"/>
 </FrameLayout>
-<!-- From: file:/home/jason/android-studio/MistroFarmerProject/libraries/ActionBarSherlock/actionbarsherlock/res/layout/abs__screen_action_bar_overlay.xml --><!-- From: file:/home/jason/android-studio/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/layout/abs__screen_action_bar_overlay.xml -->
+<!-- From: file:/home/jason/public_html/MistroFarmerProject/libraries/ActionBarSherlock/actionbarsherlock/res/layout/abs__screen_action_bar_overlay.xml --><!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/layout/abs__screen_action_bar_overlay.xml -->
