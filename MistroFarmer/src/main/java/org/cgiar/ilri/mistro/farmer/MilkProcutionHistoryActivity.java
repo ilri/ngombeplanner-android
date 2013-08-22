@@ -231,7 +231,12 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
                 tableRow.addView(rowSeparator1);
 
                 //TODO: check if name is null and use ear tag number
-                final TextView name=generateTextView(jsonObject.getString("name"),3424+jsonObject.getInt("id")+432,tableRowHeight,tableTextSize);
+                String nameText=jsonObject.getString("name");
+                if(nameText==null||nameText.equals(""))
+                {
+                    nameText=jsonObject.getString("ear_tag_number");
+                }
+                final TextView name=generateTextView(nameText,3424+jsonObject.getInt("id")+432,tableRowHeight,tableTextSize);
                 tableRow.addView(name);
 
                 final View rowSeparator2=generateRowSeparator(3424+jsonObject.getInt("id")+3432,tableRowHeight);

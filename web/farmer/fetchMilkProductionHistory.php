@@ -22,11 +22,11 @@ if(file_exists("../settings.ini") && file_exists("../codes.ini"))
 	
 	if($jsonObject['fromID']==-1)
 	{
-		$query="SELECT `milk_production`.*,`cow`.`name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='{$jsonObject['simCardSN']}' ORDER BY `milk_production`.`id` DESC LIMIT 40";
+		$query="SELECT `milk_production`.*,`cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='{$jsonObject['simCardSN']}' ORDER BY `milk_production`.`id` DESC LIMIT 40";
 	}
 	else
 	{
-		$query="SELECT `milk_production`.*,`cow`.`name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='{$jsonObject['simCardSN']}' AND `milk_production`.`id`<{$jsonObject['fromID']} ORDER BY `milk_production`.`id` DESC LIMIT 40";
+		$query="SELECT `milk_production`.*,`cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='{$jsonObject['simCardSN']}' AND `milk_production`.`id`<{$jsonObject['fromID']} ORDER BY `milk_production`.`id` DESC LIMIT 40";
 	}
 	$result=mysql_query($query) or die("103");
 	log_error($TAG,$timeEAT,mysql_error(),$query);

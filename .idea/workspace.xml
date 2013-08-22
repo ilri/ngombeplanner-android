@@ -462,105 +462,9 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/theming.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/usage.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" afterPath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/ab_background_textured_mistro.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/ab_background_textured_mistro.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_bar_home.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_bar_home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_bar_tab.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_bar_tab.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_bar_tab_bar_view.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_bar_tab_bar_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_bar_title_item.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_bar_title_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_menu_item_layout.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_menu_item_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_menu_layout.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_menu_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_mode_bar.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_mode_bar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__action_mode_close_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout-large/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout-large/abs__action_mode_close_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__activated_background_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__activated_background_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__activated_background_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__activated_background_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__activity_chooser_view.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__activity_chooser_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__activity_chooser_view_list_item.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__activity_chooser_view_list_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__btn_cab_done_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__btn_cab_done_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__btn_cab_done_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__btn_cab_done_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__ic_clear.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__ic_clear.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__ic_clear_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__ic_clear_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__ic_menu_moreoverflow_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__ic_menu_moreoverflow_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__item_background_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__item_background_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__item_background_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__item_background_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__list_menu_item_checkbox.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__list_menu_item_checkbox.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__list_menu_item_icon.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__list_menu_item_icon.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__list_menu_item_radio.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__list_menu_item_radio.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__list_selector_background_transition_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__list_selector_background_transition_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__list_selector_background_transition_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__list_selector_background_transition_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__list_selector_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__list_selector_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__list_selector_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__list_selector_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__popup_menu_item_layout.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__popup_menu_item_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/color/abs__primary_text_disable_only_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/color/abs__primary_text_disable_only_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/color/abs__primary_text_disable_only_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/color/abs__primary_text_disable_only_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/color/abs__primary_text_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/color/abs__primary_text_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/color/abs__primary_text_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/color/abs__primary_text_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__progress_horizontal_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__progress_horizontal_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__progress_horizontal_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__progress_horizontal_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__progress_medium_holo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable-v11/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable-v11/abs__progress_medium_holo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__screen_action_bar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout-xlarge/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout-xlarge/abs__screen_action_bar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__screen_action_bar_overlay.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout-xlarge/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout-xlarge/abs__screen_action_bar_overlay.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__screen_simple.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__screen_simple.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__screen_simple_overlay_action_mode.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__screen_simple_overlay_action_mode.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__search_dropdown_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__search_dropdown_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__search_dropdown_item_icons_2line.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__search_dropdown_item_icons_2line.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__search_dropdown_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__search_dropdown_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__search_view.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__search_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__simple_dropdown_hint.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/abs__simple_dropdown_hint.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__spinner_ab_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__spinner_ab_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__spinner_ab_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__spinner_ab_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__tab_indicator_ab_holo.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__tab_indicator_ab_holo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__textfield_searchview_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__textfield_searchview_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__textfield_searchview_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__textfield_searchview_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__textfield_searchview_right_holo_dark.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__textfield_searchview_right_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__textfield_searchview_right_holo_light.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/abs__textfield_searchview_right_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_cow_registration.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_cow_registration.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_farmer_registration.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_farmer_registration.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_landing.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_landing.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_main_menu.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_main_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_milk_production.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_milk_production.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_milk_production_history.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_milk_production_history.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/btn_cab_done_mistro.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/btn_cab_done_mistro.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/menu/cow_registration.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/menu/cow_registration.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/dialog_add_milk_production.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/dialog_add_milk_production.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/dialog_breed.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/dialog_breed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/dialog_change_system_sim_card.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/dialog_change_system_sim_card.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/dialog_deformity.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/dialog_deformity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/menu/farmer_registration.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/menu/farmer_registration.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/menu/main_menu.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/menu/main_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/menu/milk_procution_history.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/menu/milk_procution_history.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/menu/milk_production.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/menu/milk_production.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/pressed_background_mistro.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/pressed_background_mistro.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/progress_horizontal_mistro.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/progress_horizontal_mistro.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/farmer/fetchMilkProductionHistory.php" afterPath="$PROJECT_DIR$/web/farmer/fetchMilkProductionHistory.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/selectable_background_mistro.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/selectable_background_mistro.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/sherlock_spinner_dropdown_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout-v14/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout-v14/sherlock_spinner_dropdown_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/sherlock_spinner_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout-v14/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout-v14/sherlock_spinner_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/spinner_background_ab_mistro.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/spinner_background_ab_mistro.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/tab_indicator_ab_mistro.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/drawable/tab_indicator_ab_mistro.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-land/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-land/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-large-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-large-hdpi-1024x600/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-large-land-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-large-land-hdpi-1024x600/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-large-land-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-large-land-mdpi-1024x600/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-large-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-large-mdpi-1024x600/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-sw600dp/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-sw600dp/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-sw720dp-land/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-sw720dp-land/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-v11/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-v11/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-v14/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-v14/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-w360dp/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-w360dp/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-w480dp/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-w480dp/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-w500dp/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-w500dp/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-w600dp/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-w600dp/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-xlarge/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values-xlarge/values.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MistroFarmer.iws" />
@@ -584,7 +488,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -621,6 +524,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -633,7 +537,7 @@
       <file leaf-file-name="strings_en.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="63" selection-start="6587" selection-end="6587" vertical-scroll-proportion="0.0" vertical-offset="2268" max-vertical-offset="2430">
+            <state line="127" column="63" selection-start="6587" selection-end="6587" vertical-scroll-proportion="0.0" vertical-offset="1849" max-vertical-offset="2430">
               <folding />
             </state>
           </provider>
@@ -642,17 +546,25 @@
       <file leaf-file-name="MilkProductionActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="106" column="34" selection-start="4354" selection-end="4354" vertical-scroll-proportion="0.0" vertical-offset="1890" max-vertical-offset="4464">
+            <state line="8" column="24" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="4464">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MilkProcutionHistoryActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MilkProcutionHistoryActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="232" column="68" selection-start="8803" selection-end="8803" vertical-scroll-proportion="0.0" vertical-offset="4158" max-vertical-offset="4824">
-              <folding />
+            <state line="234" column="55" selection-start="8921" selection-end="8921" vertical-scroll-proportion="0.6363636" vertical-offset="3366" max-vertical-offset="4446">
+              <folding>
+                <element signature="e#2181#2197#0" expanded="true" />
+                <element signature="e#2230#2245#0" expanded="true" />
+                <element signature="e#2275#2291#0" expanded="true" />
+                <element signature="e#2325#2345#0" expanded="true" />
+                <element signature="e#2374#2428#0" expanded="true" />
+                <element signature="e#2527#2570#0" expanded="true" />
+                <element signature="e#2598#2645#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -660,7 +572,7 @@
       <file leaf-file-name="FarmerRegistrationActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="208" column="44" selection-start="8726" selection-end="8726" vertical-scroll-proportion="0.0" vertical-offset="2394" max-vertical-offset="5490">
+            <state line="208" column="44" selection-start="8726" selection-end="8726" vertical-scroll-proportion="0.0" vertical-offset="3726" max-vertical-offset="5940">
               <folding />
             </state>
           </provider>
@@ -669,16 +581,16 @@
       <file leaf-file-name="CowRegistrationActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="597" column="13" selection-start="25833" selection-end="25833" vertical-scroll-proportion="0.0" vertical-offset="10728" max-vertical-offset="21654">
+            <state line="133" column="9" selection-start="4573" selection-end="4573" vertical-scroll-proportion="0.0" vertical-offset="2700" max-vertical-offset="20952">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataHandler.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DataHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="94" selection-start="2203" selection-end="2203" vertical-scroll-proportion="0.6969697" vertical-offset="0" max-vertical-offset="2466">
+            <state line="53" column="5" selection-start="2414" selection-end="2414" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="2376">
               <folding />
             </state>
           </provider>
@@ -783,11 +695,11 @@
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_add_milk_production.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_milk_production_history.xml" />
-        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java" />
       </list>
     </option>
   </component>
@@ -1120,12 +1032,12 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4552352" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.29373997" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15705615" sideWeight="0.60032105" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32744783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1271,23 +1183,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java">
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="232" column="68" selection-start="8803" selection-end="8803" vertical-scroll-proportion="0.0" vertical-offset="3420" max-vertical-offset="4356">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="34" selection-start="4354" selection-end="4354" vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="3222">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="597" column="13" selection-start="25833" selection-end="25833" vertical-scroll-proportion="0.0" vertical-offset="10957" max-vertical-offset="20952">
+        <state line="208" column="44" selection-start="8726" selection-end="8726" vertical-scroll-proportion="0.0" vertical-offset="2394" max-vertical-offset="5490">
           <folding />
         </state>
       </provider>
@@ -1299,17 +1197,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java">
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="208" column="44" selection-start="8726" selection-end="8726" vertical-scroll-proportion="0.0" vertical-offset="2394" max-vertical-offset="5490">
+        <state line="8" column="24" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="4464">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="133" column="9" selection-start="4573" selection-end="4573" vertical-scroll-proportion="0.0" vertical-offset="2700" max-vertical-offset="20952">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="94" selection-start="2203" selection-end="2203" vertical-scroll-proportion="0.6969697" vertical-offset="0" max-vertical-offset="2466">
+        <state line="53" column="5" selection-start="2414" selection-end="2414" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="2376">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="234" column="55" selection-start="8921" selection-end="8921" vertical-scroll-proportion="0.6363636" vertical-offset="3366" max-vertical-offset="4446">
+          <folding>
+            <element signature="e#2181#2197#0" expanded="true" />
+            <element signature="e#2230#2245#0" expanded="true" />
+            <element signature="e#2275#2291#0" expanded="true" />
+            <element signature="e#2325#2345#0" expanded="true" />
+            <element signature="e#2374#2428#0" expanded="true" />
+            <element signature="e#2527#2570#0" expanded="true" />
+            <element signature="e#2598#2645#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
