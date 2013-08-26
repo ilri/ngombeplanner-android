@@ -24,6 +24,7 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
         milkProductionB=(Button)this.findViewById(R.id.milk_production_b);
         milkProductionB.setOnClickListener(this);
         eventsB =(Button)this.findViewById(R.id.events_b);
+        eventsB.setOnClickListener(this);
 
         initTextInViews(localeCode);
     }
@@ -44,6 +45,11 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
         if(view==milkProductionB)
         {
             Intent intent=new Intent(this,MilkProductionActivity.class);
+            startActivity(intent);
+        }
+        else if(view==eventsB)
+        {
+            Intent intent=new Intent(this,EventsActivity.class);
             startActivity(intent);
         }
     }

@@ -584,6 +584,7 @@
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="action_settings">Settings</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="add_an_event_en">Add an Event</string>
     <string name="add_en">Add</string>
     <string name="add_production_en">Add Production</string>
     <string name="age_en">Age</string>
@@ -612,6 +613,7 @@
     <string name="enter_your_mistro_id_en">Please enter your Mistro ID</string>
     <string name="enter_your_mobile_no_en">Please enter your phone number</string>
     <string name="enter_your_name_en">Please enter your name</string>
+    <string name="event_en">Event</string>
     <string name="events_en">Events</string>
     <string name="extension_p_en">Extension Personnel</string>
     <string name="failed_to_authenticate_en">Unable to authenticate you. Please try logging in again</string>
@@ -638,6 +640,7 @@
     <string name="okay_en">Okay</string>
     <string name="old_mobile_number_en">Old Mobile Number</string>
     <string name="old_number_not_in_system_en">It appears like your old mobile number is not registered in the system. Contact the system admin for more details.</string>
+    <string name="past_events_en">Past Events</string>
     <string name="previous_en">Previous</string>
     <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
     <string name="production_history_en">Production History</string>
@@ -645,6 +648,7 @@
     <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
     <string name="reason_for_enabling_network_en">This application requires an internet connection for it to work/. Press Okay to enable the internet</string>
     <string name="register_en">Register</string>
+    <string name="remarks_en">Remarks</string>
     <string name="service_type_used_en">Service Type Used</string>
     <string name="sex_en">Sex</string>
     <string name="sim_card_not_registered_en">You are using a Sim card that has not been used before in this system.</string>
@@ -657,7 +661,9 @@
     <string name="successful_registration_instructions_en">You have been successfully registered. You will receive an SMS instructing you on how to login</string>
     <string name="time_en">Time</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
+    <string name="title_activity_add_event">Add an Event</string>
     <string name="title_activity_cow_registration">Cow Registration</string>
+    <string name="title_activity_events">Events</string>
     <string name="title_activity_farmer_registration">Register Farmer</string>
     <string name="title_activity_main_menu">Main Menu</string>
     <string name="title_activity_milk_procution_history">Production History</string>

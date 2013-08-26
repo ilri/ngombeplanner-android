@@ -126,4 +126,8 @@
     <string name="enter_ear_tag_no_or_name_en">Please enter the cow\'s Ear Tag Number or Name</string>
     <string name="enter_straw_number_en">Please enter the Sire\'s straw number</string>
     <string name="enter_embryo_number_en">Please enter the Dam\'s embryo number</string>
+    <string name="add_an_event_en">Add an Event</string>
+    <string name="past_events_en">Past Events</string>
+    <string name="remarks_en">Remarks</string>
+    <string name="event_en">Event</string>
 </resources>

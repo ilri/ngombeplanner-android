@@ -49,6 +49,14 @@
             android:name="org.cgiar.ilri.mistro.farmer.MilkProcutionHistoryActivity"
             android:label="@string/title_activity_milk_procution_history" >
         </activity>
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.EventsActivity"
+            android:label="@string/title_activity_events" >
+        </activity>
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.AddEventActivity"
+            android:label="@string/title_activity_add_event" >
+        </activity>
     </application>
 
 </manifest>

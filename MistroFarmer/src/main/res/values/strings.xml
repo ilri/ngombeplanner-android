@@ -9,5 +9,7 @@
     <string name="title_activity_main_menu">Main Menu</string>
     <string name="title_activity_milk_production">Milk Production</string>
     <string name="title_activity_milk_procution_history">Production History</string>
+    <string name="title_activity_events">Events</string>
+    <string name="title_activity_add_event">Add an Event</string>
 
 </resources>
