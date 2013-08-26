@@ -167,7 +167,19 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                 }
                 MilkProductionActivity.this.cowNameArray =cowArray;
                 MilkProductionActivity.this.cowEarTagNumberArray=earTagArray;
-                setCowIdentifiers(cowArray);
+                String[] identifierArray=new String[cowArray.length];
+                for (int i=0;i<cowArray.length;i++)
+                {
+                    if(cowArray[i]!=null&&!cowArray[i].equals(""))
+                    {
+                        identifierArray[i]=cowArray[i];
+                    }
+                    else
+                    {
+                        identifierArray[i]=earTagArray[i];
+                    }
+                }
+                setCowIdentifiers(identifierArray);
             }
             catch (JSONException e)
             {
