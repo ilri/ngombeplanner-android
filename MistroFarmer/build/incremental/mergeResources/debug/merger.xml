@@ -5183,6 +5183,28 @@ Other
                 </string>
                 <string name="enter_your_name_en" >Please enter your name
                 </string>
+
+                <string-array name="cow_event_types_en" >
+                    <item>
+Abortion
+                    </item>
+                    <item>
+Birth
+                    </item>
+                    <item>
+Lactation
+                    </item>
+                    <item>
+Bloat
+                    </item>
+                    <item>
+Sickness
+                    </item>
+                    <item>
+Death
+                    </item>
+                </string-array>
+
                 <string name="events_en" >Events
                 </string>
                 <string name="milk_production_en" >Milk Production

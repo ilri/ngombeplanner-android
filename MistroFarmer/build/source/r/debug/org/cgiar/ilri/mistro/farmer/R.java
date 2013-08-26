@@ -13,11 +13,12 @@ public final class R {
          */
         public static final int age_type_array_en=0x7f040000;
         public static final int breeds_array_en=0x7f040001;
-        public static final int deformities_array_en=0x7f040002;
-        public static final int milking_times_en=0x7f040003;
-        public static final int service_types_dam_array_en=0x7f040004;
-        public static final int service_types_sire_array_en=0x7f040005;
-        public static final int sex_array_en=0x7f040006;
+        public static final int cow_event_types_en=0x7f040002;
+        public static final int deformities_array_en=0x7f040003;
+        public static final int milking_times_en=0x7f040004;
+        public static final int service_types_dam_array_en=0x7f040005;
+        public static final int service_types_sire_array_en=0x7f040006;
+        public static final int sex_array_en=0x7f040007;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 

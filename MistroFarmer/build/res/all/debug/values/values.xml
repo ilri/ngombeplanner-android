@@ -29,6 +29,14 @@
         <item>Brown Swiss</item>
         <item>Zebu</item>
     </string-array>
+    <string-array name="cow_event_types_en">
+        <item>Abortion</item>
+        <item>Birth</item>
+        <item>Lactation</item>
+        <item>Bloat</item>
+        <item>Sickness</item>
+        <item>Death</item>
+    </string-array>
     <string-array name="deformities_array_en">
         <item>Blind</item>
         <item>Lame</item>
