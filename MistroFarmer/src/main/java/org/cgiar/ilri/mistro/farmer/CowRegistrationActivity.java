@@ -2,6 +2,7 @@ package org.cgiar.ilri.mistro.farmer;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,6 +65,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private String networkAlertTitle;
     private String networkAlertText;
     private String okayText;
+    private String loadingPleaseWait;
 
     private TextView strawNumberTV;
     private EditText strawNumberET;
@@ -574,6 +576,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             cowIdentifierEmptyWarning=getResources().getString(R.string.enter_ear_tag_no_or_name_en);
             strawNoETEmptyWarning=getResources().getString(R.string.enter_straw_number_en);
             embryoNoETEmptyWarning=getResources().getString(R.string.enter_embryo_number_en);
+            loadingPleaseWait=getResources().getString(R.string.loading_please_wait_en);
         }
     }
 
@@ -1164,6 +1167,13 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
 
     private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,Boolean>
     {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(CowRegistrationActivity.this, "",loadingPleaseWait, true);
+        }
 
         @Override
         protected Boolean doInBackground(JSONObject... params)
@@ -1181,6 +1191,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         protected void onPostExecute(Boolean result)
         {
             super.onPostExecute(result);
+            progressDialog.dismiss();
             if(result)
             {
                 Log.d(TAG,"data successfully sent to server");

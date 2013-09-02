@@ -1,5 +1,6 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ public class EventsHistoryActivity extends SherlockActivity {
     private List<String> eventHistoryIDs;
     private String todayText;
     private String yesterdayText;
+    private String loadingPleaseWait;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class EventsHistoryActivity extends SherlockActivity {
             serverError = getResources().getString(R.string.problem_connecting_to_server_en);
             todayText=getResources().getString(R.string.today_en);
             yesterdayText=getResources().getString(R.string.yesterday_en);
+            loadingPleaseWait=getResources().getString(R.string.loading_please_wait_en);
         }
     }
 
@@ -94,6 +97,14 @@ public class EventsHistoryActivity extends SherlockActivity {
     }
 
     private class CowEventHistoryThread extends AsyncTask<String, Integer, String> {
+
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(EventsHistoryActivity.this, "",loadingPleaseWait, true);
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -115,6 +126,7 @@ public class EventsHistoryActivity extends SherlockActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            progressDialog.dismiss();
             if(result == null) {
                 Toast.makeText(EventsHistoryActivity.this, serverError, Toast.LENGTH_LONG).show();
             }

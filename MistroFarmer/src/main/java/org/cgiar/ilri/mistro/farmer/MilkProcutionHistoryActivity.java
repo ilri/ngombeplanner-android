@@ -1,14 +1,13 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -45,6 +44,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
     private String[] times;
     private String todayText;
     private String yesterdayText;
+    private String loadingPleaseWait;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -78,6 +78,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
             times=getResources().getStringArray(R.array.milking_times_en);
             todayText=getResources().getString(R.string.today_en);
             yesterdayText=getResources().getString(R.string.yesterday_en);
+            loadingPleaseWait=getResources().getString(R.string.loading_please_wait_en);
         }
     }
 
@@ -100,6 +101,13 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
 
     private class ProductionHistoryThread extends AsyncTask<String,Integer,String>
     {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(MilkProcutionHistoryActivity.this, "",loadingPleaseWait, true);
+        }
 
         @Override
         protected String doInBackground(String... params)
@@ -124,6 +132,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
         protected void onPostExecute(String result)
         {
             super.onPostExecute(result);
+            progressDialog.dismiss();
             if(result==null)
             {
                 Toast.makeText(MilkProcutionHistoryActivity.this,"server error",Toast.LENGTH_LONG).show();

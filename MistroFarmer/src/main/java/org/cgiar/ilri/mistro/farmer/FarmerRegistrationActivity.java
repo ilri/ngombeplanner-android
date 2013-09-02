@@ -1,6 +1,7 @@
 package org.cgiar.ilri.mistro.farmer;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -52,6 +53,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     private String nameETEmptyWarning;
     private String mobileNoETEmptyWarning;
     private  LocationManager locationManager;
+    private String loadingPleaseWait;
 
     private Farmer farmer;
     @Override
@@ -141,6 +143,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             networkAlertText=getResources().getString(R.string.reason_for_enabling_network_en);
             nameETEmptyWarning=getResources().getString(R.string.enter_your_name_en);
             mobileNoETEmptyWarning=getResources().getString(R.string.enter_your_mobile_no_en);
+            loadingPleaseWait=getResources().getString(R.string.loading_please_wait_en);
         }
     }
 
@@ -290,6 +293,13 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
 
     private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,Boolean>
     {
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(FarmerRegistrationActivity.this, "",loadingPleaseWait, true);
+        }
 
         @Override
         protected Boolean doInBackground(JSONObject... params)
@@ -307,6 +317,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         protected void onPostExecute(Boolean result)
         {
             super.onPostExecute(result);
+            progressDialog.dismiss();
             if(result)
             {
                 Log.d(TAG,"data successfully sent to server");

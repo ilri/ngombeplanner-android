@@ -1,6 +1,7 @@
 package org.cgiar.ilri.mistro.farmer;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -41,6 +42,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     private String quantityETEmptyWarning;
     private String infoSuccessfullySent;
     private String problemInData;
+    private String loadingPleaseWait;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -87,6 +89,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             quantityETEmptyWarning=getResources().getString(R.string.enter_quantity_of_milk_produced_en);
             infoSuccessfullySent=getResources().getString(R.string.information_successfully_sent_to_server_en);
             problemInData=getResources().getString(R.string.problem_in_data_sent_en);
+            loadingPleaseWait = getResources().getString(R.string.loading_please_wait_en);
         }
     }
 
@@ -130,6 +133,14 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     
     private class CowIdentifierThread extends AsyncTask<String,Integer,String>
     {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(MilkProductionActivity.this, "",loadingPleaseWait, true);
+        }
+
         @Override
         protected String doInBackground(String... params)
         {
@@ -151,6 +162,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         protected void onPostExecute(String result)
         {
             super.onPostExecute(result);
+            progressDialog.dismiss();
             try
             {
                 JSONObject jsonObject=new JSONObject(result);
@@ -214,7 +226,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             Toast.makeText(this,quantityETEmptyWarning,Toast.LENGTH_LONG).show();
             return false;
         }
-        else if(quantityET.getText().toString().length()>0)
+        else if(quantityET.getText().toString().length()<=0)
         {
             Toast.makeText(this,quantityETEmptyWarning,Toast.LENGTH_LONG).show();
             return false;
@@ -224,6 +236,13 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
 
     private class MilkProductionDataAdditionThread extends AsyncTask<String,Integer,String>
     {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(MilkProductionActivity.this, "",loadingPleaseWait, true);
+        }
 
         @Override
         protected String doInBackground(String... params)
@@ -252,6 +271,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         protected void onPostExecute(String result)
         {
             super.onPostExecute(result);
+            progressDialog.dismiss();
             if(result==null)
             {
                 Toast.makeText(MilkProductionActivity.this,"server error",Toast.LENGTH_LONG).show();

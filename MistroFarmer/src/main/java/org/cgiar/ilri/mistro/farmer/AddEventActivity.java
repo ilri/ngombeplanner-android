@@ -1,6 +1,7 @@
 package org.cgiar.ilri.mistro.farmer;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -53,6 +54,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private String dateInFuture;
     private String eventRecorded;
     private String sendUnsuccessfulWarning;
+    private String loadingPleaseWait;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -95,6 +97,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             dateInFuture=getResources().getString(R.string.date_in_future_en);
             eventRecorded=getResources().getString(R.string.event_successfully_recorded_en);
             sendUnsuccessfulWarning=getResources().getString(R.string.something_went_wrong_try_again_en);
+            loadingPleaseWait = getResources().getString(R.string.loading_please_wait_en);
         }
     }
 
@@ -187,6 +190,13 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
 
     private class CowEventAdditionThread extends AsyncTask<JSONObject, Integer, String>
     {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(AddEventActivity.this, "",loadingPleaseWait, true);
+        }
 
         @Override
         protected String doInBackground(JSONObject... params)
@@ -199,6 +209,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         protected void onPostExecute(String result)
         {
             super.onPostExecute(result);
+            progressDialog.dismiss();
             if(result.equals(DataHandler.ACKNOWLEDGE_OK))
             {
                 Toast.makeText(AddEventActivity.this, eventRecorded, Toast.LENGTH_LONG).show();
@@ -258,6 +269,15 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
 
     private class CowIdentifierThread extends AsyncTask<String,Integer,String>
     {
+
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(AddEventActivity.this, "",loadingPleaseWait, true);
+        }
+
         @Override
         protected String doInBackground(String... params)
         {
@@ -279,6 +299,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         protected void onPostExecute(String result)
         {
             super.onPostExecute(result);
+            progressDialog.dismiss();
             try
             {
                 JSONObject jsonObject=new JSONObject(result);

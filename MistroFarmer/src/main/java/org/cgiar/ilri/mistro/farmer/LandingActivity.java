@@ -2,6 +2,7 @@ package org.cgiar.ilri.mistro.farmer;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -43,6 +44,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
     private String simCardRegistrationText;
     private String oldNumberNotInSystemText;
     private String welcomeText;
+    private String loadingPleaseWait;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -99,6 +101,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             simCardRegistrationText=getResources().getString(R.string.sim_card_registration_en);
             oldNumberNotInSystemText=getResources().getString(R.string.old_number_not_in_system_en);
             welcomeText=getResources().getString(R.string.welcome_en);
+            loadingPleaseWait=getResources().getString(R.string.loading_please_wait_en);
         }
     }
 
@@ -117,7 +120,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         }
         else if(view==loginButton)
         {
-            if(!loginSessionOn)
+            if(loginSessionOn == false)
             {
                 //loginDialog.show();
                 authenticateUser();
@@ -147,11 +150,15 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
 
     private class UserAuthenticationThread extends AsyncTask<String,Integer,String>
     {
+        ProgressDialog progressDialog;
+
         @Override
         protected void onPreExecute()
         {
             super.onPreExecute();
             loginSessionOn=true;
+            progressDialog= ProgressDialog.show(LandingActivity.this, "",loadingPleaseWait, true);
+
         }
 
         @Override
@@ -176,6 +183,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         protected void onPostExecute(String result)
         {
             super.onPostExecute(result);
+            progressDialog.dismiss();
             loginSessionOn=false;
             if(result==null)
             {

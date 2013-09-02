@@ -635,6 +635,7 @@
     <string name="hello_world">Hello world!</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="information_successfully_sent_to_server_en">Information successfully sent to server</string>
+    <string name="loading_please_wait_en">Loading. Please wait...</string>
     <string name="logging_in_from_different_device_en">It appears like you are logging in from an unusual device. Do you still want to login?</string>
     <string name="login_anyway_en">Login Anyway</string>
     <string name="login_en">Login</string>
