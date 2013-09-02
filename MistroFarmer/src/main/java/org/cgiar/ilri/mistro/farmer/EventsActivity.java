@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -26,6 +27,7 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
         addEventB=(Button)findViewById(R.id.add_event_b);
         addEventB.setOnClickListener(this);
         eventHistoryB=(Button)findViewById(R.id.event_history_b);
+        eventHistoryB.setOnClickListener(this);
 
         initTextInViews(localeCode);
     }
@@ -46,6 +48,11 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
         if(view==addEventB)
         {
             Intent intent=new Intent(this,AddEventActivity.class);
+            startActivity(intent);
+        }
+        else if(view == eventHistoryB)
+        {
+            Intent intent=new Intent(this,EventsHistoryActivity.class);
             startActivity(intent);
         }
     }

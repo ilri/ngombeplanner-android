@@ -11,5 +11,6 @@
     <string name="title_activity_milk_procution_history">Production History</string>
     <string name="title_activity_events">Events</string>
     <string name="title_activity_add_event">Add an Event</string>
+    <string name="title_activity_events_history">Past Events</string>
 
 </resources>

@@ -25,7 +25,9 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class MilkProcutionHistoryActivity extends SherlockActivity
@@ -217,7 +219,10 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
                 Date milkingDate=dateFormat.parse(jsonObject.getString("date"));
                 Date today=new Date();
                 long dateDifference=(today.getTime()-milkingDate.getTime())/86400000;
-                String dateText=jsonObject.getString("date");
+
+                Calendar calendar=new GregorianCalendar();
+                calendar.setTime(milkingDate);
+                String dateText=String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH))+"/"+calendar.get(Calendar.YEAR);
                 if(dateDifference<1)
                 {
                     dateText=todayText;
@@ -233,6 +238,12 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
                 final View rowSeparator1=generateRowSeparator(3424+jsonObject.getInt("id")+3322,tableRowHeight);
                 tableRow.addView(rowSeparator1);
 
+                final  TextView time=generateTextView(times[jsonObject.getInt("time")],3424+jsonObject.getInt("id")+554,tableRowHeight,tableTextSize);
+                tableRow.addView(time);
+
+                final View rowSeparator2=generateRowSeparator(3424+jsonObject.getInt("id")+3432,tableRowHeight);
+                tableRow.addView(rowSeparator2);
+
                 //TODO: check if name is null and use ear tag number
                 String nameText=jsonObject.getString("name");
                 if(nameText==null||nameText.equals(""))
@@ -241,12 +252,6 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
                 }
                 final TextView name=generateTextView(nameText,3424+jsonObject.getInt("id")+432,tableRowHeight,tableTextSize);
                 tableRow.addView(name);
-
-                final View rowSeparator2=generateRowSeparator(3424+jsonObject.getInt("id")+3432,tableRowHeight);
-                tableRow.addView(rowSeparator2);
-
-                final  TextView time=generateTextView(times[jsonObject.getInt("time")],3424+jsonObject.getInt("id")+554,tableRowHeight,tableTextSize);
-                tableRow.addView(time);
 
                 final View rowSeparator3=generateRowSeparator(3424+jsonObject.getInt("id")+3532,tableRowHeight);
                 tableRow.addView(rowSeparator3);

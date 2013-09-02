@@ -653,6 +653,7 @@
     <string name="old_number_not_in_system_en">It appears like your old mobile number is not registered in the system. Contact the system admin for more details.</string>
     <string name="past_events_en">Past Events</string>
     <string name="previous_en">Previous</string>
+    <string name="problem_connecting_to_server_en">A problem occurred while trying to connect to the Server</string>
     <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
     <string name="production_history_en">Production History</string>
     <string name="quantity_en">Quantity (kg)</string>
@@ -676,6 +677,7 @@
     <string name="title_activity_add_event">Add an Event</string>
     <string name="title_activity_cow_registration">Cow Registration</string>
     <string name="title_activity_events">Events</string>
+    <string name="title_activity_events_history">Past Events</string>
     <string name="title_activity_farmer_registration">Register Farmer</string>
     <string name="title_activity_main_menu">Main Menu</string>
     <string name="title_activity_milk_procution_history">Production History</string>

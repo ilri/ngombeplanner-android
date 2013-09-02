@@ -57,6 +57,10 @@
             android:name="org.cgiar.ilri.mistro.farmer.AddEventActivity"
             android:label="@string/title_activity_add_event" >
         </activity>
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.EventsHistoryActivity"
+            android:label="@string/title_activity_events_history" >
+        </activity>
     </application>
 
 </manifest>
