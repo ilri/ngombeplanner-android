@@ -5079,6 +5079,8 @@ true
                 </string>
                 <string name="maximum_of_four_breeds_en" >A maximum of four breeds
                 </string>
+                <string name="date_in_future_en" >Date you entered appears to be in the future
+                </string>
                 <string name="yes_en" >Yes
                 </string>
                 <string name="breed_en" >Breed
@@ -5119,9 +5121,9 @@ Male
                 </string>
                 <string name="cow_en" >Cow
                 </string>
-                <string name="vet_used_en" >Vet Used
-                </string>
                 <string name="reason_for_enabling_network_en" >This application requires an internet connection for it to work/. Press Okay to enable the internet
+                </string>
+                <string name="vet_used_en" >Vet Used
                 </string>
                 <string name="dam_registration_en" >Dam Registration
                 </string>
@@ -5155,6 +5157,8 @@ Male
                 </string>
                 <string name="login_anyway_en" >Login Anyway
                 </string>
+                <string name="event_successfully_recorded_en" >The event has been successfully recorded
+                </string>
 
                 <string-array name="deformities_array_en" >
                     <item>
@@ -5184,6 +5188,14 @@ Other
                 <string name="enter_your_name_en" >Please enter your name
                 </string>
 
+                <string-array name="service_types_sire_array_en" >
+                    <item>
+Bull
+                    </item>
+                    <item>
+Artificial Insemination
+                    </item>
+                </string-array>
                 <string-array name="cow_event_types_en" >
                     <item>
 Abortion
@@ -5210,14 +5222,6 @@ Death
                 <string name="milk_production_en" >Milk Production
                 </string>
 
-                <string-array name="service_types_sire_array_en" >
-                    <item>
-Bull
-                    </item>
-                    <item>
-Artificial Insemination
-                    </item>
-                </string-array>
                 <string-array name="breeds_array_en" >
                     <item>
 Ayrshire
@@ -5312,6 +5316,8 @@ Embryo Transfer
                 <string name="quantity_en" >Quantity (kg)
                 </string>
                 <string name="information_successfully_sent_to_server_en" >Information successfully sent to server
+                </string>
+                <string name="enter_date_en" >Please enter the date
                 </string>
 
                 <string-array name="milking_times_en" >

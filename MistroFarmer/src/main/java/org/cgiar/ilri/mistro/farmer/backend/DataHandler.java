@@ -50,6 +50,7 @@ public class DataHandler
     public static final String FARMER_FETCH_COW_IDENTIFIERS_URL="/farmer/fetchCowIdentifiers.php";
     public static final String FARMER_ADD_MILK_PRODUCTION_URL="/farmer/addMilkProduction.php";
     public static final String FARMER_FETCH_MILK_PRODUCTION_HISTORY_URL="/farmer/fetchMilkProductionHistory.php";
+    public static final String FARMER_ADD_COW_EVENT_URL="/farmer/addCowEvent.php";
     public static boolean checkNetworkConnection(final Context context, String localeCode)
     {
         String alertTitle="";

@@ -110,9 +110,12 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
 
     private void fetchCowIdentifiers()
     {
-        CowIdentifierThread cowIdentifierThread=new CowIdentifierThread();
-        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        cowIdentifierThread.execute(telephonyManager.getSimSerialNumber());
+        if(DataHandler.checkNetworkConnection(this,localeCode))
+        {
+            CowIdentifierThread cowIdentifierThread=new CowIdentifierThread();
+            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+            cowIdentifierThread.execute(telephonyManager.getSimSerialNumber());
+        }
     }
 
     private void setCowIdentifiers(String[] cowArray)
@@ -193,20 +196,32 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     {
         if(DataHandler.checkNetworkConnection(this,localeCode))
         {
-            if(quantityET.getText().toString()!=null&&quantityET.getText().toString().length()>0)
+            if(validateInput())
             {
                 addMilkProductionDialog.dismiss();
                 TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
                 MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
                 milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],String.valueOf(timeS.getSelectedItemPosition()),quantityET.getText().toString());
             }
-            else
-            {
-                Toast.makeText(this,quantityETEmptyWarning,Toast.LENGTH_LONG).show();
-            }
         }
 
     }
+
+    private boolean validateInput()
+    {
+        if(quantityET.getText().toString()==null)
+        {
+            Toast.makeText(this,quantityETEmptyWarning,Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(quantityET.getText().toString().length()>0)
+        {
+            Toast.makeText(this,quantityETEmptyWarning,Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
     private class MilkProductionDataAdditionThread extends AsyncTask<String,Integer,String>
     {
 

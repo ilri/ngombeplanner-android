@@ -607,12 +607,14 @@
     <string name="dam_en">Dam</string>
     <string name="dam_registration_en">Dam Registration</string>
     <string name="date_en">Date</string>
+    <string name="date_in_future_en">Date you entered appears to be in the future</string>
     <string name="date_of_birth_en">Date of Birth</string>
     <string name="deformity_en">Deformity</string>
     <string name="ear_tag_number_en">Ear Tag Number</string>
     <string name="embryo_number_en">Embryo Number</string>
     <string name="enable_gps_en">Enable GPS</string>
     <string name="enable_network_en">Enable Internet</string>
+    <string name="enter_date_en">Please enter the date</string>
     <string name="enter_ear_tag_no_or_name_en">Please enter the cow\'s Ear Tag Number or Name</string>
     <string name="enter_ear_tag_number_en">Please enter the cow\'s Ear Tag Number</string>
     <string name="enter_embryo_number_en">Please enter the Dam\'s embryo number</string>
@@ -622,6 +624,7 @@
     <string name="enter_your_mobile_no_en">Please enter your phone number</string>
     <string name="enter_your_name_en">Please enter your name</string>
     <string name="event_en">Event</string>
+    <string name="event_successfully_recorded_en">The event has been successfully recorded</string>
     <string name="events_en">Events</string>
     <string name="extension_p_en">Extension Personnel</string>
     <string name="failed_to_authenticate_en">Unable to authenticate you. Please try logging in again</string>

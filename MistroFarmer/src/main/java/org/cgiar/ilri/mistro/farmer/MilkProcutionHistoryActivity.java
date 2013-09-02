@@ -81,15 +81,18 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
 
     private void fetchProductionHistory()
     {
-        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        ProductionHistoryThread productionHistoryThread=new ProductionHistoryThread();
-        if(productionHistoryIDs.size()==0)
+        if(DataHandler.checkNetworkConnection(this,localeCode))
         {
-            productionHistoryThread.execute(telephonyManager.getSimSerialNumber(),"-1");
-        }
-        else
-        {
-            productionHistoryThread.execute(telephonyManager.getSimSerialNumber(),productionHistoryIDs.get(productionHistoryIDs.size()-1));
+            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+            ProductionHistoryThread productionHistoryThread=new ProductionHistoryThread();
+            if(productionHistoryIDs.size()==0)
+            {
+                productionHistoryThread.execute(telephonyManager.getSimSerialNumber(),"-1");
+            }
+            else
+            {
+                productionHistoryThread.execute(telephonyManager.getSimSerialNumber(),productionHistoryIDs.get(productionHistoryIDs.size()-1));
+            }
         }
     }
 

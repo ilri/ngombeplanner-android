@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 21, 2013 at 12:11 PM
+-- Generation Time: Sep 02, 2013 at 01:02 PM
 -- Server version: 5.5.32-0ubuntu0.13.04.1
 -- PHP Version: 5.4.9-4ubuntu2.2
 
@@ -82,6 +82,36 @@ INSERT INTO `cow` (`id`, `farmer_id`, `name`, `ear_tag_number`, `date_of_birth`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cow_event`
+--
+
+CREATE TABLE IF NOT EXISTS `cow_event` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cow_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `event_date` date NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cow_id` (`cow_id`,`event_id`),
+  KEY `event_id` (`event_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `cow_event`
+--
+
+INSERT INTO `cow_event` (`id`, `cow_id`, `event_id`, `remarks`, `event_date`, `date_added`) VALUES
+(1, 26, 1, 'Test', '0000-00-00', '2013-09-02 12:13:01'),
+(2, 26, 1, 'Test', '2013-08-28', '2013-09-02 12:15:49'),
+(3, 26, 1, 'Test', '2013-08-22', '2013-09-02 12:16:21'),
+(4, 26, 5, 'Test', '2013-08-22', '2013-09-02 12:17:42'),
+(5, 26, 1, 'Test 2', '2013-08-28', '2013-09-02 12:47:05'),
+(6, 26, 1, '', '2013-09-02', '2013-09-02 12:55:23');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `deformity`
 --
 
@@ -104,6 +134,30 @@ INSERT INTO `deformity` (`id`, `cow_id`, `text`, `date_added`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `event`
+--
+
+CREATE TABLE IF NOT EXISTS `event` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`id`, `name`) VALUES
+(1, 'Abortion'),
+(2, 'Birth'),
+(3, 'Lactation'),
+(4, 'Bloat'),
+(5, 'Sickness'),
+(6, 'Death');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `farmer`
 --
 
@@ -122,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `farmer` (
   UNIQUE KEY `mobile_no` (`mobile_no`),
   UNIQUE KEY `sim_card_sn` (`sim_card_sn`),
   KEY `sim_card_sn_2` (`sim_card_sn`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
 
 --
 -- Dumping data for table `farmer`
@@ -147,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `milk_production` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `cow_id_2` (`cow_id`,`time`,`date`),
   KEY `cow_id` (`cow_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `milk_production`
@@ -155,7 +209,10 @@ CREATE TABLE IF NOT EXISTS `milk_production` (
 
 INSERT INTO `milk_production` (`id`, `cow_id`, `time`, `quantity`, `date_added`, `date`) VALUES
 (3, 26, 1, 12, '2013-08-11 10:19:53', '2013-08-11'),
-(6, 26, 0, 10, '2013-08-12 12:41:39', '2013-08-12');
+(6, 26, 0, 10, '2013-08-12 12:41:39', '2013-08-12'),
+(7, 26, 0, 12, '2013-08-21 12:15:13', '2013-08-21'),
+(9, 26, 3, 12, '2013-08-21 12:16:16', '2013-08-21'),
+(10, 26, 1, 1, '2013-08-22 13:46:40', '2013-08-22');
 
 --
 -- Constraints for dumped tables
@@ -173,6 +230,13 @@ ALTER TABLE `breed`
 ALTER TABLE `cow`
   ADD CONSTRAINT `cow_ibfk_1` FOREIGN KEY (`farmer_id`) REFERENCES `farmer` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_ibfk_2` FOREIGN KEY (`sire_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `cow_event`
+--
+ALTER TABLE `cow_event`
+  ADD CONSTRAINT `cow_event_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `cow_event_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `deformity`
