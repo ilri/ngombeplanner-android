@@ -459,11 +459,8 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/theming.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/usage.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" afterPath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MistroFarmer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -541,18 +538,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_events.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_events.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="26" selection-start="504" selection-end="504" vertical-scroll-proportion="-5.785714" vertical-offset="0" max-vertical-offset="522">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="EventsActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -574,42 +559,53 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CowRegistrationActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CowRegistrationActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="624" column="106" selection-start="27103" selection-end="27103" vertical-scroll-proportion="0.0" vertical-offset="10804" max-vertical-offset="21654">
+            <state line="330" column="13" selection-start="13211" selection-end="13211" vertical-scroll-proportion="0.38250428" vertical-offset="5717" max-vertical-offset="21654">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#20475#20529#0" expanded="true" />
-                <element signature="e#20882#20906#0" expanded="true" />
-                <element signature="e#20944#20969#0" expanded="true" />
-                <element signature="e#21002#21022#0" expanded="true" />
-                <element signature="e#21052#21068#0" expanded="true" />
-                <element signature="e#21106#21132#0" expanded="true" />
-                <element signature="e#21161#21176#0" expanded="true" />
-                <element signature="e#21512#21537#0" expanded="true" />
-                <element signature="e#21568#21585#0" expanded="true" />
-                <element signature="e#21614#21629#0" expanded="true" />
-                <element signature="e#21955#21976#0" expanded="true" />
-                <element signature="e#22006#22022#0" expanded="true" />
-                <element signature="e#22051#22066#0" expanded="true" />
-                <element signature="e#22103#22132#0" expanded="true" />
-                <element signature="e#22997#23026#0" expanded="true" />
-                <element signature="e#23064#23084#0" expanded="true" />
-                <element signature="e#23184#23200#0" expanded="true" />
-                <element signature="e#23357#23375#0" expanded="true" />
-                <element signature="e#23474#23490#0" expanded="true" />
-                <element signature="e#23881#23897#0" expanded="true" />
-                <element signature="e#24284#24303#0" expanded="true" />
-                <element signature="e#24347#24363#0" expanded="true" />
-                <element signature="e#24462#24527#0" expanded="true" />
-                <element signature="e#24559#24611#0" expanded="true" />
-                <element signature="e#24642#24707#0" expanded="true" />
-                <element signature="e#24730#24772#0" expanded="true" />
-                <element signature="e#24809#24867#0" expanded="true" />
-                <element signature="e#24907#24969#0" expanded="true" />
-                <element signature="e#25005#25061#0" expanded="true" />
-                <element signature="e#25098#25155#0" expanded="true" />
+                <element signature="e#20489#20543#0" expanded="true" />
+                <element signature="e#20896#20920#0" expanded="true" />
+                <element signature="e#20958#20983#0" expanded="true" />
+                <element signature="e#21016#21036#0" expanded="true" />
+                <element signature="e#21066#21082#0" expanded="true" />
+                <element signature="e#21120#21146#0" expanded="true" />
+                <element signature="e#21175#21190#0" expanded="true" />
+                <element signature="e#21526#21551#0" expanded="true" />
+                <element signature="e#21582#21599#0" expanded="true" />
+                <element signature="e#21628#21643#0" expanded="true" />
+                <element signature="e#21969#21990#0" expanded="true" />
+                <element signature="e#22020#22036#0" expanded="true" />
+                <element signature="e#22065#22080#0" expanded="true" />
+                <element signature="e#22117#22146#0" expanded="true" />
+                <element signature="e#23011#23040#0" expanded="true" />
+                <element signature="e#23078#23098#0" expanded="true" />
+                <element signature="e#23198#23214#0" expanded="true" />
+                <element signature="e#23371#23389#0" expanded="true" />
+                <element signature="e#23488#23504#0" expanded="true" />
+                <element signature="e#23895#23911#0" expanded="true" />
+                <element signature="e#24298#24317#0" expanded="true" />
+                <element signature="e#24361#24377#0" expanded="true" />
+                <element signature="e#24476#24541#0" expanded="true" />
+                <element signature="e#24573#24625#0" expanded="true" />
+                <element signature="e#24656#24721#0" expanded="true" />
+                <element signature="e#24744#24786#0" expanded="true" />
+                <element signature="e#24823#24881#0" expanded="true" />
+                <element signature="e#24921#24983#0" expanded="true" />
+                <element signature="e#25019#25075#0" expanded="true" />
+                <element signature="e#25112#25169#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Cow.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="119" column="18" selection-start="3023" selection-end="3023" vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="4716">
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -633,10 +629,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LandingActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="LandingActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="181" column="31" selection-start="6636" selection-end="6636" vertical-scroll-proportion="0.271012" vertical-offset="3100" max-vertical-offset="5022">
+            <state line="183" column="43" selection-start="6756" selection-end="6756" vertical-scroll-proportion="0.0" vertical-offset="2830" max-vertical-offset="5022">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -760,10 +756,10 @@
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" />
-        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
       </list>
     </option>
   </component>
@@ -1318,15 +1314,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="0" selection-start="4447" selection-end="4447" vertical-scroll-proportion="0.0" vertical-offset="2662" max-vertical-offset="4716">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_events.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -1366,45 +1353,6 @@
             <element signature="e#2374#2428#0" expanded="true" />
             <element signature="e#2527#2570#0" expanded="true" />
             <element signature="e#2598#2645#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="624" column="106" selection-start="27103" selection-end="27103" vertical-scroll-proportion="0.0" vertical-offset="10804" max-vertical-offset="21654">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#20475#20529#0" expanded="true" />
-            <element signature="e#20882#20906#0" expanded="true" />
-            <element signature="e#20944#20969#0" expanded="true" />
-            <element signature="e#21002#21022#0" expanded="true" />
-            <element signature="e#21052#21068#0" expanded="true" />
-            <element signature="e#21106#21132#0" expanded="true" />
-            <element signature="e#21161#21176#0" expanded="true" />
-            <element signature="e#21512#21537#0" expanded="true" />
-            <element signature="e#21568#21585#0" expanded="true" />
-            <element signature="e#21614#21629#0" expanded="true" />
-            <element signature="e#21955#21976#0" expanded="true" />
-            <element signature="e#22006#22022#0" expanded="true" />
-            <element signature="e#22051#22066#0" expanded="true" />
-            <element signature="e#22103#22132#0" expanded="true" />
-            <element signature="e#22997#23026#0" expanded="true" />
-            <element signature="e#23064#23084#0" expanded="true" />
-            <element signature="e#23184#23200#0" expanded="true" />
-            <element signature="e#23357#23375#0" expanded="true" />
-            <element signature="e#23474#23490#0" expanded="true" />
-            <element signature="e#23881#23897#0" expanded="true" />
-            <element signature="e#24284#24303#0" expanded="true" />
-            <element signature="e#24347#24363#0" expanded="true" />
-            <element signature="e#24462#24527#0" expanded="true" />
-            <element signature="e#24559#24611#0" expanded="true" />
-            <element signature="e#24642#24707#0" expanded="true" />
-            <element signature="e#24730#24772#0" expanded="true" />
-            <element signature="e#24809#24867#0" expanded="true" />
-            <element signature="e#24907#24969#0" expanded="true" />
-            <element signature="e#25005#25061#0" expanded="true" />
-            <element signature="e#25098#25155#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1458,9 +1406,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="181" column="31" selection-start="6636" selection-end="6636" vertical-scroll-proportion="0.271012" vertical-offset="3100" max-vertical-offset="5022">
+        <state line="183" column="43" selection-start="6756" selection-end="6756" vertical-scroll-proportion="0.0" vertical-offset="2830" max-vertical-offset="5022">
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="119" column="18" selection-start="3023" selection-end="3023" vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="4716">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="330" column="13" selection-start="13211" selection-end="13211" vertical-scroll-proportion="0.38250428" vertical-offset="5717" max-vertical-offset="21654">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#20489#20543#0" expanded="true" />
+            <element signature="e#20896#20920#0" expanded="true" />
+            <element signature="e#20958#20983#0" expanded="true" />
+            <element signature="e#21016#21036#0" expanded="true" />
+            <element signature="e#21066#21082#0" expanded="true" />
+            <element signature="e#21120#21146#0" expanded="true" />
+            <element signature="e#21175#21190#0" expanded="true" />
+            <element signature="e#21526#21551#0" expanded="true" />
+            <element signature="e#21582#21599#0" expanded="true" />
+            <element signature="e#21628#21643#0" expanded="true" />
+            <element signature="e#21969#21990#0" expanded="true" />
+            <element signature="e#22020#22036#0" expanded="true" />
+            <element signature="e#22065#22080#0" expanded="true" />
+            <element signature="e#22117#22146#0" expanded="true" />
+            <element signature="e#23011#23040#0" expanded="true" />
+            <element signature="e#23078#23098#0" expanded="true" />
+            <element signature="e#23198#23214#0" expanded="true" />
+            <element signature="e#23371#23389#0" expanded="true" />
+            <element signature="e#23488#23504#0" expanded="true" />
+            <element signature="e#23895#23911#0" expanded="true" />
+            <element signature="e#24298#24317#0" expanded="true" />
+            <element signature="e#24361#24377#0" expanded="true" />
+            <element signature="e#24476#24541#0" expanded="true" />
+            <element signature="e#24573#24625#0" expanded="true" />
+            <element signature="e#24656#24721#0" expanded="true" />
+            <element signature="e#24744#24786#0" expanded="true" />
+            <element signature="e#24823#24881#0" expanded="true" />
+            <element signature="e#24921#24983#0" expanded="true" />
+            <element signature="e#25019#25075#0" expanded="true" />
+            <element signature="e#25112#25169#0" expanded="true" />
           </folding>
         </state>
       </provider>

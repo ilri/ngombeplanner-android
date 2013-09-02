@@ -298,21 +298,21 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             Sire sire=thisCow.getSire();
             if(sire!=null)
             {
-                if(sire.getName()!=null||sire.getName().length()>0)
+                if(sire.getName()!=null && sire.getName().length()>0)
                     sireET.setText(sire.getName());
-                else if(sire.getEarTagNumber()!=null||sire.getEarTagNumber().length()>0)
-                    damET.setText(sire.getEarTagNumber());
-                else if(sire.getStrawNumber()!=null||sire.getStrawNumber().length()>0)
-                    damET.setText(sire.getStrawNumber());
+                else if(sire.getEarTagNumber()!=null && sire.getEarTagNumber().length()>0)
+                    sireET.setText(sire.getEarTagNumber());
+                else if(sire.getStrawNumber()!=null && sire.getStrawNumber().length()>0)
+                    sireET.setText(sire.getStrawNumber());
             }
             Dam dam=thisCow.getDam();
             if(dam!=null)
             {
-                if(dam.getName()!=null||dam.getName().length()>0)
+                if(dam.getName()!=null && dam.getName().length()>0)
                     damET.setText(dam.getName());
-                else if(dam.getEarTagNumber()!=null||dam.getEarTagNumber().length()>0)
+                else if(dam.getEarTagNumber()!=null && dam.getEarTagNumber().length()>0)
                     damET.setText(dam.getEarTagNumber());
-                else if(dam.getEmbryoNumber()!=null||dam.getEmbryoNumber().length()>0)
+                else if(dam.getEmbryoNumber()!=null && dam.getEmbryoNumber().length()>0)
                     damET.setText(dam.getEmbryoNumber());
             }
             countryOfOriginACTV.setText(thisCow.getCountryOfOrigin());
