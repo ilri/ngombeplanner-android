@@ -666,6 +666,7 @@
     <string name="sim_card_registration_en">Sim Card Registration</string>
     <string name="sire_en">Sire</string>
     <string name="sire_registration_en">Sire Registration</string>
+    <string name="something_went_wrong_try_again_en">Something went wrong. Try resending the data</string>
     <string name="specify_en">Specify</string>
     <string name="straw_number_en">Straw Number</string>
     <string name="successful_registration_en">Successful Registration</string>

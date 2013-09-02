@@ -1191,28 +1191,29 @@ containing a value of this type.
         public static final int sim_card_registration_en=0x7f0a0051;
         public static final int sire_en=0x7f0a0052;
         public static final int sire_registration_en=0x7f0a0053;
-        public static final int specify_en=0x7f0a0054;
-        public static final int straw_number_en=0x7f0a0055;
-        public static final int successful_registration_en=0x7f0a0056;
-        public static final int successful_registration_instructions_en=0x7f0a0057;
-        public static final int time_en=0x7f0a0058;
+        public static final int something_went_wrong_try_again_en=0x7f0a0054;
+        public static final int specify_en=0x7f0a0055;
+        public static final int straw_number_en=0x7f0a0056;
+        public static final int successful_registration_en=0x7f0a0057;
+        public static final int successful_registration_instructions_en=0x7f0a0058;
+        public static final int time_en=0x7f0a0059;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int title_activity_add_event=0x7f0a0059;
-        public static final int title_activity_cow_registration=0x7f0a005a;
-        public static final int title_activity_events=0x7f0a005b;
-        public static final int title_activity_farmer_registration=0x7f0a005c;
-        public static final int title_activity_main_menu=0x7f0a005d;
-        public static final int title_activity_milk_procution_history=0x7f0a005e;
-        public static final int title_activity_milk_production=0x7f0a005f;
+        public static final int title_activity_add_event=0x7f0a005a;
+        public static final int title_activity_cow_registration=0x7f0a005b;
+        public static final int title_activity_events=0x7f0a005c;
+        public static final int title_activity_farmer_registration=0x7f0a005d;
+        public static final int title_activity_main_menu=0x7f0a005e;
+        public static final int title_activity_milk_procution_history=0x7f0a005f;
+        public static final int title_activity_milk_production=0x7f0a0060;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int today_en=0x7f0a0060;
-        public static final int vet_used_en=0x7f0a0061;
-        public static final int welcome_en=0x7f0a0062;
-        public static final int yes_en=0x7f0a0063;
-        public static final int yesterday_en=0x7f0a0064;
-        public static final int your_mistro_id_en=0x7f0a0065;
+        public static final int today_en=0x7f0a0061;
+        public static final int vet_used_en=0x7f0a0062;
+        public static final int welcome_en=0x7f0a0063;
+        public static final int yes_en=0x7f0a0064;
+        public static final int yesterday_en=0x7f0a0065;
+        public static final int your_mistro_id_en=0x7f0a0066;
     }
     public static final class style {
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 

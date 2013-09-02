@@ -187,7 +187,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             }
             else
             {
-                Toast.makeText(LandingActivity.this, welcomeText,Toast.LENGTH_LONG).show();
+                Toast.makeText(LandingActivity.this, welcomeText+" "+result,Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(LandingActivity.this,MainMenu.class);
                 startActivity(intent);
             }
