@@ -1,12 +1,12 @@
 
-[Wednesday, 4th September 2013 12:00:19] [authentication.php] Starting Authenticator
-[Wednesday, 4th September 2013 12:00:19] [authentication.php] obtaining POST request
-[Wednesday, 4th September 2013 12:00:19] [authentication.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 12:00:19] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 12:00:19] [database.php] Starting DatabaseHandler
-[Wednesday, 4th September 2013 12:00:19] [database.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 12:00:19] [database.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 12:00:19] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Wednesday, 4th September 2013 12:00:19] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
-[Wednesday, 4th September 2013 12:00:19] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Wednesday, 4th September 2013 12:00:19] [authentication.php] gracefully exiting
+[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] Starting MilkProductionHistoryHandler
+[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] obtaining POST request
+[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 14:16:28] [database.php] Starting DatabaseHandler
+[Wednesday, 4th September 2013 14:16:28] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 14:16:28] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 14:16:28] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 4th September 2013 14:16:28] [database.php] running query SELECT `milk_production`.*,`cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' ORDER BY `milk_production`.`id` DESC LIMIT 40
+[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] sending milk production history data back to client as a json string
+[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] gracefully exiting

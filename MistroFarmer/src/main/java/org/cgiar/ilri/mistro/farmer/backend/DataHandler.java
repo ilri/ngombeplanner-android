@@ -47,11 +47,11 @@ public class DataHandler
     public static final String FARMER_REGISTRATION_URL="/farmer/registration.php";
     public static final String FARMER_AUTHENTICATION_URL="/php/farmer/authentication.php";
     public static final String FARMER_SIM_CARD_REGISTRATION_URL="/farmer/simCardRegistration.php";
-    public static final String FARMER_FETCH_COW_IDENTIFIERS_URL="/farmer/fetchCowIdentifiers.php";
+    public static final String FARMER_FETCH_COW_IDENTIFIERS_URL="/php/farmer/fetch_cow_identifiers.php";
     public static final String FARMER_ADD_MILK_PRODUCTION_URL="/php/farmer/add_milk_production.php";
-    public static final String FARMER_FETCH_MILK_PRODUCTION_HISTORY_URL="/farmer/fetchMilkProductionHistory.php";
+    public static final String FARMER_FETCH_MILK_PRODUCTION_HISTORY_URL="/php/farmer/fetch_milk_production_history.php";
     public static final String FARMER_ADD_COW_EVENT_URL="/php/farmer/add_cow_event.php";
-    public static final String FARMER_FETCH_COW_EVENTS_HISTORY_URL="/farmer/fetchCowEventsHistory.php";
+    public static final String FARMER_FETCH_COW_EVENTS_HISTORY_URL="/php/farmer/fetch_cow_events_history.php";
     public static boolean checkNetworkConnection(final Context context, String localeCode)
     {
         String alertTitle="";

@@ -462,9 +462,13 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/support.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/theming.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/usage.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/php/farmer/fetchCowEventsHistory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/php/farmer/fetchCowIdentifiers.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/php/farmer/fetchMilkProductionHistory.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/php/farmer/authentication.php" afterPath="$PROJECT_DIR$/web/php/farmer/authentication.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/debug.log" afterPath="$PROJECT_DIR$/web/log/debug.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/info.log" afterPath="$PROJECT_DIR$/web/log/info.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -489,6 +493,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -525,7 +530,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -547,7 +551,7 @@
       <file leaf-file-name="EventsHistoryActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="9" selection-start="4312" selection-end="4312" vertical-scroll-proportion="0.0" vertical-offset="2196" max-vertical-offset="4644">
+            <state line="115" column="39" selection-start="4084" selection-end="4084" vertical-scroll-proportion="0.0" vertical-offset="1633" max-vertical-offset="4644">
               <folding />
             </state>
           </provider>
@@ -574,7 +578,7 @@
       <file leaf-file-name="AddEventActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="5" selection-start="1854" selection-end="1854" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="5760">
+            <state line="59" column="5" selection-start="1854" selection-end="1854" vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="6300">
               <folding />
             </state>
           </provider>
@@ -622,7 +626,7 @@
       <file leaf-file-name="DataHandler.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="64" selection-start="1359" selection-end="1359" vertical-scroll-proportion="0.21140939" vertical-offset="108" max-vertical-offset="2412">
+            <state line="51" column="120" selection-start="2340" selection-end="2340" vertical-scroll-proportion="0.45302013" vertical-offset="162" max-vertical-offset="2412">
               <folding />
             </state>
           </provider>
@@ -966,11 +970,11 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="JellyBean_HIGH" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1192,8 +1196,8 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15705615" sideWeight="0.60032105" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32744783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1252,9 +1256,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="59" selection-start="1191" selection-end="1191" vertical-scroll-proportion="0.0" vertical-offset="394" max-vertical-offset="1026">
-          <folding />
-        </state>
+        <state line="40" column="59" selection-start="1191" selection-end="1191" vertical-scroll-proportion="0.0" vertical-offset="394" max-vertical-offset="1026" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_milk_production_history.xml">
@@ -1288,13 +1290,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="9" selection-start="4312" selection-end="4312" vertical-scroll-proportion="0.0" vertical-offset="1350" max-vertical-offset="4122">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1193" column="37" selection-start="45878" selection-end="45878" vertical-scroll-proportion="0.0" vertical-offset="20911" max-vertical-offset="21852">
@@ -1323,9 +1318,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="39" selection-start="4084" selection-end="4084" vertical-scroll-proportion="0.0" vertical-offset="1633" max-vertical-offset="4644">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="64" selection-start="1359" selection-end="1359" vertical-scroll-proportion="0.21140939" vertical-offset="108" max-vertical-offset="2412">
+        <state line="51" column="120" selection-start="2340" selection-end="2340" vertical-scroll-proportion="0.45302013" vertical-offset="162" max-vertical-offset="2412">
           <folding />
         </state>
       </provider>

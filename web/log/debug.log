@@ -1,10 +1,11 @@
 
-[Wednesday, 4th September 2013 12:00:19] [authentication.php] json_decode returned: Array
+[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] json_decode returned: Array
 (
+    [fromID] => -1
     [simCardSN] => 89254029541005994303
 )
 
-[Wednesday, 4th September 2013 12:00:19] [authentication.php] settings obtained: Array
+[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] settings obtained: Array
 (
     [db_name] => ilri_mistro
     [mysql_creds] => Array
@@ -19,7 +20,7 @@
     [time_zone] => EAT
 )
 
-[Wednesday, 4th September 2013 12:00:19] [authentication.php] response codes are: Array
+[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] response codes are: Array
 (
     [db_error] => 32243
     [user_not_authenticated] => 43322
@@ -29,7 +30,7 @@
     [no_data] => 77732
 )
 
-[Wednesday, 4th September 2013 12:00:19] [database.php] settings obtained: Array
+[Wednesday, 4th September 2013 14:16:28] [database.php] settings obtained: Array
 (
     [db_name] => ilri_mistro
     [mysql_creds] => Array
@@ -44,7 +45,7 @@
     [time_zone] => EAT
 )
 
-[Wednesday, 4th September 2013 12:00:19] [database.php] response codes are: Array
+[Wednesday, 4th September 2013 14:16:28] [database.php] response codes are: Array
 (
     [db_error] => 32243
     [user_not_authenticated] => 43322
@@ -54,12 +55,116 @@
     [no_data] => 77732
 )
 
-[Wednesday, 4th September 2013 12:00:19] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
+[Wednesday, 4th September 2013 14:16:28] [database.php] results gotten from 'SELECT `milk_production`.*,`cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' ORDER BY `milk_production`.`id` DESC LIMIT 40' are Array
 (
     [0] => Array
         (
-            [name] => Jason Rogena
+            [id] => 14
+            [cow_id] => 26
+            [time] => 1
+            [quantity] => 12
+            [date_added] => 2013-09-04 13:51:33
+            [date] => 2013-09-04
+            [name] => Rosy
+            [ear_tag_number] => ros1
+        )
+
+    [1] => Array
+        (
+            [id] => 13
+            [cow_id] => 26
+            [time] => 0
+            [quantity] => 20
+            [date_added] => 2013-09-04 11:22:33
+            [date] => 2013-09-04
+            [name] => Rosy
+            [ear_tag_number] => ros1
+        )
+
+    [2] => Array
+        (
+            [id] => 12
+            [cow_id] => 26
+            [time] => 0
+            [quantity] => 12
+            [date_added] => 2013-09-02 17:24:31
+            [date] => 2013-09-02
+            [name] => Rosy
+            [ear_tag_number] => ros1
+        )
+
+    [3] => Array
+        (
+            [id] => 11
+            [cow_id] => 26
+            [time] => 2
+            [quantity] => 15
+            [date_added] => 2013-09-02 17:18:49
+            [date] => 2013-09-02
+            [name] => Rosy
+            [ear_tag_number] => ros1
+        )
+
+    [4] => Array
+        (
+            [id] => 10
+            [cow_id] => 26
+            [time] => 1
+            [quantity] => 1
+            [date_added] => 2013-08-22 13:46:40
+            [date] => 2013-08-22
+            [name] => Rosy
+            [ear_tag_number] => ros1
+        )
+
+    [5] => Array
+        (
+            [id] => 9
+            [cow_id] => 26
+            [time] => 3
+            [quantity] => 12
+            [date_added] => 2013-08-21 12:16:16
+            [date] => 2013-08-21
+            [name] => Rosy
+            [ear_tag_number] => ros1
+        )
+
+    [6] => Array
+        (
+            [id] => 7
+            [cow_id] => 26
+            [time] => 0
+            [quantity] => 12
+            [date_added] => 2013-08-21 12:15:13
+            [date] => 2013-08-21
+            [name] => Rosy
+            [ear_tag_number] => ros1
+        )
+
+    [7] => Array
+        (
+            [id] => 6
+            [cow_id] => 26
+            [time] => 0
+            [quantity] => 10
+            [date_added] => 2013-08-12 12:41:39
+            [date] => 2013-08-12
+            [name] => Rosy
+            [ear_tag_number] => ros1
+        )
+
+    [8] => Array
+        (
+            [id] => 3
+            [cow_id] => 26
+            [time] => 1
+            [quantity] => 12
+            [date_added] => 2013-08-11 10:19:53
+            [date] => 2013-08-11
+            [name] => Rosy
+            [ear_tag_number] => ros1
         )
 
 )
 
+[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php]  cow milk production history encoded from an array and is '{"history":[{"id":"14","cow_id":"26","time":"1","quantity":"12","date_added":"2013-09-04 13:51:33","date":"2013-09-04","name":"Rosy","ear_tag_number":"ros1"},{"id":"13","cow_id":"26","time":"0","quantity":"20","date_added":"2013-09-04 11:22:33","date":"2013-09-04","name":"Rosy","ear_tag_number":"ros1"},{"id":"12","cow_id":"26","time":"0","quantity":"12","date_added":"2013-09-02 17:24:31","date":"2013-09-02","name":"Rosy","ear_tag_number":"ros1"},{"id":"11","cow_id":"26","time":"2","quantity":"15","date_added":"2013-09-02 17:18:49","date":"2013-09-02","name":"Rosy","ear_tag_number":"ros1"},{"id":"10","cow_id":"26","time":"1","quantity":"1","date_added":"2013-08-22 13:46:40","date":"2013-08-22","name":"Rosy","ear_tag_number":"ros1"},{"id":"9","cow_id":"26","time":"3","quantity":"12","date_added":"2013-08-21 12:16:16","date":"2013-08-21","name":"Rosy","ear_tag_number":"ros1"},{"id":"7","cow_id":"26","time":"0","quantity":"12","date_added":"2013-08-21 12:15:13","date":"2013-08-21","name":"Rosy","ear_tag_number":"ros1"},{"id":"6","cow_id":"26","time":"0","quantity":"10","date_added":"2013-08-12 12:41:39","date":"2013-08-12","name":"Rosy","ear_tag_number":"ros1"},{"id":"3","cow_id":"26","time":"1","quantity":"12","date_added":"2013-08-11 10:19:53","date":"2013-08-11","name":"Rosy","ear_tag_number":"ros1"}]}'
