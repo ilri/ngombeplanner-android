@@ -1,11 +1,156 @@
 
-[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] json_decode returned: Array
+[Wednesday, 4th September 2013 15:06:27] [registration.php] json_decode returned: Array
 (
-    [fromID] => -1
+    [longitude] => 36.72205648384988
+    [latitude] => -1.2691437313333154
+    [extensionPersonnel] => Jacob Juma
+    [fullName] => Jason Rogena
+    [mobileNumber] => 0715023802
+    [cows] => Array
+        (
+            [0] => Array
+                (
+                    [deformities] => Array
+                        (
+                            [0] => Blind
+                        )
+
+                    [ageType] => 2
+                    [dateOfBirth] => 
+                    [sex] => 1
+                    [dam] => Array
+                        (
+                            [vetUsed] => 
+                            [deformities] => Array
+                                (
+                                    [0] => 
+                                )
+
+                            [ageType] => 2
+                            [dateOfBirth] => 
+                            [sex] => 1
+                            [age] => 4
+                            [name] => Rosy
+                            [breeds] => Array
+                                (
+                                    [0] => Friesian
+                                )
+
+                            [serviceType] => 0
+                            [type] => dam
+                            [earTagNumber] => kajJas10
+                            [embryoNumber] => 
+                        )
+
+                    [age] => 2
+                    [name] => Betty
+                    [sire] => Array
+                        (
+                            [vetUsed] => Jacob Juma
+                            [deformities] => Array
+                                (
+                                    [0] => 
+                                )
+
+                            [ageType] => 0
+                            [dateOfBirth] => 
+                            [sex] => 0
+                            [strawNumber] => am1236
+                            [age] => -1
+                            [name] => 
+                            [breeds] => Array
+                                (
+                                    [0] => 
+                                )
+
+                            [serviceType] => 1
+                            [type] => sire
+                            [earTagNumber] => 
+                        )
+
+                    [breeds] => Array
+                        (
+                            [0] => Ayrshire
+                            [1] => Friesian
+                        )
+
+                    [type] => cow
+                    [earTagNumber] => kajJas1
+                )
+
+            [1] => Array
+                (
+                    [deformities] => Array
+                        (
+                            [0] => 
+                        )
+
+                    [ageType] => 1
+                    [dateOfBirth] => 
+                    [sex] => 0
+                    [dam] => Array
+                        (
+                            [vetUsed] => 
+                            [deformities] => Array
+                                (
+                                )
+
+                            [ageType] => -1
+                            [dateOfBirth] => 
+                            [sex] => 1
+                            [age] => -1
+                            [name] => 
+                            [breeds] => Array
+                                (
+                                )
+
+                            [serviceType] => -1
+                            [type] => dam
+                            [earTagNumber] => 
+                            [embryoNumber] => 
+                        )
+
+                    [age] => 3
+                    [name] => Chris
+                    [sire] => Array
+                        (
+                            [vetUsed] => 
+                            [deformities] => Array
+                                (
+                                )
+
+                            [ageType] => -1
+                            [dateOfBirth] => 
+                            [sex] => 0
+                            [strawNumber] => 
+                            [age] => -1
+                            [name] => 
+                            [breeds] => Array
+                                (
+                                )
+
+                            [serviceType] => -1
+                            [type] => sire
+                            [earTagNumber] => 
+                        )
+
+                    [breeds] => Array
+                        (
+                            [0] => Ayrshire
+                            [1] => Aberdeen Angus
+                            [2] => Friesian
+                        )
+
+                    [type] => cow
+                    [earTagNumber] => kajJas2
+                )
+
+        )
+
     [simCardSN] => 89254029541005994303
 )
 
-[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] settings obtained: Array
+[Wednesday, 4th September 2013 15:06:27] [registration.php] settings obtained: Array
 (
     [db_name] => ilri_mistro
     [mysql_creds] => Array
@@ -20,7 +165,7 @@
     [time_zone] => EAT
 )
 
-[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php] response codes are: Array
+[Wednesday, 4th September 2013 15:06:27] [registration.php] response codes are: Array
 (
     [db_error] => 32243
     [user_not_authenticated] => 43322
@@ -30,7 +175,7 @@
     [no_data] => 77732
 )
 
-[Wednesday, 4th September 2013 14:16:28] [database.php] settings obtained: Array
+[Wednesday, 4th September 2013 15:06:27] [database.php] settings obtained: Array
 (
     [db_name] => ilri_mistro
     [mysql_creds] => Array
@@ -45,7 +190,7 @@
     [time_zone] => EAT
 )
 
-[Wednesday, 4th September 2013 14:16:28] [database.php] response codes are: Array
+[Wednesday, 4th September 2013 15:06:27] [database.php] response codes are: Array
 (
     [db_error] => 32243
     [user_not_authenticated] => 43322
@@ -55,116 +200,436 @@
     [no_data] => 77732
 )
 
-[Wednesday, 4th September 2013 14:16:28] [database.php] results gotten from 'SELECT `milk_production`.*,`cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' ORDER BY `milk_production`.`id` DESC LIMIT 40' are Array
+[Wednesday, 4th September 2013 15:06:27] [registration.php] returning time '2013-09-04 15:06:27' using format 'Y-m-d H:i:s'
+[Wednesday, 4th September 2013 15:06:27] [registration.php] New farmer's ID is 42
+[Wednesday, 4th September 2013 15:06:27] [registration.php] New cow's ID is 27
+[Wednesday, 4th September 2013 15:06:27] [registration.php] New sire's ID is 28
+[Wednesday, 4th September 2013 15:06:28] [registration.php] New dam's ID is 27
+[Wednesday, 4th September 2013 15:06:28] [registration.php] New cow's ID is 30
+[Wednesday, 4th September 2013 15:11:42] [registration.php] json_decode returned: Array
+(
+    [longitude] => 36.72205648384988
+    [latitude] => -1.2691437313333154
+    [extensionPersonnel] => Jacob Juma
+    [fullName] => Jason Rogena
+    [mobileNumber] => 0715023802
+    [cows] => Array
+        (
+            [0] => Array
+                (
+                    [deformities] => Array
+                        (
+                            [0] => Blind
+                        )
+
+                    [ageType] => 2
+                    [dateOfBirth] => 
+                    [sex] => 1
+                    [dam] => Array
+                        (
+                            [vetUsed] => 
+                            [deformities] => Array
+                                (
+                                    [0] => 
+                                )
+
+                            [ageType] => 2
+                            [dateOfBirth] => 
+                            [sex] => 1
+                            [age] => 4
+                            [name] => Rosy
+                            [breeds] => Array
+                                (
+                                    [0] => Friesian
+                                )
+
+                            [serviceType] => 0
+                            [type] => dam
+                            [earTagNumber] => kajJas10
+                            [embryoNumber] => 
+                        )
+
+                    [age] => 2
+                    [name] => Betty
+                    [sire] => Array
+                        (
+                            [vetUsed] => Jacob Juma
+                            [deformities] => Array
+                                (
+                                    [0] => 
+                                )
+
+                            [ageType] => 0
+                            [dateOfBirth] => 
+                            [sex] => 0
+                            [strawNumber] => am1236
+                            [age] => -1
+                            [name] => 
+                            [breeds] => Array
+                                (
+                                    [0] => 
+                                )
+
+                            [serviceType] => 1
+                            [type] => sire
+                            [earTagNumber] => 
+                        )
+
+                    [breeds] => Array
+                        (
+                            [0] => Ayrshire
+                            [1] => Friesian
+                        )
+
+                    [type] => cow
+                    [earTagNumber] => kajJas1
+                )
+
+            [1] => Array
+                (
+                    [deformities] => Array
+                        (
+                            [0] => 
+                        )
+
+                    [ageType] => 1
+                    [dateOfBirth] => 
+                    [sex] => 0
+                    [dam] => Array
+                        (
+                            [vetUsed] => 
+                            [deformities] => Array
+                                (
+                                )
+
+                            [ageType] => -1
+                            [dateOfBirth] => 
+                            [sex] => 1
+                            [age] => -1
+                            [name] => 
+                            [breeds] => Array
+                                (
+                                )
+
+                            [serviceType] => -1
+                            [type] => dam
+                            [earTagNumber] => 
+                            [embryoNumber] => 
+                        )
+
+                    [age] => 3
+                    [name] => Chris
+                    [sire] => Array
+                        (
+                            [vetUsed] => 
+                            [deformities] => Array
+                                (
+                                )
+
+                            [ageType] => -1
+                            [dateOfBirth] => 
+                            [sex] => 0
+                            [strawNumber] => 
+                            [age] => -1
+                            [name] => 
+                            [breeds] => Array
+                                (
+                                )
+
+                            [serviceType] => -1
+                            [type] => sire
+                            [earTagNumber] => 
+                        )
+
+                    [breeds] => Array
+                        (
+                            [0] => Ayrshire
+                            [1] => Aberdeen Angus
+                            [2] => Friesian
+                        )
+
+                    [type] => cow
+                    [earTagNumber] => kajJas2
+                )
+
+        )
+
+    [simCardSN] => 89254029541005994303
+)
+
+[Wednesday, 4th September 2013 15:11:42] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 4th September 2013 15:11:42] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 4th September 2013 15:11:42] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 4th September 2013 15:11:42] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 4th September 2013 15:11:42] [registration.php] returning time '2013-09-04 15:11:42' using format 'Y-m-d H:i:s'
+[Wednesday, 4th September 2013 15:11:42] [registration.php] New farmer's ID is 43
+[Wednesday, 4th September 2013 15:11:42] [registration.php] New cow's ID is 31
+[Wednesday, 4th September 2013 15:11:42] [registration.php] New sire's ID is 32
+[Wednesday, 4th September 2013 15:11:42] [registration.php] New dam's ID is 33
+[Wednesday, 4th September 2013 15:11:42] [registration.php] New cow's ID is 34
+[Wednesday, 4th September 2013 15:11:59] [authentication.php] json_decode returned: Array
+(
+    [simCardSN] => 89254029541005994303
+)
+
+[Wednesday, 4th September 2013 15:11:59] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 4th September 2013 15:11:59] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 4th September 2013 15:11:59] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 4th September 2013 15:11:59] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 4th September 2013 15:11:59] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
 (
     [0] => Array
         (
-            [id] => 14
-            [cow_id] => 26
-            [time] => 1
-            [quantity] => 12
-            [date_added] => 2013-09-04 13:51:33
-            [date] => 2013-09-04
-            [name] => Rosy
-            [ear_tag_number] => ros1
+            [name] => Jason Rogena
+        )
+
+)
+
+[Wednesday, 4th September 2013 15:12:02] [fetch_cow_identifiers.php] json_decode returned: Array
+(
+    [simCardSN] => 89254029541005994303
+)
+
+[Wednesday, 4th September 2013 15:12:02] [fetch_cow_identifiers.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 4th September 2013 15:12:02] [fetch_cow_identifiers.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 4th September 2013 15:12:02] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 4th September 2013 15:12:02] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 4th September 2013 15:12:02] [database.php] results gotten from 'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'' are Array
+(
+    [0] => Array
+        (
+            [name] => 
+            [ear_tag_number] => 
         )
 
     [1] => Array
         (
-            [id] => 13
-            [cow_id] => 26
-            [time] => 0
-            [quantity] => 20
-            [date_added] => 2013-09-04 11:22:33
-            [date] => 2013-09-04
-            [name] => Rosy
-            [ear_tag_number] => ros1
+            [name] => Betty
+            [ear_tag_number] => kajJas1
         )
 
     [2] => Array
         (
-            [id] => 12
-            [cow_id] => 26
-            [time] => 0
-            [quantity] => 12
-            [date_added] => 2013-09-02 17:24:31
-            [date] => 2013-09-02
-            [name] => Rosy
-            [ear_tag_number] => ros1
+            [name] => Chris
+            [ear_tag_number] => kajJas2
         )
 
     [3] => Array
         (
-            [id] => 11
-            [cow_id] => 26
-            [time] => 2
-            [quantity] => 15
-            [date_added] => 2013-09-02 17:18:49
-            [date] => 2013-09-02
             [name] => Rosy
-            [ear_tag_number] => ros1
-        )
-
-    [4] => Array
-        (
-            [id] => 10
-            [cow_id] => 26
-            [time] => 1
-            [quantity] => 1
-            [date_added] => 2013-08-22 13:46:40
-            [date] => 2013-08-22
-            [name] => Rosy
-            [ear_tag_number] => ros1
-        )
-
-    [5] => Array
-        (
-            [id] => 9
-            [cow_id] => 26
-            [time] => 3
-            [quantity] => 12
-            [date_added] => 2013-08-21 12:16:16
-            [date] => 2013-08-21
-            [name] => Rosy
-            [ear_tag_number] => ros1
-        )
-
-    [6] => Array
-        (
-            [id] => 7
-            [cow_id] => 26
-            [time] => 0
-            [quantity] => 12
-            [date_added] => 2013-08-21 12:15:13
-            [date] => 2013-08-21
-            [name] => Rosy
-            [ear_tag_number] => ros1
-        )
-
-    [7] => Array
-        (
-            [id] => 6
-            [cow_id] => 26
-            [time] => 0
-            [quantity] => 10
-            [date_added] => 2013-08-12 12:41:39
-            [date] => 2013-08-12
-            [name] => Rosy
-            [ear_tag_number] => ros1
-        )
-
-    [8] => Array
-        (
-            [id] => 3
-            [cow_id] => 26
-            [time] => 1
-            [quantity] => 12
-            [date_added] => 2013-08-11 10:19:53
-            [date] => 2013-08-11
-            [name] => Rosy
-            [ear_tag_number] => ros1
+            [ear_tag_number] => kajJas10
         )
 
 )
 
-[Wednesday, 4th September 2013 14:16:28] [fetch_milk_production_history.php]  cow milk production history encoded from an array and is '{"history":[{"id":"14","cow_id":"26","time":"1","quantity":"12","date_added":"2013-09-04 13:51:33","date":"2013-09-04","name":"Rosy","ear_tag_number":"ros1"},{"id":"13","cow_id":"26","time":"0","quantity":"20","date_added":"2013-09-04 11:22:33","date":"2013-09-04","name":"Rosy","ear_tag_number":"ros1"},{"id":"12","cow_id":"26","time":"0","quantity":"12","date_added":"2013-09-02 17:24:31","date":"2013-09-02","name":"Rosy","ear_tag_number":"ros1"},{"id":"11","cow_id":"26","time":"2","quantity":"15","date_added":"2013-09-02 17:18:49","date":"2013-09-02","name":"Rosy","ear_tag_number":"ros1"},{"id":"10","cow_id":"26","time":"1","quantity":"1","date_added":"2013-08-22 13:46:40","date":"2013-08-22","name":"Rosy","ear_tag_number":"ros1"},{"id":"9","cow_id":"26","time":"3","quantity":"12","date_added":"2013-08-21 12:16:16","date":"2013-08-21","name":"Rosy","ear_tag_number":"ros1"},{"id":"7","cow_id":"26","time":"0","quantity":"12","date_added":"2013-08-21 12:15:13","date":"2013-08-21","name":"Rosy","ear_tag_number":"ros1"},{"id":"6","cow_id":"26","time":"0","quantity":"10","date_added":"2013-08-12 12:41:39","date":"2013-08-12","name":"Rosy","ear_tag_number":"ros1"},{"id":"3","cow_id":"26","time":"1","quantity":"12","date_added":"2013-08-11 10:19:53","date":"2013-08-11","name":"Rosy","ear_tag_number":"ros1"}]}'
+[Wednesday, 4th September 2013 15:12:02] [fetch_cow_identifiers.php]  cow identifiers encoded from an array and is '{"cowNames":["","Betty","Chris","Rosy"],"earTagNumbers":["","kajJas1","kajJas2","kajJas10"]}'
+[Wednesday, 4th September 2013 15:15:05] [fetch_cow_identifiers.php] json_decode returned: Array
+(
+    [simCardSN] => 89254029541005994303
+)
+
+[Wednesday, 4th September 2013 15:15:05] [fetch_cow_identifiers.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 4th September 2013 15:15:05] [fetch_cow_identifiers.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 4th September 2013 15:15:05] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 4th September 2013 15:15:05] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 4th September 2013 15:15:05] [database.php] results gotten from 'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'' are Array
+(
+    [0] => Array
+        (
+            [name] => Betty
+            [ear_tag_number] => kajJas1
+        )
+
+    [1] => Array
+        (
+            [name] => Chris
+            [ear_tag_number] => kajJas2
+        )
+
+)
+
+[Wednesday, 4th September 2013 15:15:05] [fetch_cow_identifiers.php]  cow identifiers encoded from an array and is '{"cowNames":["Betty","Chris"],"earTagNumbers":["kajJas1","kajJas2"]}'

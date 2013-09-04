@@ -23,7 +23,7 @@ class CowIdentifierFetcher {
 		$this->database = new DatabaseHandler;
 		
 		$simCardSN = $this->jsonObject['simCardSN'];
-		$query="SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}'";
+		$query="SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}' AND `cow`.`type` ='cow'";
 		$result = $this->database->runMySQLQuery($query, true);
 		$cowNameArray=array();
 		$earTagNumberArray=array();
