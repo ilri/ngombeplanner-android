@@ -1,1 +1,12 @@
 
+[Wednesday, 4th September 2013 12:00:19] [authentication.php] Starting Authenticator
+[Wednesday, 4th September 2013 12:00:19] [authentication.php] obtaining POST request
+[Wednesday, 4th September 2013 12:00:19] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 12:00:19] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 12:00:19] [database.php] Starting DatabaseHandler
+[Wednesday, 4th September 2013 12:00:19] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 12:00:19] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 12:00:19] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 4th September 2013 12:00:19] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Wednesday, 4th September 2013 12:00:19] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 4th September 2013 12:00:19] [authentication.php] gracefully exiting

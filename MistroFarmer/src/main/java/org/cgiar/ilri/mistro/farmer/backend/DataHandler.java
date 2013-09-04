@@ -45,7 +45,7 @@ public class DataHandler
     //private static final String BASE_URL="http://192.168.2.232/mistro";//"http://10.0.2.2/";//TODO: configure baseURL
     private static final String BASE_URL="http://192.168.2.232/~jason/MistroFarmerProject/web";
     public static final String FARMER_REGISTRATION_URL="/farmer/registration.php";
-    public static final String FARMER_AUTHENTICATION_URL="/farmer/authentication.php";
+    public static final String FARMER_AUTHENTICATION_URL="/php/farmer/authentication.php";
     public static final String FARMER_SIM_CARD_REGISTRATION_URL="/farmer/simCardRegistration.php";
     public static final String FARMER_FETCH_COW_IDENTIFIERS_URL="/farmer/fetchCowIdentifiers.php";
     public static final String FARMER_ADD_MILK_PRODUCTION_URL="/php/farmer/add_milk_production.php";
