@@ -1,84 +1,308 @@
 
-[Wednesday, 4th September 2013 15:06:27] [registration.php] Starting RegistrationHandler
-[Wednesday, 4th September 2013 15:06:27] [registration.php] obtaining POST request
-[Wednesday, 4th September 2013 15:06:27] [registration.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 15:06:27] [registration.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 15:06:27] [database.php] Starting DatabaseHandler
-[Wednesday, 4th September 2013 15:06:27] [database.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 15:06:27] [database.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 15:06:27] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Wednesday, 4th September 2013 15:06:27] [registration.php] Registering the new farmer (Jason Rogena) in the database
-[Wednesday, 4th September 2013 15:06:27] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel`,`sim_card_sn`,`date_added`) VALUES('Jason Rogena','0715023802','36.72205648384988','-1.2691437313333154','Jacob Juma','89254029541005994303','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:27] [registration.php] Registering the new cow (kajJas1) in the database
-[Wednesday, 4th September 2013 15:06:27] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`date_added`) VALUES(42,'Betty','kajJas1','',2,2,1,'cow','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:27] [database.php] running query INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES(27,'Ayrshire','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:27] [database.php] running query INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES(27,'Friesian','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:27] [database.php] running query INSERT INTO `deformity`(`cow_id`,`text`,`date_added`) VALUES(27,'Blind','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:27] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`service_type`,`straw_number`,`vet_used`,`date_added`) VALUES(42,'','','',-1,0,0,'sire',1,'am1236','Jacob Juma','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:27] [database.php] running query UPDATE `cow` SET `sire_id` = 28 WHERE `id` = 27
-[Wednesday, 4th September 2013 15:06:28] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`service_type`,`embryo_number`,`vet_used`,`date_added`) VALUES(42,'Rosy','kajJas10','',4,2,1,'dam',0,'','','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:28] [database.php] running query UPDATE `cow` SET `dam_id` = 29 WHERE `id` = 27
-[Wednesday, 4th September 2013 15:06:28] [registration.php] Registering the new cow (kajJas2) in the database
-[Wednesday, 4th September 2013 15:06:28] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`date_added`) VALUES(42,'Chris','kajJas2','',3,1,0,'cow','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:28] [database.php] running query INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES(30,'Ayrshire','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:28] [database.php] running query INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES(30,'Aberdeen Angus','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:28] [database.php] running query INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES(30,'Friesian','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:06:28] [database.php] running query INSERT INTO `deformity`(`cow_id`,`text`,`date_added`) VALUES(30,'','2013-09-04 15:06:27')
-[Wednesday, 4th September 2013 15:11:42] [registration.php] Starting RegistrationHandler
-[Wednesday, 4th September 2013 15:11:42] [registration.php] obtaining POST request
-[Wednesday, 4th September 2013 15:11:42] [registration.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 15:11:42] [registration.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 15:11:42] [database.php] Starting DatabaseHandler
-[Wednesday, 4th September 2013 15:11:42] [database.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 15:11:42] [database.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 15:11:42] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Wednesday, 4th September 2013 15:11:42] [registration.php] Registering the new farmer (Jason Rogena) in the database
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel`,`sim_card_sn`,`date_added`) VALUES('Jason Rogena','0715023802','36.72205648384988','-1.2691437313333154','Jacob Juma','89254029541005994303','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [registration.php] Registering the new cow (kajJas1) in the database
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`date_added`) VALUES(43,'Betty','kajJas1','',2,2,1,'cow','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES(31,'Ayrshire','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES(31,'Friesian','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `deformity`(`cow_id`,`text`,`date_added`) VALUES(31,'Blind','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`service_type`,`straw_number`,`vet_used`,`date_added`) VALUES(43,'','','',-1,0,0,'sire',1,'am1236','Jacob Juma','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query UPDATE `cow` SET `sire_id` = 32 WHERE `id` = 31
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`service_type`,`embryo_number`,`vet_used`,`date_added`) VALUES(43,'Rosy','kajJas10','',4,2,1,'dam',0,'','','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query UPDATE `cow` SET `dam_id` = 33 WHERE `id` = 31
-[Wednesday, 4th September 2013 15:11:42] [registration.php] Registering the new cow (kajJas2) in the database
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`date_added`) VALUES(43,'Chris','kajJas2','',3,1,0,'cow','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES(34,'Ayrshire','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES(34,'Aberdeen Angus','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES(34,'Friesian','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:42] [database.php] running query INSERT INTO `deformity`(`cow_id`,`text`,`date_added`) VALUES(34,'','2013-09-04 15:11:42')
-[Wednesday, 4th September 2013 15:11:59] [authentication.php] Starting Authenticator
-[Wednesday, 4th September 2013 15:11:59] [authentication.php] obtaining POST request
-[Wednesday, 4th September 2013 15:11:59] [authentication.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 15:11:59] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 15:11:59] [database.php] Starting DatabaseHandler
-[Wednesday, 4th September 2013 15:11:59] [database.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 15:11:59] [database.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 15:11:59] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Wednesday, 4th September 2013 15:11:59] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
-[Wednesday, 4th September 2013 15:11:59] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Wednesday, 4th September 2013 15:11:59] [authentication.php] gracefully exiting
-[Wednesday, 4th September 2013 15:12:02] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
-[Wednesday, 4th September 2013 15:12:02] [fetch_cow_identifiers.php] obtaining POST request
-[Wednesday, 4th September 2013 15:12:02] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 15:12:02] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 15:12:02] [database.php] Starting DatabaseHandler
-[Wednesday, 4th September 2013 15:12:02] [database.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 15:12:02] [database.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 15:12:02] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Wednesday, 4th September 2013 15:12:02] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'
-[Wednesday, 4th September 2013 15:12:02] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
-[Wednesday, 4th September 2013 15:12:02] [fetch_cow_identifiers.php] gracefully exiting
-[Wednesday, 4th September 2013 15:15:05] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
-[Wednesday, 4th September 2013 15:15:05] [fetch_cow_identifiers.php] obtaining POST request
-[Wednesday, 4th September 2013 15:15:05] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 15:15:05] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 15:15:05] [database.php] Starting DatabaseHandler
-[Wednesday, 4th September 2013 15:15:05] [database.php] getting settings from: ../../config/settings.ini
-[Wednesday, 4th September 2013 15:15:05] [database.php] getting response codes from: ../../config/response_codes.ini
-[Wednesday, 4th September 2013 15:15:05] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Wednesday, 4th September 2013 15:15:05] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'
-[Wednesday, 4th September 2013 15:15:05] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
-[Wednesday, 4th September 2013 15:15:05] [fetch_cow_identifiers.php] gracefully exiting
+[Wednesday, 4th September 2013 16:09:02] [sim_card_registration.php] Starting SimRegistrationHandler
+[Wednesday, 4th September 2013 16:09:02] [sim_card_registration.php] obtaining POST request
+[Wednesday, 4th September 2013 16:09:02] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:09:02] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:09:02] [database.php] Starting DatabaseHandler
+[Wednesday, 4th September 2013 16:09:02] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:09:02] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:09:02] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 4th September 2013 16:09:02] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:09:02] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:09:02] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Wednesday, 4th September 2013 16:09:02] [sim_card_registration.php] gracefully exiting
+[Wednesday, 4th September 2013 16:12:05] [sim_card_registration.php] Starting SimRegistrationHandler
+[Wednesday, 4th September 2013 16:12:05] [sim_card_registration.php] obtaining POST request
+[Wednesday, 4th September 2013 16:12:05] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:12:05] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:12:05] [database.php] Starting DatabaseHandler
+[Wednesday, 4th September 2013 16:12:05] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:12:05] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:12:05] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 4th September 2013 16:12:05] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:12:05] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:12:05] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Wednesday, 4th September 2013 16:12:05] [sim_card_registration.php] gracefully exiting
+[Wednesday, 4th September 2013 16:12:14] [sim_card_registration.php] Starting SimRegistrationHandler
+[Wednesday, 4th September 2013 16:12:14] [sim_card_registration.php] obtaining POST request
+[Wednesday, 4th September 2013 16:12:14] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:12:14] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:12:14] [database.php] Starting DatabaseHandler
+[Wednesday, 4th September 2013 16:12:14] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:12:14] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:12:14] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 4th September 2013 16:12:14] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:12:14] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:12:14] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Wednesday, 4th September 2013 16:12:14] [sim_card_registration.php] gracefully exiting
+[Wednesday, 4th September 2013 16:12:21] [sim_card_registration.php] Starting SimRegistrationHandler
+[Wednesday, 4th September 2013 16:12:21] [sim_card_registration.php] obtaining POST request
+[Wednesday, 4th September 2013 16:12:21] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:12:21] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:12:21] [database.php] Starting DatabaseHandler
+[Wednesday, 4th September 2013 16:12:21] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:12:21] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:12:21] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 4th September 2013 16:12:21] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:12:21] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] gracefully exiting
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] Starting SimRegistrationHandler
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] obtaining POST request
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:12:22] [database.php] Starting DatabaseHandler
+[Wednesday, 4th September 2013 16:12:22] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:12:22] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:12:22] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 4th September 2013 16:12:22] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:12:22] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] gracefully exiting
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] Starting SimRegistrationHandler
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] obtaining POST request
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:12:22] [database.php] Starting DatabaseHandler
+[Wednesday, 4th September 2013 16:12:22] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 4th September 2013 16:12:22] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 4th September 2013 16:12:22] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 4th September 2013 16:12:22] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:12:22] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 08:42:33] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 08:42:33] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 08:42:33] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:42:33] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:42:33] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:42:33] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:42:33] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:42:33] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:42:33] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 08:42:33] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 5th September 2013 08:42:33] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 08:52:35] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 08:52:35] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 08:52:35] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:52:35] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:52:35] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:52:35] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:52:35] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:52:35] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:52:35] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 08:52:35] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 08:52:52] [sim_card_registration.php] Starting SimRegistrationHandler
+[Thursday, 5th September 2013 08:52:52] [sim_card_registration.php] obtaining POST request
+[Thursday, 5th September 2013 08:52:52] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:52:52] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:52:52] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:52:52] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:52:52] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:52:52] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:52:52] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:52:52] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:52:52] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Thursday, 5th September 2013 08:52:52] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 08:53:22] [sim_card_registration.php] Starting SimRegistrationHandler
+[Thursday, 5th September 2013 08:53:22] [sim_card_registration.php] obtaining POST request
+[Thursday, 5th September 2013 08:53:22] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:53:22] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:53:22] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:53:22] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:53:22] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:53:22] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:53:22] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:53:22] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:53:22] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Thursday, 5th September 2013 08:53:22] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 08:53:27] [sim_card_registration.php] Starting SimRegistrationHandler
+[Thursday, 5th September 2013 08:53:27] [sim_card_registration.php] obtaining POST request
+[Thursday, 5th September 2013 08:53:27] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:53:27] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:53:27] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:53:27] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:53:27] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:53:27] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:53:27] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:53:27] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:53:27] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Thursday, 5th September 2013 08:53:27] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 08:53:40] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 08:53:40] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 08:53:40] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:53:40] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:53:40] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:53:40] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:53:40] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:53:40] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:53:40] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 08:53:40] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 5th September 2013 08:53:40] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 08:57:59] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 08:57:59] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 08:57:59] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:57:59] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:57:59] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:57:59] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:57:59] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:57:59] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:57:59] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 08:57:59] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 08:58:06] [sim_card_registration.php] Starting SimRegistrationHandler
+[Thursday, 5th September 2013 08:58:06] [sim_card_registration.php] obtaining POST request
+[Thursday, 5th September 2013 08:58:06] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:58:06] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:58:06] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:58:06] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:58:06] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:58:06] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:58:06] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:58:06] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:58:06] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Thursday, 5th September 2013 08:58:06] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 08:58:29] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 08:58:29] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 08:58:29] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:58:30] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:58:30] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:58:30] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:58:30] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:58:30] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:58:30] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 08:58:30] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 5th September 2013 08:58:30] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 08:59:09] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 08:59:09] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 08:59:09] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:59:09] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:59:09] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:59:09] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:59:09] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:59:09] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:59:09] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 08:59:09] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 5th September 2013 08:59:09] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 08:59:35] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 08:59:35] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 08:59:35] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:59:35] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:59:35] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:59:35] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:59:35] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:59:35] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:59:35] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 08:59:35] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 08:59:50] [sim_card_registration.php] Starting SimRegistrationHandler
+[Thursday, 5th September 2013 08:59:50] [sim_card_registration.php] obtaining POST request
+[Thursday, 5th September 2013 08:59:50] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:59:50] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:59:50] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:59:50] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:59:50] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:59:50] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:59:50] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:59:50] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:59:50] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Thursday, 5th September 2013 08:59:50] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 08:59:56] [sim_card_registration.php] Starting SimRegistrationHandler
+[Thursday, 5th September 2013 08:59:56] [sim_card_registration.php] obtaining POST request
+[Thursday, 5th September 2013 08:59:56] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:59:56] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:59:56] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 08:59:56] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 08:59:56] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 08:59:56] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 08:59:56] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:59:56] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 08:59:56] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Thursday, 5th September 2013 08:59:56] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 09:04:10] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 09:04:10] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 09:04:10] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:04:10] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:04:10] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 09:04:10] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:04:10] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:04:10] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 09:04:10] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 09:04:10] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 09:10:34] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 09:10:35] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 09:10:35] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:10:35] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:10:35] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 09:10:35] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:10:35] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:10:35] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 09:10:35] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 09:10:35] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 09:10:52] [sim_card_registration.php] Starting SimRegistrationHandler
+[Thursday, 5th September 2013 09:10:52] [sim_card_registration.php] obtaining POST request
+[Thursday, 5th September 2013 09:10:52] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:10:52] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:10:52] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 09:10:52] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:10:52] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:10:53] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 09:10:53] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 09:10:53] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 09:10:54] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Thursday, 5th September 2013 09:10:54] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 09:11:08] [sim_card_registration.php] Starting SimRegistrationHandler
+[Thursday, 5th September 2013 09:11:08] [sim_card_registration.php] obtaining POST request
+[Thursday, 5th September 2013 09:11:08] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:11:08] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:11:08] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 09:11:08] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:11:08] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:11:08] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 09:11:08] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 09:11:08] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 09:11:08] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Thursday, 5th September 2013 09:11:08] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 09:15:59] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 09:15:59] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 09:15:59] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:15:59] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:15:59] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 09:15:59] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:15:59] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:15:59] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 09:15:59] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 09:15:59] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 09:16:22] [sim_card_registration.php] Starting SimRegistrationHandler
+[Thursday, 5th September 2013 09:16:22] [sim_card_registration.php] obtaining POST request
+[Thursday, 5th September 2013 09:16:22] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:16:22] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:16:22] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 09:16:22] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:16:22] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:16:22] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 09:16:22] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 09:16:22] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 09:16:22] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Thursday, 5th September 2013 09:16:22] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 09:17:20] [sim_card_registration.php] Starting SimRegistrationHandler
+[Thursday, 5th September 2013 09:17:20] [sim_card_registration.php] obtaining POST request
+[Thursday, 5th September 2013 09:17:20] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:17:20] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:17:20] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 09:17:20] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:17:20] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:17:20] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 09:17:20] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 09:17:20] [database.php] running query UPDATE `farmer` SET `mobile_no`='0715023805', `sim_card_sn`='89254029541005994303' WHERE `mobile_no` = '0715023805'
+[Thursday, 5th September 2013 09:17:20] [sim_card_registration.php] successfully registered the new SIM card serial number (89254029541005994303). Sending the sim_card_registered response code back to the client
+[Thursday, 5th September 2013 09:17:20] [sim_card_registration.php] gracefully exiting
+[Thursday, 5th September 2013 09:17:20] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 09:17:20] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 09:17:20] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:17:20] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:17:20] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 09:17:20] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 09:17:20] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 09:17:20] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 09:17:20] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 09:17:20] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 5th September 2013 09:17:20] [authentication.php] gracefully exiting

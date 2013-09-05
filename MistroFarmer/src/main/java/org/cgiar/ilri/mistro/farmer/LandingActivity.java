@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 
 public class LandingActivity extends SherlockActivity implements View.OnClickListener
 {
+    private static final String TAG="LandingActivity";
     private String localeCode;
     private Button loginButton;
     private Button registerButton;
@@ -244,6 +246,13 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
 
     private class SimCardRegistrationThread extends AsyncTask<String,Integer,String>
     {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(LandingActivity.this, "",loadingPleaseWait, true);
+        }
 
         @Override
         protected String doInBackground(String... params)
@@ -271,6 +280,8 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         protected void onPostExecute(String result)
         {
             super.onPostExecute(result);
+            progressDialog.dismiss();
+            Log.d(TAG,"sim card registration *****"+result);
             if(result==null)
             {
                 Toast.makeText(LandingActivity.this,"Server Error",Toast.LENGTH_LONG).show();
