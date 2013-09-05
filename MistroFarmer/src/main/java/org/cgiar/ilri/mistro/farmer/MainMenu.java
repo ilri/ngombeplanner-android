@@ -5,15 +5,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 
 public class MainMenu extends SherlockActivity implements View.OnClickListener
 {
     private static final String TAG="MainMenu";
-    private String localeCode;
     private Button milkProductionB;
     private Button eventsB;
     @Override
@@ -22,24 +25,46 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        localeCode="en";
-
         milkProductionB=(Button)this.findViewById(R.id.milk_production_b);
         milkProductionB.setOnClickListener(this);
         eventsB =(Button)this.findViewById(R.id.events_b);
         eventsB.setOnClickListener(this);
 
-        initTextInViews(localeCode);
+        initTextInViews();
     }
 
-    private void initTextInViews(String localeCode)
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if(item.getItemId() == R.id.action_english) {
+            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+            initTextInViews();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_swahili) {
+            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+            initTextInViews();
+            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
+    private void initTextInViews()
     {
-        if(localeCode.equals("en"))
+        /*if(localeCode.equals("en"))
         {
             this.setTitle(R.string.main_menu_en);
             milkProductionB.setText(R.string.milk_production_en);
             eventsB.setText(R.string.events_en);
-        }
+        }*/
+        this.setTitle(Locale.getStringInLocale("main_menu",this));
+        milkProductionB.setText(Locale.getStringInLocale("milk_production",this));
+        eventsB.setText(Locale.getStringInLocale("events",this));
     }
 
     @Override
