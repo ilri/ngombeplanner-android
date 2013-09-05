@@ -18,8 +18,8 @@ import java.util.jar.JarInputStream;
  */
 public class Cow implements Parcelable, Serializable {
     public static final String TAG = "Cow";
-    public static final int SEX_MALE = 0;
-    public static final int SEX_FEMALE = 1;
+    public static final int SEX_MALE = 1;
+    public static final int SEX_FEMALE = 0;
     public static final int AGE_TYPE_DAY = 0;
     public static final int AGE_TYPE_WEEK = 1;
     public static final int AGE_TYPE_YEAR = 2;

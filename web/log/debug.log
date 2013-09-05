@@ -1,406 +1,154 @@
 
-[Wednesday, 4th September 2013 16:09:02] [sim_card_registration.php] json_decode returned: Array
+[Thursday, 5th September 2013 09:47:34] [registration.php] json_decode returned: Array
 (
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Wednesday, 4th September 2013 16:09:02] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
+    [longitude] => 36.72224457375705
+    [latitude] => -1.2685134960338473
+    [extensionPersonnel] => Tom Muriranji
+    [fullName] => Jason Rogena
+    [mobileNumber] => 0715023805
+    [cows] => Array
         (
-            [username] => root
-            [password] => jason
-            [host] => localhost
+            [0] => Array
+                (
+                    [deformities] => Array
+                        (
+                            [0] => 
+                        )
+
+                    [ageType] => 2
+                    [dateOfBirth] => 
+                    [sex] => 0
+                    [dam] => Array
+                        (
+                            [vetUsed] => 
+                            [deformities] => Array
+                                (
+                                    [0] => 
+                                )
+
+                            [ageType] => 2
+                            [dateOfBirth] => 5/9/2009
+                            [sex] => 0
+                            [age] => 4
+                            [name] => Betty
+                            [breeds] => Array
+                                (
+                                    [0] => Friesian
+                                )
+
+                            [serviceType] => 0
+                            [type] => dam
+                            [earTagNumber] => 
+                            [embryoNumber] => 
+                        )
+
+                    [age] => 1
+                    [name] => Rosy
+                    [sire] => Array
+                        (
+                            [vetUsed] => Grace Makau
+                            [deformities] => Array
+                                (
+                                    [0] => 
+                                )
+
+                            [ageType] => 0
+                            [dateOfBirth] => 
+                            [sex] => 1
+                            [strawNumber] => amfresh23
+                            [age] => -1
+                            [name] => 
+                            [breeds] => Array
+                                (
+                                    [0] => 
+                                )
+
+                            [serviceType] => 1
+                            [type] => sire
+                            [earTagNumber] => 
+                        )
+
+                    [breeds] => Array
+                        (
+                            [0] => Friesian
+                        )
+
+                    [type] => cow
+                    [earTagNumber] => nai-rog-0
+                )
+
+            [1] => Array
+                (
+                    [deformities] => Array
+                        (
+                            [0] => Abnormal teat number
+                            [1] => Crooked feet
+                        )
+
+                    [ageType] => 1
+                    [dateOfBirth] => 
+                    [sex] => 1
+                    [dam] => Array
+                        (
+                            [vetUsed] => 
+                            [deformities] => Array
+                                (
+                                )
+
+                            [ageType] => -1
+                            [dateOfBirth] => 
+                            [sex] => 0
+                            [age] => -1
+                            [name] => 
+                            [breeds] => Array
+                                (
+                                )
+
+                            [serviceType] => -1
+                            [type] => dam
+                            [earTagNumber] => 
+                            [embryoNumber] => 
+                        )
+
+                    [age] => 3
+                    [name] => Chris
+                    [sire] => Array
+                        (
+                            [vetUsed] => 
+                            [deformities] => Array
+                                (
+                                )
+
+                            [ageType] => -1
+                            [dateOfBirth] => 
+                            [sex] => 1
+                            [strawNumber] => 
+                            [age] => -1
+                            [name] => 
+                            [breeds] => Array
+                                (
+                                )
+
+                            [serviceType] => -1
+                            [type] => sire
+                            [earTagNumber] => 
+                        )
+
+                    [breeds] => Array
+                        (
+                            [0] => Boran
+                        )
+
+                    [type] => cow
+                    [earTagNumber] => nai-rog-1
+                )
+
         )
 
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:09:02] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:09:02] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:09:02] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:09:02] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994303
-        )
-
-)
-
-[Wednesday, 4th September 2013 16:12:05] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Wednesday, 4th September 2013 16:12:05] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:12:05] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:12:05] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:12:05] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:12:05] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994303
-        )
-
-)
-
-[Wednesday, 4th September 2013 16:12:14] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Wednesday, 4th September 2013 16:12:14] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:12:14] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:12:14] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:12:14] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:12:14] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994303
-        )
-
-)
-
-[Wednesday, 4th September 2013 16:12:21] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Wednesday, 4th September 2013 16:12:21] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:12:21] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:12:21] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:12:21] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:12:21] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994303
-        )
-
-)
-
-[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:12:22] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:12:22] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:12:22] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994303
-        )
-
-)
-
-[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:12:22] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:12:22] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Wednesday, 4th September 2013 16:12:22] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Wednesday, 4th September 2013 16:12:22] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994303
-        )
-
-)
-
-[Thursday, 5th September 2013 08:42:33] [authentication.php] json_decode returned: Array
-(
     [simCardSN] => 89254029541005994303
 )
 
-[Thursday, 5th September 2013 08:42:33] [authentication.php] settings obtained: Array
+[Thursday, 5th September 2013 09:47:34] [registration.php] settings obtained: Array
 (
     [db_name] => ilri_mistro
     [mysql_creds] => Array
@@ -415,7 +163,7 @@
     [time_zone] => EAT
 )
 
-[Thursday, 5th September 2013 08:42:33] [authentication.php] response codes are: Array
+[Thursday, 5th September 2013 09:47:34] [registration.php] response codes are: Array
 (
     [db_error] => 32243
     [user_not_authenticated] => 43322
@@ -425,7 +173,7 @@
     [no_data] => 77732
 )
 
-[Thursday, 5th September 2013 08:42:33] [database.php] settings obtained: Array
+[Thursday, 5th September 2013 09:47:34] [database.php] settings obtained: Array
 (
     [db_name] => ilri_mistro
     [mysql_creds] => Array
@@ -440,7 +188,7 @@
     [time_zone] => EAT
 )
 
-[Thursday, 5th September 2013 08:42:33] [database.php] response codes are: Array
+[Thursday, 5th September 2013 09:47:34] [database.php] response codes are: Array
 (
     [db_error] => 32243
     [user_not_authenticated] => 43322
@@ -450,1282 +198,9 @@
     [no_data] => 77732
 )
 
-[Thursday, 5th September 2013 08:42:33] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-    [0] => Array
-        (
-            [name] => Jason Rogena
-        )
-
-)
-
-[Thursday, 5th September 2013 08:52:35] [authentication.php] json_decode returned: Array
-(
-    [simCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:52:35] [authentication.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:52:35] [authentication.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:52:35] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:52:35] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:52:35] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-)
-
-[Thursday, 5th September 2013 08:52:52] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:52:52] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:52:52] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:52:52] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:52:52] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:52:52] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994302
-        )
-
-)
-
-[Thursday, 5th September 2013 08:53:22] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:53:22] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:53:22] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:53:22] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:53:22] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:53:22] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994303
-        )
-
-)
-
-[Thursday, 5th September 2013 08:53:27] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:53:27] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:53:27] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:53:27] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:53:27] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:53:27] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994303
-        )
-
-)
-
-[Thursday, 5th September 2013 08:53:40] [authentication.php] json_decode returned: Array
-(
-    [simCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:53:40] [authentication.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:53:40] [authentication.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:53:40] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:53:40] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:53:40] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-    [0] => Array
-        (
-            [name] => Jason Rogena
-        )
-
-)
-
-[Thursday, 5th September 2013 08:57:59] [authentication.php] json_decode returned: Array
-(
-    [simCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:57:59] [authentication.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:57:59] [authentication.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:57:59] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:57:59] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:57:59] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-)
-
-[Thursday, 5th September 2013 08:58:06] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:58:06] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:58:06] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:58:06] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:58:06] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:58:06] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994302
-        )
-
-)
-
-[Thursday, 5th September 2013 08:58:29] [authentication.php] json_decode returned: Array
-(
-    [simCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:58:30] [authentication.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:58:30] [authentication.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:58:30] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:58:30] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:58:30] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-    [0] => Array
-        (
-            [name] => Jason Rogena
-        )
-
-)
-
-[Thursday, 5th September 2013 08:59:09] [authentication.php] json_decode returned: Array
-(
-    [simCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:59:09] [authentication.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:59:09] [authentication.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:59:09] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:59:09] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:59:09] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-    [0] => Array
-        (
-            [name] => Jason Rogena
-        )
-
-)
-
-[Thursday, 5th September 2013 08:59:35] [authentication.php] json_decode returned: Array
-(
-    [simCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:59:35] [authentication.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:59:35] [authentication.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:59:35] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:59:35] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:59:35] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-)
-
-[Thursday, 5th September 2013 08:59:50] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:59:50] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:59:50] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:59:50] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:59:50] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:59:50] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994302
-        )
-
-)
-
-[Thursday, 5th September 2013 08:59:56] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 08:59:56] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:59:56] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:59:56] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 08:59:56] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 08:59:56] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994303
-        )
-
-)
-
-[Thursday, 5th September 2013 09:04:10] [authentication.php] json_decode returned: Array
-(
-    [simCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 09:04:10] [authentication.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:04:10] [authentication.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:04:10] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:04:10] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:04:10] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-)
-
-[Thursday, 5th September 2013 09:10:35] [authentication.php] json_decode returned: Array
-(
-    [simCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 09:10:35] [authentication.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:10:35] [authentication.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:10:35] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:10:35] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:10:35] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-)
-
-[Thursday, 5th September 2013 09:10:52] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 09:10:52] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:10:52] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:10:52] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:10:53] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:10:53] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994302
-        )
-
-)
-
-[Thursday, 5th September 2013 09:11:08] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 09:11:08] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:11:08] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:11:08] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:11:08] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:11:08] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994303
-        )
-
-)
-
-[Thursday, 5th September 2013 09:15:59] [authentication.php] json_decode returned: Array
-(
-    [simCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 09:15:59] [authentication.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:15:59] [authentication.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:15:59] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:15:59] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:15:59] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-)
-
-[Thursday, 5th September 2013 09:16:22] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 09:16:22] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:16:22] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:16:22] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:16:22] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:16:22] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994302
-        )
-
-)
-
-[Thursday, 5th September 2013 09:17:20] [sim_card_registration.php] json_decode returned: Array
-(
-    [newMobileNumber] => 0715023805
-    [oldMobileNumber] => 0715023805
-    [newSimCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 09:17:20] [sim_card_registration.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:17:20] [sim_card_registration.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:17:20] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:17:20] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:17:20] [database.php] results gotten from 'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '0715023805'' are Array
-(
-    [0] => Array
-        (
-            [sim_card_sn] => 89254029541005994302
-        )
-
-)
-
-[Thursday, 5th September 2013 09:17:20] [authentication.php] json_decode returned: Array
-(
-    [simCardSN] => 89254029541005994303
-)
-
-[Thursday, 5th September 2013 09:17:20] [authentication.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:17:20] [authentication.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:17:20] [database.php] settings obtained: Array
-(
-    [db_name] => ilri_mistro
-    [mysql_creds] => Array
-        (
-            [username] => root
-            [password] => jason
-            [host] => localhost
-        )
-
-    [log_settings] => logs.ini
-    [response_codes] => response_codes.ini
-    [time_zone] => EAT
-)
-
-[Thursday, 5th September 2013 09:17:20] [database.php] response codes are: Array
-(
-    [db_error] => 32243
-    [user_not_authenticated] => 43322
-    [sim_card_registered] => 83242
-    [acknowledge_ok] => 533783
-    [data_error] => 934342
-    [no_data] => 77732
-)
-
-[Thursday, 5th September 2013 09:17:20] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
-(
-    [0] => Array
-        (
-            [name] => Jason Rogena
-        )
-
-)
-
+[Thursday, 5th September 2013 09:47:34] [registration.php] returning time '2013-09-05 09:47:34' using format 'Y-m-d H:i:s'
+[Thursday, 5th September 2013 09:47:34] [registration.php] New farmer's ID is 45
+[Thursday, 5th September 2013 09:47:34] [registration.php] New cow's ID is 35
+[Thursday, 5th September 2013 09:47:34] [registration.php] New sire's ID is 36
+[Thursday, 5th September 2013 09:47:35] [registration.php] New dam's ID is 37
+[Thursday, 5th September 2013 09:47:35] [registration.php] New cow's ID is 38

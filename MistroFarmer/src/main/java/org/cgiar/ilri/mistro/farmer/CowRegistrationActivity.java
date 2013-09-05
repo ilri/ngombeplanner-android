@@ -1115,14 +1115,6 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
         }
         thisCow.setBreeds(breedET.getText().toString().split(", "));
-        if(sexS.getSelectedItemPosition()==0)
-        {
-            thisCow.setSex(Cow.SEX_FEMALE);
-        }
-        else
-        {
-            thisCow.setSex(Cow.SEX_MALE);
-        }
         thisCow.setDeformities(deformityET.getText().toString().split(", "));
         thisCow.setCountryOfOrigin(countryOfOriginACTV.getText().toString());
         if(mode==MODE_DAM)
@@ -1155,6 +1147,14 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         }
         else if(mode==MODE_COW)
         {
+            if(sexS.getSelectedItemPosition()==0)
+            {
+                thisCow.setSex(Cow.SEX_FEMALE);
+            }
+            else
+            {
+                thisCow.setSex(Cow.SEX_MALE);
+            }
             farmer.setCow(thisCow,index);
         }
     }
