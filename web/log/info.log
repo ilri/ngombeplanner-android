@@ -317,3 +317,14 @@
 [Thursday, 5th September 2013 16:18:52] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' ORDER BY `cow_event`.`id` DESC LIMIT 40
 [Thursday, 5th September 2013 16:18:52] [fetch_cow_events_history.php] sending cow events history data back to client as a json string
 [Thursday, 5th September 2013 16:18:52] [fetch_cow_events_history.php] gracefully exiting
+[Thursday, 5th September 2013 16:20:01] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Thursday, 5th September 2013 16:20:01] [fetch_cow_identifiers.php] obtaining POST request
+[Thursday, 5th September 2013 16:20:01] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 16:20:01] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 16:20:01] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 16:20:01] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 16:20:01] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 16:20:01] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 16:20:01] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'
+[Thursday, 5th September 2013 16:20:01] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Thursday, 5th September 2013 16:20:01] [fetch_cow_identifiers.php] gracefully exiting

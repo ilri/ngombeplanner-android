@@ -11,11 +11,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,8 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.json.JSONObject;
 
@@ -32,7 +34,6 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
 {
     public static final String TAG="FarmerRegistrationActivity";
 
-    private String localeCode;
     private String latitude;
     private String longitude;
     private TextView fullNameTV;
@@ -62,8 +63,6 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmer_registration);
 
-        localeCode="en";//TODO:get the locale code from sharedPreferences
-
         //init child views
         fullNameTV=(TextView)this.findViewById(R.id.full_name_tv);
         fullNameET=(EditText)this.findViewById(R.id.full_name_et);
@@ -80,7 +79,29 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         registerButton.setOnClickListener(this);
 
         //init text according to locale
-        initTextInViews(localeCode);
+        initTextInViews();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.farmer_registration, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if(item.getItemId() == R.id.action_english) {
+            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+            initTextInViews();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_swahili) {
+            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+            initTextInViews();
+            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -125,26 +146,23 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         }
     }
 
-    private void initTextInViews(String localeCode)
+    private void initTextInViews()
     {
-        if(localeCode.equals("en"))
-        {
-            setTitle(R.string.farmer_registration_en);
-            fullNameTV.setText(R.string.full_name_en);
-            extensionPersonnelTV.setText(R.string.extension_p_en);
-            mobileNumberTV.setText(R.string.mobile_number_en);
-            numberOfCowsTV.setText(R.string.number_of_cows_en);
-            registerButton.setText(R.string.register_en);
-            gpsAlertDialogTitle=getResources().getString(R.string.enable_gps_en);
-            gpsAlertDialogText=getResources().getString(R.string.reason_for_enabling_gps_en);
-            okayText=getResources().getString(R.string.okay_en);
-            cancelText=getResources().getString(R.string.cancel_en);
-            networkAlertTitle=getResources().getString(R.string.enable_network_en);
-            networkAlertText=getResources().getString(R.string.reason_for_enabling_network_en);
-            nameETEmptyWarning=getResources().getString(R.string.enter_your_name_en);
-            mobileNoETEmptyWarning=getResources().getString(R.string.enter_your_mobile_no_en);
-            loadingPleaseWait=getResources().getString(R.string.loading_please_wait_en);
-        }
+        setTitle(Locale.getStringInLocale("farmer_registration",this));
+        fullNameTV.setText(Locale.getStringInLocale("full_name",this));
+        extensionPersonnelTV.setText(Locale.getStringInLocale("extension_p",this));
+        mobileNumberTV.setText(Locale.getStringInLocale("mobile_number",this));
+        numberOfCowsTV.setText(Locale.getStringInLocale("number_of_cows",this));
+        registerButton.setText(Locale.getStringInLocale("register",this));
+        gpsAlertDialogTitle=Locale.getStringInLocale("enable_gps",this);
+        gpsAlertDialogText=Locale.getStringInLocale("reason_for_enabling_gps",this);
+        okayText=Locale.getStringInLocale("okay",this);
+        cancelText=Locale.getStringInLocale("cancel",this);
+        networkAlertTitle=Locale.getStringInLocale("enable_network",this);
+        networkAlertText=Locale.getStringInLocale("reason_for_enabling_network",this);
+        nameETEmptyWarning=Locale.getStringInLocale("enter_your_name",this);
+        mobileNoETEmptyWarning=Locale.getStringInLocale("enter_your_mobile_no",this);
+        loadingPleaseWait=Locale.getStringInLocale("loading_please_wait",this);
     }
 
     private void cacheFarmer()
@@ -188,7 +206,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
                 else
                 {
                     Log.d(TAG, farmer.getJsonObject().toString());
-                    if (DataHandler.checkNetworkConnection(this, localeCode))
+                    if (DataHandler.checkNetworkConnection(this, null))
                     {
                         sendDataToServer(farmer.getJsonObject());
                     }
@@ -321,7 +339,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             if(result)
             {
                 Log.d(TAG,"data successfully sent to server");
-                Utils.showSuccessfullRegistration(FarmerRegistrationActivity.this,localeCode);
+                Utils.showSuccessfullRegistration(FarmerRegistrationActivity.this,null);
                 //Intent intent=new Intent(FarmerRegistrationActivity.this,LandingActivity.class);
                 //startActivity(intent);
             }
