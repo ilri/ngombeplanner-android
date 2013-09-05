@@ -44,3 +44,14 @@
 [Thursday, 5th September 2013 13:09:22] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
 [Thursday, 5th September 2013 13:09:22] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
 [Thursday, 5th September 2013 13:09:22] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 13:23:30] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 13:23:31] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 13:23:31] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 13:23:31] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 13:23:31] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 13:23:31] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 13:23:31] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 13:23:31] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 13:23:31] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 13:23:31] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 5th September 2013 13:23:31] [authentication.php] gracefully exiting

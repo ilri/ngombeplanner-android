@@ -91,6 +91,8 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             return true;
         }
         else if(item.getItemId() == R.id.action_swahili) {
+            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+            initTextInViews();
             Toast.makeText(this, "kazi katika maendeleo",Toast.LENGTH_LONG).show();
         }
         return false;

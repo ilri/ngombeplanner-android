@@ -463,7 +463,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/theming.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/usage.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" />
     </list>
@@ -589,7 +588,7 @@
       <file leaf-file-name="LandingActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="54" selection-start="1004" selection-end="1004" vertical-scroll-proportion="-1.0994854" vertical-offset="1181" max-vertical-offset="5670">
+            <state line="93" column="61" selection-start="3787" selection-end="3787" vertical-scroll-proportion="0.567753" vertical-offset="1343" max-vertical-offset="5706">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1543,7 +1542,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="54" selection-start="1004" selection-end="1004" vertical-scroll-proportion="-1.0994854" vertical-offset="1181" max-vertical-offset="5670">
+        <state line="93" column="61" selection-start="3787" selection-end="3787" vertical-scroll-proportion="0.567753" vertical-offset="1343" max-vertical-offset="5706">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
