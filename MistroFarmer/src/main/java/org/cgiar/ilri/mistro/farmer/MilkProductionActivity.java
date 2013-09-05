@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -148,6 +149,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             try
             {
                 jsonObject.put("simCardSN",params[0]);
+                jsonObject.put("cowSex", Cow.SEX_FEMALE);
                 String result=DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_FETCH_COW_IDENTIFIERS_URL);
                 return result;
             }

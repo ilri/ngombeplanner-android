@@ -23,7 +23,14 @@ class CowIdentifierFetcher {
 		$this->database = new DatabaseHandler;
 		
 		$simCardSN = $this->jsonObject['simCardSN'];
-		$query="SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}' AND `cow`.`type` ='cow'";
+		if(array_key_exists("cowSex",$this->jsonObject)) {
+			$this->logHandler->log(4, $this->TAG,"CowSex specified as ".$this->jsonObject['cowSex']);
+			$query="SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}' AND `cow`.`type` ='cow' AND `cow`.`sex` = {$this->jsonObject['cowSex']}";
+		}
+		else {
+			$this->logHandler->log(4, $this->TAG,"CowSex not specified");
+			$query="SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}' AND `cow`.`type` ='cow'";
+		}
 		$result = $this->database->runMySQLQuery($query, true);
 		$cowNameArray=array();
 		$earTagNumberArray=array();
