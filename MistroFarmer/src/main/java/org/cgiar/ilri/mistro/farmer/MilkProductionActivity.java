@@ -17,8 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +33,6 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     private static final String TAG="MilkProductionActivity";
     private Button addProductionB;
     private Button productionHistoryB;
-    private String localeCode;
     private Dialog addMilkProductionDialog;
     private TextView cowTV;
     private Spinner cowS;
@@ -50,8 +53,6 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milk_production);
 
-        localeCode="en";
-
         addProductionB=(Button)this.findViewById(R.id.add_production_b);
         addProductionB.setOnClickListener(this);
         productionHistoryB =(Button)this.findViewById(R.id.production_history_b);
@@ -68,30 +69,51 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         addMilkProductionAddB.setOnClickListener(this);
 
 
-        initTextInViews(localeCode);
+        initTextInViews();
         fetchCowIdentifiers();
     }
 
-    public void initTextInViews(String localCode)
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.milk_production, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if(item.getItemId() == R.id.action_english) {
+            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+            initTextInViews();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_swahili) {
+            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+            initTextInViews();
+            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
+    public void initTextInViews()
     {
-        if(localCode.equals("en"))
-        {
-            this.setTitle(R.string.milk_production_en);
-            addProductionB.setText(R.string.add_production_en);
-            productionHistoryB.setText(R.string.production_history_en);
-            addMilkProductionDialog.setTitle(R.string.add_production_en);
-            cowTV.setText(R.string.cow_en);
-            timeTV.setText(R.string.time_en);
-            quantityTV.setText(R.string.quantity_en);
-            addMilkProductionAddB.setText(R.string.add_en);
-            ArrayAdapter<CharSequence> milkingTimesArrayAdapter=ArrayAdapter.createFromResource(this, R.array.milking_times_en, android.R.layout.simple_spinner_item);
+        this.setTitle(Locale.getStringInLocale("milk_production",this));
+        addProductionB.setText(Locale.getStringInLocale("add_production",this));
+        productionHistoryB.setText(Locale.getStringInLocale("production_history",this));
+        addMilkProductionDialog.setTitle(Locale.getStringInLocale("add_production",this));
+        cowTV.setText(Locale.getStringInLocale("cow",this));
+        timeTV.setText(Locale.getStringInLocale("time",this));
+        quantityTV.setText(Locale.getStringInLocale("quantity",this));
+        addMilkProductionAddB.setText(Locale.getStringInLocale("add",this));
+        int milkingTimesArrayID = Locale.getArrayIDInLocale("milking_times",this);
+        if(milkingTimesArrayID != 0) {
+            ArrayAdapter<CharSequence> milkingTimesArrayAdapter=ArrayAdapter.createFromResource(this, milkingTimesArrayID, android.R.layout.simple_spinner_item);
             milkingTimesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             timeS.setAdapter(milkingTimesArrayAdapter);
-            quantityETEmptyWarning=getResources().getString(R.string.enter_quantity_of_milk_produced_en);
-            infoSuccessfullySent=getResources().getString(R.string.information_successfully_sent_to_server_en);
-            problemInData=getResources().getString(R.string.problem_in_data_sent_en);
-            loadingPleaseWait = getResources().getString(R.string.loading_please_wait_en);
         }
+        quantityETEmptyWarning=Locale.getStringInLocale("enter_quantity_of_milk_produced",this);
+        infoSuccessfullySent=Locale.getStringInLocale("information_successfully_sent_to_server",this);
+        problemInData=Locale.getStringInLocale("problem_in_data_sent",this);
+        loadingPleaseWait = Locale.getStringInLocale("loading_please_wait",this);
     }
 
     @Override
@@ -114,7 +136,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
 
     private void fetchCowIdentifiers()
     {
-        if(DataHandler.checkNetworkConnection(this,localeCode))
+        if(DataHandler.checkNetworkConnection(this,null))
         {
             CowIdentifierThread cowIdentifierThread=new CowIdentifierThread();
             TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
@@ -208,7 +230,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
 
     private void sendMilkProductionData()
     {
-        if(DataHandler.checkNetworkConnection(this,localeCode))
+        if(DataHandler.checkNetworkConnection(this,null))
         {
             if(validateInput())
             {

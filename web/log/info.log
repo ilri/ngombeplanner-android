@@ -110,3 +110,113 @@
 [Thursday, 5th September 2013 14:09:20] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
 [Thursday, 5th September 2013 14:09:20] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
 [Thursday, 5th September 2013 14:09:20] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 14:13:55] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 14:13:55] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 14:13:55] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:13:55] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:13:55] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 14:13:55] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:13:55] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:13:55] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 14:13:55] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 14:13:55] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 5th September 2013 14:13:55] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 14:13:57] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Thursday, 5th September 2013 14:13:57] [fetch_cow_identifiers.php] obtaining POST request
+[Thursday, 5th September 2013 14:13:57] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:13:57] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:13:57] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 14:13:57] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:13:57] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:13:57] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 14:13:57] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow' AND `cow`.`sex` = 0
+[Thursday, 5th September 2013 14:13:57] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Thursday, 5th September 2013 14:13:57] [fetch_cow_identifiers.php] gracefully exiting
+[Thursday, 5th September 2013 14:20:46] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 14:20:46] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 14:20:46] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:20:46] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:20:46] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 14:20:46] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:20:46] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:20:46] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 14:20:46] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 14:20:46] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 5th September 2013 14:20:46] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 14:20:51] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Thursday, 5th September 2013 14:20:51] [fetch_cow_identifiers.php] obtaining POST request
+[Thursday, 5th September 2013 14:20:51] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:20:51] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:20:51] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 14:20:51] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:20:51] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:20:51] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 14:20:51] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow' AND `cow`.`sex` = 0
+[Thursday, 5th September 2013 14:20:51] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Thursday, 5th September 2013 14:20:51] [fetch_cow_identifiers.php] gracefully exiting
+[Thursday, 5th September 2013 14:32:32] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 14:32:32] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 14:32:32] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:32:32] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:32:32] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 14:32:32] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:32:32] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:32:32] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 14:32:32] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 14:32:32] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 5th September 2013 14:32:32] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 14:32:35] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Thursday, 5th September 2013 14:32:35] [fetch_cow_identifiers.php] obtaining POST request
+[Thursday, 5th September 2013 14:32:35] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:32:35] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:32:35] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 14:32:35] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:32:35] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:32:35] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 14:32:35] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow' AND `cow`.`sex` = 0
+[Thursday, 5th September 2013 14:32:35] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Thursday, 5th September 2013 14:32:35] [fetch_cow_identifiers.php] gracefully exiting
+[Thursday, 5th September 2013 14:33:02] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Thursday, 5th September 2013 14:33:02] [fetch_cow_identifiers.php] obtaining POST request
+[Thursday, 5th September 2013 14:33:02] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:33:02] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:33:02] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 14:33:02] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:33:02] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:33:02] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 14:33:02] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow' AND `cow`.`sex` = 0
+[Thursday, 5th September 2013 14:33:02] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Thursday, 5th September 2013 14:33:02] [fetch_cow_identifiers.php] gracefully exiting
+[Thursday, 5th September 2013 14:33:19] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Thursday, 5th September 2013 14:33:19] [fetch_cow_identifiers.php] obtaining POST request
+[Thursday, 5th September 2013 14:33:19] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:33:19] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:33:19] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 14:33:19] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:33:19] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:33:19] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 14:33:19] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow' AND `cow`.`sex` = 0
+[Thursday, 5th September 2013 14:33:19] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Thursday, 5th September 2013 14:33:19] [fetch_cow_identifiers.php] gracefully exiting
+[Thursday, 5th September 2013 14:35:40] [authentication.php] Starting Authenticator
+[Thursday, 5th September 2013 14:35:40] [authentication.php] obtaining POST request
+[Thursday, 5th September 2013 14:35:40] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:35:40] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:35:40] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 14:35:40] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:35:40] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:35:40] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 14:35:40] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Thursday, 5th September 2013 14:35:40] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 5th September 2013 14:35:40] [authentication.php] gracefully exiting
+[Thursday, 5th September 2013 14:35:42] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Thursday, 5th September 2013 14:35:42] [fetch_cow_identifiers.php] obtaining POST request
+[Thursday, 5th September 2013 14:35:42] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:35:42] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:35:42] [database.php] Starting DatabaseHandler
+[Thursday, 5th September 2013 14:35:42] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 5th September 2013 14:35:42] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 5th September 2013 14:35:42] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 5th September 2013 14:35:42] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow' AND `cow`.`sex` = 0
+[Thursday, 5th September 2013 14:35:42] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Thursday, 5th September 2013 14:35:42] [fetch_cow_identifiers.php] gracefully exiting

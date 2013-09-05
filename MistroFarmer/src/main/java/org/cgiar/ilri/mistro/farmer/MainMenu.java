@@ -56,12 +56,6 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
 
     private void initTextInViews()
     {
-        /*if(localeCode.equals("en"))
-        {
-            this.setTitle(R.string.main_menu_en);
-            milkProductionB.setText(R.string.milk_production_en);
-            eventsB.setText(R.string.events_en);
-        }*/
         this.setTitle(Locale.getStringInLocale("main_menu",this));
         milkProductionB.setText(Locale.getStringInLocale("milk_production",this));
         eventsB.setText(Locale.getStringInLocale("events",this));
