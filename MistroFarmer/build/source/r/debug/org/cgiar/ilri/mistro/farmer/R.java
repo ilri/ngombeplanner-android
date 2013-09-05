@@ -952,9 +952,9 @@ containing a value of this type.
         public static final int abs__textButton=0x7f070013;
         public static final int abs__title=0x7f07001b;
         public static final int abs__up=0x7f07000f;
-        public static final int action_english=0x7f070081;
-        public static final int action_settings=0x7f070080;
-        public static final int action_swahili=0x7f070082;
+        public static final int action_english=0x7f070080;
+        public static final int action_settings=0x7f070082;
+        public static final int action_swahili=0x7f070081;
         public static final int add_event_b=0x7f07005a;
         public static final int add_production_b=0x7f07006b;
         public static final int age_et=0x7f070048;

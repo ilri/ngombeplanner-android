@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.telephony.TelephonyManager;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,8 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,11 +32,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class AddEventActivity extends SherlockActivity implements View.OnClickListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener
 {
-    private String localeCode;
     private final String dateFormat="dd/MM/yyyy";
 
     private TextView cowIdentifierTV;
@@ -61,8 +61,6 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
 
-        localeCode="en";
-
         cowIdentifierTV=(TextView)findViewById(R.id.cow_identifier_tv);
         cowIdentifierS=(Spinner)findViewById(R.id.cow_identifier_s);
         dateTV=(TextView)findViewById(R.id.date_tv);
@@ -76,29 +74,53 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         okayB=(Button)findViewById(R.id.okay_b);
         okayB.setOnClickListener(this);
 
-        initTextInViews(localeCode);
+        initTextInViews();
         fetchCowIdentifiers();
     }
 
-    private void initTextInViews(String localeCode)
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.add_event, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if(item.getItemId() == R.id.action_english) {
+            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+            initTextInViews();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_swahili) {
+            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+            initTextInViews();
+            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
+    }
+
+    private void initTextInViews()
     {
-        if(localeCode.equals("en"))
-        {
-            setTitle(R.string.add_an_event_en);
-            cowIdentifierTV.setText(R.string.cow_en);
-            dateTV.setText(R.string.date_en);
-            eventTypeTV.setText(R.string.event_en);
-            ArrayAdapter<CharSequence> eventTypeArrayAdapter=ArrayAdapter.createFromResource(this, R.array.cow_event_types_en, android.R.layout.simple_spinner_item);
+        setTitle(Locale.getStringInLocale("add_an_event",this));
+        cowIdentifierTV.setText(Locale.getStringInLocale("cow",this));
+        dateTV.setText(Locale.getStringInLocale("date",this));
+        eventTypeTV.setText(Locale.getStringInLocale("event",this));
+
+        int eventTypeArrayID = Locale.getArrayIDInLocale("cow_event_types",this);
+        if(eventTypeArrayID !=0) {
+            ArrayAdapter<CharSequence> eventTypeArrayAdapter=ArrayAdapter.createFromResource(this, eventTypeArrayID, android.R.layout.simple_spinner_item);
             eventTypeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             eventTypeS.setAdapter(eventTypeArrayAdapter);
-            remarksTV.setText(R.string.remarks_en);
-            okayB.setText(R.string.okay_en);
-            enterDate=getResources().getString(R.string.enter_date_en);
-            dateInFuture=getResources().getString(R.string.date_in_future_en);
-            eventRecorded=getResources().getString(R.string.event_successfully_recorded_en);
-            sendUnsuccessfulWarning=getResources().getString(R.string.something_went_wrong_try_again_en);
-            loadingPleaseWait = getResources().getString(R.string.loading_please_wait_en);
         }
+
+        remarksTV.setText(Locale.getStringInLocale("remarks",this));
+        okayB.setText(Locale.getStringInLocale("okay",this));
+        enterDate=Locale.getStringInLocale("enter_date",this);
+        dateInFuture=Locale.getStringInLocale("date_in_future",this);
+        eventRecorded=Locale.getStringInLocale("event_successfully_recorded",this);
+        sendUnsuccessfulWarning=Locale.getStringInLocale("something_went_wrong_try_again",this);
+        loadingPleaseWait = Locale.getStringInLocale("loading_please_wait",this);
     }
 
     private void fetchCowIdentifiers()
@@ -142,7 +164,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         {
             try
             {
-                Date dateEntered=new SimpleDateFormat(dateFormat, Locale.ENGLISH).parse(dateET.getText().toString());
+                Date dateEntered=new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateET.getText().toString());
                 Date today=new Date();
                 if((today.getTime()-dateEntered.getTime())<0)
                 {
@@ -161,7 +183,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
 
     private void sendEvent()
     {
-        if(validateInput() && DataHandler.checkNetworkConnection(this,localeCode))
+        if(validateInput() && DataHandler.checkNetworkConnection(this,null))
         {
             String[] eventTypes = getResources().getStringArray(R.array.cow_event_types_en);
             String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
@@ -241,7 +263,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         {
             try
             {
-                date=new SimpleDateFormat(dateFormat, Locale.ENGLISH).parse(dateET.getText().toString());
+                date=new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateET.getText().toString());
             }
             catch (ParseException e)
             {

@@ -85,6 +85,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
             Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
             initTextInViews();
             Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+            return true;
         }
         return false;
     }

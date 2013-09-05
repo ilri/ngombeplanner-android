@@ -95,6 +95,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
             initTextInViews();
             Toast.makeText(this, "kazi katika maendeleo",Toast.LENGTH_LONG).show();
+            return true;
         }
         return false;
     }

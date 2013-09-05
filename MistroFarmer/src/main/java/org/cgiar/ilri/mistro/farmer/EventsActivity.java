@@ -50,6 +50,7 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
             Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
             initTextInViews();
             Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+            return true;
         }
         return false;
     }

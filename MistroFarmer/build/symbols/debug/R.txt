@@ -337,9 +337,9 @@ int id abs__submit_area 0x7f07002f
 int id abs__textButton 0x7f070013
 int id abs__title 0x7f07001b
 int id abs__up 0x7f07000f
-int id action_english 0x7f070081
-int id action_settings 0x7f070080
-int id action_swahili 0x7f070082
+int id action_english 0x7f070080
+int id action_settings 0x7f070082
+int id action_swahili 0x7f070081
 int id add_event_b 0x7f07005a
 int id add_production_b 0x7f07006b
 int id age_et 0x7f070048
