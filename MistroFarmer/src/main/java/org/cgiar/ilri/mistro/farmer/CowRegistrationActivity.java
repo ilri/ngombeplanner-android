@@ -10,7 +10,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.SparseBooleanArray;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,8 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.Dam;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
@@ -40,7 +43,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 
 public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener,TextWatcher,AdapterView.OnItemSelectedListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener,ListView.OnItemClickListener
 {
@@ -56,7 +58,6 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private int mode;
     private int index;
     private int numberOfCows;
-    private String localeCode;
     private int selectedBreeds=0;
     private String maxSelectedBreedsWarning;
     private String deformityOSpecifyText;
@@ -120,8 +121,6 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cow_registration);
-
-        localeCode="en";//TODO:get locale from sharedPreferences
 
         Bundle bundle=this.getIntent().getExtras();
         if(bundle!=null)
@@ -206,10 +205,33 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         deformityLV.setOnItemClickListener(this);
         specifyET=(EditText)deformityDialog.findViewById(R.id.specify_et);
         dialogDeformityOkayB =(Button) deformityDialog.findViewById(R.id.dialog_deformity_okay_b);
+        dialogDeformityOkayB.setOnClickListener(this);
 
         //init text in child views
-        initTextInViews(localeCode);
+        initTextInViews();
         resetMode();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.cow_registration, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if(item.getItemId() == R.id.action_english) {
+            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+            initTextInViews();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_swahili) {
+            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+            initTextInViews();
+            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -490,9 +512,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
        }
     }
 
-    private void initTextInViews(String localeCode)
+    private void initTextInViews()
     {
-        if(localeCode.equals("en"))
+        /*if(localeCode.equals("en"))
         {
             if(mode==MODE_COW)
             {
@@ -568,6 +590,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             specifyET.setHint(R.string.specify_en);
             dialogDeformityOkayB.setText(R.string.okay_en);
             dialogDeformityOkayB.setOnClickListener(this);
+
             maxSelectedBreedsWarning=this.getResources().getString(R.string.maximum_of_four_breeds_en);
             networkAlertTitle=getResources().getString(R.string.enable_network_en);
             networkAlertText=getResources().getString(R.string.reason_for_enabling_network_en);
@@ -577,7 +600,118 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             strawNoETEmptyWarning=getResources().getString(R.string.enter_straw_number_en);
             embryoNoETEmptyWarning=getResources().getString(R.string.enter_embryo_number_en);
             loadingPleaseWait=getResources().getString(R.string.loading_please_wait_en);
+        }*/
+        if(mode==MODE_COW)
+        {
+            String title = Locale.getStringInLocale("cow_registration",this)+" "+String.valueOf(index+1);
+            setTitle(title);
         }
+        else if(mode==MODE_SIRE)
+        {
+            setTitle(Locale.getStringInLocale("sire_registration",this));
+        }
+        else if(mode==MODE_DAM)
+        {
+            setTitle(Locale.getStringInLocale("dam_registration",this));
+        }
+        strawNumberTV.setText(Locale.getStringInLocale("straw_number",this));
+        embryoNumberTV.setText(Locale.getStringInLocale("embryo_number",this));
+        vetUsedTV.setText(Locale.getStringInLocale("vet_used",this));
+        nameTV.setText(Locale.getStringInLocale("name",this));
+        earTagNumberTV.setText(Locale.getStringInLocale("ear_tag_number",this));
+        ageTV.setText(Locale.getStringInLocale("age",this));
+
+        int ageTypeArrayID = Locale.getArrayIDInLocale("age_type_array",this);
+        if(ageTypeArrayID!=0){
+            ArrayAdapter<CharSequence> arrayAdapter2=ArrayAdapter.createFromResource(this, ageTypeArrayID, android.R.layout.simple_spinner_item);
+            arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ageS.setAdapter(arrayAdapter2);
+        }
+
+        dateOfBirthTV.setText(Locale.getStringInLocale("date_of_birth",this));
+        breedTV.setText(Locale.getStringInLocale("breed",this));
+        sexTV.setText(Locale.getStringInLocale("sex",this));
+
+        int sexArrayID = Locale.getArrayIDInLocale("sex_array",this);
+        if(sexArrayID!=0) {
+            ArrayAdapter<CharSequence> arrayAdapter=ArrayAdapter.createFromResource(this, sexArrayID, android.R.layout.simple_spinner_item);
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sexS.setAdapter(arrayAdapter);
+        }
+
+        deformityTV.setText(Locale.getStringInLocale("deformity",this));
+        sireTV.setText(Locale.getStringInLocale("sire",this));
+        damTV.setText(Locale.getStringInLocale("dam",this));
+        serviceTypeTV.setText(Locale.getStringInLocale("service_type_used",this));
+        ArrayAdapter<CharSequence> serviceTypesAdapter=null;
+        if(mode==MODE_SIRE)
+        {
+            int serviceTypesSireArrayID = Locale.getArrayIDInLocale("service_types_sire_array",this);
+            if(serviceTypesSireArrayID!=0){
+                serviceTypesAdapter=ArrayAdapter.createFromResource(this,serviceTypesSireArrayID,android.R.layout.simple_spinner_item);
+                serviceTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                serviceTypeS.setAdapter(serviceTypesAdapter);
+            }
+        }
+        else if(mode==MODE_DAM)
+        {
+            int serviceTypesDamArrayID = Locale.getArrayIDInLocale("service_types_dam_array",this);
+            if(serviceTypesDamArrayID!=0){
+                serviceTypesAdapter=ArrayAdapter.createFromResource(this,serviceTypesDamArrayID,android.R.layout.simple_spinner_item);
+                serviceTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                serviceTypeS.setAdapter(serviceTypesAdapter);
+            }
+        }
+
+        countryOfOriginTV.setText(Locale.getStringInLocale("country_of_origin",this));
+        previousButton.setText(Locale.getStringInLocale("previous",this));
+        if(mode==MODE_SIRE||mode==MODE_DAM)
+        {
+            nextButton.setText(Locale.getStringInLocale("okay",this));
+        }
+        else
+        {
+            if(index==numberOfCows-1)//last cow
+            {
+                nextButton.setText(Locale.getStringInLocale("finish",this));
+            }
+            else
+            {
+                nextButton.setText(Locale.getStringInLocale("next",this));
+            }
+        }
+        breedDialog.setTitle(Locale.getStringInLocale("breed",this));
+
+        breeds=Locale.getArrayInLocale("breeds_array",this);
+        if(breeds==null) {
+            breeds = new String[1];
+            breeds[0] = "";
+        }
+        ArrayAdapter<String> breedArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,breeds);
+        breedLV.setAdapter(breedArrayAdapter);
+
+        dialogBreedOkayB.setText(Locale.getStringInLocale("okay",this));
+        deformityDialog.setTitle(Locale.getStringInLocale("deformity",this));
+
+        deformities=Locale.getArrayInLocale("deformities_array",this);
+        if(deformities==null) {
+            deformities = new String[1];
+            deformities[0] = "";
+        }
+        ArrayAdapter<String> deformityArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,deformities);
+        deformityLV.setAdapter(deformityArrayAdapter);
+
+        specifyET.setHint(Locale.getStringInLocale("specify",this));
+        dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
+        maxSelectedBreedsWarning=Locale.getStringInLocale("maximum_of_four_breeds",this);
+        networkAlertTitle=Locale.getStringInLocale("enable_network",this);
+        networkAlertText=Locale.getStringInLocale("reason_for_enabling_network",this);
+        okayText=Locale.getStringInLocale("okay",this);
+        earTagNoETEmptyWarning=Locale.getStringInLocale("enter_ear_tag_number",this);
+        cowIdentifierEmptyWarning=Locale.getStringInLocale("enter_ear_tag_no_or_name",this);
+        strawNoETEmptyWarning=Locale.getStringInLocale("enter_straw_number",this);
+        embryoNoETEmptyWarning=Locale.getStringInLocale("enter_embryo_number",this);
+        loadingPleaseWait=Locale.getStringInLocale("loading_please_wait",this);
     }
 
     @Override
@@ -608,7 +742,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                     {
                         Log.d(TAG, farmer.getJsonObject().toString());
                         //TODO: send to server
-                        if (DataHandler.checkNetworkConnection(this, localeCode))
+                        if (DataHandler.checkNetworkConnection(this, null))
                         {
                             sendDataToServer(farmer.getJsonObject());
                         }
@@ -707,7 +841,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         {
             try
             {
-                date=new SimpleDateFormat(dateFormat, Locale.ENGLISH).parse(dateOfBirthET.getText().toString());
+                date=new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateOfBirthET.getText().toString());
             }
             catch (ParseException e)
             {
@@ -1195,7 +1329,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             if(result)
             {
                 Log.d(TAG,"data successfully sent to server");
-                Utils.showSuccessfullRegistration(CowRegistrationActivity.this,localeCode);
+                Utils.showSuccessfullRegistration(CowRegistrationActivity.this,null);
                 //Intent intent=new Intent(CowRegistrationActivity.this,LandingActivity.class);
                 //startActivity(intent);
             }
