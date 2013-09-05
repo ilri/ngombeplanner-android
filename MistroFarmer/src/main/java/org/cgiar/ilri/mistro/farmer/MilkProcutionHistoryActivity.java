@@ -15,8 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +36,6 @@ import java.util.List;
 public class MilkProcutionHistoryActivity extends SherlockActivity
 {
     private static final String TAG="MIlkProductionHistoryActivity";
-    private String localeCode;
     private TextView dateTV;
     private TextView cowNameTV;
     private TextView timeTV;
@@ -52,7 +55,6 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milk_production_history);
 
-        localeCode="en";
         productionHistoryIDs=new ArrayList<String>();
         metrics=new DisplayMetrics();
 
@@ -62,29 +64,51 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
         quantityTV=(TextView)findViewById(R.id.quantity_tv);
         productionHistoryTL=(TableLayout)findViewById(R.id.production_history_tl);
 
-        initTextInViews(localeCode);
+        initTextInViews();
         fetchProductionHistory();
     }
 
-    private void initTextInViews(String localeCode)
-    {
-        if(localeCode.equals("en"))
-        {
-            dateTV.setText(R.string.date_en);
-            cowNameTV.setText(R.string.cow_en);
-            timeTV.setText(R.string.time_en);
-            quantityTV.setText(R.string.quantity_en);
-            noDataWarning=getResources().getString(R.string.no_data_received_en);
-            times=getResources().getStringArray(R.array.milking_times_en);
-            todayText=getResources().getString(R.string.today_en);
-            yesterdayText=getResources().getString(R.string.yesterday_en);
-            loadingPleaseWait=getResources().getString(R.string.loading_please_wait_en);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.milk_procution_history, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if(item.getItemId() == R.id.action_english) {
+            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+            initTextInViews();
+            return true;
         }
+        else if(item.getItemId() == R.id.action_swahili) {
+            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+            initTextInViews();
+            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
+    private void initTextInViews()
+    {
+        dateTV.setText(Locale.getStringInLocale("date",this));
+        cowNameTV.setText(Locale.getStringInLocale("cow",this));
+        timeTV.setText(Locale.getStringInLocale("time",this));
+        quantityTV.setText(Locale.getStringInLocale("quantity",this));
+        noDataWarning=Locale.getStringInLocale("no_data_received",this);
+        times=Locale.getArrayInLocale("milking_times",this);
+        if(times == null) {
+            times = new String[1];
+            times[0] = "";
+        }
+        todayText=Locale.getStringInLocale("today",this);
+        yesterdayText=Locale.getStringInLocale("yesterday",this);
+        loadingPleaseWait=Locale.getStringInLocale("loading_please_wait",this);
     }
 
     private void fetchProductionHistory()
     {
-        if(DataHandler.checkNetworkConnection(this,localeCode))
+        if(DataHandler.checkNetworkConnection(this,null))
         {
             TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
             ProductionHistoryThread productionHistoryThread=new ProductionHistoryThread();

@@ -5188,19 +5188,11 @@ Other
                 </string>
                 <string name="enter_your_name_en" >Please enter your name
                 </string>
-                <string name="milk_production_en" >Milk Production
-                </string>
                 <string name="events_en" >Events
                 </string>
+                <string name="milk_production_en" >Milk Production
+                </string>
 
-                <string-array name="service_types_sire_array_en" >
-                    <item>
-Bull
-                    </item>
-                    <item>
-Artificial Insemination
-                    </item>
-                </string-array>
                 <string-array name="cow_event_types_en" >
                     <item>
 Abortion
@@ -5219,6 +5211,14 @@ Sickness
                     </item>
                     <item>
 Death
+                    </item>
+                </string-array>
+                <string-array name="service_types_sire_array_en" >
+                    <item>
+Bull
+                    </item>
+                    <item>
+Artificial Insemination
                     </item>
                 </string-array>
 
@@ -5355,6 +5355,8 @@ Combined
                 <string name="enter_your_mobile_no_en" >Please enter your phone number
                 </string>
                 <string name="sim_card_not_registered_en" >You are using a Sim card that has not been used before in this system.
+                </string>
+                <string name="server_error_en" >Unable to reach server
                 </string>
                 <string name="ear_tag_number_en" >Ear Tag Number
                 </string>

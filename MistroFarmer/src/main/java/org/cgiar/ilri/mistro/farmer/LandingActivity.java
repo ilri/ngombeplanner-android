@@ -50,6 +50,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
     private String oldNumberNotInSystemText;
     private String welcomeText;
     private String loadingPleaseWait;
+    private String serverError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -124,6 +125,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         oldNumberNotInSystemText=Locale.getStringInLocale("old_number_not_in_system", this);
         welcomeText=Locale.getStringInLocale("welcome", this);
         loadingPleaseWait=Locale.getStringInLocale("loading_please_wait", this);
+        serverError=Locale.getStringInLocale("server_error", this);
     }
 
     private void startRegistrationActivity()
@@ -208,7 +210,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             loginSessionOn=false;
             if(result==null)
             {
-                Toast.makeText(LandingActivity.this,"Server Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(LandingActivity.this,serverError,Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED))
             {

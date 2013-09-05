@@ -665,6 +665,7 @@
     <string name="reason_for_enabling_network_en">This application requires an internet connection for it to work/. Press Okay to enable the internet</string>
     <string name="register_en">Register</string>
     <string name="remarks_en">Remarks</string>
+    <string name="server_error_en">Unable to reach server</string>
     <string name="service_type_used_en">Service Type Used</string>
     <string name="sex_en">Sex</string>
     <string name="sim_card_not_registered_en">You are using a Sim card that has not been used before in this system.</string>
