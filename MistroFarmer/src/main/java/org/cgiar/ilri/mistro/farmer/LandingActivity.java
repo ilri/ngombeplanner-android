@@ -126,7 +126,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         oldNumberNotInSystemText=Locale.getStringInLocale("old_number_not_in_system", this);
         welcomeText=Locale.getStringInLocale("welcome", this);
         loadingPleaseWait=Locale.getStringInLocale("loading_please_wait", this);
-        serverError=Locale.getStringInLocale("server_error", this);
+        serverError=Locale.getStringInLocale("problem_connecting_to_server", this);
     }
 
     private void startRegistrationActivity()

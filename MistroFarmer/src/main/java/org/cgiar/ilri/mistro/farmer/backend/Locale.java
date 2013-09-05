@@ -52,6 +52,24 @@ public class Locale {
         return value;
     }
 
+    public static String[] getArrayInLocale(String arrayName, Context context, String localeCode) {
+        String name = arrayName+"_"+localeCode;
+        String[] value = null;
+        try {
+            Field field = R.array.class.getDeclaredField(name);
+            int id = field.getInt(field);
+            if(id != 0) {
+                value = context.getResources().getStringArray(id);
+            }
+            else {
+                Log.e(TAG,"no field in class R.string with the name "+name);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
     public static int getArrayIDInLocale(String arrayName, Context context) {
         String localeCode = getLocaleCode(context);
         String name = arrayName+"_"+localeCode;

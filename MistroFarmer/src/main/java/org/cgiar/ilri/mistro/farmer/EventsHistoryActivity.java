@@ -4,12 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -17,8 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,8 +34,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class EventsHistoryActivity extends SherlockActivity {
-
-    private String localeCode;
     private static final String TAG="EventsHistoryActivity";
 
     private TableLayout eventsHistoryTL;
@@ -48,13 +48,13 @@ public class EventsHistoryActivity extends SherlockActivity {
     private String todayText;
     private String yesterdayText;
     private String loadingPleaseWait;
+    private String[] eventTypes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_history);
 
-        localeCode = "en";
         eventHistoryIDs = new ArrayList<String>();
         metrics=new DisplayMetrics();
 
@@ -63,26 +63,51 @@ public class EventsHistoryActivity extends SherlockActivity {
         cowNameTV = (TextView)findViewById(R.id.cow_name_tv);
         eventTV = (TextView)findViewById(R.id.event_tv);
 
-        initTextViews(localeCode);
+        initTextInViews();
         fetchEventsHistory();
     }
 
-    private void initTextViews(String localeCode) {
-        if(localeCode.equals("en")) {
-            setTitle(R.string.past_events_en);
-            dateTV.setText(R.string.date_en);
-            cowNameTV.setText(R.string.cow_en);
-            eventTV.setText(R.string.event_en);
-            noDataReceived = getResources().getString(R.string.no_data_received_en);
-            serverError = getResources().getString(R.string.problem_connecting_to_server_en);
-            todayText=getResources().getString(R.string.today_en);
-            yesterdayText=getResources().getString(R.string.yesterday_en);
-            loadingPleaseWait=getResources().getString(R.string.loading_please_wait_en);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.events_history, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if(item.getItemId() == R.id.action_english) {
+            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+            initTextInViews();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_swahili) {
+            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+            initTextInViews();
+            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
+    }
+
+    private void initTextInViews() {
+        setTitle(Locale.getStringInLocale("past_events",this));
+        dateTV.setText(Locale.getStringInLocale("date",this));
+        cowNameTV.setText(Locale.getStringInLocale("cow",this));
+        eventTV.setText(Locale.getStringInLocale("event",this));
+        noDataReceived = Locale.getStringInLocale("no_data_received",this);
+        serverError = Locale.getStringInLocale("problem_connecting_to_server",this);
+        todayText=Locale.getStringInLocale("today",this);
+        yesterdayText=Locale.getStringInLocale("yesterday",this);
+        loadingPleaseWait=Locale.getStringInLocale("loading_please_wait",this);
+        eventTypes = Locale.getArrayInLocale("cow_event_types",this);
+        if(eventTypes == null) {
+            eventTypes = new String[1];
+            eventTypes[0] = "";
         }
     }
 
     private void fetchEventsHistory() {
-        if(DataHandler.checkNetworkConnection(this, localeCode)) {
+        if(DataHandler.checkNetworkConnection(this, null)) {
             TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
             CowEventHistoryThread cowEventHistoryThread =new CowEventHistoryThread();
             if(eventHistoryIDs.size() == 0){//first time
@@ -215,7 +240,18 @@ public class EventsHistoryActivity extends SherlockActivity {
                 final View rowSeparator2=generateRowSeparator(5342+jsonObject.getInt("id")+3432,tableRowHeight);
                 tableRow.addView(rowSeparator2);
 
-                final  TextView event=generateTextView(jsonObject.getString("event_name"),5342+jsonObject.getInt("id")+554,tableRowHeight,tableTextSize);
+                String[] eventTypesInEN = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
+                String eventTypeString = "";
+                int index = -1;
+                for(int j = 0; j< eventTypesInEN.length; j++) {
+                    if(eventTypesInEN[j].equals(jsonObject.getString("event_name"))) {
+                        index = j;
+                    }
+                }
+                if(eventTypesInEN.length == eventTypes.length && index != -1) {
+                    eventTypeString = eventTypes[index];
+                }
+                final  TextView event=generateTextView(eventTypeString,5342+jsonObject.getInt("id")+554,tableRowHeight,tableTextSize);
                 tableRow.addView(event);
 
                 eventsHistoryTL.addView(tableRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,tableRowHeight));

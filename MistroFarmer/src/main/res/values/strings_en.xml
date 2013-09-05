@@ -144,5 +144,4 @@
     <string name="event_successfully_recorded_en">The event has been successfully recorded</string>
     <string name="something_went_wrong_try_again_en">Something went wrong. Try resending the data</string>
     <string name="loading_please_wait_en">Loading. Please wait...</string>
-    <string name="server_error_en">Unable to reach server</string>
 </resources>
