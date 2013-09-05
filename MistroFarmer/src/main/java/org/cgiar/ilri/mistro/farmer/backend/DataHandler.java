@@ -54,15 +54,10 @@ public class DataHandler
     public static final String FARMER_FETCH_COW_EVENTS_HISTORY_URL="/php/farmer/fetch_cow_events_history.php";
     public static boolean checkNetworkConnection(final Context context, String localeCode)
     {
-        String alertTitle="";
-        String alertText="";
-        String okayText="";
-        if(localeCode.equals("en"))
-        {
-            alertTitle=context.getResources().getString(R.string.enable_network_en);
-            alertText=context.getResources().getString(R.string.reason_for_enabling_network_en);
-            okayText=context.getResources().getString(R.string.okay_en);
-        }
+        String alertTitle=Locale.getStringInLocale("enable_network",context);
+        String alertText=Locale.getStringInLocale("reason_for_enabling_network",context);
+        String okayText=Locale.getStringInLocale("okay",context);
+
         ConnectivityManager connectivityManager=(ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
         if(networkInfo==null)//no network connection

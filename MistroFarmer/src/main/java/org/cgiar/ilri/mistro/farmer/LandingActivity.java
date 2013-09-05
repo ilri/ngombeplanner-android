@@ -29,7 +29,6 @@ import org.json.JSONObject;
 public class LandingActivity extends SherlockActivity implements View.OnClickListener
 {
     private static final String TAG="LandingActivity";
-    private String localeCode;
     private Button loginButton;
     private Button registerButton;
     private boolean loginSessionOn=false;
@@ -57,8 +56,6 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
-
-        localeCode=Locale.getLocaleCode(this);
 
         //initialize child views
         loginButton=(Button)this.findViewById(R.id.login_button);
@@ -158,7 +155,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
 
     private void authenticateUser()
     {
-        if(DataHandler.checkNetworkConnection(this,localeCode))
+        if(DataHandler.checkNetworkConnection(this,null))
         {
             TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
             if(telephonyManager.getSimSerialNumber()!=null)
@@ -252,7 +249,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
 
     private void registerSimCard()
     {
-        if(DataHandler.checkNetworkConnection(this,localeCode))
+        if(DataHandler.checkNetworkConnection(this,null))
         {
             TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
             if(telephonyManager.getSimSerialNumber()!=null)
