@@ -15,10 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.actionbarsherlock.view.Menu;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,7 +58,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
-        localeCode="en";//TODO:get local code from sharedPreferences
+        localeCode=Locale.getLocaleCode(this);
 
         //initialize child views
         loginButton=(Button)this.findViewById(R.id.login_button);
@@ -73,7 +77,26 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         newMobileNumberET.setText(telephonyManager.getLine1Number());
 
         //init text according to locale
-        initTextInViews(localeCode);
+        initTextInViews();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.landing_activity, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if(item.getItemId() == R.id.action_english) {
+            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+            initTextInViews();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_swahili) {
+            Toast.makeText(this, "kazi katika maendeleo",Toast.LENGTH_LONG).show();
+        }
+        return false;
     }
 
     @Override
@@ -82,29 +105,26 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         super.onResume();
     }
 
-    private void initTextInViews(String localeCode)
+    private void initTextInViews()
     {
-        if(localeCode.equals("en"))
-        {
-            loginButton.setText(R.string.login_en);
-            registerButton.setText(R.string.register_en);
-            loginText=getResources().getString(R.string.login_en);
-            unsuccessfulAuthText=getResources().getString(R.string.sim_card_not_registered_en);
-            okayText=getResources().getString(R.string.okay_en);
-            fromAnotherDevWarning=getResources().getString(R.string.logging_in_from_different_device_en);
-            yesText=getResources().getString(R.string.yes_en);
-            noText=getResources().getString(R.string.no_en);
-            loginAnywayText=getResources().getString(R.string.login_anyway_en);
-            registerText=getResources().getString(R.string.register_en);
-            oldMobileNumberTV.setText(R.string.old_mobile_number_en);
-            newMobileNumberTV.setText(R.string.new_mobile_number_en);
-            changeSystemSimCardDialog.setTitle(R.string.sim_card_registration_en);
-            changeSystemSimCardB.setText(R.string.okay_en);
-            simCardRegistrationText=getResources().getString(R.string.sim_card_registration_en);
-            oldNumberNotInSystemText=getResources().getString(R.string.old_number_not_in_system_en);
-            welcomeText=getResources().getString(R.string.welcome_en);
-            loadingPleaseWait=getResources().getString(R.string.loading_please_wait_en);
-        }
+        loginButton.setText(Locale.getStringInLocale("login", this));
+        registerButton.setText(Locale.getStringInLocale("register", this));
+        loginText=Locale.getStringInLocale("login", this);
+        unsuccessfulAuthText=Locale.getStringInLocale("sim_card_not_registered", this);
+        okayText=Locale.getStringInLocale("okay", this);
+        fromAnotherDevWarning=Locale.getStringInLocale("logging_in_from_different_device", this);
+        yesText=Locale.getStringInLocale("yes", this);
+        noText=Locale.getStringInLocale("no", this);
+        loginAnywayText=Locale.getStringInLocale("login_anyway", this);
+        registerText=Locale.getStringInLocale("register", this);
+        oldMobileNumberTV.setText(Locale.getStringInLocale("old_mobile_number", this));
+        newMobileNumberTV.setText(Locale.getStringInLocale("new_mobile_number", this));
+        changeSystemSimCardDialog.setTitle(Locale.getStringInLocale("sim_card_registration", this));
+        changeSystemSimCardB.setText(Locale.getStringInLocale("okay", this));
+        simCardRegistrationText=Locale.getStringInLocale("sim_card_registration", this);
+        oldNumberNotInSystemText=Locale.getStringInLocale("old_number_not_in_system", this);
+        welcomeText=Locale.getStringInLocale("welcome", this);
+        loadingPleaseWait=Locale.getStringInLocale("loading_please_wait", this);
     }
 
     private void startRegistrationActivity()

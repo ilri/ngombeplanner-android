@@ -614,6 +614,9 @@
     <string name="embryo_number_en">Embryo Number</string>
     <string name="enable_gps_en">Enable GPS</string>
     <string name="enable_network_en">Enable Internet</string>
+    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
+    <string name="english">English</string>
+    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="enter_date_en">Please enter the date</string>
     <string name="enter_ear_tag_no_or_name_en">Please enter the cow\'s Ear Tag Number or Name</string>
     <string name="enter_ear_tag_number_en">Please enter the cow\'s Ear Tag Number</string>
@@ -673,6 +676,9 @@
     <string name="straw_number_en">Straw Number</string>
     <string name="successful_registration_en">Successful Registration</string>
     <string name="successful_registration_instructions_en">You have been successfully registered. You will receive an SMS instructing you on how to login</string>
+    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
+    <string name="swahili">Kiswahili</string>
+    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="time_en">Time</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="title_activity_add_event">Add an Event</string>
