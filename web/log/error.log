@@ -1,1 +1,3 @@
 
+[Friday, 6th September 2013 09:55:47] [database.php] MySQL error 'Duplicate entry '35-0-2013-09-06' for key 'cow_id_2'' thrown while trying to run query 'INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`,`date`,`date_added`) VALUES(35,0,70,'2013-09-06','2013-09-06 09:55:47')', exiting
+[Friday, 6th September 2013 09:56:12] [database.php] MySQL error 'Duplicate entry '35-0-2013-09-06' for key 'cow_id_2'' thrown while trying to run query 'INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`,`date`,`date_added`) VALUES(35,0,70,'2013-09-06','2013-09-06 09:56:12')', exiting

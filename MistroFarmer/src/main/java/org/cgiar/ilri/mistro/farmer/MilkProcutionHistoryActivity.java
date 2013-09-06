@@ -237,7 +237,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
                 }
                 else if(metrics.densityDpi==DisplayMetrics.DENSITY_LOW)
                 {
-                    tableRowHeight=20;//initially 15
+                    tableRowHeight=16;//initially 15
                     tableTextSideMargin=6;//initially 3
                     tableTextSize=15;//initially 11
                 }
