@@ -11933,3 +11933,814 @@
 )
 
 [Saturday, 7th September 2013 13:46:08] [fetch_milk_production_history.php]  cow milk production history encoded from an array and is '{"history":[{"id":"26","cow_id":"35","time":"0","quantity":"2","date_added":"2013-09-07 13:42:13","date":"2013-09-07","quantity_type":"KGs","name":"Rosy","ear_tag_number":"nai-rog-0"}]}'
+[Saturday, 7th September 2013 14:04:14] [authentication.php] json_decode returned: Array
+(
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:04:14] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:04:14] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:04:14] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:04:14] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:04:14] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
+(
+    [0] => Array
+        (
+            [name] => Jason Rogena
+        )
+
+)
+
+[Saturday, 7th September 2013 14:04:17] [fetch_cow_identifiers.php] json_decode returned: Array
+(
+    [cowSex] => 0
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:04:17] [fetch_cow_identifiers.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:04:17] [fetch_cow_identifiers.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:04:17] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:04:17] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:04:17] [fetch_cow_identifiers.php] CowSex specified as 0
+[Saturday, 7th September 2013 14:04:17] [database.php] results gotten from 'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow' AND `cow`.`sex` = 0' are Array
+(
+    [0] => Array
+        (
+            [name] => Rosy
+            [ear_tag_number] => nai-rog-0
+        )
+
+)
+
+[Saturday, 7th September 2013 14:04:17] [fetch_cow_identifiers.php]  cow identifiers encoded from an array and is '{"cowNames":["Rosy"],"earTagNumbers":["nai-rog-0"]}'
+[Saturday, 7th September 2013 14:04:23] [add_milk_production.php] json_decode returned: Array
+(
+    [cowEarTagNumber] => nai-rog-0
+    [quantity] => 1
+    [time] => 0
+    [quantityType] => KGs
+    [cowName] => Rosy
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:04:23] [add_milk_production.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:04:23] [add_milk_production.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:04:23] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:04:23] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:04:23] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-rog-0' AND `name` = 'Rosy'' are Array
+(
+    [0] => Array
+        (
+            [id] => 35
+        )
+
+)
+
+[Saturday, 7th September 2013 14:04:23] [add_milk_production.php] cow.id fetched and is 35
+[Saturday, 7th September 2013 14:04:23] [add_milk_production.php] returning time '2013-09-07' using format 'Y-m-d'
+[Saturday, 7th September 2013 14:04:23] [add_milk_production.php] returning time '2013-09-07 14:04:23' using format 'Y-m-d H:i:s'
+[Saturday, 7th September 2013 14:04:32] [add_milk_production.php] json_decode returned: Array
+(
+    [cowEarTagNumber] => nai-rog-0
+    [quantity] => 1
+    [time] => 1
+    [quantityType] => KGs
+    [cowName] => Rosy
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:04:32] [add_milk_production.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:04:32] [add_milk_production.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:04:32] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:04:32] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:04:32] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-rog-0' AND `name` = 'Rosy'' are Array
+(
+    [0] => Array
+        (
+            [id] => 35
+        )
+
+)
+
+[Saturday, 7th September 2013 14:04:32] [add_milk_production.php] cow.id fetched and is 35
+[Saturday, 7th September 2013 14:04:32] [add_milk_production.php] returning time '2013-09-07' using format 'Y-m-d'
+[Saturday, 7th September 2013 14:04:32] [add_milk_production.php] returning time '2013-09-07 14:04:32' using format 'Y-m-d H:i:s'
+[Saturday, 7th September 2013 14:04:34] [fetch_milk_production_history.php] json_decode returned: Array
+(
+    [fromID] => -1
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:04:34] [fetch_milk_production_history.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:04:34] [fetch_milk_production_history.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:04:34] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:04:34] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:04:34] [database.php] results gotten from 'SELECT `milk_production`.*,`cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' ORDER BY `milk_production`.`id` DESC LIMIT 40' are Array
+(
+    [0] => Array
+        (
+            [id] => 28
+            [cow_id] => 35
+            [time] => 1
+            [quantity] => 1
+            [date_added] => 2013-09-07 14:04:32
+            [date] => 2013-09-07
+            [quantity_type] => KGs
+            [name] => Rosy
+            [ear_tag_number] => nai-rog-0
+        )
+
+    [1] => Array
+        (
+            [id] => 26
+            [cow_id] => 35
+            [time] => 0
+            [quantity] => 2
+            [date_added] => 2013-09-07 13:42:13
+            [date] => 2013-09-07
+            [quantity_type] => KGs
+            [name] => Rosy
+            [ear_tag_number] => nai-rog-0
+        )
+
+)
+
+[Saturday, 7th September 2013 14:04:34] [fetch_milk_production_history.php]  cow milk production history encoded from an array and is '{"history":[{"id":"28","cow_id":"35","time":"1","quantity":"1","date_added":"2013-09-07 14:04:32","date":"2013-09-07","quantity_type":"KGs","name":"Rosy","ear_tag_number":"nai-rog-0"},{"id":"26","cow_id":"35","time":"0","quantity":"2","date_added":"2013-09-07 13:42:13","date":"2013-09-07","quantity_type":"KGs","name":"Rosy","ear_tag_number":"nai-rog-0"}]}'
+[Saturday, 7th September 2013 14:20:59] [authentication.php] json_decode returned: Array
+(
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:20:59] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:20:59] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:20:59] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:20:59] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:20:59] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
+(
+    [0] => Array
+        (
+            [name] => Jason Rogena
+        )
+
+)
+
+[Saturday, 7th September 2013 14:21:06] [fetch_cow_identifiers.php] json_decode returned: Array
+(
+    [cowSex] => 0
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:21:06] [fetch_cow_identifiers.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:21:06] [fetch_cow_identifiers.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:21:06] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:21:06] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:21:06] [fetch_cow_identifiers.php] CowSex specified as 0
+[Saturday, 7th September 2013 14:21:06] [database.php] results gotten from 'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow' AND `cow`.`sex` = 0' are Array
+(
+    [0] => Array
+        (
+            [name] => Rosy
+            [ear_tag_number] => nai-rog-0
+        )
+
+)
+
+[Saturday, 7th September 2013 14:21:06] [fetch_cow_identifiers.php]  cow identifiers encoded from an array and is '{"cowNames":["Rosy"],"earTagNumbers":["nai-rog-0"]}'
+[Saturday, 7th September 2013 14:21:13] [add_milk_production.php] json_decode returned: Array
+(
+    [cowEarTagNumber] => nai-rog-0
+    [quantity] => 12
+    [time] => 0
+    [quantityType] => KGs
+    [cowName] => Rosy
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:21:13] [add_milk_production.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:21:13] [add_milk_production.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:21:13] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:21:13] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:21:13] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-rog-0' AND `name` = 'Rosy'' are Array
+(
+    [0] => Array
+        (
+            [id] => 35
+        )
+
+)
+
+[Saturday, 7th September 2013 14:21:13] [add_milk_production.php] cow.id fetched and is 35
+[Saturday, 7th September 2013 14:21:13] [add_milk_production.php] returning time '2013-09-07' using format 'Y-m-d'
+[Saturday, 7th September 2013 14:21:13] [add_milk_production.php] returning time '2013-09-07 14:21:13' using format 'Y-m-d H:i:s'
+[Saturday, 7th September 2013 14:22:21] [add_milk_production.php] json_decode returned: Array
+(
+    [cowEarTagNumber] => nai-rog-0
+    [quantity] => 12
+    [time] => 1
+    [quantityType] => KGs
+    [cowName] => Rosy
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:22:21] [add_milk_production.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:22:21] [add_milk_production.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:22:21] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:22:21] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:22:21] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-rog-0' AND `name` = 'Rosy'' are Array
+(
+    [0] => Array
+        (
+            [id] => 35
+        )
+
+)
+
+[Saturday, 7th September 2013 14:22:21] [add_milk_production.php] cow.id fetched and is 35
+[Saturday, 7th September 2013 14:22:21] [add_milk_production.php] returning time '2013-09-07' using format 'Y-m-d'
+[Saturday, 7th September 2013 14:22:21] [add_milk_production.php] returning time '2013-09-07 14:22:21' using format 'Y-m-d H:i:s'
+[Saturday, 7th September 2013 14:22:24] [add_milk_production.php] json_decode returned: Array
+(
+    [cowEarTagNumber] => nai-rog-0
+    [quantity] => 12
+    [time] => 2
+    [quantityType] => KGs
+    [cowName] => Rosy
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:22:24] [add_milk_production.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:22:24] [add_milk_production.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:22:24] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:22:24] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:22:24] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-rog-0' AND `name` = 'Rosy'' are Array
+(
+    [0] => Array
+        (
+            [id] => 35
+        )
+
+)
+
+[Saturday, 7th September 2013 14:22:24] [add_milk_production.php] cow.id fetched and is 35
+[Saturday, 7th September 2013 14:22:24] [add_milk_production.php] returning time '2013-09-07' using format 'Y-m-d'
+[Saturday, 7th September 2013 14:22:24] [add_milk_production.php] returning time '2013-09-07 14:22:24' using format 'Y-m-d H:i:s'
+[Saturday, 7th September 2013 14:22:29] [fetch_milk_production_history.php] json_decode returned: Array
+(
+    [fromID] => -1
+    [simCardSN] => 89254029541005994303
+)
+
+[Saturday, 7th September 2013 14:22:29] [fetch_milk_production_history.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:22:29] [fetch_milk_production_history.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:22:29] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Saturday, 7th September 2013 14:22:29] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Saturday, 7th September 2013 14:22:29] [database.php] results gotten from 'SELECT `milk_production`.*,`cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' ORDER BY `milk_production`.`id` DESC LIMIT 40' are Array
+(
+    [0] => Array
+        (
+            [id] => 31
+            [cow_id] => 35
+            [time] => 2
+            [quantity] => 12
+            [date_added] => 2013-09-07 14:22:24
+            [date] => 2013-09-07
+            [quantity_type] => KGs
+            [name] => Rosy
+            [ear_tag_number] => nai-rog-0
+        )
+
+    [1] => Array
+        (
+            [id] => 28
+            [cow_id] => 35
+            [time] => 1
+            [quantity] => 1
+            [date_added] => 2013-09-07 14:04:32
+            [date] => 2013-09-07
+            [quantity_type] => KGs
+            [name] => Rosy
+            [ear_tag_number] => nai-rog-0
+        )
+
+    [2] => Array
+        (
+            [id] => 26
+            [cow_id] => 35
+            [time] => 0
+            [quantity] => 2
+            [date_added] => 2013-09-07 13:42:13
+            [date] => 2013-09-07
+            [quantity_type] => KGs
+            [name] => Rosy
+            [ear_tag_number] => nai-rog-0
+        )
+
+)
+
+[Saturday, 7th September 2013 14:22:29] [fetch_milk_production_history.php]  cow milk production history encoded from an array and is '{"history":[{"id":"31","cow_id":"35","time":"2","quantity":"12","date_added":"2013-09-07 14:22:24","date":"2013-09-07","quantity_type":"KGs","name":"Rosy","ear_tag_number":"nai-rog-0"},{"id":"28","cow_id":"35","time":"1","quantity":"1","date_added":"2013-09-07 14:04:32","date":"2013-09-07","quantity_type":"KGs","name":"Rosy","ear_tag_number":"nai-rog-0"},{"id":"26","cow_id":"35","time":"0","quantity":"2","date_added":"2013-09-07 13:42:13","date":"2013-09-07","quantity_type":"KGs","name":"Rosy","ear_tag_number":"nai-rog-0"}]}'

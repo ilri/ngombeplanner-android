@@ -118,7 +118,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         }
         quantityETEmptyWarning=Locale.getStringInLocale("enter_quantity_of_milk_produced",this);
         infoSuccessfullySent=Locale.getStringInLocale("information_successfully_sent_to_server",this);
-        problemInData=Locale.getStringInLocale("problem_in_data_sent",this);
+        problemInData=Locale.getStringInLocale("production_for_time_already_exists",this);
         loadingPleaseWait = Locale.getStringInLocale("loading_please_wait",this);
         quantityTypeTV.setText(Locale.getStringInLocale("measurement_type",this));
 
@@ -255,7 +255,6 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         {
             if(validateInput())
             {
-                addMilkProductionDialog.dismiss();
                 TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
                 MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
                 String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
@@ -331,6 +330,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             }
             else if(result.equals(DataHandler.ACKNOWLEDGE_OK))
             {
+                addMilkProductionDialog.dismiss();
                 Toast.makeText(MilkProductionActivity.this,infoSuccessfullySent,Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.DATA_ERROR))

@@ -71,13 +71,13 @@ class DatabaseHandler {
       }
    }
    
-   public function runMySQLQuery($query, $getResult) {
+   public function runMySQLQuery($query, $getResult, $errorResponse = "") {
 	  $this->logHandler->log(3, $this->TAG,"running query ".$query);
       $result = mysql_query($query) ;
       $mysqlError = mysql_error();
       if($mysqlError != "") {
 		  $this->logHandler->log(1, $this->TAG,"MySQL error '".$mysqlError."' thrown while trying to run query '".$query."', exiting");
-			 die();
+			 die($errorResponse);
 	  }
       
       if($getResult == true) {

@@ -33,7 +33,7 @@ class MilkProductionAdder {
 			$dateEAT = $this->getTime('Y-m-d');
 			$timeEAT = $this->getTime('Y-m-d H:i:s');
 			$query = "INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES({$cowID},{$this->jsonObject['time']},{$this->jsonObject['quantity']},'{$this->jsonObject['quantityType']}','$dateEAT','$timeEAT')";
-			$this->database->runMySQLQuery($query, false);
+			$this->database->runMySQLQuery($query, false, $this->codes['data_error']);
 			$this->logHandler->log(3, $this->TAG,"returning response code ".$this->codes['acknowledge_ok']);
 			echo $this->codes['acknowledge_ok'];
 			$this->logHandler->log(3, $this->TAG,"gracefully exiting");
