@@ -31,12 +31,33 @@ class MilkProductionAdder {
 			$cowID = $result[0]['id'];
 			$this->logHandler->log(4, $this->TAG,"cow.id fetched and is ".$cowID);
 			$dateEAT = $this->getTime('Y-m-d');
-			$timeEAT = $this->getTime('Y-m-d H:i:s');
-			$query = "INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES({$cowID},{$this->jsonObject['time']},{$this->jsonObject['quantity']},'{$this->jsonObject['quantityType']}','$dateEAT','$timeEAT')";
-			$this->database->runMySQLQuery($query, false, $this->codes['data_error']);
-			$this->logHandler->log(3, $this->TAG,"returning response code ".$this->codes['acknowledge_ok']);
-			echo $this->codes['acknowledge_ok'];
-			$this->logHandler->log(3, $this->TAG,"gracefully exiting");
+			
+			//check if there is a combined record for date
+			$query = "SELECT `time` FROM `milk_production` WHERE `cow_id` = {$cowID} AND `date` = '{$dateEAT}'";
+			$result = $this->database->runMySQLQuery($query, true);
+			$dataThereFlag = false;
+			if(sizeOf($result) > 0 && $this->jsonObject['time'] == 3) {
+				$dataThereFlag = true;
+			}
+			else {
+				for($i = 0; $i < sizeOf($result) ; $i++){
+					if($result[$i]["time"] == 3) {
+						$dataThereFlag = true;
+					}
+				}
+			}
+			if($dataThereFlag == false) {
+				$timeEAT = $this->getTime('Y-m-d H:i:s');
+				$query = "INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES({$cowID},{$this->jsonObject['time']},{$this->jsonObject['quantity']},'{$this->jsonObject['quantityType']}','$dateEAT','$timeEAT')";
+				$this->database->runMySQLQuery($query, false, $this->codes['data_error']);
+				$this->logHandler->log(3, $this->TAG,"returning response code ".$this->codes['acknowledge_ok']);
+				echo $this->codes['acknowledge_ok'];
+				$this->logHandler->log(3, $this->TAG,"gracefully exiting");
+			}
+			else {
+				$this->logHandler->log(1, $this->TAG,"a record already exists in the database with combined data for the date or the user is trying to enter combilned data when there is data record for this date, exiting");
+				die($this->codes['data_error']);
+			}
 		}
 		else {
 			$this->logHandler->log(1, $this->TAG,"it appears like there is no cow by the name '".$cowName."' and '".$earTagNumber."' as its ear tag number or more than one cow goes by these credentials, exiting");
