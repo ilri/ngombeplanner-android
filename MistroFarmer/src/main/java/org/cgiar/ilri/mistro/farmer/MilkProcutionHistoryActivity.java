@@ -290,7 +290,19 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
                 final View rowSeparator3=generateRowSeparator(3424+jsonObject.getInt("id")+3532,tableRowHeight);
                 tableRow.addView(rowSeparator3);
 
-                final TextView quantity=generateTextView(jsonObject.getString("quantity"),3424+jsonObject.getInt("id")+564,tableRowHeight,tableTextSize);
+                String quantityType = jsonObject.getString("quantity_type");
+                String quantityString = jsonObject.getString("quantity");
+                String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this, Locale.LOCALE_ENGLISH);
+                String[] quantityTypes = Locale.getArrayInLocale("quantity_types", this);
+                if(quantityTypes != null && quantityTypesInEN.length == quantityTypes.length) {
+                    for(int j = 0; j < quantityTypesInEN.length; j++) {
+                        if(quantityType.equals(quantityTypesInEN[j])) {
+                            quantityString = quantityString +" ("+quantityTypes[j]+")";
+                            break;
+                        }
+                    }
+                }
+                final TextView quantity=generateTextView(quantityString,3424+jsonObject.getInt("id")+564,tableRowHeight,tableTextSize);
                 tableRow.addView(quantity);
 
                 productionHistoryTL.addView(tableRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,tableRowHeight));
