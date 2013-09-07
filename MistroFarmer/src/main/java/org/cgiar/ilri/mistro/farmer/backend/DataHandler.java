@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
@@ -52,6 +53,9 @@ public class DataHandler
     public static final String FARMER_FETCH_MILK_PRODUCTION_HISTORY_URL="/php/farmer/fetch_milk_production_history.php";
     public static final String FARMER_ADD_COW_EVENT_URL="/php/farmer/add_cow_event.php";
     public static final String FARMER_FETCH_COW_EVENTS_HISTORY_URL="/php/farmer/fetch_cow_events_history.php";
+    public static final String SP_KEY_LOCALE = "locale";
+    public static final String SP_KEY_MILK_QUANTITY_TYPE = "milkQuantityTYpe";
+
     public static boolean checkNetworkConnection(final Context context, String localeCode)
     {
         String alertTitle=Locale.getStringInLocale("enable_network",context);
@@ -151,5 +155,16 @@ public class DataHandler
             }
         }
         return stringBuilder.toString();
+    }
+
+    public static void setSharedPreference(Context context, String sharedPreferenceKey, String value) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(context.getString(R.string.app_name),Context.MODE_PRIVATE).edit();
+        editor.putString(sharedPreferenceKey,value);
+        editor.commit();
+    }
+
+    public static String getSharedPreference(Context context, String sharedPreferenceKey, String defaultValue) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(sharedPreferenceKey, defaultValue);
     }
 }

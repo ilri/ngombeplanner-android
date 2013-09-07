@@ -7,3 +7,5 @@
 [Friday, 6th September 2013 09:51:35] [authentication.php] SIM card serial number (89254027741001582514) not matching any farmer. Sending user_not_authenticated response code back to client
 [Friday, 6th September 2013 09:52:14] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254027741001582514''
 [Friday, 6th September 2013 09:52:14] [authentication.php] SIM card serial number (89254027741001582514) not matching any farmer. Sending user_not_authenticated response code back to client
+[Friday, 6th September 2013 14:19:17] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303''
+[Friday, 6th September 2013 14:19:17] [authentication.php] SIM card serial number (89254029541005994303) not matching any farmer. Sending user_not_authenticated response code back to client

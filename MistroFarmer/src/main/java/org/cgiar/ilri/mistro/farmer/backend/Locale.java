@@ -13,7 +13,7 @@ public class Locale {
     private static final String TAG = "Locale";
     public static final String LOCALE_ENGLISH="en";
     public static final String LOCALE_SWAHILI="sw";
-    public static final String SHARED_PREFERENCES_KEY = "locale";
+    //public static final String SHARED_PREFERENCES_KEY = "locale";
     public static String getStringInLocale(String stringName, Context context) {
         String localeCode = getLocaleCode(context);
         String name = stringName+"_"+localeCode;
@@ -90,13 +90,15 @@ public class Locale {
     }
 
     public static void switchLocale(String newLocaleCode, Context context) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(context.getString(R.string.app_name),Context.MODE_PRIVATE).edit();
+        /*SharedPreferences.Editor editor = context.getSharedPreferences(context.getString(R.string.app_name),Context.MODE_PRIVATE).edit();
         editor.putString(SHARED_PREFERENCES_KEY,newLocaleCode);
-        editor.commit();
+        editor.commit();*/
+        DataHandler.setSharedPreference(context,DataHandler.SP_KEY_LOCALE,newLocaleCode);
     }
 
     public static String getLocaleCode(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
-        return sharedPreferences.getString(SHARED_PREFERENCES_KEY, LOCALE_ENGLISH);
+        /*SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(SHARED_PREFERENCES_KEY, LOCALE_ENGLISH);*/
+        return DataHandler.getSharedPreference(context, DataHandler.SP_KEY_LOCALE, LOCALE_ENGLISH);
     }
 }

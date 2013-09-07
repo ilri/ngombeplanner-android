@@ -105,13 +105,19 @@
     <string name="production_history_en">Production History</string>
     <string name="cow_en">Cow</string>
     <string name="time_en">Time</string>
-    <string name="quantity_en">Quantity (kg)</string>
+    <string name="quantity_en">Quantity</string>
+    <string name="measurement_type_en">Measurement type</string>
     <string name="add_en">Add</string>
     <string-array name="milking_times_en">
         <item>Morning</item>
         <item>Afternoon</item>
         <item>Evening</item>
         <item>Combined</item>
+    </string-array>
+    <string-array name="quantity_types_en">
+        <item>Litres</item>
+        <item>KGs</item>
+        <item>Cups</item>
     </string-array>
     <string name="enter_quantity_of_milk_produced_en">Please enter the quantity of the milk produced in KGs</string>
     <string name="information_successfully_sent_to_server_en">Information successfully sent to server</string>

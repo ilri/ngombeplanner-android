@@ -47,6 +47,10 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     private String infoSuccessfullySent;
     private String problemInData;
     private String loadingPleaseWait;
+    private TextView quantityTypeTV;
+    private Spinner quantityTypeS;
+    private String[] quantityTypes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -65,9 +69,10 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         timeS=(Spinner)addMilkProductionDialog.findViewById(R.id.time_s);
         quantityTV=(TextView)addMilkProductionDialog.findViewById(R.id.quantity_tv);
         quantityET=(EditText)addMilkProductionDialog.findViewById(R.id.quantity_et);
+        quantityTypeTV=(TextView)addMilkProductionDialog.findViewById(R.id.quantity_type_tv);
+        quantityTypeS=(Spinner)addMilkProductionDialog.findViewById(R.id.quantity_type_s);
         addMilkProductionAddB=(Button)addMilkProductionDialog.findViewById(R.id.dialog_add_milk_add_b);
         addMilkProductionAddB.setOnClickListener(this);
-
 
         initTextInViews();
         fetchCowIdentifiers();
@@ -115,6 +120,21 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         infoSuccessfullySent=Locale.getStringInLocale("information_successfully_sent_to_server",this);
         problemInData=Locale.getStringInLocale("problem_in_data_sent",this);
         loadingPleaseWait = Locale.getStringInLocale("loading_please_wait",this);
+        quantityTypeTV.setText(Locale.getStringInLocale("measurement_type",this));
+
+        quantityTypes = Locale.getArrayInLocale("quantity_types",this);
+        int defaultQuantityTypeIndex = 0;
+        if(quantityTypes == null ) {
+            quantityTypes = new String[1];
+            quantityTypes[0] = "";
+        }
+        else {
+            defaultQuantityTypeIndex = Integer.parseInt(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_MILK_QUANTITY_TYPE,"0"));
+        }
+        ArrayAdapter<String> quantityTypesArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,quantityTypes);
+        quantityTypesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        quantityTypeS.setAdapter(quantityTypesArrayAdapter);
+        quantityTypeS.setSelection(defaultQuantityTypeIndex);
     }
 
     @Override
@@ -238,7 +258,13 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                 addMilkProductionDialog.dismiss();
                 TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
                 MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
-                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],String.valueOf(timeS.getSelectedItemPosition()),quantityET.getText().toString());
+                String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
+                String quantityType = "";
+                if(quantityTypesInEN.length == quantityTypes.length) {
+                    DataHandler.setSharedPreference(MilkProductionActivity.this, DataHandler.SP_KEY_MILK_QUANTITY_TYPE, String.valueOf(quantityTypeS.getSelectedItemPosition()));
+                    quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
+                }
+                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],String.valueOf(timeS.getSelectedItemPosition()),quantityET.getText().toString(),quantityType);
             }
         }
 
@@ -281,6 +307,8 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                 jsonObject.put("cowEarTagNumber",params[2]);
                 jsonObject.put("time",params[3]);
                 jsonObject.put("quantity",params[4]);
+                jsonObject.put("quantityType",params[5]);
+                Log.d(TAG,params[5]);
                 String result=DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL);
                 Log.d(TAG,"data sent to server, result = "+result);
                 return result;

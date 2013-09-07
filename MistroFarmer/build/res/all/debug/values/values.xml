@@ -51,6 +51,11 @@
         <item>Evening</item>
         <item>Combined</item>
     </string-array>
+    <string-array name="quantity_types_en">
+        <item>Litres</item>
+        <item>KGs</item>
+        <item>Cups</item>
+    </string-array>
     <string-array name="service_types_dam_array_en">
         <item>Cow</item>
         <item>Embryo Transfer</item>
@@ -644,6 +649,7 @@
     <string name="login_en">Login</string>
     <string name="main_menu_en">Main Menu</string>
     <string name="maximum_of_four_breeds_en">A maximum of four breeds</string>
+    <string name="measurement_type_en">Measurement type</string>
     <string name="milk_production_en">Milk Production</string>
     <string name="mobile_number_en">Mobile Number</string>
     <string name="name_en">Name</string>
@@ -660,7 +666,7 @@
     <string name="problem_connecting_to_server_en">A problem occurred while trying to connect to the Server</string>
     <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
     <string name="production_history_en">Production History</string>
-    <string name="quantity_en">Quantity (kg)</string>
+    <string name="quantity_en">Quantity</string>
     <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
     <string name="reason_for_enabling_network_en">This application requires an internet connection for it to work/. Press Okay to enable the internet</string>
     <string name="register_en">Register</string>
