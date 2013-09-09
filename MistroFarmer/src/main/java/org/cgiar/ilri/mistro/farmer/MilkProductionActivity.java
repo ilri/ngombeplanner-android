@@ -1,5 +1,6 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,7 +30,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MilkProductionActivity extends SherlockActivity implements View.OnClickListener
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+public class MilkProductionActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener
 {
     private static final String TAG="MilkProductionActivity";
     private Button addProductionB;
@@ -52,6 +60,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     private String[] quantityTypes;
     private TextView dateTV;
     private EditText dateET;
+    private DatePickerDialog datePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,6 +78,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         cowS=(Spinner)addMilkProductionDialog.findViewById(R.id.cow_s);
         dateTV=(TextView)addMilkProductionDialog.findViewById(R.id.date_tv);
         dateET=(EditText)addMilkProductionDialog.findViewById(R.id.date_et);
+        dateET.setOnClickListener(this);
         timeTV=(TextView)addMilkProductionDialog.findViewById(R.id.time_tv);
         timeS=(Spinner)addMilkProductionDialog.findViewById(R.id.time_s);
         quantityTV=(TextView)addMilkProductionDialog.findViewById(R.id.quantity_tv);
@@ -158,6 +168,26 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             Intent intent=new Intent(MilkProductionActivity.this,MilkProcutionHistoryActivity.class);
             startActivity(intent);
         }
+        else if(view==dateET) {
+            dateETClicked();
+        }
+    }
+
+    private void dateETClicked()
+    {
+        Date date=new Date();
+        Calendar calendar=new GregorianCalendar();
+        calendar.setTime(date);
+        datePickerDialog=new DatePickerDialog(this,this,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        //datePickerDialog=createDialogWithoutDateField(this,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+    {
+        String dateString=String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear+1)+"/"+String.valueOf(year);
+        dateET.setText(dateString);
     }
 
     private void fetchCowIdentifiers()
@@ -312,7 +342,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                 jsonObject.put("time",params[3]);
                 jsonObject.put("quantity",params[4]);
                 jsonObject.put("quantityType",params[5]);
-                jsonObject.put("date",params[6]);
+                jsonObject.put("date", params[6]);
                 String result=DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL);
                 Log.d(TAG,"data sent to server, result = "+result);
                 return result;

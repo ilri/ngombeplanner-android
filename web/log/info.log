@@ -3085,3 +3085,49 @@
 [Monday, 9th September 2013 08:45:13] [database.php] running query INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES(35,0,1,'KGs',STR_TO_DATE('14/08/2012', '%d/%m/%Y'),'2013-09-09 08:45:13')
 [Monday, 9th September 2013 08:45:13] [add_milk_production.php] returning response code 533783
 [Monday, 9th September 2013 08:45:13] [add_milk_production.php] gracefully exiting
+[Monday, 9th September 2013 08:57:13] [authentication.php] Starting Authenticator
+[Monday, 9th September 2013 08:57:13] [authentication.php] obtaining POST request
+[Monday, 9th September 2013 08:57:13] [authentication.php] getting settings from: ../../config/settings.ini
+[Monday, 9th September 2013 08:57:13] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 9th September 2013 08:57:13] [database.php] Starting DatabaseHandler
+[Monday, 9th September 2013 08:57:13] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 9th September 2013 08:57:13] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 9th September 2013 08:57:13] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 9th September 2013 08:57:13] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Monday, 9th September 2013 08:57:13] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Monday, 9th September 2013 08:57:13] [authentication.php] gracefully exiting
+[Monday, 9th September 2013 08:57:15] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Monday, 9th September 2013 08:57:15] [fetch_cow_identifiers.php] obtaining POST request
+[Monday, 9th September 2013 08:57:15] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Monday, 9th September 2013 08:57:15] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 9th September 2013 08:57:15] [database.php] Starting DatabaseHandler
+[Monday, 9th September 2013 08:57:15] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 9th September 2013 08:57:15] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 9th September 2013 08:57:15] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 9th September 2013 08:57:15] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow' AND `cow`.`sex` = 0
+[Monday, 9th September 2013 08:57:15] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Monday, 9th September 2013 08:57:15] [fetch_cow_identifiers.php] gracefully exiting
+[Monday, 9th September 2013 08:57:33] [add_milk_production.php] Starting MilkProductionAdder
+[Monday, 9th September 2013 08:57:33] [add_milk_production.php] obtaining POST request
+[Monday, 9th September 2013 08:57:33] [add_milk_production.php] getting settings from: ../../config/settings.ini
+[Monday, 9th September 2013 08:57:33] [add_milk_production.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 9th September 2013 08:57:33] [database.php] Starting DatabaseHandler
+[Monday, 9th September 2013 08:57:33] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 9th September 2013 08:57:33] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 9th September 2013 08:57:33] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 9th September 2013 08:57:33] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-rog-0' AND `name` = 'Rosy'
+[Monday, 9th September 2013 08:57:33] [database.php] running query SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('4/9/2013', '%d/%m/%Y')
+[Monday, 9th September 2013 08:57:33] [database.php] running query INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES(35,0,1,'KGs',STR_TO_DATE('4/9/2013', '%d/%m/%Y'),'2013-09-09 08:57:33')
+[Monday, 9th September 2013 08:57:33] [add_milk_production.php] returning response code 533783
+[Monday, 9th September 2013 08:57:33] [add_milk_production.php] gracefully exiting
+[Monday, 9th September 2013 09:38:50] [add_milk_production.php] Starting MilkProductionAdder
+[Monday, 9th September 2013 09:38:50] [add_milk_production.php] obtaining POST request
+[Monday, 9th September 2013 09:38:50] [add_milk_production.php] getting settings from: ../../config/settings.ini
+[Monday, 9th September 2013 09:38:50] [add_milk_production.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 9th September 2013 09:38:50] [database.php] Starting DatabaseHandler
+[Monday, 9th September 2013 09:38:50] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 9th September 2013 09:38:50] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 9th September 2013 09:38:50] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 9th September 2013 09:38:50] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-rog-0' AND `name` = 'Rosy'
+[Monday, 9th September 2013 09:38:50] [database.php] running query SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('4/9/2013', '%d/%m/%Y')
+[Monday, 9th September 2013 09:38:50] [database.php] running query INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES(35,0,1,'KGs',STR_TO_DATE('4/9/2013', '%d/%m/%Y'),'2013-09-09 09:38:50')
