@@ -50,6 +50,8 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     private TextView quantityTypeTV;
     private Spinner quantityTypeS;
     private String[] quantityTypes;
+    private TextView dateTV;
+    private EditText dateET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -65,6 +67,8 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         addMilkProductionDialog.setContentView(R.layout.dialog_add_milk_production);
         cowTV=(TextView)addMilkProductionDialog.findViewById(R.id.cow_tv);
         cowS=(Spinner)addMilkProductionDialog.findViewById(R.id.cow_s);
+        dateTV=(TextView)addMilkProductionDialog.findViewById(R.id.date_tv);
+        dateET=(EditText)addMilkProductionDialog.findViewById(R.id.date_et);
         timeTV=(TextView)addMilkProductionDialog.findViewById(R.id.time_tv);
         timeS=(Spinner)addMilkProductionDialog.findViewById(R.id.time_s);
         quantityTV=(TextView)addMilkProductionDialog.findViewById(R.id.quantity_tv);
@@ -107,6 +111,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         productionHistoryB.setText(Locale.getStringInLocale("production_history",this));
         addMilkProductionDialog.setTitle(Locale.getStringInLocale("add_production",this));
         cowTV.setText(Locale.getStringInLocale("cow",this));
+        dateTV.setText(Locale.getStringInLocale("date",this));
         timeTV.setText(Locale.getStringInLocale("time",this));
         quantityTV.setText(Locale.getStringInLocale("quantity",this));
         addMilkProductionAddB.setText(Locale.getStringInLocale("add",this));
@@ -263,7 +268,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                     DataHandler.setSharedPreference(MilkProductionActivity.this, DataHandler.SP_KEY_MILK_QUANTITY_TYPE, String.valueOf(quantityTypeS.getSelectedItemPosition()));
                     quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
                 }
-                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],String.valueOf(timeS.getSelectedItemPosition()),quantityET.getText().toString(),quantityType);
+                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],String.valueOf(timeS.getSelectedItemPosition()),quantityET.getText().toString(),quantityType,dateET.getText().toString());
             }
         }
 
@@ -307,7 +312,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                 jsonObject.put("time",params[3]);
                 jsonObject.put("quantity",params[4]);
                 jsonObject.put("quantityType",params[5]);
-                Log.d(TAG,params[5]);
+                jsonObject.put("date",params[6]);
                 String result=DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL);
                 Log.d(TAG,"data sent to server, result = "+result);
                 return result;

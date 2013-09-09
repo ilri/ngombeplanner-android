@@ -30,10 +30,10 @@ class MilkProductionAdder {
 		if(sizeOf($result) == 1) { //only one cow ID should have been fetched
 			$cowID = $result[0]['id'];
 			$this->logHandler->log(4, $this->TAG,"cow.id fetched and is ".$cowID);
-			$dateEAT = $this->getTime('Y-m-d');
+			$dateEAT = $this->jsonObject['date'];
 			
 			//check if there is a combined record for date
-			$query = "SELECT `time` FROM `milk_production` WHERE `cow_id` = {$cowID} AND `date` = '{$dateEAT}'";
+			$query = "SELECT `time` FROM `milk_production` WHERE `cow_id` = {$cowID} AND `date` = STR_TO_DATE('{$dateEAT}', '%d/%m/%Y')";
 			$result = $this->database->runMySQLQuery($query, true);
 			$dataThereFlag = false;
 			if(sizeOf($result) > 0 && $this->jsonObject['time'] == 3) {
@@ -48,7 +48,7 @@ class MilkProductionAdder {
 			}
 			if($dataThereFlag == false) {
 				$timeEAT = $this->getTime('Y-m-d H:i:s');
-				$query = "INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES({$cowID},{$this->jsonObject['time']},{$this->jsonObject['quantity']},'{$this->jsonObject['quantityType']}','$dateEAT','$timeEAT')";
+				$query = "INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES({$cowID},{$this->jsonObject['time']},{$this->jsonObject['quantity']},'{$this->jsonObject['quantityType']}',STR_TO_DATE('{$dateEAT}', '%d/%m/%Y'),'$timeEAT')";
 				$this->database->runMySQLQuery($query, false, $this->codes['data_error']);
 				$this->logHandler->log(3, $this->TAG,"returning response code ".$this->codes['acknowledge_ok']);
 				echo $this->codes['acknowledge_ok'];
