@@ -55,6 +55,21 @@
             android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
         <TextView
+            android:id="@+id/event_subtype_tv"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:textSize="@dimen/normal_text_size"
+            android:visibility="gone"/>
+        <Spinner
+            android:id="@+id/event_subtype_s"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textColor="@color/text_input_color"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:visibility="gone"/>
+        <TextView
             android:id="@+id/remarks_tv"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"

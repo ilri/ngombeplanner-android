@@ -23,6 +23,8 @@ public class Cow implements Parcelable, Serializable {
     public static final int AGE_TYPE_DAY = 0;
     public static final int AGE_TYPE_WEEK = 1;
     public static final int AGE_TYPE_YEAR = 2;
+    public static final String MODE_ADULT_COW_REGISTRATION = "adultCowRegistration";
+    public static final String MODE_BORN_CALF_REGISTRATION = "bornCalfRegistration";
     private String name;
     private String earTagNumber;
     private String dateOfBirth;
@@ -35,6 +37,7 @@ public class Cow implements Parcelable, Serializable {
     private Dam dam;
     private String countryOfOrigin;
     private boolean isNotDamOrSire;
+    private String mode;
 
     public Cow(boolean isNotDamOrSire) {
         name = "";
@@ -51,12 +54,17 @@ public class Cow implements Parcelable, Serializable {
             sire = new Sire();
             dam = new Dam();
         }
+        mode = "";
         countryOfOrigin = "";
     }
 
     public Cow(Parcel in) {
         this(true);
         readFromParcel(in);
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 
     public void setName(String name) {
@@ -119,6 +127,10 @@ public class Cow implements Parcelable, Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getMode() {
+        return mode;
     }
 
     public String getEarTagNumber() {
@@ -188,6 +200,7 @@ public class Cow implements Parcelable, Serializable {
         }
 
         dest.writeString(countryOfOrigin);
+        dest.writeString(mode);
     }
 
     public void readFromParcel(Parcel in) {
@@ -210,6 +223,7 @@ public class Cow implements Parcelable, Serializable {
         }
 
         countryOfOrigin = in.readString();
+        mode = in.readString();
     }
 
     public static final Creator<Cow> CREATOR = new Creator<Cow>() {
@@ -243,6 +257,7 @@ public class Cow implements Parcelable, Serializable {
                 deformityJsonArray.put(i, deformities.get(i));
             }
             jsonObject.put("deformities", deformityJsonArray);
+            jsonObject.put("mode", ((mode == null) ? "" : mode));
             if (isNotDamOrSire) {
                 jsonObject.put("type", "cow");
                 jsonObject.put("sire", ((sire == null) ? "" : sire.getJsonObject()));

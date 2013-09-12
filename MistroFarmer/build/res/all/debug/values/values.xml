@@ -7,6 +7,10 @@
         <item>Weeks</item>
         <item>Years</item>
     </string-array>
+    <string-array name="birth_types_en">
+        <item>Normal</item>
+        <item>Still</item>
+    </string-array>
     <string-array name="breeds_array_en">
         <item>Ayrshire</item>
         <item>Boran</item>
@@ -33,9 +37,12 @@
         <item>Abortion</item>
         <item>Birth</item>
         <item>Start of Lactation</item>
+        <item>Dry Off</item>
         <item>Bloat</item>
         <item>Sickness</item>
         <item>Death</item>
+        <item>Acquisition</item>
+        <item>Sale</item>
     </string-array>
     <string-array name="deformities_array_en">
         <item>Blind</item>
@@ -605,6 +612,7 @@
     <string name="app_name">Mistro Farmer</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="breed_en">Breed</string>
+    <string name="calf_registration_en">Calf Registration</string>
     <string name="cancel_en">Cancel</string>
     <string name="country_of_origin_en">Country of Origin</string>
     <string name="cow_en">Cow</string>
@@ -655,6 +663,7 @@
     <string name="name_en">Name</string>
     <string name="new_mobile_number_en">New Mobile Number</string>
     <string name="next_en">Next</string>
+    <string name="next_screen_is_calf_registration_en">In the next screen, you will be required to register the calf that has been born. Click next to register the calf</string>
     <string name="no_data_received_en">No data received</string>
     <string name="no_en">No</string>
     <string name="number_of_cows_en">Number of Cows</string>
@@ -698,6 +707,7 @@
     <string name="title_activity_milk_production">Milk Production</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="today_en">Today</string>
+    <string name="type_of_birth_en">Type of birth</string>
     <string name="vet_used_en">Vet Used</string>
     <string name="welcome_en">Welcome</string>
     <string name="yes_en">Yes</string>

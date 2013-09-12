@@ -177,6 +177,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         farmer.setCowNumber((numberOfCowsET.getText().toString()==null||numberOfCowsET.getText().toString().length()==0) ? 0:Integer.parseInt(numberOfCowsET.getText().toString()));//Integer.parseInt(numberOfCowsET.getText().toString())
         farmer.setLatitude(latitude);
         farmer.setLongitude(longitude);
+        farmer.setMode(Farmer.MODE_INITIAL_REGISTRATION);
         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         farmer.setSimCardSN(telephonyManager.getSimSerialNumber());
         //TODO:save gps coordinates

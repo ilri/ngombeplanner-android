@@ -209,7 +209,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
 
         //init text in child views
         initTextInViews();
-        resetMode();
+        //resetMode();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -245,8 +245,26 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             farmer=bundle.getParcelable(Farmer.PARCELABLE_KEY);
             if(mode==MODE_COW)
             {
-                if(farmer!=null)
+                if(farmer!=null){
                     thisCow=farmer.getCow(index);
+                    if(thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)) {
+                        this.setTitle(Locale.getStringInLocale("calf_registration",this));
+                        setAgeFromDate(thisCow.getDateOfBirth());
+                        thisCow.setAge(Integer.parseInt(ageET.getText().toString()));
+                        if(ageS.getSelectedItemPosition()==0)
+                        {
+                            thisCow.setAgeType(Cow.AGE_TYPE_DAY);
+                        }
+                        else if(ageS.getSelectedItemPosition()==1)
+                        {
+                            thisCow.setAgeType(Cow.AGE_TYPE_WEEK);
+                        }
+                        else if(ageS.getSelectedItemPosition()==2)
+                        {
+                            thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
+                        }
+                    }
+                }
                 else
                     Log.d(TAG,"Farmer object is null");
             }
@@ -367,6 +385,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 vetUsedET.setText(((Sire)thisCow).getVetUsed());
             }
         }
+        resetMode();
     }
 
     private void resetMode()
@@ -418,6 +437,11 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             vetUsedTV.setVisibility(TextView.VISIBLE);
             vetUsedET.setVisibility(EditText.VISIBLE);
             serviceTypeModeHandler(serviceTypeS.getSelectedItemPosition());
+        }
+        else if(mode==MODE_COW) {
+            if(farmer.getMode().equals(Farmer.MODE_NEW_COW_REGISTRATION)) {
+                previousButton.setVisibility(Button.INVISIBLE);
+            }
         }
     }
 
@@ -1233,6 +1257,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             }
         }
         thisCow.setName(nameET.getText().toString());
+        if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
+            thisCow.setMode(Cow.MODE_ADULT_COW_REGISTRATION);
+        }
         thisCow.setEarTagNumber(earTagNumberET.getText().toString());
         thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
         thisCow.setAge((ageET.getText().toString() == null || ageET.getText().toString().length() == 0) ? -1 : Integer.parseInt(ageET.getText().toString()));
@@ -1329,13 +1356,20 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             if(result)
             {
                 Log.d(TAG,"data successfully sent to server");
-                Utils.showSuccessfullRegistration(CowRegistrationActivity.this,null);
+                if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
+                    Utils.showSuccessfullRegistration(CowRegistrationActivity.this,null);
+                }
+                else {
+                    Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("event_successfully_recorded",CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(CowRegistrationActivity.this, EventsActivity.class);
+                    startActivity(intent);
+                }
                 //Intent intent=new Intent(CowRegistrationActivity.this,LandingActivity.class);
                 //startActivity(intent);
             }
             else
             {
-                Toast.makeText(CowRegistrationActivity.this,"something went wrong",Toast.LENGTH_LONG).show();
+                Toast.makeText(CowRegistrationActivity.this,Locale.getStringInLocale("problem_connecting_to_server",CowRegistrationActivity.this),Toast.LENGTH_LONG).show();
             }
         }
     }

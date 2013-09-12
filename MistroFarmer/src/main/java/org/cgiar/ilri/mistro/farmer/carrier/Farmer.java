@@ -19,6 +19,8 @@ public class Farmer implements Parcelable, Serializable
 {
     public static final String TAG="Farmer";
     public static final String PARCELABLE_KEY="farmer";
+    public static final String MODE_INITIAL_REGISTRATION = "initialRegistration";
+    public static final String MODE_NEW_COW_REGISTRATION = "newCowRegistration";
     private String fullName;
     private String extensionPersonnel;
     private String mobileNumber;
@@ -26,6 +28,7 @@ public class Farmer implements Parcelable, Serializable
     private String longitude;
     private String latitude;
     private String simCardSN;
+    private String mode;
 
     public Farmer()
     {
@@ -36,6 +39,7 @@ public class Farmer implements Parcelable, Serializable
         longitude="";
         latitude="";
         simCardSN ="";
+        mode = "";
     }
 
     public Farmer(Parcel source)
@@ -47,6 +51,10 @@ public class Farmer implements Parcelable, Serializable
     public void setFullName(String fullName)
     {
         this.fullName = fullName;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 
     public void setExtensionPersonnel(String extensionPersonnel)
@@ -62,6 +70,10 @@ public class Farmer implements Parcelable, Serializable
     public int getCowNumber()
     {
         return cows.size();
+    }
+
+    public String getMode() {
+        return this.mode;
     }
 
     public void setCowNumber(int number)
@@ -162,6 +174,7 @@ public class Farmer implements Parcelable, Serializable
         dest.writeString(longitude);
         dest.writeString(latitude);
         dest.writeString(simCardSN);
+        dest.writeString(mode);
     }
 
     public void readFromParcel(Parcel in)
@@ -173,6 +186,7 @@ public class Farmer implements Parcelable, Serializable
         this.longitude=in.readString();
         this.latitude=in.readString();
         this.simCardSN =in.readString();
+        this.mode = in.readString();
     }
 
     public static final Creator<Farmer> CREATOR=new Creator<Farmer>()
@@ -207,6 +221,7 @@ public class Farmer implements Parcelable, Serializable
             jsonObject.put("longitude",((longitude==null) ? "":longitude));
             jsonObject.put("latitude",((latitude==null) ? "":latitude));
             jsonObject.put("simCardSN",((simCardSN ==null) ? "": simCardSN));
+            jsonObject.put("mode",((mode ==null) ? "": mode));
         }
         catch (JSONException e)
         {

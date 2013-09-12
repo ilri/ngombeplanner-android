@@ -1,13 +1,17 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -23,6 +27,9 @@ import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
+import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.Dam;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +40,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class AddEventActivity extends SherlockActivity implements View.OnClickListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener
+public class AddEventActivity extends SherlockActivity implements View.OnClickListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener, Spinner.OnItemSelectedListener
 {
     private final String dateFormat="dd/MM/yyyy";
 
@@ -43,6 +50,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private EditText dateET;
     private TextView eventTypeTV;
     private Spinner eventTypeS;
+    private TextView eventSubtypeTV;
+    private Spinner eventSubtypeS;
     private TextView remarksTV;
     private EditText remarksET;
     private Button okayB;
@@ -69,6 +78,9 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         dateET.setOnClickListener(this);
         eventTypeTV=(TextView)findViewById(R.id.event_type_tv);
         eventTypeS=(Spinner)findViewById(R.id.event_type_s);
+        eventTypeS.setOnItemSelectedListener(this);
+        eventSubtypeTV=(TextView)findViewById(R.id.event_subtype_tv);
+        eventSubtypeS=(Spinner)findViewById(R.id.event_subtype_s);
         remarksTV=(TextView)findViewById(R.id.remarks_tv);
         remarksET=(EditText)findViewById(R.id.remarks_et);
         okayB=(Button)findViewById(R.id.okay_b);
@@ -153,6 +165,43 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(parent == eventTypeS) {
+            String[] eventTypesEN = Locale.getArrayInLocale("cow_event_types", this, Locale.LOCALE_ENGLISH);
+            if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {
+                birthEventSelected();
+                remarksTV.setVisibility(TextView.GONE);
+                remarksET.setVisibility(EditText.GONE);
+            }
+            else {
+                eventSubtypeTV.setVisibility(TextView.GONE);
+                eventSubtypeS.setVisibility(Spinner.GONE);
+                okayB.setText(Locale.getStringInLocale("okay",this));
+                remarksTV.setVisibility(TextView.VISIBLE);
+                remarksET.setVisibility(EditText.VISIBLE);
+            }
+        }
+    }
+
+    private void birthEventSelected() {
+        eventSubtypeTV.setText(Locale.getStringInLocale("type_of_birth",this));
+        int eventSubtypeArrayID = Locale.getArrayIDInLocale("birth_types",this);
+        if(eventSubtypeArrayID != 0) {
+            ArrayAdapter<CharSequence> eventSubtypeArrayAdapter=ArrayAdapter.createFromResource(this, eventSubtypeArrayID, android.R.layout.simple_spinner_item);
+            eventSubtypeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            eventSubtypeS.setAdapter(eventSubtypeArrayAdapter);
+            eventSubtypeTV.setVisibility(TextView.VISIBLE);
+            eventSubtypeS.setVisibility(Spinner.VISIBLE);
+            okayB.setText(Locale.getStringInLocale("next",this));
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
     private boolean validateInput()
     {
         if(dateET.getText().toString()==null||dateET.getText().toString().length()==0)
@@ -185,29 +234,87 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     {
         if(validateInput() && DataHandler.checkNetworkConnection(this,null))
         {
-            String[] eventTypes = getResources().getStringArray(R.array.cow_event_types_en);
+            String[] eventTypes = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
             String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
-            String selectedCowETN = cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()];
-            String selectedCowName = cowNameArray[cowIdentifierS.getSelectedItemPosition()];
-            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-            String serialNumber = telephonyManager.getSimSerialNumber();
-            JSONObject jsonObject = new JSONObject();
-            try
-            {
-                jsonObject.put("simCardSN", serialNumber);
-                jsonObject.put("cowEarTagNumber", selectedCowETN);
-                jsonObject.put("cowName", selectedCowName);
-                jsonObject.put("date", dateET.getText().toString());
-                jsonObject.put("eventType", selectedEvent);
-                jsonObject.put("remarks", remarksET.getText().toString());
-                CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
-                cowEventAdditionThread.execute(jsonObject);
+            if(selectedEvent.equals("Birth")) {
+                String[] eventSubtypes = Locale.getArrayInLocale("birth_types",this,Locale.LOCALE_ENGLISH);
+                if(eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal")) {
+                    AlertDialog cowRegistrationAlertDialog = constructCalfRegistrationDialog();
+                    cowRegistrationAlertDialog.show();
+                }
             }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
+            else {
+                String selectedCowETN = cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()];
+                String selectedCowName = cowNameArray[cowIdentifierS.getSelectedItemPosition()];
+                TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+                String serialNumber = telephonyManager.getSimSerialNumber();
+                JSONObject jsonObject = new JSONObject();
+                try
+                {
+                    jsonObject.put("simCardSN", serialNumber);
+                    jsonObject.put("cowEarTagNumber", selectedCowETN);
+                    jsonObject.put("cowName", selectedCowName);
+                    jsonObject.put("date", dateET.getText().toString());
+                    jsonObject.put("eventType", selectedEvent);
+                    jsonObject.put("remarks", remarksET.getText().toString());
+                    CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
+                    cowEventAdditionThread.execute(jsonObject);
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
             }
+
         }
+    }
+
+    private AlertDialog constructCalfRegistrationDialog() {
+        AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(Locale.getStringInLocale("calf_registration", this));
+        alertDialogBuilder
+                .setMessage(Locale.getStringInLocale("next_screen_is_calf_registration",AddEventActivity.this))
+                .setCancelable(false)
+                .setPositiveButton(Locale.getStringInLocale("next",AddEventActivity.this), new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        int numberOfCows=1;
+                        Farmer farmer = new Farmer();
+                        farmer.setCowNumber(numberOfCows);
+                        farmer.setMode(Farmer.MODE_NEW_COW_REGISTRATION);
+                        TelephonyManager telephonyManager=(TelephonyManager)AddEventActivity.this.getSystemService(Context.TELEPHONY_SERVICE);
+                        farmer.setSimCardSN(telephonyManager.getSimSerialNumber());
+                        Cow thisCalf = new Cow(true);
+                        Dam calfDam = new Dam();
+                        calfDam.setEarTagNumber(cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()]);
+                        calfDam.setName(cowNameArray[cowIdentifierS.getSelectedItemPosition()]);
+                        thisCalf.setDam(calfDam);
+                        thisCalf.setDateOfBirth(dateET.getText().toString());
+                        thisCalf.setMode(Cow.MODE_BORN_CALF_REGISTRATION);
+                        farmer.setCow(thisCalf, 0);
+
+                        Intent intent=new Intent(AddEventActivity.this,CowRegistrationActivity.class);
+                        intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
+                        intent.putExtra(CowRegistrationActivity.KEY_INDEX,0);
+                        intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS,numberOfCows);
+                        Bundle bundle=new Bundle();
+                        bundle.putParcelable(Farmer.PARCELABLE_KEY, farmer);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton(Locale.getStringInLocale("cancel",AddEventActivity.this), new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog=alertDialogBuilder.create();
+        return alertDialog;
     }
 
     private class CowEventAdditionThread extends AsyncTask<JSONObject, Integer, String>

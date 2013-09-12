@@ -1,14 +1,2 @@
 
-[Thursday, 5th September 2013 15:09:57] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='''
-[Thursday, 5th September 2013 15:09:57] [authentication.php] SIM card serial number () not matching any farmer. Sending user_not_authenticated response code back to client
-[Friday, 6th September 2013 08:58:45] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89014103211118510720''
-[Friday, 6th September 2013 08:58:45] [authentication.php] SIM card serial number (89014103211118510720) not matching any farmer. Sending user_not_authenticated response code back to client
-[Friday, 6th September 2013 09:51:35] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254027741001582514''
-[Friday, 6th September 2013 09:51:35] [authentication.php] SIM card serial number (89254027741001582514) not matching any farmer. Sending user_not_authenticated response code back to client
-[Friday, 6th September 2013 09:52:14] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254027741001582514''
-[Friday, 6th September 2013 09:52:14] [authentication.php] SIM card serial number (89254027741001582514) not matching any farmer. Sending user_not_authenticated response code back to client
-[Friday, 6th September 2013 14:19:17] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303''
-[Friday, 6th September 2013 14:19:17] [authentication.php] SIM card serial number (89254029541005994303) not matching any farmer. Sending user_not_authenticated response code back to client
-[Saturday, 7th September 2013 13:42:05] [database.php] no results gotten for  'SELECT `milk_production`.*,`cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' ORDER BY `milk_production`.`id` DESC LIMIT 40'
-[Monday, 9th September 2013 08:45:13] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('14/08/2012', '%d/%m/%Y')'
-[Monday, 9th September 2013 08:57:33] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('4/9/2013', '%d/%m/%Y')'
+[Thursday, 12th September 2013 12:54:08] [database.php] no results gotten for  'SELECT `cow`.`id` FROM `cow` WHERE `name` = 'Rosy' AND `ear_tag_number` = 'nai-rog-0' AND `embryo_number` = '''
