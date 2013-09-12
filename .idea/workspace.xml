@@ -470,21 +470,12 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/usage.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" afterPath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_add_event.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/layout/activity_add_event.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_add_event.xml" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_add_event.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/debug.log" afterPath="$PROJECT_DIR$/web/log/debug.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/error.log" afterPath="$PROJECT_DIR$/web/log/error.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/info.log" afterPath="$PROJECT_DIR$/web/log/info.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/php/farmer/registration.php" afterPath="$PROJECT_DIR$/web/php/farmer/registration.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/warning.log" afterPath="$PROJECT_DIR$/web/log/warning.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MistroFarmer.iws" />
@@ -557,7 +548,7 @@
       <file leaf-file-name="strings_en.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="18" selection-start="6234" selection-end="6262" vertical-scroll-proportion="-4.5925927" vertical-offset="2126" max-vertical-offset="3060">
+            <state line="163" column="18" selection-start="8468" selection-end="8481" vertical-scroll-proportion="-15.925926" vertical-offset="2504" max-vertical-offset="3078">
               <folding />
             </state>
           </provider>
@@ -572,17 +563,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddEventActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AddEventActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="58" selection-start="7111" selection-end="7111" vertical-scroll-proportion="0.0" vertical-offset="6646" max-vertical-offset="8622">
+            <state line="234" column="29" selection-start="9182" selection-end="9182" vertical-scroll-proportion="0.77186966" vertical-offset="3762" max-vertical-offset="8946">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#5885#5893#0" expanded="true" />
-                <element signature="e#11412#13274#0" expanded="true" />
-                <element signature="e#13255#13256#0" expanded="true" />
-                <element signature="e#13369#13632#0" expanded="true" />
-                <element signature="e#13613#13614#0" expanded="true" />
+                <element signature="e#11881#13743#0" expanded="true" />
+                <element signature="e#13724#13725#0" expanded="true" />
+                <element signature="e#13838#14101#0" expanded="true" />
+                <element signature="e#14082#14083#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -642,10 +633,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Farmer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Farmer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="182" column="48" selection-start="3882" selection-end="3882" vertical-scroll-proportion="5.757469" vertical-offset="0" max-vertical-offset="4284">
+            <state line="15" column="30" selection-start="331" selection-end="331" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="4284">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1280,8 +1271,8 @@
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java" />
-        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" />
       </list>
     </option>
@@ -1762,7 +1753,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32954547" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32905295" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32905295" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3296" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.6224" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32905295" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1906,13 +1897,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="18" selection-start="6234" selection-end="6262" vertical-scroll-proportion="-4.5925927" vertical-offset="2126" max-vertical-offset="3060">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="242" column="24" selection-start="10038" selection-end="10038" vertical-scroll-proportion="-2.1851852" vertical-offset="4297" max-vertical-offset="24876">
@@ -1931,25 +1915,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="58" selection-start="7111" selection-end="7111" vertical-scroll-proportion="0.0" vertical-offset="6646" max-vertical-offset="8622">
+        <state line="15" column="30" selection-start="331" selection-end="331" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="4284">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5885#5893#0" expanded="true" />
-            <element signature="e#11412#13274#0" expanded="true" />
-            <element signature="e#13255#13256#0" expanded="true" />
-            <element signature="e#13369#13632#0" expanded="true" />
-            <element signature="e#13613#13614#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java">
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="182" column="48" selection-start="3882" selection-end="3882" vertical-scroll-proportion="5.757469" vertical-offset="0" max-vertical-offset="4284">
+        <state line="163" column="18" selection-start="8468" selection-end="8481" vertical-scroll-proportion="-15.925926" vertical-offset="2504" max-vertical-offset="3078">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="234" column="29" selection-start="9182" selection-end="9182" vertical-scroll-proportion="0.77186966" vertical-offset="3762" max-vertical-offset="8946">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#5885#5893#0" expanded="true" />
+            <element signature="e#11881#13743#0" expanded="true" />
+            <element signature="e#13724#13725#0" expanded="true" />
+            <element signature="e#13838#14101#0" expanded="true" />
+            <element signature="e#14082#14083#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -211,23 +211,38 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
         else
         {
-            try
-            {
-                Date dateEntered=new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateET.getText().toString());
-                Date today=new Date();
-                if((today.getTime()-dateEntered.getTime())<0)
-                {
-                    Toast.makeText(this,dateInFuture,Toast.LENGTH_LONG).show();
-                    return false;
-                }
-            }
-            catch (ParseException e)
-            {
-                e.printStackTrace();
+            if(!validateDate()){
                 return false;
             }
         }
         return true;
+    }
+
+    private boolean validateDate() {
+        try
+        {
+            Date dateEntered=new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateET.getText().toString());
+            Date today=new Date();
+            long milisecondDifference = today.getTime() - dateEntered.getTime();
+            long days = milisecondDifference / 86400000;
+            if((today.getTime()-dateEntered.getTime())<0)
+            {
+                Toast.makeText(this,dateInFuture,Toast.LENGTH_LONG).show();
+                return false;
+            }
+            else if(days > 30) {//more than one month
+                Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private void sendEvent()
@@ -394,6 +409,9 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     {
         String dateString=String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear+1)+"/"+String.valueOf(year);
         dateET.setText(dateString);
+        if(!validateDate()){
+            dateET.setText("");
+        }
     }
 
     private class CowIdentifierThread extends AsyncTask<String,Integer,String>
