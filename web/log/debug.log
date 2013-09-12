@@ -1751,3 +1751,135 @@
 )
 
 [Thursday, 12th September 2013 14:32:02] [fetch_cow_identifiers.php]  cow identifiers encoded from an array and is '{"cowNames":["Rosy","Chris","SonOfRosy","SonOfRosy1","Fdwds"],"earTagNumbers":["nai-rog-0","nai-rog-1","sor","sor2","sfd"]}'
+[Thursday, 12th September 2013 14:47:02] [authentication.php] json_decode returned: Array
+(
+    [simCardSN] => 89014103211118510720
+)
+
+[Thursday, 12th September 2013 14:47:02] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Thursday, 12th September 2013 14:47:02] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Thursday, 12th September 2013 14:47:02] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Thursday, 12th September 2013 14:47:02] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Thursday, 12th September 2013 14:47:03] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89014103211118510720'' are Array
+(
+    [0] => Array
+        (
+            [name] => Jason Rogena
+        )
+
+)
+
+[Thursday, 12th September 2013 14:47:18] [fetch_cow_identifiers.php] json_decode returned: Array
+(
+    [cowSex] => 0
+    [simCardSN] => 89014103211118510720
+)
+
+[Thursday, 12th September 2013 14:47:18] [fetch_cow_identifiers.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Thursday, 12th September 2013 14:47:18] [fetch_cow_identifiers.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Thursday, 12th September 2013 14:47:18] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Thursday, 12th September 2013 14:47:18] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Thursday, 12th September 2013 14:47:18] [fetch_cow_identifiers.php] CowSex specified as 0
+[Thursday, 12th September 2013 14:47:19] [database.php] results gotten from 'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89014103211118510720' AND `cow`.`type` ='cow' AND `cow`.`sex` = 0' are Array
+(
+    [0] => Array
+        (
+            [name] => Rosy
+            [ear_tag_number] => nai-rog-0
+        )
+
+)
+
+[Thursday, 12th September 2013 14:47:19] [fetch_cow_identifiers.php]  cow identifiers encoded from an array and is '{"cowNames":["Rosy"],"earTagNumbers":["nai-rog-0"]}'

@@ -38,6 +38,8 @@ import java.util.GregorianCalendar;
 
 public class MilkProductionActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener
 {
+    private final String dateFormat="dd/MM/yyyy";
+
     private static final String TAG="MilkProductionActivity";
     private Button addProductionB;
     private Button productionHistoryB;
@@ -188,6 +190,9 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     {
         String dateString=String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear+1)+"/"+String.valueOf(year);
         dateET.setText(dateString);
+        if(!validateDate()){
+            dateET.setText("");
+        }
     }
 
     private void fetchCowIdentifiers()
@@ -316,7 +321,42 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             Toast.makeText(this,quantityETEmptyWarning,Toast.LENGTH_LONG).show();
             return false;
         }
+        else if(dateET.getText().toString()==null||dateET.getText().toString().length()==0)
+        {
+            Toast.makeText(this,Locale.getStringInLocale("enter_date",this),Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(!validateDate()) {
+            return false;
+        }
         return true;
+    }
+
+    private boolean validateDate() {
+        try
+        {
+            Date dateEntered=new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateET.getText().toString());
+            Date today=new Date();
+            long milisecondDifference = today.getTime() - dateEntered.getTime();
+            long days = milisecondDifference / 86400000;
+            if((today.getTime()-dateEntered.getTime())<0)
+            {
+                Toast.makeText(this,Locale.getStringInLocale("date_in_future",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+            else if(days > 30) {//more than one month
+                Toast.makeText(this,Locale.getStringInLocale("milk_data_too_old",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private class MilkProductionDataAdditionThread extends AsyncTask<String,Integer,String>
