@@ -472,10 +472,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" afterPath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/debug.log" afterPath="$PROJECT_DIR$/web/log/debug.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/error.log" afterPath="$PROJECT_DIR$/web/log/error.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/info.log" afterPath="$PROJECT_DIR$/web/log/info.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/warning.log" afterPath="$PROJECT_DIR$/web/log/warning.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MistroFarmer.iws" />
@@ -548,7 +550,7 @@
       <file leaf-file-name="strings_en.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="164" column="18" selection-start="8574" selection-end="8591" vertical-scroll-proportion="-15.925926" vertical-offset="2522" max-vertical-offset="3096">
+            <state line="119" column="18" selection-start="5714" selection-end="5718" vertical-scroll-proportion="-7.259259" vertical-offset="1946" max-vertical-offset="3114">
               <folding />
             </state>
           </provider>
@@ -557,7 +559,7 @@
       <file leaf-file-name="MilkProductionActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="312" column="5" selection-start="13216" selection-end="13216" vertical-scroll-proportion="0.11663808" vertical-offset="5548" max-vertical-offset="7614">
+            <state line="370" column="32" selection-start="15671" selection-end="15671" vertical-scroll-proportion="0.3207547" vertical-offset="6473" max-vertical-offset="7866">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#6701#6709#0" expanded="true" />
@@ -1537,7 +1539,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="S5570dd0cef05" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="DPIL" />
@@ -1937,14 +1939,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="164" column="18" selection-start="8574" selection-end="8591" vertical-scroll-proportion="-15.925926" vertical-offset="2522" max-vertical-offset="3096">
+        <state line="119" column="18" selection-start="5714" selection-end="5718" vertical-scroll-proportion="-7.259259" vertical-offset="1946" max-vertical-offset="3114">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="312" column="5" selection-start="13216" selection-end="13216" vertical-scroll-proportion="0.11663808" vertical-offset="5548" max-vertical-offset="7614">
+        <state line="370" column="32" selection-start="15671" selection-end="15671" vertical-scroll-proportion="0.3207547" vertical-offset="6473" max-vertical-offset="7866">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#6701#6709#0" expanded="true" />

@@ -311,6 +311,8 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
 
     private boolean validateInput()
     {
+        String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
+        String quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
         if(quantityET.getText().toString()==null)
         {
             Toast.makeText(this,quantityETEmptyWarning,Toast.LENGTH_LONG).show();
@@ -328,6 +330,18 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         }
         else if(!validateDate()) {
             return false;
+        }
+        else if(quantityType.equals("Litres") || quantityType.equals("KGs")) {
+            if(Integer.parseInt(quantityET.getText().toString()) > 50) {
+                Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+        else if(quantityType.equals("Cups")) {
+            if(Integer.parseInt(quantityET.getText().toString()) > (50*3.3)) {
+                Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
         }
         return true;
     }

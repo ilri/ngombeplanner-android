@@ -1,2 +1,1 @@
 
-[Thursday, 12th September 2013 12:54:09] [database.php] MySQL error 'Duplicate entry '45-Rosy' for key 'farmer_id_2'' thrown while trying to run query 'INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`service_type`,`embryo_number`,`vet_used`,`date_added`) VALUES(45,'Rosy','nai-rog-0','',-1,-1,0,'dam',-1,'','','2013-09-12 12:54:08')', exiting
