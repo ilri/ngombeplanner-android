@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 13, 2013 at 01:00 PM
+-- Generation Time: Sep 13, 2013 at 01:22 PM
 -- Server version: 5.5.32-0ubuntu0.13.04.1
 -- PHP Version: 5.4.9-4ubuntu2.3
 
@@ -72,8 +72,8 @@ CREATE TABLE IF NOT EXISTS `cow` (
   `ear_tag_number` varchar(255) NOT NULL,
   `date_of_birth` datetime DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
-  `age_type` int(11) DEFAULT NULL COMMENT '0 for day, 1 for weeks, 2 for years',
-  `sex` int(11) NOT NULL COMMENT '0 for female, 1 for male',
+  `age_type` enum('Years','Weeks','Days') DEFAULT NULL,
+  `sex` enum('Female','Male') NOT NULL,
   `type` varchar(100) DEFAULT NULL,
   `sire_id` int(11) DEFAULT NULL,
   `dam_id` int(11) DEFAULT NULL,
@@ -274,11 +274,11 @@ CREATE TABLE IF NOT EXISTS `vet` (
 -- Constraints for table `cow`
 --
 ALTER TABLE `cow`
-  ADD CONSTRAINT `cow_ibfk_5` FOREIGN KEY (`embryo_id`) REFERENCES `embryo` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_ibfk_1` FOREIGN KEY (`farmer_id`) REFERENCES `farmer` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_ibfk_2` FOREIGN KEY (`sire_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_ibfk_3` FOREIGN KEY (`dam_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `cow_ibfk_4` FOREIGN KEY (`straw_id`) REFERENCES `straw` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `cow_ibfk_4` FOREIGN KEY (`straw_id`) REFERENCES `straw` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `cow_ibfk_5` FOREIGN KEY (`embryo_id`) REFERENCES `embryo` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `cow_breed`
