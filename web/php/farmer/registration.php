@@ -2,6 +2,7 @@
 
 include '../common/log.php';
 include '../common/database.php';
+include 'general.php';
 
 class RegistrationHandler {
 
@@ -13,6 +14,7 @@ class RegistrationHandler {
    private $jsonObject;
    private $logHandler;
    private $database;
+   private $general;
 
    public function __construct() {
       $this->settingsDir = $this->ROOT . "config/settings.ini";
@@ -22,6 +24,7 @@ class RegistrationHandler {
       $this->getSettings();
       $this->getCodes();
       $this->database = new DatabaseHandler;
+      $this->general = new General();
 
       if ($this->jsonObject['mode'] === "initialRegistration") {
          $this->logHandler->log(3, $this->TAG, "Initial registration for farmer");
@@ -104,7 +107,7 @@ class RegistrationHandler {
          //add an event and link it to the new cow
          if ($currentCow['mode'] === "bornCalfRegistration") {
             //add event to database
-            $eventTypeID = $this->getEventTypeID("Birth");
+            $eventTypeID = $this->general->getEventID("Birth");
             $eventDate = $currentCow['dateOfBirth'];
             $remarks = "";
             $time = $this->getTime("EAT");
@@ -112,25 +115,13 @@ class RegistrationHandler {
             $this->database->runMySQLQuery($query, false);
          }
          else if($currentCow['mode'] === "adultCowRegistration") {
-            $eventTypeID = $this->getEventTypeID("Acquisition");
+            $eventTypeID = $this->general->getEventID("Acquisition");
             $eventDate = $this->getTime("Y-m-d");
             $remarks = "";
             $time = $this->getTime("Y-m-d H:i:s");
             $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$remarks}','{$eventDate}','{$time}')";
             $this->database->runMySQLQuery($query, false);
          }
-      }
-   }
-
-   private function getEventTypeID($eventTypeName) {
-      $query = "SELECT `id` FROM `event` WHERE `name` = '{$eventTypeName}'";
-      $result = $this->database->runMySQLQuery($query, true);
-      if (sizeOf($result) == 1) {
-         $this->logHandler->log(4, $this->TAG, "fetched event type ID for " . $eventTypeName . " which is " . $result[0]['id']);
-         return $result[0]['id'];
-      } else {
-         $this->logHandler->log(1, $this->TAG, "it appears like there is no event type by the name '" . $eventTypeName . "' or more than one event type goes by this name, exiting");
-         die();
       }
    }
 
@@ -146,16 +137,19 @@ class RegistrationHandler {
       $breeds = $currentCow['breeds'];
       for ($j = 0; $j < sizeof($breeds); $j++) {
          $currentBreed = $breeds[$j];
-         $query = "INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES($cowID,'$currentBreed','$timeEAT')";
+         $breedID = $this->general->getBreedID($currentBreed);
+         $query = "INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES($cowID,$breedID,'$timeEAT')";
          $this->database->runMySQLQuery($query, false);
       }
       $deformities = $currentCow['deformities'];
       for ($j = 0; $j < sizeof($deformities); $j++) {
          $currentDeformity = $deformities[$j];
-         $query = "INSERT INTO `deformity`(`cow_id`,`text`,`date_added`) VALUES($cowID,'$currentDeformity','$timeEAT')";
+         $deformityID = $this->general->getDeformityID($currentDeformity);
+         $query = "INSERT INTO `cow_deformity`(`cow_id`,`deformity_id`,`date_added`) VALUES($cowID,$deformityID,'$timeEAT')";
          $this->database->runMySQLQuery($query, false);
       }
-      $sire = $currentCow['sire'];
+      /*$sire = $currentCow['sire'];
+      //TODO: implement using the new database scheme
       if ($sire['earTagNumber'] != "" || $sire['strawNumber'] != "" || $sire['name'] != "") {
          
          if($sire['strawNumber']!= "") {
@@ -200,7 +194,7 @@ class RegistrationHandler {
          $this->logHandler->log(4, $this->TAG, "New dam's ID is " . $damID);
          $query = "UPDATE `cow` SET `dam_id` = $damID WHERE `id` = $cowID";
          $this->database->runMySQLQuery($query, false);
-      }
+      }*/
       return $cowID;
    }
 }

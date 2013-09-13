@@ -4,3 +4,5 @@
 [Thursday, 12th September 2013 16:05:03] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('12/9/2013', '%d/%m/%Y')'
 [Thursday, 12th September 2013 16:07:59] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('8/9/2013', '%d/%m/%Y')'
 [Thursday, 12th September 2013 16:11:42] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('10/9/2013', '%d/%m/%Y')'
+[Friday, 13th September 2013 10:57:37] [database.php] no results gotten for  'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow''
+[Friday, 13th September 2013 10:57:47] [database.php] no results gotten for  'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow''

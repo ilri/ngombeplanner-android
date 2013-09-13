@@ -298,12 +298,17 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                 TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
                 MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
                 String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
+                String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times", this, Locale.LOCALE_ENGLISH);
                 String quantityType = "";
                 if(quantityTypesInEN.length == quantityTypes.length) {
                     DataHandler.setSharedPreference(MilkProductionActivity.this, DataHandler.SP_KEY_MILK_QUANTITY_TYPE, String.valueOf(quantityTypeS.getSelectedItemPosition()));
                     quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
                 }
-                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],String.valueOf(timeS.getSelectedItemPosition()),quantityET.getText().toString(),quantityType,dateET.getText().toString());
+                String milkingTime = "";
+                if(milkingTimesInEN.length > 0){
+                    milkingTime = milkingTimesInEN[timeS.getSelectedItemPosition()];
+                }
+                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString());
             }
         }
 

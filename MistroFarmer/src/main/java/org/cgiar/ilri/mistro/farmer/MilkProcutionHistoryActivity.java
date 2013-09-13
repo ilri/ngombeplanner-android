@@ -272,7 +272,17 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
                 final View rowSeparator1=generateRowSeparator(3424+jsonObject.getInt("id")+3322,tableRowHeight);
                 tableRow.addView(rowSeparator1);
 
-                final  TextView time=generateTextView(times[jsonObject.getInt("time")],3424+jsonObject.getInt("id")+554,tableRowHeight,tableTextSize);
+                String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times",this,Locale.LOCALE_ENGLISH);
+                String milkingTime = "";
+                for(int i = 0; i < milkingTimesInEN.length; i++) {
+                    if(jsonObject.getString("time").equals(milkingTimesInEN[i])) {
+                        if(milkingTimesInEN.length == times.length){
+                            milkingTime = times[i];
+                        }
+                        break;
+                    }
+                }
+                final  TextView time=generateTextView(milkingTime,3424+jsonObject.getInt("id")+554,tableRowHeight,tableTextSize);
                 tableRow.addView(time);
 
                 final View rowSeparator2=generateRowSeparator(3424+jsonObject.getInt("id")+3432,tableRowHeight);

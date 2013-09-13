@@ -446,3 +446,25 @@
 [Friday, 13th September 2013 09:03:42] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'
 [Friday, 13th September 2013 09:03:42] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
 [Friday, 13th September 2013 09:03:42] [fetch_cow_identifiers.php] gracefully exiting
+[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] obtaining POST request
+[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 13th September 2013 10:57:37] [database.php] Starting DatabaseHandler
+[Friday, 13th September 2013 10:57:37] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 13th September 2013 10:57:37] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 13th September 2013 10:57:37] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 13th September 2013 10:57:37] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'
+[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] gracefully exiting
+[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] obtaining POST request
+[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 13th September 2013 10:57:47] [database.php] Starting DatabaseHandler
+[Friday, 13th September 2013 10:57:47] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 13th September 2013 10:57:47] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 13th September 2013 10:57:47] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 13th September 2013 10:57:47] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'
+[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] gracefully exiting
