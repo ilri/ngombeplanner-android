@@ -1,14 +1,19 @@
 package org.cgiar.ilri.mistro.farmer;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener
+public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener,ListView.OnItemClickListener
 {
     public static final String TAG="CowRegistrationActivity";
     public static final String KEY_INDEX="index";
@@ -62,9 +67,15 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private Button previousButton;
     private Button nextButton;
     private DatePickerDialog datePickerDialog;
+    private Dialog breedDialog;
+    private ScrollView breedDialogSV;
+    private ListView breedLV;
+    private Button dialogBreedOkayB;
+    private String[] breeds;
 
     private int index;
     private int numberOfCows;
+    private int selectedBreeds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +87,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             index=bundle.getInt(KEY_INDEX);
             numberOfCows=bundle.getInt(KEY_NUMBER_OF_COWS);
         }
+        selectedBreeds = 0;
 
         //init views
         nameTV=(TextView)this.findViewById(R.id.name_tv);
@@ -115,6 +127,14 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         previousButton.setOnClickListener(this);
         nextButton = (Button)this.findViewById(R.id.next_button);
         nextButton.setOnClickListener(this);
+        breedDialog=new Dialog(this);
+        breedDialog.setContentView(R.layout.dialog_breed);
+        dialogBreedOkayB=(Button)breedDialog.findViewById(R.id.dialog_breed_okay_b);
+        dialogBreedOkayB.setOnClickListener(this);
+        breedDialogSV=(ScrollView)breedDialog.findViewById(R.id.dialog_breed_sv);
+        breedLV=(ListView)breedDialog.findViewById(R.id.breed_lv);
+        breedLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        breedLV.setOnItemClickListener(this);
 
         initTextInViews();
     }
@@ -181,6 +201,17 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         countryOfOriginTV.setText(Locale.getStringInLocale("country_of_origin",this));
         previousButton.setText(Locale.getStringInLocale("previous",this));
         nextButton.setText(Locale.getStringInLocale("next",this));
+
+        breedDialog.setTitle(Locale.getStringInLocale("breed",this));
+        breeds=Locale.getArrayInLocale("breeds_array",this);
+        if(breeds==null) {
+            breeds = new String[1];
+            breeds[0] = "";
+        }
+        ArrayAdapter<String> breedArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,breeds);
+        breedLV.setAdapter(breedArrayAdapter);
+        dialogBreedOkayB.setText(Locale.getStringInLocale("okay",this));
+
     }
 
     @Override
@@ -195,10 +226,30 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             dateOfBirthETClicked();
         }
         else if(view==breedET) {
-
+            breedETClicked();
         }
         else if(view==deformityET) {
 
+        }
+        else if(view==dialogBreedOkayB) {
+            String selectedBreeds="";
+            SparseBooleanArray checkedBreeds=breedLV.getCheckedItemPositions();
+            for (int i=0; i<breedLV.getCount();i++)
+            {
+                if(checkedBreeds.get(i))
+                {
+                    if(!selectedBreeds.equals(""))
+                    {
+                        selectedBreeds=selectedBreeds+", "+breeds[i];
+                    }
+                    else
+                    {
+                        selectedBreeds=breeds[i];
+                    }
+                }
+            }
+            breedET.setText(selectedBreeds);
+            breedDialog.dismiss();
         }
     }
 
@@ -274,6 +325,49 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 if(ageTypesInEN[i].equals("Years")) {
                     ageS.setSelection(i);
                 }
+            }
+        }
+    }
+
+    private void breedETClicked() {
+        //uncheck everything in listview
+        for (int i=0; i<breedLV.getCount();i++) {
+            breedLV.setItemChecked(i,false);
+        }
+
+        String breedETString=breedET.getText().toString();
+        if(!breedETString.equals(null)||!breedETString.equals(""))
+        {
+            String[] selectedBreeds=breedETString.split(", ");
+            //for all of the breeds check if breed is in selected breeds
+            for(int i=0; i<breeds.length;i++)
+            {
+                String currentBreed=breeds[i];
+                for(int j=0; j<selectedBreeds.length;j++) {
+                    if(currentBreed.equals(selectedBreeds[j])) {
+                        breedLV.setItemChecked(i,true);
+                        break;
+                    }
+                }
+            }
+        }
+        breedDialog.show();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        if(parent==breedLV) {
+            if(breedLV.isItemChecked(position)) {
+                selectedBreeds++;
+            }
+            else {
+                selectedBreeds--;
+            }
+            if(selectedBreeds>4) {
+                breedLV.setItemChecked(position,false);
+                selectedBreeds--;
+                Toast.makeText(this,Locale.getStringInLocale("maximum_of_four_breeds",this),Toast.LENGTH_LONG).show();
             }
         }
     }
