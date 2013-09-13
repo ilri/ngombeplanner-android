@@ -196,7 +196,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
                 {
                     int numberOfCows=Integer.valueOf(numberOfCowsString);
                     Intent intent=new Intent(FarmerRegistrationActivity.this,CowRegistrationActivity.class);
-                    intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
+                    //intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
                     intent.putExtra(CowRegistrationActivity.KEY_INDEX,0);
                     intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS,numberOfCows);
                     Bundle bundle=new Bundle();

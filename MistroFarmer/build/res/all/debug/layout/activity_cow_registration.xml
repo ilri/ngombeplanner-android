@@ -13,72 +13,6 @@
         android:paddingRight="@dimen/activity_padding_side"
         android:orientation="vertical">
         <TextView
-                android:id="@+id/service_type_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
-                android:visibility="gone"
-                android:textSize="@dimen/normal_text_size"/>
-        <Spinner
-                android:id="@+id/service_type_s"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
-                android:textColor="@color/text_input_color"
-                android:visibility="gone"
-                android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
-        <TextView
-            android:id="@+id/straw_number_tv"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
-            android:textSize="@dimen/normal_text_size"
-            android:visibility="gone"/>
-        <EditText
-            android:id="@+id/straw_number_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
-            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
-            android:textSize="@dimen/normal_text_size"
-            android:textColor="@color/text_input_color"
-            android:inputType="text"
-            android:visibility="gone"/>
-        <TextView
-            android:id="@+id/embryo_number_tv"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
-            android:textSize="@dimen/normal_text_size"
-            android:visibility="gone"/>
-        <EditText
-            android:id="@+id/embryo_number_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
-            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
-            android:textSize="@dimen/normal_text_size"
-            android:textColor="@color/text_input_color"
-            android:inputType="text"
-            android:visibility="gone"/>
-        <TextView
-            android:id="@+id/vet_used_tv"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
-            android:textSize="@dimen/normal_text_size"
-            android:visibility="gone"/>
-        <EditText
-            android:id="@+id/vet_used_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
-            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
-            android:textSize="@dimen/normal_text_size"
-            android:textColor="@color/text_input_color"
-            android:inputType="textCapWords|textPersonName"
-            android:visibility="gone"/>
-        <TextView
                 android:id="@+id/name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -200,41 +134,79 @@
                 android:textColor="@color/text_input_color"
                 android:inputType="text"/>
         <TextView
+            android:id="@+id/service_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:textSize="@dimen/normal_text_size"/>
+        <Spinner
+            android:id="@+id/service_type_s"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:textColor="@color/text_input_color"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
+        <TextView
             android:id="@+id/sire_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
             android:textSize="@dimen/normal_text_size"/>
+        <Spinner
+            android:id="@+id/sire_s"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:textColor="@color/text_input_color"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
+        <TextView
+            android:id="@+id/straw_number_tv"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:textSize="@dimen/normal_text_size"/>
         <EditText
-            android:id="@+id/sire_et"
+            android:id="@+id/straw_number_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:textSize="@dimen/normal_text_size"
             android:textColor="@color/text_input_color"
-            android:inputType="textCapWords|textPersonName"/>
+            android:inputType="text"/>
         <TextView
                 android:id="@+id/dam_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
                 android:textSize="@dimen/normal_text_size"/>
+        <Spinner
+                android:id="@+id/dam_s"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:textColor="@color/text_input_color"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
+        <TextView
+            android:id="@+id/embryo_number_tv"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:textSize="@dimen/normal_text_size"/>
         <EditText
-                android:id="@+id/dam_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
-                android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
-                android:textSize="@dimen/normal_text_size"
-                android:textColor="@color/text_input_color"
-                android:inputType="textCapWords|textPersonName"/>
+            android:id="@+id/embryo_number_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:textSize="@dimen/normal_text_size"
+            android:textColor="@color/text_input_color"
+            android:inputType="text"/>
         <TextView
             android:id="@+id/country_of_origin_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
-            android:visibility="gone"
             android:textSize="@dimen/normal_text_size"/>
         <AutoCompleteTextView
             android:id="@+id/country_of_origin_actv"
@@ -244,7 +216,6 @@
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:textSize="@dimen/normal_text_size"
             android:textColor="@color/text_input_color"
-            android:visibility="gone"
             android:inputType="textCapWords|textPersonName"/>
 
         <LinearLayout

@@ -18,11 +18,11 @@ import java.util.jar.JarInputStream;
  */
 public class Cow implements Parcelable, Serializable {
     public static final String TAG = "Cow";
-    public static final int SEX_MALE = 1;
-    public static final int SEX_FEMALE = 0;
-    public static final int AGE_TYPE_DAY = 0;
-    public static final int AGE_TYPE_WEEK = 1;
-    public static final int AGE_TYPE_YEAR = 2;
+    public static final String SEX_MALE = "Male";
+    public static final String SEX_FEMALE = "Female";
+    public static final String AGE_TYPE_DAY = "Days";
+    public static final String AGE_TYPE_WEEK = "Weeks";
+    public static final String AGE_TYPE_YEAR = "Years";
     public static final String MODE_ADULT_COW_REGISTRATION = "adultCowRegistration";
     public static final String MODE_BORN_CALF_REGISTRATION = "bornCalfRegistration";
     private static final String SERVICE_TYPE_BULL = "Bull";
@@ -32,15 +32,14 @@ public class Cow implements Parcelable, Serializable {
     private String earTagNumber;
     private String dateOfBirth;
     private int age;
-    private int ageType;
+    private String ageType;
     private List<String> breeds;
-    private int sex;
+    private String sex;
     private List<String> deformities;
     private Sire sire;
     private Dam dam;
     private String countryOfOrigin;
     private boolean isNotDamOrSire;
-    private String mode;
     private String mode;
     private String serviceType;
 
@@ -49,9 +48,9 @@ public class Cow implements Parcelable, Serializable {
         earTagNumber = "";
         dateOfBirth = "";
         age = -1;
-        ageType = -1;
+        ageType = "";
         this.breeds = new ArrayList<String>();
-        sex = -1;
+        sex = "";
         this.deformities = new ArrayList<String>();
         this.isNotDamOrSire = isNotDamOrSire;
         if (isNotDamOrSire)//LOL, brings StackOverflowError if you init sire object inside sire object
@@ -89,7 +88,7 @@ public class Cow implements Parcelable, Serializable {
         this.age = age;
     }
 
-    public void setAgeType(int ageType) {
+    public void setAgeType(String ageType) {
         this.ageType = ageType;
     }
 
@@ -108,7 +107,7 @@ public class Cow implements Parcelable, Serializable {
         this.breeds.add(breed);
     }
 
-    public void setSex(int sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -155,7 +154,7 @@ public class Cow implements Parcelable, Serializable {
         return age;
     }
 
-    public int getAgeType() {
+    public String getAgeType() {
         return ageType;
     }
 
@@ -167,7 +166,7 @@ public class Cow implements Parcelable, Serializable {
         return breeds;
     }
 
-    public int getSex() {
+    public String getSex() {
         return sex;
     }
 
@@ -201,9 +200,9 @@ public class Cow implements Parcelable, Serializable {
         dest.writeString(earTagNumber);
         dest.writeString(dateOfBirth);
         dest.writeInt(age);
-        dest.writeInt(ageType);
+        dest.writeString(ageType);
         dest.writeStringList(breeds);
-        dest.writeInt(sex);
+        dest.writeString(sex);
         dest.writeStringList(deformities);
         if (isNotDamOrSire) {
             dest.writeInt(1);
@@ -223,9 +222,9 @@ public class Cow implements Parcelable, Serializable {
         earTagNumber = in.readString();
         dateOfBirth = in.readString();
         age = in.readInt();
-        ageType = in.readInt();
+        ageType = in.readString();
         in.readStringList(breeds);
-        sex = in.readInt();
+        sex = in.readString();
         in.readStringList(deformities);
         int x = in.readInt();
         if (x == 1)//isnotsireordam

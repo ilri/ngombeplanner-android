@@ -274,10 +274,10 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
 
                 String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times",this,Locale.LOCALE_ENGLISH);
                 String milkingTime = "";
-                for(int i = 0; i < milkingTimesInEN.length; i++) {
-                    if(jsonObject.getString("time").equals(milkingTimesInEN[i])) {
+                for(int j = 0; j < milkingTimesInEN.length; j++) {
+                    if(jsonObject.getString("time").equals(milkingTimesInEN[j])) {
                         if(milkingTimesInEN.length == times.length){
-                            milkingTime = times[i];
+                            milkingTime = times[j];
                         }
                         break;
                     }

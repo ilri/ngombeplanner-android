@@ -324,7 +324,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                         farmer.setCow(thisCalf, 0);
 
                         Intent intent=new Intent(AddEventActivity.this,CowRegistrationActivity.class);
-                        intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
+                        //intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
                         intent.putExtra(CowRegistrationActivity.KEY_INDEX,0);
                         intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS,numberOfCows);
                         Bundle bundle=new Bundle();
@@ -367,7 +367,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                         farmer.setCow(thisCow, 0);
 
                         Intent intent=new Intent(AddEventActivity.this,CowRegistrationActivity.class);
-                        intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
+                        //intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
                         intent.putExtra(CowRegistrationActivity.KEY_INDEX,0);
                         intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS,numberOfCows);
                         Bundle bundle=new Bundle();

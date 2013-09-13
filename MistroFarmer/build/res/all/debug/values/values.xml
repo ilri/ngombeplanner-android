@@ -63,13 +63,10 @@
         <item>KGs</item>
         <item>Cups</item>
     </string-array>
-    <string-array name="service_types_dam_array_en">
-        <item>Cow</item>
-        <item>Embryo Transfer</item>
-    </string-array>
-    <string-array name="service_types_sire_array_en">
+    <string-array name="service_types_en">
         <item>Bull</item>
         <item>Artificial Insemination</item>
+        <item>Embryo Transfer</item>
     </string-array>
     <string-array name="sex_array_en">
         <item>Female</item>
@@ -679,7 +676,7 @@
     <string name="previous_en">Previous</string>
     <string name="problem_connecting_to_server_en">A problem occurred while trying to connect to the Server</string>
     <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
-    <string name="production_for_time_already_exists_en">You have already entered the amount you got from this cow</string>
+    <string name="production_for_time_already_exists_en">You have already entered the amount you got from this cow from this date</string>
     <string name="production_history_en">Production History</string>
     <string name="quantity_en">Quantity</string>
     <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
