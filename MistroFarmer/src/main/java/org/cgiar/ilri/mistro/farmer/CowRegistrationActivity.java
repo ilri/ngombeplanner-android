@@ -71,11 +71,17 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private ScrollView breedDialogSV;
     private ListView breedLV;
     private Button dialogBreedOkayB;
-    private String[] breeds;
+    private Dialog deformityDialog;
+    private ListView deformityLV;
+    private EditText specifyET;
+    private Button dialogDeformityOkayB;
 
     private int index;
     private int numberOfCows;
     private int selectedBreeds;
+    private String[] breeds;
+    private String[] deformities;
+    private String deformityOSpecifyText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +141,14 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         breedLV=(ListView)breedDialog.findViewById(R.id.breed_lv);
         breedLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         breedLV.setOnItemClickListener(this);
+        deformityDialog =new Dialog(this);
+        deformityDialog.setContentView(R.layout.dialog_deformity);
+        deformityLV =(ListView) deformityDialog.findViewById(R.id.deformity_lv);
+        deformityLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        deformityLV.setOnItemClickListener(this);
+        specifyET=(EditText)deformityDialog.findViewById(R.id.specify_et);
+        dialogDeformityOkayB =(Button) deformityDialog.findViewById(R.id.dialog_deformity_okay_b);
+        dialogDeformityOkayB.setOnClickListener(this);
 
         initTextInViews();
     }
@@ -212,6 +226,16 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         breedLV.setAdapter(breedArrayAdapter);
         dialogBreedOkayB.setText(Locale.getStringInLocale("okay",this));
 
+        deformityDialog.setTitle(Locale.getStringInLocale("deformity",this));
+        deformities=Locale.getArrayInLocale("deformities_array",this);
+        if(deformities==null) {
+            deformities = new String[1];
+            deformities[0] = "";
+        }
+        ArrayAdapter<String> deformityArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,deformities);
+        deformityLV.setAdapter(deformityArrayAdapter);
+        specifyET.setHint(Locale.getStringInLocale("specify",this));
+        dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
     }
 
     @Override
@@ -229,7 +253,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             breedETClicked();
         }
         else if(view==deformityET) {
-
+            deformityETClicked();
         }
         else if(view==dialogBreedOkayB) {
             String selectedBreeds="";
@@ -250,6 +274,23 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             }
             breedET.setText(selectedBreeds);
             breedDialog.dismiss();
+        }
+        else if(view==dialogDeformityOkayB) {
+            String selectedDeformities="";
+            SparseBooleanArray checkedDeformities=deformityLV.getCheckedItemPositions();
+            for (int i=0; i<deformityLV.getCount();i++) {
+                if(checkedDeformities.get(i)) {
+                    if(!selectedDeformities.equals("")) {
+                        selectedDeformities=selectedDeformities+", "+deformities[i];
+                    }
+                    else {
+                        selectedDeformities=deformities[i];
+                    }
+                }
+            }
+            deformityET.setText(selectedDeformities);
+            deformityDialog.dismiss();
+            deformityOSpecifyText=specifyET.getText().toString();
         }
     }
 
@@ -370,5 +411,45 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 Toast.makeText(this,Locale.getStringInLocale("maximum_of_four_breeds",this),Toast.LENGTH_LONG).show();
             }
         }
+        else if(parent==deformityLV) {
+            if(position==deformities.length-1){ //last deformity. should be other
+                if(deformityLV.isItemChecked(position)) {
+                    specifyET.setVisibility(EditText.VISIBLE);
+                }
+                else {
+                    specifyET.setVisibility(EditText.GONE);
+                    specifyET.setText("");
+                }
+            }
+        }
+    }
+
+    private void deformityETClicked() {
+        //uncheck everything in listview
+        for (int i=0;i<deformityLV.getCount();i++) {
+            deformityLV.setItemChecked(i,false);
+        }
+        String deformityETString=deformityET.getText().toString();
+        if(!deformityETString.equals(null)||!deformityETString.equals("")) {
+            String[] selectedDeformities=deformityETString.split(", ");
+            for (int i=0;i<deformities.length;i++)
+            {
+                String currentDeformity=deformities[i];
+                for (int j=0;j<selectedDeformities.length;j++)
+                {
+                    if(currentDeformity.equals(selectedDeformities[j]))
+                    {
+                        deformityLV.setItemChecked(i,true);
+                        if (i==deformities.length-1)
+                        {
+                            specifyET.setVisibility(EditText.VISIBLE);
+                            specifyET.setText(deformityOSpecifyText);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        deformityDialog.show();
     }
 }
