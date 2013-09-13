@@ -617,6 +617,7 @@
     <string name="country_of_origin_en">Country of Origin</string>
     <string name="cow_en">Cow</string>
     <string name="cow_registration_en">Cow Registration, Cow</string>
+    <string name="cow_registration_proper_en">Cow Registration</string>
     <string name="dam_en">Dam</string>
     <string name="dam_registration_en">Dam Registration</string>
     <string name="date_en">Date</string>
@@ -667,6 +668,7 @@
     <string name="new_mobile_number_en">New Mobile Number</string>
     <string name="next_en">Next</string>
     <string name="next_screen_is_calf_registration_en">In the next screen, you will be required to register the calf that has been born. Click next to register the calf</string>
+    <string name="next_screen_is_cow_registration_en">In the next screen, you will be required to register the acquired cow. Click next to register the cow</string>
     <string name="no_data_received_en">No data received</string>
     <string name="no_en">No</string>
     <string name="number_of_cows_en">Number of Cows</string>

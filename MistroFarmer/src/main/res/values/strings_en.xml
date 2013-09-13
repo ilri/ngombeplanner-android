@@ -27,6 +27,7 @@
     <string name="okay_en">Okay</string>
     <string name="farmer_registration_en">Farmer Registration</string>
     <string name="cow_registration_en">Cow Registration, Cow</string>
+    <string name="cow_registration_proper_en">Cow Registration</string>
     <string name="dam_registration_en">Dam Registration</string>
     <string name="sire_registration_en">Sire Registration</string>
     <string-array name="age_type_array_en">
@@ -122,7 +123,7 @@
     <string name="enter_quantity_of_milk_produced_en">Please enter the quantity of the milk produced in KGs</string>
     <string name="information_successfully_sent_to_server_en">Information successfully sent to server</string>
     <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
-    <string name="production_for_time_already_exists_en">You have already entered the amount you got from this cow</string>
+    <string name="production_for_time_already_exists_en">You have already entered the amount you got from this cow from this date</string>
     <string name="problem_connecting_to_server_en">A problem occurred while trying to connect to the Server</string>
     <string name="date_en">Date</string>
     <string name="no_data_received_en">No data received</string>
@@ -161,6 +162,7 @@
     </string-array>
     <string name="calf_registration_en">Calf Registration</string>
     <string name="next_screen_is_calf_registration_en">In the next screen, you will be required to register the calf that has been born. Click next to register the calf</string>
+    <string name="next_screen_is_cow_registration_en">In the next screen, you will be required to register the acquired cow. Click next to register the cow</string>
     <string name="event_too_old_en">You cannot add an event that occured more than one month ago</string>
     <string name="milk_data_too_old_en">You cannot enter milk production data that is more than one month old</string>
     <string name="milk_too_much_en">The quantity of milk you entered is too much</string>

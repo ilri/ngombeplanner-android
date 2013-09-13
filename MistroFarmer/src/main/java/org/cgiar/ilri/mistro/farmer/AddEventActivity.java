@@ -174,12 +174,21 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 remarksTV.setVisibility(TextView.GONE);
                 remarksET.setVisibility(EditText.GONE);
             }
+            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Acquisition")) {
+                remarksTV.setVisibility(TextView.GONE);
+                remarksET.setVisibility(EditText.GONE);
+                cowIdentifierS.setVisibility(Spinner.GONE);
+                cowIdentifierTV.setVisibility(TextView.GONE);
+                okayB.setText(Locale.getStringInLocale("next",this));
+            }
             else {
                 eventSubtypeTV.setVisibility(TextView.GONE);
                 eventSubtypeS.setVisibility(Spinner.GONE);
                 okayB.setText(Locale.getStringInLocale("okay",this));
                 remarksTV.setVisibility(TextView.VISIBLE);
                 remarksET.setVisibility(EditText.VISIBLE);
+                cowIdentifierS.setVisibility(Spinner.VISIBLE);
+                cowIdentifierTV.setVisibility(TextView.VISIBLE);
             }
         }
     }
@@ -258,6 +267,10 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                     cowRegistrationAlertDialog.show();
                 }
             }
+            else if(selectedEvent.equals("Acquisition")) {
+                AlertDialog cowRegistrationAlertDialog = constructCowRegistrationDialog();
+                cowRegistrationAlertDialog.show();
+            }
             else {
                 String selectedCowETN = cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()];
                 String selectedCowName = cowNameArray[cowIdentifierS.getSelectedItemPosition()];
@@ -309,6 +322,49 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                         thisCalf.setDateOfBirth(dateET.getText().toString());
                         thisCalf.setMode(Cow.MODE_BORN_CALF_REGISTRATION);
                         farmer.setCow(thisCalf, 0);
+
+                        Intent intent=new Intent(AddEventActivity.this,CowRegistrationActivity.class);
+                        intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
+                        intent.putExtra(CowRegistrationActivity.KEY_INDEX,0);
+                        intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS,numberOfCows);
+                        Bundle bundle=new Bundle();
+                        bundle.putParcelable(Farmer.PARCELABLE_KEY, farmer);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton(Locale.getStringInLocale("cancel",AddEventActivity.this), new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog=alertDialogBuilder.create();
+        return alertDialog;
+    }
+
+    private AlertDialog constructCowRegistrationDialog() {
+        AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(Locale.getStringInLocale("cow_registration_proper", this));
+        alertDialogBuilder
+                .setMessage(Locale.getStringInLocale("next_screen_is_cow_registration",AddEventActivity.this))
+                .setCancelable(false)
+                .setPositiveButton(Locale.getStringInLocale("next",AddEventActivity.this), new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        int numberOfCows=1;
+                        Farmer farmer = new Farmer();
+                        farmer.setCowNumber(numberOfCows);
+                        farmer.setMode(Farmer.MODE_NEW_COW_REGISTRATION);
+                        TelephonyManager telephonyManager=(TelephonyManager)AddEventActivity.this.getSystemService(Context.TELEPHONY_SERVICE);
+                        farmer.setSimCardSN(telephonyManager.getSimSerialNumber());
+                        Cow thisCow = new Cow(true);
+                        thisCow.setMode(Cow.MODE_ADULT_COW_REGISTRATION);
+                        farmer.setCow(thisCow, 0);
 
                         Intent intent=new Intent(AddEventActivity.this,CowRegistrationActivity.class);
                         intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);

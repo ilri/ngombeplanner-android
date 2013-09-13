@@ -1,3 +1,6 @@
 
-[Thursday, 12th September 2013 15:13:49] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89014103211118510720''
-[Thursday, 12th September 2013 15:13:49] [authentication.php] SIM card serial number (89014103211118510720) not matching any farmer. Sending user_not_authenticated response code back to client
+[Thursday, 12th September 2013 16:04:22] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303''
+[Thursday, 12th September 2013 16:04:22] [authentication.php] SIM card serial number (89254029541005994303) not matching any farmer. Sending user_not_authenticated response code back to client
+[Thursday, 12th September 2013 16:05:03] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('12/9/2013', '%d/%m/%Y')'
+[Thursday, 12th September 2013 16:07:59] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('8/9/2013', '%d/%m/%Y')'
+[Thursday, 12th September 2013 16:11:42] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('10/9/2013', '%d/%m/%Y')'

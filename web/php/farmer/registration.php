@@ -102,13 +102,21 @@ class RegistrationHandler {
          $currentCow = $cows[$i];
          $cowID = $this->registerCow($currentCow,$farmerID);
          //add an event and link it to the new cow
-         if ($currentCow['mode' === "bornCalfRegistration"]) {
+         if ($currentCow['mode'] === "bornCalfRegistration") {
             //add event to database
             $eventTypeID = $this->getEventTypeID("Birth");
             $eventDate = $currentCow['dateOfBirth'];
             $remarks = "";
             $time = $this->getTime("EAT");
             $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}')";
+            $this->database->runMySQLQuery($query, false);
+         }
+         else if($currentCow['mode'] === "adultCowRegistration") {
+            $eventTypeID = $this->getEventTypeID("Acquisition");
+            $eventDate = $this->getTime("Y-m-d");
+            $remarks = "";
+            $time = $this->getTime("Y-m-d H:i:s");
+            $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$remarks}','{$eventDate}','{$time}')";
             $this->database->runMySQLQuery($query, false);
          }
       }
