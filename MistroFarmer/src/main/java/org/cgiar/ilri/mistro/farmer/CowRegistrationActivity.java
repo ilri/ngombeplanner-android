@@ -2,6 +2,7 @@ package org.cgiar.ilri.mistro.farmer;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -24,12 +25,15 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
+import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener
 {
@@ -82,6 +86,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private String[] breeds;
     private String[] deformities;
     private String deformityOSpecifyText;
+    private Cow thisCow;
+    private Farmer farmer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,10 +185,111 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     @Override
     protected void onResume() {
         super.onResume();
+
+        Bundle bundle=this.getIntent().getExtras();
+        if(bundle != null) {
+            farmer=bundle.getParcelable(Farmer.PARCELABLE_KEY);
+            if(farmer!=null){
+                if(farmer.getMode().equals(Farmer.MODE_NEW_COW_REGISTRATION) || index == 0) {
+                    previousButton.setVisibility(Button.INVISIBLE);
+                }
+                thisCow = farmer.getCow(index);
+                if(thisCow != null) {
+                    nameET.setText(thisCow.getName());
+                    earTagNumberET.setText(thisCow.getEarTagNumber());
+                    dateOfBirthET.setText(thisCow.getDateOfBirth());
+                    ageET.setText((thisCow.getAge()==-1) ? "":String.valueOf(thisCow.getAge()));
+                    String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array",this,Locale.LOCALE_ENGLISH);
+                    for(int i = 0; i < ageTypesInEN.length; i++) {
+                        if(ageTypesInEN[i].equals("Days") && thisCow.getAgeType().equals(Cow.AGE_TYPE_DAY)) {
+                            ageS.setSelection(i);
+                        }
+                        else if(ageTypesInEN[i].equals("Weeks") && thisCow.getAgeType().equals(Cow.AGE_TYPE_WEEK)) {
+                            ageS.setSelection(i);
+                        }
+                        else if(ageTypesInEN[i].equals("Years") && thisCow.getAgeType().equals(Cow.AGE_TYPE_YEAR)) {
+                            ageS.setSelection(i);
+                        }
+                    }
+                    List<String> savedBreeds=thisCow.getBreeds();
+                    String breed="";
+                    for (int i=0;i<savedBreeds.size();i++) {
+                        if(i==0) {
+                            breed=savedBreeds.get(i);
+                        }
+                        else {
+                            breed=breed+", "+savedBreeds.get(i);
+                        }
+                    }
+                    breedET.setText(breed);
+                    String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
+                    for(int i = 0; i < sexInEN.length; i++) {
+                        if(sexInEN[i].equals("Female") && thisCow.getSex().equals(Cow.SEX_FEMALE)) {
+                            sexS.setSelection(i);
+                        }
+                        else if(sexInEN[i].equals("Male") && thisCow.getSex().equals(Cow.SEX_MALE)) {
+                            sexS.setSelection(i);
+                        }
+                    }
+                    List<String> savedDeformities=thisCow.getDeformities();
+                    String deformity="";
+                    for (int i=0;i<savedDeformities.size();i++) {
+                        if(i==0) {
+                            deformity=savedDeformities.get(i);
+                        }
+                        else {
+                            deformity=deformity+", "+savedDeformities.get(i);
+                        }
+                        if(savedDeformities.get(i).equals(deformities[deformities.length-1])) {
+                            deformityOSpecifyText = thisCow.getOtherDeformity();
+                        }
+                    }
+                    deformityET.setText(deformity);
+
+                    //TODO: set sire and dam spinners
+                    countryOfOriginACTV.setText(thisCow.getCountryOfOrigin());
+                    String[] serviceTypesInEN = Locale.getArrayInLocale("service_types",this,Locale.LOCALE_ENGLISH);
+                    for(int i = 0; i < serviceTypesInEN.length; i++) {
+                        if(serviceTypesInEN[i].equals("Bull") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_BULL)) {
+                            serviceTypeS.setSelection(i);
+                        }
+                        else if(serviceTypesInEN[i].equals("Artificial Insemination") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_AI)) {
+                            serviceTypeS.setSelection(i);
+                        }
+                        else if(serviceTypesInEN[i].equals("Embryo Transfer") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_ET)) {
+                            serviceTypeS.setSelection(i);
+                        }
+                    }
+
+                    if(thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)) {
+                        this.setTitle(Locale.getStringInLocale("calf_registration",this));
+                        setAgeFromDate(thisCow.getDateOfBirth());
+                        thisCow.setAge(Integer.parseInt(ageET.getText().toString()));
+                        if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Days")) {
+                            thisCow.setAgeType(Cow.AGE_TYPE_DAY);
+                        }
+                        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Weeks")) {
+                            thisCow.setAgeType(Cow.AGE_TYPE_WEEK);
+                        }
+                        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Years")) {
+                            thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
+                        }
+                    }
+                }
+                else {
+                    Log.d(TAG,"Cow object is null");
+                }
+            }
+            else {
+                Log.d(TAG,"Farmer object is null");
+            }
+
+        }
     }
 
     private void initTextInViews() {
-        //TODO: set Title
+        String title = Locale.getStringInLocale("cow_registration",this)+" "+String.valueOf(index+1);
+        this.setTitle(title);
         nameTV.setText(Locale.getStringInLocale("name",this));
         earTagNumberTV.setText(Locale.getStringInLocale("ear_tag_number",this));
         ageTV.setText(Locale.getStringInLocale("age",this));
@@ -242,10 +349,38 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     @Override
     public void onClick(View view) {
         if(view==previousButton) {
-
+            cacheThisCow();
+            Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
+            intent.putExtra(KEY_INDEX,index-1);
+            intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+            Bundle bundle=new Bundle();
+            bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
         else if(view==nextButton) {
-
+            if(validateInput()) {
+                cacheThisCow();
+                Bundle bundle=new Bundle();
+                bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
+                if(index == (numberOfCows-1))//last cow
+                {
+                    /*Log.d(TAG, farmer.getJsonObject().toString());
+                    //TODO: send to server
+                    if (DataHandler.checkNetworkConnection(this, null))
+                    {
+                        sendDataToServer(farmer.getJsonObject());
+                    }*/
+                }
+                else
+                {
+                    Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
+                    intent.putExtra(KEY_INDEX,index+1);
+                    intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            }
         }
         else if(view==dateOfBirthET) {
             dateOfBirthETClicked();
@@ -497,5 +632,64 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    private boolean validateInput() {
+        String earTagNumberText=earTagNumberET.getText().toString();
+        String nameText=nameET.getText().toString();
+        if(earTagNumberText==null||earTagNumberText.equals("")) {
+            Toast.makeText(this,Locale.getStringInLocale("enter_ear_tag_number",this),Toast.LENGTH_LONG).show();
+            return false;
+        }
+        //TODO: validate country of origin
+        return true;
+    }
+
+    private void cacheThisCow() {
+        if(thisCow==null) {
+            thisCow=new Cow(true);
+        }
+        thisCow.setName(nameET.getText().toString());
+        if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
+            thisCow.setMode(Cow.MODE_ADULT_COW_REGISTRATION);
+        }
+        thisCow.setEarTagNumber(earTagNumberET.getText().toString());
+        thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
+        thisCow.setAge((ageET.getText().toString() == null || ageET.getText().toString().length() == 0) ? -1 : Integer.parseInt(ageET.getText().toString()));
+        String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array",this,Locale.LOCALE_ENGLISH);
+        if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Days")) {
+            thisCow.setAgeType(Cow.AGE_TYPE_DAY);
+        }
+        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Weeks")) {
+            thisCow.setAgeType(Cow.AGE_TYPE_WEEK);
+        }
+        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Years")) {
+            thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
+        }
+        thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
+        thisCow.setBreeds(breedET.getText().toString().split(", "));
+        thisCow.setDeformities(deformityET.getText().toString().split(", "));
+        String[] selectedDeformities = deformityET.getText().toString().split(", ");
+        thisCow.setOtherDeformity(specifyET.getText().toString());
+        thisCow.setCountryOfOrigin(countryOfOriginACTV.getText().toString());
+        String[] sexInEN = Locale.getArrayInLocale("sex_array",this,Locale.LOCALE_ENGLISH);
+        if(sexInEN[sexS.getSelectedItemPosition()].equals("Female")) {
+            thisCow.setSex(Cow.SEX_FEMALE);
+        }
+        else if(sexInEN[sexS.getSelectedItemPosition()].equals("Male")) {
+            thisCow.setSex(Cow.SEX_MALE);
+        }
+        String[] serviceTypesInEN = Locale.getArrayInLocale("service_types",this,Locale.LOCALE_ENGLISH);
+        if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Bull")) {
+            thisCow.setServiceType(Cow.SERVICE_TYPE_BULL);
+        }
+        else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
+            thisCow.setServiceType(Cow.SERVICE_TYPE_AI);
+        }
+        else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Embryo Transfer")) {
+            thisCow.setServiceType(Cow.SERVICE_TYPE_ET);
+        }
+        //TODO: cache sire and dam
+        farmer.setCow(thisCow,index);
     }
 }

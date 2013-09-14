@@ -25,9 +25,9 @@ public class Cow implements Parcelable, Serializable {
     public static final String AGE_TYPE_YEAR = "Years";
     public static final String MODE_ADULT_COW_REGISTRATION = "adultCowRegistration";
     public static final String MODE_BORN_CALF_REGISTRATION = "bornCalfRegistration";
-    private static final String SERVICE_TYPE_BULL = "Bull";
-    private static final String SERVICE_TYPE_AI = "AI";
-    private static final String SERVICE_TYPE_ET = "ET";
+    public static final String SERVICE_TYPE_BULL = "Bull";
+    public static final String SERVICE_TYPE_AI = "AI";
+    public static final String SERVICE_TYPE_ET = "ET";
     private String name;
     private String earTagNumber;
     private String dateOfBirth;
@@ -42,6 +42,7 @@ public class Cow implements Parcelable, Serializable {
     private boolean isNotDamOrSire;
     private String mode;
     private String serviceType;
+    private String otherDeformity;
 
     public Cow(boolean isNotDamOrSire) {
         name = "";
@@ -61,6 +62,7 @@ public class Cow implements Parcelable, Serializable {
         mode = "";
         countryOfOrigin = "";
         serviceType = "";
+        otherDeformity = "";
     }
 
     public Cow(Parcel in) {
@@ -101,6 +103,11 @@ public class Cow implements Parcelable, Serializable {
 
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
+    }
+
+    public void setOtherDeformity(String otherDeformity) {
+        this.otherDeformity = otherDeformity;
+        Log.d(TAG, "other deformity set to "+otherDeformity);
     }
 
     public void addBreed(String breed) {
@@ -162,6 +169,11 @@ public class Cow implements Parcelable, Serializable {
         return serviceType;
     }
 
+    public String getOtherDeformity() {
+        Log.d(TAG,"other deformity is = "+otherDeformity);
+        return otherDeformity;
+    }
+
     public List<String> getBreeds() {
         return breeds;
     }
@@ -215,6 +227,7 @@ public class Cow implements Parcelable, Serializable {
         dest.writeString(countryOfOrigin);
         dest.writeString(mode);
         dest.writeString(serviceType);
+        dest.writeString(otherDeformity);
     }
 
     public void readFromParcel(Parcel in) {
@@ -239,6 +252,7 @@ public class Cow implements Parcelable, Serializable {
         countryOfOrigin = in.readString();
         mode = in.readString();
         serviceType = in.readString();
+        otherDeformity = in.readString();
     }
 
     public static final Creator<Cow> CREATOR = new Creator<Cow>() {
@@ -274,6 +288,7 @@ public class Cow implements Parcelable, Serializable {
             jsonObject.put("deformities", deformityJsonArray);
             jsonObject.put("mode", ((mode == null) ? "" : mode));
             jsonObject.put("serviceType", ((serviceType == null) ? "" : serviceType));
+            jsonObject.put("otherDeformity", ((otherDeformity == null) ? "" : otherDeformity));
             if (isNotDamOrSire) {
                 jsonObject.put("type", "cow");
                 jsonObject.put("sire", ((sire == null) ? "" : sire.getJsonObject()));
