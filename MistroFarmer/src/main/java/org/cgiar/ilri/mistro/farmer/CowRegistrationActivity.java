@@ -31,7 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener,ListView.OnItemClickListener
+public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener
 {
     public static final String TAG="CowRegistrationActivity";
     public static final String KEY_INDEX="index";
@@ -119,6 +119,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         deformityET.setOnClickListener(this);
         serviceTypeTV = (TextView)this.findViewById(R.id.service_type_tv);
         serviceTypeS = (Spinner)this.findViewById(R.id.service_type_s);
+        serviceTypeS.setOnItemSelectedListener(this);
         sireTV = (TextView)this.findViewById(R.id.sire_tv);
         sireS = (Spinner)this.findViewById(R.id.sire_s);
         strawNumberTV = (TextView)this.findViewById(R.id.straw_number_tv);
@@ -451,5 +452,50 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             }
         }
         deformityDialog.show();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(parent == serviceTypeS) {
+            changeServiceType();
+        }
+    }
+
+    private void changeServiceType() {
+        String[] serviceTypesInEN = Locale.getArrayInLocale("service_types", this, Locale.LOCALE_ENGLISH);
+        if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Bull")) {
+            sireTV.setVisibility(TextView.VISIBLE);
+            sireS.setVisibility(Spinner.VISIBLE);
+            strawNumberTV.setVisibility(TextView.GONE);
+            strawNumberET.setVisibility(EditText.GONE);
+            damTV.setVisibility(TextView.VISIBLE);
+            damS.setVisibility(Spinner.VISIBLE);
+            embryoNumberTV.setVisibility(TextView.GONE);
+            embryoNumberET.setVisibility(EditText.GONE);
+        }
+        else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
+            sireTV.setVisibility(TextView.GONE);
+            sireS.setVisibility(Spinner.GONE);
+            strawNumberTV.setVisibility(TextView.VISIBLE);
+            strawNumberET.setVisibility(EditText.VISIBLE);
+            damTV.setVisibility(TextView.VISIBLE);
+            damS.setVisibility(Spinner.VISIBLE);
+            embryoNumberTV.setVisibility(TextView.GONE);
+            embryoNumberET.setVisibility(EditText.GONE);
+        }
+        else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Embryo Transfer")) {
+            sireTV.setVisibility(TextView.GONE);
+            sireS.setVisibility(Spinner.GONE);
+            strawNumberTV.setVisibility(TextView.GONE);
+            strawNumberET.setVisibility(EditText.GONE);
+            damTV.setVisibility(TextView.GONE);
+            damS.setVisibility(Spinner.GONE);
+            embryoNumberTV.setVisibility(TextView.VISIBLE);
+            embryoNumberET.setVisibility(EditText.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
     }
 }
