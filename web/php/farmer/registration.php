@@ -81,7 +81,9 @@ class RegistrationHandler {
    private function registerNewFarmer() {
       $timeEAT = $this->getTime('Y-m-d H:i:s');
       $this->logHandler->log(3, $this->TAG, "Registering the new farmer (" . $this->jsonObject['fullName'] . ") in the database");
-      $query = "INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel`,`sim_card_sn`,`date_added`) VALUES('{$this->jsonObject['fullName']}','{$this->jsonObject['mobileNumber']}','{$this->jsonObject['longitude']}','{$this->jsonObject['latitude']}','{$this->jsonObject['extensionPersonnel']}','{$this->jsonObject['simCardSN']}','{$timeEAT}')";
+      $extensionPID = $this->general->getExtensionPersonnelID($this->jsonObject['extensionPersonnel'], true);
+      $query = "INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`)".
+              " VALUES('{$this->jsonObject['fullName']}','{$this->jsonObject['mobileNumber']}','{$this->jsonObject['longitude']}','{$this->jsonObject['latitude']}',{$extensionPID},'{$this->jsonObject['simCardSN']}','{$timeEAT}')";
       $this->database->runMySQLQuery($query, false);
       $farmerID = mysql_insert_id();
       $this->logHandler->log(4, $this->TAG, "New farmer's ID is " . $farmerID);
@@ -92,6 +94,11 @@ class RegistrationHandler {
          $currentCow = $cows[$i];
          $this->registerCow($currentCow,$farmerID);
       }
+      /*for ($i = 0; $i < sizeof($cows); $i++) {
+         //insert cow
+         $currentCow = $cows[$i];
+         $this->registerParents($currentCow,$farmerID);
+      }*/
    }
 
    private function addCowsToExistingFarmer() {
@@ -123,14 +130,26 @@ class RegistrationHandler {
             $this->database->runMySQLQuery($query, false);
          }
       }
+      /*for ($i = 0; $i < sizeof($cows); $i++) {
+         //insert cow
+         $currentCow = $cows[$i];
+         $this->registerParents($currentCow,$farmerID);
+      }*/
    }
 
    private function registerCow($currentCow, $farmerID) {
       $timeEAT = $this->getTime('Y-m-d H:i:s');
       $this->logHandler->log(3, $this->TAG, "Registering the new cow (" . $currentCow['earTagNumber'] . ") in the database");
-
-      //add the cow to the database
-      $query = "INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`date_added`) VALUES({$farmerID},'{$currentCow['name']}','{$currentCow['earTagNumber']}',STR_TO_DATE('{$currentCow['dateOfBirth']}', '%d/%m/%Y'),{$currentCow['age']},{$currentCow['ageType']},{$currentCow['sex']},'cow','{$timeEAT}')";
+      $countryID = $this->general->getCountryID($currentCow['countryOfOrigin']);
+      if($countryID != -1) {
+         $query = "INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`,`country_id`)".
+              " VALUES({$farmerID},'{$currentCow['name']}','{$currentCow['earTagNumber']}',STR_TO_DATE('{$currentCow['dateOfBirth']}', '%d/%m/%Y'),{$currentCow['age']},'{$currentCow['ageType']}','{$currentCow['sex']}','{$timeEAT}','{$currentCow['serviceType']}',{$countryID})";
+      }
+      else {
+         $query = "INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`)".
+              " VALUES({$farmerID},'{$currentCow['name']}','{$currentCow['earTagNumber']}',STR_TO_DATE('{$currentCow['dateOfBirth']}', '%d/%m/%Y'),{$currentCow['age']},'{$currentCow['ageType']}','{$currentCow['sex']}','{$timeEAT}','{$currentCow['serviceType']}')";
+      }
+      
       $this->database->runMySQLQuery($query, false);
       $cowID = mysql_insert_id();
       $this->logHandler->log(4, $this->TAG, "New cow's ID is " . $cowID);
@@ -138,64 +157,83 @@ class RegistrationHandler {
       for ($j = 0; $j < sizeof($breeds); $j++) {
          $currentBreed = $breeds[$j];
          $breedID = $this->general->getBreedID($currentBreed);
-         $query = "INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES($cowID,$breedID,'$timeEAT')";
-         $this->database->runMySQLQuery($query, false);
+         if($breedID != -1) {
+            $query = "INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES($cowID,$breedID,'$timeEAT')";
+            $this->database->runMySQLQuery($query, false);
+         }
+         else {
+            $this->logHandler->log(2, $this->TAG, "No breed with the name '".$currentBreed."' found, not inserting breed into database");
+         }
+         
       }
       $deformities = $currentCow['deformities'];
       for ($j = 0; $j < sizeof($deformities); $j++) {
          $currentDeformity = $deformities[$j];
          $deformityID = $this->general->getDeformityID($currentDeformity);
-         $query = "INSERT INTO `cow_deformity`(`cow_id`,`deformity_id`,`date_added`) VALUES($cowID,$deformityID,'$timeEAT')";
-         $this->database->runMySQLQuery($query, false);
-      }
-      /*$sire = $currentCow['sire'];
-      //TODO: implement using the new database scheme
-      if ($sire['earTagNumber'] != "" || $sire['strawNumber'] != "" || $sire['name'] != "") {
-         
-         if($sire['strawNumber']!= "") {
-            $query = "SELECT `cow`.`id` FROM `cow` WHERE `straw_number` = '{$sire['strawNumber']}'";
-         }
-         else {
-            $query = "SELECT `cow`.`id` FROM `cow` WHERE `name` = '{$sire['name']}' AND `ear_tag_number` = '{$sire['earTagNumber']}'";
-         }
-         
-         $result = $this->database->runMySQLQuery($query, true);
-         if(sizeof($result) == 0) {
-            $query = "INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`service_type`,`straw_number`,`vet_used`,`date_added`) VALUES($farmerID,'{$sire['name']}','{$sire['earTagNumber']}',STR_TO_DATE('{$sire['dateOfBirth']}', '%d/%m/%Y'),{$sire['age']},{$sire['ageType']},{$sire['sex']},'sire',{$sire['serviceType']},'{$sire['strawNumber']}','{$sire['vetUsed']}','$timeEAT')";
+         if ($deformityID != -1) {
+            if ($currentDeformity != "Other") {
+               $query = "INSERT INTO `cow_deformity`(`cow_id`,`deformity_id`,`date_added`) VALUES($cowID,$deformityID,'$timeEAT')";
+            } else {
+               $query = "INSERT INTO `cow_deformity`(`cow_id`,`deformity_id`,`date_added`,`specification`) VALUES($cowID,$deformityID,'$timeEAT','{$currentCow['otherDeformity']}')";
+            }
             $this->database->runMySQLQuery($query, false);
-            $sireID = mysql_insert_id();
          }
-         else {
-            $sireID = $result[0]['id'];
-         }
-         $this->logHandler->log(4, $this->TAG, "New sire's ID is " . $sireID);
-         $query = "UPDATE `cow` SET `sire_id` = $sireID WHERE `id` = $cowID";
-         $this->database->runMySQLQuery($query, false);
       }
-      $dam = $currentCow['dam'];
-      if ($dam['earTagNumber'] != "" || $dam['embryoNumber'] != "" || $dam['name'] != "") {
-         
-         if($dam['embryoNumber'] != "") {
-            $query = "SELECT `cow`.`id` FROM `cow` WHERE `embryo_number` = '{$dam['embryoNumber']}'";
-         }
-         else {
-            $query = "SELECT `cow`.`id` FROM `cow` WHERE `name` = '{$dam['name']}' AND `ear_tag_number` = '{$dam['earTagNumber']}'";
-         }
-         
-         $result = $this->database->runMySQLQuery($query, true);
-         if(sizeof($result) == 0) {
-            $query = "INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`type`,`service_type`,`embryo_number`,`vet_used`,`date_added`) VALUES($farmerID,'{$dam['name']}','{$dam['earTagNumber']}',STR_TO_DATE('{$dam['dateOfBirth']}', '%d/%m/%Y'),{$dam['age']},{$dam['ageType']},{$dam['sex']},'dam',{$dam['serviceType']},'{$dam['embryoNumber']}','{$dam['vetUsed']}','$timeEAT')";
-            $this->database->runMySQLQuery($query, false);
-            $damID = mysql_insert_id();
-         }
-         else {
-            $damID = $result[0]['id'];
-         }
-         $this->logHandler->log(4, $this->TAG, "New dam's ID is " . $damID);
-         $query = "UPDATE `cow` SET `dam_id` = $damID WHERE `id` = $cowID";
-         $this->database->runMySQLQuery($query, false);
-      }*/
       return $cowID;
+   }
+   
+   private function registerParents($currentCow,$farmerID) {
+      $cowID = $this->general->getCowID($farmerID,$currentCow['name'],$currentCow['earTagNumber']);
+      if($cowID != -1) {
+         if($currentCow['serviceType'] == "Bull") {
+            $sire = $currentCow['sire'];
+            if($sire != "") {
+               $sireID = $this->general->getCowID(-1,$sire['name'],$sire['earTagNumber']);
+               if($sireID != -1) {
+                  $query = "UPDATE `cow` SET `sire_id` = {$sireID} WHERE `id` = {$cowID}";
+                  $this->database->runMySQLQuery($query, false);
+               }
+            }
+            
+            $dam = $currentCow['dam'];
+            if($dam != "") {
+               $damID = $this->general->getCowID($farmerID,$dam['name'],$dam['earTagNumber']);
+               if($damID != -1) {
+                  $query = "UPDATE `cow` SET `dam_id` = {$damID} WHERE `id` = {$cowID}";
+                  $this->database->runMySQLQuery($query, false);
+               }
+            }
+         }
+         else if($currentCow['serviceType'] == "AI") {
+            $sire = $currentCow['sire'];
+            if($sire != "") {
+               $strawID = $this->general->getStrawID($sire['strawNumber'], true);
+               if ($strawID != -1) {
+                  $query = "UPDATE `cow` SET `straw_id` = {$strawID} WHERE `id` = {$cowID}";
+                  $this->database->runMySQLQuery($query, false);
+               }
+            }
+            
+            $dam = $currentCow['dam'];
+            if($dam != "") {
+               $damID = $this->general->getCowID($farmerID,$dam['name'],$dam['earTagNumber']);
+               if($damID != -1) {
+                  $query = "UPDATE `cow` SET `dam_id` = {$damID} WHERE `id` = {$cowID}";
+                  $this->database->runMySQLQuery($query, false);
+               }
+            }
+         }
+         else if($currentCow['serviceType'] == "ET") {
+            $dam = $currentCow['dam'];
+            if($dam != "") {
+               $embryoID = $this->general->getEmbryoID($dam['embryoNumber'],true);
+               if($embryoID != -1) {
+                  $query = "UPDATE `cow` SET `embryo_id` = {$embryoID} WHERE `id` = {$cowID}";
+                  $this->database->runMySQLQuery($query, false);
+               }
+            }
+         }
+      }
    }
 }
 

@@ -1,10 +1,23 @@
 
-[Thursday, 12th September 2013 16:04:22] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303''
-[Thursday, 12th September 2013 16:04:22] [authentication.php] SIM card serial number (89254029541005994303) not matching any farmer. Sending user_not_authenticated response code back to client
-[Thursday, 12th September 2013 16:05:03] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('12/9/2013', '%d/%m/%Y')'
-[Thursday, 12th September 2013 16:07:59] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('8/9/2013', '%d/%m/%Y')'
-[Thursday, 12th September 2013 16:11:42] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('10/9/2013', '%d/%m/%Y')'
-[Friday, 13th September 2013 10:57:37] [database.php] no results gotten for  'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow''
-[Friday, 13th September 2013 10:57:47] [database.php] no results gotten for  'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow''
-[Friday, 13th September 2013 15:46:11] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303''
-[Friday, 13th September 2013 15:46:11] [authentication.php] SIM card serial number (89254029541005994303) not matching any farmer. Sending user_not_authenticated response code back to client
+[Sunday, 15th September 2013 19:16:28] [database.php] no results gotten for  'SELECT `id` FROM `country` WHERE `name` = '''
+[Sunday, 15th September 2013 19:16:28] [general.php] Either more than one Country with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 19:17:46] [database.php] no results gotten for  'SELECT `id` FROM `country` WHERE `name` = '''
+[Sunday, 15th September 2013 19:17:46] [general.php] Either more than one Country with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 19:17:46] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Sunday, 15th September 2013 19:17:46] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 19:21:31] [database.php] no results gotten for  'SELECT `id` FROM `country` WHERE `name` = '''
+[Sunday, 15th September 2013 19:21:31] [general.php] Either more than one Country with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 19:21:32] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Sunday, 15th September 2013 19:21:32] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 19:21:32] [database.php] no results gotten for  'SELECT `id` FROM `country` WHERE `name` = '''
+[Sunday, 15th September 2013 19:21:32] [general.php] Either more than one Country with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 19:21:32] [database.php] no results gotten for  'SELECT `id` FROM `breed` WHERE `name` = '''
+[Sunday, 15th September 2013 19:21:32] [general.php] Either more than one breed with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 19:21:32] [registration.php] No breed with the name '' found, not inserting breed into database
+[Sunday, 15th September 2013 19:21:32] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Sunday, 15th September 2013 19:21:32] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 19:27:44] [database.php] no results gotten for  'SELECT `id` FROM `breed` WHERE `name` = '''
+[Sunday, 15th September 2013 19:27:44] [general.php] Either more than one breed with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 19:27:44] [registration.php] No breed with the name '' found, not inserting breed into database
+[Sunday, 15th September 2013 19:27:44] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Sunday, 15th September 2013 19:27:44] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1

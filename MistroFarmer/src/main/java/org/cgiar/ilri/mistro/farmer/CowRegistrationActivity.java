@@ -2,7 +2,9 @@ package org.cgiar.ilri.mistro.farmer;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -24,9 +26,11 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -322,7 +326,12 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         embryoNumberTV.setText(Locale.getStringInLocale("embryo_number",this));
         countryOfOriginTV.setText(Locale.getStringInLocale("country_of_origin",this));
         previousButton.setText(Locale.getStringInLocale("previous",this));
-        nextButton.setText(Locale.getStringInLocale("next",this));
+        if(index == (numberOfCows -1)) {
+            nextButton.setText(Locale.getStringInLocale("finish",this));
+        }
+        else {
+            nextButton.setText(Locale.getStringInLocale("next",this));
+        }
 
         breedDialog.setTitle(Locale.getStringInLocale("breed",this));
         breeds=Locale.getArrayInLocale("breeds_array",this);
@@ -365,12 +374,11 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
                 if(index == (numberOfCows-1))//last cow
                 {
-                    /*Log.d(TAG, farmer.getJsonObject().toString());
+                    Log.d(TAG, farmer.getJsonObject().toString());
                     //TODO: send to server
-                    if (DataHandler.checkNetworkConnection(this, null))
-                    {
+                    if (DataHandler.checkNetworkConnection(this, null)) {
                         sendDataToServer(farmer.getJsonObject());
-                    }*/
+                    }
                 }
                 else
                 {
@@ -691,5 +699,51 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         }
         //TODO: cache sire and dam
         farmer.setCow(thisCow,index);
+    }
+
+    private void sendDataToServer(JSONObject jsonObject)
+    {
+        ServerRegistrationThread serverRegistrationThread=new ServerRegistrationThread();
+        serverRegistrationThread.execute(jsonObject);
+    }
+
+    private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,Boolean> {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(CowRegistrationActivity.this, "",Locale.getStringInLocale("loading_please_wait",CowRegistrationActivity.this), true);
+        }
+
+        @Override
+        protected Boolean doInBackground(JSONObject... params) {
+            Log.d(TAG,"sending registration data to server");
+            String responseString=DataHandler.sendDataToServer(params[0].toString(), DataHandler.FARMER_REGISTRATION_URL);
+            if(responseString!=null && responseString.equals(DataHandler.ACKNOWLEDGE_OK)) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            progressDialog.dismiss();
+            if(result) {
+                Log.d(TAG,"data successfully sent to server");
+                if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
+                    Utils.showSuccessfullRegistration(CowRegistrationActivity.this,null);
+                }
+                else {
+                    Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("event_successfully_recorded",CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(CowRegistrationActivity.this, EventsActivity.class);
+                    startActivity(intent);
+                }
+            }
+            else {
+                Toast.makeText(CowRegistrationActivity.this,Locale.getStringInLocale("problem_connecting_to_server",CowRegistrationActivity.this),Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

@@ -289,6 +289,7 @@ public class Cow implements Parcelable, Serializable {
             jsonObject.put("mode", ((mode == null) ? "" : mode));
             jsonObject.put("serviceType", ((serviceType == null) ? "" : serviceType));
             jsonObject.put("otherDeformity", ((otherDeformity == null) ? "" : otherDeformity));
+            jsonObject.put("countryOfOrigin", ((countryOfOrigin == null) ? "" : countryOfOrigin));
             if (isNotDamOrSire) {
                 jsonObject.put("type", "cow");
                 jsonObject.put("sire", ((sire == null) ? "" : sire.getJsonObject()));

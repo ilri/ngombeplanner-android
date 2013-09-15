@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
 
+import org.cgiar.ilri.mistro.farmer.backend.Locale;
+
 /**
  * Created by jason on 8/6/13.
  */
@@ -13,15 +15,9 @@ public class Utils
 {
     public static void showSuccessfullRegistration(final Context context, String localeCode)
     {
-        String title="";
-        String instructions="";
-        String okayText="";
-        if(localeCode=="en")
-        {
-            title=context.getResources().getString(R.string.successful_registration_en);
-            instructions=context.getResources().getString(R.string.successful_registration_instructions_en);
-            okayText=context.getResources().getString(R.string.okay_en);
-        }
+        String title= Locale.getStringInLocale("string.successful_registration",context);
+        String instructions = Locale.getStringInLocale("successful_registration_instructions",context);
+        String okayText = Locale.getStringInLocale("okay",context);
         AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(context);
 
         alertDialogBuilder.setTitle(title);
