@@ -43,6 +43,7 @@ public class Cow implements Parcelable, Serializable {
     private String mode;
     private String serviceType;
     private String otherDeformity;
+    private String piggyBack;
 
     public Cow(boolean isNotDamOrSire) {
         name = "";
@@ -63,6 +64,7 @@ public class Cow implements Parcelable, Serializable {
         countryOfOrigin = "";
         serviceType = "";
         otherDeformity = "";
+        piggyBack = "";
     }
 
     public Cow(Parcel in) {
@@ -99,6 +101,10 @@ public class Cow implements Parcelable, Serializable {
         for (int i = 0; i < breeds.length; i++) {
             this.breeds.add(breeds[i]);
         }
+    }
+
+    public void setPiggyBack(String piggyBack) {
+        this.piggyBack = piggyBack;
     }
 
     public void setServiceType(String serviceType) {
@@ -159,6 +165,10 @@ public class Cow implements Parcelable, Serializable {
 
     public int getAge() {
         return age;
+    }
+
+    public String getPiggyBack() {
+        return piggyBack;
     }
 
     public String getAgeType() {
@@ -228,6 +238,7 @@ public class Cow implements Parcelable, Serializable {
         dest.writeString(mode);
         dest.writeString(serviceType);
         dest.writeString(otherDeformity);
+        dest.writeString(piggyBack);
     }
 
     public void readFromParcel(Parcel in) {
@@ -253,6 +264,7 @@ public class Cow implements Parcelable, Serializable {
         mode = in.readString();
         serviceType = in.readString();
         otherDeformity = in.readString();
+        piggyBack = in.readString();
     }
 
     public static final Creator<Cow> CREATOR = new Creator<Cow>() {
@@ -294,6 +306,9 @@ public class Cow implements Parcelable, Serializable {
                 jsonObject.put("type", "cow");
                 jsonObject.put("sire", ((sire == null) ? "" : sire.getJsonObject()));
                 jsonObject.put("dam", ((dam == null) ? "" : dam.getJsonObject()));
+            }
+            if(piggyBack!=null && piggyBack.length()>0) {
+                jsonObject.put("piggyBack",piggyBack);
             }
         } catch (JSONException e) {
             e.printStackTrace();

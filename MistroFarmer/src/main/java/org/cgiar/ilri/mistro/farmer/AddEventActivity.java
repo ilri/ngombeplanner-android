@@ -13,6 +13,7 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -56,9 +57,22 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private EditText remarksET;
     private Button okayB;
     private DatePickerDialog datePickerDialog;
+    private TextView strawNumberTV;
+    private EditText strawNumberET;
+    private TextView vetUsedTV;
+    private EditText vetUsedET;
+    private TextView bullNameTV;
+    private AutoCompleteTextView bullNameACTV;
+    private TextView bullETNTV;
+    private AutoCompleteTextView bullETNACTV;
+    private TextView noOfServicingDaysTV;
+    private EditText noOfServicingDaysET;
+    private TextView servicingTV;
+    private Spinner servicingS;
 
     private String[] cowNameArray;
     private String[] cowEarTagNumberArray;
+    private String[] cowSexArray;
     private String enterDate;
     private String dateInFuture;
     private String eventRecorded;
@@ -81,6 +95,18 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         eventTypeS.setOnItemSelectedListener(this);
         eventSubtypeTV=(TextView)findViewById(R.id.event_subtype_tv);
         eventSubtypeS=(Spinner)findViewById(R.id.event_subtype_s);
+        servicingTV = (TextView)findViewById(R.id.servicing_tv);
+        servicingS = (Spinner)findViewById(R.id.servicing_s);
+        strawNumberTV = (TextView)findViewById(R.id.straw_number_tv);
+        strawNumberET = (EditText)findViewById(R.id.straw_number_et);
+        vetUsedTV = (TextView)findViewById(R.id.vet_used_tv);
+        vetUsedET = (EditText)findViewById(R.id.vet_used_et);
+        bullNameTV = (TextView)findViewById(R.id.bull_name_tv);
+        bullNameACTV = (AutoCompleteTextView)findViewById(R.id.bull_name_actv);
+        bullETNTV = (TextView)findViewById(R.id.bull_etn_tv);
+        bullETNACTV = (AutoCompleteTextView)findViewById(R.id.bull_etn_actv);
+        noOfServicingDaysTV = (TextView)findViewById(R.id.no_of_servicing_days_tv);
+        noOfServicingDaysET = (EditText)findViewById(R.id.no_of_servicing_days_et);
         remarksTV=(TextView)findViewById(R.id.remarks_tv);
         remarksET=(EditText)findViewById(R.id.remarks_et);
         okayB=(Button)findViewById(R.id.okay_b);
@@ -125,7 +151,11 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             eventTypeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             eventTypeS.setAdapter(eventTypeArrayAdapter);
         }
-
+        strawNumberTV.setText(Locale.getStringInLocale("straw_number",this));
+        vetUsedTV.setText(Locale.getStringInLocale("vet_used",this));
+        bullNameTV.setText(Locale.getStringInLocale("servicing_bull_name",this));
+        bullETNTV.setText(Locale.getStringInLocale("servicing_bull_ear_tag_number",this));
+        noOfServicingDaysTV.setText(Locale.getStringInLocale("no_of_days_in_servicing",this));
         remarksTV.setText(Locale.getStringInLocale("remarks",this));
         okayB.setText(Locale.getStringInLocale("okay",this));
         enterDate=Locale.getStringInLocale("enter_date",this);
@@ -133,6 +163,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         eventRecorded=Locale.getStringInLocale("event_successfully_recorded",this);
         sendUnsuccessfulWarning=Locale.getStringInLocale("something_went_wrong_try_again",this);
         loadingPleaseWait = Locale.getStringInLocale("loading_please_wait",this);
+        servicingTV.setText(Locale.getStringInLocale("associated_servicing",this));
     }
 
     private void fetchCowIdentifiers()
@@ -168,23 +199,68 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent == eventTypeS) {
+            okayB.setText(Locale.getStringInLocale("okay",this));
+            dateTV.setText(Locale.getStringInLocale("date",this));
+            strawNumberTV.setVisibility(TextView.GONE);
+            strawNumberET.setVisibility(EditText.GONE);
+            vetUsedTV.setVisibility(TextView.GONE);
+            vetUsedET.setVisibility(EditText.GONE);
+            bullNameTV.setVisibility(TextView.GONE);
+            bullNameACTV.setVisibility(AutoCompleteTextView.GONE);
+            bullETNTV.setVisibility(TextView.GONE);
+            bullETNACTV.setVisibility(AutoCompleteTextView.GONE);
+            remarksTV.setVisibility(TextView.GONE);
+            remarksET.setVisibility(EditText.GONE);
+            cowIdentifierS.setVisibility(Spinner.GONE);
+            cowIdentifierTV.setVisibility(TextView.GONE);
+            noOfServicingDaysTV.setVisibility(TextView.GONE);
+            noOfServicingDaysET.setVisibility(EditText.GONE);
+            servicingTV.setVisibility(TextView.GONE);
+            servicingS.setVisibility(Spinner.GONE);
             String[] eventTypesEN = Locale.getArrayInLocale("cow_event_types", this, Locale.LOCALE_ENGLISH);
             if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {
                 birthEventSelected();
-                remarksTV.setVisibility(TextView.GONE);
-                remarksET.setVisibility(EditText.GONE);
-            }
-            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Acquisition")) {
-                remarksTV.setVisibility(TextView.GONE);
-                remarksET.setVisibility(EditText.GONE);
-                cowIdentifierS.setVisibility(Spinner.GONE);
-                cowIdentifierTV.setVisibility(TextView.GONE);
+                eventSubtypeTV.setVisibility(TextView.VISIBLE);
+                eventSubtypeS.setVisibility(Spinner.VISIBLE);
+                servicingTV.setVisibility(TextView.VISIBLE);
+                servicingS.setVisibility(Spinner.VISIBLE);
                 okayB.setText(Locale.getStringInLocale("next",this));
             }
+            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Abortion")) {
+                servicingTV.setVisibility(TextView.VISIBLE);
+                servicingS.setVisibility(Spinner.VISIBLE);
+                remarksTV.setVisibility(TextView.VISIBLE);
+                remarksET.setVisibility(EditText.VISIBLE);
+                cowIdentifierS.setVisibility(Spinner.VISIBLE);
+                cowIdentifierTV.setVisibility(TextView.VISIBLE);
+            }
+            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Acquisition")) {
+                okayB.setText(Locale.getStringInLocale("next",this));
+            }
+            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
+                strawNumberTV.setVisibility(TextView.VISIBLE);
+                strawNumberET.setVisibility(EditText.VISIBLE);
+                vetUsedTV.setVisibility(TextView.VISIBLE);
+                vetUsedET.setVisibility(EditText.VISIBLE);
+                remarksTV.setVisibility(TextView.VISIBLE);
+                remarksET.setVisibility(EditText.VISIBLE);
+                cowIdentifierS.setVisibility(Spinner.VISIBLE);
+                cowIdentifierTV.setVisibility(TextView.VISIBLE);
+            }
+            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Bull Servicing")) {
+                bullNameTV.setVisibility(TextView.VISIBLE);
+                bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                bullETNTV.setVisibility(TextView.VISIBLE);
+                bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                remarksTV.setVisibility(TextView.VISIBLE);
+                remarksET.setVisibility(EditText.VISIBLE);
+                cowIdentifierS.setVisibility(Spinner.VISIBLE);
+                cowIdentifierTV.setVisibility(TextView.VISIBLE);
+                noOfServicingDaysTV.setVisibility(TextView.VISIBLE);
+                noOfServicingDaysET.setVisibility(EditText.VISIBLE);
+                dateTV.setText(Locale.getStringInLocale("start_date",this));
+            }
             else {
-                eventSubtypeTV.setVisibility(TextView.GONE);
-                eventSubtypeS.setVisibility(Spinner.GONE);
-                okayB.setText(Locale.getStringInLocale("okay",this));
                 remarksTV.setVisibility(TextView.VISIBLE);
                 remarksET.setVisibility(EditText.VISIBLE);
                 cowIdentifierS.setVisibility(Spinner.VISIBLE);
@@ -200,9 +276,6 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             ArrayAdapter<CharSequence> eventSubtypeArrayAdapter=ArrayAdapter.createFromResource(this, eventSubtypeArrayID, android.R.layout.simple_spinner_item);
             eventSubtypeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             eventSubtypeS.setAdapter(eventSubtypeArrayAdapter);
-            eventSubtypeTV.setVisibility(TextView.VISIBLE);
-            eventSubtypeS.setVisibility(Spinner.VISIBLE);
-            okayB.setText(Locale.getStringInLocale("next",this));
         }
     }
 
@@ -285,6 +358,11 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                     jsonObject.put("date", dateET.getText().toString());
                     jsonObject.put("eventType", selectedEvent);
                     jsonObject.put("remarks", remarksET.getText().toString());
+                    jsonObject.put("strawNumber", strawNumberET.getText().toString());
+                    jsonObject.put("vetUsed", vetUsedET.getText().toString());
+                    jsonObject.put("bullName", bullNameACTV.getText().toString());
+                    jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
+                    jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
                     CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
                     cowEventAdditionThread.execute(jsonObject);
                 }
@@ -319,6 +397,15 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                         calfDam.setEarTagNumber(cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()]);
                         calfDam.setName(cowNameArray[cowIdentifierS.getSelectedItemPosition()]);
                         thisCalf.setDam(calfDam);
+                        JSONObject jsonObject = new JSONObject();
+                        String[] birthTypesInEN = Locale.getArrayInLocale("birth_types",AddEventActivity.this,Locale.LOCALE_ENGLISH);
+                        try {
+                            jsonObject.put("birthType",birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
+                            thisCalf.setPiggyBack(jsonObject.toString());
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         thisCalf.setDateOfBirth(dateET.getText().toString());
                         thisCalf.setMode(Cow.MODE_BORN_CALF_REGISTRATION);
                         farmer.setCow(thisCalf, 0);
@@ -363,6 +450,14 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                         TelephonyManager telephonyManager=(TelephonyManager)AddEventActivity.this.getSystemService(Context.TELEPHONY_SERVICE);
                         farmer.setSimCardSN(telephonyManager.getSimSerialNumber());
                         Cow thisCow = new Cow(true);
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("remarks",remarksET.getText().toString());
+                            thisCow.setPiggyBack(jsonObject.toString());
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         thisCow.setMode(Cow.MODE_ADULT_COW_REGISTRATION);
                         farmer.setCow(thisCow, 0);
 
@@ -508,12 +603,15 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 JSONObject jsonObject=new JSONObject(result);
                 JSONArray cowNamesArray=jsonObject.getJSONArray("cowNames");
                 JSONArray earTagNumbersArray=jsonObject.getJSONArray("earTagNumbers");
+                JSONArray sexTextArray = jsonObject.getJSONArray("sex");
                 String[] cowArray=new String[cowNamesArray.length()];
                 String[] earTagArray=new String[cowNamesArray.length()];
+                String[] sexArray=new String[cowNamesArray.length()];
                 for(int i=0;i<cowNamesArray.length();i++)
                 {
                     cowArray[i]=cowNamesArray.get(i).toString();
                     earTagArray[i]=earTagNumbersArray.get(i).toString();
+                    sexArray[i]=sexTextArray.get(i).toString();
                 }
                 //TODO: warn user if no cows
                 if(cowArray.length==0)
@@ -522,6 +620,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 }
                 AddEventActivity.this.cowNameArray =cowArray;
                 AddEventActivity.this.cowEarTagNumberArray=earTagArray;
+                AddEventActivity.this.cowSexArray = sexArray;
                 String[] identifierArray=new String[cowArray.length];
                 for (int i=0;i<cowArray.length;i++)
                 {

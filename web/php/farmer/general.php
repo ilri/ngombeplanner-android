@@ -126,6 +126,35 @@ class General {
       
    }
    
+   public function getVetID($name, $insert) {
+      if($name != "") {
+         $time = $this->getTime('Y-m-d H:i:s');
+         $this->logHandler->log(3, $this->TAG, "Getting id of Vet with name as " . $name);
+         $query = "SELECT `id` FROM `vet` WHERE `name` = '{$name}'";
+         $result = $this->database->runMySQLQuery($query, true);
+         if (sizeof($result) == 1) {
+            $id = $result[0]['id'];
+            $this->logHandler->log(4, $this->TAG, "ID of Vet " . $name . " gotten as " . $id);
+            return $id;
+         } 
+         else if(sizeof($result) == 0 && $insert == true) {
+            $query = "INSERT INTO `vet`(`name`,`date_added`) VALUES ('$name','$time')";
+            $result = $this->database->runMySQLQuery($query, false);
+            $id = mysql_insert_id();
+            $this->logHandler->log(3, $this->TAG, "Created a new Vet record with the name " . $name . " and id as " . $id);
+            return $id;
+         }
+         else {
+            $this->logHandler->log(2, $this->TAG, "There is more than one Vet with the name '" . $name . "' gotten, returning -1");
+            return -1;
+         }
+      }
+      else {
+         return -1;
+      }
+      
+   }
+   
    public function getCountryID($name) {
       if($name != -1){
          $this->logHandler->log(3, $this->TAG, "Getting id of country with name as ".$name);

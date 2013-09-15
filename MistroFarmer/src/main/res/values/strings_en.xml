@@ -76,6 +76,8 @@
     <string name="specify_en">Specify</string>
     <string name="straw_number_en">Straw Number</string>
     <string name="vet_used_en">Vet Used</string>
+    <string name="servicing_bull_name_en">Servicing Bull Name</string>
+    <string name="servicing_bull_ear_tag_number_en">Servicing Bull Ear Tag Number</string>
     <string name="embryo_number_en">Embryo Number</string>
     <string name="enable_gps_en">Enable GPS</string>
     <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
@@ -146,6 +148,8 @@
         <item>Death</item>
         <item>Acquisition</item>
         <item>Sale</item>
+        <item>Artificial Insemination</item>
+        <item>Bull Servicing</item>
     </string-array>
     <string name="enter_date_en">Please enter the date</string>
     <string name="date_in_future_en">Date you entered appears to be in the future</string>
@@ -163,4 +167,7 @@
     <string name="event_too_old_en">You cannot add an event that occured more than one month ago</string>
     <string name="milk_data_too_old_en">You cannot enter milk production data that is more than one month old</string>
     <string name="milk_too_much_en">The quantity of milk you entered is too much</string>
+    <string name="start_date_en">Start Date</string>
+    <string name="no_of_days_in_servicing_en">No. of Days in Servicing</string>
+    <string name="associated_servicing_en">Associated Servicing/AI</string>
 </resources>

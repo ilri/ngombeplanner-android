@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 15, 2013 at 07:30 PM
+-- Generation Time: Sep 16, 2013 at 01:35 AM
 -- Server version: 5.5.32-0ubuntu0.13.04.1
 -- PHP Version: 5.4.9-4ubuntu2.3
 
@@ -111,16 +111,18 @@ CREATE TABLE IF NOT EXISTS `cow` (
   KEY `straw_id` (`straw_id`),
   KEY `embryo_id` (`embryo_id`),
   KEY `country_id` (`country_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `cow`
 --
 
 INSERT INTO `cow` (`id`, `farmer_id`, `name`, `ear_tag_number`, `date_of_birth`, `age`, `age_type`, `sex`, `sire_id`, `dam_id`, `straw_id`, `embryo_id`, `date_added`, `service_type`, `country_id`) VALUES
-(5, 12, 'Cow1', 'jascow1', '2008-03-11 00:00:00', 5, 'Years', 'Male', NULL, NULL, NULL, NULL, '2013-09-15 19:21:31', 'AI', NULL),
-(6, 12, 'Cow2', 'jascow2', '0000-00-00 00:00:00', 8, 'Weeks', 'Female', NULL, NULL, NULL, NULL, '2013-09-15 19:21:32', 'Bull', NULL),
-(7, 14, 'Tesr', 'rdx', '0000-00-00 00:00:00', 2, 'Days', 'Female', NULL, NULL, NULL, NULL, '2013-09-15 19:27:43', 'Bull', 1);
+(8, 15, 'Sire1', 'jas1', '0000-00-00 00:00:00', 2, 'Years', 'Male', NULL, NULL, NULL, NULL, '2013-09-15 21:01:02', 'Bull', 1),
+(9, 15, 'Dam1', 'jas2', '0000-00-00 00:00:00', 1, 'Years', 'Female', 8, 11, NULL, NULL, '2013-09-15 21:01:02', 'Bull', 2),
+(10, 15, 'Sire2', 'jas3', '0000-00-00 00:00:00', -1, 'Days', 'Male', NULL, 9, 1, NULL, '2013-09-15 21:01:03', 'AI', 3),
+(11, 15, 'Dam2', 'jas4', '0000-00-00 00:00:00', -1, 'Days', 'Female', NULL, NULL, NULL, 0, '2013-09-15 21:01:03', 'ET', NULL),
+(12, 15, 'Calf1', 'jas5', '2013-09-16 00:00:00', 0, 'Days', 'Female', NULL, NULL, NULL, NULL, '2013-09-16 01:30:26', 'Bull', NULL);
 
 -- --------------------------------------------------------
 
@@ -136,15 +138,15 @@ CREATE TABLE IF NOT EXISTS `cow_breed` (
   PRIMARY KEY (`id`),
   KEY `cow_id` (`cow_id`),
   KEY `breed_id` (`breed_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `cow_breed`
 --
 
 INSERT INTO `cow_breed` (`id`, `cow_id`, `breed_id`, `date_added`) VALUES
-(8, 5, 3, '2013-09-15 19:21:31'),
-(9, 5, 5, '2013-09-15 19:21:31');
+(10, 8, 3, '2013-09-15 21:01:02'),
+(11, 8, 5, '2013-09-15 21:01:02');
 
 -- --------------------------------------------------------
 
@@ -171,15 +173,36 @@ CREATE TABLE IF NOT EXISTS `cow_deformity` (
 
 CREATE TABLE IF NOT EXISTS `cow_event` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cow_id` int(11) NOT NULL,
+  `cow_id` int(11) DEFAULT NULL,
   `event_id` int(11) NOT NULL,
   `remarks` varchar(255) DEFAULT NULL,
   `event_date` date NOT NULL,
   `date_added` datetime NOT NULL,
+  `birth_type` enum('Normal','Still') DEFAULT NULL,
+  `parent_cow_event` int(11) DEFAULT NULL,
+  `straw_id` int(11) DEFAULT NULL,
+  `vet_id` int(11) DEFAULT NULL,
+  `bull_id` int(11) DEFAULT NULL,
+  `servicing_days` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cow_id` (`cow_id`,`event_id`),
-  KEY `event_id` (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `event_id` (`event_id`),
+  KEY `parent_cow_event` (`parent_cow_event`),
+  KEY `straw_id` (`straw_id`),
+  KEY `vet_id` (`vet_id`),
+  KEY `bull_id` (`bull_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `cow_event`
+--
+
+INSERT INTO `cow_event` (`id`, `cow_id`, `event_id`, `remarks`, `event_date`, `date_added`, `birth_type`, `parent_cow_event`, `straw_id`, `vet_id`, `bull_id`, `servicing_days`) VALUES
+(1, 9, 1, 'Test', '2013-09-16', '2013-09-16 00:55:12', NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 9, 10, 'Comments here', '2013-09-16', '2013-09-16 00:57:11', NULL, NULL, 1, 1, NULL, NULL),
+(3, 9, 11, 'Comments here', '2013-09-16', '2013-09-16 00:58:42', NULL, NULL, NULL, NULL, 8, 20),
+(4, 9, 7, 'Also here', '2013-09-16', '2013-09-16 00:59:27', NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 12, 2, NULL, '2013-09-16', '0000-00-00 00:00:00', '', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -224,6 +247,13 @@ CREATE TABLE IF NOT EXISTS `embryo` (
   KEY `sire_id` (`sire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `embryo`
+--
+
+INSERT INTO `embryo` (`id`, `embryo_no`, `dam_id`, `sire_id`, `date_added`) VALUES
+(0, 'embro1', NULL, NULL, '2013-09-15 21:01:03');
+
 -- --------------------------------------------------------
 
 --
@@ -235,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `event`
@@ -244,8 +274,10 @@ CREATE TABLE IF NOT EXISTS `event` (
 INSERT INTO `event` (`id`, `name`) VALUES
 (1, 'Abortion'),
 (9, 'Acquisition'),
+(10, 'Artificial Insemination'),
 (2, 'Birth'),
 (4, 'Bloat'),
+(11, 'Bull Servicing'),
 (6, 'Death'),
 (7, 'Dry Off'),
 (8, 'Sale'),
@@ -292,15 +324,14 @@ CREATE TABLE IF NOT EXISTS `farmer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `mobile_no` (`mobile_no`,`sim_card_sn`),
   KEY `extension_personnel_id` (`extension_personnel_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `farmer`
 --
 
 INSERT INTO `farmer` (`id`, `name`, `mobile_no`, `location_county`, `location_district`, `gps_longitude`, `gps_latitude`, `date_added`, `extension_personnel_id`, `sim_card_sn`) VALUES
-(12, 'Jason Rogena', '0715023805', NULL, NULL, '', '', '2013-09-15 19:21:31', 5, '89254029541005994302'),
-(14, 'Jason Rogena', '0715023805', NULL, NULL, '', '', '2013-09-15 19:27:43', 5, '89254029541005994303');
+(15, 'Jason Rogena', '0715023805', NULL, NULL, '', '', '2013-09-15 21:01:02', 5, '89254029541005994303');
 
 -- --------------------------------------------------------
 
@@ -335,7 +366,14 @@ CREATE TABLE IF NOT EXISTS `straw` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `straw_number` (`straw_number`),
   KEY `sire_id` (`sire_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `straw`
+--
+
+INSERT INTO `straw` (`id`, `straw_number`, `sire_id`, `date_added`) VALUES
+(1, 'straw1', NULL, '2013-09-15 21:01:03');
 
 -- --------------------------------------------------------
 
@@ -348,7 +386,14 @@ CREATE TABLE IF NOT EXISTS `vet` (
   `name` varchar(100) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `vet`
+--
+
+INSERT INTO `vet` (`id`, `name`, `date_added`) VALUES
+(1, 'Frank Makau', '2013-09-16 00:57:11');
 
 --
 -- Constraints for dumped tables
@@ -383,8 +428,12 @@ ALTER TABLE `cow_deformity`
 -- Constraints for table `cow_event`
 --
 ALTER TABLE `cow_event`
+  ADD CONSTRAINT `cow_event_ibfk_6` FOREIGN KEY (`bull_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_event_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `cow_event_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `cow_event_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `cow_event_ibfk_3` FOREIGN KEY (`parent_cow_event`) REFERENCES `cow_event` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `cow_event_ibfk_4` FOREIGN KEY (`straw_id`) REFERENCES `straw` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `cow_event_ibfk_5` FOREIGN KEY (`vet_id`) REFERENCES `vet` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `embryo`

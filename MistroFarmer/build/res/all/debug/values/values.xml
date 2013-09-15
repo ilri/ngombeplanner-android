@@ -43,6 +43,8 @@
         <item>Death</item>
         <item>Acquisition</item>
         <item>Sale</item>
+        <item>Artificial Insemination</item>
+        <item>Bull Servicing</item>
     </string-array>
     <string-array name="deformities_array_en">
         <item>Blind</item>
@@ -608,6 +610,7 @@
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="app_name">Mistro Farmer</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="associated_servicing_en">Associated Servicing/AI</string>
     <string name="breed_en">Breed</string>
     <string name="calf_registration_en">Calf Registration</string>
     <string name="cancel_en">Cancel</string>
@@ -668,6 +671,7 @@
     <string name="next_screen_is_cow_registration_en">In the next screen, you will be required to register the acquired cow. Click next to register the cow</string>
     <string name="no_data_received_en">No data received</string>
     <string name="no_en">No</string>
+    <string name="no_of_days_in_servicing_en">No. of Days in Servicing</string>
     <string name="number_of_cows_en">Number of Cows</string>
     <string name="okay_en">Okay</string>
     <string name="old_mobile_number_en">Old Mobile Number</string>
@@ -684,6 +688,8 @@
     <string name="register_en">Register</string>
     <string name="remarks_en">Remarks</string>
     <string name="service_type_used_en">Service Type Used</string>
+    <string name="servicing_bull_ear_tag_number_en">Servicing Bull Ear Tag Number</string>
+    <string name="servicing_bull_name_en">Servicing Bull Name</string>
     <string name="sex_en">Sex</string>
     <string name="sim_card_not_registered_en">You are using a Sim card that has not been used before in this system.</string>
     <string name="sim_card_registration_en">Sim Card Registration</string>
@@ -691,6 +697,7 @@
     <string name="sire_registration_en">Sire Registration</string>
     <string name="something_went_wrong_try_again_en">Something went wrong. Try resending the data</string>
     <string name="specify_en">Specify</string>
+    <string name="start_date_en">Start Date</string>
     <string name="straw_number_en">Straw Number</string>
     <string name="successful_registration_en">Successful Registration</string>
     <string name="successful_registration_instructions_en">You have been successfully registered. You will receive an SMS instructing you on how to login</string>

@@ -116,14 +116,15 @@ class RegistrationHandler {
             $eventTypeID = $this->general->getEventID("Birth");
             $eventDate = $currentCow['dateOfBirth'];
             $remarks = "";
-            $time = $this->getTime("EAT");
-            $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}')";
+            $time = $this->getTime("Y-m-d H:i:s");
+            $piggyBack = $currentCow['piggyBack'];
+            $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`birth_type`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$piggyBack['birthType']}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}')";
             $this->database->runMySQLQuery($query, false);
          }
          else if($currentCow['mode'] === "adultCowRegistration") {
             $eventTypeID = $this->general->getEventID("Acquisition");
             $eventDate = $this->getTime("Y-m-d");
-            $remarks = "";
+            $remarks = $currentCow['piggyBack']['remarks'];
             $time = $this->getTime("Y-m-d H:i:s");
             $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$remarks}','{$eventDate}','{$time}')";
             $this->database->runMySQLQuery($query, false);

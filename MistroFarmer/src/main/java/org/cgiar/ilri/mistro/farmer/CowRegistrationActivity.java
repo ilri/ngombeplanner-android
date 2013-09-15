@@ -95,8 +95,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private String deformityOSpecifyText;
     private Cow thisCow;
     private Farmer farmer;
-    List<Cow> validSires;
-    List<Cow> validDams;
+    private List<Cow> validSires;
+    private List<Cow> validDams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -770,7 +770,6 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             dam.setEmbryoNumber(embryoNumberET.getText().toString());
             thisCow.setDam(dam);
         }
-
         farmer.setCow(thisCow,index);
     }
 

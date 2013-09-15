@@ -25,24 +25,27 @@ class CowIdentifierFetcher {
 		$simCardSN = $this->jsonObject['simCardSN'];
 		if(array_key_exists("cowSex",$this->jsonObject)) {
 			$this->logHandler->log(4, $this->TAG,"CowSex specified as ".$this->jsonObject['cowSex']);
-			$query="SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}' AND `cow`.`type` ='cow' AND `cow`.`sex` = {$this->jsonObject['cowSex']}";
+			$query="SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}' AND `cow`.`sex` = {$this->jsonObject['cowSex']}";
 		}
 		else {
 			$this->logHandler->log(4, $this->TAG,"CowSex not specified");
-			$query="SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}' AND `cow`.`type` ='cow'";
+			$query="SELECT `cow`.`name`,`cow`.`ear_tag_number`,`cow`.`sex` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}'";
 		}
 		$result = $this->database->runMySQLQuery($query, true);
 		$cowNameArray=array();
 		$earTagNumberArray=array();
+                $sexArray=  array();
 		//$index=0;
 		for($i = 0; $i<sizeOf($result); $i++) {
 			$cowNameArray[$i]=$result[$i]['name'];
 			$earTagNumberArray[$i]=$result[$i]['ear_tag_number'];
+                        $sexArray[$i]=$result[$i]['sex'];
 		}
 		$this->logHandler->log(3, $this->TAG,"sending cow identifiers back to client as a json string");
 		$jsonArray=array();
 		$jsonArray['cowNames']=$cowNameArray;
 		$jsonArray['earTagNumbers']=$earTagNumberArray;
+                $jsonArray['sex']=$sexArray;
 		$jsonString = json_encode($jsonArray);
 		$this->logHandler->log(4, $this->TAG," cow identifiers encoded from an array and is '".$jsonString."'");
 		echo $jsonString;

@@ -1,6 +1,7 @@
 <?php
 include '../common/log.php';
 include '../common/database.php';
+include 'general.php';
 
 class CowEventHandler {
 
@@ -12,6 +13,7 @@ class CowEventHandler {
 	private $jsonObject;
 	private $logHandler;
 	private $database;
+        private $general;
 	
 	public function __construct() {
 		$this->settingsDir = $this->ROOT."config/settings.ini";
@@ -21,21 +23,49 @@ class CowEventHandler {
 		$this->getSettings();
 		$this->getCodes();
 		$this->database = new DatabaseHandler;
+                $this->general = new General();
 		
 		//get the cowID
 		$simCardSN = $this->jsonObject['simCardSN'];
 		$cowEarTagNumber = $this->jsonObject['cowEarTagNumber'];
 		$cowName = $this->jsonObject['cowName'];
-		$query = "SELECT `cow`.`id` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` WHERE `farmer`.`sim_card_sn` = '{$simCardSN}' AND `cow`.`name` = '{$cowName}' AND `cow`.`ear_tag_number` = '{$cowEarTagNumber}'";
+		$query = "SELECT `cow`.`id`,`cow`.`farmer_id` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` WHERE `farmer`.`sim_card_sn` = '{$simCardSN}' AND `cow`.`name` = '{$cowName}' AND `cow`.`ear_tag_number` = '{$cowEarTagNumber}'";
 		$result = $this->database->runMySQLQuery($query, true);
 		$cowID = $result[0]['id'];
+                $farmerID = $result[0]['farmer_id'];
 		
 		//add event to database
 		$eventTypeID = $this->getEventTypeID();
 		$eventDate = $this->jsonObject['date'];
 		$remarks = $this->jsonObject['remarks'];
 		$time = $this->getTime("EAT");
-		$query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}')";
+                if($this->jsonObject['eventType'] == "Abortion") {
+                   //TODO: remember to add parent_cow_event
+                   $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`)".
+                           " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}')";
+                }
+                else if($this->jsonObject['eventType'] == "Artificial Insemination") {
+                   $vetID = $this->general->getVetID($this->jsonObject['vetUsed'],true);
+                   $strawID = $this->general->getStrawID($this->jsonObject['strawNumber'], true);
+                   $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`straw_id`,`vet_id`)".
+                           " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$strawID},{$vetID})";
+                }
+                else if($this->jsonObject['eventType'] == "Bull Servicing") {
+                   $bullID = $this->general->getCowID($farmerID,$this->jsonObject['bullEarTagNo']);
+                   if($bullID != -1) {
+                      $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`bull_id`,`servicing_days`)".
+                           " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',$bullID,{$this->jsonObject['noOfServicingDays']})";
+                   }
+                   else {
+                      $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`servicing_days`)".
+                           " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$this->jsonObject['noOfServicingDays']})";
+                   }
+                   
+                }
+                else {
+                   $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}')";
+                }
+		
 		$this->database->runMySQLQuery($query, false);
 		$this->logHandler->log(3, $this->TAG,"returning response code ".$this->codes['acknowledge_ok']);
 		echo $this->codes['acknowledge_ok'];

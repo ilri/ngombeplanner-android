@@ -5083,6 +5083,8 @@ true
             <file
                 path="/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml"
                 qualifiers="" >
+                <string name="associated_servicing_en" >Associated Servicing/AI
+                </string>
                 <string name="okay_en" >Okay
                 </string>
                 <string name="next_en" >Next
@@ -5102,6 +5104,8 @@ true
                 <string name="logging_in_from_different_device_en" >It appears like you are logging in from an unusual device. Do you still want to login?
                 </string>
                 <string name="sex_en" >Sex
+                </string>
+                <string name="servicing_bull_ear_tag_number_en" >Servicing Bull Ear Tag Number
                 </string>
                 <string name="enter_your_mistro_id_en" >Please enter your Mistro ID
                 </string>
@@ -5140,6 +5144,8 @@ Male
                 <string name="calf_registration_en" >Calf Registration
                 </string>
                 <string name="service_type_used_en" >Service Type Used
+                </string>
+                <string name="no_of_days_in_servicing_en" >No. of Days in Servicing
                 </string>
                 <string name="straw_number_en" >Straw Number
                 </string>
@@ -5194,11 +5200,13 @@ Years
                 </string>
                 <string name="dam_en" >Dam
                 </string>
-                <string name="problem_in_data_sent_en" >There seems to be a problem with the data you are trying to send.
-                </string>
                 <string name="production_history_en" >Production History
                 </string>
+                <string name="problem_in_data_sent_en" >There seems to be a problem with the data you are trying to send.
+                </string>
                 <string name="register_en" >Register
+                </string>
+                <string name="start_date_en" >Start Date
                 </string>
                 <string name="new_mobile_number_en" >New Mobile Number
                 </string>
@@ -5316,6 +5324,12 @@ Acquisition
                     <item>
 Sale
                     </item>
+                    <item>
+Artificial Insemination
+                    </item>
+                    <item>
+Bull Servicing
+                    </item>
                 </string-array>
                 <string-array name="breeds_array_en" >
                     <item>
@@ -5416,6 +5430,10 @@ Combined
                 </string>
                 <string name="reason_for_enabling_gps_en" >You need to enable your GPS before register. Press Okay to enable GPS
                 </string>
+                <string name="servicing_bull_name_en" >Servicing Bull Name
+                </string>
+                <string name="loading_please_wait_en" >Loading. Please wait...
+                </string>
 
                 <string-array name="service_types_en" >
                     <item>
@@ -5428,10 +5446,6 @@ Artificial Insemination
 Embryo Transfer
                     </item>
                 </string-array>
-
-                <string name="loading_please_wait_en" >Loading. Please wait...
-                </string>
-
                 <string-array name="birth_types_en" >
                     <item>
 Normal

@@ -14,6 +14,34 @@
         android:paddingRight="@dimen/activity_padding_side"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/event_type_tv"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:textSize="@dimen/normal_text_size"/>
+        <Spinner
+            android:id="@+id/event_type_s"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textColor="@color/text_input_color"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
+        <TextView
+            android:id="@+id/event_subtype_tv"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:textSize="@dimen/normal_text_size"
+            android:visibility="gone"/>
+        <Spinner
+            android:id="@+id/event_subtype_s"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textColor="@color/text_input_color"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:visibility="gone"/>
+        <TextView
             android:id="@+id/cow_identifier_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,33 +70,102 @@
             android:textColor="@color/text_input_color"
             android:inputType="date"/>
         <TextView
-            android:id="@+id/event_type_tv"
-            android:layout_height="wrap_content"
+            android:id="@+id/servicing_tv"
             android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
-            android:textSize="@dimen/normal_text_size"/>
-        <Spinner
-            android:id="@+id/event_type_s"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:textColor="@color/text_input_color"
-            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
-            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
-        <TextView
-            android:id="@+id/event_subtype_tv"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
             android:textSize="@dimen/normal_text_size"
             android:visibility="gone"/>
         <Spinner
-            android:id="@+id/event_subtype_s"
-            android:layout_height="wrap_content"
+            android:id="@+id/servicing_s"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textColor="@color/text_input_color"
             android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:visibility="gone"/>
+        <TextView
+            android:id="@+id/straw_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:visibility="gone"
+            android:textSize="@dimen/normal_text_size"/>
+        <EditText
+            android:id="@+id/straw_number_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:textSize="@dimen/normal_text_size"
+            android:visibility="gone"
+            android:textColor="@color/text_input_color"/>
+        <TextView
+            android:id="@+id/vet_used_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:visibility="gone"
+            android:textSize="@dimen/normal_text_size"/>
+        <EditText
+            android:id="@+id/vet_used_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:textSize="@dimen/normal_text_size"
+            android:visibility="gone"
+            android:inputType="textPersonName"
+            android:textColor="@color/text_input_color"/>
+        <TextView
+            android:id="@+id/bull_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:visibility="gone"
+            android:textSize="@dimen/normal_text_size"/>
+        <AutoCompleteTextView
+            android:id="@+id/bull_name_actv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:textSize="@dimen/normal_text_size"
+            android:visibility="gone"
+            android:textColor="@color/text_input_color"/>
+        <TextView
+            android:id="@+id/bull_etn_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:visibility="gone"
+            android:textSize="@dimen/normal_text_size"/>
+        <AutoCompleteTextView
+            android:id="@+id/bull_etn_actv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:textSize="@dimen/normal_text_size"
+            android:visibility="gone"
+            android:textColor="@color/text_input_color"/>
+        <TextView
+            android:id="@+id/no_of_servicing_days_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:visibility="gone"
+            android:textSize="@dimen/normal_text_size"/>
+        <EditText
+            android:id="@+id/no_of_servicing_days_et"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:textSize="@dimen/normal_text_size"
+            android:visibility="gone"
+            android:textColor="@color/text_input_color"
+            android:inputType="number"/>
         <TextView
             android:id="@+id/remarks_tv"
             android:layout_height="wrap_content"
