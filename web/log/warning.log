@@ -1,23 +1,26 @@
 
-[Sunday, 15th September 2013 19:16:28] [database.php] no results gotten for  'SELECT `id` FROM `country` WHERE `name` = '''
-[Sunday, 15th September 2013 19:16:28] [general.php] Either more than one Country with the name '' gotten or none at all, returning -1
-[Sunday, 15th September 2013 19:17:46] [database.php] no results gotten for  'SELECT `id` FROM `country` WHERE `name` = '''
-[Sunday, 15th September 2013 19:17:46] [general.php] Either more than one Country with the name '' gotten or none at all, returning -1
-[Sunday, 15th September 2013 19:17:46] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
-[Sunday, 15th September 2013 19:17:46] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
-[Sunday, 15th September 2013 19:21:31] [database.php] no results gotten for  'SELECT `id` FROM `country` WHERE `name` = '''
-[Sunday, 15th September 2013 19:21:31] [general.php] Either more than one Country with the name '' gotten or none at all, returning -1
-[Sunday, 15th September 2013 19:21:32] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
-[Sunday, 15th September 2013 19:21:32] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
-[Sunday, 15th September 2013 19:21:32] [database.php] no results gotten for  'SELECT `id` FROM `country` WHERE `name` = '''
-[Sunday, 15th September 2013 19:21:32] [general.php] Either more than one Country with the name '' gotten or none at all, returning -1
-[Sunday, 15th September 2013 19:21:32] [database.php] no results gotten for  'SELECT `id` FROM `breed` WHERE `name` = '''
-[Sunday, 15th September 2013 19:21:32] [general.php] Either more than one breed with the name '' gotten or none at all, returning -1
-[Sunday, 15th September 2013 19:21:32] [registration.php] No breed with the name '' found, not inserting breed into database
-[Sunday, 15th September 2013 19:21:32] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
-[Sunday, 15th September 2013 19:21:32] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
-[Sunday, 15th September 2013 19:27:44] [database.php] no results gotten for  'SELECT `id` FROM `breed` WHERE `name` = '''
-[Sunday, 15th September 2013 19:27:44] [general.php] Either more than one breed with the name '' gotten or none at all, returning -1
-[Sunday, 15th September 2013 19:27:44] [registration.php] No breed with the name '' found, not inserting breed into database
-[Sunday, 15th September 2013 19:27:44] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
-[Sunday, 15th September 2013 19:27:44] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:02] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Sunday, 15th September 2013 21:01:02] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `breed` WHERE `name` = '''
+[Sunday, 15th September 2013 21:01:03] [general.php] Either more than one breed with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:03] [registration.php] No breed with the name '' found, not inserting breed into database
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Sunday, 15th September 2013 21:01:03] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `breed` WHERE `name` = '''
+[Sunday, 15th September 2013 21:01:03] [general.php] Either more than one breed with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:03] [registration.php] No breed with the name '' found, not inserting breed into database
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Sunday, 15th September 2013 21:01:03] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `country` WHERE `name` = '''
+[Sunday, 15th September 2013 21:01:03] [general.php] Either more than one Country with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `breed` WHERE `name` = '''
+[Sunday, 15th September 2013 21:01:03] [general.php] Either more than one breed with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:03] [registration.php] No breed with the name '' found, not inserting breed into database
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Sunday, 15th September 2013 21:01:03] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 15'
+[Sunday, 15th September 2013 21:01:03] [general.php] Either more than one cow with the ear tag number '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 15'
+[Sunday, 15th September 2013 21:01:03] [general.php] Either more than one cow with the ear tag number '' gotten or none at all, returning -1
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `straw` WHERE `straw_number` = 'straw1''
+[Sunday, 15th September 2013 21:01:03] [database.php] no results gotten for  'SELECT `id` FROM `embryo` WHERE `embryo_no` = 'embro1''

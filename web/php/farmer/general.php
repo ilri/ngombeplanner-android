@@ -145,23 +145,18 @@ class General {
       }
    }
    
-   public function getCowID($farmerID,$name,$earTagNumber) {
-      $this->logHandler->log(3, $this->TAG, "Getting id of cow with name as ".$name);
-      if($farmerID != -1) {
-         $query = "SELECT `id` FROM `cow` WHERE `name` = '{$name}' AND `ear_tag_number` = '{$earTagNumber}' AND `farmer_id` = {$farmerID}";
-      }
-      else {
-         $query = "SELECT `id` FROM `cow` WHERE `name` = '{$name}' AND `ear_tag_number` = '{$earTagNumber}'";
-      }
+   public function getCowID($farmerID,$earTagNumber) {
+      $this->logHandler->log(3, $this->TAG, "Getting id of cow with ear tag number as ".$earTagNumber);
+      $query = "SELECT `id` FROM `cow` WHERE `ear_tag_number` = '{$earTagNumber}' AND `farmer_id` = {$farmerID}";
       
       $result = $this->database->runMySQLQuery($query, true);
       if(sizeof($result) == 1) {
          $id = $result[0]['id'];
-         $this->logHandler->log(4, $this->TAG, "ID of Cow ".$name." gotten as ".$id);
+         $this->logHandler->log(4, $this->TAG, "ID of Cow ".$earTagNumber." gotten as ".$id);
          return $id;
       }
       else {
-         $this->logHandler->log(2, $this->TAG, "Either more than one cow with the name '".$name."' and ear_tag_number '".$earTagNumber."' gotten or none at all, returning -1");
+         $this->logHandler->log(2, $this->TAG, "Either more than one cow with the ear tag number '".$earTagNumber."' gotten or none at all, returning -1");
          return -1;
       }
    }

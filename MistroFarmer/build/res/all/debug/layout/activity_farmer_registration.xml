@@ -70,6 +70,7 @@
             android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:inputType="number"
+            android:gravity="center_horizontal"
             android:textColor="@color/text_input_color"
             android:textSize="@dimen/normal_text_size"/>
         <Button

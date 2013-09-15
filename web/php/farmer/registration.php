@@ -94,11 +94,10 @@ class RegistrationHandler {
          $currentCow = $cows[$i];
          $this->registerCow($currentCow,$farmerID);
       }
-      /*for ($i = 0; $i < sizeof($cows); $i++) {
-         //insert cow
+      for ($i = 0; $i < sizeof($cows); $i++) {
          $currentCow = $cows[$i];
          $this->registerParents($currentCow,$farmerID);
-      }*/
+      }
    }
 
    private function addCowsToExistingFarmer() {
@@ -130,11 +129,10 @@ class RegistrationHandler {
             $this->database->runMySQLQuery($query, false);
          }
       }
-      /*for ($i = 0; $i < sizeof($cows); $i++) {
-         //insert cow
+      for ($i = 0; $i < sizeof($cows); $i++) {
          $currentCow = $cows[$i];
          $this->registerParents($currentCow,$farmerID);
-      }*/
+      }
    }
 
    private function registerCow($currentCow, $farmerID) {
@@ -183,12 +181,12 @@ class RegistrationHandler {
    }
    
    private function registerParents($currentCow,$farmerID) {
-      $cowID = $this->general->getCowID($farmerID,$currentCow['name'],$currentCow['earTagNumber']);
+      $cowID = $this->general->getCowID($farmerID,$currentCow['earTagNumber']);
       if($cowID != -1) {
          if($currentCow['serviceType'] == "Bull") {
             $sire = $currentCow['sire'];
             if($sire != "") {
-               $sireID = $this->general->getCowID(-1,$sire['name'],$sire['earTagNumber']);
+               $sireID = $this->general->getCowID($farmerID,$sire['earTagNumber']);
                if($sireID != -1) {
                   $query = "UPDATE `cow` SET `sire_id` = {$sireID} WHERE `id` = {$cowID}";
                   $this->database->runMySQLQuery($query, false);
@@ -197,7 +195,7 @@ class RegistrationHandler {
             
             $dam = $currentCow['dam'];
             if($dam != "") {
-               $damID = $this->general->getCowID($farmerID,$dam['name'],$dam['earTagNumber']);
+               $damID = $this->general->getCowID($farmerID,$dam['earTagNumber']);
                if($damID != -1) {
                   $query = "UPDATE `cow` SET `dam_id` = {$damID} WHERE `id` = {$cowID}";
                   $this->database->runMySQLQuery($query, false);
@@ -216,7 +214,7 @@ class RegistrationHandler {
             
             $dam = $currentCow['dam'];
             if($dam != "") {
-               $damID = $this->general->getCowID($farmerID,$dam['name'],$dam['earTagNumber']);
+               $damID = $this->general->getCowID($farmerID,$dam['earTagNumber']);
                if($damID != -1) {
                   $query = "UPDATE `cow` SET `dam_id` = {$damID} WHERE `id` = {$cowID}";
                   $this->database->runMySQLQuery($query, false);

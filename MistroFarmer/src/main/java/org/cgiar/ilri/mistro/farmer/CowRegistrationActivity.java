@@ -29,11 +29,14 @@ import com.actionbarsherlock.view.MenuItem;
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.Dam;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+import org.cgiar.ilri.mistro.farmer.carrier.Sire;
 import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -92,6 +95,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private String deformityOSpecifyText;
     private Cow thisCow;
     private Farmer farmer;
+    List<Cow> validSires;
+    List<Cow> validDams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,7 +255,50 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                     }
                     deformityET.setText(deformity);
 
-                    //TODO: set sire and dam spinners
+                    List<Cow> allCows = farmer.getCows();
+                    validSires = new ArrayList<Cow>();
+                    validSires.add(new Cow(false));
+                    List<String> validSireNames = new ArrayList<String>();
+                    validSireNames.add("");
+                    int sireSelection = 0;
+
+                    validDams = new ArrayList<Cow>();
+                    validDams.add(new Cow(false));
+                    List<String> validDamNames = new ArrayList<String>();
+                    int damSelection = 0;
+                    validDamNames.add("");
+                    for(int i = 0; i < allCows.size(); i++) {
+                        if(i != index) {
+                            if(allCows.get(i).getEarTagNumber() != null && allCows.get(i).getEarTagNumber().length() > 0 && allCows.get(i).getSex().equals(Cow.SEX_MALE)) {
+                                validSires.add(allCows.get(i));
+                                validSireNames.add(allCows.get(i).getEarTagNumber()+" ("+allCows.get(i).getName()+")");
+                                if(thisCow.getServiceType().equals(Cow.SERVICE_TYPE_BULL)) {
+                                    if(thisCow.getSire().getEarTagNumber().equals(allCows.get(i).getEarTagNumber())) {
+                                        sireSelection = validSires.size() - 1;
+                                    }
+                                }
+                            }
+                            else if(allCows.get(i).getEarTagNumber() != null && allCows.get(i).getEarTagNumber().length() > 0 && allCows.get(i).getSex().equals(Cow.SEX_FEMALE)) {
+                                validDams.add(allCows.get(i));
+                                validDamNames.add(allCows.get(i).getEarTagNumber()+" ("+allCows.get(i).getName()+")");
+                                if(thisCow.getServiceType().equals(Cow.SERVICE_TYPE_BULL) || thisCow.getServiceType().equals(Cow.SERVICE_TYPE_AI)) {
+                                    if(thisCow.getDam().getEarTagNumber().equals(allCows.get(i).getEarTagNumber())) {
+                                        damSelection = validDams.size() - 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    ArrayAdapter<String> siresArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,validSireNames);
+                    siresArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    sireS.setAdapter(siresArrayAdapter);
+                    sireS.setSelection(sireSelection);
+
+                    ArrayAdapter<String> damsArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,validDamNames);
+                    damsArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    damS.setAdapter(damsArrayAdapter);
+                    damS.setSelection(damSelection);
+
                     countryOfOriginACTV.setText(thisCow.getCountryOfOrigin());
                     String[] serviceTypesInEN = Locale.getArrayInLocale("service_types",this,Locale.LOCALE_ENGLISH);
                     for(int i = 0; i < serviceTypesInEN.length; i++) {
@@ -259,9 +307,11 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                         }
                         else if(serviceTypesInEN[i].equals("Artificial Insemination") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_AI)) {
                             serviceTypeS.setSelection(i);
+                            strawNumberET.setText(thisCow.getSire().getStrawNumber());
                         }
                         else if(serviceTypesInEN[i].equals("Embryo Transfer") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_ET)) {
                             serviceTypeS.setSelection(i);
+                            embryoNumberET.setText(thisCow.getDam().getEmbryoNumber());
                         }
                     }
 
@@ -690,14 +740,37 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         String[] serviceTypesInEN = Locale.getArrayInLocale("service_types",this,Locale.LOCALE_ENGLISH);
         if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Bull")) {
             thisCow.setServiceType(Cow.SERVICE_TYPE_BULL);
+
+            Sire sire = new Sire();
+            sire.setName(validSires.get(sireS.getSelectedItemPosition()).getName());
+            sire.setEarTagNumber(validSires.get(sireS.getSelectedItemPosition()).getEarTagNumber());
+            thisCow.setSire(sire);
+
+            Dam dam =new Dam();
+            dam.setName(validDams.get(damS.getSelectedItemPosition()).getName());
+            dam.setEarTagNumber(validDams.get(damS.getSelectedItemPosition()).getEarTagNumber());
+            thisCow.setDam(dam);
         }
         else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
             thisCow.setServiceType(Cow.SERVICE_TYPE_AI);
+
+            Sire sire = new Sire();
+            sire.setStrawNumber(strawNumberET.getText().toString());
+            thisCow.setSire(sire);
+
+            Dam dam =new Dam();
+            dam.setName(validDams.get(damS.getSelectedItemPosition()).getName());
+            dam.setEarTagNumber(validDams.get(damS.getSelectedItemPosition()).getEarTagNumber());
+            thisCow.setDam(dam);
         }
         else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Embryo Transfer")) {
             thisCow.setServiceType(Cow.SERVICE_TYPE_ET);
+
+            Dam dam = new Dam();
+            dam.setEmbryoNumber(embryoNumberET.getText().toString());
+            thisCow.setDam(dam);
         }
-        //TODO: cache sire and dam
+
         farmer.setCow(thisCow,index);
     }
 
