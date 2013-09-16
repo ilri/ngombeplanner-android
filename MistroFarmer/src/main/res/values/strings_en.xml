@@ -179,4 +179,5 @@
     </string-array>
     <string name="gps_narrowing_down_on_loc_en">Please wait while GPS narrows down on your location</string>
     <string name="event_only_for_female_cattle_en">The selected event can only occur in female cattle</string>
+    <string name="other_countries_en">Other Countries</string>
 </resources>

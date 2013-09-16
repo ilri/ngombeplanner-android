@@ -198,4 +198,11 @@
         <item>Zambia</item>
         <item>Zimbabwe</item>
     </string-array>
+    <string-array name="common_countries">
+        <item>Kenya</item>
+        <item>Tanzania</item>
+        <item>Uganda</item>
+        <item>Ethiopia</item>
+        <item>Other</item>
+    </string-array>
 </resources>

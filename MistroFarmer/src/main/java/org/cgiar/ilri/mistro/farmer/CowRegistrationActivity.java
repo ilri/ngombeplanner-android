@@ -79,6 +79,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private EditText embryoNumberET;
     private TextView countryOfOriginTV;
     private AutoCompleteTextView countryOfOriginACTV;
+    private TextView commonCountriesTV;
+    private Spinner commonCountriesS;
     private Button previousButton;
     private Button nextButton;
     private DatePickerDialog datePickerDialog;
@@ -149,6 +151,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         embryoNumberET = (EditText)this.findViewById(R.id.embryo_number_et);
         countryOfOriginTV = (TextView)this.findViewById(R.id.country_of_origin_tv);
         countryOfOriginACTV = (AutoCompleteTextView)this.findViewById(R.id.country_of_origin_actv);
+        commonCountriesTV = (TextView)this.findViewById(R.id.common_countries_tv);
+        commonCountriesS = (Spinner)this.findViewById(R.id.common_countries_s);
+        commonCountriesS.setOnItemSelectedListener(this);
         previousButton = (Button)this.findViewById(R.id.previous_button);
         previousButton.setOnClickListener(this);
         nextButton = (Button)this.findViewById(R.id.next_button);
@@ -394,7 +399,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         damTV.setText(Locale.getStringInLocale("dam",this));
         strawNumberTV.setText(Locale.getStringInLocale("straw_number",this));
         embryoNumberTV.setText(Locale.getStringInLocale("embryo_number",this));
-        countryOfOriginTV.setText(Locale.getStringInLocale("country_of_origin",this));
+        countryOfOriginTV.setText(Locale.getStringInLocale("other_countries",this));
+        commonCountriesTV.setText(Locale.getStringInLocale("country_of_origin",this));
         previousButton.setText(Locale.getStringInLocale("previous",this));
         if(index == (numberOfCows -1)) {
             nextButton.setText(Locale.getStringInLocale("finish",this));
@@ -425,6 +431,10 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
         ArrayAdapter countryArrayAdapter = ArrayAdapter.createFromResource(this,R.array.countries,android.R.layout.select_dialog_item);
         countryOfOriginACTV.setAdapter(countryArrayAdapter);
+
+        ArrayAdapter<CharSequence> commonCountriesArrayAdapter = ArrayAdapter.createFromResource(this,R.array.common_countries,android.R.layout.simple_spinner_item);
+        commonCountriesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        commonCountriesS.setAdapter(commonCountriesArrayAdapter);
     }
 
     @Override
@@ -673,6 +683,19 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent == serviceTypeS) {
             changeServiceType();
+        }
+        else if(parent == commonCountriesS) {
+            String[] commonCountries = getResources().getStringArray(R.array.common_countries);
+            if(commonCountries[commonCountriesS.getSelectedItemPosition()].equals("Other")) {
+                countryOfOriginACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                countryOfOriginTV.setVisibility(TextView.VISIBLE);
+                countryOfOriginACTV.setText("");
+            }
+            else {
+                countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
+                countryOfOriginTV.setVisibility(TextView.GONE);
+                countryOfOriginACTV.setText(commonCountries[commonCountriesS.getSelectedItemPosition()]);
+            }
         }
     }
 

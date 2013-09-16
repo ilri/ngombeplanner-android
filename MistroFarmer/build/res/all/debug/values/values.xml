@@ -39,6 +39,13 @@
         <item>Injury</item>
     </string-array>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/countries.xml -->
+    <string-array name="common_countries">
+        <item>Kenya</item>
+        <item>Tanzania</item>
+        <item>Uganda</item>
+        <item>Ethiopia</item>
+        <item>Other</item>
+    </string-array>
     <string-array name="countries">
         <item>Afghanistan</item>
         <item>Albania</item>
@@ -885,6 +892,7 @@
     <string name="okay_en">Okay</string>
     <string name="old_mobile_number_en">Old Mobile Number</string>
     <string name="old_number_not_in_system_en">It appears like your old mobile number is not registered in the system. Contact the system admin for more details.</string>
+    <string name="other_countries_en">Other Countries</string>
     <string name="past_events_en">Past Events</string>
     <string name="previous_en">Previous</string>
     <string name="problem_connecting_to_server_en">A problem occurred while trying to connect to the Server</string>
