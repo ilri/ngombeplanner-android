@@ -85,6 +85,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private String sendUnsuccessfulWarning;
     private String loadingPleaseWait;
     private List<Integer> servicingIDs;
+    private List<String> servicingTypes;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -243,6 +244,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 eventSubtypeS.setVisibility(Spinner.VISIBLE);
                 servicingTV.setVisibility(TextView.VISIBLE);
                 servicingS.setVisibility(Spinner.VISIBLE);
+                cowIdentifierS.setVisibility(Spinner.VISIBLE);
+                cowIdentifierTV.setVisibility(TextView.VISIBLE);
                 okayB.setText(Locale.getStringInLocale("next",this));
             }
             else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Abortion")) {
@@ -277,7 +280,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 cowIdentifierTV.setVisibility(TextView.VISIBLE);
                 noOfServicingDaysTV.setVisibility(TextView.VISIBLE);
                 noOfServicingDaysET.setVisibility(EditText.VISIBLE);
-                dateTV.setText(Locale.getStringInLocale("start_date",this));
+                dateTV.setText(Locale.getStringInLocale("start_date", this));
             }
             else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Death")) {
                 causeOfDeathTV.setVisibility(TextView.VISIBLE);
@@ -434,8 +437,15 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        if(servicingTypes.get(servicingS.getSelectedItemPosition()).equals("Artificial Insemination")) {
+                            thisCalf.setServiceType(Cow.SERVICE_TYPE_AI);
+                        }
+                        else if(servicingTypes.get(servicingS.getSelectedItemPosition()).equals("Bull Servicing")) {
+                            thisCalf.setServiceType(Cow.SERVICE_TYPE_BULL);
+                        }
                         thisCalf.setDateOfBirth(dateET.getText().toString());
                         thisCalf.setMode(Cow.MODE_BORN_CALF_REGISTRATION);
+
                         farmer.setCow(thisCalf, 0);
 
                         Intent intent = new Intent(AddEventActivity.this, CowRegistrationActivity.class);
@@ -711,10 +721,12 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                     JSONArray historyArray = jsonObject.getJSONArray("history");
                     List<String> servicingNames = new ArrayList<String>();
                     servicingIDs = new ArrayList<Integer>();
+                    servicingTypes = new ArrayList<String>();
                     for(int i = 0; i < historyArray.length(); i++) {
                         JSONObject currentServicing = historyArray.getJSONObject(i);
                         servicingIDs.add(currentServicing.getInt("id"));
                         servicingNames.add(currentServicing.getString("event_date")+" ("+currentServicing.getString("ear_tag_number")+")");
+                        servicingTypes.add(currentServicing.getString("event_name"));
                     }
                     ArrayAdapter<String> servicingsArrayAdapter=new ArrayAdapter<String>(AddEventActivity.this,android.R.layout.simple_spinner_dropdown_item,servicingNames);
                     servicingsArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

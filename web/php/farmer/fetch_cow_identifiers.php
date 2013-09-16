@@ -25,7 +25,7 @@ class CowIdentifierFetcher {
 		$simCardSN = $this->jsonObject['simCardSN'];
 		if(array_key_exists("cowSex",$this->jsonObject)) {
 			$this->logHandler->log(4, $this->TAG,"CowSex specified as ".$this->jsonObject['cowSex']);
-			$query="SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}' AND `cow`.`sex` = {$this->jsonObject['cowSex']}";
+			$query="SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='{$simCardSN}' AND `cow`.`sex` = '{$this->jsonObject['cowSex']}'";
 		}
 		else {
 			$this->logHandler->log(4, $this->TAG,"CowSex not specified");
