@@ -14,12 +14,17 @@ public final class R {
         public static final int age_type_array_en=0x7f040000;
         public static final int birth_types_en=0x7f040001;
         public static final int breeds_array_en=0x7f040002;
-        public static final int cow_event_types_en=0x7f040003;
-        public static final int deformities_array_en=0x7f040004;
-        public static final int milking_times_en=0x7f040005;
-        public static final int quantity_types_en=0x7f040006;
-        public static final int service_types_en=0x7f040007;
-        public static final int sex_array_en=0x7f040008;
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/countries.xml 
+         */
+        public static final int countries=0x7f040003;
+        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int cow_event_types_en=0x7f040004;
+        public static final int deformities_array_en=0x7f040005;
+        public static final int milking_times_en=0x7f040006;
+        public static final int quantity_types_en=0x7f040007;
+        public static final int service_types_en=0x7f040008;
+        public static final int sex_array_en=0x7f040009;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1145,122 +1150,123 @@ containing a value of this type.
         public static final int breed_en=0x7f0a0014;
         public static final int calf_registration_en=0x7f0a0015;
         public static final int cancel_en=0x7f0a0016;
-        public static final int country_of_origin_en=0x7f0a0017;
-        public static final int cow_en=0x7f0a0018;
-        public static final int cow_registration_en=0x7f0a0019;
-        public static final int cow_registration_proper_en=0x7f0a001a;
-        public static final int dam_en=0x7f0a001b;
-        public static final int dam_registration_en=0x7f0a001c;
-        public static final int date_en=0x7f0a001d;
-        public static final int date_in_future_en=0x7f0a001e;
-        public static final int date_of_birth_en=0x7f0a001f;
-        public static final int deformity_en=0x7f0a0020;
-        public static final int ear_tag_number_en=0x7f0a0021;
-        public static final int embryo_number_en=0x7f0a0022;
-        public static final int enable_gps_en=0x7f0a0023;
-        public static final int enable_network_en=0x7f0a0024;
+        public static final int country_not_found_en=0x7f0a0017;
+        public static final int country_of_origin_en=0x7f0a0018;
+        public static final int cow_en=0x7f0a0019;
+        public static final int cow_registration_en=0x7f0a001a;
+        public static final int cow_registration_proper_en=0x7f0a001b;
+        public static final int dam_en=0x7f0a001c;
+        public static final int dam_registration_en=0x7f0a001d;
+        public static final int date_en=0x7f0a001e;
+        public static final int date_in_future_en=0x7f0a001f;
+        public static final int date_of_birth_en=0x7f0a0020;
+        public static final int deformity_en=0x7f0a0021;
+        public static final int ear_tag_number_en=0x7f0a0022;
+        public static final int embryo_number_en=0x7f0a0023;
+        public static final int enable_gps_en=0x7f0a0024;
+        public static final int enable_network_en=0x7f0a0025;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int english=0x7f0a0025;
+        public static final int english=0x7f0a0026;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int enter_date_en=0x7f0a0026;
-        public static final int enter_ear_tag_no_or_name_en=0x7f0a0027;
-        public static final int enter_ear_tag_number_en=0x7f0a0028;
-        public static final int enter_embryo_number_en=0x7f0a0029;
-        public static final int enter_quantity_of_milk_produced_en=0x7f0a002a;
-        public static final int enter_straw_number_en=0x7f0a002b;
-        public static final int enter_your_mistro_id_en=0x7f0a002c;
-        public static final int enter_your_mobile_no_en=0x7f0a002d;
-        public static final int enter_your_name_en=0x7f0a002e;
-        public static final int event_en=0x7f0a002f;
-        public static final int event_successfully_recorded_en=0x7f0a0030;
-        public static final int event_too_old_en=0x7f0a0031;
-        public static final int events_en=0x7f0a0032;
-        public static final int extension_p_en=0x7f0a0033;
-        public static final int failed_to_authenticate_en=0x7f0a0034;
-        public static final int farmer_registration_en=0x7f0a0035;
-        public static final int finish_en=0x7f0a0036;
-        public static final int full_name_en=0x7f0a0037;
+        public static final int enter_date_en=0x7f0a0027;
+        public static final int enter_ear_tag_no_or_name_en=0x7f0a0028;
+        public static final int enter_ear_tag_number_en=0x7f0a0029;
+        public static final int enter_embryo_number_en=0x7f0a002a;
+        public static final int enter_quantity_of_milk_produced_en=0x7f0a002b;
+        public static final int enter_straw_number_en=0x7f0a002c;
+        public static final int enter_your_mistro_id_en=0x7f0a002d;
+        public static final int enter_your_mobile_no_en=0x7f0a002e;
+        public static final int enter_your_name_en=0x7f0a002f;
+        public static final int event_en=0x7f0a0030;
+        public static final int event_successfully_recorded_en=0x7f0a0031;
+        public static final int event_too_old_en=0x7f0a0032;
+        public static final int events_en=0x7f0a0033;
+        public static final int extension_p_en=0x7f0a0034;
+        public static final int failed_to_authenticate_en=0x7f0a0035;
+        public static final int farmer_registration_en=0x7f0a0036;
+        public static final int finish_en=0x7f0a0037;
+        public static final int full_name_en=0x7f0a0038;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int hello_world=0x7f0a0038;
+        public static final int hello_world=0x7f0a0039;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int information_successfully_sent_to_server_en=0x7f0a0039;
-        public static final int loading_please_wait_en=0x7f0a003a;
-        public static final int logging_in_from_different_device_en=0x7f0a003b;
-        public static final int login_anyway_en=0x7f0a003c;
-        public static final int login_en=0x7f0a003d;
-        public static final int main_menu_en=0x7f0a003e;
-        public static final int maximum_of_four_breeds_en=0x7f0a003f;
-        public static final int measurement_type_en=0x7f0a0040;
-        public static final int milk_data_too_old_en=0x7f0a0041;
-        public static final int milk_production_en=0x7f0a0042;
-        public static final int milk_too_much_en=0x7f0a0043;
-        public static final int mobile_number_en=0x7f0a0044;
-        public static final int name_en=0x7f0a0045;
-        public static final int new_mobile_number_en=0x7f0a0046;
-        public static final int next_en=0x7f0a0047;
-        public static final int next_screen_is_calf_registration_en=0x7f0a0048;
-        public static final int next_screen_is_cow_registration_en=0x7f0a0049;
-        public static final int no_data_received_en=0x7f0a004a;
-        public static final int no_en=0x7f0a004b;
-        public static final int no_of_days_in_servicing_en=0x7f0a004c;
-        public static final int number_of_cows_en=0x7f0a004d;
-        public static final int okay_en=0x7f0a004e;
-        public static final int old_mobile_number_en=0x7f0a004f;
-        public static final int old_number_not_in_system_en=0x7f0a0050;
-        public static final int past_events_en=0x7f0a0051;
-        public static final int previous_en=0x7f0a0052;
-        public static final int problem_connecting_to_server_en=0x7f0a0053;
-        public static final int problem_in_data_sent_en=0x7f0a0054;
-        public static final int production_for_time_already_exists_en=0x7f0a0055;
-        public static final int production_history_en=0x7f0a0056;
-        public static final int quantity_en=0x7f0a0057;
-        public static final int reason_for_enabling_gps_en=0x7f0a0058;
-        public static final int reason_for_enabling_network_en=0x7f0a0059;
-        public static final int register_en=0x7f0a005a;
-        public static final int remarks_en=0x7f0a005b;
-        public static final int service_type_used_en=0x7f0a005c;
-        public static final int servicing_bull_ear_tag_number_en=0x7f0a005d;
-        public static final int servicing_bull_name_en=0x7f0a005e;
-        public static final int sex_en=0x7f0a005f;
-        public static final int sim_card_not_registered_en=0x7f0a0060;
-        public static final int sim_card_registration_en=0x7f0a0061;
-        public static final int sire_en=0x7f0a0062;
-        public static final int sire_registration_en=0x7f0a0063;
-        public static final int something_went_wrong_try_again_en=0x7f0a0064;
-        public static final int specify_en=0x7f0a0065;
-        public static final int start_date_en=0x7f0a0066;
-        public static final int straw_number_en=0x7f0a0067;
-        public static final int successful_registration_en=0x7f0a0068;
-        public static final int successful_registration_instructions_en=0x7f0a0069;
+        public static final int information_successfully_sent_to_server_en=0x7f0a003a;
+        public static final int loading_please_wait_en=0x7f0a003b;
+        public static final int logging_in_from_different_device_en=0x7f0a003c;
+        public static final int login_anyway_en=0x7f0a003d;
+        public static final int login_en=0x7f0a003e;
+        public static final int main_menu_en=0x7f0a003f;
+        public static final int maximum_of_four_breeds_en=0x7f0a0040;
+        public static final int measurement_type_en=0x7f0a0041;
+        public static final int milk_data_too_old_en=0x7f0a0042;
+        public static final int milk_production_en=0x7f0a0043;
+        public static final int milk_too_much_en=0x7f0a0044;
+        public static final int mobile_number_en=0x7f0a0045;
+        public static final int name_en=0x7f0a0046;
+        public static final int new_mobile_number_en=0x7f0a0047;
+        public static final int next_en=0x7f0a0048;
+        public static final int next_screen_is_calf_registration_en=0x7f0a0049;
+        public static final int next_screen_is_cow_registration_en=0x7f0a004a;
+        public static final int no_data_received_en=0x7f0a004b;
+        public static final int no_en=0x7f0a004c;
+        public static final int no_of_days_in_servicing_en=0x7f0a004d;
+        public static final int number_of_cows_en=0x7f0a004e;
+        public static final int okay_en=0x7f0a004f;
+        public static final int old_mobile_number_en=0x7f0a0050;
+        public static final int old_number_not_in_system_en=0x7f0a0051;
+        public static final int past_events_en=0x7f0a0052;
+        public static final int previous_en=0x7f0a0053;
+        public static final int problem_connecting_to_server_en=0x7f0a0054;
+        public static final int problem_in_data_sent_en=0x7f0a0055;
+        public static final int production_for_time_already_exists_en=0x7f0a0056;
+        public static final int production_history_en=0x7f0a0057;
+        public static final int quantity_en=0x7f0a0058;
+        public static final int reason_for_enabling_gps_en=0x7f0a0059;
+        public static final int reason_for_enabling_network_en=0x7f0a005a;
+        public static final int register_en=0x7f0a005b;
+        public static final int remarks_en=0x7f0a005c;
+        public static final int service_type_used_en=0x7f0a005d;
+        public static final int servicing_bull_ear_tag_number_en=0x7f0a005e;
+        public static final int servicing_bull_name_en=0x7f0a005f;
+        public static final int sex_en=0x7f0a0060;
+        public static final int sim_card_not_registered_en=0x7f0a0061;
+        public static final int sim_card_registration_en=0x7f0a0062;
+        public static final int sire_en=0x7f0a0063;
+        public static final int sire_registration_en=0x7f0a0064;
+        public static final int something_went_wrong_try_again_en=0x7f0a0065;
+        public static final int specify_en=0x7f0a0066;
+        public static final int start_date_en=0x7f0a0067;
+        public static final int straw_number_en=0x7f0a0068;
+        public static final int successful_registration_en=0x7f0a0069;
+        public static final int successful_registration_instructions_en=0x7f0a006a;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int swahili=0x7f0a006a;
+        public static final int swahili=0x7f0a006b;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int time_en=0x7f0a006b;
+        public static final int time_en=0x7f0a006c;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int title_activity_add_event=0x7f0a006c;
-        public static final int title_activity_cow_registration=0x7f0a006d;
-        public static final int title_activity_events=0x7f0a006e;
-        public static final int title_activity_events_history=0x7f0a006f;
-        public static final int title_activity_farmer_registration=0x7f0a0070;
-        public static final int title_activity_main_menu=0x7f0a0071;
-        public static final int title_activity_milk_procution_history=0x7f0a0072;
-        public static final int title_activity_milk_production=0x7f0a0073;
+        public static final int title_activity_add_event=0x7f0a006d;
+        public static final int title_activity_cow_registration=0x7f0a006e;
+        public static final int title_activity_events=0x7f0a006f;
+        public static final int title_activity_events_history=0x7f0a0070;
+        public static final int title_activity_farmer_registration=0x7f0a0071;
+        public static final int title_activity_main_menu=0x7f0a0072;
+        public static final int title_activity_milk_procution_history=0x7f0a0073;
+        public static final int title_activity_milk_production=0x7f0a0074;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int today_en=0x7f0a0074;
-        public static final int type_of_birth_en=0x7f0a0075;
-        public static final int vet_used_en=0x7f0a0076;
-        public static final int welcome_en=0x7f0a0077;
-        public static final int yes_en=0x7f0a0078;
-        public static final int yesterday_en=0x7f0a0079;
-        public static final int your_mistro_id_en=0x7f0a007a;
+        public static final int today_en=0x7f0a0075;
+        public static final int type_of_birth_en=0x7f0a0076;
+        public static final int vet_used_en=0x7f0a0077;
+        public static final int welcome_en=0x7f0a0078;
+        public static final int yes_en=0x7f0a0079;
+        public static final int yesterday_en=0x7f0a007a;
+        public static final int your_mistro_id_en=0x7f0a007b;
     }
     public static final class style {
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 

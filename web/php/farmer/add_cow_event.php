@@ -41,8 +41,8 @@ class CowEventHandler {
 		$time = $this->getTime("EAT");
                 if($this->jsonObject['eventType'] == "Abortion") {
                    //TODO: remember to add parent_cow_event
-                   $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`)".
-                           " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}')";
+                   $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`parent_cow_event`)".
+                           " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$this->jsonObject['parentEvent']})";
                 }
                 else if($this->jsonObject['eventType'] == "Artificial Insemination") {
                    $vetID = $this->general->getVetID($this->jsonObject['vetUsed'],true);

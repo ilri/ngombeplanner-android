@@ -112,19 +112,21 @@ class RegistrationHandler {
          $cowID = $this->registerCow($currentCow,$farmerID);
          //add an event and link it to the new cow
          if ($currentCow['mode'] === "bornCalfRegistration") {
-            //add event to database
             $eventTypeID = $this->general->getEventID("Birth");
             $eventDate = $currentCow['dateOfBirth'];
             $remarks = "";
             $time = $this->getTime("Y-m-d H:i:s");
-            $piggyBack = $currentCow['piggyBack'];
-            $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`birth_type`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$piggyBack['birthType']}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}')";
+            $piggyBack = json_decode($currentCow['piggyBack'], true);
+            $this->logHandler->log(3, $this->TAG, "piggy back " . $piggyBack['birthType']);
+            $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`birth_type`,`event_date`,`date_added`,`parent_cow_event`)".
+                    " VALUES({$cowID},{$eventTypeID},'{$piggyBack['birthType']}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$piggyBack['parentEvent']})";
             $this->database->runMySQLQuery($query, false);
          }
          else if($currentCow['mode'] === "adultCowRegistration") {
             $eventTypeID = $this->general->getEventID("Acquisition");
             $eventDate = $this->getTime("Y-m-d");
-            $remarks = $currentCow['piggyBack']['remarks'];
+            $piggyBack = json_decode($currentCow['piggyBack'], true);
+            $remarks = $piggyBack['remarks'];
             $time = $this->getTime("Y-m-d H:i:s");
             $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$remarks}','{$eventDate}','{$time}')";
             $this->database->runMySQLQuery($query, false);
