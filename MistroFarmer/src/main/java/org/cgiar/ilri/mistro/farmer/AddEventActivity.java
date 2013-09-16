@@ -327,6 +327,14 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 return false;
             }
         }
+        String[] eventTypesInEN = Locale.getArrayInLocale("cow_event_types",this, Locale.LOCALE_ENGLISH);
+        String selectedEvent = eventTypesInEN[eventTypeS.getSelectedItemPosition()];
+        if(selectedEvent.equals("Abortion") || selectedEvent.equals("Birth") || selectedEvent.equals("Start of Lactation") || selectedEvent.equals("Dry Off") || selectedEvent.equals("Artificial Insemination") || selectedEvent.equals("Bull Servicing")) {
+            if(cowSexArray != null && cowSexArray[cowIdentifierS.getSelectedItemPosition()].equals(Cow.SEX_MALE)) {
+                Toast.makeText(this,Locale.getStringInLocale("event_only_for_female_cattle",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
         return true;
     }
 
@@ -644,6 +652,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 String[] cowArray=new String[cowNamesArray.length()];
                 String[] earTagArray=new String[cowNamesArray.length()];
                 String[] sexArray=new String[cowNamesArray.length()];
+                List<String> femaleList = new ArrayList<String>();
                 for(int i=0;i<cowNamesArray.length();i++)
                 {
                     cowArray[i]=cowNamesArray.get(i).toString();
@@ -653,7 +662,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 //TODO: warn user if no cows
                 if(cowArray.length==0)
                 {
-                    Toast.makeText(AddEventActivity.this, "no cows fetched", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("no_data_received",AddEventActivity.this), Toast.LENGTH_LONG).show();
                 }
                 AddEventActivity.this.cowNameArray =cowArray;
                 AddEventActivity.this.cowEarTagNumberArray=earTagArray;

@@ -5236,6 +5236,8 @@ Cups
                 </string>
                 <string name="no_en" >No
                 </string>
+                <string name="event_only_for_female_cattle_en" >The selected event can only occur in female cattle
+                </string>
                 <string name="cow_registration_en" >Cow Registration, Cow
                 </string>
 

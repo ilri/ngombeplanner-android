@@ -848,6 +848,7 @@
     <string name="enter_your_mobile_no_en">Please enter your phone number</string>
     <string name="enter_your_name_en">Please enter your name</string>
     <string name="event_en">Event</string>
+    <string name="event_only_for_female_cattle_en">The selected event can only occur in female cattle</string>
     <string name="event_successfully_recorded_en">The event has been successfully recorded</string>
     <string name="event_too_old_en">You cannot add an event that occured more than one month ago</string>
     <string name="events_en">Events</string>

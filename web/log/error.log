@@ -1,1 +1,2 @@
 
+[Monday, 16th September 2013 14:23:01] [database.php] MySQL error 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 's trough',STR_TO_DATE('16/9/2013', '%d/%m/%Y'),'2013-09-16 14:23:01',12)' at line 1' thrown while trying to run query 'INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`parent_cow_event`) VALUES(22,1,'After drinking from a neighbour's trough',STR_TO_DATE('16/9/2013', '%d/%m/%Y'),'2013-09-16 14:23:01',12)', exiting
