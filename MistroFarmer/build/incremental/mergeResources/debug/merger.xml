@@ -5168,6 +5168,8 @@ Male
                 </string>
                 <string name="milk_data_too_old_en" >You cannot enter milk production data that is more than one month old
                 </string>
+                <string name="cause_of_death_en" >Cause of Death
+                </string>
                 <string name="next_screen_is_cow_registration_en" >In the next screen, you will be required to register the acquired cow. Click next to register the cow
                 </string>
                 <string name="ear_tag_number_en" >Ear Tag Number
@@ -5234,6 +5236,19 @@ Cups
                 </string>
                 <string name="cow_registration_en" >Cow Registration, Cow
                 </string>
+
+                <string-array name="causes_of_death_en" >
+                    <item>
+Natural Causes
+                    </item>
+                    <item>
+Sickness
+                    </item>
+                    <item>
+Injury
+                    </item>
+                </string-array>
+
                 <string name="reason_for_enabling_network_en" >This application requires an internet connection for it to work/. Press Okay to enable the internet
                 </string>
                 <string name="dam_registration_en" >Dam Registration

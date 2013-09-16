@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 16, 2013 at 01:35 AM
+-- Generation Time: Sep 16, 2013 at 11:10 AM
 -- Server version: 5.5.32-0ubuntu0.13.04.1
 -- PHP Version: 5.4.9-4ubuntu2.3
 
@@ -62,6 +62,27 @@ INSERT INTO `breed` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cause_of_death`
+--
+
+CREATE TABLE IF NOT EXISTS `cause_of_death` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `cause_of_death`
+--
+
+INSERT INTO `cause_of_death` (`id`, `name`) VALUES
+(1, 'Natural Causes'),
+(2, 'Sickness'),
+(3, 'Injury');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `country`
 --
 
@@ -70,16 +91,209 @@ CREATE TABLE IF NOT EXISTS `country` (
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci AUTO_INCREMENT=197 ;
 
 --
 -- Dumping data for table `country`
 --
 
 INSERT INTO `country` (`id`, `name`) VALUES
+(4, 'Afghanistan'),
+(5, 'Albania'),
+(6, 'Algeria'),
+(7, 'Andorra'),
+(8, 'Angola'),
+(9, 'Antigua and Deps'),
+(10, 'Argentina'),
+(11, 'Armenia'),
+(12, 'Australia'),
+(13, 'Austria'),
+(14, 'Azerbaijan'),
+(15, 'Bahamas'),
+(16, 'Bahrain'),
+(17, 'Bangladesh'),
+(18, 'Barbados'),
+(19, 'Belarus'),
+(20, 'Belgium'),
+(21, 'Belize'),
+(22, 'Benin'),
+(23, 'Bhutan'),
+(24, 'Bolivia'),
+(25, 'Bosnia Herzegovina'),
+(26, 'Botswana'),
+(27, 'Brazil'),
+(28, 'Brunei'),
+(29, 'Bulgaria'),
+(30, 'Burkina'),
+(31, 'Burundi'),
+(32, 'Cambodia'),
+(33, 'Cameroon'),
+(34, 'Canada'),
+(35, 'Cape Verde'),
+(36, 'Central African Rep'),
+(37, 'Chad'),
+(38, 'Chile'),
+(39, 'China'),
+(40, 'Colombia'),
+(41, 'Comoros'),
+(42, 'Congo'),
+(43, 'Congo (Democratic Rep)'),
+(44, 'Costa Rica'),
+(45, 'Croatia'),
+(46, 'Cuba'),
+(47, 'Cyprus'),
+(48, 'Czech Republic'),
+(49, 'Denmark'),
+(50, 'Djibouti'),
+(51, 'Dominica'),
+(52, 'Dominican Republic'),
+(53, 'East Timor'),
+(54, 'Ecuador'),
+(55, 'Egypt'),
+(56, 'El Salvador'),
+(57, 'Equatorial Guinea'),
+(58, 'Eritrea'),
+(59, 'Estonia'),
+(60, 'Ethiopia'),
+(61, 'Fiji'),
+(62, 'Finland'),
+(63, 'France'),
+(64, 'Gabon'),
+(65, 'Gambia'),
+(66, 'Georgia'),
+(67, 'Germany'),
+(68, 'Ghana'),
+(69, 'Greece'),
+(70, 'Grenada'),
+(71, 'Guatemala'),
+(72, 'Guinea'),
+(73, 'Guinea-Bissau'),
+(74, 'Guyana'),
+(75, 'Haiti'),
+(76, 'Honduras'),
+(77, 'Hungary'),
+(78, 'Iceland'),
+(79, 'India'),
+(80, 'Indonesia'),
+(81, 'Iran'),
+(82, 'Iraq'),
+(83, 'Ireland (Republic)'),
+(84, 'Israel'),
+(85, 'Italy'),
+(86, 'Ivory Coast'),
+(87, 'Jamaica'),
+(88, 'Japan'),
+(89, 'Jordan'),
+(90, 'Kazakhstan'),
 (1, 'Kenya'),
+(91, 'Kiribati'),
+(92, 'Korea North'),
+(93, 'Korea South'),
+(94, 'Kosovo'),
+(95, 'Kuwait'),
+(96, 'Kyrgyzstan'),
+(97, 'Laos'),
+(98, 'Latvia'),
+(99, 'Lebanon'),
+(100, 'Lesotho'),
+(101, 'Liberia'),
+(102, 'Libya'),
+(103, 'Liechtenstein'),
+(104, 'Lithuania'),
+(105, 'Luxembourg'),
+(106, 'Macedonia'),
+(107, 'Madagascar'),
+(108, 'Malawi'),
+(109, 'Malaysia'),
+(110, 'Maldives'),
+(111, 'Mali'),
+(112, 'Malta'),
+(113, 'Marshall Islands'),
+(114, 'Mauritania'),
+(115, 'Mauritius'),
+(116, 'Mexico'),
+(117, 'Micronesia'),
+(118, 'Moldova'),
+(119, 'Monaco'),
+(120, 'Mongolia'),
+(121, 'Montenegro'),
+(122, 'Morocco'),
+(123, 'Mozambique'),
+(124, 'Myanmar (Burma)'),
+(125, 'Namibia'),
+(126, 'Nauru'),
+(127, 'Nepal'),
+(128, 'Netherlands'),
+(129, 'New Zealand'),
+(130, 'Nicaragua'),
+(131, 'Niger'),
+(132, 'Nigeria'),
+(133, 'Norway'),
+(134, 'Oman'),
+(135, 'Pakistan'),
+(136, 'Palau'),
+(137, 'Panama'),
+(138, 'Papua New Guinea'),
+(139, 'Paraguay'),
+(140, 'Peru'),
+(141, 'Philippines'),
+(142, 'Poland'),
+(143, 'Portugal'),
+(144, 'Qatar'),
+(145, 'Romania'),
+(146, 'Russian Federation'),
+(147, 'Rwanda'),
+(150, 'Saint Vincent and the Grenadines'),
+(151, 'Samoa'),
+(152, 'San Marino'),
+(153, 'Sao Tome and Principe'),
+(154, 'Saudi Arabia'),
+(155, 'Senegal'),
+(156, 'Serbia'),
+(157, 'Seychelles'),
+(158, 'Sierra Leone'),
+(159, 'Singapore'),
+(160, 'Slovakia'),
+(161, 'Slovenia'),
+(162, 'Solomon Islands'),
+(163, 'Somalia'),
+(164, 'South Africa'),
+(165, 'South Sudan'),
+(166, 'Spain'),
+(167, 'Sri Lanka'),
+(148, 'St Kitts and Nevis'),
+(149, 'St Lucia'),
+(168, 'Sudan'),
+(169, 'Suriname'),
+(170, 'Swaziland'),
+(171, 'Sweden'),
+(172, 'Switzerland'),
+(173, 'Syria'),
+(174, 'Taiwan'),
+(175, 'Tajikistan'),
 (2, 'Tanzania'),
-(3, 'Uganda');
+(176, 'Thailand'),
+(177, 'Togo'),
+(178, 'Tonga'),
+(179, 'Trinidad and Tobago'),
+(180, 'Tunisia'),
+(181, 'Turkey'),
+(182, 'Turkmenistan'),
+(183, 'Tuvalu'),
+(3, 'Uganda'),
+(184, 'Ukraine'),
+(185, 'United Arab Emirates'),
+(186, 'United Kingdom'),
+(187, 'United States'),
+(188, 'Uruguay'),
+(189, 'Uzbekistan'),
+(190, 'Vanuatu'),
+(191, 'Vatican City'),
+(192, 'Venezuela'),
+(193, 'Vietnam'),
+(194, 'Yemen'),
+(195, 'Zambia'),
+(196, 'Zimbabwe');
 
 -- --------------------------------------------------------
 
@@ -111,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `cow` (
   KEY `straw_id` (`straw_id`),
   KEY `embryo_id` (`embryo_id`),
   KEY `country_id` (`country_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `cow`
@@ -122,7 +336,9 @@ INSERT INTO `cow` (`id`, `farmer_id`, `name`, `ear_tag_number`, `date_of_birth`,
 (9, 15, 'Dam1', 'jas2', '0000-00-00 00:00:00', 1, 'Years', 'Female', 8, 11, NULL, NULL, '2013-09-15 21:01:02', 'Bull', 2),
 (10, 15, 'Sire2', 'jas3', '0000-00-00 00:00:00', -1, 'Days', 'Male', NULL, 9, 1, NULL, '2013-09-15 21:01:03', 'AI', 3),
 (11, 15, 'Dam2', 'jas4', '0000-00-00 00:00:00', -1, 'Days', 'Female', NULL, NULL, NULL, 0, '2013-09-15 21:01:03', 'ET', NULL),
-(12, 15, 'Calf1', 'jas5', '2013-09-16 00:00:00', 0, 'Days', 'Female', NULL, NULL, NULL, NULL, '2013-09-16 01:30:26', 'Bull', NULL);
+(12, 15, 'Calf1', 'jas5', '2013-09-16 00:00:00', 0, 'Days', 'Female', NULL, NULL, NULL, NULL, '2013-09-16 01:30:26', 'Bull', NULL),
+(13, 15, 'Calf2', 'jas6', '2013-09-16 00:00:00', 0, 'Days', 'Female', NULL, NULL, NULL, NULL, '2013-09-16 07:53:16', '', NULL),
+(19, 15, 'Calf4', 'Jada AW', '2013-09-16 00:00:00', 0, 'Days', 'Female', NULL, NULL, NULL, NULL, '2013-09-16 09:08:39', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -138,7 +354,7 @@ CREATE TABLE IF NOT EXISTS `cow_breed` (
   PRIMARY KEY (`id`),
   KEY `cow_id` (`cow_id`),
   KEY `breed_id` (`breed_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `cow_breed`
@@ -146,7 +362,9 @@ CREATE TABLE IF NOT EXISTS `cow_breed` (
 
 INSERT INTO `cow_breed` (`id`, `cow_id`, `breed_id`, `date_added`) VALUES
 (10, 8, 3, '2013-09-15 21:01:02'),
-(11, 8, 5, '2013-09-15 21:01:02');
+(11, 8, 5, '2013-09-15 21:01:02'),
+(12, 13, 2, '2013-09-16 07:53:16'),
+(13, 13, 3, '2013-09-16 07:53:16');
 
 -- --------------------------------------------------------
 
@@ -184,25 +402,31 @@ CREATE TABLE IF NOT EXISTS `cow_event` (
   `vet_id` int(11) DEFAULT NULL,
   `bull_id` int(11) DEFAULT NULL,
   `servicing_days` int(11) DEFAULT NULL,
+  `cod_id` int(11) DEFAULT NULL COMMENT 'Cause of Death ID',
   PRIMARY KEY (`id`),
   KEY `cow_id` (`cow_id`,`event_id`),
   KEY `event_id` (`event_id`),
   KEY `parent_cow_event` (`parent_cow_event`),
   KEY `straw_id` (`straw_id`),
   KEY `vet_id` (`vet_id`),
-  KEY `bull_id` (`bull_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  KEY `bull_id` (`bull_id`),
+  KEY `cod_id` (`cod_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `cow_event`
 --
 
-INSERT INTO `cow_event` (`id`, `cow_id`, `event_id`, `remarks`, `event_date`, `date_added`, `birth_type`, `parent_cow_event`, `straw_id`, `vet_id`, `bull_id`, `servicing_days`) VALUES
-(1, 9, 1, 'Test', '2013-09-16', '2013-09-16 00:55:12', NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 9, 10, 'Comments here', '2013-09-16', '2013-09-16 00:57:11', NULL, NULL, 1, 1, NULL, NULL),
-(3, 9, 11, 'Comments here', '2013-09-16', '2013-09-16 00:58:42', NULL, NULL, NULL, NULL, 8, 20),
-(4, 9, 7, 'Also here', '2013-09-16', '2013-09-16 00:59:27', NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 12, 2, NULL, '2013-09-16', '0000-00-00 00:00:00', '', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `cow_event` (`id`, `cow_id`, `event_id`, `remarks`, `event_date`, `date_added`, `birth_type`, `parent_cow_event`, `straw_id`, `vet_id`, `bull_id`, `servicing_days`, `cod_id`) VALUES
+(1, 9, 1, 'Test', '2013-09-16', '2013-09-16 00:55:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 9, 10, 'Comments here', '2013-09-16', '2013-09-16 00:57:11', NULL, NULL, 1, 1, NULL, NULL, NULL),
+(3, 9, 11, 'Comments here', '2013-09-16', '2013-09-16 00:58:42', NULL, NULL, NULL, NULL, 8, 20, NULL),
+(4, 9, 7, 'Also here', '2013-09-16', '2013-09-16 00:59:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 12, 2, NULL, '2013-09-16', '0000-00-00 00:00:00', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 13, 2, NULL, '2013-09-16', '2013-09-16 07:53:16', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 12, 1, 'Holy shit', '2013-09-16', '2013-09-16 08:53:16', NULL, 2, NULL, NULL, NULL, NULL, NULL),
+(8, 19, 2, NULL, '2013-09-16', '2013-09-16 09:08:39', 'Normal', 2, NULL, NULL, NULL, NULL, NULL),
+(9, 12, 6, 'Was coughing for 2 weeks', '2013-09-16', '2013-09-16 11:05:38', NULL, NULL, NULL, NULL, NULL, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -428,12 +652,13 @@ ALTER TABLE `cow_deformity`
 -- Constraints for table `cow_event`
 --
 ALTER TABLE `cow_event`
-  ADD CONSTRAINT `cow_event_ibfk_6` FOREIGN KEY (`bull_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `cow_event_ibfk_7` FOREIGN KEY (`cod_id`) REFERENCES `cause_of_death` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_event_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_event_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_event_ibfk_3` FOREIGN KEY (`parent_cow_event`) REFERENCES `cow_event` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `cow_event_ibfk_4` FOREIGN KEY (`straw_id`) REFERENCES `straw` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `cow_event_ibfk_5` FOREIGN KEY (`vet_id`) REFERENCES `vet` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `cow_event_ibfk_5` FOREIGN KEY (`vet_id`) REFERENCES `vet` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `cow_event_ibfk_6` FOREIGN KEY (`bull_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `embryo`

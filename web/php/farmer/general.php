@@ -97,6 +97,21 @@ class General {
       }
    }
    
+   public function getCODID($name) {
+      $this->logHandler->log(3, $this->TAG, "Getting id of COD with name as ".$name);
+      $query = "SELECT `id` FROM `cause_of_death` WHERE `name` = '{$name}'";
+      $result = $this->database->runMySQLQuery($query, true);
+      if(sizeof($result) == 1) {
+         $id = $result[0]['id'];
+         $this->logHandler->log(4, $this->TAG, "ID of COD ".$name." gotten as ".$id);
+         return $id;
+      }
+      else {
+         $this->logHandler->log(2, $this->TAG, "Either more than one COD with the name '".$name."' gotten or none at all, returning -1");
+         return -1;
+      }
+   }
+   
    public function getExtensionPersonnelID($name, $insert) {
       if($name != "") {
          $time = $this->getTime('Y-m-d H:i:s');

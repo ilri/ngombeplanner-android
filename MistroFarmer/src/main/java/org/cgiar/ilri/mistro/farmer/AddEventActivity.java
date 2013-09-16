@@ -73,6 +73,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private EditText noOfServicingDaysET;
     private TextView servicingTV;
     private Spinner servicingS;
+    private TextView causeOfDeathTV;
+    private Spinner causeOfDeathS;
 
     private String[] cowNameArray;
     private String[] cowEarTagNumberArray;
@@ -106,6 +108,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         strawNumberET = (EditText)findViewById(R.id.straw_number_et);
         vetUsedTV = (TextView)findViewById(R.id.vet_used_tv);
         vetUsedET = (EditText)findViewById(R.id.vet_used_et);
+        causeOfDeathTV = (TextView)findViewById(R.id.cause_of_death_tv);
+        causeOfDeathS = (Spinner)findViewById(R.id.cause_of_death_s);
         bullNameTV = (TextView)findViewById(R.id.bull_name_tv);
         bullNameACTV = (AutoCompleteTextView)findViewById(R.id.bull_name_actv);
         bullETNTV = (TextView)findViewById(R.id.bull_etn_tv);
@@ -159,6 +163,13 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
         strawNumberTV.setText(Locale.getStringInLocale("straw_number",this));
         vetUsedTV.setText(Locale.getStringInLocale("vet_used",this));
+        causeOfDeathTV.setText(Locale.getStringInLocale("cause_of_death",this));
+        int causesOfDeathID = Locale.getArrayIDInLocale("causes_of_death",this);
+        if(causesOfDeathID != 0) {
+            ArrayAdapter<CharSequence> causesOfDeathArrayAdapter=ArrayAdapter.createFromResource(this, causesOfDeathID, android.R.layout.simple_spinner_item);
+            causesOfDeathArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            causeOfDeathS.setAdapter(causesOfDeathArrayAdapter);
+        }
         bullNameTV.setText(Locale.getStringInLocale("servicing_bull_name",this));
         bullETNTV.setText(Locale.getStringInLocale("servicing_bull_ear_tag_number",this));
         noOfServicingDaysTV.setText(Locale.getStringInLocale("no_of_days_in_servicing",this));
@@ -223,6 +234,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             noOfServicingDaysET.setVisibility(EditText.GONE);
             servicingTV.setVisibility(TextView.GONE);
             servicingS.setVisibility(Spinner.GONE);
+            causeOfDeathTV.setVisibility(TextView.GONE);
+            causeOfDeathS.setVisibility(Spinner.GONE);
             String[] eventTypesEN = Locale.getArrayInLocale("cow_event_types", this, Locale.LOCALE_ENGLISH);
             if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {
                 birthEventSelected();
@@ -265,6 +278,14 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 noOfServicingDaysTV.setVisibility(TextView.VISIBLE);
                 noOfServicingDaysET.setVisibility(EditText.VISIBLE);
                 dateTV.setText(Locale.getStringInLocale("start_date",this));
+            }
+            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Death")) {
+                causeOfDeathTV.setVisibility(TextView.VISIBLE);
+                causeOfDeathS.setVisibility(Spinner.VISIBLE);
+                remarksTV.setVisibility(TextView.VISIBLE);
+                remarksET.setVisibility(EditText.VISIBLE);
+                cowIdentifierS.setVisibility(Spinner.VISIBLE);
+                cowIdentifierTV.setVisibility(TextView.VISIBLE);
             }
             else {
                 remarksTV.setVisibility(TextView.VISIBLE);
@@ -358,6 +379,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 JSONObject jsonObject = new JSONObject();
                 try
                 {
+                    String[] causesOfDeathInEN = Locale.getArrayInLocale("causes_of_death",AddEventActivity.this,Locale.LOCALE_ENGLISH);
                     jsonObject.put("simCardSN", serialNumber);
                     jsonObject.put("cowEarTagNumber", selectedCowETN);
                     jsonObject.put("cowName", selectedCowName);
@@ -370,6 +392,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                     jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
                     jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
                     jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
+                    jsonObject.put("causeOfDeath", causesOfDeathInEN[causeOfDeathS.getSelectedItemPosition()]);
                     CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
                     cowEventAdditionThread.execute(jsonObject);
                 }

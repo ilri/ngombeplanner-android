@@ -62,6 +62,13 @@ class CowEventHandler {
                    }
                    
                 }
+                else if($this->jsonObject['eventType'] == "Death") {
+                   $causeOfDeathID = $this->general->getCODID($this->jsonObject['causeOfDeath']);
+                   if($causeOfDeathID!= -1) {
+                      $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`cod_id`)" .
+                           " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',$causeOfDeathID)";
+                   }
+                }
                 else {
                    $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}')";
                 }

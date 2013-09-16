@@ -171,4 +171,10 @@
     <string name="no_of_days_in_servicing_en">No. of Days in Servicing</string>
     <string name="associated_servicing_en">Associated Servicing/AI</string>
     <string name="country_not_found_en">The country you entered cannot be found</string>
+    <string name="cause_of_death_en">Cause of Death</string>
+    <string-array name="causes_of_death_en">
+        <item>Natural Causes</item>
+        <item>Sickness</item>
+        <item>Injury</item>
+    </string-array>
 </resources>
