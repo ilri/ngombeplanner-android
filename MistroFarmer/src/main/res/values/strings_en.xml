@@ -177,4 +177,5 @@
         <item>Sickness</item>
         <item>Injury</item>
     </string-array>
+    <string name="gps_narrowing_down_on_loc_en">Please wait while GPS narrows down on your location</string>
 </resources>

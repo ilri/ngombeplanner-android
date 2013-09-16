@@ -856,6 +856,7 @@
     <string name="farmer_registration_en">Farmer Registration</string>
     <string name="finish_en">Finish</string>
     <string name="full_name_en">Full Name</string>
+    <string name="gps_narrowing_down_on_loc_en">Please wait while GPS narrows down on your location</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="hello_world">Hello world!</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->

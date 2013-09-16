@@ -283,6 +283,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             Toast.makeText(this,mobileNoETEmptyWarning,Toast.LENGTH_LONG).show();
             return false;
         }
+        if(longitude == null || longitude.length() == 0 || latitude == null || latitude.length() == 0) {
+            Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
+            return false;
+        }
         return true;
     }
 

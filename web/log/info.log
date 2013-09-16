@@ -78,3 +78,85 @@
 [Monday, 16th September 2013 11:52:01] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'jas5' AND `farmer_id` = 15
 [Monday, 16th September 2013 11:52:01] [database.php] running query UPDATE `cow` SET `dam_id` = 12 WHERE `id` = 21
 [Monday, 16th September 2013 11:52:01] [registration.php] sending acknowledge_ok response cod back to client
+[Monday, 16th September 2013 11:59:30] [authentication.php] Starting Authenticator
+[Monday, 16th September 2013 11:59:30] [authentication.php] obtaining POST request
+[Monday, 16th September 2013 11:59:30] [authentication.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 11:59:30] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 11:59:30] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 11:59:30] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 11:59:30] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 11:59:30] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 11:59:30] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 11:59:30] [authentication.php] gracefully exiting
+[Monday, 16th September 2013 12:01:26] [registration.php] Starting RegistrationHandler
+[Monday, 16th September 2013 12:01:26] [registration.php] obtaining POST request
+[Monday, 16th September 2013 12:01:26] [registration.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:01:26] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:01:26] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:01:26] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:01:26] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:01:26] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:01:26] [general.php] Starting General
+[Monday, 16th September 2013 12:01:26] [general.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:01:26] [general.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:01:26] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:01:26] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:01:26] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:01:26] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:01:26] [registration.php] Initial registration for farmer
+[Monday, 16th September 2013 12:01:26] [registration.php] Registering the new farmer (Jason Rogena) in the database
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of Extension Personnel with name as Tom Muriranji
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Tom Muriranji'
+[Monday, 16th September 2013 12:01:26] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Jason Rogena','0715023805','','',5,'89254029541005994303','2013-09-16 12:01:26')
+[Monday, 16th September 2013 12:01:26] [registration.php] Registering the new cow (nai-jas1) in the database
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of country with name as Kenya
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `country` WHERE `name` = 'Kenya'
+[Monday, 16th September 2013 12:01:26] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`,`country_id`) VALUES(16,'Rosy','nai-jas1',STR_TO_DATE('', '%d/%m/%Y'),2,'Years','Female','2013-09-16 12:01:26','Bull',1)
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of breed with name as Friesian
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `breed` WHERE `name` = 'Friesian'
+[Monday, 16th September 2013 12:01:26] [database.php] running query INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES(22,6,'2013-09-16 12:01:26')
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of breed with name as Guernsey
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `breed` WHERE `name` = 'Guernsey'
+[Monday, 16th September 2013 12:01:26] [database.php] running query INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES(22,7,'2013-09-16 12:01:26')
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of deformity with name as 
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `deformity` WHERE `name` = ''
+[Monday, 16th September 2013 12:01:26] [registration.php] Registering the new cow (nai-jas2) in the database
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of country with name as Kenya
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `country` WHERE `name` = 'Kenya'
+[Monday, 16th September 2013 12:01:26] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`,`country_id`) VALUES(16,'Chris','nai-jas2',STR_TO_DATE('', '%d/%m/%Y'),5,'Weeks','Male','2013-09-16 12:01:26','Bull',1)
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of breed with name as Friesian
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `breed` WHERE `name` = 'Friesian'
+[Monday, 16th September 2013 12:01:26] [database.php] running query INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES(23,6,'2013-09-16 12:01:26')
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of breed with name as Guernsey
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `breed` WHERE `name` = 'Guernsey'
+[Monday, 16th September 2013 12:01:26] [database.php] running query INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES(23,7,'2013-09-16 12:01:26')
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of breed with name as Jersey
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `breed` WHERE `name` = 'Jersey'
+[Monday, 16th September 2013 12:01:26] [database.php] running query INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES(23,9,'2013-09-16 12:01:26')
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of deformity with name as 
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `deformity` WHERE `name` = ''
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of cow with ear tag number as nai-jas1
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-jas1' AND `farmer_id` = 16
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of cow with ear tag number as 
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of cow with ear tag number as 
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of cow with ear tag number as nai-jas2
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-jas2' AND `farmer_id` = 16
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of cow with ear tag number as 
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16
+[Monday, 16th September 2013 12:01:26] [general.php] Getting id of cow with ear tag number as nai-jas1
+[Monday, 16th September 2013 12:01:26] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-jas1' AND `farmer_id` = 16
+[Monday, 16th September 2013 12:01:26] [database.php] running query UPDATE `cow` SET `dam_id` = 22 WHERE `id` = 23
+[Monday, 16th September 2013 12:01:26] [registration.php] sending acknowledge_ok response cod back to client
+[Monday, 16th September 2013 12:08:30] [authentication.php] Starting Authenticator
+[Monday, 16th September 2013 12:08:30] [authentication.php] obtaining POST request
+[Monday, 16th September 2013 12:08:30] [authentication.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:08:30] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:08:30] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:08:30] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:08:30] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:08:30] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:08:30] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:08:30] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Monday, 16th September 2013 12:08:30] [authentication.php] gracefully exiting

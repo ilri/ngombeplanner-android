@@ -608,3 +608,527 @@
 )
 
 [Monday, 16th September 2013 11:52:01] [general.php] ID of Cow jas5 gotten as 12
+[Monday, 16th September 2013 11:59:30] [authentication.php] json_decode returned: Array
+(
+    [simCardSN] => 89254029541005994303
+)
+
+[Monday, 16th September 2013 11:59:30] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Monday, 16th September 2013 11:59:30] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Monday, 16th September 2013 11:59:30] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Monday, 16th September 2013 11:59:30] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Monday, 16th September 2013 11:59:30] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
+(
+)
+
+[Monday, 16th September 2013 12:01:26] [registration.php] json_decode returned: Array
+(
+    [extensionPersonnel] => Tom Muriranji
+    [longitude] => 
+    [latitude] => 
+    [fullName] => Jason Rogena
+    [mobileNumber] => 0715023805
+    [cows] => Array
+        (
+            [0] => Array
+                (
+                    [ageType] => Years
+                    [dateOfBirth] => 
+                    [sex] => Female
+                    [sire] => Array
+                        (
+                            [ageType] => 
+                            [dateOfBirth] => 
+                            [sex] => Male
+                            [breeds] => Array
+                                (
+                                )
+
+                            [type] => sire
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [mode] => 
+                            [deformities] => Array
+                                (
+                                )
+
+                            [strawNumber] => 
+                            [otherDeformity] => 
+                            [age] => -1
+                            [name] => 
+                            [countryOfOrigin] => 
+                        )
+
+                    [breeds] => Array
+                        (
+                            [0] => Friesian
+                            [1] => Guernsey
+                        )
+
+                    [type] => cow
+                    [serviceType] => Bull
+                    [earTagNumber] => nai-jas1
+                    [mode] => adultCowRegistration
+                    [deformities] => Array
+                        (
+                            [0] => 
+                        )
+
+                    [otherDeformity] => 
+                    [dam] => Array
+                        (
+                            [ageType] => 
+                            [dateOfBirth] => 
+                            [sex] => Female
+                            [breeds] => Array
+                                (
+                                )
+
+                            [type] => dam
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [embryoNumber] => 
+                            [mode] => 
+                            [deformities] => Array
+                                (
+                                )
+
+                            [otherDeformity] => 
+                            [age] => -1
+                            [name] => 
+                            [countryOfOrigin] => 
+                        )
+
+                    [age] => 2
+                    [name] => Rosy
+                    [countryOfOrigin] => Kenya
+                )
+
+            [1] => Array
+                (
+                    [ageType] => Weeks
+                    [dateOfBirth] => 
+                    [sex] => Male
+                    [sire] => Array
+                        (
+                            [ageType] => 
+                            [dateOfBirth] => 
+                            [sex] => Male
+                            [breeds] => Array
+                                (
+                                )
+
+                            [type] => sire
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [mode] => 
+                            [deformities] => Array
+                                (
+                                )
+
+                            [strawNumber] => 
+                            [otherDeformity] => 
+                            [age] => -1
+                            [name] => 
+                            [countryOfOrigin] => 
+                        )
+
+                    [breeds] => Array
+                        (
+                            [0] => Friesian
+                            [1] => Guernsey
+                            [2] => Jersey
+                        )
+
+                    [type] => cow
+                    [serviceType] => Bull
+                    [earTagNumber] => nai-jas2
+                    [mode] => adultCowRegistration
+                    [deformities] => Array
+                        (
+                            [0] => 
+                        )
+
+                    [otherDeformity] => 
+                    [dam] => Array
+                        (
+                            [ageType] => 
+                            [dateOfBirth] => 
+                            [sex] => Female
+                            [breeds] => Array
+                                (
+                                )
+
+                            [type] => dam
+                            [serviceType] => 
+                            [earTagNumber] => nai-jas1
+                            [embryoNumber] => 
+                            [mode] => 
+                            [deformities] => Array
+                                (
+                                )
+
+                            [otherDeformity] => 
+                            [age] => -1
+                            [name] => Rosy
+                            [countryOfOrigin] => 
+                        )
+
+                    [age] => 5
+                    [name] => Chris
+                    [countryOfOrigin] => Kenya
+                )
+
+        )
+
+    [mode] => initialRegistration
+    [simCardSN] => 89254029541005994303
+)
+
+[Monday, 16th September 2013 12:01:26] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Monday, 16th September 2013 12:01:26] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Monday, 16th September 2013 12:01:26] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Monday, 16th September 2013 12:01:26] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Monday, 16th September 2013 12:01:26] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Monday, 16th September 2013 12:01:26] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Monday, 16th September 2013 12:01:26] [registration.php] returning time '2013-09-16 12:01:26' using format 'Y-m-d H:i:s'
+[Monday, 16th September 2013 12:01:26] [general.php] returning time '2013-09-16 12:01:26' using format 'Y-m-d H:i:s'
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Tom Muriranji'' are Array
+(
+    [0] => Array
+        (
+            [id] => 5
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of Extension Personnel Tom Muriranji gotten as 5
+[Monday, 16th September 2013 12:01:26] [registration.php] New farmer's ID is 16
+[Monday, 16th September 2013 12:01:26] [registration.php] returning time '2013-09-16 12:01:26' using format 'Y-m-d H:i:s'
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `country` WHERE `name` = 'Kenya'' are Array
+(
+    [0] => Array
+        (
+            [id] => 1
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of Country Kenya gotten as 1
+[Monday, 16th September 2013 12:01:26] [registration.php] New cow's ID is 22
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `breed` WHERE `name` = 'Friesian'' are Array
+(
+    [0] => Array
+        (
+            [id] => 6
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of BreedFriesian gotten as 6
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `breed` WHERE `name` = 'Guernsey'' are Array
+(
+    [0] => Array
+        (
+            [id] => 7
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of BreedGuernsey gotten as 7
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `deformity` WHERE `name` = ''' are Array
+(
+)
+
+[Monday, 16th September 2013 12:01:26] [registration.php] returning time '2013-09-16 12:01:26' using format 'Y-m-d H:i:s'
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `country` WHERE `name` = 'Kenya'' are Array
+(
+    [0] => Array
+        (
+            [id] => 1
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of Country Kenya gotten as 1
+[Monday, 16th September 2013 12:01:26] [registration.php] New cow's ID is 23
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `breed` WHERE `name` = 'Friesian'' are Array
+(
+    [0] => Array
+        (
+            [id] => 6
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of BreedFriesian gotten as 6
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `breed` WHERE `name` = 'Guernsey'' are Array
+(
+    [0] => Array
+        (
+            [id] => 7
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of BreedGuernsey gotten as 7
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `breed` WHERE `name` = 'Jersey'' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of BreedJersey gotten as 9
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `deformity` WHERE `name` = ''' are Array
+(
+)
+
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-jas1' AND `farmer_id` = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 22
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of Cow nai-jas1 gotten as 22
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16' are Array
+(
+)
+
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16' are Array
+(
+)
+
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-jas2' AND `farmer_id` = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 23
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of Cow nai-jas2 gotten as 23
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16' are Array
+(
+)
+
+[Monday, 16th September 2013 12:01:26] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'nai-jas1' AND `farmer_id` = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 22
+        )
+
+)
+
+[Monday, 16th September 2013 12:01:26] [general.php] ID of Cow nai-jas1 gotten as 22
+[Monday, 16th September 2013 12:08:30] [authentication.php] json_decode returned: Array
+(
+    [simCardSN] => 89254029541005994303
+)
+
+[Monday, 16th September 2013 12:08:30] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Monday, 16th September 2013 12:08:30] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Monday, 16th September 2013 12:08:30] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Monday, 16th September 2013 12:08:30] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Monday, 16th September 2013 12:08:30] [database.php] results gotten from 'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'' are Array
+(
+    [0] => Array
+        (
+            [name] => Jason Rogena
+        )
+
+)
+
