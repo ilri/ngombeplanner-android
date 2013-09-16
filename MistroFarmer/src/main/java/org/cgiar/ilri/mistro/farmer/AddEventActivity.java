@@ -394,7 +394,9 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                     jsonObject.put("bullName", bullNameACTV.getText().toString());
                     jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
                     jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
-                    jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
+                    if(servicingIDs != null) {
+                        jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
+                    }
                     jsonObject.put("causeOfDeath", causesOfDeathInEN[causeOfDeathS.getSelectedItemPosition()]);
                     CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
                     cowEventAdditionThread.execute(jsonObject);
@@ -432,16 +434,20 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                         String[] birthTypesInEN = Locale.getArrayInLocale("birth_types", AddEventActivity.this, Locale.LOCALE_ENGLISH);
                         try {
                             jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
-                            jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
+                            if(servicingIDs != null) {
+                                jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
+                            }
+
                             thisCalf.setPiggyBack(jsonObject.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        if(servicingTypes.get(servicingS.getSelectedItemPosition()).equals("Artificial Insemination")) {
-                            thisCalf.setServiceType(Cow.SERVICE_TYPE_AI);
-                        }
-                        else if(servicingTypes.get(servicingS.getSelectedItemPosition()).equals("Bull Servicing")) {
-                            thisCalf.setServiceType(Cow.SERVICE_TYPE_BULL);
+                        if(servicingTypes != null) {
+                            if (servicingTypes.get(servicingS.getSelectedItemPosition()).equals("Artificial Insemination")) {
+                                thisCalf.setServiceType(Cow.SERVICE_TYPE_AI);
+                            } else if (servicingTypes.get(servicingS.getSelectedItemPosition()).equals("Bull Servicing")) {
+                                thisCalf.setServiceType(Cow.SERVICE_TYPE_BULL);
+                            }
                         }
                         thisCalf.setDateOfBirth(dateET.getText().toString());
                         thisCalf.setMode(Cow.MODE_BORN_CALF_REGISTRATION);

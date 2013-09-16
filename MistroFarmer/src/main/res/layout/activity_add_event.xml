@@ -115,7 +115,7 @@
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:textSize="@dimen/normal_text_size"
             android:visibility="gone"
-            android:inputType="textPersonName"
+            android:inputType="textCapWords|textPersonName"
             android:textColor="@color/text_input_color"/>
         <TextView
             android:id="@+id/cause_of_death_tv"

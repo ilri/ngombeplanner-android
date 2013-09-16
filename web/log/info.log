@@ -160,3 +160,324 @@
 [Monday, 16th September 2013 12:08:30] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
 [Monday, 16th September 2013 12:08:30] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
 [Monday, 16th September 2013 12:08:30] [authentication.php] gracefully exiting
+[Monday, 16th September 2013 12:22:27] [authentication.php] Starting Authenticator
+[Monday, 16th September 2013 12:22:27] [authentication.php] obtaining POST request
+[Monday, 16th September 2013 12:22:27] [authentication.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:22:27] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:22:27] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:22:27] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:22:27] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:22:27] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:22:27] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:22:27] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Monday, 16th September 2013 12:22:27] [authentication.php] gracefully exiting
+[Monday, 16th September 2013 12:22:30] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Monday, 16th September 2013 12:22:30] [fetch_cow_identifiers.php] obtaining POST request
+[Monday, 16th September 2013 12:22:30] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:22:30] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:22:30] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:22:30] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:22:30] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:22:30] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:22:30] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number`,`cow`.`sex` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:22:30] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Monday, 16th September 2013 12:22:30] [fetch_cow_identifiers.php] gracefully exiting
+[Monday, 16th September 2013 12:22:30] [fetch_servicing_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:22:30] [fetch_servicing_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:22:30] [fetch_servicing_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:22:30] [fetch_servicing_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:22:30] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:22:30] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:22:30] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:22:30] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:22:30] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')
+[Monday, 16th September 2013 12:22:30] [fetch_servicing_events_history.php] sending the no_data response code to client
+[Monday, 16th September 2013 12:22:30] [fetch_servicing_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:24:41] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Monday, 16th September 2013 12:24:41] [fetch_cow_identifiers.php] obtaining POST request
+[Monday, 16th September 2013 12:24:41] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:24:41] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:24:41] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:24:41] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:24:41] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:24:41] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:24:41] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number`,`cow`.`sex` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:24:41] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Monday, 16th September 2013 12:24:41] [fetch_cow_identifiers.php] gracefully exiting
+[Monday, 16th September 2013 12:24:41] [fetch_servicing_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:24:41] [fetch_servicing_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:24:41] [fetch_servicing_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:24:41] [fetch_servicing_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:24:41] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:24:41] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:24:41] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:24:41] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:24:41] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')
+[Monday, 16th September 2013 12:24:41] [fetch_servicing_events_history.php] sending the no_data response code to client
+[Monday, 16th September 2013 12:24:41] [fetch_servicing_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:25:40] [fetch_cow_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:25:40] [fetch_cow_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:25:40] [fetch_cow_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:25:40] [fetch_cow_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:25:40] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:25:40] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:25:40] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:25:40] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:25:40] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' ORDER BY `cow_event`.`id` DESC LIMIT 40
+[Monday, 16th September 2013 12:25:41] [fetch_cow_events_history.php] sending the no_data response code to client
+[Monday, 16th September 2013 12:25:41] [fetch_cow_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:26:29] [authentication.php] Starting Authenticator
+[Monday, 16th September 2013 12:26:29] [authentication.php] obtaining POST request
+[Monday, 16th September 2013 12:26:29] [authentication.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:26:29] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:26:29] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:26:29] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:26:29] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:26:29] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:26:29] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:26:29] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Monday, 16th September 2013 12:26:29] [authentication.php] gracefully exiting
+[Monday, 16th September 2013 12:26:34] [fetch_cow_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:26:34] [fetch_cow_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:26:34] [fetch_cow_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:26:34] [fetch_cow_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:26:34] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:26:34] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:26:34] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:26:34] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:26:34] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' ORDER BY `cow_event`.`id` DESC LIMIT 40
+[Monday, 16th September 2013 12:26:34] [fetch_cow_events_history.php] sending the no_data response code to client
+[Monday, 16th September 2013 12:26:34] [fetch_cow_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:26:50] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Monday, 16th September 2013 12:26:50] [fetch_cow_identifiers.php] obtaining POST request
+[Monday, 16th September 2013 12:26:50] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:26:50] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:26:50] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:26:50] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:26:50] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:26:50] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:26:50] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number`,`cow`.`sex` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:26:50] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Monday, 16th September 2013 12:26:50] [fetch_cow_identifiers.php] gracefully exiting
+[Monday, 16th September 2013 12:26:50] [fetch_servicing_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:26:50] [fetch_servicing_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:26:50] [fetch_servicing_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:26:50] [fetch_servicing_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:26:50] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:26:50] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:26:50] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:26:50] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:26:50] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')
+[Monday, 16th September 2013 12:26:50] [fetch_servicing_events_history.php] sending the no_data response code to client
+[Monday, 16th September 2013 12:26:50] [fetch_servicing_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:29:09] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Monday, 16th September 2013 12:29:09] [fetch_cow_identifiers.php] obtaining POST request
+[Monday, 16th September 2013 12:29:09] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:29:09] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:29:09] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:29:09] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:29:09] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:29:09] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:29:09] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number`,`cow`.`sex` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:29:09] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Monday, 16th September 2013 12:29:09] [fetch_cow_identifiers.php] gracefully exiting
+[Monday, 16th September 2013 12:29:09] [fetch_servicing_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:29:09] [fetch_servicing_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:29:09] [fetch_servicing_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:29:09] [fetch_servicing_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:29:09] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:29:09] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:29:09] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:29:09] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:29:09] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')
+[Monday, 16th September 2013 12:29:09] [fetch_servicing_events_history.php] sending the no_data response code to client
+[Monday, 16th September 2013 12:29:09] [fetch_servicing_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:30:21] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Monday, 16th September 2013 12:30:21] [fetch_cow_identifiers.php] obtaining POST request
+[Monday, 16th September 2013 12:30:21] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:30:21] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:30:21] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:30:21] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:30:21] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:30:21] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:30:21] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number`,`cow`.`sex` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:30:21] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Monday, 16th September 2013 12:30:21] [fetch_cow_identifiers.php] gracefully exiting
+[Monday, 16th September 2013 12:30:22] [fetch_servicing_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:30:22] [fetch_servicing_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:30:22] [fetch_servicing_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:30:22] [fetch_servicing_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:30:22] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:30:22] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:30:22] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:30:22] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:30:22] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')
+[Monday, 16th September 2013 12:30:22] [fetch_servicing_events_history.php] sending the no_data response code to client
+[Monday, 16th September 2013 12:30:22] [fetch_servicing_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:34:46] [authentication.php] Starting Authenticator
+[Monday, 16th September 2013 12:34:46] [authentication.php] obtaining POST request
+[Monday, 16th September 2013 12:34:46] [authentication.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:34:46] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:34:46] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:34:46] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:34:46] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:34:46] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:34:46] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:34:46] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Monday, 16th September 2013 12:34:46] [authentication.php] gracefully exiting
+[Monday, 16th September 2013 12:34:51] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Monday, 16th September 2013 12:34:51] [fetch_cow_identifiers.php] obtaining POST request
+[Monday, 16th September 2013 12:34:51] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:34:51] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:34:51] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:34:51] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:34:51] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:34:51] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:34:51] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number`,`cow`.`sex` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:34:51] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Monday, 16th September 2013 12:34:51] [fetch_cow_identifiers.php] gracefully exiting
+[Monday, 16th September 2013 12:34:51] [fetch_servicing_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:34:51] [fetch_servicing_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:34:51] [fetch_servicing_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:34:51] [fetch_servicing_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:34:51] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:34:51] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:34:51] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:34:51] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:34:51] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')
+[Monday, 16th September 2013 12:34:51] [fetch_servicing_events_history.php] sending the no_data response code to client
+[Monday, 16th September 2013 12:34:51] [fetch_servicing_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:39:40] [authentication.php] Starting Authenticator
+[Monday, 16th September 2013 12:39:40] [authentication.php] obtaining POST request
+[Monday, 16th September 2013 12:39:40] [authentication.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:39:40] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:39:40] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:39:40] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:39:40] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:39:40] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:39:40] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:39:40] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Monday, 16th September 2013 12:39:40] [authentication.php] gracefully exiting
+[Monday, 16th September 2013 12:39:47] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Monday, 16th September 2013 12:39:47] [fetch_cow_identifiers.php] obtaining POST request
+[Monday, 16th September 2013 12:39:47] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:39:47] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:39:47] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:39:47] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:39:47] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:39:47] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:39:47] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number`,`cow`.`sex` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:39:47] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Monday, 16th September 2013 12:39:47] [fetch_cow_identifiers.php] gracefully exiting
+[Monday, 16th September 2013 12:39:47] [fetch_servicing_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:39:47] [fetch_servicing_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:39:47] [fetch_servicing_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:39:47] [fetch_servicing_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:39:47] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:39:47] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:39:47] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:39:47] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:39:47] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')
+[Monday, 16th September 2013 12:39:47] [fetch_servicing_events_history.php] sending the no_data response code to client
+[Monday, 16th September 2013 12:39:47] [fetch_servicing_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:43:21] [authentication.php] Starting Authenticator
+[Monday, 16th September 2013 12:43:21] [authentication.php] obtaining POST request
+[Monday, 16th September 2013 12:43:21] [authentication.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:21] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:21] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:43:21] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:21] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:21] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:43:21] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:43:21] [authentication.php] the SIM card serial number being used (89254029541005994303) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Monday, 16th September 2013 12:43:21] [authentication.php] gracefully exiting
+[Monday, 16th September 2013 12:43:24] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Monday, 16th September 2013 12:43:24] [fetch_cow_identifiers.php] obtaining POST request
+[Monday, 16th September 2013 12:43:24] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:24] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:24] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:43:24] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:24] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:24] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:43:24] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number`,`cow`.`sex` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:43:24] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Monday, 16th September 2013 12:43:24] [fetch_cow_identifiers.php] gracefully exiting
+[Monday, 16th September 2013 12:43:24] [fetch_servicing_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:43:24] [fetch_servicing_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:43:24] [fetch_servicing_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:24] [fetch_servicing_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:24] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:43:24] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:24] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:24] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:43:24] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')
+[Monday, 16th September 2013 12:43:24] [fetch_servicing_events_history.php] sending the no_data response code to client
+[Monday, 16th September 2013 12:43:24] [fetch_servicing_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:43:50] [add_cow_event.php] Starting CowEventHandler
+[Monday, 16th September 2013 12:43:50] [add_cow_event.php] obtaining POST request
+[Monday, 16th September 2013 12:43:50] [add_cow_event.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:50] [add_cow_event.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:50] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:43:50] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:50] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:50] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:43:50] [general.php] Starting General
+[Monday, 16th September 2013 12:43:50] [general.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:50] [general.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:50] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:43:50] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:50] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:50] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:43:50] [database.php] running query SELECT `cow`.`id`,`cow`.`farmer_id` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` WHERE `farmer`.`sim_card_sn` = '89254029541005994303' AND `cow`.`name` = 'Rosy' AND `cow`.`ear_tag_number` = 'nai-jas1'
+[Monday, 16th September 2013 12:43:50] [database.php] running query SELECT `id` FROM `event` WHERE `name` = 'Artificial Insemination'
+[Monday, 16th September 2013 12:43:50] [general.php] Getting id of Vet with name as Frank Makau
+[Monday, 16th September 2013 12:43:50] [database.php] running query SELECT `id` FROM `vet` WHERE `name` = 'Frank Makau'
+[Monday, 16th September 2013 12:43:50] [general.php] Getting id of straw with number as straw1
+[Monday, 16th September 2013 12:43:50] [database.php] running query SELECT `id` FROM `straw` WHERE `straw_number` = 'straw1'
+[Monday, 16th September 2013 12:43:50] [database.php] running query INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`straw_id`,`vet_id`) VALUES(22,10,'',STR_TO_DATE('16/9/2013', '%d/%m/%Y'),'2013-09-16 12:43:50',1,1)
+[Monday, 16th September 2013 12:43:50] [add_cow_event.php] returning response code 533783
+[Monday, 16th September 2013 12:43:50] [add_cow_event.php] gracefully exiting
+[Monday, 16th September 2013 12:43:53] [fetch_cow_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:43:53] [fetch_cow_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:43:53] [fetch_cow_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:53] [fetch_cow_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:53] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:43:53] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:43:53] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:43:53] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:43:53] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' ORDER BY `cow_event`.`id` DESC LIMIT 40
+[Monday, 16th September 2013 12:43:53] [fetch_cow_events_history.php] sending cow events history data back to client as a json string
+[Monday, 16th September 2013 12:43:53] [fetch_cow_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:44:21] [fetch_cow_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:44:21] [fetch_cow_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:44:21] [fetch_cow_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:44:21] [fetch_cow_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:44:21] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:44:21] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:44:21] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:44:21] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:44:21] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' ORDER BY `cow_event`.`id` DESC LIMIT 40
+[Monday, 16th September 2013 12:44:21] [fetch_cow_events_history.php] sending cow events history data back to client as a json string
+[Monday, 16th September 2013 12:44:21] [fetch_cow_events_history.php] gracefully exiting
+[Monday, 16th September 2013 12:44:23] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
+[Monday, 16th September 2013 12:44:23] [fetch_cow_identifiers.php] obtaining POST request
+[Monday, 16th September 2013 12:44:23] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:44:23] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:44:23] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:44:23] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:44:23] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:44:23] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:44:23] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number`,`cow`.`sex` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303'
+[Monday, 16th September 2013 12:44:23] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+[Monday, 16th September 2013 12:44:23] [fetch_cow_identifiers.php] gracefully exiting
+[Monday, 16th September 2013 12:44:23] [fetch_servicing_events_history.php] Starting CowEventsHandler
+[Monday, 16th September 2013 12:44:23] [fetch_servicing_events_history.php] obtaining POST request
+[Monday, 16th September 2013 12:44:23] [fetch_servicing_events_history.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:44:23] [fetch_servicing_events_history.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:44:23] [database.php] Starting DatabaseHandler
+[Monday, 16th September 2013 12:44:23] [database.php] getting settings from: ../../config/settings.ini
+[Monday, 16th September 2013 12:44:23] [database.php] getting response codes from: ../../config/response_codes.ini
+[Monday, 16th September 2013 12:44:23] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Monday, 16th September 2013 12:44:23] [database.php] running query SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029541005994303' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')
+[Monday, 16th September 2013 12:44:23] [fetch_servicing_events_history.php] sending cow events history data back to client as a json string
+[Monday, 16th September 2013 12:44:23] [fetch_servicing_events_history.php] gracefully exiting
