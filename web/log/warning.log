@@ -36,3 +36,5 @@
 [Monday, 16th September 2013 15:52:50] [registration.php] No breed with the name '' found, not inserting breed into database
 [Monday, 16th September 2013 15:52:50] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
 [Monday, 16th September 2013 15:52:50] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Monday, 16th September 2013 17:03:13] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Monday, 16th September 2013 17:03:13] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1

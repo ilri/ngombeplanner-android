@@ -822,7 +822,7 @@
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="app_name">Mistro Farmer</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
-    <string name="associated_servicing_en">Associated Servicing/AI</string>
+    <string name="associated_servicing_en">Bull Services</string>
     <string name="breed_en">Breed</string>
     <string name="calf_registration_en">Calf Registration</string>
     <string name="cancel_en">Cancel</string>
