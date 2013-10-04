@@ -151,7 +151,8 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         ArrayAdapter<String> quantityTypesArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,quantityTypes);
         quantityTypesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         quantityTypeS.setAdapter(quantityTypesArrayAdapter);
-        quantityTypeS.setSelection(defaultQuantityTypeIndex);
+        if(defaultQuantityTypeIndex < quantityTypes.length)
+            quantityTypeS.setSelection(defaultQuantityTypeIndex);
     }
 
     @Override

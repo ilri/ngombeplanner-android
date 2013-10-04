@@ -38,3 +38,7 @@
 [Monday, 16th September 2013 15:52:50] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
 [Monday, 16th September 2013 17:03:13] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
 [Monday, 16th September 2013 17:03:13] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Friday, 4th October 2013 12:31:06] [database.php] no results gotten for  'SELECT `milk_production`.*,`cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' ORDER BY `milk_production`.`id` DESC LIMIT 40'
+[Friday, 4th October 2013 12:31:54] [database.php] no results gotten for  'SELECT `milk_production`.*,`cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `milk_production` ON `cow`.`id`=`milk_production`.`cow_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' ORDER BY `milk_production`.`id` DESC LIMIT 40'
+[Friday, 4th October 2013 13:02:35] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 22 AND `date` = STR_TO_DATE('4/10/2013', '%d/%m/%Y')'
+[Friday, 4th October 2013 13:11:35] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 22 AND `date` = STR_TO_DATE('3/10/2013', '%d/%m/%Y')'

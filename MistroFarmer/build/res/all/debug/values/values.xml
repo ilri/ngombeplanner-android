@@ -275,7 +275,6 @@
     <string-array name="quantity_types_en">
         <item>Litres</item>
         <item>KGs</item>
-        <item>Cups</item>
     </string-array>
     <string-array name="service_types_en">
         <item>Bull</item>

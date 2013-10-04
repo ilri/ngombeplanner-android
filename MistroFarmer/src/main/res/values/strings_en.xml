@@ -117,7 +117,6 @@
     <string-array name="quantity_types_en">
         <item>Litres</item>
         <item>KGs</item>
-        <item>Cups</item>
     </string-array>
     <string name="enter_quantity_of_milk_produced_en">Please enter the quantity of the milk produced in KGs</string>
     <string name="information_successfully_sent_to_server_en">Information successfully sent to server</string>
