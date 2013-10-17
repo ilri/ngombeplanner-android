@@ -257,6 +257,7 @@
         <item>Sale</item>
         <item>Artificial Insemination</item>
         <item>Bull Servicing</item>
+        <item>Signs of Heat</item>
     </string-array>
     <string-array name="deformities_array_en">
         <item>Blind</item>

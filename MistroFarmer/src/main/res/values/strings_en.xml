@@ -149,6 +149,7 @@
         <item>Sale</item>
         <item>Artificial Insemination</item>
         <item>Bull Servicing</item>
+        <item>Signs of Heat</item>
     </string-array>
     <string name="enter_date_en">Please enter the date</string>
     <string name="date_in_future_en">Date you entered appears to be in the future</string>
