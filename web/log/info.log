@@ -1585,3 +1585,43 @@
 [Thursday, 17th October 2013 14:28:25] [database.php] running query INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES(22,12,'Test',STR_TO_DATE('17/10/2013', '%d/%m/%Y'),'2013-10-17 14:28:25')
 [Thursday, 17th October 2013 14:28:25] [add_cow_event.php] returning response code 533783
 [Thursday, 17th October 2013 14:28:25] [add_cow_event.php] gracefully exiting
+[Friday, 18th October 2013 11:30:55] [authentication.php] Starting Authenticator
+[Friday, 18th October 2013 11:30:55] [authentication.php] obtaining POST request
+[Friday, 18th October 2013 11:30:55] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 18th October 2013 11:30:55] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 18th October 2013 11:30:55] [database.php] Starting DatabaseHandler
+[Friday, 18th October 2013 11:30:55] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 18th October 2013 11:30:55] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 18th October 2013 11:30:55] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 18th October 2013 11:30:55] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254027441015373410'
+[Friday, 18th October 2013 11:30:56] [authentication.php] gracefully exiting
+[Friday, 18th October 2013 11:31:07] [sim_card_registration.php] Starting SimRegistrationHandler
+[Friday, 18th October 2013 11:31:07] [sim_card_registration.php] obtaining POST request
+[Friday, 18th October 2013 11:31:07] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Friday, 18th October 2013 11:31:07] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 18th October 2013 11:31:07] [database.php] Starting DatabaseHandler
+[Friday, 18th October 2013 11:31:07] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 18th October 2013 11:31:07] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 18th October 2013 11:31:07] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 18th October 2013 11:31:07] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = ''
+[Friday, 18th October 2013 11:31:09] [sim_card_registration.php] gracefully exiting
+[Friday, 18th October 2013 11:31:41] [sim_card_registration.php] Starting SimRegistrationHandler
+[Friday, 18th October 2013 11:31:41] [sim_card_registration.php] obtaining POST request
+[Friday, 18th October 2013 11:31:41] [sim_card_registration.php] getting settings from: ../../config/settings.ini
+[Friday, 18th October 2013 11:31:41] [sim_card_registration.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 18th October 2013 11:31:41] [database.php] Starting DatabaseHandler
+[Friday, 18th October 2013 11:31:41] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 18th October 2013 11:31:41] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 18th October 2013 11:31:41] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 18th October 2013 11:31:41] [database.php] running query SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = ''
+[Friday, 18th October 2013 11:31:41] [sim_card_registration.php] gracefully exiting
+[Friday, 18th October 2013 11:31:50] [authentication.php] Starting Authenticator
+[Friday, 18th October 2013 11:31:50] [authentication.php] obtaining POST request
+[Friday, 18th October 2013 11:31:50] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 18th October 2013 11:31:50] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 18th October 2013 11:31:50] [database.php] Starting DatabaseHandler
+[Friday, 18th October 2013 11:31:50] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 18th October 2013 11:31:50] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 18th October 2013 11:31:50] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 18th October 2013 11:31:50] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254027441015373410'
+[Friday, 18th October 2013 11:31:50] [authentication.php] gracefully exiting

@@ -53,3 +53,11 @@
 [Monday, 14th October 2013 14:25:22] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 22 AND `date` = STR_TO_DATE('14/10/2013', '%d/%m/%Y')'
 [Thursday, 17th October 2013 14:14:29] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029541005994303''
 [Thursday, 17th October 2013 14:14:29] [authentication.php] SIM card serial number (89254029541005994303) not matching any farmer. Sending user_not_authenticated response code back to client
+[Friday, 18th October 2013 11:30:56] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254027441015373410''
+[Friday, 18th October 2013 11:30:56] [authentication.php] SIM card serial number (89254027441015373410) not matching any farmer. Sending user_not_authenticated response code back to client
+[Friday, 18th October 2013 11:31:09] [database.php] no results gotten for  'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '''
+[Friday, 18th October 2013 11:31:09] [sim_card_registration.php] SIM card with mobile number as  is not registered in the database. Sending the user_not_authenticated response code back to the client
+[Friday, 18th October 2013 11:31:41] [database.php] no results gotten for  'SELECT `sim_card_sn` FROM `farmer` WHERE `mobile_no` = '''
+[Friday, 18th October 2013 11:31:41] [sim_card_registration.php] SIM card with mobile number as  is not registered in the database. Sending the user_not_authenticated response code back to the client
+[Friday, 18th October 2013 11:31:50] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254027441015373410''
+[Friday, 18th October 2013 11:31:50] [authentication.php] SIM card serial number (89254027441015373410) not matching any farmer. Sending user_not_authenticated response code back to client

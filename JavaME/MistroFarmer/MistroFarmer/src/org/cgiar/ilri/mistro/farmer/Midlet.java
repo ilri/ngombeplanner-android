@@ -15,7 +15,7 @@ public class Midlet extends MIDlet {
     
     public void startApp() {
         Display.init(this);
-        LoginScreen loginScreen = new  LoginScreen(locale);
+        LoginScreen loginScreen = new  LoginScreen(this, locale);
         loginScreen.start();
     }
     
@@ -23,5 +23,10 @@ public class Midlet extends MIDlet {
     }
     
     public void destroyApp(boolean unconditional) {
+    }
+    
+    public void destroy(){
+        this.destroyApp(true);
+        this.notifyDestroyed();
     }
 }

@@ -385,4 +385,12 @@ public class StringResources {
         "Other Countries",
         ""
     };
+    public static final String[] exit = {
+        "Exit",
+        ""
+    };
+    public static final String[] back = {
+        "Back",
+        ""
+    };
 }
