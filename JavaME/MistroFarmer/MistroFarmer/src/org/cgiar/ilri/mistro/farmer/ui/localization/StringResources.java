@@ -93,6 +93,10 @@ public class StringResources {
         "Cow Registration",
         ""
     };
+    public static final String[] cow_registration_wth_indx = {
+        "Cow Registration, cow ",
+        ""
+    };
     public static final String[] dam_registration = {
         "Dam Registration",
         ""
@@ -391,6 +395,10 @@ public class StringResources {
     };
     public static final String[] back = {
         "Back",
+        ""
+    };
+    public static final String[] age_type = {
+        "Age Type",
         ""
     };
 }

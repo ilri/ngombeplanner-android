@@ -37,6 +37,8 @@ public class FarmerRegistrationScreen extends Form implements Screen{
     private Label mobileNoL;
     private TextField ePersonnelTV;
     private Label ePersonnelL;
+    private Label cowNumberL;
+    private TextField cowNumberTF;
 
     public FarmerRegistrationScreen(Midlet midlet, int locale) {
         super(Locale.getStringInLocale(locale, StringResources.register));
@@ -45,11 +47,13 @@ public class FarmerRegistrationScreen extends Form implements Screen{
         
         this.parentBoxLayout = new BoxLayout(BoxLayout.Y_AXIS);
         this.setLayout(parentBoxLayout);
+        
         backCommand = new Command(Locale.getStringInLocale(locale, StringResources.back));
         this.addCommand(backCommand);
         
         nextCommand = new Command(Locale.getStringInLocale(locale, StringResources.next));
         this.addCommand(nextCommand);
+        
         this.addCommandListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {
@@ -58,6 +62,12 @@ public class FarmerRegistrationScreen extends Form implements Screen{
                     loginScreen.start();
                 }
                 else if(evt.getCommand().equals(nextCommand)) {
+                    String noOfCowsString = cowNumberTF.getText();
+                    if(noOfCowsString!= null && !noOfCowsString.equals("")) {
+                        CowRegistrationScreen firstCowScreen = new CowRegistrationScreen(FarmerRegistrationScreen.this.midlet, FarmerRegistrationScreen.this.locale, 0, Integer.parseInt(noOfCowsString));
+                        firstCowScreen.start();
+                    }
+                    
                 }
             }
         });
@@ -91,6 +101,16 @@ public class FarmerRegistrationScreen extends Form implements Screen{
         ePersonnelTV.getStyle().setMargin(5, 0, 0, 0);
         ePersonnelTV.getSelectedStyle().setMargin(5, 0, 0, 0);
         this.addComponent(ePersonnelTV);
+        
+        cowNumberL = new Label(Locale.getStringInLocale(locale, StringResources.number_of_cows));
+        cowNumberL.getStyle().setMargin(10, 0, 10, 0);
+        cowNumberL.getSelectedStyle().setMargin(10, 0, 10, 0);
+        this.addComponent(cowNumberL);
+        
+        cowNumberTF = new TextField();
+        cowNumberTF.getStyle().setMargin(5, 0, 0, 0);
+        cowNumberTF.getSelectedStyle().setMargin(5, 0, 0, 0);
+        this.addComponent(cowNumberTF);
     }
     
     public void start() {
