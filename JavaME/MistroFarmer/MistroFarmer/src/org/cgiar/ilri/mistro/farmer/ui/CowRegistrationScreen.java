@@ -8,6 +8,7 @@ import com.sun.lwuit.Label;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
+import com.sun.lwuit.events.SelectionListener;
 import com.sun.lwuit.layouts.BoxLayout;
 import org.cgiar.ilri.mistro.farmer.Midlet;
 import org.cgiar.ilri.mistro.farmer.ui.localization.ArrayResources;
@@ -126,6 +127,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         ageTypeCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.age_type_array));
         setComponentStyle(ageTypeCB, true);
+        ageTypeCB.setRenderer(new MistroListCellRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.age_type_array)));
         this.addComponent(ageTypeCB);
         
         dateOfBirthL = new Label(Locale.getStringInLocale(locale, StringResources.date_of_birth));
@@ -142,6 +144,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         breedCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
         setComponentStyle(breedCB, true);
+        breedCB.setRenderer(new MultiselectRenderer());
         this.addComponent(breedCB);
         
         sexL = new Label(Locale.getStringInLocale(locale, StringResources.sex));
@@ -150,6 +153,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         sexCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.sex_array));
         setComponentStyle(sexCB, true);
+        sexCB.setRenderer(new MistroListCellRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.sex_array)));
         this.addComponent(sexCB);
         
         deformityL = new Label(Locale.getStringInLocale(locale, StringResources.deformity));
@@ -158,6 +162,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         deformityCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
         setComponentStyle(deformityCB, true);
+        deformityCB.setRenderer(new MultiselectRenderer());
         this.addComponent(deformityCB);
         
         serviceTypeL = new Label(Locale.getStringInLocale(locale, StringResources.service_type_used));
@@ -166,6 +171,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         serviceTypeCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.service_types));
         setComponentStyle(serviceTypeCB, true);
+        serviceTypeCB.setRenderer(new MistroListCellRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.service_types)));
         this.addComponent(serviceTypeCB);
         
         sireL = new Label(Locale.getStringInLocale(locale, StringResources.sire));
@@ -174,6 +180,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         sireCB = new ComboBox(new String[]{" "});
         setComponentStyle(sireCB, true);
+        sireCB.setRenderer(new MistroListCellRenderer(new String[]{" "}));
         this.addComponent(sireCB);
         
         damL = new Label(Locale.getStringInLocale(locale, StringResources.dam));
@@ -182,6 +189,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         damCB = new ComboBox(new String[]{" "});
         setComponentStyle(damCB, true);
+        damCB.setRenderer(new MistroListCellRenderer(new String[]{" "}));
         this.addComponent(damCB);
         
         countryL = new Label(Locale.getStringInLocale(locale, StringResources.country_of_origin));
@@ -190,6 +198,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         countryCB = new ComboBox(GeneralArrays.common_countries);
         setComponentStyle(countryCB, true);
+        countryCB.setRenderer(new MistroListCellRenderer(GeneralArrays.common_countries));
         this.addComponent(countryCB);
     }
     

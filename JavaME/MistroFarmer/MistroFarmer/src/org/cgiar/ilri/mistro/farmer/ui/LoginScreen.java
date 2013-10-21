@@ -7,7 +7,6 @@ import com.sun.lwuit.Form;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.layouts.BoxLayout;
-import javax.microedition.midlet.MIDlet;
 import org.cgiar.ilri.mistro.farmer.Midlet;
 import org.cgiar.ilri.mistro.farmer.ui.localization.Locale;
 import org.cgiar.ilri.mistro.farmer.ui.localization.StringResources;
@@ -79,6 +78,10 @@ public class LoginScreen extends Form implements Screen, ActionListener{
         if(event.getComponent().equals(registerButton)){
             FarmerRegistrationScreen farmerRegistrationScreen = new FarmerRegistrationScreen(midlet, locale);
             farmerRegistrationScreen.start();
+        }
+        else if(event.getComponent().equals(loginButton)){
+            MainMenuScreen mainMenuScreen = new MainMenuScreen(midlet, locale);
+            mainMenuScreen.start();
         }
     }
     
