@@ -14,9 +14,11 @@ import java.util.Vector;
 public class MultiselectRenderer implements ListCellRenderer, ActionListener{
     
     private Vector comboBoxItems;
+    private final int maximumSelection;
     
-    public MultiselectRenderer(String[] items) {
+    public MultiselectRenderer(String[] items, int maximumSelection) {
         super();
+        this.maximumSelection = maximumSelection;
         comboBoxItems = new Vector(items.length);
         for(int i = 0; i < items.length; i ++){
             ComboBoxItem currentBoxItem = new ComboBoxItem(items[i],i);
@@ -44,6 +46,24 @@ public class MultiselectRenderer implements ListCellRenderer, ActionListener{
     public void actionPerformed(ActionEvent evt) {
         List list = (List) evt.getComponent();
         ComboBoxItem clickedBoxItem = (ComboBoxItem) comboBoxItems.elementAt(list.getSelectedIndex());
-        clickedBoxItem.toggleChecked();
+        
+        if(clickedBoxItem.isChecked()){
+            //we want to uncheck the item, no need for checking for constraints
+            clickedBoxItem.toggleChecked();
+        }
+        else{
+            System.out.println("checkbox was not previously checked");
+            //get the number of selected items on list
+            int selectedNumber=0;
+            for(int i = 0; i < comboBoxItems.size(); i++){
+                ComboBoxItem currentBoxItem= (ComboBoxItem) comboBoxItems.elementAt(i);
+                if(currentBoxItem.isChecked()){
+                    selectedNumber++;
+                }
+            }
+            if(maximumSelection == 0 || selectedNumber <maximumSelection){
+                clickedBoxItem.toggleChecked();
+            }
+        }
     }
 }

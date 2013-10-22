@@ -147,7 +147,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         breedCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
         setComponentStyle(breedCB, true);
-        MultiselectRenderer breedMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
+        MultiselectRenderer breedMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array),4);
         breedCB.setRenderer(breedMultiselectRenderer);
         breedCB.addActionListener(breedMultiselectRenderer);
         this.addComponent(breedCB);
@@ -166,7 +166,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         this.addComponent(deformityL);
         
         deformityCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
-        MultiselectRenderer deformityMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
+        MultiselectRenderer deformityMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array),0);
         deformityCB.setRenderer(deformityMultiselectRenderer);
         deformityCB.addActionListener(deformityMultiselectRenderer);
         setComponentStyle(deformityCB, true);
