@@ -1,5 +1,6 @@
 package org.cgiar.ilri.mistro.farmer.ui;
 
+import com.sun.lwuit.CheckBox;
 import com.sun.lwuit.ComboBox;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
@@ -119,6 +120,8 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         ageTF = new TextField();
         setComponentStyle(ageTF, false);
+        ageTF.setConstraint(TextField.NUMERIC);
+        ageTF.setInputModeOrder(new String[] {"123"});
         this.addComponent(ageTF);
         
         ageTypeL = new Label(Locale.getStringInLocale(locale, StringResources.age_type));
@@ -144,7 +147,9 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         breedCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
         setComponentStyle(breedCB, true);
-        breedCB.setRenderer(new MultiselectRenderer());
+        MultiselectRenderer breedMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
+        breedCB.setRenderer(breedMultiselectRenderer);
+        breedCB.addActionListener(breedMultiselectRenderer);
         this.addComponent(breedCB);
         
         sexL = new Label(Locale.getStringInLocale(locale, StringResources.sex));
@@ -161,8 +166,11 @@ public class CowRegistrationScreen extends Form implements Screen{
         this.addComponent(deformityL);
         
         deformityCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
+        MultiselectRenderer deformityMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
+        deformityCB.setRenderer(deformityMultiselectRenderer);
+        deformityCB.addActionListener(deformityMultiselectRenderer);
         setComponentStyle(deformityCB, true);
-        deformityCB.setRenderer(new MultiselectRenderer());
+        //deformityCB.setRenderer(new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array)));
         this.addComponent(deformityCB);
         
         serviceTypeL = new Label(Locale.getStringInLocale(locale, StringResources.service_type_used));

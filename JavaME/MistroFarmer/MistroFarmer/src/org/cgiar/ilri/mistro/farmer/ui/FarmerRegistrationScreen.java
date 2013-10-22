@@ -90,6 +90,8 @@ public class FarmerRegistrationScreen extends Form implements Screen{
         mobileNoTF = new TextField();
         mobileNoTF.getStyle().setMargin(5, 0, 0, 0);
         mobileNoTF.getSelectedStyle().setMargin(5, 0, 0, 0);
+        mobileNoTF.setConstraint(TextField.NUMERIC);
+        mobileNoTF.setInputModeOrder(new String[] {"123"});
         this.addComponent(mobileNoTF);
         
         ePersonnelL = new Label(Locale.getStringInLocale(locale, StringResources.extension_p));
@@ -110,6 +112,8 @@ public class FarmerRegistrationScreen extends Form implements Screen{
         cowNumberTF = new TextField();
         cowNumberTF.getStyle().setMargin(5, 0, 0, 0);
         cowNumberTF.getSelectedStyle().setMargin(5, 0, 0, 0);
+        cowNumberTF.setConstraint(TextField.NUMERIC);
+        cowNumberTF.setInputModeOrder(new String[] {"123"});
         this.addComponent(cowNumberTF);
     }
     
