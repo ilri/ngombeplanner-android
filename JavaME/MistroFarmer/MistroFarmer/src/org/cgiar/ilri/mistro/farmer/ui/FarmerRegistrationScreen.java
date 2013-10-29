@@ -2,6 +2,7 @@ package org.cgiar.ilri.mistro.farmer.ui;
 
 
 import com.sun.lwuit.Command;
+import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Label;
 import com.sun.lwuit.TextField;
@@ -9,6 +10,7 @@ import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.layouts.BoxLayout;
 import org.cgiar.ilri.mistro.farmer.Midlet;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.cgiar.ilri.mistro.farmer.ui.Screen;
 import org.cgiar.ilri.mistro.farmer.ui.localization.Locale;
 import org.cgiar.ilri.mistro.farmer.ui.localization.StringResources;
@@ -39,11 +41,18 @@ public class FarmerRegistrationScreen extends Form implements Screen{
     private Label ePersonnelL;
     private Label cowNumberL;
     private TextField cowNumberTF;
+    private Farmer farmer;
 
-    public FarmerRegistrationScreen(Midlet midlet, int locale) {
+    public FarmerRegistrationScreen(Midlet midlet, int locale, Farmer farmer) {
         super(Locale.getStringInLocale(locale, StringResources.register));
         this.locale = locale;
         this.midlet = midlet;
+        if(farmer!=null){
+            this.farmer = farmer;
+        }
+        else {
+            this.farmer = new Farmer();
+        }
         
         this.parentBoxLayout = new BoxLayout(BoxLayout.Y_AXIS);
         this.setLayout(parentBoxLayout);
@@ -63,11 +72,16 @@ public class FarmerRegistrationScreen extends Form implements Screen{
                 }
                 else if(evt.getCommand().equals(nextCommand)) {
                     String noOfCowsString = cowNumberTF.getText();
-                    if(noOfCowsString!= null && !noOfCowsString.equals("")) {
-                        CowRegistrationScreen firstCowScreen = new CowRegistrationScreen(FarmerRegistrationScreen.this.midlet, FarmerRegistrationScreen.this.locale, 0, Integer.parseInt(noOfCowsString));
-                        firstCowScreen.start();
+                    if(validateInput()){
+                        saveFarmerDetails();
+                        if(noOfCowsString!= null && !noOfCowsString.equals("")) {
+                            CowRegistrationScreen firstCowScreen = new CowRegistrationScreen(FarmerRegistrationScreen.this.midlet, FarmerRegistrationScreen.this.locale, FarmerRegistrationScreen.this.farmer, 0, Integer.parseInt(noOfCowsString));
+                            firstCowScreen.start();
+                        }
+                        else {
+                            //TODO: send farmer details to server
+                        }
                     }
-                    
                 }
             }
         });
@@ -115,6 +129,59 @@ public class FarmerRegistrationScreen extends Form implements Screen{
         cowNumberTF.setConstraint(TextField.NUMERIC);
         cowNumberTF.setInputModeOrder(new String[] {"123"});
         this.addComponent(cowNumberTF);
+        
+        restoreFarmerDetails();
+    }
+    
+    private boolean validateInput(){
+        final Dialog infoDialog = new Dialog();
+        infoDialog.setDialogType(Dialog.TYPE_INFO);
+        final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.back));
+        infoDialog.addCommand(backCommand);
+        infoDialog.addCommandListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent evt) {
+                if(evt.getCommand().equals(backCommand)){
+                    infoDialog.dispose();
+                }
+            }
+        });
+        
+        Label text = new Label();
+        text.getStyle().setAlignment(CENTER);
+        infoDialog.addComponent(text);
+        if(fullNameTF.getText()== null || fullNameTF.getText().trim().length()==0){
+            fullNameTF.requestFocus();
+            text.setText(Locale.getStringInLocale(locale, StringResources.enter_your_name));
+            infoDialog.show(100, 100, 11, 11, true);
+            return false;
+        }
+        if(mobileNoTF.getText()== null || mobileNoTF.getText().trim().length()==0){
+            mobileNoTF.requestFocus();
+            text.setText(Locale.getStringInLocale(locale, StringResources.enter_your_mobile_no));
+            infoDialog.show(100, 100, 11, 11, true);
+            return false;
+        }
+        return true;
+    }
+    
+    private void saveFarmerDetails(){
+        farmer.setMode(Farmer.MODE_INITIAL_REGISTRATION);
+        farmer.setFullName(fullNameTF.getText());
+        farmer.setMobileNumber(mobileNoTF.getText());
+        farmer.setExtensionPersonnel(ePersonnelTV.getText());
+        if(cowNumberTF.getText()!=null && cowNumberTF.getText().trim().length() > 0){
+            farmer.setCowNumber(Integer.parseInt(cowNumberTF.getText().trim()));
+        }
+    }
+    
+    private void restoreFarmerDetails(){
+        if(farmer!=null){
+            fullNameTF.setText(farmer.getFullName());
+            mobileNoTF.setText(farmer.getMobileNumber());
+            ePersonnelTV.setText(farmer.getExtensionPersonnel());
+            cowNumberTF.setText(String.valueOf(farmer.getCowNumber()));
+        }
     }
     
     public void start() {

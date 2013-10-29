@@ -4,6 +4,7 @@ import com.sun.lwuit.CheckBox;
 import com.sun.lwuit.ComboBox;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
+import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Label;
 import com.sun.lwuit.TextField;
@@ -11,7 +12,14 @@ import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.events.SelectionListener;
 import com.sun.lwuit.layouts.BoxLayout;
+import com.sun.lwuit.spinner.Spinner;
+import java.util.Date;
+import java.util.Vector;
 import org.cgiar.ilri.mistro.farmer.Midlet;
+import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.Dam;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+import org.cgiar.ilri.mistro.farmer.carrier.Sire;
 import org.cgiar.ilri.mistro.farmer.ui.localization.ArrayResources;
 import org.cgiar.ilri.mistro.farmer.ui.localization.GeneralArrays;
 import org.cgiar.ilri.mistro.farmer.ui.localization.Locale;
@@ -27,6 +35,11 @@ public class CowRegistrationScreen extends Form implements Screen{
     private final int locale;
     private final int cowIndex;
     private final int cowNumber;
+    private final Farmer farmer;
+    private Vector validSires;
+    private Vector validSireNames;
+    private Vector validDams;
+    private Vector validDamNames;
     
     private Command previousCommand;
     private Command nextCommand;
@@ -41,13 +54,15 @@ public class CowRegistrationScreen extends Form implements Screen{
     private Label ageTypeL;
     private ComboBox ageTypeCB;
     private Label dateOfBirthL;
-    private TextField dateOfBirthTF;
+    private Spinner dateOfBirthS;
     private Label breedL;
     private ComboBox breedCB;
+    private MultiselectRenderer breedMultiselectRenderer;
     private Label sexL;
     private ComboBox sexCB;
     private Label deformityL;
     private ComboBox deformityCB;
+    private MultiselectRenderer deformityMultiselectRenderer;
     private Label serviceTypeL;
     private ComboBox serviceTypeCB;
     private Label sireL;
@@ -56,13 +71,14 @@ public class CowRegistrationScreen extends Form implements Screen{
     private ComboBox damCB;
     private Label countryL;
     private ComboBox countryCB;
-    public CowRegistrationScreen(Midlet midlet, int locale, int cowIndex, int cowNumber) {
+    public CowRegistrationScreen(Midlet midlet, int locale, Farmer farmer, int cowIndex, int cowNumber) {
         super(Locale.getStringInLocale(locale, StringResources.cow_registration_wth_indx)+String.valueOf(cowIndex+1));
         
         this.midlet = midlet;
         this.locale = locale;
         this.cowIndex = cowIndex;
         this.cowNumber = cowNumber;
+        this.farmer = farmer;
         
         parentBoxLayout = new BoxLayout(BoxLayout.Y_AXIS);
         this.setLayout(parentBoxLayout);
@@ -80,19 +96,23 @@ public class CowRegistrationScreen extends Form implements Screen{
 
             public void actionPerformed(ActionEvent evt) {  
                 if(evt.getCommand().equals(previousCommand)) {
+                    saveCowDetails();
                     if(CowRegistrationScreen.this.cowIndex>0){
-                        CowRegistrationScreen previousScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.cowIndex - 1, CowRegistrationScreen.this.cowNumber);
+                        CowRegistrationScreen previousScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer, CowRegistrationScreen.this.cowIndex - 1, CowRegistrationScreen.this.cowNumber);
                         previousScreen.start();
                     }
                     else {
-                        FarmerRegistrationScreen farmerRegistrationScreen = new FarmerRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale);
+                        FarmerRegistrationScreen farmerRegistrationScreen = new FarmerRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer);
                         farmerRegistrationScreen.start();
                     }
                 }
                 else if(evt.getCommand().equals(nextCommand)) {
-                    if(CowRegistrationScreen.this.cowIndex < (CowRegistrationScreen.this.cowNumber -1)) {
-                        CowRegistrationScreen nextScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.cowIndex + 1, CowRegistrationScreen.this.cowNumber);
-                        nextScreen.start();
+                    if(validateInput()) {
+                        saveCowDetails();;
+                        if(CowRegistrationScreen.this.cowIndex < (CowRegistrationScreen.this.cowNumber -1)) {
+                            CowRegistrationScreen nextScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer, CowRegistrationScreen.this.cowIndex + 1, CowRegistrationScreen.this.cowNumber);
+                            nextScreen.start();
+                        }
                     }
                 }
             }
@@ -137,9 +157,10 @@ public class CowRegistrationScreen extends Form implements Screen{
         setLabelStyle(dateOfBirthL);
         this.addComponent(dateOfBirthL);
         
-        dateOfBirthTF = new TextField();
-        setComponentStyle(dateOfBirthTF, false);
-        this.addComponent(dateOfBirthTF);
+        dateOfBirthS = Spinner.createDate(System.currentTimeMillis() - (31536000730l*50), System.currentTimeMillis(), System.currentTimeMillis(), '/', Spinner.DATE_FORMAT_DD_MM_YYYY);
+        setComponentStyle(dateOfBirthS, true);
+        dateOfBirthS.getSelectedStyle().setFgColor(0x2ecc71);
+        this.addComponent(dateOfBirthS);
         
         breedL = new Label(Locale.getStringInLocale(locale, StringResources.breed));
         setLabelStyle(breedL);
@@ -147,7 +168,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         
         breedCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
         setComponentStyle(breedCB, true);
-        MultiselectRenderer breedMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array),4);
+        breedMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array),4);
         breedCB.setRenderer(breedMultiselectRenderer);
         breedCB.addActionListener(breedMultiselectRenderer);
         this.addComponent(breedCB);
@@ -166,7 +187,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         this.addComponent(deformityL);
         
         deformityCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
-        MultiselectRenderer deformityMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array),0);
+        deformityMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array),0);
         deformityCB.setRenderer(deformityMultiselectRenderer);
         deformityCB.addActionListener(deformityMultiselectRenderer);
         setComponentStyle(deformityCB, true);
@@ -186,7 +207,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         setLabelStyle(sireL);
         this.addComponent(sireL);
         
-        sireCB = new ComboBox(new String[]{" "});
+        sireCB = new ComboBox(getValidSires());
         setComponentStyle(sireCB, true);
         sireCB.setRenderer(new MistroListCellRenderer(new String[]{" "}));
         this.addComponent(sireCB);
@@ -195,7 +216,7 @@ public class CowRegistrationScreen extends Form implements Screen{
         setLabelStyle(damL);
         this.addComponent(damL);
         
-        damCB = new ComboBox(new String[]{" "});
+        damCB = new ComboBox(getValidDams());
         setComponentStyle(damCB, true);
         damCB.setRenderer(new MistroListCellRenderer(new String[]{" "}));
         this.addComponent(damCB);
@@ -204,10 +225,13 @@ public class CowRegistrationScreen extends Form implements Screen{
         setLabelStyle(countryL);
         this.addComponent(countryL);
         
-        countryCB = new ComboBox(GeneralArrays.common_countries);
+        countryCB = new ComboBox(GeneralArrays.all_countries);
         setComponentStyle(countryCB, true);
-        countryCB.setRenderer(new MistroListCellRenderer(GeneralArrays.common_countries));
+        countryCB.setRenderer(new MistroListCellRenderer(GeneralArrays.all_countries));
         this.addComponent(countryCB);
+        
+        
+        restoreCowDetails();
     }
     
     private void setLabelStyle(Label label){
@@ -221,6 +245,129 @@ public class CowRegistrationScreen extends Form implements Screen{
         if(isFocusable){
             component.getSelectedStyle().setBgColor(0x2ecc71);
         }
+    }
+    
+    private boolean validateInput(){
+        final Dialog infoDialog = new Dialog();
+        infoDialog.setDialogType(Dialog.TYPE_INFO);
+        final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.back));
+        infoDialog.addCommand(backCommand);
+        infoDialog.addCommandListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                if(evt.getCommand().equals(backCommand)){
+                    infoDialog.dispose();
+                }
+            }
+        });
+        Label text = new Label();
+        text.getStyle().setAlignment(CENTER);
+        infoDialog.addComponent(text);
+        
+        if(earTagNumberTF.getText()== null || earTagNumberTF.getText().trim().length()==0){
+            earTagNumberTF.requestFocus();
+            text.setText(Locale.getStringInLocale(locale, StringResources.enter_ear_tag_number));
+            infoDialog.show(100, 100, 11, 11, true);
+            return false;
+        }
+        return true;
+    }
+    
+    private void saveCowDetails() {
+        Cow thisCow = farmer.getCow(cowIndex);
+        thisCow.setMode(Cow.MODE_ADULT_COW_REGISTRATION);
+        thisCow.setName(cowNameTF.getText());
+        thisCow.setEarTagNumber(earTagNumberTF.getText());
+        if(ageTF.getText()!=null && ageTF.getText().trim().length() > 0){
+            thisCow.setAge(Integer.parseInt(ageTF.getText().trim()));
+        }
+        String[] ageTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.age_type_array);
+        thisCow.setAgeType(ageTypesInEN[ageTypeCB.getSelectedIndex()]);
+        thisCow.setDateOfBirth((Date) dateOfBirthS.getValue());
+        thisCow.setBreeds(breedMultiselectRenderer.getSelectedItems());
+        String[] sexInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.sex_array);
+        thisCow.setSex(sexInEN[sexCB.getSelectedIndex()]);
+        thisCow.setDeformities(deformityMultiselectRenderer.getSelectedItems());
+        String[] serviceTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.service_types);
+        thisCow.setServiceType(serviceTypesInEN[serviceTypeCB.getSelectedIndex()]);
+        
+        Sire sire = new Sire();
+        Cow selectedSire = (Cow)validSires.elementAt(sireCB.getSelectedIndex());
+        sire.setName(selectedSire.getName());
+        sire.setEarTagNumber(selectedSire.getEarTagNumber());
+        thisCow.setSire(sire);
+        
+        Dam dam = new Dam();
+        Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
+        dam.setName(selectedDam.getName());
+        dam.setEarTagNumber(selectedDam.getEarTagNumber());
+        thisCow.setDam(dam);
+        
+        String[] countries = GeneralArrays.all_countries;
+        thisCow.setCountryOfOrigin(countries[countryCB.getSelectedIndex()]);
+    }
+    
+    private void restoreCowDetails() {
+        Cow thisCow = farmer.getCow(cowIndex);
+        
+        cowNameTF.setText(thisCow.getName());
+        earTagNumberTF.setText(thisCow.getEarTagNumber());
+        ageTF.setText(String.valueOf(thisCow.getAge()));
+        String[] ageTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.age_type_array);
+        for(int i = 0; i < ageTypesInEN.length; i ++) {
+            if(ageTypesInEN[i].equals(thisCow.getAgeType())){
+                ageTypeCB.setSelectedIndex(i);
+            }
+        }
+        //TODO: set date of birth
+        
+    }
+    
+    private String[] getValidSires() {
+        Cow[] allCows = farmer.getCows();
+        
+        validSires = new Vector();
+        //add placibo
+        validSires.addElement(new Cow(true));
+        validSireNames.addElement("");
+        
+        for(int i = 0;i < allCows.length; i++) {
+            Cow currentCow = allCows[i];
+            if(i != cowIndex && currentCow.getEarTagNumber() != null && currentCow.getEarTagNumber().length() > 0 && currentCow.getSex().equals(Cow.SEX_MALE)) {
+                validSires.addElement(currentCow);
+                validSireNames.addElement(currentCow.getEarTagNumber()+" ("+currentCow.getName()+")");
+            }
+        }
+        
+        String[] sireNames = new String[validSireNames.size()];
+        for(int i = 0; i < validSireNames.size(); i++) {
+            sireNames[i] = (String)validSireNames.elementAt(i);
+        }
+        
+        return sireNames;
+    }
+    
+    private String[] getValidDams() {
+        Cow[] allCows = farmer.getCows();
+        
+        validDams = new Vector();
+        //add placibo
+        validDams.addElement(new Cow(true));
+        validDamNames.addElement("");
+        
+        for(int i = 0;i < allCows.length; i++) {
+            Cow currentCow = allCows[i];
+            if(i != cowIndex && currentCow.getEarTagNumber() != null && currentCow.getEarTagNumber().length() > 0 && currentCow.getSex().equals(Cow.SEX_FEMALE)) {
+                validDams.addElement(currentCow);
+                validDamNames.addElement(currentCow.getEarTagNumber()+" ("+currentCow.getName()+")");
+            }
+        }
+        
+        String[] damNames = new String[validDamNames.size()];
+        for(int i = 0; i < validDamNames.size(); i++) {
+            damNames[i] = (String)validDamNames.elementAt(i);
+        }
+        
+        return damNames;
     }
     
     public void start() {

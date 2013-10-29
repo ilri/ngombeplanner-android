@@ -277,8 +277,16 @@ public class StringResources {
         "Please enter your name",
         ""
     };
+    public static final String[] your_name = {
+        "Your name",
+        ""
+    };
     public static final String[] enter_your_mobile_no = {
         "Please enter your phone number",
+        ""
+    };
+    public static final String[] your_mobile_no = {
+        "Your mobile number",
         ""
     };
     public static final String[] enter_ear_tag_number = {

@@ -76,7 +76,7 @@ public class LoginScreen extends Form implements Screen, ActionListener{
 
     public void actionPerformed(ActionEvent event) {
         if(event.getComponent().equals(registerButton)){
-            FarmerRegistrationScreen farmerRegistrationScreen = new FarmerRegistrationScreen(midlet, locale);
+            FarmerRegistrationScreen farmerRegistrationScreen = new FarmerRegistrationScreen(midlet, locale, null);
             farmerRegistrationScreen.start();
         }
         else if(event.getComponent().equals(loginButton)){

@@ -61,3 +61,10 @@
 [Friday, 18th October 2013 11:31:41] [sim_card_registration.php] SIM card with mobile number as  is not registered in the database. Sending the user_not_authenticated response code back to the client
 [Friday, 18th October 2013 11:31:50] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254027441015373410''
 [Friday, 18th October 2013 11:31:50] [authentication.php] SIM card serial number (89254027441015373410) not matching any farmer. Sending user_not_authenticated response code back to client
+[Wednesday, 23rd October 2013 16:42:03] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254028071000359956''
+[Wednesday, 23rd October 2013 16:42:03] [authentication.php] SIM card serial number (89254028071000359956) not matching any farmer. Sending user_not_authenticated response code back to client
+[Wednesday, 23rd October 2013 16:43:48] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 22 AND `date` = STR_TO_DATE('23/10/2013', '%d/%m/%Y')'
+[Wednesday, 23rd October 2013 17:09:56] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16'
+[Wednesday, 23rd October 2013 17:09:56] [general.php] Either more than one cow with the ear tag number '' gotten or none at all, returning -1
+[Wednesday, 23rd October 2013 17:10:00] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16'
+[Wednesday, 23rd October 2013 17:10:00] [general.php] Either more than one cow with the ear tag number '' gotten or none at all, returning -1
