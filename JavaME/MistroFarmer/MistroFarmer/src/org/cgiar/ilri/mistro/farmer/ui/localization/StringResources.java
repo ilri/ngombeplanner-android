@@ -409,4 +409,14 @@ public class StringResources {
         "Age Type",
         ""
     };
+    
+    public static final String[] other_deformity = {
+        "Other Deformity",
+        ""
+    };
+    
+    public static final String[] spec_other_deformity = {
+        "Please specify the cow's extra deformity",
+        ""
+    };
 }

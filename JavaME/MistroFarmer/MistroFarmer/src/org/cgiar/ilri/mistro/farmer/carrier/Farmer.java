@@ -146,4 +146,9 @@ public class Farmer {
         }
         return  jsonObject;
     }
+    
+    public void syncWithServer(){
+        JSONObject farmerJSONObject = getJsonObject();
+        
+    }
 }

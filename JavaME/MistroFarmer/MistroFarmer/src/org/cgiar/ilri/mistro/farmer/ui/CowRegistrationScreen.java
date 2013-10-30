@@ -62,6 +62,8 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
     private ComboBox sexCB;
     private Label deformityL;
     private ComboBox deformityCB;
+    private Label otherDeformityL;
+    private TextField otherDeformityTF;
     private MultiselectRenderer deformityMultiselectRenderer;
     private Label serviceTypeL;
     private ComboBox serviceTypeCB;
@@ -194,9 +196,18 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
         deformityMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array),0);
         deformityCB.setRenderer(deformityMultiselectRenderer);
         deformityCB.addActionListener(deformityMultiselectRenderer);
+        deformityCB.addActionListener(this);
         setComponentStyle(deformityCB, true);
         //deformityCB.setRenderer(new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array)));
         this.addComponent(deformityCB);
+        
+        otherDeformityL = new Label(Locale.getStringInLocale(locale, StringResources.other_deformity));
+        setLabelStyle(otherDeformityL);
+        this.addComponent(otherDeformityL);
+        
+        otherDeformityTF = new TextField();
+        setComponentStyle(otherDeformityTF, false);
+        this.addComponent(otherDeformityTF);
         
         serviceTypeL = new Label(Locale.getStringInLocale(locale, StringResources.service_type_used));
         setLabelStyle(serviceTypeL);
@@ -292,6 +303,15 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
             infoDialog.show(100, 100, 11, 11, true);
             return false;
         }
+        
+        if(otherDeformityTF.isFocusable()){
+            if(otherDeformityTF.getText().trim().length() == 0){
+                otherDeformityTF.requestFocus();
+                text.setText(Locale.getStringInLocale(locale, StringResources.spec_other_deformity));
+                infoDialog.show(100, 100, 11, 11, true);
+                return false;
+            }
+        }
         return true;
     }
     
@@ -306,10 +326,13 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
         String[] ageTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.age_type_array);
         thisCow.setAgeType(ageTypesInEN[ageTypeCB.getSelectedIndex()]);
         //thisCow.setDateOfBirth((Date) dateOfBirthS.getValue());
-        thisCow.setBreeds(breedMultiselectRenderer.getSelectedItems());
+        thisCow.setBreeds(breedMultiselectRenderer.getSelectedItems(Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.breeds_array)));
         String[] sexInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.sex_array);
         thisCow.setSex(sexInEN[sexCB.getSelectedIndex()]);
-        thisCow.setDeformities(deformityMultiselectRenderer.getSelectedItems());
+        thisCow.setDeformities(deformityMultiselectRenderer.getSelectedItems(Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.deformities_array)));
+        if(otherDeformityTF.isFocusable()){
+            thisCow.setOtherDeformity(otherDeformityTF.getText());
+        }
         String[] serviceTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.service_types);
         thisCow.setServiceType(serviceTypesInEN[serviceTypeCB.getSelectedIndex()]);
         
@@ -368,7 +391,7 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
             dateOfBirthS.setValue(new Long(System.currentTimeMillis()));
         }*/
         
-        String[] breedsInEN = Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array);
+        String[] breedsInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.breeds_array);
         //for each breed, check if breed in cow's breed array
         String[] cowBreeds = thisCow.getBreeds();
         int noSelectedBreeds = 0;
@@ -395,21 +418,25 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
         }
         
         
-        String[] sexInEN = Locale.getStringArrayInLocale(locale, ArrayResources.sex_array);
+        String[] sexInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.sex_array);
         for(int i = 0; i < sexInEN.length; i++){
             if(sexInEN[i].equals(thisCow.getSex())){
                 sexCB.setSelectedIndex(i);
             }
         }
         
-        String[] deformitiesInEN = Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array);
+        String[] deformitiesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.deformities_array);
         String[] cowDeformities = thisCow.getDeformities();
         int noDeformities = 0;
+        boolean hasOtherDeformity = false;
         if(cowDeformities!=null){
             for(int i = 0; i < deformitiesInEN.length; i++ ){
                 for(int j = 0; j < cowDeformities.length; j++){
                     if(deformitiesInEN[i].equals(cowDeformities[j])){
                         noDeformities++;
+                    }
+                    if(cowDeformities[j].equals("Other")){
+                        hasOtherDeformity = true;
                     }
                 }
             }
@@ -426,8 +453,12 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
             if(cowDeformitiesIndexes.length>0)
                 deformityMultiselectRenderer.setSelectedItems(cowDeformitiesIndexes);
         }
+        if(hasOtherDeformity){
+            otherDeformityTF.setText(thisCow.getOtherDeformity());
+        }
+        deformitySelected();
         
-        String[] serviceTypesInEN = Locale.getStringArrayInLocale(locale, ArrayResources.service_types);
+        String[] serviceTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.service_types);
         String serviceType = null;
         for(int i =0; i < serviceTypesInEN.length; i++){
             if(serviceTypesInEN[i].equals(thisCow.getServiceType())){
@@ -553,71 +584,56 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
     }
     
     private void serviceTypeSelected(){
-        String[] serviceTypesInEN = Locale.getStringArrayInLocale(locale, ArrayResources.service_types);
+        String[] serviceTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.service_types);
         int selectedIndex = serviceTypeCB.getSelectedIndex();
         System.out.println(serviceTypesInEN[selectedIndex]);
         if(serviceTypesInEN[selectedIndex].equals(Cow.SERVICE_TYPE_BULL)){
-            sireL.getStyle().setFgColor(0x000000);
-            sireCB.setFocusable(true);
-            sireCB.getStyle().setBgColor(0xFFFFFF);
+            setLabelFocusable(sireL, true);
+            setComponentFocusable(sireCB, true);
             
-            damL.getStyle().setFgColor(0x000000);
-            damCB.setFocusable(true);
-            damCB.getStyle().setBgColor(0xFFFFFF);
+            setLabelFocusable(damL, true);
+            setComponentFocusable(damCB, true);
             
-            countryL.getStyle().setFgColor(0x000000);
-            countryCB.setFocusable(true);
-            countryCB.getStyle().setBgColor(0xFFFFFF);
+            setLabelFocusable(countryL, true);
+            setComponentFocusable(countryCB, true);
             
-            strawNumberL.getStyle().setFgColor(0xC0C0C0);
-            strawNumberTF.setFocusable(false);
-            strawNumberTF.getStyle().setBgColor(0xC0C0C0);
+            setLabelFocusable(strawNumberL, false);
+            setComponentFocusable(strawNumberTF, false);
             
-            embryoNumberL.getStyle().setFgColor(0xC0C0C0);
-            embryoNumberTF.setFocusable(false);
-            embryoNumberTF.getStyle().setBgColor(0xC0C0C0);
+            setLabelFocusable(embryoNumberL, false);
+            setComponentFocusable(embryoNumberTF, false);
         }
         else if(serviceTypesInEN[selectedIndex].equals(Cow.SERVICE_TYPE_AI)){
-            sireL.getStyle().setFgColor(0xC0C0C0);
-            sireCB.setFocusable(false);
-            sireCB.getStyle().setBgColor(0xC0C0C0);
+            setLabelFocusable(sireL, false);
+            setComponentFocusable(sireCB, false);
             
-            damL.getStyle().setFgColor(0x000000);
-            damCB.setFocusable(true);
-            damCB.getStyle().setBgColor(0xFFFFFF);
+            setLabelFocusable(damL, true);
+            setComponentFocusable(damCB, true);
             
-            countryL.getStyle().setFgColor(0xC0C0C0);
-            countryCB.setFocusable(false);
-            countryCB.getStyle().setBgColor(0xC0C0C0);
+            setLabelFocusable(countryL, false);
+            setComponentFocusable(countryCB, false);
             
-            strawNumberL.getStyle().setFgColor(0x000000);
-            strawNumberTF.setFocusable(true);
-            strawNumberTF.getStyle().setBgColor(0xFFFFFF);
+            setLabelFocusable(strawNumberL, true);
+            setComponentFocusable(strawNumberTF, true);
             
-            embryoNumberL.getStyle().setFgColor(0xC0C0C0);
-            embryoNumberTF.setFocusable(false);
-            embryoNumberTF.getStyle().setBgColor(0xC0C0C0);
+            setLabelFocusable(embryoNumberL, false);
+            setComponentFocusable(embryoNumberTF, false);
         }
         else if(serviceTypesInEN[selectedIndex].equals(Cow.SERVICE_TYPE_ET)){
-            sireL.getStyle().setFgColor(0xC0C0C0);
-            sireCB.setFocusable(false);
-            sireCB.getStyle().setBgColor(0xC0C0C0);
+            setLabelFocusable(sireL, false);
+            setComponentFocusable(sireCB, false);
             
-            damL.getStyle().setFgColor(0xC0C0C0);
-            damCB.setFocusable(false);
-            damCB.getStyle().setBgColor(0xC0C0C0);
+            setLabelFocusable(damL, false);
+            setComponentFocusable(damCB, false);
             
-            countryL.getStyle().setFgColor(0xC0C0C0);
-            countryCB.setFocusable(false);
-            countryCB.getStyle().setBgColor(0xC0C0C0);
+            setLabelFocusable(countryL, false);
+            setComponentFocusable(countryCB, false);
             
-            strawNumberL.getStyle().setFgColor(0xC0C0C0);
-            strawNumberTF.setFocusable(false);
-            strawNumberTF.getStyle().setBgColor(0xC0C0C0);
+            setLabelFocusable(strawNumberL, false);
+            setComponentFocusable(strawNumberTF, false);
             
-            embryoNumberL.getStyle().setFgColor(0x000000);
-            embryoNumberTF.setFocusable(true);
-            embryoNumberTF.getStyle().setBgColor(0xFFFFFF);
+            setLabelFocusable(embryoNumberL, true);
+            setComponentFocusable(embryoNumberTF, true);
         }
     }
     
@@ -636,7 +652,55 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
     public void actionPerformed(ActionEvent evt) {
         if(evt.getComponent().equals(serviceTypeCB)){
             serviceTypeSelected();
-            System.out.println("called");
+        }
+        else if(evt.getComponent().equals(deformityCB)){
+            deformitySelected();
+        }
+    }
+    
+    private void deformitySelected(){
+        System.out.println("deformity selected");
+        String[] selectedDeformities = deformityMultiselectRenderer.getSelectedItems(Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.deformities_array));
+        boolean hasOther = false;
+        if(selectedDeformities != null){
+            for(int i = 0; i < selectedDeformities.length; i++){
+                if(selectedDeformities[i].equals("Other")){
+                    hasOther = true;
+                }
+            }
+            if(hasOther){
+                setLabelFocusable(otherDeformityL, true);
+            setComponentFocusable(otherDeformityTF, true);
+            }
+            else{
+                setLabelFocusable(otherDeformityL, false);
+            setComponentFocusable(otherDeformityTF, false);
+            }
+        }
+        else{
+            setLabelFocusable(otherDeformityL, false);
+            setComponentFocusable(otherDeformityTF, false);
+        }
+        
+    }
+    
+    private void setLabelFocusable(Label label, boolean focusable){
+        if(focusable){
+            label.getStyle().setFgColor(0x000000);
+        }
+        else{
+            label.getStyle().setFgColor(0xC0C0C0);
+        }
+    }
+    
+    private void setComponentFocusable(Component component, boolean focusable){
+        if(focusable){
+            component.getStyle().setBgColor(0xFFFFFF);
+            component.setFocusable(true);
+        }
+        else{
+            component.getStyle().setBgColor(0xC0C0C0);
+            component.setFocusable(false);
         }
     }
     

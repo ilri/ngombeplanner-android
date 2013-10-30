@@ -67,27 +67,34 @@ public class MultiselectRenderer implements ListCellRenderer, ActionListener{
         }
     }
     
-    public String[] getSelectedItems() {
-        String[] result = null;
-        int numberSelected = 0;
-        for(int i = 0; i < comboBoxItems.size(); i++){
-            ComboBoxItem currentItem = (ComboBoxItem)comboBoxItems.elementAt(i);
-            if(currentItem.isChecked()) {
-                numberSelected++;
-            }
-        }
-        if(numberSelected > 0) {
-            result = new String[numberSelected];
-            int currentIndex = 0;
+    public String[] getSelectedItems(String[] itemsInEN) {
+        if(itemsInEN.length == comboBoxItems.size()){
+            String[] result = null;
+            int numberSelected = 0;
             for(int i = 0; i < comboBoxItems.size(); i++){
                 ComboBoxItem currentItem = (ComboBoxItem)comboBoxItems.elementAt(i);
                 if(currentItem.isChecked()) {
-                    result[currentIndex] = currentItem.getText();
-                    currentIndex++;
+                    numberSelected++;
                 }
             }
+            if(numberSelected > 0) {
+                result = new String[numberSelected];
+                int currentIndex = 0;
+                for(int i = 0; i < comboBoxItems.size(); i++){
+                    ComboBoxItem currentItem = (ComboBoxItem)comboBoxItems.elementAt(i);
+                    if(currentItem.isChecked()) {
+                        result[currentIndex] = itemsInEN[i];
+                        currentIndex++;
+                    }
+                }
+            }
+            return result;
         }
-        return result;
+        else{
+            System.err.println("Size of array in EN locale is not the same size as number of combo box items");
+            return null;
+        }
+        
     }
     
     public void setSelectedItems(int[] itemIndexes) {
