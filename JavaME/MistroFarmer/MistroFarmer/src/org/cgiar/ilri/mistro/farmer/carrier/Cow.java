@@ -1,6 +1,5 @@
 package org.cgiar.ilri.mistro.farmer.carrier;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import org.json.me.JSONArray;
@@ -37,6 +36,7 @@ public class Cow {
     private String serviceType;
     private String otherDeformity;
     private String piggyBack;
+    private Date dateOfBirthDate;
 
     public Cow(boolean isNotDamOrSire) {
         name = "";
@@ -71,6 +71,7 @@ public class Cow {
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirthDate = dateOfBirth;
         Calendar calendar  = Calendar.getInstance();
         calendar.setTime(dateOfBirth);
         StringBuffer dateStringBuffer = new StringBuffer();
@@ -138,6 +139,12 @@ public class Cow {
 
     public String getDateOfBirth() {
         return dateOfBirth;
+    }
+    
+    public long getDateOfBirthMilliseconds() {
+        if(dateOfBirthDate != null)
+            return dateOfBirthDate.getTime();
+        else return -1;
     }
 
     public int getAge() {

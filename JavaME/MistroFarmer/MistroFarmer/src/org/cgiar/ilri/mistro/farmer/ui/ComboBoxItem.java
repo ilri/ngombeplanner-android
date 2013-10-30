@@ -34,5 +34,10 @@ public class ComboBoxItem extends CheckBox{
         this.checked = !checked;
         this.setSelected(checked);
     }
+    
+    public void setChecked(){
+        this.checked = true;
+        this.setSelected(true);
+    }
 }
 

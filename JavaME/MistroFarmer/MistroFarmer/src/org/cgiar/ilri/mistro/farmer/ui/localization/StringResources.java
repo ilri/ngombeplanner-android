@@ -113,8 +113,8 @@ public class StringResources {
         "A maximum of four breeds",
         ""
     };
-    public static final String[] country_of_origin = {
-        "Country of Origin",
+    public static final String[] sire_country_of_origin = {
+        "Sire's Country of Origin",
         ""
     };
     public static final String[] specify = {

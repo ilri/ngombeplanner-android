@@ -89,4 +89,12 @@ public class MultiselectRenderer implements ListCellRenderer, ActionListener{
         }
         return result;
     }
+    
+    public void setSelectedItems(int[] itemIndexes) {
+        for(int i = 0; i < itemIndexes.length; i++){
+            ComboBoxItem currentItem = (ComboBoxItem)comboBoxItems.elementAt(itemIndexes[i]);
+            currentItem.setChecked();
+            //comboBoxItems.setElementAt(currentItem, i);
+        }
+    }
 }
