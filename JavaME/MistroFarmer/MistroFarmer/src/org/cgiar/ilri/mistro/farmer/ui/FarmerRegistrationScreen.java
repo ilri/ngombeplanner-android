@@ -74,7 +74,7 @@ public class FarmerRegistrationScreen extends Form implements Screen{
                     String noOfCowsString = cowNumberTF.getText();
                     if(validateInput()){
                         saveFarmerDetails();
-                        if(noOfCowsString!= null && !noOfCowsString.equals("")) {
+                        if(noOfCowsString!= null && !noOfCowsString.equals("") && Integer.parseInt(noOfCowsString) > 0) {
                             CowRegistrationScreen firstCowScreen = new CowRegistrationScreen(FarmerRegistrationScreen.this.midlet, FarmerRegistrationScreen.this.locale, FarmerRegistrationScreen.this.farmer, 0, Integer.parseInt(noOfCowsString));
                             firstCowScreen.start();
                         }

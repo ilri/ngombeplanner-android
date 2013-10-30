@@ -18,8 +18,8 @@ public class Cow {
     public static final String MODE_ADULT_COW_REGISTRATION = "adultCowRegistration";
     public static final String MODE_BORN_CALF_REGISTRATION = "bornCalfRegistration";
     public static final String SERVICE_TYPE_BULL = "Bull";
-    public static final String SERVICE_TYPE_AI = "AI";
-    public static final String SERVICE_TYPE_ET = "ET";
+    public static final String SERVICE_TYPE_AI = "Artificial Insemination";
+    public static final String SERVICE_TYPE_ET = "Embryo Transfer";
     private String name;
     private String earTagNumber;
     private String dateOfBirth;
