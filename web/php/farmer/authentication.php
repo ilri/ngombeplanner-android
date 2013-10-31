@@ -46,6 +46,15 @@ class Authenticator {
                             $this->logHandler->log(3, $this->TAG,"the mobile number being used (".$mobileNumber.") is authenticated for '".$farmer['name']."'. Sending farmer's name back to client");
                             $query  = "SELECT * FROM cow WHERE farmer_id = {$farmer['id']}";
                             $cows = $this->database->runMySQLQuery($query, true);
+                            for ($index = 0; $index < count($cows); $index++) {
+                                $cow = $cows[$index];
+                                
+                                $query = "SELECT * FROM `milk_production` WHERE `cow_id` = {$cow['id']} ORDER BY id DESC";
+                                $milk_production = $this->database->runMySQLQuery($query, true);
+                                $cow['milk_production'] = $milk_production;
+                                
+                                $cows[$index] = $cow;
+                            }
                             $farmer['cows'] = $cows;
                             echo json_encode($farmer);
                     }

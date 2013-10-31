@@ -37,6 +37,7 @@ public class Cow {
     private String otherDeformity;
     private String piggyBack;
     private Date dateOfBirthDate;
+    private MilkProduction[] milkProduction;
 
     public Cow(boolean isNotDamOrSire) {
         name = "";
@@ -82,6 +83,14 @@ public class Cow {
             serviceType = cowJSONObject.getString("service_type");
             otherDeformity = "";
             piggyBack = "";
+            
+            JSONArray milkProductionArray = cowJSONObject.getJSONArray("milk_production");
+            if(milkProductionArray!=null){
+                milkProduction = new MilkProduction[milkProductionArray.length()];
+                for(int i = 0; i < milkProductionArray.length(); i++){
+                    milkProduction[i] = new MilkProduction(milkProductionArray.getJSONObject(i));
+                }
+            }
         } 
         catch (JSONException ex) {
             ex.printStackTrace();
@@ -219,6 +228,10 @@ public class Cow {
 
     public String getCountryOfOrigin() {
         return countryOfOrigin;
+    }
+    
+    public MilkProduction[] getMilkProduction(){
+        return milkProduction;
     }
 
     public JSONObject getJsonObject() {
