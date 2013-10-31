@@ -65,7 +65,7 @@ public class AddMilkProductionScreen extends Form implements Screen{
 
             public void actionPerformed(ActionEvent evt) {
                 if(evt.getCommand().equals(backCommand)) {
-                    MilkProductionScreen milkProductionScreen = new MilkProductionScreen(AddMilkProductionScreen.this.midlet, AddMilkProductionScreen.this.locale);
+                    MilkProductionScreen milkProductionScreen = new MilkProductionScreen(AddMilkProductionScreen.this.midlet, AddMilkProductionScreen.this.locale, AddMilkProductionScreen.this.farmer);
                     milkProductionScreen.start();
                 }
                 else if(evt.getCommand().equals(addCommand)){

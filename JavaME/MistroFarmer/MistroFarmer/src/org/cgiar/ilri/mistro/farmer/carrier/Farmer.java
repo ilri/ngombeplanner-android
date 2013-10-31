@@ -32,6 +32,28 @@ public class Farmer {
         simCardSN ="";
         mode = "";
     }
+    
+    public Farmer(JSONObject farmerJSONObject){
+        try {
+            fullName = farmerJSONObject.getString("name");
+            extensionPersonnel="";
+            mobileNumber=farmerJSONObject.getString("mobile_no");
+            longitude=farmerJSONObject.getString("gps_longitude");
+            latitude=farmerJSONObject.getString("gps_latitude");
+            simCardSN=farmerJSONObject.getString("sim_card_sn");
+            
+            JSONArray cowsJSONArray = farmerJSONObject.getJSONArray("cows");
+            cows = new Cow[cowsJSONArray.length()];
+            for(int i=0; i < cows.length; i++){
+                cows[i] = new Cow(cowsJSONArray.getJSONObject(i));
+            }
+            
+            mode = "";
+        } 
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;

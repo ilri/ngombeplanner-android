@@ -6,6 +6,7 @@ import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.layouts.BoxLayout;
 import org.cgiar.ilri.mistro.farmer.Midlet;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.cgiar.ilri.mistro.farmer.ui.localization.Locale;
 import org.cgiar.ilri.mistro.farmer.ui.localization.StringResources;
 
@@ -17,14 +18,16 @@ public class MilkProductionScreen extends Form implements Screen, ActionListener
 
     private final int locale;
     private final Midlet midlet;
+    private final Farmer farmer;
     
     private BoxLayout parentBoxLayout;
     private Command backCommand;
     
-    public MilkProductionScreen(Midlet midlet, int locale) {
+    public MilkProductionScreen(Midlet midlet, int locale, Farmer farmer) {
         super(Locale.getStringInLocale(locale, StringResources.milk_production));
         this.midlet = midlet;
         this.locale = locale;
+        this.farmer = farmer;
         
         this.parentBoxLayout = new BoxLayout(BoxLayout.Y_AXIS);
         this.setLayout(parentBoxLayout);
@@ -36,7 +39,7 @@ public class MilkProductionScreen extends Form implements Screen, ActionListener
 
             public void actionPerformed(ActionEvent evt) {
                 if(evt.getCommand().equals(backCommand)) {
-                    MainMenuScreen mainMenuScreen = new MainMenuScreen(MilkProductionScreen.this.midlet, MilkProductionScreen.this.locale);
+                    MainMenuScreen mainMenuScreen = new MainMenuScreen(MilkProductionScreen.this.midlet, MilkProductionScreen.this.locale, MilkProductionScreen.this.farmer);
                     mainMenuScreen.start();
                 }
             }

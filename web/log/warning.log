@@ -105,3 +105,9 @@
 [Wednesday, 30th October 2013 17:02:10] [database.php] no results gotten for  'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Jas''
 [Wednesday, 30th October 2013 17:17:11] [database.php] no results gotten for  'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Ron''
 [Wednesday, 30th October 2013 17:24:46] [database.php] no results gotten for  'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Ij''
+[Thursday, 31st October 2013 10:41:54] [database.php] no results gotten for  'SELECT * FROM `farmer` INNER JOIN `cow` ON `farmer`.id = `cow`.`farmer_id` WHERE farmer.`mobile_no` = '22222''
+[Thursday, 31st October 2013 10:41:54] [authentication.php] SIM card serial number () not matching any farmer. Sending user_not_authenticated response code back to client
+[Thursday, 31st October 2013 10:42:23] [database.php] no results gotten for  'SELECT * FROM `farmer` INNER JOIN `cow` ON `farmer`.id = `cow`.`farmer_id` WHERE farmer.`mobile_no` = '22222''
+[Thursday, 31st October 2013 10:42:23] [authentication.php] SIM card serial number () not matching any farmer. Sending user_not_authenticated response code back to client
+[Thursday, 31st October 2013 10:58:11] [database.php] no results gotten for  'SELECT * FROM `farmer` INNER JOIN `cow` ON `farmer`.id = `cow`.`farmer_id` WHERE farmer.`mobile_no` = '22222''
+[Thursday, 31st October 2013 10:58:11] [authentication.php] The mobile number (22222) not matching any farmer. Sending user_not_authenticated response code back to client

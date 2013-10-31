@@ -22,19 +22,40 @@ class Authenticator {
 		$this->getCodes();
 		$this->database = new DatabaseHandler;
 		
-		$simCardSN=$this->jsonObject['simCardSN'];
-		$query="SELECT `name` FROM `farmer` WHERE `sim_card_sn`='{$simCardSN}'";
-		$result = $this->database->runMySQLQuery($query, true);
-		if(sizeOf($result) == 1) {
-			$farmerName = $result[0]['name'];
-			$this->logHandler->log(3, $this->TAG,"the SIM card serial number being used (".$simCardSN.") is authenticated for '".$farmerName."'. Sending farmer's name back to client");
-			echo $farmerName;
-		}
-		else {
-			$this->logHandler->log(2, $this->TAG,"SIM card serial number (".$simCardSN.") not matching any farmer. Sending user_not_authenticated response code back to client");
-			echo $this->codes['user_not_authenticated'];
-		}
-		$this->logHandler->log(3, $this->TAG,"gracefully exiting");
+                if(isset($this->jsonObject['simCardSN'])){
+                    $simCardSN=$this->jsonObject['simCardSN'];
+                    $query="SELECT `name` FROM `farmer` WHERE `sim_card_sn`='{$simCardSN}'";
+                    $result = $this->database->runMySQLQuery($query, true);
+                    if(sizeOf($result) == 1) {
+                            $farmerName = $result[0]['name'];
+                            $this->logHandler->log(3, $this->TAG,"the SIM card serial number being used (".$simCardSN.") is authenticated for '".$farmerName."'. Sending farmer's name back to client");
+                            echo $farmerName;
+                    }
+                    else {
+                            $this->logHandler->log(2, $this->TAG,"SIM card serial number (".$simCardSN.") not matching any farmer. Sending user_not_authenticated response code back to client");
+                            echo $this->codes['user_not_authenticated'];
+                    }
+                    $this->logHandler->log(3, $this->TAG,"gracefully exiting");                     
+                }
+                else if(isset ($this->jsonObject['mobileNumber'])){
+                    $mobileNumber = $this->jsonObject['mobileNumber'];
+                    $query = "SELECT * FROM farmer WHERE `mobile_no` = '{$mobileNumber}'";
+                    $result = $this->database->runMySQLQuery($query, true);
+                    if(sizeOf($result) == 1) {
+                            $farmer = $result[0];
+                            $this->logHandler->log(3, $this->TAG,"the mobile number being used (".$mobileNumber.") is authenticated for '".$farmer['name']."'. Sending farmer's name back to client");
+                            $query  = "SELECT * FROM cow WHERE farmer_id = {$farmer['id']}";
+                            $cows = $this->database->runMySQLQuery($query, true);
+                            $farmer['cows'] = $cows;
+                            echo json_encode($farmer);
+                    }
+                    else {
+                            $this->logHandler->log(2, $this->TAG,"The mobile number (".$mobileNumber.") not matching any farmer. Sending user_not_authenticated response code back to client");
+                            echo $this->codes['user_not_authenticated'];
+                    }
+                    $this->logHandler->log(3, $this->TAG,"gracefully exiting");
+                }
+		
 	}
 
 	private function getTime($format) {

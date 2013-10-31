@@ -59,6 +59,33 @@ public class Cow {
         otherDeformity = "";
         piggyBack = "";
     }
+    
+    public Cow(JSONObject cowJSONObject){
+        try {
+            name = cowJSONObject.getString("name");
+            earTagNumber = cowJSONObject.getString("ear_tag_number");;
+            dateOfBirth = cowJSONObject.getString("date_of_birth");;
+            age = cowJSONObject.getInt("age");
+            ageType = cowJSONObject.getString("age_type");;
+            breeds = new String[0];
+            sex = cowJSONObject.getString("sex");
+            deformities = new String[0];
+            this.isNotDamOrSire = true;
+            if (isNotDamOrSire)//LOL, brings StackOverflowError if you init sire object inside sire object
+            {
+                sire = new Sire();
+                dam = new Dam();
+            }
+            mode = "";
+            countryOfOrigin = "";
+            serviceType = cowJSONObject.getString("service_type");
+            otherDeformity = "";
+            piggyBack = "";
+        } 
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void setMode(String mode) {
         this.mode = mode;
