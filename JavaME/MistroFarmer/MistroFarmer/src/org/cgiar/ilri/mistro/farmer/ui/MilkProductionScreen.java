@@ -1,6 +1,8 @@
 package org.cgiar.ilri.mistro.farmer.ui;
 
+import com.sun.lwuit.Button;
 import com.sun.lwuit.Command;
+import com.sun.lwuit.Component;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
@@ -23,6 +25,9 @@ public class MilkProductionScreen extends Form implements Screen, ActionListener
     private BoxLayout parentBoxLayout;
     private Command backCommand;
     
+    private Button addMilkProductionB;
+    private Button pastMilkProdutionB;
+    
     public MilkProductionScreen(Midlet midlet, int locale, Farmer farmer) {
         super(Locale.getStringInLocale(locale, StringResources.milk_production));
         this.midlet = midlet;
@@ -44,6 +49,29 @@ public class MilkProductionScreen extends Form implements Screen, ActionListener
                 }
             }
         });
+        
+        parentBoxLayout = new BoxLayout(BoxLayout.Y_AXIS);
+        this.setLayout(parentBoxLayout);
+        
+        addMilkProductionB = new Button(Locale.getStringInLocale(locale, StringResources.add_production));
+        addMilkProductionB.getStyle().setMargin(100, 10, 0, 0);
+        addMilkProductionB.getSelectedStyle().setMargin(100, 10, 0, 0);
+        setButtonStyle(addMilkProductionB);
+        addMilkProductionB.addActionListener(this);
+        this.addComponent(addMilkProductionB);
+        
+        pastMilkProdutionB = new Button(Locale.getStringInLocale(locale, StringResources.production_history));
+        pastMilkProdutionB.getStyle().setMargin(10, 10, 0, 0);
+        pastMilkProdutionB.getSelectedStyle().setMargin(10, 10, 0, 0);
+        setButtonStyle(pastMilkProdutionB);
+        pastMilkProdutionB.addActionListener(this);
+        this.addComponent(pastMilkProdutionB);
+    }
+    
+    private void setButtonStyle(Button button){
+        button.getStyle().setAlignment(Component.CENTER);
+        button.getSelectedStyle().setAlignment(Component.CENTER);
+        button.getSelectedStyle().setBgColor(0x2ecc71);
     }
     
     public void start() {
@@ -59,7 +87,10 @@ public class MilkProductionScreen extends Form implements Screen, ActionListener
     }
 
     public void actionPerformed(ActionEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(evt.getComponent().equals(addMilkProductionB)){
+            AddMilkProductionScreen addMilkProductionScreen = new AddMilkProductionScreen(midlet, locale, farmer);
+            addMilkProductionScreen.show();
+        }
     }
     
 }

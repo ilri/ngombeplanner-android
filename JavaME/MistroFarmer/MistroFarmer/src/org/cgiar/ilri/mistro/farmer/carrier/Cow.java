@@ -63,10 +63,11 @@ public class Cow {
     public Cow(JSONObject cowJSONObject){
         try {
             name = cowJSONObject.getString("name");
-            earTagNumber = cowJSONObject.getString("ear_tag_number");;
-            dateOfBirth = cowJSONObject.getString("date_of_birth");;
-            age = cowJSONObject.getInt("age");
-            ageType = cowJSONObject.getString("age_type");;
+            earTagNumber = cowJSONObject.getString("ear_tag_number");
+            dateOfBirth = cowJSONObject.getString("date_of_birth");
+            if(cowJSONObject.getString("age")!=null && cowJSONObject.getString("age").trim().length() > 0)
+                age = Integer.parseInt(cowJSONObject.getString("age"));
+            ageType = cowJSONObject.getString("age_type");
             breeds = new String[0];
             sex = cowJSONObject.getString("sex");
             deformities = new String[0];

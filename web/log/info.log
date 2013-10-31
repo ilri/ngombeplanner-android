@@ -2547,3 +2547,158 @@
 [Thursday, 31st October 2013 12:09:58] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
 [Thursday, 31st October 2013 12:09:58] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
 [Thursday, 31st October 2013 12:09:58] [authentication.php] gracefully exiting
+[Thursday, 31st October 2013 12:21:37] [authentication.php] Starting Authenticator
+[Thursday, 31st October 2013 12:21:37] [authentication.php] obtaining POST request
+[Thursday, 31st October 2013 12:21:37] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 12:21:37] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 12:21:37] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 12:21:37] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 12:21:37] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 12:21:37] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 12:21:37] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '525'
+[Thursday, 31st October 2013 12:21:37] [authentication.php] gracefully exiting
+[Thursday, 31st October 2013 12:21:54] [authentication.php] Starting Authenticator
+[Thursday, 31st October 2013 12:21:54] [authentication.php] obtaining POST request
+[Thursday, 31st October 2013 12:21:54] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 12:21:54] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 12:21:54] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 12:21:54] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 12:21:54] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 12:21:54] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 12:21:54] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Thursday, 31st October 2013 12:21:54] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 31st October 2013 12:21:54] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Thursday, 31st October 2013 12:21:54] [authentication.php] gracefully exiting
+[Thursday, 31st October 2013 12:23:20] [authentication.php] Starting Authenticator
+[Thursday, 31st October 2013 12:23:20] [authentication.php] obtaining POST request
+[Thursday, 31st October 2013 12:23:20] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 12:23:20] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 12:23:20] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 12:23:20] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 12:23:20] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 12:23:20] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 12:23:20] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Thursday, 31st October 2013 12:23:20] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 31st October 2013 12:23:20] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Thursday, 31st October 2013 12:23:20] [authentication.php] gracefully exiting
+[Thursday, 31st October 2013 12:32:35] [authentication.php] Starting Authenticator
+[Thursday, 31st October 2013 12:32:35] [authentication.php] obtaining POST request
+[Thursday, 31st October 2013 12:32:35] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 12:32:35] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 12:32:35] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 12:32:35] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 12:32:35] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 12:32:35] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 12:32:35] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Thursday, 31st October 2013 12:32:35] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 31st October 2013 12:32:35] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Thursday, 31st October 2013 12:32:35] [authentication.php] gracefully exiting
+[Thursday, 31st October 2013 12:35:14] [authentication.php] Starting Authenticator
+[Thursday, 31st October 2013 12:35:14] [authentication.php] obtaining POST request
+[Thursday, 31st October 2013 12:35:14] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 12:35:14] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 12:35:14] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 12:35:14] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 12:35:14] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 12:35:14] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 12:35:14] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Thursday, 31st October 2013 12:35:14] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 31st October 2013 12:35:14] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Thursday, 31st October 2013 12:35:14] [authentication.php] gracefully exiting
+[Thursday, 31st October 2013 15:10:55] [authentication.php] Starting Authenticator
+[Thursday, 31st October 2013 15:10:55] [authentication.php] obtaining POST request
+[Thursday, 31st October 2013 15:10:55] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:10:55] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:10:55] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 15:10:55] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:10:55] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:10:55] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 15:10:55] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Thursday, 31st October 2013 15:10:55] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 31st October 2013 15:10:55] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Thursday, 31st October 2013 15:10:55] [authentication.php] gracefully exiting
+[Thursday, 31st October 2013 15:11:16] [add_milk_production.php] Starting MilkProductionAdder
+[Thursday, 31st October 2013 15:11:16] [add_milk_production.php] obtaining POST request
+[Thursday, 31st October 2013 15:11:16] [add_milk_production.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:11:16] [add_milk_production.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:11:16] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 15:11:16] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:11:16] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:11:16] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 15:11:16] [database.php] running query SELECT cow.`id` FROM farmer INNER JOIN `cow` ON farmer.id = cow.`farmer_id` WHERE cow.`ear_tag_number` = 'nai-jas3' AND cow.`name` = 'Betty' AND farmer.`mobile_no` = '0722838686'
+[Thursday, 31st October 2013 15:11:16] [database.php] running query SELECT `time` FROM `milk_production` WHERE `cow_id` = 24 AND `date` = STR_TO_DATE('30/9/2013', '%d/%m/%Y')
+[Thursday, 31st October 2013 15:11:16] [database.php] running query INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES(24,'Morning',20,'Litres',STR_TO_DATE('30/9/2013', '%d/%m/%Y'),'2013-10-31 15:11:16')
+[Thursday, 31st October 2013 15:11:17] [add_milk_production.php] returning response code 533783
+[Thursday, 31st October 2013 15:11:17] [add_milk_production.php] gracefully exiting
+[Thursday, 31st October 2013 15:11:32] [add_milk_production.php] Starting MilkProductionAdder
+[Thursday, 31st October 2013 15:11:32] [add_milk_production.php] obtaining POST request
+[Thursday, 31st October 2013 15:11:32] [add_milk_production.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:11:32] [add_milk_production.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:11:32] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 15:11:32] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:11:32] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:11:32] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 15:11:32] [database.php] running query SELECT cow.`id` FROM farmer INNER JOIN `cow` ON farmer.id = cow.`farmer_id` WHERE cow.`ear_tag_number` = 'nai-jas3' AND cow.`name` = 'Betty' AND farmer.`mobile_no` = '0722838686'
+[Thursday, 31st October 2013 15:11:32] [database.php] running query SELECT `time` FROM `milk_production` WHERE `cow_id` = 24 AND `date` = STR_TO_DATE('30/9/2013', '%d/%m/%Y')
+[Thursday, 31st October 2013 15:11:32] [database.php] running query INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES(24,'Morning',20,'Litres',STR_TO_DATE('30/9/2013', '%d/%m/%Y'),'2013-10-31 15:11:32')
+[Thursday, 31st October 2013 15:12:35] [add_milk_production.php] Starting MilkProductionAdder
+[Thursday, 31st October 2013 15:12:35] [add_milk_production.php] obtaining POST request
+[Thursday, 31st October 2013 15:12:35] [add_milk_production.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:12:35] [add_milk_production.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:12:35] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 15:12:35] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:12:35] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:12:35] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 15:12:35] [database.php] running query SELECT cow.`id` FROM farmer INNER JOIN `cow` ON farmer.id = cow.`farmer_id` WHERE cow.`ear_tag_number` = 'nai-jas3' AND cow.`name` = 'Betty' AND farmer.`mobile_no` = '0722838686'
+[Thursday, 31st October 2013 15:12:35] [database.php] running query SELECT `time` FROM `milk_production` WHERE `cow_id` = 24 AND `date` = STR_TO_DATE('30/9/2013', '%d/%m/%Y')
+[Thursday, 31st October 2013 15:12:35] [database.php] running query INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES(24,'Afternoon',20,'Litres',STR_TO_DATE('30/9/2013', '%d/%m/%Y'),'2013-10-31 15:12:35')
+[Thursday, 31st October 2013 15:12:35] [add_milk_production.php] returning response code 533783
+[Thursday, 31st October 2013 15:12:35] [add_milk_production.php] gracefully exiting
+[Thursday, 31st October 2013 15:13:10] [add_milk_production.php] Starting MilkProductionAdder
+[Thursday, 31st October 2013 15:13:10] [add_milk_production.php] obtaining POST request
+[Thursday, 31st October 2013 15:13:10] [add_milk_production.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:13:10] [add_milk_production.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:13:10] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 15:13:10] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:13:10] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:13:10] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 15:13:10] [database.php] running query SELECT cow.`id` FROM farmer INNER JOIN `cow` ON farmer.id = cow.`farmer_id` WHERE cow.`ear_tag_number` = 'nai-jas3' AND cow.`name` = 'Betty' AND farmer.`mobile_no` = '0722838686'
+[Thursday, 31st October 2013 15:13:10] [database.php] running query SELECT `time` FROM `milk_production` WHERE `cow_id` = 24 AND `date` = STR_TO_DATE('30/9/2013', '%d/%m/%Y')
+[Thursday, 31st October 2013 15:13:10] [database.php] running query INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES(24,'Evening',20,'Litres',STR_TO_DATE('30/9/2013', '%d/%m/%Y'),'2013-10-31 15:13:10')
+[Thursday, 31st October 2013 15:13:10] [add_milk_production.php] returning response code 533783
+[Thursday, 31st October 2013 15:13:10] [add_milk_production.php] gracefully exiting
+[Thursday, 31st October 2013 15:13:52] [add_milk_production.php] Starting MilkProductionAdder
+[Thursday, 31st October 2013 15:13:52] [add_milk_production.php] obtaining POST request
+[Thursday, 31st October 2013 15:13:52] [add_milk_production.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:13:52] [add_milk_production.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:13:52] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 15:13:52] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:13:52] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:13:52] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 15:13:52] [database.php] running query SELECT cow.`id` FROM farmer INNER JOIN `cow` ON farmer.id = cow.`farmer_id` WHERE cow.`ear_tag_number` = 'nai-jas3' AND cow.`name` = 'Betty' AND farmer.`mobile_no` = '0722838686'
+[Thursday, 31st October 2013 15:13:52] [database.php] running query SELECT `time` FROM `milk_production` WHERE `cow_id` = 24 AND `date` = STR_TO_DATE('30/9/2013', '%d/%m/%Y')
+[Thursday, 31st October 2013 15:49:47] [authentication.php] Starting Authenticator
+[Thursday, 31st October 2013 15:49:47] [authentication.php] obtaining POST request
+[Thursday, 31st October 2013 15:49:47] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:49:47] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:49:47] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 15:49:47] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:49:47] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:49:47] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 15:49:47] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Thursday, 31st October 2013 15:49:47] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Thursday, 31st October 2013 15:49:47] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Thursday, 31st October 2013 15:49:47] [authentication.php] gracefully exiting
+[Thursday, 31st October 2013 15:50:33] [add_milk_production.php] Starting MilkProductionAdder
+[Thursday, 31st October 2013 15:50:33] [add_milk_production.php] obtaining POST request
+[Thursday, 31st October 2013 15:50:33] [add_milk_production.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:50:33] [add_milk_production.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:50:33] [database.php] Starting DatabaseHandler
+[Thursday, 31st October 2013 15:50:33] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 31st October 2013 15:50:33] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 31st October 2013 15:50:33] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 31st October 2013 15:50:33] [database.php] running query SELECT cow.`id` FROM farmer INNER JOIN `cow` ON farmer.id = cow.`farmer_id` WHERE cow.`ear_tag_number` = 'nai-jas1' AND cow.`name` = 'Rosy' AND farmer.`mobile_no` = '0722838686'
+[Thursday, 31st October 2013 15:50:33] [database.php] running query SELECT `time` FROM `milk_production` WHERE `cow_id` = 22 AND `date` = STR_TO_DATE('30/9/2013', '%d/%m/%Y')
+[Thursday, 31st October 2013 15:50:33] [database.php] running query INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES(22,'Morning',10,'Litres',STR_TO_DATE('30/9/2013', '%d/%m/%Y'),'2013-10-31 15:50:33')
+[Thursday, 31st October 2013 15:50:33] [add_milk_production.php] returning response code 533783
+[Thursday, 31st October 2013 15:50:33] [add_milk_production.php] gracefully exiting

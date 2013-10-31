@@ -427,4 +427,8 @@ public class StringResources {
         "Quantity Type",
         ""
     };
+    public static final String[] success = {
+        "Success",
+        ""
+    };
 }

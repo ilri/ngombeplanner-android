@@ -3,6 +3,7 @@ package org.cgiar.ilri.mistro.farmer.ui;
 import com.sun.lwuit.ComboBox;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
+import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Label;
 import com.sun.lwuit.TextField;
@@ -10,6 +11,8 @@ import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.layouts.BoxLayout;
 import com.sun.lwuit.spinner.Spinner;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 import org.cgiar.ilri.mistro.farmer.Midlet;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
@@ -17,6 +20,9 @@ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.cgiar.ilri.mistro.farmer.ui.localization.ArrayResources;
 import org.cgiar.ilri.mistro.farmer.ui.localization.Locale;
 import org.cgiar.ilri.mistro.farmer.ui.localization.StringResources;
+import org.cgiar.ilri.mistro.farmer.utils.DataHandler;
+import org.json.me.JSONException;
+import org.json.me.JSONObject;
 
 /**
  *
@@ -69,7 +75,34 @@ public class AddMilkProductionScreen extends Form implements Screen{
                     milkProductionScreen.start();
                 }
                 else if(evt.getCommand().equals(addCommand)){
-                    //TODO: send data to server
+                    if(validateInput()){
+                        JSONObject jsonObject  = new JSONObject();
+                        try {
+                            jsonObject.put("mobile_no",AddMilkProductionScreen.this.farmer.getMobileNumber());
+                            Cow selectedCow = (Cow) validCows.elementAt(cowCB.getSelectedIndex());
+                            jsonObject.put("cowName",selectedCow.getName());
+                            jsonObject.put("cowEarTagNumber",selectedCow.getEarTagNumber());
+
+                            String[] timesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.milking_times);
+                            jsonObject.put("time",timesInEN[timeCB.getSelectedIndex()]);
+                            jsonObject.put("quantity",quantityTF.getText());
+
+                            String[] quantityTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.quantity_types);
+                            jsonObject.put("quantityType",quantityTypesInEN[quantityTypeCB.getSelectedIndex()]);
+
+                            Date date = (Date) dateS.getValue();
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTime(date);
+                            String dateString = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH))+"/"+String.valueOf(calendar.get(Calendar.YEAR));
+                            jsonObject.put("date", dateString);
+                            
+                            Thread thread = new Thread(new MilkProductionHandler(jsonObject));
+                            thread.run();
+                        } 
+                        catch (JSONException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
                 }
             }
         });
@@ -97,9 +130,9 @@ public class AddMilkProductionScreen extends Form implements Screen{
         setLabelStyle(timeL);
         this.addComponent(timeL);
         
-        timeCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.quantity_types));
+        timeCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.milking_times));
         setComponentStyle(timeCB, true);
-        timeCB.setRenderer(new MistroListCellRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.quantity_types)));
+        timeCB.setRenderer(new MistroListCellRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.milking_times)));
         this.addComponent(timeCB);
         
         quantityL = new Label(Locale.getStringInLocale(locale, StringResources.quantity));
@@ -155,9 +188,70 @@ public class AddMilkProductionScreen extends Form implements Screen{
         
         return cowNames;
     }
+    
+    private boolean validateInput(){
+        final Dialog infoDialog = new Dialog();
+        infoDialog.setDialogType(Dialog.TYPE_INFO);
+        final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.back));
+        infoDialog.addCommand(backCommand);
+        infoDialog.addCommandListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent evt) {
+                if(evt.getCommand().equals(backCommand)){
+                    infoDialog.dispose();
+                }
+            }
+        });
+        
+        Label text = new Label();
+        text.getStyle().setAlignment(CENTER);
+        infoDialog.addComponent(text);
+        
+        if(quantityTF.getText()==null || quantityTF.getText().trim().length() == 0){
+            text.setText(Locale.getStringInLocale(locale, StringResources.enter_quantity_of_milk_produced));
+            quantityTF.requestFocus();
+            infoDialog.show(100, 100, 11, 11, true);
+            return false;
+        }
+        
+        if(validateDate()!=null){
+            text.setText(validateDate());
+            dateS.requestFocus();
+            infoDialog.show(100, 100, 11, 11, true);
+            return false;
+        }
+        
+        String[] quantityTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.quantity_types);
+        String quantityType = quantityTypesInEN[quantityTypeCB.getSelectedIndex()];
+        if(quantityType.equals("Litres") || quantityType.equals("KGs")){
+            if(Integer.parseInt(quantityTF.getText()) > 50){
+                text.setText(Locale.getStringInLocale(locale, StringResources.milk_too_much));
+                quantityTF.requestFocus();
+                infoDialog.show(100, 100, 11, 11, true);
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private String validateDate(){
+        Date dateSelected  = (Date) dateS.getValue();
+        long currentTime = System.currentTimeMillis();
+        
+        long timeDiffDays = (currentTime - dateSelected.getTime())/86400000;
+        
+        if(timeDiffDays > 30){
+            return Locale.getStringInLocale(locale, StringResources.milk_data_too_old);
+        }
+        else if(timeDiffDays < 0){
+            return Locale.getStringInLocale(locale, StringResources.date_in_future);
+        }
+        
+        return null;
+    }
 
     public void start() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.show();
     }
 
     public void destroy() {
@@ -168,4 +262,85 @@ public class AddMilkProductionScreen extends Form implements Screen{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    private void actOnServerResponse(String response){
+        if(response == null){
+            final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.error));
+            infoDialog.setDialogType(Dialog.TYPE_ERROR);
+            final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.back));
+            infoDialog.addCommand(backCommand);
+            infoDialog.addCommandListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent evt) {
+                    if(evt.getCommand().equals(backCommand)){
+                        infoDialog.dispose();
+                    }
+                }
+            });
+
+            Label text = new Label();
+            text.getStyle().setAlignment(CENTER);
+            infoDialog.addComponent(text);
+            text.setText(Locale.getStringInLocale(locale, StringResources.problem_connecting_to_server));
+            infoDialog.show(100, 100, 11, 11, true);
+        }
+        else if(response.equals(DataHandler.ACKNOWLEDGE_OK)){
+            final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.success));
+            infoDialog.setDialogType(Dialog.TYPE_INFO);
+            final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+            infoDialog.addCommand(new Command(""));//placibo command
+            infoDialog.addCommand(backCommand);
+            infoDialog.addCommandListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent evt) {
+                    if(evt.getCommand().equals(backCommand)){
+                        infoDialog.dispose();
+                        MilkProductionScreen milkProductionScreen = new MilkProductionScreen(midlet, locale, farmer);
+                        milkProductionScreen.start();
+                    }
+                }
+            });
+
+            Label text = new Label();
+            text.getStyle().setAlignment(CENTER);
+            infoDialog.addComponent(text);
+            text.setText(Locale.getStringInLocale(locale, StringResources.information_successfully_sent_to_server));
+            infoDialog.show(100, 100, 11, 11, true);
+        }
+        else if(response.equals(DataHandler.DATA_ERROR)){
+            final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.error));
+            infoDialog.setDialogType(Dialog.TYPE_ERROR);
+            final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.back));
+            infoDialog.addCommand(backCommand);
+            infoDialog.addCommandListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent evt) {
+                    if(evt.getCommand().equals(backCommand)){
+                        infoDialog.dispose();
+                    }
+                }
+            });
+
+            Label text = new Label();
+            text.getStyle().setAlignment(CENTER);
+            infoDialog.addComponent(text);
+            text.setText(Locale.getStringInLocale(locale, StringResources.problem_in_data_sent_en));
+            infoDialog.show(100, 100, 11, 11, true);
+        }
+    }
+    
+    private class MilkProductionHandler implements Runnable{
+
+        private JSONObject jSONObject;
+        
+        public MilkProductionHandler(JSONObject jSONObject) {
+            this.jSONObject = jSONObject;
+        }
+        
+        
+        public void run() {
+            String response = DataHandler.sendDataToServer(jSONObject, DataHandler.FARMER_ADD_MILK_PRODUCTION_URL);
+            actOnServerResponse(response);
+        }
+        
+    }
 }

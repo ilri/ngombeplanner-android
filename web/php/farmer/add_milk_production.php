@@ -23,9 +23,17 @@ class MilkProductionAdder {
 		$this->database = new DatabaseHandler;
 		
 		//get cow ID
-		$earTagNumber = $this->jsonObject['cowEarTagNumber'];
 		$cowName = $this->jsonObject['cowName'];
-		$query = "SELECT `id` FROM `cow` WHERE `ear_tag_number` = '{$earTagNumber}' AND `name` = '{$cowName}'";
+                $earTagNumber = $this->jsonObject['cowEarTagNumber'];
+                if(isset($this->jsonObject['simCardSN'])){
+                    $simCardSN = $this->jsonObject['simCardSN'];
+                    $query = "SELECT cow.`id` FROM farmer INNER JOIN `cow` ON farmer.id = cow.`farmer_id` WHERE cow.`ear_tag_number` = '{$earTagNumber}' AND cow.`name` = '{$cowName}' AND farmer.`sim_card_sn` = '{$simCardSN}'";
+                }
+                else if(isset ($this->jsonObject['mobile_no'])){
+                    $mobileNumber = $this->jsonObject['mobile_no'];
+                    $query = "SELECT cow.`id` FROM farmer INNER JOIN `cow` ON farmer.id = cow.`farmer_id` WHERE cow.`ear_tag_number` = '{$earTagNumber}' AND cow.`name` = '{$cowName}' AND farmer.`mobile_no` = '{$mobileNumber}'";
+                }
+		
 		$result = $this->database->runMySQLQuery($query, true);
 		if(sizeOf($result) == 1) { //only one cow ID should have been fetched
 			$cowID = $result[0]['id'];
