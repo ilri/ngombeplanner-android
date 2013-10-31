@@ -1864,3 +1864,620 @@
 [Wednesday, 23rd October 2013 17:10:00] [general.php] Getting id of cow with ear tag number as 
 [Wednesday, 23rd October 2013 17:10:00] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16
 [Wednesday, 23rd October 2013 17:10:00] [database.php] running query INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`servicing_days`) VALUES(22,11,'',STR_TO_DATE('23/10/2013', '%d/%m/%Y'),'2013-10-23 17:10:00',)
+[Wednesday, 30th October 2013 14:45:11] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 14:45:11] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 14:45:11] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:45:11] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:45:11] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 14:45:11] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:45:11] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:45:11] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 14:45:11] [general.php] Starting General
+[Wednesday, 30th October 2013 14:45:11] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:45:11] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:45:11] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 14:45:11] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:45:11] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:45:11] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 14:45:11] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 14:46:26] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 14:46:26] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 14:46:26] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:46:26] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:46:26] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 14:46:26] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:46:26] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:46:26] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 14:46:26] [general.php] Starting General
+[Wednesday, 30th October 2013 14:46:26] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:46:26] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:46:26] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 14:46:26] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:46:26] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:46:26] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 14:46:26] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 14:48:47] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 14:48:47] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 14:48:47] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:48:47] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:48:47] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 14:48:47] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:48:47] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:48:47] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 14:48:47] [general.php] Starting General
+[Wednesday, 30th October 2013 14:48:47] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:48:47] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:48:47] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 14:48:47] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 14:48:47] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 14:48:47] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 14:48:47] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:45:45] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:45:45] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:45:45] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:45:45] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:45:45] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:45:45] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:45:45] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:45:45] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:45:45] [general.php] Starting General
+[Wednesday, 30th October 2013 15:45:45] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:45:45] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:45:45] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:45:45] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:45:45] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:45:45] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:45:45] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:47:14] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:47:14] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:47:14] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:47:14] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:47:14] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:47:14] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:47:14] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:47:14] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:47:14] [general.php] Starting General
+[Wednesday, 30th October 2013 15:47:14] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:47:14] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:47:14] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:47:14] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:47:14] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:47:14] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:47:14] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:47:51] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:47:51] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:47:51] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:47:51] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:47:51] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:47:51] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:47:51] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:47:51] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:47:52] [general.php] Starting General
+[Wednesday, 30th October 2013 15:47:52] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:47:52] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:47:52] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:47:52] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:47:52] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:47:52] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:47:52] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:51:39] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:51:39] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:51:39] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:39] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:39] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:39] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:39] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:39] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:39] [general.php] Starting General
+[Wednesday, 30th October 2013 15:51:39] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:39] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:39] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:39] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:39] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:39] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:39] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:51:47] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:51:47] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:51:47] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:47] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:47] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:47] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:47] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:47] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:47] [general.php] Starting General
+[Wednesday, 30th October 2013 15:51:47] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:47] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:47] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:47] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:47] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:47] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:47] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:51:49] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:51:49] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:51:49] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:49] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:49] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:49] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:49] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:49] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:49] [general.php] Starting General
+[Wednesday, 30th October 2013 15:51:49] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:49] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:49] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:49] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:49] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:49] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:49] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:51:50] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:51:50] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:51:50] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:50] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:50] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:50] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:50] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:50] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:50] [general.php] Starting General
+[Wednesday, 30th October 2013 15:51:50] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:50] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:50] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:50] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:50] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:50] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:50] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:51:51] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:51:51] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:51:51] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:51] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:51] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:51] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:51] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:51] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:51] [general.php] Starting General
+[Wednesday, 30th October 2013 15:51:51] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:51] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:51] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:51] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:51] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:51] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:51] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:51:52] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:51:52] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:51:52] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:52] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:52] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:52] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:52] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:52] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:52] [general.php] Starting General
+[Wednesday, 30th October 2013 15:51:52] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:52] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:52] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:51:52] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:51:52] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:51:52] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:51:52] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:53:08] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:53:08] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:53:08] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:53:08] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:53:08] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:53:08] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:53:08] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:53:08] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:53:08] [general.php] Starting General
+[Wednesday, 30th October 2013 15:53:08] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:53:08] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:53:08] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:53:08] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:53:08] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:53:08] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:53:08] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:53:46] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:53:46] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:53:46] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:53:46] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:53:46] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:53:46] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:53:46] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:53:46] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:53:46] [general.php] Starting General
+[Wednesday, 30th October 2013 15:53:46] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:53:46] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:53:46] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:53:46] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:53:46] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:53:46] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:53:46] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:56:31] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:56:31] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:56:31] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:56:31] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:56:31] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:56:31] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:56:31] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:56:31] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:56:31] [general.php] Starting General
+[Wednesday, 30th October 2013 15:56:31] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:56:31] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:56:31] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:56:31] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:56:31] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:56:31] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:56:31] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:56:36] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:56:36] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:56:36] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:56:36] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:56:36] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:56:36] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:56:36] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:56:36] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:56:36] [general.php] Starting General
+[Wednesday, 30th October 2013 15:56:36] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:56:36] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:56:36] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:56:36] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:56:36] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:56:36] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:56:36] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 15:58:41] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 15:58:41] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 15:58:41] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:58:41] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:58:41] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:58:41] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:58:41] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:58:41] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:58:41] [general.php] Starting General
+[Wednesday, 30th October 2013 15:58:41] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:58:41] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:58:41] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 15:58:41] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 15:58:41] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 15:58:41] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 15:58:41] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 15:58:41] [registration.php] Registering the new farmer (A) in the database
+[Wednesday, 30th October 2013 15:58:41] [general.php] Getting id of Extension Personnel with name as A
+[Wednesday, 30th October 2013 15:58:41] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'A'
+[Wednesday, 30th October 2013 15:58:41] [database.php] running query INSERT INTO `extension_personnel`(`name`,`date_added`) VALUES ('A','2013-10-30 15:58:41')
+[Wednesday, 30th October 2013 15:58:41] [general.php] Created a new Extension Personnel record with the name A and id as 6
+[Wednesday, 30th October 2013 15:58:41] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('A','22222','','',6,'','2013-10-30 15:58:41')
+[Wednesday, 30th October 2013 15:58:41] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 16:05:33] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 16:05:33] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 16:05:33] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:05:33] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:05:33] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:05:33] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:05:33] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:05:33] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:05:33] [general.php] Starting General
+[Wednesday, 30th October 2013 16:05:33] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:05:33] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:05:33] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:05:33] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:05:33] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:05:33] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:05:33] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 16:05:33] [registration.php] Registering the new farmer (Jason gone) in the database
+[Wednesday, 30th October 2013 16:05:33] [general.php] Getting id of Extension Personnel with name as Frank makau
+[Wednesday, 30th October 2013 16:05:33] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Frank makau'
+[Wednesday, 30th October 2013 16:05:33] [database.php] running query INSERT INTO `extension_personnel`(`name`,`date_added`) VALUES ('Frank makau','2013-10-30 16:05:33')
+[Wednesday, 30th October 2013 16:05:33] [general.php] Created a new Extension Personnel record with the name Frank makau and id as 7
+[Wednesday, 30th October 2013 16:05:33] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Jason gone','0744112233','','',7,'','2013-10-30 16:05:33')
+[Wednesday, 30th October 2013 16:05:33] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 16:21:46] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 16:21:46] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 16:21:46] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:21:46] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:21:46] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:21:46] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:21:46] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:21:46] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:21:46] [general.php] Starting General
+[Wednesday, 30th October 2013 16:21:46] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:21:46] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:21:46] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:21:46] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:21:46] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:21:46] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:21:46] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 16:21:46] [registration.php] Registering the new farmer (Test1) in the database
+[Wednesday, 30th October 2013 16:21:46] [general.php] Getting id of Extension Personnel with name as Jasom
+[Wednesday, 30th October 2013 16:21:46] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Jasom'
+[Wednesday, 30th October 2013 16:21:46] [database.php] running query INSERT INTO `extension_personnel`(`name`,`date_added`) VALUES ('Jasom','2013-10-30 16:21:46')
+[Wednesday, 30th October 2013 16:21:46] [general.php] Created a new Extension Personnel record with the name Jasom and id as 8
+[Wednesday, 30th October 2013 16:21:46] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Test1','0733669966','','',8,'','2013-10-30 16:21:46')
+[Wednesday, 30th October 2013 16:21:46] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 16:34:16] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 16:34:16] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 16:34:16] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:16] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:16] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:34:16] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:16] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:16] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:34:16] [general.php] Starting General
+[Wednesday, 30th October 2013 16:34:16] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:16] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:16] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:34:16] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:16] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:16] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:34:16] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 16:34:16] [registration.php] Registering the new farmer (Test2) in the database
+[Wednesday, 30th October 2013 16:34:16] [general.php] Getting id of Extension Personnel with name as Rogue
+[Wednesday, 30th October 2013 16:34:16] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Rogue'
+[Wednesday, 30th October 2013 16:34:16] [database.php] running query INSERT INTO `extension_personnel`(`name`,`date_added`) VALUES ('Rogue','2013-10-30 16:34:16')
+[Wednesday, 30th October 2013 16:34:16] [general.php] Created a new Extension Personnel record with the name Rogue and id as 9
+[Wednesday, 30th October 2013 16:34:16] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Test2','0712558800','','',9,'','2013-10-30 16:34:16')
+[Wednesday, 30th October 2013 16:34:16] [registration.php] Registering the new cow (T1) in the database
+[Wednesday, 30th October 2013 16:34:16] [general.php] Getting id of country with name as 
+[Wednesday, 30th October 2013 16:34:16] [database.php] running query SELECT `id` FROM `country` WHERE `name` = ''
+[Wednesday, 30th October 2013 16:34:16] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`) VALUES(20,'T1','T1',STR_TO_DATE('', '%d/%m/%Y'),-1,'Days','Female','2013-10-30 16:34:16','Bull')
+[Wednesday, 30th October 2013 16:34:16] [registration.php] Registering the new cow (T2) in the database
+[Wednesday, 30th October 2013 16:34:16] [general.php] Getting id of country with name as 
+[Wednesday, 30th October 2013 16:34:16] [database.php] running query SELECT `id` FROM `country` WHERE `name` = ''
+[Wednesday, 30th October 2013 16:34:16] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`) VALUES(20,'T2','T2',STR_TO_DATE('', '%d/%m/%Y'),-1,'Days','Female','2013-10-30 16:34:16','Bull')
+[Wednesday, 30th October 2013 16:34:17] [general.php] Getting id of cow with ear tag number as T1
+[Wednesday, 30th October 2013 16:34:17] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'T1' AND `farmer_id` = 20
+[Wednesday, 30th October 2013 16:34:17] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 30th October 2013 16:34:17] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 20
+[Wednesday, 30th October 2013 16:34:17] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 30th October 2013 16:34:17] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 20
+[Wednesday, 30th October 2013 16:34:17] [general.php] Getting id of cow with ear tag number as T2
+[Wednesday, 30th October 2013 16:34:17] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'T2' AND `farmer_id` = 20
+[Wednesday, 30th October 2013 16:34:17] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 30th October 2013 16:34:17] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 20
+[Wednesday, 30th October 2013 16:34:17] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 30th October 2013 16:34:17] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 20
+[Wednesday, 30th October 2013 16:34:17] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 16:34:29] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 16:34:29] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 16:34:29] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:29] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:29] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:34:29] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:29] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:29] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:34:29] [general.php] Starting General
+[Wednesday, 30th October 2013 16:34:29] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:29] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:29] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:34:29] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:29] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:29] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:34:29] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 16:34:29] [registration.php] Registering the new farmer (Test2) in the database
+[Wednesday, 30th October 2013 16:34:29] [general.php] Getting id of Extension Personnel with name as Rogue
+[Wednesday, 30th October 2013 16:34:29] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Rogue'
+[Wednesday, 30th October 2013 16:34:29] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Test2','0712558800','','',9,'','2013-10-30 16:34:29')
+[Wednesday, 30th October 2013 16:34:40] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 16:34:40] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 16:34:40] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:40] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:40] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:34:40] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:40] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:40] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:34:40] [general.php] Starting General
+[Wednesday, 30th October 2013 16:34:40] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:40] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:40] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:34:40] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:34:40] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:34:40] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:34:40] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 16:34:40] [registration.php] Registering the new farmer (Test2) in the database
+[Wednesday, 30th October 2013 16:34:40] [general.php] Getting id of Extension Personnel with name as Rogue
+[Wednesday, 30th October 2013 16:34:40] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Rogue'
+[Wednesday, 30th October 2013 16:34:40] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Test2','0712558800','','',9,'','2013-10-30 16:34:40')
+[Wednesday, 30th October 2013 16:37:19] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 16:37:19] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 16:37:19] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:37:19] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:37:19] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:37:19] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:37:19] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:37:19] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:37:19] [general.php] Starting General
+[Wednesday, 30th October 2013 16:37:19] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:37:19] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:37:19] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:37:19] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:37:19] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:37:19] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:37:19] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 16:37:19] [registration.php] Registering the new farmer (Testd) in the database
+[Wednesday, 30th October 2013 16:37:19] [general.php] Getting id of Extension Personnel with name as Rogue
+[Wednesday, 30th October 2013 16:37:19] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Rogue'
+[Wednesday, 30th October 2013 16:37:19] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Testd','0712558801','','',9,'','2013-10-30 16:37:19')
+[Wednesday, 30th October 2013 16:37:19] [registration.php] Registering the new cow (T3) in the database
+[Wednesday, 30th October 2013 16:37:19] [general.php] Getting id of country with name as 
+[Wednesday, 30th October 2013 16:37:19] [database.php] running query SELECT `id` FROM `country` WHERE `name` = ''
+[Wednesday, 30th October 2013 16:37:19] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`) VALUES(23,'T3','T3',STR_TO_DATE('', '%d/%m/%Y'),2,'Years','Female','2013-10-30 16:37:19','Bull')
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of deformity with name as Other
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `deformity` WHERE `name` = 'Other'
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query INSERT INTO `cow_deformity`(`cow_id`,`deformity_id`,`date_added`,`specification`) VALUES(29,6,'2013-10-30 16:37:19','Other')
+[Wednesday, 30th October 2013 16:37:20] [registration.php] Registering the new cow (T4) in the database
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of country with name as 
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `country` WHERE `name` = ''
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`) VALUES(23,'T4','T4',STR_TO_DATE('', '%d/%m/%Y'),5,'Weeks','Female','2013-10-30 16:37:20','Bull')
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of breed with name as Simmental
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `breed` WHERE `name` = 'Simmental'
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES(30,5,'2013-10-30 16:37:20')
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of deformity with name as Blind
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `deformity` WHERE `name` = 'Blind'
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query INSERT INTO `cow_deformity`(`cow_id`,`deformity_id`,`date_added`) VALUES(30,1,'2013-10-30 16:37:20')
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of deformity with name as Abnormal teat number
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `deformity` WHERE `name` = 'Abnormal teat number'
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query INSERT INTO `cow_deformity`(`cow_id`,`deformity_id`,`date_added`) VALUES(30,3,'2013-10-30 16:37:20')
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of cow with ear tag number as T3
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'T3' AND `farmer_id` = 23
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 23
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 23
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of cow with ear tag number as T4
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'T4' AND `farmer_id` = 23
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 23
+[Wednesday, 30th October 2013 16:37:20] [general.php] Getting id of cow with ear tag number as T3
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'T3' AND `farmer_id` = 23
+[Wednesday, 30th October 2013 16:37:20] [database.php] running query UPDATE `cow` SET `dam_id` = 29 WHERE `id` = 30
+[Wednesday, 30th October 2013 16:37:20] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 16:49:13] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 16:49:13] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 16:49:13] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:49:13] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:49:13] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:49:13] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:49:13] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:49:13] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:49:13] [general.php] Starting General
+[Wednesday, 30th October 2013 16:49:13] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:49:13] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:49:13] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:49:13] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:49:13] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:49:13] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:49:13] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 16:49:13] [registration.php] Registering the new farmer (Jason rogena agwata) in the database
+[Wednesday, 30th October 2013 16:49:13] [general.php] Getting id of Extension Personnel with name as Ext
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Ext'
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query INSERT INTO `extension_personnel`(`name`,`date_added`) VALUES ('Ext','2013-10-30 16:49:13')
+[Wednesday, 30th October 2013 16:49:13] [general.php] Created a new Extension Personnel record with the name Ext and id as 10
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Jason rogena agwata','0715023802','','',10,'','2013-10-30 16:49:13')
+[Wednesday, 30th October 2013 16:49:13] [registration.php] Registering the new cow (Makena) in the database
+[Wednesday, 30th October 2013 16:49:13] [general.php] Getting id of country with name as 
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query SELECT `id` FROM `country` WHERE `name` = ''
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`) VALUES(24,'Rosy','Makena',STR_TO_DATE('', '%d/%m/%Y'),2,'Years','Female','2013-10-30 16:49:13','Bull')
+[Wednesday, 30th October 2013 16:49:13] [general.php] Getting id of breed with name as Ayrshire
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query SELECT `id` FROM `breed` WHERE `name` = 'Ayrshire'
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES(31,1,'2013-10-30 16:49:13')
+[Wednesday, 30th October 2013 16:49:13] [general.php] Getting id of breed with name as Aberdeen Angus
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query SELECT `id` FROM `breed` WHERE `name` = 'Aberdeen Angus'
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES(31,4,'2013-10-30 16:49:13')
+[Wednesday, 30th October 2013 16:49:13] [general.php] Getting id of deformity with name as Blind
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query SELECT `id` FROM `deformity` WHERE `name` = 'Blind'
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query INSERT INTO `cow_deformity`(`cow_id`,`deformity_id`,`date_added`) VALUES(31,1,'2013-10-30 16:49:13')
+[Wednesday, 30th October 2013 16:49:13] [general.php] Getting id of cow with ear tag number as Makena
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'Makena' AND `farmer_id` = 24
+[Wednesday, 30th October 2013 16:49:13] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 24
+[Wednesday, 30th October 2013 16:49:13] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 30th October 2013 16:49:13] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 24
+[Wednesday, 30th October 2013 16:49:13] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 16:59:53] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 16:59:53] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 16:59:53] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:59:53] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:59:53] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:59:53] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:59:53] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:59:53] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:59:53] [general.php] Starting General
+[Wednesday, 30th October 2013 16:59:53] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:59:53] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:59:53] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 16:59:53] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 16:59:53] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 16:59:53] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 16:59:53] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 16:59:53] [registration.php] Registering the new farmer (Emily rogena) in the database
+[Wednesday, 30th October 2013 16:59:53] [general.php] Getting id of Extension Personnel with name as Jason rogena
+[Wednesday, 30th October 2013 16:59:53] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Jason rogena'
+[Wednesday, 30th October 2013 16:59:53] [database.php] running query INSERT INTO `extension_personnel`(`name`,`date_added`) VALUES ('Jason rogena','2013-10-30 16:59:53')
+[Wednesday, 30th October 2013 16:59:53] [general.php] Created a new Extension Personnel record with the name Jason rogena and id as 11
+[Wednesday, 30th October 2013 16:59:53] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Emily rogena','0721674647','','',11,'','2013-10-30 16:59:53')
+[Wednesday, 30th October 2013 16:59:53] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 17:01:14] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 17:01:14] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 17:01:14] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:01:14] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:01:14] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 17:01:14] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:01:14] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:01:14] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 17:01:14] [general.php] Starting General
+[Wednesday, 30th October 2013 17:01:14] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:01:14] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:01:14] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 17:01:14] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:01:14] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:01:14] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 17:01:14] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 17:01:14] [registration.php] Registering the new farmer (Julius) in the database
+[Wednesday, 30th October 2013 17:01:14] [general.php] Getting id of Extension Personnel with name as Jason rogena
+[Wednesday, 30th October 2013 17:01:14] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Jason rogena'
+[Wednesday, 30th October 2013 17:01:14] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Julius','0725805247','','',11,'','2013-10-30 17:01:14')
+[Wednesday, 30th October 2013 17:01:14] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 17:02:10] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 17:02:10] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 17:02:10] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:02:10] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:02:10] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 17:02:10] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:02:10] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:02:10] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 17:02:10] [general.php] Starting General
+[Wednesday, 30th October 2013 17:02:10] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:02:10] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:02:10] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 17:02:10] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:02:10] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:02:10] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 17:02:10] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 17:02:10] [registration.php] Registering the new farmer (Sam) in the database
+[Wednesday, 30th October 2013 17:02:10] [general.php] Getting id of Extension Personnel with name as Jas
+[Wednesday, 30th October 2013 17:02:10] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Jas'
+[Wednesday, 30th October 2013 17:02:10] [database.php] running query INSERT INTO `extension_personnel`(`name`,`date_added`) VALUES ('Jas','2013-10-30 17:02:10')
+[Wednesday, 30th October 2013 17:02:10] [general.php] Created a new Extension Personnel record with the name Jas and id as 12
+[Wednesday, 30th October 2013 17:02:10] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Sam','0741','','',12,'','2013-10-30 17:02:10')
+[Wednesday, 30th October 2013 17:02:10] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 17:17:10] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 17:17:11] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 17:17:11] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:17:11] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:17:11] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 17:17:11] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:17:11] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:17:11] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 17:17:11] [general.php] Starting General
+[Wednesday, 30th October 2013 17:17:11] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:17:11] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:17:11] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 17:17:11] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:17:11] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:17:11] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 17:17:11] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 17:17:11] [registration.php] Registering the new farmer (Tot) in the database
+[Wednesday, 30th October 2013 17:17:11] [general.php] Getting id of Extension Personnel with name as Ron
+[Wednesday, 30th October 2013 17:17:11] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Ron'
+[Wednesday, 30th October 2013 17:17:11] [database.php] running query INSERT INTO `extension_personnel`(`name`,`date_added`) VALUES ('Ron','2013-10-30 17:17:11')
+[Wednesday, 30th October 2013 17:17:11] [general.php] Created a new Extension Personnel record with the name Ron and id as 13
+[Wednesday, 30th October 2013 17:17:11] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Tot','5805855','','',13,'','2013-10-30 17:17:11')
+[Wednesday, 30th October 2013 17:17:11] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 30th October 2013 17:24:46] [registration.php] Starting RegistrationHandler
+[Wednesday, 30th October 2013 17:24:46] [registration.php] obtaining POST request
+[Wednesday, 30th October 2013 17:24:46] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:24:46] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:24:46] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 17:24:46] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:24:46] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:24:46] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 17:24:46] [general.php] Starting General
+[Wednesday, 30th October 2013 17:24:46] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:24:46] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:24:46] [database.php] Starting DatabaseHandler
+[Wednesday, 30th October 2013 17:24:46] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 30th October 2013 17:24:46] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 30th October 2013 17:24:46] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 30th October 2013 17:24:46] [registration.php] Initial registration for farmer
+[Wednesday, 30th October 2013 17:24:46] [registration.php] Registering the new farmer (Tip) in the database
+[Wednesday, 30th October 2013 17:24:46] [general.php] Getting id of Extension Personnel with name as Ij
+[Wednesday, 30th October 2013 17:24:46] [database.php] running query SELECT `id` FROM `extension_personnel` WHERE `name` = 'Ij'
+[Wednesday, 30th October 2013 17:24:46] [database.php] running query INSERT INTO `extension_personnel`(`name`,`date_added`) VALUES ('Ij','2013-10-30 17:24:46')
+[Wednesday, 30th October 2013 17:24:46] [general.php] Created a new Extension Personnel record with the name Ij and id as 14
+[Wednesday, 30th October 2013 17:24:46] [database.php] running query INSERT INTO `farmer`(name,`mobile_no`,`gps_longitude`,`gps_latitude`,`extension_personnel_id`,`sim_card_sn`,`date_added`) VALUES('Tip','0874558821','','',14,'','2013-10-30 17:24:46')
+[Wednesday, 30th October 2013 17:24:46] [registration.php] sending acknowledge_ok response cod back to client

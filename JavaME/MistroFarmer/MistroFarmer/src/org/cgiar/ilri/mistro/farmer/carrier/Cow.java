@@ -44,7 +44,9 @@ public class Cow {
         dateOfBirth = "";
         age = -1;
         ageType = "";
+        breeds = new String[0];
         sex = "";
+        deformities = new String[0];
         this.isNotDamOrSire = isNotDamOrSire;
         if (isNotDamOrSire)//LOL, brings StackOverflowError if you init sire object inside sire object
         {
@@ -200,16 +202,28 @@ public class Cow {
             jsonObject.put("age", age);
             jsonObject.put("ageType", ageType);
             JSONArray breedJsonArray = new JSONArray();
-            for (int i = 0; i < breeds.length; i++) {
-                breedJsonArray.put(i, breeds[i]);
+            if(breeds!=null){
+                for (int i = 0; i < breeds.length; i++) {
+                    breedJsonArray.put(i, breeds[i]);
+                }
+                jsonObject.put("breeds", breedJsonArray);
             }
-            jsonObject.put("breeds", breedJsonArray);
+            else{
+                jsonObject.put("breeds", new JSONArray());
+            }
+            
             jsonObject.put("sex", sex);
             JSONArray deformityJsonArray = new JSONArray();
-            for (int i = 0; i < deformities.length; i++) {
-                deformityJsonArray.put(i, deformities[i]);
+            if(deformities!=null){
+                for (int i = 0; i < deformities.length; i++) {
+                    deformityJsonArray.put(i, deformities[i]);
+                }
+                jsonObject.put("deformities", deformityJsonArray);
             }
-            jsonObject.put("deformities", deformityJsonArray);
+            else{
+                jsonObject.put("deformities", new JSONArray());
+            }
+            
             jsonObject.put("mode", ((mode == null) ? "" : mode));
             jsonObject.put("serviceType", ((serviceType == null) ? "" : serviceType));
             jsonObject.put("otherDeformity", ((otherDeformity == null) ? "" : otherDeformity));

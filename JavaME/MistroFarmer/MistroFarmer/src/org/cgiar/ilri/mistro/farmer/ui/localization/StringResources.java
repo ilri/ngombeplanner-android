@@ -419,4 +419,12 @@ public class StringResources {
         "Please specify the cow's extra deformity",
         ""
     };
+    public static final String[] error = {
+        "Error",
+        ""
+    };
+    public static final String[] quantity_type = {
+        "Quantity Type",
+        ""
+    };
 }

@@ -14,6 +14,8 @@ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.cgiar.ilri.mistro.farmer.ui.Screen;
 import org.cgiar.ilri.mistro.farmer.ui.localization.Locale;
 import org.cgiar.ilri.mistro.farmer.ui.localization.StringResources;
+import org.cgiar.ilri.mistro.farmer.utils.DataHandler;
+import org.cgiar.ilri.mistro.farmer.utils.ResponseListener;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,7 +27,7 @@ import org.cgiar.ilri.mistro.farmer.ui.localization.StringResources;
  *
  * @author jason
  */
-public class FarmerRegistrationScreen extends Form implements Screen{
+public class FarmerRegistrationScreen extends Form implements Screen, ResponseListener{
     
     private final Midlet midlet;
     private final int locale;
@@ -79,7 +81,7 @@ public class FarmerRegistrationScreen extends Form implements Screen{
                             firstCowScreen.start();
                         }
                         else {
-                            //TODO: send farmer details to server
+                            FarmerRegistrationScreen.this.farmer.syncWithServer(FarmerRegistrationScreen.this);
                         }
                     }
                 }
@@ -184,6 +186,10 @@ public class FarmerRegistrationScreen extends Form implements Screen{
         }
     }
     
+    public void confirmRegistration(String message){
+        System.out.println(message);
+    }
+    
     public void start() {
         this.show();
     }
@@ -192,6 +198,54 @@ public class FarmerRegistrationScreen extends Form implements Screen{
     }
 
     public void pause() {
+    }
+
+    public void responseGotten(Object source, String message) {
+        if(message.equals(DataHandler.ACKNOWLEDGE_OK)){
+            final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.successful_registration));
+            infoDialog.setDialogType(Dialog.TYPE_CONFIRMATION);
+            final Command placiboCommand = new Command("");
+            final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+            infoDialog.addCommand(placiboCommand);
+            infoDialog.addCommand(backCommand);
+            infoDialog.addCommandListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent evt) {
+                    if(evt.getCommand().equals(backCommand)){
+                        infoDialog.dispose();
+                        LoginScreen loginScreen = new LoginScreen(midlet, locale);
+                        loginScreen.start();
+                    }
+                }
+            });
+
+            Label text = new Label();
+            text.getStyle().setAlignment(CENTER);
+            infoDialog.addComponent(text);
+            text.setText(Locale.getStringInLocale(locale, StringResources.successful_registration_instructions));
+            infoDialog.show(100, 100, 11, 11, true);
+            
+        }
+        else{
+            final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.error));
+            infoDialog.setDialogType(Dialog.TYPE_ERROR);
+            final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+            infoDialog.addCommand(backCommand);
+            infoDialog.addCommandListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent evt) {
+                    if(evt.getCommand().equals(backCommand)){
+                        infoDialog.dispose();
+                    }
+                }
+            });
+
+            Label text = new Label();
+            text.getStyle().setAlignment(CENTER);
+            infoDialog.addComponent(text);
+            text.setText(Locale.getStringInLocale(locale, StringResources.something_went_wrong_try_again));
+            infoDialog.show(100, 100, 11, 11, true);
+        }
     }
     
 }

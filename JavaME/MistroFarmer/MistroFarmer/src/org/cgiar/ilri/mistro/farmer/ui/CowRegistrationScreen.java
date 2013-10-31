@@ -7,6 +7,7 @@ import com.sun.lwuit.Component;
 import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Label;
+import com.sun.lwuit.TextArea;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
@@ -24,12 +25,14 @@ import org.cgiar.ilri.mistro.farmer.ui.localization.ArrayResources;
 import org.cgiar.ilri.mistro.farmer.ui.localization.GeneralArrays;
 import org.cgiar.ilri.mistro.farmer.ui.localization.Locale;
 import org.cgiar.ilri.mistro.farmer.ui.localization.StringResources;
+import org.cgiar.ilri.mistro.farmer.utils.DataHandler;
+import org.cgiar.ilri.mistro.farmer.utils.ResponseListener;
 
 /**
  *
  * @author jason
  */
-public class CowRegistrationScreen extends Form implements Screen, ActionListener{
+public class CowRegistrationScreen extends Form implements Screen, ActionListener, ResponseListener{
 
     private final Midlet midlet;
     private final int locale;
@@ -114,10 +117,13 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
                 }
                 else if(evt.getCommand().equals(nextCommand)) {
                     if(validateInput()) {
-                        saveCowDetails();;
+                        saveCowDetails();
                         if(CowRegistrationScreen.this.cowIndex < (CowRegistrationScreen.this.cowNumber -1)) {
                             CowRegistrationScreen nextScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer, CowRegistrationScreen.this.cowIndex + 1, CowRegistrationScreen.this.cowNumber);
                             nextScreen.start();
+                        }
+                        else{
+                            CowRegistrationScreen.this.farmer.syncWithServer(CowRegistrationScreen.this);
                         }
                     }
                 }
@@ -701,6 +707,57 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
         else{
             component.getStyle().setBgColor(0xC0C0C0);
             component.setFocusable(false);
+        }
+    }
+
+    public void responseGotten(Object source, String message) {
+        if(message.equals(DataHandler.ACKNOWLEDGE_OK)){
+            final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.successful_registration));
+            infoDialog.setDialogType(Dialog.TYPE_CONFIRMATION);
+            final Command placiboCommand = new Command("");
+            final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+            infoDialog.addCommand(placiboCommand);
+            infoDialog.addCommand(backCommand);
+            infoDialog.addCommandListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent evt) {
+                    if(evt.getCommand().equals(backCommand)){
+                        infoDialog.dispose();
+                        LoginScreen loginScreen = new LoginScreen(midlet, locale);
+                        loginScreen.start();
+                    }
+                }
+            });
+
+            Label text = new Label();
+            text.getStyle().setAlignment(CENTER);
+            infoDialog.addComponent(text);
+            text.setText(Locale.getStringInLocale(locale, StringResources.successful_registration_instructions));
+            infoDialog.show(100, 100, 11, 11, true);
+            
+        }
+        else{
+            final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.error));
+            infoDialog.setDialogType(Dialog.TYPE_ERROR);
+            final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+            infoDialog.addCommand(backCommand);
+            infoDialog.addCommandListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent evt) {
+                    if(evt.getCommand().equals(backCommand)){
+                        infoDialog.dispose();
+                    }
+                }
+            });
+
+            TextArea text = new TextArea(1,20);
+            text.setFocusable(false);
+            text.setWidth(30);
+            text.setEditable(false);
+            text.getStyle().setAlignment(CENTER);
+            infoDialog.addComponent(text);
+            text.setText(Locale.getStringInLocale(locale, StringResources.something_went_wrong_try_again));
+            infoDialog.show(100, 100, 11, 11, true);
         }
     }
     

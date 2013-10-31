@@ -13577,3 +13577,4149 @@
 (
 )
 
+[Wednesday, 30th October 2013 14:45:11] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 14:45:11] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:45:11] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:45:11] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:45:11] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:45:11] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:45:11] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:45:11] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:45:11] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:46:26] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 14:46:26] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:46:26] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:46:26] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:46:26] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:46:26] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:46:26] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:46:26] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:46:26] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:48:47] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 14:48:47] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:48:47] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:48:47] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:48:47] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:48:47] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:48:47] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 14:48:47] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 14:48:47] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:45:45] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:45:45] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:45:45] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:45:45] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:45:45] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:45:45] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:45:45] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:45:45] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:45:45] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:47:14] [Array] 
+[Wednesday, 30th October 2013 15:47:14] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:47:14] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:47:14] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:47:14] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:47:14] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:47:14] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:47:14] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:47:14] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:47:14] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:47:51] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:47:51] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:47:51] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:47:51] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:47:51] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:47:51] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:47:52] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:47:52] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:47:52] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:47:52] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:39] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:51:39] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:51:39] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:39] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:39] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:39] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:39] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:39] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:39] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:39] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:47] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:51:47] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:51:47] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:47] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:47] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:47] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:47] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:47] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:47] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:47] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:49] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:51:49] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:51:49] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:49] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:49] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:49] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:49] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:49] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:49] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:49] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:50] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:51:50] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:51:50] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:50] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:50] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:50] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:50] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:50] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:50] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:50] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:51] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:51:51] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:51:51] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:51] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:51] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:51] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:51] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:51] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:51] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:51] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:52] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:51:52] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:51:52] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:52] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:52] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:52] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:52] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:52] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:51:52] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:51:52] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:53:08] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:53:08] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:53:08] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:53:08] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:53:08] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:53:08] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:53:08] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:53:08] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:53:08] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:53:08] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:53:46] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:53:46] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:53:46] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:53:46] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:53:46] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:53:46] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:53:46] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:53:46] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:53:46] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:53:46] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:56:31] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:56:31] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:56:31] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:56:31] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:56:31] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:56:31] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:56:31] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:56:31] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:56:31] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:56:31] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:56:36] [Array
+(
+)
+] 
+[Wednesday, 30th October 2013 15:56:36] [registration.php] json_decode returned: 
+[Wednesday, 30th October 2013 15:56:36] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:56:36] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:56:36] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:56:36] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:56:36] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:56:36] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:56:36] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:56:36] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:58:41] [Array
+(
+    [json] => {"simCardSN":"","longitude":"","extensionPersonnel":"A","cows":[],"mobileNumber":"22222","mode":"initialRegistration","fullName":"A","latitude":""}
+)
+] 
+[Wednesday, 30th October 2013 15:58:41] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => A
+    [cows] => Array
+        (
+        )
+
+    [mobileNumber] => 22222
+    [mode] => initialRegistration
+    [fullName] => A
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 15:58:41] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:58:41] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:58:41] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:58:41] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:58:41] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:58:41] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:58:41] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 15:58:41] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 15:58:41] [registration.php] returning time '2013-10-30 15:58:41' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 15:58:41] [general.php] returning time '2013-10-30 15:58:41' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 15:58:41] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'A'' are Array
+(
+)
+
+[Wednesday, 30th October 2013 15:58:41] [registration.php] New farmer's ID is 17
+[Wednesday, 30th October 2013 16:05:33] [Array
+(
+    [json] => {"simCardSN":"","longitude":"","extensionPersonnel":"Frank makau","cows":[],"mobileNumber":"0744112233","mode":"initialRegistration","fullName":"Jason gone","latitude":""}
+)
+] 
+[Wednesday, 30th October 2013 16:05:33] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Frank makau
+    [cows] => Array
+        (
+        )
+
+    [mobileNumber] => 0744112233
+    [mode] => initialRegistration
+    [fullName] => Jason gone
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 16:05:33] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:05:33] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:05:33] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:05:33] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:05:33] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:05:33] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:05:33] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:05:33] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:05:33] [registration.php] returning time '2013-10-30 16:05:33' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:05:33] [general.php] returning time '2013-10-30 16:05:33' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:05:33] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Frank makau'' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:05:33] [registration.php] New farmer's ID is 18
+[Wednesday, 30th October 2013 16:21:46] [Array
+(
+    [json] => {"simCardSN":"","longitude":"","extensionPersonnel":"Jasom","cows":[],"mobileNumber":"0733669966","mode":"initialRegistration","fullName":"Test1","latitude":""}
+)
+] 
+[Wednesday, 30th October 2013 16:21:46] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Jasom
+    [cows] => Array
+        (
+        )
+
+    [mobileNumber] => 0733669966
+    [mode] => initialRegistration
+    [fullName] => Test1
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 16:21:46] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:21:46] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:21:46] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:21:46] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:21:46] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:21:46] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:21:46] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:21:46] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:21:46] [registration.php] returning time '2013-10-30 16:21:46' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:21:46] [general.php] returning time '2013-10-30 16:21:46' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:21:46] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Jasom'' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:21:46] [registration.php] New farmer's ID is 19
+[Wednesday, 30th October 2013 16:34:16] [Array
+(
+    [json] => {"simCardSN":"","longitude":"","extensionPersonnel":"Rogue","cows":[{"name":"T1","serviceType":"Bull","dam":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","embryoNumber":"","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"dam","age":-1,"breeds":[],"deformities":[]},"earTagNumber":"T1","otherDeformity":"","ageType":"Days","mode":"adultCowRegistration","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"cow","sire":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","dateOfBirth":"","strawNumber":"","countryOfOrigin":"Ethiopia","sex":"Male","type":"sire","age":-1,"breeds":[],"deformities":[]},"age":-1,"breeds":[],"deformities":[]},{"name":"T2","serviceType":"Bull","dam":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","embryoNumber":"","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"dam","age":-1,"breeds":[],"deformities":[]},"earTagNumber":"T2","otherDeformity":"","ageType":"Days","mode":"adultCowRegistration","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"cow","sire":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","dateOfBirth":"","strawNumber":"","countryOfOrigin":"Ethiopia","sex":"Male","type":"sire","age":-1,"breeds":[],"deformities":[]},"age":-1,"breeds":[],"deformities":[]}],"mobileNumber":"0712558800","mode":"initialRegistration","fullName":"Test2","latitude":""}
+)
+] 
+[Wednesday, 30th October 2013 16:34:16] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Rogue
+    [cows] => Array
+        (
+            [0] => Array
+                (
+                    [name] => T1
+                    [serviceType] => Bull
+                    [dam] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [embryoNumber] => 
+                            [dateOfBirth] => 
+                            [countryOfOrigin] => 
+                            [sex] => Female
+                            [type] => dam
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [earTagNumber] => T1
+                    [otherDeformity] => 
+                    [ageType] => Days
+                    [mode] => adultCowRegistration
+                    [dateOfBirth] => 
+                    [countryOfOrigin] => 
+                    [sex] => Female
+                    [type] => cow
+                    [sire] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [dateOfBirth] => 
+                            [strawNumber] => 
+                            [countryOfOrigin] => Ethiopia
+                            [sex] => Male
+                            [type] => sire
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [age] => -1
+                    [breeds] => Array
+                        (
+                        )
+
+                    [deformities] => Array
+                        (
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [name] => T2
+                    [serviceType] => Bull
+                    [dam] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [embryoNumber] => 
+                            [dateOfBirth] => 
+                            [countryOfOrigin] => 
+                            [sex] => Female
+                            [type] => dam
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [earTagNumber] => T2
+                    [otherDeformity] => 
+                    [ageType] => Days
+                    [mode] => adultCowRegistration
+                    [dateOfBirth] => 
+                    [countryOfOrigin] => 
+                    [sex] => Female
+                    [type] => cow
+                    [sire] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [dateOfBirth] => 
+                            [strawNumber] => 
+                            [countryOfOrigin] => Ethiopia
+                            [sex] => Male
+                            [type] => sire
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [age] => -1
+                    [breeds] => Array
+                        (
+                        )
+
+                    [deformities] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [mobileNumber] => 0712558800
+    [mode] => initialRegistration
+    [fullName] => Test2
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 16:34:16] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:16] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:16] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:16] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:16] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:16] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:16] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:16] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:16] [registration.php] returning time '2013-10-30 16:34:16' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:34:16] [general.php] returning time '2013-10-30 16:34:16' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:34:16] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Rogue'' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:34:16] [registration.php] New farmer's ID is 20
+[Wednesday, 30th October 2013 16:34:16] [registration.php] returning time '2013-10-30 16:34:16' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:34:16] [database.php] results gotten from 'SELECT `id` FROM `country` WHERE `name` = ''' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:34:16] [registration.php] New cow's ID is 27
+[Wednesday, 30th October 2013 16:34:16] [registration.php] returning time '2013-10-30 16:34:16' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:34:16] [database.php] results gotten from 'SELECT `id` FROM `country` WHERE `name` = ''' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:34:17] [registration.php] New cow's ID is 28
+[Wednesday, 30th October 2013 16:34:17] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'T1' AND `farmer_id` = 20' are Array
+(
+    [0] => Array
+        (
+            [id] => 27
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:34:17] [general.php] ID of Cow T1 gotten as 27
+[Wednesday, 30th October 2013 16:34:17] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 20' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:34:17] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 20' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:34:17] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'T2' AND `farmer_id` = 20' are Array
+(
+    [0] => Array
+        (
+            [id] => 28
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:34:17] [general.php] ID of Cow T2 gotten as 28
+[Wednesday, 30th October 2013 16:34:17] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 20' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:34:17] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 20' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:34:29] [Array
+(
+    [json] => {"simCardSN":"","longitude":"","extensionPersonnel":"Rogue","cows":[{"name":"T1","serviceType":"Bull","dam":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","embryoNumber":"","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"dam","age":-1,"breeds":[],"deformities":[]},"earTagNumber":"T1","otherDeformity":"","ageType":"Days","mode":"adultCowRegistration","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"cow","sire":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","dateOfBirth":"","strawNumber":"","countryOfOrigin":"Ethiopia","sex":"Male","type":"sire","age":-1,"breeds":[],"deformities":[]},"age":-1,"breeds":[],"deformities":[]},{"name":"T2","serviceType":"Bull","dam":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","embryoNumber":"","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"dam","age":-1,"breeds":[],"deformities":[]},"earTagNumber":"T2","otherDeformity":"","ageType":"Days","mode":"adultCowRegistration","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"cow","sire":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","dateOfBirth":"","strawNumber":"","countryOfOrigin":"Ethiopia","sex":"Male","type":"sire","age":-1,"breeds":[],"deformities":[]},"age":-1,"breeds":[],"deformities":[]}],"mobileNumber":"0712558800","mode":"initialRegistration","fullName":"Test2","latitude":""}
+)
+] 
+[Wednesday, 30th October 2013 16:34:29] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Rogue
+    [cows] => Array
+        (
+            [0] => Array
+                (
+                    [name] => T1
+                    [serviceType] => Bull
+                    [dam] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [embryoNumber] => 
+                            [dateOfBirth] => 
+                            [countryOfOrigin] => 
+                            [sex] => Female
+                            [type] => dam
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [earTagNumber] => T1
+                    [otherDeformity] => 
+                    [ageType] => Days
+                    [mode] => adultCowRegistration
+                    [dateOfBirth] => 
+                    [countryOfOrigin] => 
+                    [sex] => Female
+                    [type] => cow
+                    [sire] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [dateOfBirth] => 
+                            [strawNumber] => 
+                            [countryOfOrigin] => Ethiopia
+                            [sex] => Male
+                            [type] => sire
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [age] => -1
+                    [breeds] => Array
+                        (
+                        )
+
+                    [deformities] => Array
+                        (
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [name] => T2
+                    [serviceType] => Bull
+                    [dam] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [embryoNumber] => 
+                            [dateOfBirth] => 
+                            [countryOfOrigin] => 
+                            [sex] => Female
+                            [type] => dam
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [earTagNumber] => T2
+                    [otherDeformity] => 
+                    [ageType] => Days
+                    [mode] => adultCowRegistration
+                    [dateOfBirth] => 
+                    [countryOfOrigin] => 
+                    [sex] => Female
+                    [type] => cow
+                    [sire] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [dateOfBirth] => 
+                            [strawNumber] => 
+                            [countryOfOrigin] => Ethiopia
+                            [sex] => Male
+                            [type] => sire
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [age] => -1
+                    [breeds] => Array
+                        (
+                        )
+
+                    [deformities] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [mobileNumber] => 0712558800
+    [mode] => initialRegistration
+    [fullName] => Test2
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 16:34:29] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:29] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:29] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:29] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:29] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:29] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:29] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:29] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:29] [registration.php] returning time '2013-10-30 16:34:29' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:34:29] [general.php] returning time '2013-10-30 16:34:29' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:34:29] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Rogue'' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:34:29] [general.php] ID of Extension Personnel Rogue gotten as 9
+[Wednesday, 30th October 2013 16:34:40] [Array
+(
+    [json] => {"simCardSN":"","longitude":"","extensionPersonnel":"Rogue","cows":[{"name":"T1","serviceType":"Bull","dam":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","embryoNumber":"","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"dam","age":-1,"breeds":[],"deformities":[]},"earTagNumber":"T1","otherDeformity":"","ageType":"Days","mode":"adultCowRegistration","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"cow","sire":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","dateOfBirth":"","strawNumber":"","countryOfOrigin":"Ethiopia","sex":"Male","type":"sire","age":-1,"breeds":[],"deformities":[]},"age":-1,"breeds":[],"deformities":[]},{"name":"T2","serviceType":"Bull","dam":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","embryoNumber":"","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"dam","age":-1,"breeds":[],"deformities":[]},"earTagNumber":"T2","otherDeformity":"","ageType":"Days","mode":"adultCowRegistration","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"cow","sire":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","dateOfBirth":"","strawNumber":"","countryOfOrigin":"Ethiopia","sex":"Male","type":"sire","age":-1,"breeds":[],"deformities":[]},"age":-1,"breeds":[],"deformities":[]}],"mobileNumber":"0712558800","mode":"initialRegistration","fullName":"Test2","latitude":""}
+)
+] 
+[Wednesday, 30th October 2013 16:34:40] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Rogue
+    [cows] => Array
+        (
+            [0] => Array
+                (
+                    [name] => T1
+                    [serviceType] => Bull
+                    [dam] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [embryoNumber] => 
+                            [dateOfBirth] => 
+                            [countryOfOrigin] => 
+                            [sex] => Female
+                            [type] => dam
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [earTagNumber] => T1
+                    [otherDeformity] => 
+                    [ageType] => Days
+                    [mode] => adultCowRegistration
+                    [dateOfBirth] => 
+                    [countryOfOrigin] => 
+                    [sex] => Female
+                    [type] => cow
+                    [sire] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [dateOfBirth] => 
+                            [strawNumber] => 
+                            [countryOfOrigin] => Ethiopia
+                            [sex] => Male
+                            [type] => sire
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [age] => -1
+                    [breeds] => Array
+                        (
+                        )
+
+                    [deformities] => Array
+                        (
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [name] => T2
+                    [serviceType] => Bull
+                    [dam] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [embryoNumber] => 
+                            [dateOfBirth] => 
+                            [countryOfOrigin] => 
+                            [sex] => Female
+                            [type] => dam
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [earTagNumber] => T2
+                    [otherDeformity] => 
+                    [ageType] => Days
+                    [mode] => adultCowRegistration
+                    [dateOfBirth] => 
+                    [countryOfOrigin] => 
+                    [sex] => Female
+                    [type] => cow
+                    [sire] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [dateOfBirth] => 
+                            [strawNumber] => 
+                            [countryOfOrigin] => Ethiopia
+                            [sex] => Male
+                            [type] => sire
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [age] => -1
+                    [breeds] => Array
+                        (
+                        )
+
+                    [deformities] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [mobileNumber] => 0712558800
+    [mode] => initialRegistration
+    [fullName] => Test2
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 16:34:40] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:40] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:40] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:40] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:40] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:40] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:40] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:34:40] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:34:40] [registration.php] returning time '2013-10-30 16:34:40' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:34:40] [general.php] returning time '2013-10-30 16:34:40' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:34:40] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Rogue'' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:34:40] [general.php] ID of Extension Personnel Rogue gotten as 9
+[Wednesday, 30th October 2013 16:37:19] [Array
+(
+    [json] => {"simCardSN":"","longitude":"","extensionPersonnel":"Rogue","cows":[{"name":"T3","serviceType":"Bull","dam":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","embryoNumber":"","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"dam","age":-1,"breeds":[],"deformities":[]},"earTagNumber":"T3","otherDeformity":"Other","ageType":"Years","mode":"adultCowRegistration","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"cow","sire":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","dateOfBirth":"","strawNumber":"","countryOfOrigin":"Ethiopia","sex":"Male","type":"sire","age":-1,"breeds":[],"deformities":[]},"age":2,"breeds":[],"deformities":["Other"]},{"name":"T4","serviceType":"Bull","dam":{"name":"T3","serviceType":"","earTagNumber":"T3","otherDeformity":"","ageType":"","mode":"","embryoNumber":"","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"dam","age":-1,"breeds":[],"deformities":[]},"earTagNumber":"T4","otherDeformity":"","ageType":"Weeks","mode":"adultCowRegistration","dateOfBirth":"","countryOfOrigin":"","sex":"Female","type":"cow","sire":{"name":"","serviceType":"","earTagNumber":"","otherDeformity":"","ageType":"","mode":"","dateOfBirth":"","strawNumber":"","countryOfOrigin":"Ethiopia","sex":"Male","type":"sire","age":-1,"breeds":[],"deformities":[]},"age":5,"breeds":["Simmental"],"deformities":["Blind","Abnormal teat number"]}],"mobileNumber":"0712558801","mode":"initialRegistration","fullName":"Testd","latitude":""}
+)
+] 
+[Wednesday, 30th October 2013 16:37:19] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Rogue
+    [cows] => Array
+        (
+            [0] => Array
+                (
+                    [name] => T3
+                    [serviceType] => Bull
+                    [dam] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [embryoNumber] => 
+                            [dateOfBirth] => 
+                            [countryOfOrigin] => 
+                            [sex] => Female
+                            [type] => dam
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [earTagNumber] => T3
+                    [otherDeformity] => Other
+                    [ageType] => Years
+                    [mode] => adultCowRegistration
+                    [dateOfBirth] => 
+                    [countryOfOrigin] => 
+                    [sex] => Female
+                    [type] => cow
+                    [sire] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [dateOfBirth] => 
+                            [strawNumber] => 
+                            [countryOfOrigin] => Ethiopia
+                            [sex] => Male
+                            [type] => sire
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [age] => 2
+                    [breeds] => Array
+                        (
+                        )
+
+                    [deformities] => Array
+                        (
+                            [0] => Other
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [name] => T4
+                    [serviceType] => Bull
+                    [dam] => Array
+                        (
+                            [name] => T3
+                            [serviceType] => 
+                            [earTagNumber] => T3
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [embryoNumber] => 
+                            [dateOfBirth] => 
+                            [countryOfOrigin] => 
+                            [sex] => Female
+                            [type] => dam
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [earTagNumber] => T4
+                    [otherDeformity] => 
+                    [ageType] => Weeks
+                    [mode] => adultCowRegistration
+                    [dateOfBirth] => 
+                    [countryOfOrigin] => 
+                    [sex] => Female
+                    [type] => cow
+                    [sire] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [dateOfBirth] => 
+                            [strawNumber] => 
+                            [countryOfOrigin] => Ethiopia
+                            [sex] => Male
+                            [type] => sire
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [age] => 5
+                    [breeds] => Array
+                        (
+                            [0] => Simmental
+                        )
+
+                    [deformities] => Array
+                        (
+                            [0] => Blind
+                            [1] => Abnormal teat number
+                        )
+
+                )
+
+        )
+
+    [mobileNumber] => 0712558801
+    [mode] => initialRegistration
+    [fullName] => Testd
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 16:37:19] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:37:19] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:37:19] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:37:19] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:37:19] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:37:19] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:37:19] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:37:19] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:37:19] [registration.php] returning time '2013-10-30 16:37:19' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:37:19] [general.php] returning time '2013-10-30 16:37:19' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:37:19] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Rogue'' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:37:19] [general.php] ID of Extension Personnel Rogue gotten as 9
+[Wednesday, 30th October 2013 16:37:19] [registration.php] New farmer's ID is 23
+[Wednesday, 30th October 2013 16:37:19] [registration.php] returning time '2013-10-30 16:37:19' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:37:19] [database.php] results gotten from 'SELECT `id` FROM `country` WHERE `name` = ''' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:37:20] [registration.php] New cow's ID is 29
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `deformity` WHERE `name` = 'Other'' are Array
+(
+    [0] => Array
+        (
+            [id] => 6
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:37:20] [general.php] ID of DeformityOther gotten as 6
+[Wednesday, 30th October 2013 16:37:20] [registration.php] returning time '2013-10-30 16:37:20' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `country` WHERE `name` = ''' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:37:20] [registration.php] New cow's ID is 30
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `breed` WHERE `name` = 'Simmental'' are Array
+(
+    [0] => Array
+        (
+            [id] => 5
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:37:20] [general.php] ID of BreedSimmental gotten as 5
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `deformity` WHERE `name` = 'Blind'' are Array
+(
+    [0] => Array
+        (
+            [id] => 1
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:37:20] [general.php] ID of DeformityBlind gotten as 1
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `deformity` WHERE `name` = 'Abnormal teat number'' are Array
+(
+    [0] => Array
+        (
+            [id] => 3
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:37:20] [general.php] ID of DeformityAbnormal teat number gotten as 3
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'T3' AND `farmer_id` = 23' are Array
+(
+    [0] => Array
+        (
+            [id] => 29
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:37:20] [general.php] ID of Cow T3 gotten as 29
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 23' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 23' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'T4' AND `farmer_id` = 23' are Array
+(
+    [0] => Array
+        (
+            [id] => 30
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:37:20] [general.php] ID of Cow T4 gotten as 30
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 23' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:37:20] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'T3' AND `farmer_id` = 23' are Array
+(
+    [0] => Array
+        (
+            [id] => 29
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:37:20] [general.php] ID of Cow T3 gotten as 29
+[Wednesday, 30th October 2013 16:49:13] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Ext
+    [cows] => Array
+        (
+            [0] => Array
+                (
+                    [name] => Rosy
+                    [serviceType] => Bull
+                    [dam] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [embryoNumber] => 
+                            [dateOfBirth] => 
+                            [countryOfOrigin] => 
+                            [sex] => Female
+                            [type] => dam
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [earTagNumber] => Makena
+                    [otherDeformity] => 
+                    [ageType] => Years
+                    [mode] => adultCowRegistration
+                    [dateOfBirth] => 
+                    [countryOfOrigin] => 
+                    [sex] => Female
+                    [type] => cow
+                    [sire] => Array
+                        (
+                            [name] => 
+                            [serviceType] => 
+                            [earTagNumber] => 
+                            [otherDeformity] => 
+                            [ageType] => 
+                            [mode] => 
+                            [dateOfBirth] => 
+                            [strawNumber] => 
+                            [countryOfOrigin] => Tanzania
+                            [sex] => Male
+                            [type] => sire
+                            [age] => -1
+                            [breeds] => Array
+                                (
+                                )
+
+                            [deformities] => Array
+                                (
+                                )
+
+                        )
+
+                    [age] => 2
+                    [breeds] => Array
+                        (
+                            [0] => Ayrshire
+                            [1] => Aberdeen Angus
+                        )
+
+                    [deformities] => Array
+                        (
+                            [0] => Blind
+                        )
+
+                )
+
+        )
+
+    [mobileNumber] => 0715023802
+    [mode] => initialRegistration
+    [fullName] => Jason rogena agwata
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 16:49:13] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:49:13] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:49:13] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:49:13] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:49:13] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:49:13] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:49:13] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:49:13] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:49:13] [registration.php] returning time '2013-10-30 16:49:13' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:49:13] [general.php] returning time '2013-10-30 16:49:13' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:49:13] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Ext'' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:49:13] [registration.php] New farmer's ID is 24
+[Wednesday, 30th October 2013 16:49:13] [registration.php] returning time '2013-10-30 16:49:13' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:49:13] [database.php] results gotten from 'SELECT `id` FROM `country` WHERE `name` = ''' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:49:13] [registration.php] New cow's ID is 31
+[Wednesday, 30th October 2013 16:49:13] [database.php] results gotten from 'SELECT `id` FROM `breed` WHERE `name` = 'Ayrshire'' are Array
+(
+    [0] => Array
+        (
+            [id] => 1
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:49:13] [general.php] ID of BreedAyrshire gotten as 1
+[Wednesday, 30th October 2013 16:49:13] [database.php] results gotten from 'SELECT `id` FROM `breed` WHERE `name` = 'Aberdeen Angus'' are Array
+(
+    [0] => Array
+        (
+            [id] => 4
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:49:13] [general.php] ID of BreedAberdeen Angus gotten as 4
+[Wednesday, 30th October 2013 16:49:13] [database.php] results gotten from 'SELECT `id` FROM `deformity` WHERE `name` = 'Blind'' are Array
+(
+    [0] => Array
+        (
+            [id] => 1
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:49:13] [general.php] ID of DeformityBlind gotten as 1
+[Wednesday, 30th October 2013 16:49:13] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'Makena' AND `farmer_id` = 24' are Array
+(
+    [0] => Array
+        (
+            [id] => 31
+        )
+
+)
+
+[Wednesday, 30th October 2013 16:49:13] [general.php] ID of Cow Makena gotten as 31
+[Wednesday, 30th October 2013 16:49:13] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 24' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:49:13] [database.php] results gotten from 'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 24' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:59:53] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Jason rogena
+    [cows] => Array
+        (
+        )
+
+    [mobileNumber] => 0721674647
+    [mode] => initialRegistration
+    [fullName] => Emily rogena
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 16:59:53] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:59:53] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:59:53] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:59:53] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:59:53] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:59:53] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:59:53] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 16:59:53] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 16:59:53] [registration.php] returning time '2013-10-30 16:59:53' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:59:53] [general.php] returning time '2013-10-30 16:59:53' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 16:59:53] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Jason rogena'' are Array
+(
+)
+
+[Wednesday, 30th October 2013 16:59:53] [registration.php] New farmer's ID is 25
+[Wednesday, 30th October 2013 17:01:14] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Jason rogena
+    [cows] => Array
+        (
+        )
+
+    [mobileNumber] => 0725805247
+    [mode] => initialRegistration
+    [fullName] => Julius
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 17:01:14] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:01:14] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:01:14] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:01:14] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:01:14] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:01:14] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:01:14] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:01:14] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:01:14] [registration.php] returning time '2013-10-30 17:01:14' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 17:01:14] [general.php] returning time '2013-10-30 17:01:14' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 17:01:14] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Jason rogena'' are Array
+(
+    [0] => Array
+        (
+            [id] => 11
+        )
+
+)
+
+[Wednesday, 30th October 2013 17:01:14] [general.php] ID of Extension Personnel Jason rogena gotten as 11
+[Wednesday, 30th October 2013 17:01:14] [registration.php] New farmer's ID is 26
+[Wednesday, 30th October 2013 17:02:10] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Jas
+    [cows] => Array
+        (
+        )
+
+    [mobileNumber] => 0741
+    [mode] => initialRegistration
+    [fullName] => Sam
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 17:02:10] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:02:10] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:02:10] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:02:10] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:02:10] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:02:10] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:02:10] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:02:10] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:02:10] [registration.php] returning time '2013-10-30 17:02:10' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 17:02:10] [general.php] returning time '2013-10-30 17:02:10' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 17:02:10] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Jas'' are Array
+(
+)
+
+[Wednesday, 30th October 2013 17:02:10] [registration.php] New farmer's ID is 27
+[Wednesday, 30th October 2013 17:17:11] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Ron
+    [cows] => Array
+        (
+        )
+
+    [mobileNumber] => 5805855
+    [mode] => initialRegistration
+    [fullName] => Tot
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 17:17:11] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:17:11] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:17:11] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:17:11] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:17:11] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:17:11] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:17:11] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:17:11] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:17:11] [registration.php] returning time '2013-10-30 17:17:11' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 17:17:11] [general.php] returning time '2013-10-30 17:17:11' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 17:17:11] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Ron'' are Array
+(
+)
+
+[Wednesday, 30th October 2013 17:17:11] [registration.php] New farmer's ID is 28
+[Wednesday, 30th October 2013 17:24:46] [registration.php] json_decode returned: Array
+(
+    [simCardSN] => 
+    [longitude] => 
+    [extensionPersonnel] => Ij
+    [cows] => Array
+        (
+        )
+
+    [mobileNumber] => 0874558821
+    [mode] => initialRegistration
+    [fullName] => Tip
+    [latitude] => 
+)
+
+[Wednesday, 30th October 2013 17:24:46] [registration.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:24:46] [registration.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:24:46] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:24:46] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:24:46] [general.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:24:46] [general.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:24:46] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Wednesday, 30th October 2013 17:24:46] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Wednesday, 30th October 2013 17:24:46] [registration.php] returning time '2013-10-30 17:24:46' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 17:24:46] [general.php] returning time '2013-10-30 17:24:46' using format 'Y-m-d H:i:s'
+[Wednesday, 30th October 2013 17:24:46] [database.php] results gotten from 'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Ij'' are Array
+(
+)
+
+[Wednesday, 30th October 2013 17:24:46] [registration.php] New farmer's ID is 29

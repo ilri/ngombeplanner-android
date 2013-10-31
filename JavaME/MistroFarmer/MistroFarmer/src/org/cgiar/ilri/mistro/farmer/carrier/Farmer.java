@@ -1,5 +1,8 @@
 package org.cgiar.ilri.mistro.farmer.carrier;
 
+import org.cgiar.ilri.mistro.farmer.ui.FarmerRegistrationScreen;
+import org.cgiar.ilri.mistro.farmer.utils.DataHandler;
+import org.cgiar.ilri.mistro.farmer.utils.ResponseListener;
 import org.json.me.JSONArray;
 import org.json.me.JSONException;
 import org.json.me.JSONObject;
@@ -147,8 +150,26 @@ public class Farmer {
         return  jsonObject;
     }
     
-    public void syncWithServer(){
-        JSONObject farmerJSONObject = getJsonObject();
+    public void syncWithServer(ResponseListener responseListener){
+        System.out.println(getJsonObject());
+        Thread thread = new Thread(new DataSender(getJsonObject(), responseListener));
+        thread.run();
+    }
+    
+    private class DataSender implements Runnable{
+        
+        private ResponseListener responseListener;
+        private JSONObject farmerJSONObject;
+        
+        public DataSender(JSONObject farmerJSONObject, ResponseListener responseListener) {
+            this.responseListener = responseListener;
+            this.farmerJSONObject = farmerJSONObject;
+        }
+        
+        public void run() {
+            String message = DataHandler.sendDataToServer(farmerJSONObject, DataHandler.FARMER_REGISTRATION_URL);
+            responseListener.responseGotten(Farmer.this, message);
+        }
         
     }
 }

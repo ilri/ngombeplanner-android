@@ -6,6 +6,11 @@
 
 package org.cgiar.ilri.mistro.farmer.utils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import javax.microedition.io.Connector;
+import javax.microedition.io.HttpConnection;
 import org.json.me.JSONObject;
 
 /**
@@ -35,7 +40,77 @@ public class DataHandler {
     public static final String SP_KEY_LOCALE = "locale";
     public static final String SP_KEY_MILK_QUANTITY_TYPE = "milkQuantityTYpe";
     
-    public static void sendDataToServer(JSONObject jSONObject){
-        
+    public static String sendDataToServer(JSONObject jSONObject, String appendedURL){
+        HttpConnection hc = null;
+        OutputStream out = null;
+        InputStream in = null;
+        try
+        {
+            hc = (HttpConnection) Connector.open(BASE_URL+appendedURL);
+            hc.setRequestMethod(HttpConnection.POST);
+            hc.setRequestProperty("User-Agent","Profile/MIDP-1.0 Confirguration/CLDC-1.0");
+            hc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            String outData = "json="+jSONObject.toString(); 
+            out = hc.openOutputStream();
+            out.write(outData.getBytes());
+            //out.flush();
+            /*in = hc.openInputStream();
+            int length = (int) hc.getLength();
+            byte[] inData = new byte[length];
+            in.read(inData);
+            String response = new String(inData); //response can either contain the name of the xml to be fetched or the errors
+            */
+            StringBuffer stringBuffer = new StringBuffer();
+            in = hc.openDataInputStream();
+            int chr;
+            while ((chr = in.read()) != -1)
+            {
+                stringBuffer.append((char) chr);
+            }
+            String response=stringBuffer.toString();
+            return response;
+
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            if(in!= null)
+            {
+                try
+                {
+                    in.close();
+                }
+                catch (IOException ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+            if(out != null)
+            {
+                try
+                {
+                    out.close();
+                }
+                catch (IOException ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+            if(hc != null)
+            {
+                try
+                {
+                    hc.close();
+                }
+                catch (IOException ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 }
