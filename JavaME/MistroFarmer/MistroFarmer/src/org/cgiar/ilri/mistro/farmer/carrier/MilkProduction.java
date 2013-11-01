@@ -26,7 +26,9 @@ public class MilkProduction {
     public MilkProduction(JSONObject jSONObject) {
         try {
             time = jSONObject.getString("time");
-            quantity = jSONObject.getInt("quantity");
+            if(jSONObject.getString("quantity")!=null && jSONObject.getString("quantity").trim().length() > 0){
+                quantity = Integer.parseInt(jSONObject.getString("quantity"));
+            }
             date = jSONObject.getString("date");
             quantityType = jSONObject.getString("quantity_type");
         } 

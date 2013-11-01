@@ -2702,3 +2702,265 @@
 [Thursday, 31st October 2013 15:50:33] [database.php] running query INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES(22,'Morning',10,'Litres',STR_TO_DATE('30/9/2013', '%d/%m/%Y'),'2013-10-31 15:50:33')
 [Thursday, 31st October 2013 15:50:33] [add_milk_production.php] returning response code 533783
 [Thursday, 31st October 2013 15:50:33] [add_milk_production.php] gracefully exiting
+[Friday, 1st November 2013 08:19:06] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 08:19:06] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 08:19:06] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:19:06] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:19:06] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 08:19:06] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:19:06] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:19:06] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 08:19:06] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 08:19:06] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 08:19:06] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 08:19:06] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 08:19:06] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 08:19:06] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 08:19:06] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 08:19:06] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 08:19:06] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 08:21:23] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 08:21:23] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 08:21:23] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:21:23] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:21:23] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 08:21:23] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:21:23] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:21:23] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 08:21:23] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 08:21:23] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 08:21:23] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 08:21:23] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 08:21:23] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 08:21:23] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 08:21:23] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 08:21:23] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 08:21:23] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 08:34:22] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 08:34:22] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 08:34:22] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:34:22] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:34:22] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 08:34:22] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:34:22] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:34:22] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 08:34:22] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 08:34:22] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 08:34:22] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 08:34:22] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 08:34:22] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 08:34:22] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 08:34:22] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 08:34:22] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 08:34:22] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 08:37:08] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 08:37:09] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 08:37:09] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:37:09] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:37:09] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 08:37:09] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:37:09] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:37:09] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 08:37:09] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 08:37:09] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 08:37:09] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 08:37:09] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 08:37:09] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 08:37:09] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 08:37:09] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 08:37:09] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 08:37:09] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 08:38:34] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 08:38:34] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 08:38:34] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:38:34] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:38:34] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 08:38:34] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:38:34] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:38:34] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 08:38:34] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 08:38:34] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 08:38:34] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 08:38:34] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 08:38:34] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 08:38:34] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 08:38:34] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 08:38:34] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 08:38:34] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 08:42:28] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 08:42:28] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 08:42:28] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:42:28] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:42:28] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 08:42:28] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:42:28] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:42:28] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 08:42:28] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 08:42:28] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 08:42:28] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 08:42:28] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 08:42:28] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 08:42:28] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 08:42:28] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 08:42:28] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 08:42:28] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 08:48:19] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 08:48:19] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 08:48:19] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:48:19] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:48:19] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 08:48:19] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 08:48:19] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 08:48:19] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 08:48:19] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 08:48:19] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 08:48:19] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 08:48:19] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 08:48:19] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 08:48:19] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 08:48:19] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 08:48:19] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 08:48:19] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 09:02:02] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 09:02:02] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 09:02:02] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:02:02] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:02:02] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 09:02:02] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:02:02] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:02:02] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 09:02:02] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 09:02:02] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 09:02:02] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 09:02:02] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 09:02:02] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 09:02:02] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 09:02:02] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 09:02:02] [database.php] running query SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 09:02:02] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 09:22:56] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 09:22:56] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 09:22:56] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:22:56] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:22:56] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 09:22:56] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:22:56] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:22:56] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 09:22:56] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 09:22:56] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 09:22:56] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 09:22:56] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 09:22:56] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 09:22:56] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 09:22:56] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 09:22:56] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 09:22:56] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 09:24:38] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 09:24:38] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 09:24:38] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:24:38] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:24:38] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 09:24:38] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:24:38] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:24:38] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 09:24:38] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 09:24:38] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 09:24:38] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 09:24:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 09:24:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 09:24:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 09:24:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 09:24:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 09:24:38] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 09:34:10] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 09:34:10] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 09:34:10] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:34:10] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:34:10] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 09:34:10] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:34:10] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:34:10] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 09:34:10] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 09:34:10] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 09:34:10] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 09:34:10] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 09:34:10] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 09:34:10] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 09:34:10] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 09:34:10] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 09:34:10] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 09:49:44] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 09:49:44] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 09:49:44] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:49:44] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:49:44] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 09:49:44] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:49:44] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:49:44] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 09:49:44] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 09:49:44] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 09:49:44] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 09:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 09:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 09:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 09:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 09:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 09:49:44] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 09:52:33] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 09:52:33] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 09:52:33] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:52:33] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:52:33] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 09:52:33] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 09:52:33] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 09:52:33] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 09:52:33] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 09:52:33] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 09:52:33] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 09:52:33] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 09:52:33] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 09:52:33] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 09:52:33] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 09:52:33] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 09:52:33] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 10:04:20] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 10:04:20] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 10:04:20] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 10:04:20] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 10:04:20] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 10:04:20] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 10:04:20] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 10:04:20] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 10:04:20] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '22222'
+[Friday, 1st November 2013 10:04:20] [authentication.php] the mobile number being used (22222) is authenticated for 'A'. Sending farmer's name back to client
+[Friday, 1st November 2013 10:04:20] [database.php] running query SELECT * FROM cow WHERE farmer_id = 17
+[Friday, 1st November 2013 10:04:20] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 10:08:59] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 10:08:59] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 10:08:59] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 10:08:59] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 10:08:59] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 10:08:59] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 10:08:59] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 10:08:59] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 10:08:59] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '22222'
+[Friday, 1st November 2013 10:08:59] [authentication.php] the mobile number being used (22222) is authenticated for 'A'. Sending farmer's name back to client
+[Friday, 1st November 2013 10:08:59] [database.php] running query SELECT * FROM cow WHERE farmer_id = 17
+[Friday, 1st November 2013 10:08:59] [authentication.php] gracefully exiting
+[Friday, 1st November 2013 10:09:18] [authentication.php] Starting Authenticator
+[Friday, 1st November 2013 10:09:18] [authentication.php] obtaining POST request
+[Friday, 1st November 2013 10:09:18] [authentication.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 10:09:18] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 10:09:18] [database.php] Starting DatabaseHandler
+[Friday, 1st November 2013 10:09:18] [database.php] getting settings from: ../../config/settings.ini
+[Friday, 1st November 2013 10:09:18] [database.php] getting response codes from: ../../config/response_codes.ini
+[Friday, 1st November 2013 10:09:18] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Friday, 1st November 2013 10:09:18] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Friday, 1st November 2013 10:09:18] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Friday, 1st November 2013 10:09:18] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Friday, 1st November 2013 10:09:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Friday, 1st November 2013 10:09:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Friday, 1st November 2013 10:09:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Friday, 1st November 2013 10:09:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Friday, 1st November 2013 10:09:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Friday, 1st November 2013 10:09:18] [authentication.php] gracefully exiting

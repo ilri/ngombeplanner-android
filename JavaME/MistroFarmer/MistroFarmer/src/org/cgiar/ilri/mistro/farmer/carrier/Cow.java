@@ -85,11 +85,14 @@ public class Cow {
             piggyBack = "";
             
             JSONArray milkProductionArray = cowJSONObject.getJSONArray("milk_production");
-            if(milkProductionArray!=null){
+            if(milkProductionArray!=null && sex.equals(SEX_FEMALE)){
                 milkProduction = new MilkProduction[milkProductionArray.length()];
                 for(int i = 0; i < milkProductionArray.length(); i++){
                     milkProduction[i] = new MilkProduction(milkProductionArray.getJSONObject(i));
                 }
+            }
+            else{
+                milkProduction = new MilkProduction[0];
             }
         } 
         catch (JSONException ex) {

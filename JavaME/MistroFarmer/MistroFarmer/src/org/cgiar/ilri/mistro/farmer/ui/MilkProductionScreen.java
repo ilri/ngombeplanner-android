@@ -88,8 +88,17 @@ public class MilkProductionScreen extends Form implements Screen, ActionListener
 
     public void actionPerformed(ActionEvent evt) {
         if(evt.getComponent().equals(addMilkProductionB)){
-            AddMilkProductionScreen addMilkProductionScreen = new AddMilkProductionScreen(midlet, locale, farmer);
-            addMilkProductionScreen.show();
+            if(farmer.getCows()!=null && farmer.getCows().length>0){
+                AddMilkProductionScreen addMilkProductionScreen = new AddMilkProductionScreen(midlet, locale, farmer);
+                addMilkProductionScreen.start();
+            }
+            
+        }
+        else if(evt.getComponent().equals(pastMilkProdutionB)){
+            if(farmer.getCows()!=null && farmer.getCows().length>0){
+                ProductionHistoryScreen historyScreen = new ProductionHistoryScreen(midlet, locale, farmer);
+                historyScreen.start();
+            }
         }
     }
     

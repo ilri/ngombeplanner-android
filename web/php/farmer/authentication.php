@@ -49,7 +49,7 @@ class Authenticator {
                             for ($index = 0; $index < count($cows); $index++) {
                                 $cow = $cows[$index];
                                 
-                                $query = "SELECT * FROM `milk_production` WHERE `cow_id` = {$cow['id']} ORDER BY id DESC";
+                                $query = "SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, \"%d/%l/%Y\") AS date FROM `milk_production` WHERE `cow_id` = {$cow['id']} ORDER BY id DESC";
                                 $milk_production = $this->database->runMySQLQuery($query, true);
                                 $cow['milk_production'] = $milk_production;
                                 

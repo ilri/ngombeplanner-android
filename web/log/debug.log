@@ -19997,3 +19997,3839 @@
 )
 
 [Thursday, 31st October 2013 15:50:33] [add_milk_production.php] returning time '2013-10-31 15:50:33' using format 'Y-m-d H:i:s'
+[Friday, 1st November 2013 08:19:06] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 08:19:06] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:19:06] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:19:06] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:19:06] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:19:06] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 08:19:06] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 08:19:06] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [cow_id] => 24
+            [time] => Evening
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:13:10
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [cow_id] => 24
+            [time] => Afternoon
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:12:35
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [cow_id] => 24
+            [time] => Morning
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:11:16
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+)
+
+[Friday, 1st November 2013 08:19:06] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:19:06] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:19:06] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 10
+            [date_added] => 2013-10-31 15:50:33
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [cow_id] => 22
+            [time] => Combined
+            [quantity] => 2
+            [date_added] => 2013-10-23 16:43:48
+            [date] => 2013-10-23
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 50
+            [date_added] => 2013-10-14 14:25:22
+            [date] => 2013-10-14
+            [quantity_type] => Litres
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 23
+            [date_added] => 2013-10-04 13:11:35
+            [date] => 2013-10-03
+            [quantity_type] => KGs
+        )
+
+)
+
+[Friday, 1st November 2013 08:19:06] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:21:23] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 08:21:23] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:21:23] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:21:23] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:21:23] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:21:23] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 08:21:23] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 08:21:23] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [cow_id] => 24
+            [time] => Evening
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:13:10
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [cow_id] => 24
+            [time] => Afternoon
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:12:35
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [cow_id] => 24
+            [time] => Morning
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:11:16
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+)
+
+[Friday, 1st November 2013 08:21:23] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:21:23] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:21:23] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 10
+            [date_added] => 2013-10-31 15:50:33
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [cow_id] => 22
+            [time] => Combined
+            [quantity] => 2
+            [date_added] => 2013-10-23 16:43:48
+            [date] => 2013-10-23
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 50
+            [date_added] => 2013-10-14 14:25:22
+            [date] => 2013-10-14
+            [quantity_type] => Litres
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 23
+            [date_added] => 2013-10-04 13:11:35
+            [date] => 2013-10-03
+            [quantity_type] => KGs
+        )
+
+)
+
+[Friday, 1st November 2013 08:21:23] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:34:22] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 08:34:22] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:34:22] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:34:22] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:34:22] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:34:22] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 08:34:22] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 08:34:22] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [cow_id] => 24
+            [time] => Evening
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:13:10
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [cow_id] => 24
+            [time] => Afternoon
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:12:35
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [cow_id] => 24
+            [time] => Morning
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:11:16
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+)
+
+[Friday, 1st November 2013 08:34:22] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:34:22] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:34:22] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 10
+            [date_added] => 2013-10-31 15:50:33
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [cow_id] => 22
+            [time] => Combined
+            [quantity] => 2
+            [date_added] => 2013-10-23 16:43:48
+            [date] => 2013-10-23
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 50
+            [date_added] => 2013-10-14 14:25:22
+            [date] => 2013-10-14
+            [quantity_type] => Litres
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 23
+            [date_added] => 2013-10-04 13:11:35
+            [date] => 2013-10-03
+            [quantity_type] => KGs
+        )
+
+)
+
+[Friday, 1st November 2013 08:34:22] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:37:09] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 08:37:09] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:37:09] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:37:09] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:37:09] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:37:09] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 08:37:09] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 08:37:09] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [cow_id] => 24
+            [time] => Evening
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:13:10
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [cow_id] => 24
+            [time] => Afternoon
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:12:35
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [cow_id] => 24
+            [time] => Morning
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:11:16
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+)
+
+[Friday, 1st November 2013 08:37:09] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:37:09] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:37:09] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 10
+            [date_added] => 2013-10-31 15:50:33
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [cow_id] => 22
+            [time] => Combined
+            [quantity] => 2
+            [date_added] => 2013-10-23 16:43:48
+            [date] => 2013-10-23
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 50
+            [date_added] => 2013-10-14 14:25:22
+            [date] => 2013-10-14
+            [quantity_type] => Litres
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 23
+            [date_added] => 2013-10-04 13:11:35
+            [date] => 2013-10-03
+            [quantity_type] => KGs
+        )
+
+)
+
+[Friday, 1st November 2013 08:37:09] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:38:34] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 08:38:34] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:38:34] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:38:34] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:38:34] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:38:34] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 08:38:34] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 08:38:34] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [cow_id] => 24
+            [time] => Evening
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:13:10
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [cow_id] => 24
+            [time] => Afternoon
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:12:35
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [cow_id] => 24
+            [time] => Morning
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:11:16
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+)
+
+[Friday, 1st November 2013 08:38:34] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:38:34] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:38:34] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 10
+            [date_added] => 2013-10-31 15:50:33
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [cow_id] => 22
+            [time] => Combined
+            [quantity] => 2
+            [date_added] => 2013-10-23 16:43:48
+            [date] => 2013-10-23
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 50
+            [date_added] => 2013-10-14 14:25:22
+            [date] => 2013-10-14
+            [quantity_type] => Litres
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 23
+            [date_added] => 2013-10-04 13:11:35
+            [date] => 2013-10-03
+            [quantity_type] => KGs
+        )
+
+)
+
+[Friday, 1st November 2013 08:38:34] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:42:28] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 08:42:28] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:42:28] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:42:28] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:42:28] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:42:28] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 08:42:28] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 08:42:28] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [cow_id] => 24
+            [time] => Evening
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:13:10
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [cow_id] => 24
+            [time] => Afternoon
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:12:35
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [cow_id] => 24
+            [time] => Morning
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:11:16
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+)
+
+[Friday, 1st November 2013 08:42:28] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:42:28] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:42:28] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 10
+            [date_added] => 2013-10-31 15:50:33
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [cow_id] => 22
+            [time] => Combined
+            [quantity] => 2
+            [date_added] => 2013-10-23 16:43:48
+            [date] => 2013-10-23
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 50
+            [date_added] => 2013-10-14 14:25:22
+            [date] => 2013-10-14
+            [quantity_type] => Litres
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 23
+            [date_added] => 2013-10-04 13:11:35
+            [date] => 2013-10-03
+            [quantity_type] => KGs
+        )
+
+)
+
+[Friday, 1st November 2013 08:42:28] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:48:19] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 08:48:19] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:48:19] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:48:19] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 08:48:19] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 08:48:19] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 08:48:19] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 08:48:19] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [cow_id] => 24
+            [time] => Evening
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:13:10
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [cow_id] => 24
+            [time] => Afternoon
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:12:35
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [cow_id] => 24
+            [time] => Morning
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:11:16
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+)
+
+[Friday, 1st November 2013 08:48:19] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:48:19] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 08:48:19] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 10
+            [date_added] => 2013-10-31 15:50:33
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [cow_id] => 22
+            [time] => Combined
+            [quantity] => 2
+            [date_added] => 2013-10-23 16:43:48
+            [date] => 2013-10-23
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 50
+            [date_added] => 2013-10-14 14:25:22
+            [date] => 2013-10-14
+            [quantity_type] => Litres
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 23
+            [date_added] => 2013-10-04 13:11:35
+            [date] => 2013-10-03
+            [quantity_type] => KGs
+        )
+
+)
+
+[Friday, 1st November 2013 08:48:19] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:02:02] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 09:02:02] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:02:02] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:02:02] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:02:02] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:02:02] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 09:02:02] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 09:02:02] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [cow_id] => 24
+            [time] => Evening
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:13:10
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [cow_id] => 24
+            [time] => Afternoon
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:12:35
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [cow_id] => 24
+            [time] => Morning
+            [quantity] => 20
+            [date_added] => 2013-10-31 15:11:16
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+)
+
+[Friday, 1st November 2013 09:02:02] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:02:02] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:02:02] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 10
+            [date_added] => 2013-10-31 15:50:33
+            [date] => 2013-09-30
+            [quantity_type] => Litres
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [cow_id] => 22
+            [time] => Combined
+            [quantity] => 2
+            [date_added] => 2013-10-23 16:43:48
+            [date] => 2013-10-23
+            [quantity_type] => Litres
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 50
+            [date_added] => 2013-10-14 14:25:22
+            [date] => 2013-10-14
+            [quantity_type] => Litres
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [cow_id] => 22
+            [time] => Morning
+            [quantity] => 23
+            [date_added] => 2013-10-04 13:11:35
+            [date] => 2013-10-03
+            [quantity_type] => KGs
+        )
+
+)
+
+[Friday, 1st November 2013 09:02:02] [database.php] results gotten from 'SELECT * FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:22:56] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 09:22:56] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:22:56] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:22:56] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:22:56] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:22:56] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 09:22:56] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 09:22:56] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [time] => Evening
+            [quantity] => 20
+            [quantity_type] => Litres
+            [DATE_FORMAT(date, "%d/%l%Y")] => 30/122013
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [time] => Afternoon
+            [quantity] => 20
+            [quantity_type] => Litres
+            [DATE_FORMAT(date, "%d/%l%Y")] => 30/122013
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [time] => Morning
+            [quantity] => 20
+            [quantity_type] => Litres
+            [DATE_FORMAT(date, "%d/%l%Y")] => 30/122013
+        )
+
+)
+
+[Friday, 1st November 2013 09:22:56] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:22:56] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:22:56] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [time] => Morning
+            [quantity] => 10
+            [quantity_type] => Litres
+            [DATE_FORMAT(date, "%d/%l%Y")] => 30/122013
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [time] => Combined
+            [quantity] => 2
+            [quantity_type] => Litres
+            [DATE_FORMAT(date, "%d/%l%Y")] => 23/122013
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [time] => Morning
+            [quantity] => 50
+            [quantity_type] => Litres
+            [DATE_FORMAT(date, "%d/%l%Y")] => 14/122013
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [time] => Morning
+            [quantity] => 23
+            [quantity_type] => KGs
+            [DATE_FORMAT(date, "%d/%l%Y")] => 03/122013
+        )
+
+)
+
+[Friday, 1st November 2013 09:22:56] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:24:38] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 09:24:38] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:24:38] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:24:38] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:24:38] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:24:38] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 09:24:38] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 09:24:38] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [time] => Evening
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/122013
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [time] => Afternoon
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/122013
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [time] => Morning
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/122013
+        )
+
+)
+
+[Friday, 1st November 2013 09:24:38] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:24:38] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:24:38] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [time] => Morning
+            [quantity] => 10
+            [quantity_type] => Litres
+            [date] => 30/122013
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [time] => Combined
+            [quantity] => 2
+            [quantity_type] => Litres
+            [date] => 23/122013
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [time] => Morning
+            [quantity] => 50
+            [quantity_type] => Litres
+            [date] => 14/122013
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [time] => Morning
+            [quantity] => 23
+            [quantity_type] => KGs
+            [date] => 03/122013
+        )
+
+)
+
+[Friday, 1st November 2013 09:24:38] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:34:10] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 09:34:10] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:34:10] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:34:10] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:34:10] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:34:10] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 09:34:10] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 09:34:10] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [time] => Evening
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/122013
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [time] => Afternoon
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/122013
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [time] => Morning
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/122013
+        )
+
+)
+
+[Friday, 1st November 2013 09:34:10] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:34:10] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:34:10] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [time] => Morning
+            [quantity] => 10
+            [quantity_type] => Litres
+            [date] => 30/122013
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [time] => Combined
+            [quantity] => 2
+            [quantity_type] => Litres
+            [date] => 23/122013
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [time] => Morning
+            [quantity] => 50
+            [quantity_type] => Litres
+            [date] => 14/122013
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [time] => Morning
+            [quantity] => 23
+            [quantity_type] => KGs
+            [date] => 03/122013
+        )
+
+)
+
+[Friday, 1st November 2013 09:34:10] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:49:44] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 09:49:44] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:49:44] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:49:44] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:49:44] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:49:44] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 09:49:44] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 09:49:44] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [time] => Evening
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [time] => Afternoon
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [time] => Morning
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+)
+
+[Friday, 1st November 2013 09:49:44] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:49:44] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:49:44] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [time] => Morning
+            [quantity] => 10
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [time] => Combined
+            [quantity] => 2
+            [quantity_type] => Litres
+            [date] => 23/12/2013
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [time] => Morning
+            [quantity] => 50
+            [quantity_type] => Litres
+            [date] => 14/12/2013
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [time] => Morning
+            [quantity] => 23
+            [quantity_type] => KGs
+            [date] => 03/12/2013
+        )
+
+)
+
+[Friday, 1st November 2013 09:49:44] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:52:33] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 09:52:33] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:52:33] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:52:33] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 09:52:33] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 09:52:33] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 09:52:33] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 09:52:33] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [time] => Evening
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [time] => Afternoon
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [time] => Morning
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+)
+
+[Friday, 1st November 2013 09:52:33] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:52:33] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 09:52:33] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [time] => Morning
+            [quantity] => 10
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [time] => Combined
+            [quantity] => 2
+            [quantity_type] => Litres
+            [date] => 23/12/2013
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [time] => Morning
+            [quantity] => 50
+            [quantity_type] => Litres
+            [date] => 14/12/2013
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [time] => Morning
+            [quantity] => 23
+            [quantity_type] => KGs
+            [date] => 03/12/2013
+        )
+
+)
+
+[Friday, 1st November 2013 09:52:33] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 10:04:20] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 22222
+)
+
+[Friday, 1st November 2013 10:04:20] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 10:04:20] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 10:04:20] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 10:04:20] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 10:04:20] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '22222'' are Array
+(
+    [0] => Array
+        (
+            [id] => 17
+            [name] => A
+            [mobile_no] => 22222
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-10-30 15:58:41
+            [extension_personnel_id] => 6
+            [sim_card_sn] => 
+        )
+
+)
+
+[Friday, 1st November 2013 10:04:20] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 17' are Array
+(
+)
+
+[Friday, 1st November 2013 10:08:59] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 22222
+)
+
+[Friday, 1st November 2013 10:08:59] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 10:08:59] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 10:08:59] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 10:08:59] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 10:08:59] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '22222'' are Array
+(
+    [0] => Array
+        (
+            [id] => 17
+            [name] => A
+            [mobile_no] => 22222
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-10-30 15:58:41
+            [extension_personnel_id] => 6
+            [sim_card_sn] => 
+        )
+
+)
+
+[Friday, 1st November 2013 10:08:59] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 17' are Array
+(
+)
+
+[Friday, 1st November 2013 10:09:18] [authentication.php] json_decode returned: Array
+(
+    [mobileNumber] => 0722838686
+)
+
+[Friday, 1st November 2013 10:09:18] [authentication.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 10:09:18] [authentication.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 10:09:18] [database.php] settings obtained: Array
+(
+    [db_name] => ilri_mistro
+    [mysql_creds] => Array
+        (
+            [username] => root
+            [password] => jason
+            [host] => localhost
+        )
+
+    [log_settings] => logs.ini
+    [response_codes] => response_codes.ini
+    [time_zone] => EAT
+)
+
+[Friday, 1st November 2013 10:09:18] [database.php] response codes are: Array
+(
+    [db_error] => 32243
+    [user_not_authenticated] => 43322
+    [sim_card_registered] => 83242
+    [acknowledge_ok] => 533783
+    [data_error] => 934342
+    [no_data] => 77732
+)
+
+[Friday, 1st November 2013 10:09:18] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [name] => Jason Rogena
+            [mobile_no] => 0722838686
+            [location_county] => 
+            [location_district] => 
+            [gps_longitude] => 
+            [gps_latitude] => 
+            [date_added] => 2013-09-16 12:01:26
+            [extension_personnel_id] => 5
+            [sim_card_sn] => 89254028071000359956
+        )
+
+)
+
+[Friday, 1st November 2013 10:09:18] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
+(
+    [0] => Array
+        (
+            [id] => 24
+            [farmer_id] => 16
+            [name] => Betty
+            [ear_tag_number] => nai-jas3
+            [date_of_birth] => 2013-03-16 00:00:00
+            [age] => 26
+            [age_type] => Weeks
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 23
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 14:33:26
+            [service_type] => AI
+            [country_id] => 60
+        )
+
+    [1] => Array
+        (
+            [id] => 25
+            [farmer_id] => 16
+            [name] => Calf3
+            [ear_tag_number] => nai-jas5
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 0
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 15:52:50
+            [service_type] => AI
+            [country_id] => 3
+        )
+
+    [2] => Array
+        (
+            [id] => 23
+            [farmer_id] => 16
+            [name] => Chris
+            [ear_tag_number] => nai-jas2
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 5
+            [age_type] => Weeks
+            [sex] => Male
+            [sire_id] => 
+            [dam_id] => 22
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [3] => Array
+        (
+            [id] => 22
+            [farmer_id] => 16
+            [name] => Rosy
+            [ear_tag_number] => nai-jas1
+            [date_of_birth] => 0000-00-00 00:00:00
+            [age] => 2
+            [age_type] => Years
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 12:01:26
+            [service_type] => Bull
+            [country_id] => 1
+        )
+
+    [4] => Array
+        (
+            [id] => 26
+            [farmer_id] => 16
+            [name] => Tesr
+            [ear_tag_number] => etd2
+            [date_of_birth] => 2013-09-16 00:00:00
+            [age] => 258
+            [age_type] => Days
+            [sex] => Female
+            [sire_id] => 
+            [dam_id] => 24
+            [straw_id] => 
+            [embryo_id] => 
+            [date_added] => 2013-09-16 17:03:12
+            [service_type] => AI
+            [country_id] => 195
+        )
+
+)
+
+[Friday, 1st November 2013 10:09:18] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 9
+            [time] => Evening
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+    [1] => Array
+        (
+            [id] => 8
+            [time] => Afternoon
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+    [2] => Array
+        (
+            [id] => 6
+            [time] => Morning
+            [quantity] => 20
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+)
+
+[Friday, 1st November 2013 10:09:18] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 10:09:18] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
+(
+)
+
+[Friday, 1st November 2013 10:09:18] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
+(
+    [0] => Array
+        (
+            [id] => 10
+            [time] => Morning
+            [quantity] => 10
+            [quantity_type] => Litres
+            [date] => 30/12/2013
+        )
+
+    [1] => Array
+        (
+            [id] => 5
+            [time] => Combined
+            [quantity] => 2
+            [quantity_type] => Litres
+            [date] => 23/12/2013
+        )
+
+    [2] => Array
+        (
+            [id] => 4
+            [time] => Morning
+            [quantity] => 50
+            [quantity_type] => Litres
+            [date] => 14/12/2013
+        )
+
+    [3] => Array
+        (
+            [id] => 3
+            [time] => Morning
+            [quantity] => 23
+            [quantity_type] => KGs
+            [date] => 03/12/2013
+        )
+
+)
+
+[Friday, 1st November 2013 10:09:18] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
+(
+)
+
