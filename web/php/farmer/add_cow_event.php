@@ -26,10 +26,17 @@ class CowEventHandler {
                 $this->general = new General();
 		
 		//get the cowID
-		$simCardSN = $this->jsonObject['simCardSN'];
-		$cowEarTagNumber = $this->jsonObject['cowEarTagNumber'];
+                $cowEarTagNumber = $this->jsonObject['cowEarTagNumber'];
 		$cowName = $this->jsonObject['cowName'];
-		$query = "SELECT `cow`.`id`,`cow`.`farmer_id` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` WHERE `farmer`.`sim_card_sn` = '{$simCardSN}' AND `cow`.`name` = '{$cowName}' AND `cow`.`ear_tag_number` = '{$cowEarTagNumber}'";
+                if(isset($this->jsonObject['simCardSN'])){
+                    $simCardSN = $this->jsonObject['simCardSN'];
+                    $query = "SELECT `cow`.`id`,`cow`.`farmer_id` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` WHERE `farmer`.`sim_card_sn` = '{$simCardSN}' AND `cow`.`name` = '{$cowName}' AND `cow`.`ear_tag_number` = '{$cowEarTagNumber}'";
+                }
+                else if(isset($this->jsonObject['mobileNo'])){
+                    $mobileNo = $this->jsonObject['mobileNo'];
+                    $query = "SELECT `cow`.`id`,`cow`.`farmer_id` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` WHERE `farmer`.`mobile_no` = '{$mobileNo}' AND `cow`.`name` = '{$cowName}' AND `cow`.`ear_tag_number` = '{$cowEarTagNumber}'";
+                }
+		
 		$result = $this->database->runMySQLQuery($query, true);
 		$cowID = $result[0]['id'];
                 $farmerID = $result[0]['farmer_id'];
@@ -45,21 +52,54 @@ class CowEventHandler {
                            " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$this->jsonObject['parentEvent']})";
                 }
                 else if($this->jsonObject['eventType'] == "Artificial Insemination") {
-                   $vetID = $this->general->getVetID($this->jsonObject['vetUsed'],true);
-                   $strawID = $this->general->getStrawID($this->jsonObject['strawNumber'], true);
-                   $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`straw_id`,`vet_id`)".
-                           " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$strawID},{$vetID})";
+                    /*
+                     * 1. check if ear_tag_number is null
+                     * 2. if eartagnumber is not null check if bull already exists 
+                     * 3. if bull does not exist insert bull into database
+                     */
+                   if(isset($this->jsonObject['strawNumber']) && $this->jsonObject['strawNumber']!== ""){
+                       $strawID = $this->general->getStrawID($this->jsonObject['strawNumber'], true);
+                   }
+                   else{
+                       $strawID = -1;
+                   }
+                   if(isset($this->jsonObject['vetUsed']) && $this->jsonObject['vetUsed'] !== ""){
+                       $vetID = $this->general->getVetID($this->jsonObject['vetUsed'],true);
+                   }
+                   else{
+                       $vetID = -1;
+                   }
+                       
+                       
+                   if(isset($this->jsonObject['bullEarTagNo']) && $this->jsonObject['bullEarTagNo'] !== ""){
+                       $this->logHandler->log(3, $this->TAG,"checking if bull in db");
+                       $bullID = $this->general->getCowID($farmerID,$this->jsonObject['bullEarTagNo']);
+                       if($bullID === -1){
+                           $query = "INSERT INTO cow(`name`,`ear_tag_number`,`farmer_id`,`sex`) VALUES('{$this->jsonObject['bullName']}','{$this->jsonObject['bullEarTagNo']}',{$farmerID},'Male')";
+                           $result = $this->database->runMySQLQuery($query, true);
+                           $bullID = $this->database->getLastInsertID();
+                           
+                       }
+                       if($strawID !== -1){
+                           $query = "UPDATE `straw` SET `sire_id` = $bullID WHERE id = $strawID";
+                           $this->database->runMySQLQuery($query, false);
+                       }
+                   }
+                   if($strawID === -1) $strawID = "NULL";
+                   if($vetID === -1) $vetID = "NULL";
+                   $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`event_date`,`date_added`,`straw_id`,`vet_id`)".
+                           " VALUES({$cowID},{$eventTypeID},STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$strawID},{$vetID})";
                 }
                 else if($this->jsonObject['eventType'] == "Bull Servicing") {
                    $bullID = $this->general->getCowID($farmerID,$this->jsonObject['bullEarTagNo']);
-                   if($bullID != -1) {
-                      $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`bull_id`,`servicing_days`)".
-                           " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',$bullID,{$this->jsonObject['noOfServicingDays']})";
+                   //check if the bull already exists
+                   if($bullID === -1) {
+                      $query = "INSERT INTO cow(`name`,`ear_tag_number`,`farmer_id`,`sex`) VALUES('{$this->jsonObject['bullName']}','{$this->jsonObject['bullEarTagNo']}',{$farmerID},'Male')";
+                      $result = $this->database->runMySQLQuery($query, true);
+                      $bullID = $this->database->getLastInsertID();
                    }
-                   else {
-                      $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`servicing_days`)".
-                           " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$this->jsonObject['noOfServicingDays']})";
-                   }
+                   $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`event_date`,`date_added`,`bull_id`)".
+                           " VALUES({$cowID},{$eventTypeID},STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',$bullID)";
                    
                 }
                 else if($this->jsonObject['eventType'] == "Death") {

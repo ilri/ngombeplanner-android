@@ -25,6 +25,10 @@ public class ArrayResources {
         {"Bull","Artificial Insemination","Embryo Transfer"},
         {"","",""}
     };
+    public static final String[][] main_service_types = {
+        {"Bull Servicing","Artificial Insemination"},
+        {"",""}
+    };
     public static final String[][] milking_times = {
         {"Morning","Afternoon","Evening","Combined"},
         {"","","",""}

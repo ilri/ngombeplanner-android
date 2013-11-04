@@ -1,6 +1,5 @@
 package org.cgiar.ilri.mistro.farmer.ui;
 
-import com.sun.lwuit.CheckBox;
 import com.sun.lwuit.ComboBox;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
@@ -11,10 +10,7 @@ import com.sun.lwuit.TextArea;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
-import com.sun.lwuit.events.SelectionListener;
 import com.sun.lwuit.layouts.BoxLayout;
-import com.sun.lwuit.spinner.Spinner;
-import java.util.Date;
 import java.util.Vector;
 import org.cgiar.ilri.mistro.farmer.Midlet;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
@@ -305,7 +301,7 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
         
         if(earTagNumberTF.getText()== null || earTagNumberTF.getText().trim().length()==0){
             earTagNumberTF.requestFocus();
-            text.setText(Locale.getStringInLocale(locale, StringResources.enter_ear_tag_number));
+            text.setText(Locale.getStringInLocale(locale, StringResources.enter_bull_etn_or_straw_no));
             infoDialog.show(100, 100, 11, 11, true);
             return false;
         }

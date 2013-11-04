@@ -67,6 +67,7 @@ public class Cow {
             earTagNumber = cowJSONObject.getString("ear_tag_number");
             dateOfBirth = cowJSONObject.getString("date_of_birth");
             if(cowJSONObject.getString("age")!=null && cowJSONObject.getString("age").trim().length() > 0)
+                System.out.println(cowJSONObject.getString("age"));
                 age = Integer.parseInt(cowJSONObject.getString("age"));
             ageType = cowJSONObject.getString("age_type");
             breeds = new String[0];

@@ -30,6 +30,7 @@ public class MainMenuScreen extends Form implements Screen, ActionListener{
     
     private Command backCommand;
     private Button milkProductionB;
+    private Button fertilityB;
     private Button eventsB;
     private BoxLayout parentBoxLayout;
     
@@ -56,11 +57,18 @@ public class MainMenuScreen extends Form implements Screen, ActionListener{
         });
         
         milkProductionB = new Button(Locale.getStringInLocale(locale, StringResources.milk_production));
-        milkProductionB.getStyle().setMargin(100, 10, 0, 0);
-        milkProductionB.getSelectedStyle().setMargin(100, 10, 0, 0);
+        milkProductionB.getStyle().setMargin(80, 10, 0, 0);
+        milkProductionB.getSelectedStyle().setMargin(80, 10, 0, 0);
         setButtonStyle(milkProductionB);
         milkProductionB.addActionListener(this);
         this.addComponent(milkProductionB);
+        
+        fertilityB = new Button(Locale.getStringInLocale(locale, StringResources.fertility));
+        fertilityB.getStyle().setMargin(10, 10, 0, 0);
+        fertilityB.getSelectedStyle().setMargin(10, 10, 0, 0);
+        setButtonStyle(fertilityB);
+        fertilityB.addActionListener(this);
+        this.addComponent(fertilityB);
         
         eventsB = new Button(Locale.getStringInLocale(locale, StringResources.events));
         eventsB.getStyle().setMargin(10, 10, 0, 0);
@@ -92,6 +100,10 @@ public class MainMenuScreen extends Form implements Screen, ActionListener{
         if(evt.getComponent().equals(milkProductionB)){
             MilkProductionScreen milkProductionScreen = new MilkProductionScreen(midlet, locale,farmer);
             milkProductionScreen.start();
+        }
+        else if(evt.getComponent().equals(fertilityB)){
+            FertilityScreen fertilityScreen = new FertilityScreen(midlet, locale, farmer);
+            fertilityScreen.start();
         }
     }
     

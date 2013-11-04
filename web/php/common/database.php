@@ -94,5 +94,9 @@ class DatabaseHandler {
          return $resultArray;
       }
    }
+   
+   public function getLastInsertID(){
+       return mysql_insert_id();
+   }
 }
 ?>

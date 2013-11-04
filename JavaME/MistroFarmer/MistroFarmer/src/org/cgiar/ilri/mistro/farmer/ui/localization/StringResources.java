@@ -431,4 +431,28 @@ public class StringResources {
         "Success",
         ""
     };
+    public static final String[] fertility = {
+        "Fertility",
+        ""
+    };
+    
+    public static final String[] servicing = {
+        "Servicing",
+        ""
+    };
+    
+    public static final String[] calving = {
+        "Calving",
+        ""
+    };
+    
+    public static final String[] bull_name ={
+        "Bull name",
+        ""
+    };
+    
+    public static final String[] enter_bull_etn_or_straw_no={
+        "Please enter the bull's ear tag number or the straw number",
+        ""
+    };
 }
