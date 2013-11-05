@@ -34,7 +34,7 @@ import org.json.me.JSONObject;
  *
  * @author jason
  */
-public class ServicingScreen extends Form implements Screen, ActionListener{
+public class AddServicingScreen extends Form implements Screen, ActionListener{
     private final Midlet midlet;
     private final int locale;
     private final Farmer farmer;
@@ -60,7 +60,7 @@ public class ServicingScreen extends Form implements Screen, ActionListener{
     private Label strawNumberL;
     private TextField strawNumberTF;
     
-    public ServicingScreen(Midlet midlet, int locale, Farmer farmer) {
+    public AddServicingScreen(Midlet midlet, int locale, Farmer farmer) {
         super(Locale.getStringInLocale(locale, StringResources.servicing));
         
         this.midlet = midlet;
@@ -80,7 +80,7 @@ public class ServicingScreen extends Form implements Screen, ActionListener{
 
             public void actionPerformed(ActionEvent evt) {
                 if(evt.getCommand().equals(backCommand)) {
-                    FertilityScreen fertilityScreen = new FertilityScreen(ServicingScreen.this.midlet, ServicingScreen.this.locale, ServicingScreen.this.farmer);
+                    FertilityScreen fertilityScreen = new FertilityScreen(AddServicingScreen.this.midlet, AddServicingScreen.this.locale, AddServicingScreen.this.farmer);
                     fertilityScreen.start();
                 }
                 else if(evt.getCommand().equals(okayCommand)){
@@ -89,7 +89,7 @@ public class ServicingScreen extends Form implements Screen, ActionListener{
                         try {
                             Cow selectedCow = (Cow)validCows.elementAt(cowCB.getSelectedIndex());
                             String[] sevicingTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.main_service_types);
-                            jSONObject.put("mobileNo", ServicingScreen.this.farmer.getMobileNumber());
+                            jSONObject.put("mobileNo", AddServicingScreen.this.farmer.getMobileNumber());
                             jSONObject.put("cowEarTagNumber", selectedCow.getEarTagNumber());
                             jSONObject.put("cowName", selectedCow.getName());
                             Date date = (Date) dateS.getValue();
@@ -330,7 +330,35 @@ public class ServicingScreen extends Form implements Screen, ActionListener{
     }
     
     private void reactToServerResponse(String response){
+        final Dialog infoDialog = new Dialog();
+        infoDialog.setDialogType(Dialog.TYPE_INFO);
+        final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.back));
+        infoDialog.addCommand(backCommand);
+        infoDialog.addCommandListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                if(evt.getCommand().equals(backCommand)){
+                    infoDialog.dispose();
+                }
+            }
+        });
+        Label text = new Label();
+        text.getStyle().setAlignment(CENTER);
+        infoDialog.addComponent(text);
         
+        if(response == null){
+            text.setText(Locale.getStringInLocale(locale, StringResources.problem_connecting_to_server));
+            infoDialog.show(100, 100, 11, 11, true);
+        }
+        else if(response.equals(DataHandler.ACKNOWLEDGE_OK)){
+            text.setText(Locale.getStringInLocale(locale, StringResources.information_successfully_sent_to_server));
+            infoDialog.show(100, 100, 11, 11, true);
+            FertilityScreen fertilityScreen = new FertilityScreen(midlet, locale, farmer);
+            fertilityScreen.start();
+        }
+        else{
+            text.setText(Locale.getStringInLocale(locale, StringResources.problem_in_data_sent_en));
+            infoDialog.show(100, 100, 11, 11, true);
+        }
     }
     
     private class EventHandler implements Runnable{

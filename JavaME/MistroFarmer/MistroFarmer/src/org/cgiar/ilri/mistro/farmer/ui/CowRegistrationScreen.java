@@ -77,7 +77,14 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
     private Label embryoNumberL;
     private TextField embryoNumberTF;
     public CowRegistrationScreen(Midlet midlet, int locale, Farmer farmer, int cowIndex, int cowNumber) {
-        super(Locale.getStringInLocale(locale, StringResources.cow_registration_wth_indx)+String.valueOf(cowIndex+1));
+        super();
+        Cow thisCow = farmer.getCow(cowIndex);
+        if(thisCow.getMode()!= null && thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){
+            this.setTitle(Locale.getStringInLocale(locale,StringResources.calf_registration));
+        }
+        else{
+            this.setTitle(Locale.getStringInLocale(locale, StringResources.cow_registration_wth_indx)+String.valueOf(cowIndex+1));
+        }
         
         this.midlet = midlet;
         this.locale = locale;
@@ -101,26 +108,46 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
 
             public void actionPerformed(ActionEvent evt) {  
                 if(evt.getCommand().equals(previousCommand)) {
-                    saveCowDetails();
-                    if(CowRegistrationScreen.this.cowIndex>0){
-                        CowRegistrationScreen previousScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer, CowRegistrationScreen.this.cowIndex - 1, CowRegistrationScreen.this.cowNumber);
-                        previousScreen.start();
+                    if(CowRegistrationScreen.this.farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)){
+                        saveCowDetails();
+                        if(CowRegistrationScreen.this.cowIndex>0){
+                            CowRegistrationScreen previousScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer, CowRegistrationScreen.this.cowIndex - 1, CowRegistrationScreen.this.cowNumber);
+                            previousScreen.start();
+                        }
+                        else {
+                            FarmerRegistrationScreen farmerRegistrationScreen = new FarmerRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer);
+                            farmerRegistrationScreen.start();
+                        }   
                     }
-                    else {
-                        FarmerRegistrationScreen farmerRegistrationScreen = new FarmerRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer);
-                        farmerRegistrationScreen.start();
+                    else if(CowRegistrationScreen.this.farmer.getMode().equals(Farmer.MODE_NEW_COW_REGISTRATION)){
+                        Cow thisCow = CowRegistrationScreen.this.farmer.getCow(CowRegistrationScreen.this.cowIndex);
+                        if(thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){
+                            CowRegistrationScreen.this.farmer.unAppendCow();
+                            AddCalvingScreen addCalvingScreen = new AddCalvingScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer);
+                            addCalvingScreen.start();
+                        }
+                        else if(thisCow.getMode().equals(Cow.MODE_ADULT_COW_REGISTRATION)){
+                            
+                        }
                     }
+                    
                 }
                 else if(evt.getCommand().equals(nextCommand)) {
                     if(validateInput()) {
                         saveCowDetails();
-                        if(CowRegistrationScreen.this.cowIndex < (CowRegistrationScreen.this.cowNumber -1)) {
-                            CowRegistrationScreen nextScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer, CowRegistrationScreen.this.cowIndex + 1, CowRegistrationScreen.this.cowNumber);
-                            nextScreen.start();
+                        if(CowRegistrationScreen.this.farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)){
+                            if(CowRegistrationScreen.this.cowIndex < (CowRegistrationScreen.this.cowNumber -1)) {
+                                CowRegistrationScreen nextScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer, CowRegistrationScreen.this.cowIndex + 1, CowRegistrationScreen.this.cowNumber);
+                                nextScreen.start();
+                            }
+                            else{
+                                CowRegistrationScreen.this.farmer.syncWithServer(CowRegistrationScreen.this);
+                            }                       
                         }
-                        else{
+                        else if(CowRegistrationScreen.this.farmer.getMode().equals(Farmer.MODE_NEW_COW_REGISTRATION)){
                             CowRegistrationScreen.this.farmer.syncWithServer(CowRegistrationScreen.this);
                         }
+                        
                     }
                 }
             }
@@ -266,7 +293,6 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
         countryCB.setRenderer(new MistroListCellRenderer(GeneralArrays.all_countries));
         this.addComponent(countryCB);
         
-        
         restoreCowDetails();
     }
     
@@ -319,7 +345,9 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
     
     private void saveCowDetails() {
         Cow thisCow = farmer.getCow(cowIndex);
-        thisCow.setMode(Cow.MODE_ADULT_COW_REGISTRATION);
+        if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION))
+            thisCow.setMode(Cow.MODE_ADULT_COW_REGISTRATION);
+        
         thisCow.setName(cowNameTF.getText());
         thisCow.setEarTagNumber(earTagNumberTF.getText());
         if(ageTF.getText()!=null && ageTF.getText().trim().length() > 0){
@@ -335,39 +363,42 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
         if(otherDeformityTF.isFocusable()){
             thisCow.setOtherDeformity(otherDeformityTF.getText());
         }
-        String[] serviceTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.service_types);
-        thisCow.setServiceType(serviceTypesInEN[serviceTypeCB.getSelectedIndex()]);
         
-        if(serviceTypesInEN[serviceTypeCB.getSelectedIndex()].equals(Cow.SERVICE_TYPE_BULL)) {
-            Sire sire = new Sire();
-            Cow selectedSire = (Cow)validSires.elementAt(sireCB.getSelectedIndex());
-            sire.setName(selectedSire.getName());
-            sire.setEarTagNumber(selectedSire.getEarTagNumber());
+        if(!thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){
+            String[] serviceTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.service_types);
+            thisCow.setServiceType(serviceTypesInEN[serviceTypeCB.getSelectedIndex()]);
 
-            Dam dam = new Dam();
-            Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
-            dam.setName(selectedDam.getName());
-            dam.setEarTagNumber(selectedDam.getEarTagNumber());
-            thisCow.setDam(dam);
-            String[] countries = GeneralArrays.all_countries;
-            sire.setCountryOfOrigin(countries[countryCB.getSelectedIndex()]);
-            thisCow.setSire(sire);
-        }
-        else if(serviceTypesInEN[serviceTypeCB.getSelectedIndex()].equals(Cow.SERVICE_TYPE_AI)){
-            Sire sire = new Sire();
-            sire.setStrawNumber(strawNumberTF.getText());
-            thisCow.setSire(sire);
-            
-            Dam dam = new Dam();
-            Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
-            dam.setName(selectedDam.getName());
-            dam.setEarTagNumber(selectedDam.getEarTagNumber());
-            thisCow.setDam(dam);
-        }
-        else if(serviceTypesInEN[serviceTypeCB.getSelectedIndex()].equals(Cow.SERVICE_TYPE_ET)){
-            Dam dam = new Dam();
-            dam.setEmbryoNumber(embryoNumberTF.getText());
-            thisCow.setDam(dam);
+            if(serviceTypesInEN[serviceTypeCB.getSelectedIndex()].equals(Cow.SERVICE_TYPE_BULL)) {
+                Sire sire = new Sire();
+                Cow selectedSire = (Cow)validSires.elementAt(sireCB.getSelectedIndex());
+                sire.setName(selectedSire.getName());
+                sire.setEarTagNumber(selectedSire.getEarTagNumber());
+
+                Dam dam = new Dam();
+                Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
+                dam.setName(selectedDam.getName());
+                dam.setEarTagNumber(selectedDam.getEarTagNumber());
+                thisCow.setDam(dam);
+                String[] countries = GeneralArrays.all_countries;
+                sire.setCountryOfOrigin(countries[countryCB.getSelectedIndex()]);
+                thisCow.setSire(sire);
+            }
+            else if(serviceTypesInEN[serviceTypeCB.getSelectedIndex()].equals(Cow.SERVICE_TYPE_AI)){
+                Sire sire = new Sire();
+                sire.setStrawNumber(strawNumberTF.getText());
+                thisCow.setSire(sire);
+
+                Dam dam = new Dam();
+                Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
+                dam.setName(selectedDam.getName());
+                dam.setEarTagNumber(selectedDam.getEarTagNumber());
+                thisCow.setDam(dam);
+            }
+            else if(serviceTypesInEN[serviceTypeCB.getSelectedIndex()].equals(Cow.SERVICE_TYPE_ET)){
+                Dam dam = new Dam();
+                dam.setEmbryoNumber(embryoNumberTF.getText());
+                thisCow.setDam(dam);
+            }
         }
     }
     
@@ -527,6 +558,24 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
             }
         }
         
+        if(thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){
+            System.out.println("Mode is calf");
+            setLabelFocusable(serviceTypeL, false);
+            setComponentFocusable(serviceTypeCB, false);
+            setLabelFocusable(sireL, false);
+            setComponentFocusable(sireCB, false);
+            setLabelFocusable(strawNumberL, false);
+            setComponentFocusable(strawNumberTF, false);
+            setLabelFocusable(damL, false);
+            setComponentFocusable(damCB, false);
+            setLabelFocusable(embryoNumberL, false);
+            setComponentFocusable(embryoNumberTF, false);
+            setLabelFocusable(countryL, false);
+            setComponentFocusable(countryCB, false);
+        }
+        else{
+            System.out.println("Mode is cow");
+        }
     }
     
     private String[] getValidSires() {
@@ -707,54 +756,139 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
     }
 
     public void responseGotten(Object source, String message) {
-        if(message.equals(DataHandler.ACKNOWLEDGE_OK)){
-            final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.successful_registration));
-            infoDialog.setDialogType(Dialog.TYPE_CONFIRMATION);
-            final Command placiboCommand = new Command("");
-            final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
-            infoDialog.addCommand(placiboCommand);
-            infoDialog.addCommand(backCommand);
-            infoDialog.addCommandListener(new ActionListener() {
+        System.out.println("Response gotten from server");
+        if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)){
+            System.out.println("farmer mode is initial reg");
+            if(message.equals(DataHandler.ACKNOWLEDGE_OK)){
+                final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.successful_registration));
+                infoDialog.setDialogType(Dialog.TYPE_CONFIRMATION);
+                final Command placiboCommand = new Command("");
+                final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+                infoDialog.addCommand(placiboCommand);
+                infoDialog.addCommand(backCommand);
+                infoDialog.addCommandListener(new ActionListener() {
 
-                public void actionPerformed(ActionEvent evt) {
-                    if(evt.getCommand().equals(backCommand)){
-                        infoDialog.dispose();
-                        LoginScreen loginScreen = new LoginScreen(midlet, locale);
-                        loginScreen.start();
+                    public void actionPerformed(ActionEvent evt) {
+                        if(evt.getCommand().equals(backCommand)){
+                            infoDialog.dispose();
+                            LoginScreen loginScreen = new LoginScreen(midlet, locale);
+                            loginScreen.start();
+                        }
                     }
-                }
-            });
+                });
 
-            Label text = new Label();
-            text.getStyle().setAlignment(CENTER);
-            infoDialog.addComponent(text);
-            text.setText(Locale.getStringInLocale(locale, StringResources.successful_registration_instructions));
-            infoDialog.show(100, 100, 11, 11, true);
-            
-        }
-        else{
-            final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.error));
-            infoDialog.setDialogType(Dialog.TYPE_ERROR);
-            final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
-            infoDialog.addCommand(backCommand);
-            infoDialog.addCommandListener(new ActionListener() {
+                Label text = new Label();
+                text.getStyle().setAlignment(CENTER);
+                infoDialog.addComponent(text);
+                text.setText(Locale.getStringInLocale(locale, StringResources.successful_registration_instructions));
+                infoDialog.show(100, 100, 11, 11, true);
 
-                public void actionPerformed(ActionEvent evt) {
-                    if(evt.getCommand().equals(backCommand)){
-                        infoDialog.dispose();
+            }
+            else{
+                final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.error));
+                infoDialog.setDialogType(Dialog.TYPE_ERROR);
+                final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+                infoDialog.addCommand(backCommand);
+                infoDialog.addCommandListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent evt) {
+                        if(evt.getCommand().equals(backCommand)){
+                            infoDialog.dispose();
+                        }
                     }
-                }
-            });
+                });
 
-            TextArea text = new TextArea(1,20);
-            text.setFocusable(false);
-            text.setWidth(30);
-            text.setEditable(false);
-            text.getStyle().setAlignment(CENTER);
-            infoDialog.addComponent(text);
-            text.setText(Locale.getStringInLocale(locale, StringResources.something_went_wrong_try_again));
-            infoDialog.show(100, 100, 11, 11, true);
+                TextArea text = new TextArea(1,20);
+                text.setFocusable(false);
+                text.setWidth(30);
+                text.setEditable(false);
+                text.getStyle().setAlignment(CENTER);
+                infoDialog.addComponent(text);
+                text.setText(Locale.getStringInLocale(locale, StringResources.something_went_wrong_try_again));
+                infoDialog.show(100, 100, 11, 11, true);
+            }
         }
+        else if(farmer.getMode().equals(Farmer.MODE_NEW_COW_REGISTRATION)){
+            System.out.println("farmer mode is new cow reg");
+            Cow thisCow = farmer.getCow(cowIndex);
+            System.out.println("cow index = "+String.valueOf(cowIndex));
+            if(thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){
+                System.out.println("response gotten for calf");
+               if(message == null){
+                   final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.error));
+                    infoDialog.setDialogType(Dialog.TYPE_ERROR);
+                    final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+                    infoDialog.addCommand(backCommand);
+                    infoDialog.addCommandListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent evt) {
+                            if(evt.getCommand().equals(backCommand)){
+                                infoDialog.dispose();
+                            }
+                        }
+                    });
+
+                    TextArea text = new TextArea(1,20);
+                    text.setFocusable(false);
+                    text.setWidth(30);
+                    text.setEditable(false);
+                    text.getStyle().setAlignment(CENTER);
+                    infoDialog.addComponent(text);
+                    text.setText(Locale.getStringInLocale(locale, StringResources.problem_connecting_to_server));
+                    infoDialog.show(100, 100, 11, 11, true);
+               }
+               else if(message.equals(DataHandler.ACKNOWLEDGE_OK)){
+                    final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.successful_registration));
+                    infoDialog.setDialogType(Dialog.TYPE_CONFIRMATION);
+                    final Command placiboCommand = new Command("");
+                    final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+                    infoDialog.addCommand(placiboCommand);
+                    infoDialog.addCommand(backCommand);
+                    infoDialog.addCommandListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent evt) {
+                            if(evt.getCommand().equals(backCommand)){
+                                infoDialog.dispose();
+                                FertilityScreen fertilityScreen = new FertilityScreen(midlet, locale, farmer);
+                                fertilityScreen.start();
+                            }
+                        }
+                    });
+
+                    Label text = new Label();
+                    text.getStyle().setAlignment(CENTER);
+                    infoDialog.addComponent(text);
+                    text.setText(Locale.getStringInLocale(locale, StringResources.information_successfully_sent_to_server));
+                    infoDialog.show(100, 100, 11, 11, true);
+               }
+               else{
+                   final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.error));
+                    infoDialog.setDialogType(Dialog.TYPE_ERROR);
+                    final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+                    infoDialog.addCommand(backCommand);
+                    infoDialog.addCommandListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent evt) {
+                            if(evt.getCommand().equals(backCommand)){
+                                infoDialog.dispose();
+                            }
+                        }
+                    });
+
+                    TextArea text = new TextArea(1,20);
+                    text.setFocusable(false);
+                    text.setWidth(30);
+                    text.setEditable(false);
+                    text.getStyle().setAlignment(CENTER);
+                    infoDialog.addComponent(text);
+                    text.setText(Locale.getStringInLocale(locale, StringResources.something_went_wrong_try_again));
+                    infoDialog.show(100, 100, 11, 11, true);
+               }
+               
+            }
+            else System.err.println("cow is not calf");
+        }
+        
     }
     
 }

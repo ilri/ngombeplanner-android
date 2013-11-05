@@ -95,11 +95,12 @@ public class FertilityScreen extends Form implements Screen, ActionListener{
 
     public void actionPerformed(ActionEvent evt) {
         if(evt.getComponent().equals(servicingB)){
-            ServicingScreen servicingScreen = new ServicingScreen(midlet, locale, farmer);
+            AddServicingScreen servicingScreen = new AddServicingScreen(midlet, locale, farmer);
             servicingScreen.start();
         }
         else if(evt.getComponent().equals(calvingB)){
-            
+            AddCalvingScreen addCalvingScreen = new AddCalvingScreen(midlet, locale, farmer);
+            addCalvingScreen.start();
         }
     }
     

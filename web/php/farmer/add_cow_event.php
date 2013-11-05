@@ -51,6 +51,11 @@ class CowEventHandler {
                    $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`parent_cow_event`)".
                            " VALUES({$cowID},{$eventTypeID},'{$remarks}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$this->jsonObject['parentEvent']})";
                 }
+                else if($this->jsonObject['eventType'] == "Birth"){
+					$this->logHandler->log(3, $this->TAG,"Event type is BIRTH");
+					$query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`event_date`,`date_added`,`birth_type`,`no_of_live_births`)".
+                           " VALUES({$cowID},{$eventTypeID},STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}','{$this->jsonObject['birthType']}',{$this->jsonObject['liveBirths']})";
+				}
                 else if($this->jsonObject['eventType'] == "Artificial Insemination") {
                     /*
                      * 1. check if ear_tag_number is null

@@ -90,6 +90,32 @@ public class Farmer {
             cows[i] = new Cow(true);
         }
     }
+    
+    public void appendCow(Cow newCow){
+        if(cows!=null){
+            Cow[] newCowList = new Cow[cows.length+1];
+            for(int i = 0; i < cows.length; i++){
+                newCowList[i] = cows[i];
+            }
+            newCowList[newCowList.length-1] = newCow;
+            
+            cows = newCowList;
+        }
+        else{
+            cows = new Cow[1];
+            cows[0] = newCow;
+        }
+    }
+    
+    public void unAppendCow(){
+        if(cows!=null){
+            Cow[] newCowList = new Cow[cows.length-1];
+            for(int i = 0; i < cows.length-1; i++){
+                newCowList[i]=cows[i];
+            }
+            cows = newCowList;
+        }
+    }
 
     public void setCows(Cow[] cows) {
         this.cows = cows;
@@ -156,9 +182,13 @@ public class Farmer {
             jsonObject.put("extensionPersonnel",((extensionPersonnel==null) ? "":extensionPersonnel));
             jsonObject.put("mobileNumber",((mobileNumber==null) ? "":mobileNumber));
             JSONArray cowsJsonArray=new JSONArray();
-            for (int i=0;i<cows.length;i++)
-            {
-                cowsJsonArray.put(i,cows[i].getJsonObject());
+            if(mode.equals(MODE_INITIAL_REGISTRATION)){
+                for (int i=0;i<cows.length;i++) {
+                    cowsJsonArray.put(i,cows[i].getJsonObject());
+                }
+            }
+            else if(mode.equals(MODE_NEW_COW_REGISTRATION)){
+                cowsJsonArray.put(0,cows[cows.length-1].getJsonObject());
             }
             jsonObject.put("cows",cowsJsonArray);
             jsonObject.put("longitude",((longitude==null) ? "":longitude));
@@ -173,7 +203,6 @@ public class Farmer {
     }
     
     public void syncWithServer(ResponseListener responseListener){
-        System.out.println(getJsonObject());
         Thread thread = new Thread(new DataSender(getJsonObject(), responseListener));
         thread.run();
     }

@@ -101,8 +101,15 @@ class RegistrationHandler {
    }
 
    private function addCowsToExistingFarmer() {
-      $simCardSN = $this->jsonObject['simCardSN'];
-      $query = "SELECT `farmer`.`id` FROM `farmer` WHERE `farmer`.`sim_card_sn` = '{$simCardSN}'";
+        if(isset($this->jsonObject['simCardSN']) && $this->jsonObject['simCardSN']!==""){
+            $simCardSN = $this->jsonObject['simCardSN'];
+            $query = "SELECT `farmer`.`id` FROM `farmer` WHERE `farmer`.`sim_card_sn` = '{$simCardSN}'";
+        }
+        else if(isset ($this->jsonObject['mobileNumber']) && $this->jsonObject['mobileNumber']!==""){
+            $mobileNumber = $this->jsonObject['mobileNumber'];
+            $query = "SELECT `farmer`.`id` FROM `farmer` WHERE `farmer`.`mobile_no` = '{$mobileNumber}'";
+        }
+        
       $result = $this->database->runMySQLQuery($query, true);
       $farmerID = $result[0]['id'];
       $cows = array();
@@ -118,8 +125,8 @@ class RegistrationHandler {
             $time = $this->getTime("Y-m-d H:i:s");
             $piggyBack = json_decode($currentCow['piggyBack'], true);
             $this->logHandler->log(3, $this->TAG, "piggy back " . $piggyBack['birthType']);
-            $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`birth_type`,`event_date`,`date_added`,`parent_cow_event`)".
-                    " VALUES({$cowID},{$eventTypeID},'{$piggyBack['birthType']}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$piggyBack['parentEvent']})";
+            $query = "INSERT INTO `cow_event`(`cow_id`,`event_id`,`birth_type`,`event_date`,`date_added`,`no_of_live_births`)".
+                    " VALUES({$cowID},{$eventTypeID},'{$piggyBack['birthType']}',STR_TO_DATE('{$eventDate}', '%d/%m/%Y'),'{$time}',{$piggyBack['liveBirths']})";
             $this->database->runMySQLQuery($query, false);
          }
          else if($currentCow['mode'] === "adultCowRegistration") {

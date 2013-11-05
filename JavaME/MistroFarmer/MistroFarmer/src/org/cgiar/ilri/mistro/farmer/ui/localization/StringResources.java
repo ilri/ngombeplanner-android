@@ -455,4 +455,14 @@ public class StringResources {
         "Please enter the bull's ear tag number or the straw number",
         ""
     };
+    
+    public static final String[] no_f_cow_births={
+        "Number of live births by this cow",
+        ""
+    };
+    
+    public static final String[] enter_no_f_cow_births={
+        "Pleas input the number of live births by this cow",
+        ""
+    };
 }
