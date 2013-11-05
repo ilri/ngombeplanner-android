@@ -185,6 +185,10 @@ public class StringResources {
         "Events",
         ""
     };
+    public static final String[] other_events = {
+        "Other Events",
+        ""
+    };
     public static final String[] main_menu = {
         "Main Menu",
         ""
@@ -463,6 +467,11 @@ public class StringResources {
     
     public static final String[] enter_no_f_cow_births={
         "Pleas input the number of live births by this cow",
+        ""
+    };
+    
+    public static final String[] event_type={
+        "Type of event",
         ""
     };
 }

@@ -70,7 +70,7 @@ public class MainMenuScreen extends Form implements Screen, ActionListener{
         fertilityB.addActionListener(this);
         this.addComponent(fertilityB);
         
-        eventsB = new Button(Locale.getStringInLocale(locale, StringResources.events));
+        eventsB = new Button(Locale.getStringInLocale(locale, StringResources.other_events));
         eventsB.getStyle().setMargin(10, 10, 0, 0);
         eventsB.getSelectedStyle().setMargin(10, 10, 0, 0);
         setButtonStyle(eventsB);
@@ -104,6 +104,10 @@ public class MainMenuScreen extends Form implements Screen, ActionListener{
         else if(evt.getComponent().equals(fertilityB)){
             FertilityScreen fertilityScreen = new FertilityScreen(midlet, locale, farmer);
             fertilityScreen.start();
+        }
+        else if(evt.getComponent().equals(eventsB)){
+            EventsScreen eventsScreen = new EventsScreen(midlet, locale, farmer);
+            eventsScreen.start();
         }
     }
     
