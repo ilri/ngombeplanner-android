@@ -545,3 +545,331 @@
 [Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC
 [Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 52 ORDER BY a.id DESC
 [Wednesday, 6th November 2013 14:30:54] [authentication.php] gracefully exiting
+[Wednesday, 6th November 2013 15:03:31] [authentication.php] Starting Authenticator
+[Wednesday, 6th November 2013 15:03:31] [authentication.php] obtaining POST request
+[Wednesday, 6th November 2013 15:03:31] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:03:31] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:03:31] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 15:03:31] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:03:31] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:03:31] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Wednesday, 6th November 2013 15:03:31] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 22 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 23 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 24 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 25 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 26 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 32 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 33 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 34 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 39 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 41 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 42 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 43 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 44 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 45 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 46 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 47 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 48 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 49 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 50 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 51 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:03:31] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 52 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:03:31] [authentication.php] gracefully exiting
+[Wednesday, 6th November 2013 15:04:41] [registration.php] Starting RegistrationHandler
+[Wednesday, 6th November 2013 15:04:41] [registration.php] obtaining POST request
+[Wednesday, 6th November 2013 15:04:41] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:04:41] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:04:41] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 15:04:41] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:04:41] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:04:41] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 15:04:41] [general.php] Starting General
+[Wednesday, 6th November 2013 15:04:41] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:04:41] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:04:41] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 15:04:41] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:04:41] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:04:41] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 15:04:41] [registration.php] Farmer already registered but registering new cow
+[Wednesday, 6th November 2013 15:04:41] [database.php] running query SELECT `farmer`.`id` FROM `farmer` WHERE `farmer`.`sim_card_sn` = '89254028071000359956'
+[Wednesday, 6th November 2013 15:04:41] [registration.php] Registering the new cow (Tj) in the database
+[Wednesday, 6th November 2013 15:04:41] [general.php] Getting id of country with name as 
+[Wednesday, 6th November 2013 15:04:41] [database.php] running query SELECT `id` FROM `country` WHERE `name` = ''
+[Wednesday, 6th November 2013 15:04:41] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`) VALUES(16,'Jgpm','Tj',STR_TO_DATE('5/11/2013', '%d/%m/%Y'),1,'Days','Female','2013-11-06 15:04:41','')
+[Wednesday, 6th November 2013 15:04:41] [general.php] Getting id of event with name as Birth
+[Wednesday, 6th November 2013 15:04:41] [database.php] running query SELECT `id` FROM `event` WHERE `name` = 'Birth'
+[Wednesday, 6th November 2013 15:04:41] [registration.php] piggy back Normal
+[Wednesday, 6th November 2013 15:04:41] [database.php] running query INSERT INTO `cow_event`(`cow_id`,`event_id`,`birth_type`,`event_date`,`date_added`,`no_of_live_births`) VALUES(53,2,'Normal',STR_TO_DATE('5/11/2013', '%d/%m/%Y'),'2013-11-06 15:04:41',2)
+[Wednesday, 6th November 2013 15:04:41] [general.php] Getting id of cow with ear tag number as Tj
+[Wednesday, 6th November 2013 15:04:41] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'Tj' AND `farmer_id` = 16
+[Wednesday, 6th November 2013 15:04:41] [registration.php] sending acknowledge_ok response cod back to client
+[Wednesday, 6th November 2013 15:06:02] [add_cow_event.php] Starting CowEventHandler
+[Wednesday, 6th November 2013 15:06:02] [add_cow_event.php] obtaining POST request
+[Wednesday, 6th November 2013 15:06:02] [add_cow_event.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:06:02] [add_cow_event.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:06:02] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 15:06:02] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:06:02] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:06:02] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 15:06:02] [general.php] Starting General
+[Wednesday, 6th November 2013 15:06:02] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:06:02] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:06:02] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 15:06:02] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:06:02] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:06:02] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 15:06:02] [database.php] running query SELECT `cow`.`id`,`cow`.`farmer_id` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` WHERE `farmer`.`mobile_no` = '0722838686' AND `cow`.`name` = 'Rosy' AND `cow`.`ear_tag_number` = 'nai-jas1'
+[Wednesday, 6th November 2013 15:06:02] [database.php] running query SELECT `id` FROM `event` WHERE `name` = 'Death'
+[Wednesday, 6th November 2013 15:06:02] [general.php] Getting id of COD with name as Natural Causes
+[Wednesday, 6th November 2013 15:06:02] [database.php] running query SELECT `id` FROM `cause_of_death` WHERE `name` = 'Natural Causes'
+[Wednesday, 6th November 2013 15:06:02] [database.php] running query INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`cod_id`) VALUES(22,6,'',STR_TO_DATE('5/11/2013', '%d/%m/%Y'),'2013-11-06 15:06:02',1)
+[Wednesday, 6th November 2013 15:06:02] [add_cow_event.php] returning response code 533783
+[Wednesday, 6th November 2013 15:06:02] [add_cow_event.php] gracefully exiting
+[Wednesday, 6th November 2013 15:24:07] [authentication.php] Starting Authenticator
+[Wednesday, 6th November 2013 15:24:07] [authentication.php] obtaining POST request
+[Wednesday, 6th November 2013 15:24:07] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:24:07] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:24:07] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 15:24:07] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:24:07] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:24:07] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Wednesday, 6th November 2013 15:24:07] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 22 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 23 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 24 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 25 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 26 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 32 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 33 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 34 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 39 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 41 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 42 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 43 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 44 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 45 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 46 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 47 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 48 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 49 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 50 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 51 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 52 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 53 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:24:07] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 53 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:24:07] [authentication.php] gracefully exiting
+[Wednesday, 6th November 2013 15:26:48] [authentication.php] Starting Authenticator
+[Wednesday, 6th November 2013 15:26:48] [authentication.php] obtaining POST request
+[Wednesday, 6th November 2013 15:26:48] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:26:48] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:26:48] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 15:26:48] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:26:48] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:26:48] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Wednesday, 6th November 2013 15:26:48] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 22 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 23 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 24 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 25 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 26 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 32 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 33 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 34 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 39 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 41 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 42 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 43 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 44 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 45 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 46 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 47 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 48 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 49 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 50 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 51 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 52 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 53 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:26:48] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 53 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:26:48] [authentication.php] gracefully exiting
+[Wednesday, 6th November 2013 15:28:40] [authentication.php] Starting Authenticator
+[Wednesday, 6th November 2013 15:28:40] [authentication.php] obtaining POST request
+[Wednesday, 6th November 2013 15:28:40] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:28:40] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:28:40] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 15:28:40] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:28:40] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:28:40] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Wednesday, 6th November 2013 15:28:40] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 22 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 23 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 24 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 25 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 26 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 32 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 33 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 34 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 39 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 41 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 42 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 43 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 44 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 45 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 46 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 47 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 48 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 49 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 50 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 51 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 52 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 53 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:28:40] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 53 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:28:40] [authentication.php] gracefully exiting
+[Wednesday, 6th November 2013 15:29:42] [authentication.php] Starting Authenticator
+[Wednesday, 6th November 2013 15:29:42] [authentication.php] obtaining POST request
+[Wednesday, 6th November 2013 15:29:42] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:29:42] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:29:42] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 15:29:42] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 15:29:42] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 15:29:42] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Wednesday, 6th November 2013 15:29:42] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 22 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 23 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 24 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 25 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 26 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 32 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 33 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 34 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 39 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 41 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 42 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 43 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 44 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 45 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 46 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 47 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 48 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 49 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 50 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 51 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 52 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 53 ORDER BY id DESC
+[Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 53 ORDER BY a.id DESC
+[Wednesday, 6th November 2013 15:29:42] [authentication.php] gracefully exiting

@@ -326,7 +326,9 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
                 }
             }
         });
-        Label text = new Label();
+        TextArea text = new TextArea();
+        text.setEditable(false);
+        text.setFocusable(false);
         text.getStyle().setAlignment(CENTER);
         infoDialog.addComponent(text);
         

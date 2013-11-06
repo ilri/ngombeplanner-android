@@ -6,6 +6,7 @@ import com.sun.lwuit.Component;
 import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Label;
+import com.sun.lwuit.TextArea;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
@@ -203,7 +204,9 @@ public class AddMilkProductionScreen extends Form implements Screen{
             }
         });
         
-        Label text = new Label();
+        TextArea text = new TextArea();
+        text.setEditable(false);
+        text.setFocusable(false);
         text.getStyle().setAlignment(CENTER);
         infoDialog.addComponent(text);
         
