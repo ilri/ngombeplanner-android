@@ -216,7 +216,7 @@ public class EventsHistoryActivity extends SherlockActivity {
 
                 Calendar calendar=new GregorianCalendar();
                 calendar.setTime(eventDate);
-                String dateText=String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH))+"/"+calendar.get(Calendar.YEAR);
+                String dateText=String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.YEAR);
                 if(dateDifference<1) {
                     dateText=todayText;
                 }

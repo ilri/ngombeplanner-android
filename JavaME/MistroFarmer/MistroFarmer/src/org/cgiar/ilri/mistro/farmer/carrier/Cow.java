@@ -131,7 +131,7 @@ public class Cow {
         calendar.setTime(dateOfBirth);
         StringBuffer dateStringBuffer = new StringBuffer();
         dateStringBuffer.append(calendar.get(Calendar.DATE)).append("/");
-        dateStringBuffer.append(calendar.get(Calendar.MONTH)).append("/");
+        dateStringBuffer.append(calendar.get(Calendar.MONTH)+1).append("/");
         dateStringBuffer.append(calendar.get(Calendar.YEAR));
         this.dateOfBirth = dateStringBuffer.toString();
     }

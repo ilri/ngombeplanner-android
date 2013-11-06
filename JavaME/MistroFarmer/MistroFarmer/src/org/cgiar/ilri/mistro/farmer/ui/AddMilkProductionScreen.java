@@ -93,7 +93,7 @@ public class AddMilkProductionScreen extends Form implements Screen{
                             Date date = (Date) dateS.getValue();
                             Calendar calendar = Calendar.getInstance();
                             calendar.setTime(date);
-                            String dateString = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH))+"/"+String.valueOf(calendar.get(Calendar.YEAR));
+                            String dateString = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH)+1)+"/"+String.valueOf(calendar.get(Calendar.YEAR));
                             jsonObject.put("date", dateString);
                             
                             Thread thread = new Thread(new MilkProductionHandler(jsonObject));
