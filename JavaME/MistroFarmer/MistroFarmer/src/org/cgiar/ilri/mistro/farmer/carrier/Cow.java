@@ -38,6 +38,7 @@ public class Cow {
     private String piggyBack;
     private Date dateOfBirthDate;
     private MilkProduction[] milkProduction;
+    private Event[] events;
 
     public Cow(boolean isNotDamOrSire) {
         name = "";
@@ -94,6 +95,17 @@ public class Cow {
             }
             else{
                 milkProduction = new MilkProduction[0];
+            }
+            
+            JSONArray eventsArray = cowJSONObject.getJSONArray("cow_events");
+            if(eventsArray!=null){
+                events = new Event[eventsArray.length()];
+                for(int i = 0; i< eventsArray.length(); i++ ){
+                    events[i] = new Event(eventsArray.getJSONObject(i));
+                }
+            }
+            else{
+                events = new Event[0];
             }
         } 
         catch (JSONException ex) {
@@ -236,6 +248,10 @@ public class Cow {
     
     public MilkProduction[] getMilkProduction(){
         return milkProduction;
+    }
+    
+    public Event[] getEvents(){
+        return events;
     }
 
     public JSONObject getJsonObject() {

@@ -53,6 +53,14 @@ class Authenticator {
                                 $milk_production = $this->database->runMySQLQuery($query, true);
                                 $cow['milk_production'] = $milk_production;
                                 
+                                $query = "SELECT a.id, DATE_FORMAT(a.event_date, \"%d/%l/%Y\") AS event_date, b.name  AS `event_type`".
+                                        " FROM `cow_event` AS a".
+                                        " INNER JOIN `event` AS b ON a.`event_id` = b.id".
+                                        " WHERE a.`cow_id` = {$cow['id']} ORDER BY a.id DESC";
+                                $cow_events = $this->database->runMySQLQuery($query, true);
+                                $cow['cow_events'] = $cow_events;
+                                
+                                
                                 $cows[$index] = $cow;
                             }
                             $farmer['cows'] = $cows;

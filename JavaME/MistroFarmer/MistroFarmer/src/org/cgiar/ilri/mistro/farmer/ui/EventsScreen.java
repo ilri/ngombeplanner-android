@@ -146,7 +146,8 @@ public class EventsScreen extends Form implements Screen, ActionListener{
             infoDialog.show(100, 100, 11, 11, true);
         }
         else if(evt.getComponent().equals(pastEventsButton)){
-
+            PastEventsScreen pastEventsScreen = new PastEventsScreen(midlet, locale, farmer);
+            pastEventsScreen.start();
         }
     }
     
