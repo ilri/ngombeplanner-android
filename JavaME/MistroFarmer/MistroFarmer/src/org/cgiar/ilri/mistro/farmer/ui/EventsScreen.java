@@ -126,10 +126,19 @@ public class EventsScreen extends Form implements Screen, ActionListener{
                     }
                     else if(evt.getCommand().equals(nextCommand)){
                         String[] eventTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.generic_cow_event_types);
-                        AddGenericEventScreen addEventScreen = new AddGenericEventScreen(midlet, locale, farmer, eventTypesInEN[eventTypeCB.getSelectedIndex()]);
                         infoDialog.dispose();
-                        System.out.println("should go to next screen");
-                        addEventScreen.start();
+                        if(eventTypesInEN[eventTypeCB.getSelectedIndex()].equals("Death")){
+                            AddDeathEventScreen addDeathEventScreen = new AddDeathEventScreen(midlet, locale, farmer);
+                            addDeathEventScreen.start();
+                        }
+                        else if(eventTypesInEN[eventTypeCB.getSelectedIndex()].equals("Acquisition")){
+                            AddAcquisitionEventScreen acquisitionEventScreen = new AddAcquisitionEventScreen(midlet, locale, farmer);
+                            acquisitionEventScreen.start();
+                        }
+                        else{
+                            AddGenericEventScreen addEventScreen = new AddGenericEventScreen(midlet, locale, farmer, eventTypesInEN[eventTypeCB.getSelectedIndex()]);
+                            addEventScreen.start();
+                        }
                     }
                 }
             });

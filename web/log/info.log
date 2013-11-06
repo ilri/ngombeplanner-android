@@ -1,458 +1,220 @@
 
-[Tuesday, 5th November 2013 17:00:06] [add_cow_event.php] Starting CowEventHandler
-[Tuesday, 5th November 2013 17:00:06] [add_cow_event.php] obtaining POST request
-[Tuesday, 5th November 2013 17:00:06] [add_cow_event.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:00:06] [add_cow_event.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:00:06] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 17:00:06] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:00:06] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:00:06] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 17:00:06] [general.php] Starting General
-[Tuesday, 5th November 2013 17:00:06] [general.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:00:06] [general.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:00:06] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 17:00:06] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:00:06] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:00:06] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 17:00:06] [database.php] running query SELECT `cow`.`id`,`cow`.`farmer_id` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` WHERE `farmer`.`mobile_no` = '0722838686' AND `cow`.`name` = 'Rosy' AND `cow`.`ear_tag_number` = 'nai-jas1'
-[Tuesday, 5th November 2013 17:00:06] [database.php] running query SELECT `id` FROM `event` WHERE `name` = 'Birth'
-[Tuesday, 5th November 2013 17:00:06] [add_cow_event.php] Event type is BIRTH
-[Tuesday, 5th November 2013 17:00:06] [database.php] running query INSERT INTO `cow_event`(`cow_id`,`event_id`,`event_date`,`date_added`,`birth_type`,`no_of_live_births`) VALUES(22,2,STR_TO_DATE('4/11/2013', '%d/%m/%Y'),'2013-11-05 17:00:06','Still',2)
-[Tuesday, 5th November 2013 17:00:06] [add_cow_event.php] returning response code 533783
-[Tuesday, 5th November 2013 17:00:06] [add_cow_event.php] gracefully exiting
-[Tuesday, 5th November 2013 17:11:57] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 17:11:57] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 17:11:57] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:11:57] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:11:57] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 17:11:57] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:11:57] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:11:57] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 17:11:57] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:11:57] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 17:12:47] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 17:12:47] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 17:12:47] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:12:47] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:12:47] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 17:12:47] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:12:47] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:12:47] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 17:12:47] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:12:47] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 17:19:44] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 17:19:44] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 17:19:44] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:19:44] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:19:44] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 17:19:44] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:19:44] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:19:44] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 17:19:44] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:19:44] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 17:20:31] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 17:20:31] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 17:20:31] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:20:31] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:20:31] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 17:20:31] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 17:20:31] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 17:20:31] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 17:20:31] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 17:20:31] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 20:21:42] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 20:21:42] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 20:21:42] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 20:21:42] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 20:21:42] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 20:21:42] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 20:21:42] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 20:21:42] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 20:21:42] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:21:42] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 20:27:48] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 20:27:48] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 20:27:48] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 20:27:48] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 20:27:48] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 20:27:48] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 20:27:48] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 20:27:48] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 20:27:48] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:27:48] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 20:37:19] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 20:37:19] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 20:37:19] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 20:37:19] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 20:37:19] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 20:37:19] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 20:37:19] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 20:37:19] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 20:37:19] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 20:37:19] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 22:44:27] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 22:44:27] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 22:44:27] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 22:44:27] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 22:44:27] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 22:44:27] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 22:44:27] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 22:44:27] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 22:44:27] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:44:27] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 22:49:44] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 22:49:44] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 22:49:44] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 22:49:44] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 22:49:44] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 22:49:44] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 22:49:44] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 22:49:44] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 22:49:44] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:49:44] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 22:50:41] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 22:50:41] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 22:50:41] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 22:50:41] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 22:50:41] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 22:50:41] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 22:50:41] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 22:50:41] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 22:50:41] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:50:41] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 22:51:38] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 22:51:38] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 22:51:38] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 22:51:38] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 22:51:38] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 22:51:38] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 22:51:38] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 22:51:38] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 22:51:38] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 22:51:38] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 23:09:47] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 23:09:47] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 23:09:47] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 23:09:47] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 23:09:47] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 23:09:47] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 23:09:47] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 23:09:47] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 23:09:47] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:09:47] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 23:11:58] [authentication.php] Starting Authenticator
-[Tuesday, 5th November 2013 23:11:58] [authentication.php] obtaining POST request
-[Tuesday, 5th November 2013 23:11:58] [authentication.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 23:11:58] [authentication.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 23:11:58] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 23:11:58] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 23:11:58] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 23:11:58] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
-[Tuesday, 5th November 2013 23:11:58] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
-[Tuesday, 5th November 2013 23:11:58] [authentication.php] gracefully exiting
-[Tuesday, 5th November 2013 23:12:20] [add_cow_event.php] Starting CowEventHandler
-[Tuesday, 5th November 2013 23:12:20] [add_cow_event.php] obtaining POST request
-[Tuesday, 5th November 2013 23:12:20] [add_cow_event.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 23:12:20] [add_cow_event.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 23:12:20] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 23:12:20] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 23:12:20] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 23:12:20] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 23:12:20] [general.php] Starting General
-[Tuesday, 5th November 2013 23:12:20] [general.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 23:12:20] [general.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 23:12:20] [database.php] Starting DatabaseHandler
-[Tuesday, 5th November 2013 23:12:20] [database.php] getting settings from: ../../config/settings.ini
-[Tuesday, 5th November 2013 23:12:20] [database.php] getting response codes from: ../../config/response_codes.ini
-[Tuesday, 5th November 2013 23:12:20] [database.php] connecting to ilri_mistro on localhost using root as the username
-[Tuesday, 5th November 2013 23:12:20] [database.php] running query SELECT `cow`.`id`,`cow`.`farmer_id` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` WHERE `farmer`.`mobile_no` = '0722838686' AND `cow`.`name` = 'Rosy' AND `cow`.`ear_tag_number` = 'nai-jas1'
-[Tuesday, 5th November 2013 23:12:20] [database.php] running query SELECT `id` FROM `event` WHERE `name` = 'Start of Lactation'
-[Tuesday, 5th November 2013 23:12:20] [database.php] running query INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES(22,3,'TEST',STR_TO_DATE('4/11/2013', '%d/%m/%Y'),'2013-11-05 23:12:20')
-[Tuesday, 5th November 2013 23:12:21] [add_cow_event.php] returning response code 533783
-[Tuesday, 5th November 2013 23:12:21] [add_cow_event.php] gracefully exiting
+[Wednesday, 6th November 2013 09:25:57] [authentication.php] Starting Authenticator
+[Wednesday, 6th November 2013 09:25:57] [authentication.php] obtaining POST request
+[Wednesday, 6th November 2013 09:25:57] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 09:25:57] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 09:25:57] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 09:25:57] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 09:25:57] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 09:25:57] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Wednesday, 6th November 2013 09:25:57] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:25:57] [authentication.php] gracefully exiting
+[Wednesday, 6th November 2013 09:27:18] [add_cow_event.php] Starting CowEventHandler
+[Wednesday, 6th November 2013 09:27:18] [add_cow_event.php] obtaining POST request
+[Wednesday, 6th November 2013 09:27:18] [add_cow_event.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 09:27:18] [add_cow_event.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 09:27:18] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 09:27:18] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 09:27:18] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 09:27:18] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 09:27:18] [general.php] Starting General
+[Wednesday, 6th November 2013 09:27:18] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 09:27:18] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 09:27:18] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 09:27:18] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 09:27:18] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 09:27:18] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 09:27:18] [database.php] running query SELECT `cow`.`id`,`cow`.`farmer_id` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` WHERE `farmer`.`mobile_no` = '0722838686' AND `cow`.`name` = 'Rosy' AND `cow`.`ear_tag_number` = 'nai-jas1'
+[Wednesday, 6th November 2013 09:27:18] [database.php] running query SELECT `id` FROM `event` WHERE `name` = 'Death'
+[Wednesday, 6th November 2013 09:27:19] [general.php] Getting id of COD with name as Natural Causes
+[Wednesday, 6th November 2013 09:27:19] [database.php] running query SELECT `id` FROM `cause_of_death` WHERE `name` = 'Natural Causes'
+[Wednesday, 6th November 2013 09:27:19] [database.php] running query INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`,`cod_id`) VALUES(22,6,'MY MOTHER SAID IT WAS A WITCH',STR_TO_DATE('5/11/2013', '%d/%m/%Y'),'2013-11-06 09:27:19',1)
+[Wednesday, 6th November 2013 09:27:19] [add_cow_event.php] returning response code 533783
+[Wednesday, 6th November 2013 09:27:19] [add_cow_event.php] gracefully exiting
+[Wednesday, 6th November 2013 09:32:18] [authentication.php] Starting Authenticator
+[Wednesday, 6th November 2013 09:32:18] [authentication.php] obtaining POST request
+[Wednesday, 6th November 2013 09:32:18] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 09:32:18] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 09:32:18] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 09:32:18] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 09:32:18] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 09:32:18] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Wednesday, 6th November 2013 09:32:18] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
+[Wednesday, 6th November 2013 09:32:18] [authentication.php] gracefully exiting
+[Wednesday, 6th November 2013 10:24:20] [authentication.php] Starting Authenticator
+[Wednesday, 6th November 2013 10:24:20] [authentication.php] obtaining POST request
+[Wednesday, 6th November 2013 10:24:20] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 10:24:20] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 10:24:20] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 10:24:20] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 10:24:20] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 10:24:20] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Wednesday, 6th November 2013 10:24:20] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:24:20] [authentication.php] gracefully exiting
+[Wednesday, 6th November 2013 10:41:36] [authentication.php] Starting Authenticator
+[Wednesday, 6th November 2013 10:41:36] [authentication.php] obtaining POST request
+[Wednesday, 6th November 2013 10:41:36] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 10:41:36] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 10:41:36] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 10:41:36] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 10:41:36] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 10:41:36] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Wednesday, 6th November 2013 10:41:36] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
+[Wednesday, 6th November 2013 10:41:36] [authentication.php] gracefully exiting
+[Wednesday, 6th November 2013 11:25:05] [authentication.php] Starting Authenticator
+[Wednesday, 6th November 2013 11:25:05] [authentication.php] obtaining POST request
+[Wednesday, 6th November 2013 11:25:05] [authentication.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 11:25:05] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 11:25:05] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 11:25:05] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 11:25:05] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 11:25:05] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
+[Wednesday, 6th November 2013 11:25:05] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
+[Wednesday, 6th November 2013 11:25:05] [authentication.php] gracefully exiting
+[Wednesday, 6th November 2013 11:28:47] [registration.php] Starting RegistrationHandler
+[Wednesday, 6th November 2013 11:28:47] [registration.php] obtaining POST request
+[Wednesday, 6th November 2013 11:28:47] [registration.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 11:28:47] [registration.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 11:28:47] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 11:28:47] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 11:28:47] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 11:28:47] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 11:28:47] [general.php] Starting General
+[Wednesday, 6th November 2013 11:28:47] [general.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 11:28:47] [general.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 11:28:47] [database.php] Starting DatabaseHandler
+[Wednesday, 6th November 2013 11:28:47] [database.php] getting settings from: ../../config/settings.ini
+[Wednesday, 6th November 2013 11:28:47] [database.php] getting response codes from: ../../config/response_codes.ini
+[Wednesday, 6th November 2013 11:28:47] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Wednesday, 6th November 2013 11:28:47] [registration.php] Farmer already registered but registering new cow
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query SELECT `farmer`.`id` FROM `farmer` WHERE `farmer`.`sim_card_sn` = '89254028071000359956'
+[Wednesday, 6th November 2013 11:28:47] [registration.php] Registering the new cow (Bot) in the database
+[Wednesday, 6th November 2013 11:28:47] [general.php] Getting id of country with name as 
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query SELECT `id` FROM `country` WHERE `name` = ''
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query INSERT INTO `cow`(`farmer_id`,`name`,`ear_tag_number`,`date_of_birth`,`age`,`age_type`,`sex`,`date_added`,`service_type`) VALUES(16,'Boti tot','Bot',STR_TO_DATE('', '%d/%m/%Y'),2,'Years','Male','2013-11-06 11:28:47','Bull')
+[Wednesday, 6th November 2013 11:28:47] [general.php] Getting id of breed with name as Ayrshire
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query SELECT `id` FROM `breed` WHERE `name` = 'Ayrshire'
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES(52,1,'2013-11-06 11:28:47')
+[Wednesday, 6th November 2013 11:28:47] [general.php] Getting id of breed with name as Charolais
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query SELECT `id` FROM `breed` WHERE `name` = 'Charolais'
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES(52,3,'2013-11-06 11:28:47')
+[Wednesday, 6th November 2013 11:28:47] [general.php] Getting id of event with name as Acquisition
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query SELECT `id` FROM `event` WHERE `name` = 'Acquisition'
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query INSERT INTO `cow_event`(`cow_id`,`event_id`,`remarks`,`event_date`,`date_added`) VALUES(52,9,'FR6 A FRIEND','2013-11-06','2013-11-06 11:28:47')
+[Wednesday, 6th November 2013 11:28:47] [general.php] Getting id of cow with ear tag number as Bot
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'Bot' AND `farmer_id` = 16
+[Wednesday, 6th November 2013 11:28:47] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16
+[Wednesday, 6th November 2013 11:28:47] [general.php] Getting id of cow with ear tag number as 
+[Wednesday, 6th November 2013 11:28:47] [database.php] running query SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 16
+[Wednesday, 6th November 2013 11:28:47] [registration.php] sending acknowledge_ok response cod back to client

@@ -82,6 +82,9 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
         if(thisCow.getMode()!= null && thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){
             this.setTitle(Locale.getStringInLocale(locale,StringResources.calf_registration));
         }
+        else if(farmer.getMode().equals(Farmer.MODE_NEW_COW_REGISTRATION) && thisCow.getMode()!=null && thisCow.getMode().equals(Cow.MODE_ADULT_COW_REGISTRATION)){
+            this.setTitle(Locale.getStringInLocale(locale, StringResources.new_cow_registration));
+        }
         else{
             this.setTitle(Locale.getStringInLocale(locale, StringResources.cow_registration_wth_indx)+String.valueOf(cowIndex+1));
         }
@@ -127,7 +130,9 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
                             addCalvingScreen.start();
                         }
                         else if(thisCow.getMode().equals(Cow.MODE_ADULT_COW_REGISTRATION)){
-                            
+                            CowRegistrationScreen.this.farmer.unAppendCow();
+                            AddAcquisitionEventScreen acquisitionEventScreen = new AddAcquisitionEventScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.farmer);
+                            acquisitionEventScreen.start();
                         }
                     }
                     
@@ -886,7 +891,79 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
                }
                
             }
-            else System.err.println("cow is not calf");
+            
+            else if(thisCow.getMode().equals(Cow.MODE_ADULT_COW_REGISTRATION)){
+                if(message == null){
+                   final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.error));
+                    infoDialog.setDialogType(Dialog.TYPE_ERROR);
+                    final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+                    infoDialog.addCommand(backCommand);
+                    infoDialog.addCommandListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent evt) {
+                            if(evt.getCommand().equals(backCommand)){
+                                infoDialog.dispose();
+                            }
+                        }
+                    });
+
+                    TextArea text = new TextArea(1,20);
+                    text.setFocusable(false);
+                    text.setWidth(30);
+                    text.setEditable(false);
+                    text.getStyle().setAlignment(CENTER);
+                    infoDialog.addComponent(text);
+                    text.setText(Locale.getStringInLocale(locale, StringResources.problem_connecting_to_server));
+                    infoDialog.show(100, 100, 11, 11, true);
+               }
+               else if(message.equals(DataHandler.ACKNOWLEDGE_OK)){
+                    final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.successful_registration));
+                    infoDialog.setDialogType(Dialog.TYPE_CONFIRMATION);
+                    final Command placiboCommand = new Command("");
+                    final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+                    infoDialog.addCommand(placiboCommand);
+                    infoDialog.addCommand(backCommand);
+                    infoDialog.addCommandListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent evt) {
+                            if(evt.getCommand().equals(backCommand)){
+                                infoDialog.dispose();
+                                EventsScreen eventsScreen = new EventsScreen(midlet, locale, farmer);
+                                eventsScreen.start();
+                            }
+                        }
+                    });
+
+                    Label text = new Label();
+                    text.getStyle().setAlignment(CENTER);
+                    infoDialog.addComponent(text);
+                    text.setText(Locale.getStringInLocale(locale, StringResources.information_successfully_sent_to_server));
+                    infoDialog.show(100, 100, 11, 11, true);
+               }
+               else{
+                   final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.error));
+                    infoDialog.setDialogType(Dialog.TYPE_ERROR);
+                    final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));
+                    infoDialog.addCommand(backCommand);
+                    infoDialog.addCommandListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent evt) {
+                            if(evt.getCommand().equals(backCommand)){
+                                infoDialog.dispose();
+                            }
+                        }
+                    });
+
+                    TextArea text = new TextArea(1,20);
+                    text.setFocusable(false);
+                    text.setWidth(30);
+                    text.setEditable(false);
+                    text.getStyle().setAlignment(CENTER);
+                    infoDialog.addComponent(text);
+                    text.setText(Locale.getStringInLocale(locale, StringResources.something_went_wrong_try_again));
+                    infoDialog.show(100, 100, 11, 11, true);
+               }
+            }
         }
         
     }

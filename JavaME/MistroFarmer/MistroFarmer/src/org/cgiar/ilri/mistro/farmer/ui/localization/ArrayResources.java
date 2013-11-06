@@ -42,8 +42,8 @@ public class ArrayResources {
         {"","","","","","","","","","","",""}
     };
     public static final String[][] generic_cow_event_types = {
-        {"Start of Lactation","Dry Off","Bloat","Signs of Heat"},
-        {"","","",""}
+        {"Abortion","Start of Lactation","Dry Off","Bloat","Sickness","Death","Acquisition","Sale","Signs of Heat"},
+        {"","","","","","","","",""}
     };
     public static final String[][] birth_types = {
         {"Normal","Still"},

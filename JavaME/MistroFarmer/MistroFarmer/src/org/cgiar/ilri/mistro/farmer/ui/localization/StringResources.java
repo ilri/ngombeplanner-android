@@ -474,4 +474,19 @@ public class StringResources {
         "Type of event",
         ""
     };
+    
+    public static final String[] death={
+        "Death",
+        ""
+    };
+    
+    public static final String[] acquisition={
+        "Acquisition",
+        ""
+    };
+    
+    public static final String[] new_cow_registration = {
+        "New Cow Registration",
+        ""
+    };
 }
