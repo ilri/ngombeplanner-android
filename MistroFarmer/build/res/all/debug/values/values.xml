@@ -33,6 +33,10 @@
         <item>Brown Swiss</item>
         <item>Zebu</item>
     </string-array>
+    <string-array name="calf_suckling_types_en">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
     <string-array name="causes_of_death_en">
         <item>Natural Causes</item>
         <item>Sickness</item>
@@ -825,6 +829,7 @@
     <string name="associated_servicing_en">Bull Services</string>
     <string name="breed_en">Breed</string>
     <string name="calf_registration_en">Calf Registration</string>
+    <string name="calf_suckling_en">Calf suckling</string>
     <string name="cancel_en">Cancel</string>
     <string name="cause_of_death_en">Cause of Death</string>
     <string name="country_not_found_en">The country you entered cannot be found</string>
@@ -888,6 +893,7 @@
     <string name="no_data_received_en">No data received</string>
     <string name="no_en">No</string>
     <string name="no_of_days_in_servicing_en">No. of Days in Servicing</string>
+    <string name="no_times_milked_in_a_day_en">Number of times cow is milked per day</string>
     <string name="number_of_cows_en">Number of Cows</string>
     <string name="okay_en">Okay</string>
     <string name="old_mobile_number_en">Old Mobile Number</string>

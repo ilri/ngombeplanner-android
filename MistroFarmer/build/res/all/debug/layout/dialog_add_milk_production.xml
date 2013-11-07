@@ -94,6 +94,40 @@
                     android:paddingLeft="20dp"
                     android:layout_weight="0.5"/>
             </TableRow>
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top">
+                <TextView
+                    android:id="@+id/no_milking_tv"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"/>
+                <EditText
+                    android:id="@+id/no_milking_et"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:paddingLeft="20dp"
+                    android:layout_weight="0.5"/>
+            </TableRow>
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top">
+                <TextView
+                    android:id="@+id/calf_suckling_tv"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"/>
+                <Spinner
+                    android:id="@+id/calf_suckling_s"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:layout_weight="0.5"/>
+            </TableRow>
         </TableLayout>
         <Button
             android:id="@+id/dialog_add_milk_add_b"

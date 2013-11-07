@@ -63,6 +63,11 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     private TextView dateTV;
     private EditText dateET;
     private DatePickerDialog datePickerDialog;
+    private TextView noMilkingTV;
+    private EditText noMilkingET;
+    private TextView calfSucklingTV;
+    private String[] calfSucklingTypes;
+    private Spinner calfSucklingS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -88,6 +93,10 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         quantityTypeTV=(TextView)addMilkProductionDialog.findViewById(R.id.quantity_type_tv);
         quantityTypeS=(Spinner)addMilkProductionDialog.findViewById(R.id.quantity_type_s);
         addMilkProductionAddB=(Button)addMilkProductionDialog.findViewById(R.id.dialog_add_milk_add_b);
+        noMilkingTV = (TextView)addMilkProductionDialog.findViewById(R.id.no_milking_tv);
+        noMilkingET = (EditText)addMilkProductionDialog.findViewById(R.id.no_milking_et);
+        calfSucklingTV = (TextView)addMilkProductionDialog.findViewById(R.id.calf_suckling_tv);
+        calfSucklingS = (Spinner)addMilkProductionDialog.findViewById(R.id.calf_suckling_s);
         addMilkProductionAddB.setOnClickListener(this);
 
         initTextInViews();
@@ -153,6 +162,15 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         quantityTypeS.setAdapter(quantityTypesArrayAdapter);
         if(defaultQuantityTypeIndex < quantityTypes.length)
             quantityTypeS.setSelection(defaultQuantityTypeIndex);
+
+
+        noMilkingTV.setText(Locale.getStringInLocale("no_times_milked_in_a_day",this));
+        calfSucklingTV.setText(Locale.getStringInLocale("calf_suckling",this));
+
+        calfSucklingTypes = Locale.getArrayInLocale("calf_suckling_types",this);
+        ArrayAdapter<String> calfSucklingTypesArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,calfSucklingTypes);
+        calfSucklingTypesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        calfSucklingS.setAdapter(calfSucklingTypesArrayAdapter);
     }
 
     @Override
@@ -309,7 +327,10 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                 if(milkingTimesInEN.length > 0){
                     milkingTime = milkingTimesInEN[timeS.getSelectedItemPosition()];
                 }
-                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString());
+
+                String[] calfSucklingTypesInEN = Locale.getArrayInLocale("calf_suckling_types",this,Locale.LOCALE_ENGLISH);
+                String calfSucklingType = calfSucklingTypesInEN[calfSucklingS.getSelectedItemPosition()];
+                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(),noMilkingET.getText().toString(),calfSucklingType);
             }
         }
 
@@ -338,16 +359,24 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             return false;
         }
         else if(quantityType.equals("Litres") || quantityType.equals("KGs")) {
-            if(Integer.parseInt(quantityET.getText().toString()) > 50) {
+            if(Integer.parseInt(quantityET.getText().toString()) > 30) {
                 Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
                 return false;
             }
         }
         else if(quantityType.equals("Cups")) {
-            if(Integer.parseInt(quantityET.getText().toString()) > (50*3.3)) {
+            if(Integer.parseInt(quantityET.getText().toString()) > (30*3.3)) {
                 Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
                 return false;
             }
+        }
+        if(noMilkingET.getText().toString()==null || noMilkingET.getText().toString().trim().length()==0){
+            Toast.makeText(this, Locale.getStringInLocale("enter_number_times_cow_milked",this),Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(Integer.parseInt(noMilkingET.getText().toString())>10){
+            Toast.makeText(this, Locale.getStringInLocale("milking_times_too_much",this), Toast.LENGTH_LONG).show();
+            return false;
         }
         return true;
     }
@@ -403,6 +432,8 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                 jsonObject.put("quantity",params[4]);
                 jsonObject.put("quantityType",params[5]);
                 jsonObject.put("date", params[6]);
+                jsonObject.put("noMilkingTimes",params[7]);
+                jsonObject.put("calfSuckling",params[8]);
                 String result=DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL);
                 Log.d(TAG,"data sent to server, result = "+result);
                 return result;

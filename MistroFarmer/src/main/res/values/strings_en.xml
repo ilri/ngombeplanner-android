@@ -180,4 +180,12 @@
     <string name="gps_narrowing_down_on_loc_en">Please wait while GPS narrows down on your location</string>
     <string name="event_only_for_female_cattle_en">The selected event can only occur in female cattle</string>
     <string name="other_countries_en">Other Countries</string>
+    <string name="no_times_milked_in_a_day_en">Number of times cow is milked per day</string>
+    <string name="calf_suckling_en">Calf suckling</string>
+    <string-array name="calf_suckling_types_en">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
+    <string name="enter_number_times_cow_milked_en">Please enter the number of times the cow is normally milked per day</string>
+    <string name="milking_times_too_much_en">Number of times cow is milked should not be more than 10</string>
 </resources>
