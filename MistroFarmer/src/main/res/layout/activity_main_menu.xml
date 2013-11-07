@@ -16,6 +16,13 @@
         android:paddingLeft="@dimen/normal_button_padding_side"
         android:paddingRight="@dimen/normal_button_padding_side"/>
     <Button
+        android:id="@+id/fertility_b"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_button_layout_height"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="@dimen/normal_button_padding_side"
+        android:paddingRight="@dimen/normal_button_padding_side"/>
+    <Button
             android:id="@+id/events_b"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normal_button_layout_height"

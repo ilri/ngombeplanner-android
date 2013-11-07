@@ -32,6 +32,8 @@
         </activity>
         <activity android:label="@string/title_activity_events_history" android:name="org.cgiar.ilri.mistro.farmer.EventsHistoryActivity">
         </activity>
+        <activity android:label="@string/title_activity_fertility" android:name="org.cgiar.ilri.mistro.farmer.FertilityActivity">
+        </activity>
     </application>
 
 </manifest>

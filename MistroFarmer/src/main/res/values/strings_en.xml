@@ -188,4 +188,7 @@
     </string-array>
     <string name="enter_number_times_cow_milked_en">Please enter the number of times the cow is normally milked per day</string>
     <string name="milking_times_too_much_en">Number of times cow is milked should not be more than 10</string>
+    <string name="fertility_en">Fertility</string>
+    <string name="servicing_en">Servicing</string>
+    <string name="calving_en">Calving</string>
 </resources>

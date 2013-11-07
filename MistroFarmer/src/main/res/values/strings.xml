@@ -14,5 +14,6 @@
     <string name="title_activity_events_history">Past Events</string>
     <string name="english">English</string>
     <string name="swahili">Kiswahili</string>
+    <string name="title_activity_fertility">Fertility</string>
 
 </resources>

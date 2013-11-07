@@ -18,6 +18,7 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
 {
     private static final String TAG="MainMenu";
     private Button milkProductionB;
+    private Button fertilityB;
     private Button eventsB;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,6 +28,8 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
 
         milkProductionB=(Button)this.findViewById(R.id.milk_production_b);
         milkProductionB.setOnClickListener(this);
+        fertilityB = (Button)this.findViewById(R.id.fertility_b);
+        fertilityB.setOnClickListener(this);
         eventsB =(Button)this.findViewById(R.id.events_b);
         eventsB.setOnClickListener(this);
 
@@ -58,7 +61,8 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
     private void initTextInViews()
     {
         this.setTitle(Locale.getStringInLocale("main_menu",this));
-        milkProductionB.setText(Locale.getStringInLocale("milk_production",this));
+        milkProductionB.setText(Locale.getStringInLocale("milk_production", this));
+        fertilityB.setText(Locale.getStringInLocale("fertility",this));
         eventsB.setText(Locale.getStringInLocale("events",this));
     }
 
@@ -68,6 +72,10 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
         if(view==milkProductionB)
         {
             Intent intent=new Intent(this,MilkProductionActivity.class);
+            startActivity(intent);
+        }
+        else if(view == fertilityB){
+            Intent intent=new Intent(this,FertilityActivity.class);
             startActivity(intent);
         }
         else if(view==eventsB)

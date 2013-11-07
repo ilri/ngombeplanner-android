@@ -22,7 +22,7 @@ class Authenticator {
 		$this->getCodes();
 		$this->database = new DatabaseHandler;
 		
-                if(isset($this->jsonObject['simCardSN'])){
+                if(isset($this->jsonObject['simCardSN']) && $this->jsonObject['simCardSN']!==""){
                     $simCardSN=$this->jsonObject['simCardSN'];
                     $query="SELECT `name` FROM `farmer` WHERE `sim_card_sn`='{$simCardSN}'";
                     $result = $this->database->runMySQLQuery($query, true);
