@@ -873,3 +873,13 @@
 [Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 53 ORDER BY id DESC
 [Wednesday, 6th November 2013 15:29:42] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 53 ORDER BY a.id DESC
 [Wednesday, 6th November 2013 15:29:42] [authentication.php] gracefully exiting
+[Thursday, 7th November 2013 07:21:46] [authentication.php] Starting Authenticator
+[Thursday, 7th November 2013 07:21:46] [authentication.php] obtaining POST request
+[Thursday, 7th November 2013 07:21:46] [authentication.php] getting settings from: ../../config/settings.ini
+[Thursday, 7th November 2013 07:21:46] [authentication.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 7th November 2013 07:21:46] [database.php] Starting DatabaseHandler
+[Thursday, 7th November 2013 07:21:46] [database.php] getting settings from: ../../config/settings.ini
+[Thursday, 7th November 2013 07:21:46] [database.php] getting response codes from: ../../config/response_codes.ini
+[Thursday, 7th November 2013 07:21:46] [database.php] connecting to ilri_mistro on localhost using root as the username
+[Thursday, 7th November 2013 07:21:46] [database.php] running query SELECT `name` FROM `farmer` WHERE `sim_card_sn`=''
+[Thursday, 7th November 2013 07:21:46] [authentication.php] gracefully exiting

@@ -72,7 +72,7 @@
         <item>Embryo Transfer</item>
     </string-array>
     <string name="maximum_of_four_breeds_en">A maximum of four breeds</string>
-    <string name="country_of_origin_en">Country of Origin</string>
+    <string name="country_of_origin_en">Sire\'s country of Origin</string>
     <string name="specify_en">Specify</string>
     <string name="straw_number_en">Straw Number</string>
     <string name="vet_used_en">Vet Used</string>

@@ -125,9 +125,11 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         ageS=(Spinner)this.findViewById(R.id.age_s);
         ageET=(EditText)this.findViewById(R.id.age_et);
         dateOfBirthTV=(TextView)this.findViewById(R.id.date_of_birth_tv);
+        dateOfBirthTV.setVisibility(TextView.GONE); //date of birth appears not to be necessary
         dateOfBirthET=(EditText)this.findViewById(R.id.date_of_birth_et);
         //dateOfBirthET.setOnFocusChangeListener(this);
         dateOfBirthET.setOnClickListener(this);
+        dateOfBirthET.setVisibility(TextView.GONE); //date of birth appears not to be necessary
         breedTV=(TextView)this.findViewById(R.id.breed_tv);
         breedET=(EditText)this.findViewById(R.id.breed_et);
         //breedET.setOnFocusChangeListener(this);

@@ -1331,3 +1331,4 @@
 [Wednesday, 6th November 2013 15:29:42] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC'
 [Wednesday, 6th November 2013 15:29:42] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC'
 [Wednesday, 6th November 2013 15:29:42] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 53 ORDER BY id DESC'
+[Thursday, 7th November 2013 07:21:46] [authentication.php] SIM card serial number () not matching any farmer. Sending user_not_authenticated response code back to client
