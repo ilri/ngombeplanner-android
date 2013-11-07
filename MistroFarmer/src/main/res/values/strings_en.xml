@@ -151,6 +151,10 @@
         <item>Bull Servicing</item>
         <item>Signs of Heat</item>
     </string-array>
+    <string-array name="cow_servicing_types_en">
+        <item>Artificial Insemination</item>
+        <item>Bull Servicing</item>
+    </string-array>
     <string name="enter_date_en">Please enter the date</string>
     <string name="date_in_future_en">Date you entered appears to be in the future</string>
     <string name="event_successfully_recorded_en">The event has been successfully recorded</string>
@@ -191,4 +195,7 @@
     <string name="fertility_en">Fertility</string>
     <string name="servicing_en">Servicing</string>
     <string name="calving_en">Calving</string>
+    <string name="select_service_type_en">Select servicing type</string>
+    <string name="artificial_inseminamtion_en">Artificial Insemination</string>
+    <string name="bull_servicing_en">Bull Servicing</string>
 </resources>

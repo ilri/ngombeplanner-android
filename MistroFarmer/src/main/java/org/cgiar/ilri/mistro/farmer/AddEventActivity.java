@@ -49,6 +49,11 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     public static final String TAG="AddEventActivity";
     private final String dateFormat="dd/MM/yyyy";
 
+    public static final String KEY_MODE="mode";
+    public static final String MODE_SERVICING="Servicing";
+    public static final String MODE_CALVING="Birth";
+    public static final String KEY_SERVICING_TYPE="servicingType";
+
     private TextView cowIdentifierTV;
     private Spinner cowIdentifierS;
     private TextView dateTV;
@@ -86,6 +91,9 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private String loadingPleaseWait;
     private List<Integer> servicingIDs;
     private List<String> servicingTypes;
+
+    private String presetMode;
+    private String presetServicingType;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -125,6 +133,15 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         initTextInViews();
         fetchCowIdentifiers();
         fetchServicingEvents();
+
+        Bundle bundle = this.getIntent().getExtras();
+        if(bundle!=null) {
+            presetMode = bundle.getString(KEY_MODE);
+            if(presetMode.equals(MODE_SERVICING)){
+                presetServicingType = bundle.getString(KEY_SERVICING_TYPE);
+            }
+            modeSet();
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,6 +164,68 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             return true;
         }
         return false;
+    }
+
+    private void modeSet(){
+        if(presetMode.equals(MODE_CALVING)){
+            String[] eventTypesInEN = Locale.getArrayInLocale("cow_event_types",this);
+            for(int i = 0; i < eventTypesInEN.length; i++){
+                if(eventTypesInEN[i].equals("Birth")){
+                    eventTypeS.setSelection(i);
+                    break;
+                }
+            }
+
+            eventTypeSelected();
+
+            this.setTitle(Locale.getStringInLocale("calving",this));
+            eventTypeTV.setVisibility(TextView.GONE);
+            eventTypeS.setVisibility(Spinner.GONE);
+            servicingTV.setVisibility(TextView.GONE);
+            servicingS.setVisibility(Spinner.GONE);
+        }
+        else if(presetMode.equals(MODE_SERVICING)){
+            if(presetServicingType.equals(Cow.SERVICE_TYPE_BULL)){
+                String[] eventTypesInEN = Locale.getArrayInLocale("cow_event_types",this);
+                for(int i = 0; i < eventTypesInEN.length; i++){
+                    if(eventTypesInEN[i].equals("Bull Servicing")){
+                        eventTypeS.setSelection(i);
+                        break;
+                    }
+                }
+
+                eventTypeSelected();
+
+                this.setTitle(Locale.getStringInLocale("bull_servicing",this));
+                eventTypeTV.setVisibility(TextView.GONE);
+                eventTypeS.setVisibility(Spinner.GONE);
+                noOfServicingDaysTV.setVisibility(TextView.GONE);
+                noOfServicingDaysET.setVisibility(EditText.GONE);
+                remarksTV.setVisibility(TextView.GONE);
+                remarksET.setVisibility(EditText.GONE);
+            }
+            else if(presetServicingType.equals(Cow.SERVICE_TYPE_AI)){
+                String[] eventTypesInEN = Locale.getArrayInLocale("cow_event_types",this);
+                for(int i = 0; i < eventTypesInEN.length; i++){
+                    if(eventTypesInEN[i].equals("Artificial Insemination")){
+                        eventTypeS.setSelection(i);
+                        break;
+                    }
+                }
+
+                eventTypeSelected();
+
+                this.setTitle(Locale.getStringInLocale("artificial_inseminamtion",this));
+                eventTypeTV.setVisibility(TextView.GONE);
+                eventTypeS.setVisibility(Spinner.GONE);
+                bullNameTV.setVisibility(TextView.VISIBLE);
+                bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                bullETNTV.setVisibility(TextView.VISIBLE);
+                bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                remarksTV.setVisibility(TextView.GONE);
+                remarksET.setVisibility(EditText.GONE);
+            }
+        }
     }
 
     private void initTextInViews()
@@ -214,88 +293,92 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
     }
 
+    private void eventTypeSelected(){
+        okayB.setText(Locale.getStringInLocale("okay",this));
+        dateTV.setText(Locale.getStringInLocale("date",this));
+        strawNumberTV.setVisibility(TextView.GONE);
+        strawNumberET.setVisibility(EditText.GONE);
+        vetUsedTV.setVisibility(TextView.GONE);
+        vetUsedET.setVisibility(EditText.GONE);
+        bullNameTV.setVisibility(TextView.GONE);
+        bullNameACTV.setVisibility(AutoCompleteTextView.GONE);
+        bullETNTV.setVisibility(TextView.GONE);
+        bullETNACTV.setVisibility(AutoCompleteTextView.GONE);
+        remarksTV.setVisibility(TextView.GONE);
+        remarksET.setVisibility(EditText.GONE);
+        cowIdentifierS.setVisibility(Spinner.GONE);
+        cowIdentifierTV.setVisibility(TextView.GONE);
+        noOfServicingDaysTV.setVisibility(TextView.GONE);
+        noOfServicingDaysET.setVisibility(EditText.GONE);
+        servicingTV.setVisibility(TextView.GONE);
+        servicingS.setVisibility(Spinner.GONE);
+        causeOfDeathTV.setVisibility(TextView.GONE);
+        causeOfDeathS.setVisibility(Spinner.GONE);
+        String[] eventTypesEN = Locale.getArrayInLocale("cow_event_types", this, Locale.LOCALE_ENGLISH);
+        if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {
+            birthEventSelected();
+            eventSubtypeTV.setVisibility(TextView.VISIBLE);
+            eventSubtypeS.setVisibility(Spinner.VISIBLE);
+            servicingTV.setVisibility(TextView.VISIBLE);
+            servicingS.setVisibility(Spinner.VISIBLE);
+            cowIdentifierS.setVisibility(Spinner.VISIBLE);
+            cowIdentifierTV.setVisibility(TextView.VISIBLE);
+            okayB.setText(Locale.getStringInLocale("next",this));
+        }
+        else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Abortion")) {
+            servicingTV.setVisibility(TextView.VISIBLE);
+            servicingS.setVisibility(Spinner.VISIBLE);
+            remarksTV.setVisibility(TextView.VISIBLE);
+            remarksET.setVisibility(EditText.VISIBLE);
+            cowIdentifierS.setVisibility(Spinner.VISIBLE);
+            cowIdentifierTV.setVisibility(TextView.VISIBLE);
+        }
+        else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Acquisition")) {
+            okayB.setText(Locale.getStringInLocale("next",this));
+        }
+        else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
+            strawNumberTV.setVisibility(TextView.VISIBLE);
+            strawNumberET.setVisibility(EditText.VISIBLE);
+            vetUsedTV.setVisibility(TextView.VISIBLE);
+            vetUsedET.setVisibility(EditText.VISIBLE);
+            remarksTV.setVisibility(TextView.VISIBLE);
+            remarksET.setVisibility(EditText.VISIBLE);
+            cowIdentifierS.setVisibility(Spinner.VISIBLE);
+            cowIdentifierTV.setVisibility(TextView.VISIBLE);
+        }
+        else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Bull Servicing")) {
+            bullNameTV.setVisibility(TextView.VISIBLE);
+            bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+            bullETNTV.setVisibility(TextView.VISIBLE);
+            bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+            remarksTV.setVisibility(TextView.VISIBLE);
+            remarksET.setVisibility(EditText.VISIBLE);
+            cowIdentifierS.setVisibility(Spinner.VISIBLE);
+            cowIdentifierTV.setVisibility(TextView.VISIBLE);
+            noOfServicingDaysTV.setVisibility(TextView.VISIBLE);
+            noOfServicingDaysET.setVisibility(EditText.VISIBLE);
+            dateTV.setText(Locale.getStringInLocale("start_date", this));
+        }
+        else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Death")) {
+            causeOfDeathTV.setVisibility(TextView.VISIBLE);
+            causeOfDeathS.setVisibility(Spinner.VISIBLE);
+            remarksTV.setVisibility(TextView.VISIBLE);
+            remarksET.setVisibility(EditText.VISIBLE);
+            cowIdentifierS.setVisibility(Spinner.VISIBLE);
+            cowIdentifierTV.setVisibility(TextView.VISIBLE);
+        }
+        else {
+            remarksTV.setVisibility(TextView.VISIBLE);
+            remarksET.setVisibility(EditText.VISIBLE);
+            cowIdentifierS.setVisibility(Spinner.VISIBLE);
+            cowIdentifierTV.setVisibility(TextView.VISIBLE);
+        }
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent == eventTypeS) {
-            okayB.setText(Locale.getStringInLocale("okay",this));
-            dateTV.setText(Locale.getStringInLocale("date",this));
-            strawNumberTV.setVisibility(TextView.GONE);
-            strawNumberET.setVisibility(EditText.GONE);
-            vetUsedTV.setVisibility(TextView.GONE);
-            vetUsedET.setVisibility(EditText.GONE);
-            bullNameTV.setVisibility(TextView.GONE);
-            bullNameACTV.setVisibility(AutoCompleteTextView.GONE);
-            bullETNTV.setVisibility(TextView.GONE);
-            bullETNACTV.setVisibility(AutoCompleteTextView.GONE);
-            remarksTV.setVisibility(TextView.GONE);
-            remarksET.setVisibility(EditText.GONE);
-            cowIdentifierS.setVisibility(Spinner.GONE);
-            cowIdentifierTV.setVisibility(TextView.GONE);
-            noOfServicingDaysTV.setVisibility(TextView.GONE);
-            noOfServicingDaysET.setVisibility(EditText.GONE);
-            servicingTV.setVisibility(TextView.GONE);
-            servicingS.setVisibility(Spinner.GONE);
-            causeOfDeathTV.setVisibility(TextView.GONE);
-            causeOfDeathS.setVisibility(Spinner.GONE);
-            String[] eventTypesEN = Locale.getArrayInLocale("cow_event_types", this, Locale.LOCALE_ENGLISH);
-            if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {
-                birthEventSelected();
-                eventSubtypeTV.setVisibility(TextView.VISIBLE);
-                eventSubtypeS.setVisibility(Spinner.VISIBLE);
-                servicingTV.setVisibility(TextView.VISIBLE);
-                servicingS.setVisibility(Spinner.VISIBLE);
-                cowIdentifierS.setVisibility(Spinner.VISIBLE);
-                cowIdentifierTV.setVisibility(TextView.VISIBLE);
-                okayB.setText(Locale.getStringInLocale("next",this));
-            }
-            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Abortion")) {
-                servicingTV.setVisibility(TextView.VISIBLE);
-                servicingS.setVisibility(Spinner.VISIBLE);
-                remarksTV.setVisibility(TextView.VISIBLE);
-                remarksET.setVisibility(EditText.VISIBLE);
-                cowIdentifierS.setVisibility(Spinner.VISIBLE);
-                cowIdentifierTV.setVisibility(TextView.VISIBLE);
-            }
-            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Acquisition")) {
-                okayB.setText(Locale.getStringInLocale("next",this));
-            }
-            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
-                strawNumberTV.setVisibility(TextView.VISIBLE);
-                strawNumberET.setVisibility(EditText.VISIBLE);
-                vetUsedTV.setVisibility(TextView.VISIBLE);
-                vetUsedET.setVisibility(EditText.VISIBLE);
-                remarksTV.setVisibility(TextView.VISIBLE);
-                remarksET.setVisibility(EditText.VISIBLE);
-                cowIdentifierS.setVisibility(Spinner.VISIBLE);
-                cowIdentifierTV.setVisibility(TextView.VISIBLE);
-            }
-            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Bull Servicing")) {
-                bullNameTV.setVisibility(TextView.VISIBLE);
-                bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
-                bullETNTV.setVisibility(TextView.VISIBLE);
-                bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);
-                remarksTV.setVisibility(TextView.VISIBLE);
-                remarksET.setVisibility(EditText.VISIBLE);
-                cowIdentifierS.setVisibility(Spinner.VISIBLE);
-                cowIdentifierTV.setVisibility(TextView.VISIBLE);
-                noOfServicingDaysTV.setVisibility(TextView.VISIBLE);
-                noOfServicingDaysET.setVisibility(EditText.VISIBLE);
-                dateTV.setText(Locale.getStringInLocale("start_date", this));
-            }
-            else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Death")) {
-                causeOfDeathTV.setVisibility(TextView.VISIBLE);
-                causeOfDeathS.setVisibility(Spinner.VISIBLE);
-                remarksTV.setVisibility(TextView.VISIBLE);
-                remarksET.setVisibility(EditText.VISIBLE);
-                cowIdentifierS.setVisibility(Spinner.VISIBLE);
-                cowIdentifierTV.setVisibility(TextView.VISIBLE);
-            }
-            else {
-                remarksTV.setVisibility(TextView.VISIBLE);
-                remarksET.setVisibility(EditText.VISIBLE);
-                cowIdentifierS.setVisibility(Spinner.VISIBLE);
-                cowIdentifierTV.setVisibility(TextView.VISIBLE);
-            }
+            eventTypeSelected();
         }
     }
 

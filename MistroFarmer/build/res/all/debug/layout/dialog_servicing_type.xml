@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_padding_side"
+        android:paddingRight="@dimen/activity_padding_side"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/bull_b"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normal_button_layout_height"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:paddingLeft="@dimen/normal_button_padding_side"
+            android:paddingRight="@dimen/normal_button_padding_side"/>
+        <Button
+            android:id="@+id/ai_b"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normal_button_layout_height"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:layout_marginBottom="@dimen/activity_f_r_text_view_margin_top"
+            android:paddingLeft="@dimen/normal_button_padding_side"
+            android:paddingRight="@dimen/normal_button_padding_side"/>
+    </LinearLayout>
+</ScrollView><!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/layout/dialog_servicing_type.xml -->
