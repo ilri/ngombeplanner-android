@@ -183,6 +183,24 @@
             android:gravity="center_horizontal"
             android:inputType="number"/>
         <TextView
+            android:id="@+id/live_births_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
+            android:visibility="gone"
+            android:textSize="@dimen/normal_text_size"/>
+        <EditText
+            android:id="@+id/live_births_et"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:textSize="@dimen/normal_text_size"
+            android:visibility="gone"
+            android:textColor="@color/text_input_color"
+            android:gravity="center_horizontal"
+            android:inputType="number"/>
+        <TextView
             android:id="@+id/remarks_tv"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"

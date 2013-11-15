@@ -5148,7 +5148,7 @@ Male
                 </string>
                 <string name="previous_en" >Previous
                 </string>
-                <string name="milking_times_too_much_en" >Number of times cow is milked should not be more than 10
+                <string name="milking_times_too_much_en" >No. of times cow is milked should not be more than 10
                 </string>
                 <string name="no_data_received_en" >No data received
                 </string>
@@ -5156,7 +5156,7 @@ Male
                 </string>
                 <string name="calf_registration_en" >Calf Registration
                 </string>
-                <string name="no_times_milked_in_a_day_en" >Number of times cow is milked per day
+                <string name="no_times_milked_in_a_day_en" >No. of times milked per day
                 </string>
                 <string name="service_type_used_en" >Service Type Used
                 </string>
@@ -5192,9 +5192,11 @@ Bull Servicing
                 </string>
                 <string name="your_mistro_id_en" >Your Mistro ID
                 </string>
-                <string name="next_screen_is_calf_registration_en" >In the next screen, you will be required to register the calf that has been born. Click next to register the calf
+                <string name="next_screen_is_calf_registration_en" >In the next screen, you will be required to register the delivered calf. Click next to register the calf
                 </string>
                 <string name="event_en" >Event
+                </string>
+                <string name="enter_previous_live_births_en" >Please enter the number of previous live births by this cow
                 </string>
                 <string name="milk_data_too_old_en" >You cannot enter milk production data that is more than one month old
                 </string>
@@ -5233,6 +5235,8 @@ Years
                 </string>
                 <string name="dam_en" >Dam
                 </string>
+                <string name="previous_live_births_en" >Number of previous live births
+                </string>
                 <string name="production_history_en" >Production History
                 </string>
                 <string name="problem_in_data_sent_en" >There seems to be a problem with the data you are trying to send.
@@ -5262,6 +5266,8 @@ Yes
                 </string-array>
 
                 <string name="remarks_en" >Remarks
+                </string>
+                <string name="no_sim_card_en" >No sim card present
                 </string>
                 <string name="artificial_inseminamtion_en" >Artificial Insemination
                 </string>

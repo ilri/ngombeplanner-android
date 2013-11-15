@@ -144,6 +144,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         }
         else if(view==loginButton)
         {
+            Log.d(TAG,"Login button clicked");
             if(loginSessionOn == false)
             {
                 //loginDialog.show();
@@ -162,11 +163,15 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
     {
         if(DataHandler.checkNetworkConnection(this,null))
         {
+            Log.d(TAG, "Authenticate user called");
             TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
             if(telephonyManager.getSimSerialNumber()!=null)
             {
                 UserAuthenticationThread authenticationThread=new UserAuthenticationThread();
                 authenticationThread.execute(telephonyManager.getSimSerialNumber());
+            }
+            else{
+                Toast.makeText(this,Locale.getStringInLocale("no_sim_card",this),Toast.LENGTH_LONG).show();
             }
 
         }

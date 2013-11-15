@@ -25,7 +25,7 @@ class MilkProductionAdder {
 		//get cow ID
 		$cowName = $this->jsonObject['cowName'];
                 $earTagNumber = $this->jsonObject['cowEarTagNumber'];
-                if(isset($this->jsonObject['simCardSN'])){
+                if(isset($this->jsonObject['simCardSN']) && $this->jsonObject['simCardSN']!==""){
                     $simCardSN = $this->jsonObject['simCardSN'];
                     $query = "SELECT cow.`id` FROM farmer INNER JOIN `cow` ON farmer.id = cow.`farmer_id` WHERE cow.`ear_tag_number` = '{$earTagNumber}' AND cow.`name` = '{$cowName}' AND farmer.`sim_card_sn` = '{$simCardSN}'";
                 }
@@ -56,7 +56,7 @@ class MilkProductionAdder {
 			}
 			if($dataThereFlag == false) {
 				$timeEAT = $this->getTime('Y-m-d H:i:s');
-				$query = "INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES({$cowID},'{$this->jsonObject['time']}',{$this->jsonObject['quantity']},'{$this->jsonObject['quantityType']}',STR_TO_DATE('{$dateEAT}', '%d/%m/%Y'),'$timeEAT')";
+				$query = "INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`,`calf_suckling`,`milking_per_day`) VALUES({$cowID},'{$this->jsonObject['time']}',{$this->jsonObject['quantity']},'{$this->jsonObject['quantityType']}',STR_TO_DATE('{$dateEAT}', '%d/%m/%Y'),'$timeEAT','{$this->jsonObject['calfSuckling']}',{$this->jsonObject['noMilkingTimes']})";
 				$this->database->runMySQLQuery($query, false, $this->codes['data_error']);
 				$this->logHandler->log(3, $this->TAG,"returning response code ".$this->codes['acknowledge_ok']);
 				echo $this->codes['acknowledge_ok'];

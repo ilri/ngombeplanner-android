@@ -1371,3 +1371,49 @@
 [Thursday, 7th November 2013 07:57:31] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC'
 [Thursday, 7th November 2013 07:57:31] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC'
 [Thursday, 7th November 2013 07:57:31] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 53 ORDER BY id DESC'
+[Wednesday, 13th November 2013 08:03:40] [database.php] no results gotten for  'SELECT `id` FROM `extension_personnel` WHERE `name` = 'Test''
+[Wednesday, 13th November 2013 10:13:40] [authentication.php] SIM card serial number () not matching any farmer. Sending user_not_authenticated response code back to client
+[Wednesday, 13th November 2013 11:19:47] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254028171000339030''
+[Wednesday, 13th November 2013 11:19:47] [authentication.php] SIM card serial number (89254028171000339030) not matching any farmer. Sending user_not_authenticated response code back to client
+[Wednesday, 13th November 2013 11:24:50] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 22 AND `date` = STR_TO_DATE('13/11/2013', '%d/%m/%Y')'
+[Wednesday, 13th November 2013 11:36:10] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 24 AND `date` = STR_TO_DATE('13/11/2013', '%d/%m/%Y')'
+[Wednesday, 13th November 2013 11:36:24] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 47 AND `date` = STR_TO_DATE('13/11/2013', '%d/%m/%Y')'
+[Wednesday, 13th November 2013 11:36:31] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 47 AND `date` = STR_TO_DATE('13/11/2013', '%d/%m/%Y')'
+[Wednesday, 13th November 2013 11:36:32] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 47 AND `date` = STR_TO_DATE('13/11/2013', '%d/%m/%Y')'
+[Wednesday, 13th November 2013 11:36:33] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 47 AND `date` = STR_TO_DATE('13/11/2013', '%d/%m/%Y')'
+[Wednesday, 13th November 2013 11:36:34] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 47 AND `date` = STR_TO_DATE('13/11/2013', '%d/%m/%Y')'
+[Wednesday, 13th November 2013 11:38:26] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 47 AND `date` = STR_TO_DATE('13/11/2013', '%d/%m/%Y')'
+[Wednesday, 13th November 2013 11:44:49] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'ear tag number' AND `farmer_id` = 16'
+[Wednesday, 13th November 2013 11:44:49] [general.php] Either more than one cow with the ear tag number 'ear tag number' gotten or none at all, returning -1
+[Wednesday, 13th November 2013 11:44:49] [database.php] no results gotten for  'INSERT INTO cow(`name`,`ear_tag_number`,`farmer_id`,`sex`) VALUES('bull name','ear tag number',16,'Male')'
+[Wednesday, 13th November 2013 11:58:17] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'cthby' AND `farmer_id` = 16'
+[Wednesday, 13th November 2013 11:58:17] [general.php] Either more than one cow with the ear tag number 'cthby' gotten or none at all, returning -1
+[Wednesday, 13th November 2013 11:58:17] [database.php] no results gotten for  'INSERT INTO cow(`name`,`ear_tag_number`,`farmer_id`,`sex`) VALUES('gvdfgg','cthby',16,'Male')'
+[Wednesday, 13th November 2013 12:05:13] [database.php] no results gotten for  'SELECT `id` FROM `straw` WHERE `straw_number` = '56788trt''
+[Wednesday, 13th November 2013 12:05:13] [database.php] no results gotten for  'SELECT `id` FROM `vet` WHERE `name` = 'Jason Rogena''
+[Wednesday, 13th November 2013 12:05:13] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = 'vtfub' AND `farmer_id` = 16'
+[Wednesday, 13th November 2013 12:05:13] [general.php] Either more than one cow with the ear tag number 'vtfub' gotten or none at all, returning -1
+[Wednesday, 13th November 2013 12:05:13] [database.php] no results gotten for  'INSERT INTO cow(`name`,`ear_tag_number`,`farmer_id`,`sex`) VALUES('bvvybb','vtfub',16,'Male')'
+[Wednesday, 13th November 2013 15:17:38] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029351003837441''
+[Wednesday, 13th November 2013 15:17:38] [authentication.php] SIM card serial number (89254029351003837441) not matching any farmer. Sending user_not_authenticated response code back to client
+[Wednesday, 13th November 2013 15:19:12] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029351003837441''
+[Wednesday, 13th November 2013 15:19:12] [authentication.php] SIM card serial number (89254029351003837441) not matching any farmer. Sending user_not_authenticated response code back to client
+[Wednesday, 13th November 2013 15:19:14] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029351003837441''
+[Wednesday, 13th November 2013 15:19:14] [authentication.php] SIM card serial number (89254029351003837441) not matching any farmer. Sending user_not_authenticated response code back to client
+[Wednesday, 13th November 2013 15:19:24] [database.php] no results gotten for  'SELECT `name` FROM `farmer` WHERE `sim_card_sn`='89254029351003837441''
+[Wednesday, 13th November 2013 15:19:24] [authentication.php] SIM card serial number (89254029351003837441) not matching any farmer. Sending user_not_authenticated response code back to client
+[Wednesday, 13th November 2013 15:44:30] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Wednesday, 13th November 2013 15:44:30] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Wednesday, 13th November 2013 15:44:30] [database.php] no results gotten for  'SELECT `id` FROM `deformity` WHERE `name` = '''
+[Wednesday, 13th November 2013 15:44:30] [general.php] Either more than one deformity with the name '' gotten or none at all, returning -1
+[Wednesday, 13th November 2013 15:44:30] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 31'
+[Wednesday, 13th November 2013 15:44:30] [general.php] Either more than one cow with the ear tag number '' gotten or none at all, returning -1
+[Wednesday, 13th November 2013 15:44:30] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 31'
+[Wednesday, 13th November 2013 15:44:30] [general.php] Either more than one cow with the ear tag number '' gotten or none at all, returning -1
+[Wednesday, 13th November 2013 15:44:30] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 31'
+[Wednesday, 13th November 2013 15:44:30] [general.php] Either more than one cow with the ear tag number '' gotten or none at all, returning -1
+[Wednesday, 13th November 2013 15:44:30] [database.php] no results gotten for  'SELECT `id` FROM `cow` WHERE `ear_tag_number` = '' AND `farmer_id` = 31'
+[Wednesday, 13th November 2013 15:44:30] [general.php] Either more than one cow with the ear tag number '' gotten or none at all, returning -1
+[Wednesday, 13th November 2013 15:44:52] [database.php] no results gotten for  'SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029351003837441' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')'
+[Wednesday, 13th November 2013 15:45:10] [database.php] no results gotten for  'SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029351003837441' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')'
+[Wednesday, 13th November 2013 15:45:33] [database.php] no results gotten for  'SELECT `cow`.`name` AS `cow_name`, `cow`.`ear_tag_number` , `cow_event`.*, `event`.`name` AS `event_name`, `vet`.`name` AS `vet_name` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id` = `cow`.`farmer_id` INNER JOIN `cow_event` ON `cow`.`id` = `cow_event`.`cow_id` INNER JOIN `event` ON `cow_event`.`event_id` = `event`.`id` INNER JOIN `vet` ON `cow_event`.`vet_id` = `vet`.`id` WHERE  `farmer`.`sim_card_sn` = '89254029351003837441' AND (`event`.`name` = 'Artificial Insemination' OR `event`.`name` = 'Bull Servicing')'

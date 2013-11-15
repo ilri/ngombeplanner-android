@@ -862,6 +862,7 @@
     <string name="enter_ear_tag_number_en">Please enter the cow\'s Ear Tag Number</string>
     <string name="enter_embryo_number_en">Please enter the Dam\'s embryo number</string>
     <string name="enter_number_times_cow_milked_en">Please enter the number of times the cow is normally milked per day</string>
+    <string name="enter_previous_live_births_en">Please enter the number of previous live births by this cow</string>
     <string name="enter_quantity_of_milk_produced_en">Please enter the quantity of the milk produced in KGs</string>
     <string name="enter_straw_number_en">Please enter the Sire\'s straw number</string>
     <string name="enter_your_mistro_id_en">Please enter your Mistro ID</string>
@@ -893,17 +894,18 @@
     <string name="milk_data_too_old_en">You cannot enter milk production data that is more than one month old</string>
     <string name="milk_production_en">Milk Production</string>
     <string name="milk_too_much_en">The quantity of milk you entered is too much</string>
-    <string name="milking_times_too_much_en">Number of times cow is milked should not be more than 10</string>
+    <string name="milking_times_too_much_en">No. of times cow is milked should not be more than 10</string>
     <string name="mobile_number_en">Mobile Number</string>
     <string name="name_en">Name</string>
     <string name="new_mobile_number_en">New Mobile Number</string>
     <string name="next_en">Next</string>
-    <string name="next_screen_is_calf_registration_en">In the next screen, you will be required to register the calf that has been born. Click next to register the calf</string>
+    <string name="next_screen_is_calf_registration_en">In the next screen, you will be required to register the delivered calf. Click next to register the calf</string>
     <string name="next_screen_is_cow_registration_en">In the next screen, you will be required to register the acquired cow. Click next to register the cow</string>
     <string name="no_data_received_en">No data received</string>
     <string name="no_en">No</string>
     <string name="no_of_days_in_servicing_en">No. of Days in Servicing</string>
-    <string name="no_times_milked_in_a_day_en">Number of times cow is milked per day</string>
+    <string name="no_sim_card_en">No sim card present</string>
+    <string name="no_times_milked_in_a_day_en">No. of times milked per day</string>
     <string name="number_of_cows_en">Number of Cows</string>
     <string name="okay_en">Okay</string>
     <string name="old_mobile_number_en">Old Mobile Number</string>
@@ -911,6 +913,7 @@
     <string name="other_countries_en">Other Countries</string>
     <string name="past_events_en">Past Events</string>
     <string name="previous_en">Previous</string>
+    <string name="previous_live_births_en">Number of previous live births</string>
     <string name="problem_connecting_to_server_en">A problem occurred while trying to connect to the Server</string>
     <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
     <string name="production_for_time_already_exists_en">You have already entered the amount you got from this cow from this date</string>

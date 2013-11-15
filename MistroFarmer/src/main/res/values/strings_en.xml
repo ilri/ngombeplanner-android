@@ -166,7 +166,7 @@
         <item>Still</item>
     </string-array>
     <string name="calf_registration_en">Calf Registration</string>
-    <string name="next_screen_is_calf_registration_en">In the next screen, you will be required to register the calf that has been born. Click next to register the calf</string>
+    <string name="next_screen_is_calf_registration_en">In the next screen, you will be required to register the delivered calf. Click next to register the calf</string>
     <string name="next_screen_is_cow_registration_en">In the next screen, you will be required to register the acquired cow. Click next to register the cow</string>
     <string name="event_too_old_en">You cannot add an event that occured more than one month ago</string>
     <string name="milk_data_too_old_en">You cannot enter milk production data that is more than one month old</string>
@@ -184,18 +184,21 @@
     <string name="gps_narrowing_down_on_loc_en">Please wait while GPS narrows down on your location</string>
     <string name="event_only_for_female_cattle_en">The selected event can only occur in female cattle</string>
     <string name="other_countries_en">Other Countries</string>
-    <string name="no_times_milked_in_a_day_en">Number of times cow is milked per day</string>
+    <string name="no_times_milked_in_a_day_en">No. of times milked per day</string>
     <string name="calf_suckling_en">Calf suckling</string>
     <string-array name="calf_suckling_types_en">
         <item>No</item>
         <item>Yes</item>
     </string-array>
     <string name="enter_number_times_cow_milked_en">Please enter the number of times the cow is normally milked per day</string>
-    <string name="milking_times_too_much_en">Number of times cow is milked should not be more than 10</string>
+    <string name="milking_times_too_much_en">No. of times cow is milked should not be more than 10</string>
     <string name="fertility_en">Fertility</string>
     <string name="servicing_en">Servicing</string>
     <string name="calving_en">Calving</string>
     <string name="select_service_type_en">Select servicing type</string>
     <string name="artificial_inseminamtion_en">Artificial Insemination</string>
     <string name="bull_servicing_en">Bull Servicing</string>
+    <string name="no_sim_card_en">No sim card present</string>
+    <string name="previous_live_births_en">Number of previous live births</string>
+    <string name="enter_previous_live_births_en">Please enter the number of previous live births by this cow</string>
 </resources>

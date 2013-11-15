@@ -43,7 +43,8 @@ public class DataHandler
     private static final String TAG="DataHandler";
     private static final int HTTP_POST_TIMEOUT =20000;
     private static final int HTTP_RESPONSE_TIMEOUT =20000;
-    private static final String BASE_URL="http://192.168.2.232/~jason/MistroFarmerProject/web";
+    private static final String BASE_URL="http://192.168.43.175/~jason/MistroFarmerProject/web";
+    //private static final String BASE_URL="http://10.0.2.2/~jason/MistroFarmerProject/web";
     //private static final String BASE_URL="http://hpc.ilri.cgiar.org/~jrogena/mistro_web";
     public static final String FARMER_REGISTRATION_URL="/php/farmer/registration.php";
     public static final String FARMER_AUTHENTICATION_URL="/php/farmer/authentication.php";
