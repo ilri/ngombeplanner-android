@@ -926,7 +926,7 @@
     <string name="production_for_time_already_exists_en">You have already entered the amount you got from this cow from this date</string>
     <string name="production_history_en">Production History</string>
     <string name="quantity_en">Quantity</string>
-    <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
+    <string name="reason_for_enabling_gps_en">You need to enable your GPS before you can continue. Press Okay to enable GPS</string>
     <string name="reason_for_enabling_network_en">This application requires an internet connection for it to work/. Press Okay to enable the internet</string>
     <string name="register_en">Register</string>
     <string name="remarks_en">Remarks</string>
