@@ -748,6 +748,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/ActionProviderWrapper.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/ActionProviderWrapper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/ActivityChooserModel.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/ActivityChooserModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/ActivityChooserView.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/widget/ActivityChooserView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/AndroidManifest.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/Animator.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/Animator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/AnimatorListenerAdapter.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/AnimatorListenerAdapter.java" />
@@ -760,7 +761,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CapitalizingTextView.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CapitalizingTextView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/CollapsibleActionView.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/CollapsibleActionView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CollapsibleActionViewWrapper.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CollapsibleActionViewWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatEvaluator.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatEvaluator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatKeyframeSet.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatKeyframeSet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsAbsSpinner.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsAbsSpinner.java" />
@@ -910,8 +910,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout-v14/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout-v14/sherlock_spinner_dropdown_item.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout/sherlock_spinner_item.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout-v14/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout-v14/sherlock_spinner_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MistroFarmer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1072,10 +1070,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataHandler.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DataHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="6" selection-start="1573" selection-end="1573" vertical-scroll-proportion="0.33389544" vertical-offset="108" max-vertical-offset="2628">
+            <state line="43" column="54" selection-start="1507" selection-end="1507" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="2628">
               <folding />
             </state>
           </provider>
@@ -1106,10 +1104,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddEventActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AddEventActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="470" column="84" selection-start="21072" selection-end="21072" vertical-scroll-proportion="-5.285714" vertical-offset="7556" max-vertical-offset="14796">
+            <state line="306" column="51" selection-start="13222" selection-end="13222" vertical-scroll-proportion="-4.010345" vertical-offset="7078" max-vertical-offset="14832">
               <folding />
             </state>
           </provider>
@@ -1845,13 +1843,13 @@
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_add_event.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_cow_registration.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java" />
-        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MainMenu.java" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" />
+        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" />
       </list>
     </option>
   </component>
@@ -2518,13 +2516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="470" column="84" selection-start="21072" selection-end="21072" vertical-scroll-proportion="-5.285714" vertical-offset="7556" max-vertical-offset="14796">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_breed.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2611,7 +2602,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="6" selection-start="1573" selection-end="1573" vertical-scroll-proportion="0.33389544" vertical-offset="108" max-vertical-offset="2628">
+        <state line="43" column="54" selection-start="1507" selection-end="1507" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="2628">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="306" column="51" selection-start="13222" selection-end="13222" vertical-scroll-proportion="-4.010345" vertical-offset="7078" max-vertical-offset="14832">
           <folding />
         </state>
       </provider>

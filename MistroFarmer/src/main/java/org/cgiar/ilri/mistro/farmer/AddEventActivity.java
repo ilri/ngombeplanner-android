@@ -301,6 +301,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private void eventTypeSelected(){
         okayB.setText(Locale.getStringInLocale("okay",this));
         dateTV.setText(Locale.getStringInLocale("date",this));
+        eventSubtypeTV.setVisibility(TextView.GONE);
+        eventSubtypeS.setVisibility(Spinner.GONE);
         strawNumberTV.setVisibility(TextView.GONE);
         strawNumberET.setVisibility(EditText.GONE);
         vetUsedTV.setVisibility(TextView.GONE);
