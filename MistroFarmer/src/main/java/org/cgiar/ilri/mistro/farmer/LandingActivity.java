@@ -222,11 +222,20 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             {
                 showRegisterOrLoginDialog();
             }
-            else
-            {
-                Toast.makeText(LandingActivity.this, welcomeText+" "+result,Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(LandingActivity.this,MainMenu.class);
-                startActivity(intent);
+            else {
+                try{
+                    JSONObject jsonObject = new JSONObject(result);
+                    String longitude = jsonObject.getString("gps_longitude");
+                    String latitude = jsonObject.getString("gps_latitude");
+                    Toast.makeText(LandingActivity.this, welcomeText+" "+jsonObject.getString("name"),Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(LandingActivity.this,MainMenu.class);
+                    intent.putExtra(MainMenu.KEY_LATITUDE,latitude);
+                    intent.putExtra(MainMenu.KEY_LONGITUDE,longitude);
+                    startActivity(intent);
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
             }
         }
 

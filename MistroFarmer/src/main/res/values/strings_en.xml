@@ -32,7 +32,7 @@
     <string name="sire_registration_en">Sire Registration</string>
     <string-array name="age_type_array_en">
         <item>Days</item>
-        <item>Weeks</item>
+        <item>Months</item>
         <item>Years</item>
     </string-array>
     <string-array name="breeds_array_en">
@@ -80,7 +80,7 @@
     <string name="servicing_bull_ear_tag_number_en">Servicing Bull Ear Tag Number</string>
     <string name="embryo_number_en">Embryo Number</string>
     <string name="enable_gps_en">Enable GPS</string>
-    <string name="reason_for_enabling_gps_en">You need to enable your GPS before register. Press Okay to enable GPS</string>
+    <string name="reason_for_enabling_gps_en">You need to enable your GPS before you can continue. Press Okay to enable GPS</string>
     <string name="cancel_en">Cancel</string>
     <string name="enable_network_en">Enable Internet</string>
     <string name="reason_for_enabling_network_en">This application requires an internet connection for it to work/. Press Okay to enable the internet</string>
@@ -138,7 +138,6 @@
     <string name="remarks_en">Remarks</string>
     <string name="event_en">Event</string>
     <string-array name="cow_event_types_en">
-        <item>Abortion</item>
         <item>Birth</item>
         <item>Start of Lactation</item>
         <item>Dry Off</item>
@@ -164,6 +163,8 @@
     <string-array name="birth_types_en">
         <item>Normal</item>
         <item>Still</item>
+        <item>Premature</item>
+        <item>Abortion</item>
     </string-array>
     <string name="calf_registration_en">Calf Registration</string>
     <string name="next_screen_is_calf_registration_en">In the next screen, you will be required to register the delivered calf. Click next to register the calf</string>
@@ -199,6 +200,11 @@
     <string name="artificial_inseminamtion_en">Artificial Insemination</string>
     <string name="bull_servicing_en">Bull Servicing</string>
     <string name="no_sim_card_en">No sim card present</string>
-    <string name="previous_live_births_en">Number of previous live births</string>
-    <string name="enter_previous_live_births_en">Please enter the number of previous live births by this cow</string>
+    <string name="previous_live_births_en">Number of previous births</string>
+    <string name="enter_previous_live_births_en">Please enter the number of previous births by this cow</string>
+    <string name="enter_dam_etn_en">Enter dam\'s ear tag number</string>
+    <string name="age_diff_from_dob_en">Cow\'s age appears to conflict with the cow\'s Date of birth</string>
+    <string name="action_not_allowed_en">Action not allowed here</string>
+    <string name="are_you_in_farm_en">Are you in your farm?</string>
+    <string name="farm_coords_successfully_reg_en">Farm coordinates successfully registered</string>
 </resources>

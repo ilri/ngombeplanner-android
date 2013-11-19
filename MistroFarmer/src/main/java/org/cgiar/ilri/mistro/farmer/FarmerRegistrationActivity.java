@@ -165,7 +165,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         loadingPleaseWait=Locale.getStringInLocale("loading_please_wait",this);
     }
 
-    private void cacheFarmer()
+    private void cacheFarmer(boolean isInFarm)
     {
         if(farmer==null)
         {
@@ -175,8 +175,14 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         farmer.setExtensionPersonnel(extensionPersonnelET.getText().toString());
         farmer.setMobileNumber(mobileNumberET.getText().toString());
         farmer.setCowNumber((numberOfCowsET.getText().toString()==null||numberOfCowsET.getText().toString().length()==0) ? 0:Integer.parseInt(numberOfCowsET.getText().toString()));//Integer.parseInt(numberOfCowsET.getText().toString())
-        farmer.setLatitude(latitude);
-        farmer.setLongitude(longitude);
+        if(isInFarm) {
+            farmer.setLatitude(latitude);
+            farmer.setLongitude(longitude);
+        }
+        else {
+            farmer.setLatitude("");
+            farmer.setLongitude("");
+        }
         farmer.setMode(Farmer.MODE_INITIAL_REGISTRATION);
         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         farmer.setSimCardSN(telephonyManager.getSimSerialNumber());
@@ -188,29 +194,32 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     {
         if(view==registerButton)
         {
-            if(validateInput())
+            buildGPSAlert();
+        }
+    }
+
+    public void registerButtonClicked(boolean isInFarm){
+        if(validateInput(isInFarm)) {
+            cacheFarmer(isInFarm);
+            String numberOfCowsString=numberOfCowsET.getText().toString();
+            if(numberOfCowsString!=null && numberOfCowsString.length()>0 && Integer.parseInt(numberOfCowsString)>0)
             {
-                cacheFarmer();
-                String numberOfCowsString=numberOfCowsET.getText().toString();
-                if(numberOfCowsString!=null && numberOfCowsString.length()>0 && Integer.parseInt(numberOfCowsString)>0)
+                int numberOfCows=Integer.valueOf(numberOfCowsString);
+                Intent intent=new Intent(FarmerRegistrationActivity.this,CowRegistrationActivity.class);
+                //intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
+                intent.putExtra(CowRegistrationActivity.KEY_INDEX,0);
+                intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS,numberOfCows);
+                Bundle bundle=new Bundle();
+                bundle.putParcelable(Farmer.PARCELABLE_KEY, farmer);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+            else
+            {
+                Log.d(TAG, farmer.getJsonObject().toString());
+                if (DataHandler.checkNetworkConnection(this, null))
                 {
-                    int numberOfCows=Integer.valueOf(numberOfCowsString);
-                    Intent intent=new Intent(FarmerRegistrationActivity.this,CowRegistrationActivity.class);
-                    //intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
-                    intent.putExtra(CowRegistrationActivity.KEY_INDEX,0);
-                    intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS,numberOfCows);
-                    Bundle bundle=new Bundle();
-                    bundle.putParcelable(Farmer.PARCELABLE_KEY, farmer);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-                else
-                {
-                    Log.d(TAG, farmer.getJsonObject().toString());
-                    if (DataHandler.checkNetworkConnection(this, null))
-                    {
-                        sendDataToServer(farmer.getJsonObject());
-                    }
+                    sendDataToServer(farmer.getJsonObject());
                 }
             }
         }
@@ -269,7 +278,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         serverRegistrationThread.execute(jsonObject);
     }
 
-    private boolean validateInput()
+    private boolean validateInput(boolean isInFarm)
     {
         String nameText=fullNameET.getText().toString();
         if(nameText==null || nameText.equals(""))
@@ -283,7 +292,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             Toast.makeText(this,mobileNoETEmptyWarning,Toast.LENGTH_LONG).show();
             return false;
         }
-        if(longitude == null || longitude.length() == 0 || latitude == null || latitude.length() == 0) {
+        if(isInFarm && (longitude == null || longitude.length() == 0 || latitude == null || latitude.length() == 0)) {
             Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
             return false;
         }
@@ -312,6 +321,29 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    private void buildGPSAlert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(Locale.getStringInLocale("are_you_in_farm",this));
+        builder.setPositiveButton(Locale.getStringInLocale("yes",this), new DialogInterface.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                registerButtonClicked(true);
+            }
+        });
+        builder.setNegativeButton(Locale.getStringInLocale("no",this), new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                registerButtonClicked(false);
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,Boolean>

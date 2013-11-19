@@ -21,7 +21,7 @@ public class Cow implements Parcelable, Serializable {
     public static final String SEX_MALE = "Male";
     public static final String SEX_FEMALE = "Female";
     public static final String AGE_TYPE_DAY = "Days";
-    public static final String AGE_TYPE_WEEK = "Weeks";
+    public static final String AGE_TYPE_MONTH = "Months";
     public static final String AGE_TYPE_YEAR = "Years";
     public static final String MODE_ADULT_COW_REGISTRATION = "adultCowRegistration";
     public static final String MODE_BORN_CALF_REGISTRATION = "bornCalfRegistration";

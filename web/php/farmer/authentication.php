@@ -24,12 +24,14 @@ class Authenticator {
 		
                 if(isset($this->jsonObject['simCardSN']) && $this->jsonObject['simCardSN']!==""){
                     $simCardSN=$this->jsonObject['simCardSN'];
-                    $query="SELECT `name` FROM `farmer` WHERE `sim_card_sn`='{$simCardSN}'";
+                    $query="SELECT `name`,`gps_longitude`,`gps_latitude` FROM `farmer` WHERE `sim_card_sn`='{$simCardSN}'";
                     $result = $this->database->runMySQLQuery($query, true);
                     if(sizeOf($result) == 1) {
                             $farmerName = $result[0]['name'];
                             $this->logHandler->log(3, $this->TAG,"the SIM card serial number being used (".$simCardSN.") is authenticated for '".$farmerName."'. Sending farmer's name back to client");
-                            echo $farmerName;
+                            //echo $farmerName;
+                            echo json_encode($result[0]);
+                            
                     }
                     else {
                             $this->logHandler->log(2, $this->TAG,"SIM card serial number (".$simCardSN.") not matching any farmer. Sending user_not_authenticated response code back to client");

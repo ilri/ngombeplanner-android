@@ -470,7 +470,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             String[] eventTypes = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
             String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
             String[] eventSubtypes = Locale.getArrayInLocale("birth_types",this,Locale.LOCALE_ENGLISH);
-            if(selectedEvent.equals("Birth") && eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal")) {
+            if(selectedEvent.equals("Birth") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
                 AlertDialog cowRegistrationAlertDialog = constructCalfRegistrationDialog();
                 cowRegistrationAlertDialog.show();
             }

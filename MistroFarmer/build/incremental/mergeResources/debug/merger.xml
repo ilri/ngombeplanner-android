@@ -5112,6 +5112,8 @@ true
                 </string>
                 <string name="logging_in_from_different_device_en" >It appears like you are logging in from an unusual device. Do you still want to login?
                 </string>
+                <string name="are_you_in_farm_en" >Are you in your farm?
+                </string>
                 <string name="sex_en" >Sex
                 </string>
                 <string name="servicing_bull_ear_tag_number_en" >Servicing Bull Ear Tag Number
@@ -5131,6 +5133,8 @@ Male
                 <string name="welcome_en" >Welcome
                 </string>
                 <string name="extension_p_en" >Extension Personnel
+                </string>
+                <string name="enter_dam_etn_en" >Enter dam\'s ear tag number
                 </string>
                 <string name="cow_en" >Cow
                 </string>
@@ -5196,7 +5200,7 @@ Bull Servicing
                 </string>
                 <string name="event_en" >Event
                 </string>
-                <string name="enter_previous_live_births_en" >Please enter the number of previous live births by this cow
+                <string name="enter_previous_live_births_en" >Please enter the number of previous births by this cow
                 </string>
                 <string name="milk_data_too_old_en" >You cannot enter milk production data that is more than one month old
                 </string>
@@ -5218,7 +5222,7 @@ Bull Servicing
 Days
                     </item>
                     <item>
-Weeks
+Months
                     </item>
                     <item>
 Years
@@ -5235,7 +5239,7 @@ Years
                 </string>
                 <string name="dam_en" >Dam
                 </string>
-                <string name="previous_live_births_en" >Number of previous live births
+                <string name="previous_live_births_en" >Number of previous births
                 </string>
                 <string name="production_history_en" >Production History
                 </string>
@@ -5314,6 +5318,8 @@ Injury
                 </string>
                 <string name="add_an_event_en" >Add an Event
                 </string>
+                <string name="action_not_allowed_en" >Action not allowed here
+                </string>
                 <string name="login_en" >Login
                 </string>
                 <string name="add_production_en" >Add Production
@@ -5323,6 +5329,8 @@ Injury
                 <string name="cow_registration_proper_en" >Cow Registration
                 </string>
                 <string name="main_menu_en" >Main Menu
+                </string>
+                <string name="age_diff_from_dob_en" >Cow\'s age appears to conflict with the cow\'s Date of birth
                 </string>
                 <string name="select_service_type_en" >Select servicing type
                 </string>
@@ -5360,9 +5368,6 @@ Other
                 </string>
 
                 <string-array name="cow_event_types_en" >
-                    <item>
-Abortion
-                    </item>
                     <item>
 Birth
                     </item>
@@ -5527,6 +5532,12 @@ Normal
                     <item>
 Still
                     </item>
+                    <item>
+Premature
+                    </item>
+                    <item>
+Abortion
+                    </item>
                 </string-array>
 
                 <string name="enter_your_mobile_no_en" >Please enter your phone number
@@ -5544,6 +5555,8 @@ Still
                 <string name="enter_embryo_number_en" >Please enter the Dam\'s embryo number
                 </string>
                 <string name="enter_ear_tag_no_or_name_en" >Please enter the cow\'s Ear Tag Number or Name
+                </string>
+                <string name="farm_coords_successfully_reg_en" >Farm coordinates successfully registered
                 </string>
             </file>
             <file

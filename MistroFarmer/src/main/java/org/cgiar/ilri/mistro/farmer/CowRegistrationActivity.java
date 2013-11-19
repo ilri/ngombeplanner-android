@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -75,6 +76,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private EditText strawNumberET;
     private TextView damTV;
     private Spinner damS;
+    private AutoCompleteTextView damACTV;
     private TextView embryoNumberTV;
     private EditText embryoNumberET;
     private TextView countryOfOriginTV;
@@ -125,11 +127,11 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         ageS=(Spinner)this.findViewById(R.id.age_s);
         ageET=(EditText)this.findViewById(R.id.age_et);
         dateOfBirthTV=(TextView)this.findViewById(R.id.date_of_birth_tv);
-        dateOfBirthTV.setVisibility(TextView.GONE); //date of birth appears not to be necessary
+        //dateOfBirthTV.setVisibility(TextView.GONE); //date of birth appears not to be necessary
         dateOfBirthET=(EditText)this.findViewById(R.id.date_of_birth_et);
         //dateOfBirthET.setOnFocusChangeListener(this);
         dateOfBirthET.setOnClickListener(this);
-        dateOfBirthET.setVisibility(TextView.GONE); //date of birth appears not to be necessary
+        //dateOfBirthET.setVisibility(TextView.GONE); //date of birth appears not to be necessary
         breedTV=(TextView)this.findViewById(R.id.breed_tv);
         breedET=(EditText)this.findViewById(R.id.breed_et);
         //breedET.setOnFocusChangeListener(this);
@@ -149,6 +151,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         strawNumberET = (EditText)this.findViewById(R.id.straw_number_et);
         damTV = (TextView)this.findViewById(R.id.dam_tv);
         damS = (Spinner)this.findViewById(R.id.dam_s);
+        damACTV = (AutoCompleteTextView)this.findViewById(R.id.dam_actv);
+        damACTV.setHint(Locale.getStringInLocale("enter_dam_etn",this));
         embryoNumberTV = (TextView)this.findViewById(R.id.embryo_number_tv);
         embryoNumberET = (EditText)this.findViewById(R.id.embryo_number_et);
         countryOfOriginTV = (TextView)this.findViewById(R.id.country_of_origin_tv);
@@ -224,7 +228,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                         if(ageTypesInEN[i].equals("Days") && thisCow.getAgeType().equals(Cow.AGE_TYPE_DAY)) {
                             ageS.setSelection(i);
                         }
-                        else if(ageTypesInEN[i].equals("Weeks") && thisCow.getAgeType().equals(Cow.AGE_TYPE_WEEK)) {
+                        else if(ageTypesInEN[i].equals("Months") && thisCow.getAgeType().equals(Cow.AGE_TYPE_MONTH)) {
                             ageS.setSelection(i);
                         }
                         else if(ageTypesInEN[i].equals("Years") && thisCow.getAgeType().equals(Cow.AGE_TYPE_YEAR)) {
@@ -277,7 +281,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                         validDams = new ArrayList<Cow>();
                         validDams.add(new Cow(false));
                         List<String> validDamNames = new ArrayList<String>();
-                        int damSelection = 0;
+                        int damSelection = -1;
                         validDamNames.add("");
                         for(int i = 0; i < allCows.size(); i++) {
                             if(i != index) {
@@ -312,7 +316,15 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                         ArrayAdapter<String> damsArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,validDamNames);
                         damsArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         damS.setAdapter(damsArrayAdapter);
-                        damS.setSelection(damSelection);
+                        if(damSelection != -1)
+                            damS.setSelection(damSelection);
+
+                        ArrayAdapter<String> damsACTVAdapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item,validDamNames);
+                        damACTV.setAdapter(damsACTVAdapter);
+                        if(damSelection != -1)
+                            damACTV.setText(validDamNames.get(damSelection));
+
+
                         for(int i = 0; i < serviceTypesInEN.length; i++) {
                             if(serviceTypesInEN[i].equals("Bull") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_BULL)) {
                                 serviceTypeS.setSelection(i);
@@ -336,6 +348,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                         strawNumberET.setVisibility(EditText.GONE);
                         damTV.setVisibility(TextView.GONE);
                         damS.setVisibility(Spinner.GONE);
+                        damACTV.setVisibility(AutoCompleteTextView.GONE);
                         embryoNumberTV.setVisibility(TextView.GONE);
                         embryoNumberET.setVisibility(EditText.GONE);
                     }
@@ -349,8 +362,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                         if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Days")) {
                             thisCow.setAgeType(Cow.AGE_TYPE_DAY);
                         }
-                        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Weeks")) {
-                            thisCow.setAgeType(Cow.AGE_TYPE_WEEK);
+                        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Months")) {
+                            thisCow.setAgeType(Cow.AGE_TYPE_MONTH);
                         }
                         else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Years")) {
                             thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
@@ -366,6 +379,17 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             }
 
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION) && index>0){
+                Toast.makeText(this,Locale.getStringInLocale("action_not_allowed",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void initTextInViews() {
@@ -546,7 +570,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         String dateString=String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear+1)+"/"+String.valueOf(year);//TODO: this might be a bug
         dateOfBirthET.setText(dateString);
-        setAgeFromDate(dateString);
+        //setAgeFromDate(dateString);
     }
 
     private void setAgeFromDate(String dateString) {
@@ -576,12 +600,12 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 }
             }
         }
-        else if(millisecondDifference>=604800000L&&millisecondDifference<31557600000L)//less than a year
+        else if(millisecondDifference>=604800000L&&millisecondDifference<2628000000L)//less than a year
         {
-            int weeks=(int)(millisecondDifference/604800000L);
-            ageET.setText(String.valueOf(weeks));
+            int months=(int)(millisecondDifference/2628000000L);
+            ageET.setText(String.valueOf(months));
             for(int i = 0; i < ageTypesInEN.length; i++) {
-                if(ageTypesInEN[i].equals("Weeks")) {
+                if(ageTypesInEN[i].equals("Months")) {
                     ageS.setSelection(i);
                 }
             }
@@ -709,7 +733,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             strawNumberTV.setVisibility(TextView.GONE);
             strawNumberET.setVisibility(EditText.GONE);
             damTV.setVisibility(TextView.VISIBLE);
-            damS.setVisibility(Spinner.VISIBLE);
+//            damS.setVisibility(Spinner.VISIBLE);
+            damS.setVisibility(Spinner.GONE);
+            damACTV.setVisibility(AutoCompleteTextView.VISIBLE);
             embryoNumberTV.setVisibility(TextView.GONE);
             embryoNumberET.setVisibility(EditText.GONE);
         }
@@ -719,7 +745,9 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             strawNumberTV.setVisibility(TextView.VISIBLE);
             strawNumberET.setVisibility(EditText.VISIBLE);
             damTV.setVisibility(TextView.VISIBLE);
-            damS.setVisibility(Spinner.VISIBLE);
+//            damS.setVisibility(Spinner.VISIBLE);
+            damS.setVisibility(Spinner.GONE);
+            damACTV.setVisibility(AutoCompleteTextView.VISIBLE);
             embryoNumberTV.setVisibility(TextView.GONE);
             embryoNumberET.setVisibility(EditText.GONE);
         }
@@ -730,6 +758,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             strawNumberET.setVisibility(EditText.GONE);
             damTV.setVisibility(TextView.GONE);
             damS.setVisibility(Spinner.GONE);
+            damACTV.setVisibility(AutoCompleteTextView.GONE);
             embryoNumberTV.setVisibility(TextView.VISIBLE);
             embryoNumberET.setVisibility(EditText.VISIBLE);
         }
@@ -759,6 +788,39 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 Toast.makeText(this,Locale.getStringInLocale("country_not_found",this),Toast.LENGTH_LONG).show();
                 return false;
             }
+            if(!dateOfBirthET.getText().toString().trim().equals("") && !ageET.getText().toString().trim().equals("")){
+                String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array",this,Locale.LOCALE_ENGLISH);
+                String ageType = ageTypesInEN[ageS.getSelectedItemPosition()];
+                float unitAge = 0;
+                if(ageType.equals("Years")){
+                    unitAge = 31557600000L;
+                }
+                else if(ageType.equals("Months")){
+                    unitAge = 2628000000L;
+                }
+                else if(ageType.equals("Days")){
+                    unitAge = 86400000L;
+                }
+
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat(dateFormat);
+
+                try
+                {
+                    Date enteredDate=simpleDateFormat.parse(dateOfBirthET.getText().toString());
+                    long enteredDateMs = enteredDate.getTime();
+                    long  ageMs = (long)(new Date().getTime() - (Integer.parseInt(ageET.getText().toString())*unitAge));
+                    long msDiff = Math.abs(ageMs - enteredDateMs);
+                    float unitDiff = msDiff / unitAge;
+                    if(unitDiff > 1){
+                        Toast.makeText(this, /*Locale.getStringInLocale("age_diff_from_dob",this)*/String.valueOf(unitDiff),Toast.LENGTH_LONG).show();
+                        return false;
+                    }
+                }
+                catch (ParseException e)
+                {
+                    e.printStackTrace();
+                }
+            }
         }
         return true;
     }
@@ -778,8 +840,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Days")) {
             thisCow.setAgeType(Cow.AGE_TYPE_DAY);
         }
-        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Weeks")) {
-            thisCow.setAgeType(Cow.AGE_TYPE_WEEK);
+        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Months")) {
+            thisCow.setAgeType(Cow.AGE_TYPE_MONTH);
         }
         else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Years")) {
             thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
@@ -808,8 +870,18 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 thisCow.setSire(sire);
 
                 Dam dam =new Dam();
-                dam.setName(validDams.get(damS.getSelectedItemPosition()).getName());
-                dam.setEarTagNumber(validDams.get(damS.getSelectedItemPosition()).getEarTagNumber());
+//                dam.setName(validDams.get(damS.getSelectedItemPosition()).getName());
+//                dam.setEarTagNumber(validDams.get(damS.getSelectedItemPosition()).getEarTagNumber());
+
+                for(int i = 0; i < validDams.size(); i++ ){
+                    if(damACTV.getText().toString().equals(validDams.get(i).getEarTagNumber()+" ("+validDams.get(i).getName()+")")){
+                        dam.setEarTagNumber(validDams.get(i).getEarTagNumber());
+                        dam.setName(validDams.get(i).getName());
+                    }
+                }
+                if(dam.getEmbryoNumber().trim().equals("")){
+                    dam.setEarTagNumber(damACTV.getText().toString());
+                }
                 thisCow.setDam(dam);
             }
             else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
@@ -820,15 +892,36 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 thisCow.setSire(sire);
 
                 Dam dam =new Dam();
-                dam.setName(validDams.get(damS.getSelectedItemPosition()).getName());
-                dam.setEarTagNumber(validDams.get(damS.getSelectedItemPosition()).getEarTagNumber());
+//                dam.setName(validDams.get(damS.getSelectedItemPosition()).getName());
+//                dam.setEarTagNumber(validDams.get(damS.getSelectedItemPosition()).getEarTagNumber());
+
+                for(int i = 0; i < validDams.size(); i++ ){
+                    if(damACTV.getText().toString().equals(validDams.get(i).getEarTagNumber()+" ("+validDams.get(i).getName()+")")){
+                        dam.setEarTagNumber(validDams.get(i).getEarTagNumber());
+                        dam.setName(validDams.get(i).getName());
+                    }
+                }
+                if(dam.getEmbryoNumber().trim().equals("")){
+                    dam.setEarTagNumber(damACTV.getText().toString());
+                }
                 thisCow.setDam(dam);
             }
             else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Embryo Transfer")) {
                 thisCow.setServiceType(Cow.SERVICE_TYPE_ET);
 
-                Dam dam = new Dam();
-                dam.setEmbryoNumber(embryoNumberET.getText().toString());
+                Dam dam =new Dam();
+//                dam.setName(validDams.get(damS.getSelectedItemPosition()).getName());
+//                dam.setEarTagNumber(validDams.get(damS.getSelectedItemPosition()).getEarTagNumber());
+
+                for(int i = 0; i < validDams.size(); i++ ){
+                    if(damACTV.getText().toString().equals(validDams.get(i).getEarTagNumber()+" ("+validDams.get(i).getName()+")")){
+                        dam.setEarTagNumber(validDams.get(i).getEarTagNumber());
+                        dam.setName(validDams.get(i).getName());
+                    }
+                }
+                if(dam.getEmbryoNumber().trim().equals("")){
+                    dam.setEarTagNumber(damACTV.getText().toString());
+                }
                 thisCow.setDam(dam);
             }
         }

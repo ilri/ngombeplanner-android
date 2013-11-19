@@ -186,7 +186,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
             android:textColor="@color/text_input_color"
-            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:visibility="gone"/>
+        <AutoCompleteTextView
+            android:id="@+id/dam_actv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+            android:textSize="@dimen/normal_text_size"
+            android:textColor="@color/text_input_color"/>
         <TextView
             android:id="@+id/embryo_number_tv"
             android:layout_height="wrap_content"

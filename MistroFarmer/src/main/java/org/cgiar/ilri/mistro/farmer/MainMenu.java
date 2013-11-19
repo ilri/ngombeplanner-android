@@ -1,7 +1,17 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,14 +22,24 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class MainMenu extends SherlockActivity implements View.OnClickListener
+public class MainMenu extends SherlockActivity implements View.OnClickListener, LocationListener
 {
     private static final String TAG="MainMenu";
+    public static final String KEY_LONGITUDE = "longitude";
+    public static final String KEY_LATITUDE = "latitude";
     private Button milkProductionB;
     private Button fertilityB;
     private Button eventsB;
+    private String regLatitude;
+    private String regLongitude;
+    private LocationManager locationManager;
+    private String longitude;
+    private String latitude;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -32,6 +52,13 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
         fertilityB.setOnClickListener(this);
         eventsB =(Button)this.findViewById(R.id.events_b);
         eventsB.setOnClickListener(this);
+
+        Bundle bundle=this.getIntent().getExtras();
+        if(bundle != null){
+            regLatitude = bundle.getString(KEY_LATITUDE);
+            regLongitude = bundle.getString(KEY_LONGITUDE);
+            registerCoords();
+        }
 
         initTextInViews();
     }
@@ -67,8 +94,8 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
     }
 
     @Override
-    public void onClick(View view)
-    {
+    public void onClick(View view) {
+        sendDataToServer();
         if(view==milkProductionB)
         {
             Intent intent=new Intent(this,MilkProductionActivity.class);
@@ -82,6 +109,138 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener
         {
             Intent intent=new Intent(this,EventsActivity.class);
             startActivity(intent);
+        }
+    }
+
+    private void registerCoords(){
+        if(regLongitude==null || regLongitude.trim().length()==0 || regLatitude==null || regLatitude.trim().length()==0){
+            buildGPSAlert();
+        }
+    }
+
+    private void buildGPSAlert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(Locale.getStringInLocale("are_you_in_farm",this));
+        builder.setPositiveButton(Locale.getStringInLocale("yes",this), new DialogInterface.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                getGPSCoordinates();
+            }
+        });
+        builder.setNegativeButton(Locale.getStringInLocale("no",this), new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void getGPSCoordinates() {
+        locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
+        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+        {
+            //Toast.makeText(this,"gps started",Toast.LENGTH_LONG).show();
+            Criteria criteria=new Criteria();
+            String provider=locationManager.getBestProvider(criteria,false);
+            Location location=locationManager.getLastKnownLocation(provider);
+            locationManager.requestLocationUpdates(provider,18000,1000,this);//If farmer  is moving at 200km/h, will still be able to update!
+            if(location!=null)
+            {
+                onLocationChanged(location);
+            }
+        }
+        else
+        {
+            AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle(Locale.getStringInLocale("enable_gps",this));
+            alertDialogBuilder
+                    .setMessage(Locale.getStringInLocale("reason_for_enabling_gps", this))
+                    .setCancelable(false)
+                    .setPositiveButton(Locale.getStringInLocale("okay",this), new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton(Locale.getStringInLocale("cancel",this), new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.cancel();
+                            Intent intent=new Intent(MainMenu.this,LandingActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+            AlertDialog alertDialog=alertDialogBuilder.create();
+            alertDialog.show();
+
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        latitude=String.valueOf(location.getLatitude());
+        longitude=String.valueOf(location.getLongitude());
+        Log.d(TAG,"latitude : "+latitude);
+        Log.d(TAG,"longitude : "+longitude);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    private void sendDataToServer(){
+        if(longitude!=null && longitude.trim().length()>0 && latitude!=null && latitude.trim().length()>0){
+            JSONObject jsonObject = new JSONObject();
+            try {
+                TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+                jsonObject.put("simCardSN",telephonyManager.getSimSerialNumber());
+                jsonObject.put("longitude",longitude);
+                jsonObject.put("latitude",latitude);
+                CoordinateHandler coordinateHandler = new CoordinateHandler();
+                coordinateHandler.execute(jsonObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class CoordinateHandler extends AsyncTask<JSONObject, Integer, String>{
+        @Override
+        protected String doInBackground(JSONObject... params) {
+            if(DataHandler.checkNetworkConnection(MainMenu.this, null)){
+                return DataHandler.sendDataToServer(params[0].toString(),DataHandler.FARMER_REGISTER_FARM_COORDS_URL);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            if(result!=null && result.equals(DataHandler.ACKNOWLEDGE_OK)){
+                Toast.makeText(MainMenu.this,Locale.getStringInLocale("farm_coords_successfully_reg", MainMenu.this),Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

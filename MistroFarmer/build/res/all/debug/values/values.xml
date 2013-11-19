@@ -4,12 +4,14 @@
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string-array name="age_type_array_en">
         <item>Days</item>
-        <item>Weeks</item>
+        <item>Months</item>
         <item>Years</item>
     </string-array>
     <string-array name="birth_types_en">
         <item>Normal</item>
         <item>Still</item>
+        <item>Premature</item>
+        <item>Abortion</item>
     </string-array>
     <string-array name="breeds_array_en">
         <item>Ayrshire</item>
@@ -250,7 +252,6 @@
     </string-array>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string-array name="cow_event_types_en">
-        <item>Abortion</item>
         <item>Birth</item>
         <item>Start of Lactation</item>
         <item>Dry Off</item>
@@ -820,16 +821,20 @@
     <string name="abs__searchview_description_voice">Voice search</string>
     <string name="abs__shareactionprovider_share_with">Share with</string>
     <string name="abs__shareactionprovider_share_with_application">Share with <ns1:g id="application_name" example="Bluetooth">%s</ns1:g></string>
+    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="action_not_allowed_en">Action not allowed here</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="action_settings">Settings</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
     <string name="add_an_event_en">Add an Event</string>
     <string name="add_en">Add</string>
     <string name="add_production_en">Add Production</string>
+    <string name="age_diff_from_dob_en">Cow\'s age appears to conflict with the cow\'s Date of birth</string>
     <string name="age_en">Age</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="app_name">Mistro Farmer</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="are_you_in_farm_en">Are you in your farm?</string>
     <string name="artificial_inseminamtion_en">Artificial Insemination</string>
     <string name="associated_servicing_en">Bull Services</string>
     <string name="breed_en">Breed</string>
@@ -857,12 +862,13 @@
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml -->
     <string name="english">English</string>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml -->
+    <string name="enter_dam_etn_en">Enter dam\'s ear tag number</string>
     <string name="enter_date_en">Please enter the date</string>
     <string name="enter_ear_tag_no_or_name_en">Please enter the cow\'s Ear Tag Number or Name</string>
     <string name="enter_ear_tag_number_en">Please enter the cow\'s Ear Tag Number</string>
     <string name="enter_embryo_number_en">Please enter the Dam\'s embryo number</string>
     <string name="enter_number_times_cow_milked_en">Please enter the number of times the cow is normally milked per day</string>
-    <string name="enter_previous_live_births_en">Please enter the number of previous live births by this cow</string>
+    <string name="enter_previous_live_births_en">Please enter the number of previous births by this cow</string>
     <string name="enter_quantity_of_milk_produced_en">Please enter the quantity of the milk produced in KGs</string>
     <string name="enter_straw_number_en">Please enter the Sire\'s straw number</string>
     <string name="enter_your_mistro_id_en">Please enter your Mistro ID</string>
@@ -875,6 +881,7 @@
     <string name="events_en">Events</string>
     <string name="extension_p_en">Extension Personnel</string>
     <string name="failed_to_authenticate_en">Unable to authenticate you. Please try logging in again</string>
+    <string name="farm_coords_successfully_reg_en">Farm coordinates successfully registered</string>
     <string name="farmer_registration_en">Farmer Registration</string>
     <string name="fertility_en">Fertility</string>
     <string name="finish_en">Finish</string>
@@ -913,7 +920,7 @@
     <string name="other_countries_en">Other Countries</string>
     <string name="past_events_en">Past Events</string>
     <string name="previous_en">Previous</string>
-    <string name="previous_live_births_en">Number of previous live births</string>
+    <string name="previous_live_births_en">Number of previous births</string>
     <string name="problem_connecting_to_server_en">A problem occurred while trying to connect to the Server</string>
     <string name="problem_in_data_sent_en">There seems to be a problem with the data you are trying to send.</string>
     <string name="production_for_time_already_exists_en">You have already entered the amount you got from this cow from this date</string>

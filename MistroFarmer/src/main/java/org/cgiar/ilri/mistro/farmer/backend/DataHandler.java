@@ -43,7 +43,7 @@ public class DataHandler
     private static final String TAG="DataHandler";
     private static final int HTTP_POST_TIMEOUT =20000;
     private static final int HTTP_RESPONSE_TIMEOUT =20000;
-    private static final String BASE_URL="http://192.168.43.175/~jason/MistroFarmerProject/web";
+    private static final String BASE_URL="http://192.168.2.232/~jason/MistroFarmerProject/web";
     //private static final String BASE_URL="http://10.0.2.2/~jason/MistroFarmerProject/web";
     //private static final String BASE_URL="http://hpc.ilri.cgiar.org/~jrogena/mistro_web";
     public static final String FARMER_REGISTRATION_URL="/php/farmer/registration.php";
@@ -55,6 +55,7 @@ public class DataHandler
     public static final String FARMER_ADD_COW_EVENT_URL="/php/farmer/add_cow_event.php";
     public static final String FARMER_FETCH_COW_EVENTS_HISTORY_URL="/php/farmer/fetch_cow_events_history.php";
     public static final String FARMER_FETCH_COW_SERVICING_EVENTS_URL="/php/farmer/fetch_servicing_events.php";
+    public static final String FARMER_REGISTER_FARM_COORDS_URL="/php/farmer/register_farm_coords.php";
     public static final String SP_KEY_LOCALE = "locale";
     public static final String SP_KEY_MILK_QUANTITY_TYPE = "milkQuantityTYpe";
 
