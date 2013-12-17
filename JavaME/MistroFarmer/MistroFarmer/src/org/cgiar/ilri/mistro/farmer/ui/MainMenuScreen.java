@@ -35,7 +35,7 @@ public class MainMenuScreen extends Form implements Screen, ActionListener{
     private BoxLayout parentBoxLayout;
     
     public MainMenuScreen(Midlet midlet, int locale, Farmer farmer) {
-        super(Locale.getStringInLocale(locale, StringResources.main_menu));
+        super(Locale.getStringInLocale(locale, StringResources.main_menu)+" ("+farmer.getFullName()+")");
         
         this.locale = locale;
         this.midlet = midlet;

@@ -4,4 +4,5 @@
     <color name="pressed_mistro">#CC96AA39</color>
     <color name="black_overlay">#66000000</color>
     <color name="text_input_color">#527270</color>
+    <color name="dialog_bg_color">#ffffff</color>
 </resources>

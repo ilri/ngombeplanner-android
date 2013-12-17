@@ -7,7 +7,8 @@
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_padding_side"
         android:paddingRight="@dimen/activity_padding_side"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/dialog_bg_color">
         <Button
             android:id="@+id/bull_b"
             android:layout_width="match_parent"

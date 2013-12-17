@@ -461,7 +461,7 @@ public class StringResources {
     };
     
     public static final String[] no_f_cow_births={
-        "Number of live births by this cow",
+        "Number of births by this cow",
         ""
     };
     
@@ -487,6 +487,14 @@ public class StringResources {
     
     public static final String[] new_cow_registration = {
         "New Cow Registration",
+        ""
+    };
+    public static final String[] no_tms_mlkd = {
+        "Number of times milked per day",
+        ""
+    };
+    public static final String[] calf_suckling ={
+        "Calf suckling?",
         ""
     };
 }

@@ -9,8 +9,12 @@ public class ArrayResources {
         {"Female","Male"},
         {"",""}
     };
+    public static final String[][] yes_no = {
+        {"No","Yes"},
+        {"",""}
+    };
     public static final String[][] age_type_array = {
-        {"Days","Weeks","Years"},
+        {"Days","Months","Years"},
         {"","",""}
     };
     public static final String[][] breeds_array = {
@@ -42,12 +46,12 @@ public class ArrayResources {
         {"","","","","","","","","","","",""}
     };
     public static final String[][] generic_cow_event_types = {
-        {"Abortion","Start of Lactation","Dry Off","Bloat","Sickness","Death","Acquisition","Sale","Signs of Heat"},
-        {"","","","","","","","",""}
+        {"Start of Lactation","Dry Off","Bloat","Sickness","Death","Acquisition","Sale","Signs of Heat"},
+        {"","","","","","","",""}
     };
     public static final String[][] birth_types = {
-        {"Normal","Still"},
-        {"",""}
+        {"Normal","Still","Premature","Abortion"},
+        {"","","",""}
     };
     public static final String[][] causes_of_death = {
         {"Natural Causes","Sickness","Injury"},

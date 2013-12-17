@@ -263,6 +263,7 @@ public class AddDeathEventScreen extends Form implements Screen, ActionListener{
             infoDialog.show(100, 100, 11, 11, true);
         }
         else if(response.equals(DataHandler.ACKNOWLEDGE_OK)){
+            farmer.update();
             text.setText(Locale.getStringInLocale(locale, StringResources.information_successfully_sent_to_server));
             infoDialog.show(100, 100, 11, 11, true);
             EventsScreen eventsScreen = new EventsScreen(midlet, locale, farmer);

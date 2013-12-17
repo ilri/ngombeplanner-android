@@ -54,6 +54,11 @@ public class Farmer {
             ex.printStackTrace();
         }
     }
+    
+    public void update(){
+        Thread thread = new Thread(new Updater());
+        thread.run();
+    }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
@@ -220,6 +225,54 @@ public class Farmer {
         public void run() {
             String message = DataHandler.sendDataToServer(farmerJSONObject, DataHandler.FARMER_REGISTRATION_URL);
             responseListener.responseGotten(Farmer.this, message);
+        }
+        
+    }
+    
+    private void actOnServerResponse(JSONObject farmerJSONObject){
+        try {
+            fullName = farmerJSONObject.getString("name");
+            extensionPersonnel="";
+            mobileNumber=farmerJSONObject.getString("mobile_no");
+            longitude=farmerJSONObject.getString("gps_longitude");
+            latitude=farmerJSONObject.getString("gps_latitude");
+            simCardSN=farmerJSONObject.getString("sim_card_sn");
+            
+            JSONArray cowsJSONArray = farmerJSONObject.getJSONArray("cows");
+            cows = new Cow[cowsJSONArray.length()];
+            for(int i=0; i < cows.length; i++){
+                cows[i] = new Cow(cowsJSONArray.getJSONObject(i));
+            }
+            
+            mode = "";
+        } 
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private class Updater implements Runnable{
+        
+        public void run() {
+            JSONObject jSONObject = new JSONObject();
+            try {
+                jSONObject.put("mobileNumber", mobileNumber);
+                String response = DataHandler.sendDataToServer(jSONObject, DataHandler.FARMER_AUTHENTICATION_URL);
+                if(response == null){
+                    System.err.println("no response from server");
+                }
+                else if(response.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)) {
+                    System.err.println("user not authenticated");
+                }
+                else{
+                    JSONObject farmerJSONObject = new JSONObject(response);
+                    actOnServerResponse(farmerJSONObject);
+                }
+                
+            } 
+            catch (JSONException ex) {
+                ex.printStackTrace();
+            }
         }
         
     }

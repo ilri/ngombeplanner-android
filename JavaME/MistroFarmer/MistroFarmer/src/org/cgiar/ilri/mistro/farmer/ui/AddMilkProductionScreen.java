@@ -50,6 +50,10 @@ public class AddMilkProductionScreen extends Form implements Screen{
     private TextField quantityTF;
     private Label quantityTypeL;
     private ComboBox quantityTypeCB;
+    private Label noTimesMilkedL;
+    private TextField noTimesMilkedTF;
+    private Label calfSucklingL;
+    private ComboBox calfSucklingCB;
     
     
     public AddMilkProductionScreen(Midlet midlet, int locale, Farmer farmer) {
@@ -96,6 +100,11 @@ public class AddMilkProductionScreen extends Form implements Screen{
                             calendar.setTime(date);
                             String dateString = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH)+1)+"/"+String.valueOf(calendar.get(Calendar.YEAR));
                             jsonObject.put("date", dateString);
+                            
+                            jsonObject.put("noMilkingTimes",noTimesMilkedTF.getText());
+                            
+                            String[] yesNoInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.yes_no);
+                            jsonObject.put("calfSuckling", yesNoInEN[calfSucklingCB.getSelectedIndex()]);
                             
                             Thread thread = new Thread(new MilkProductionHandler(jsonObject));
                             thread.run();
@@ -154,6 +163,25 @@ public class AddMilkProductionScreen extends Form implements Screen{
         setComponentStyle(quantityTypeCB, true);
         quantityTypeCB.setRenderer(new MistroListCellRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.quantity_types)));
         this.addComponent(quantityTypeCB);
+        
+        noTimesMilkedL = new Label(Locale.getStringInLocale(locale, StringResources.no_tms_mlkd));
+        setLabelStyle(noTimesMilkedL);
+        this.addComponent(noTimesMilkedL);
+        
+        noTimesMilkedTF = new TextField();
+        setComponentStyle(noTimesMilkedTF, false);
+        noTimesMilkedTF.setConstraint(TextField.NUMERIC);
+        noTimesMilkedTF.setInputModeOrder(new String[]{"123"});
+        this.addComponent(noTimesMilkedTF);
+        
+        calfSucklingL = new Label(Locale.getStringInLocale(locale, StringResources.calf_suckling));
+        setLabelStyle(calfSucklingL);
+        this.addComponent(calfSucklingL);
+        
+        calfSucklingCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.yes_no));
+        setComponentStyle(calfSucklingCB, true);
+        calfSucklingCB.setRenderer(new MistroListCellRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.yes_no)));
+        this.addComponent(calfSucklingCB);
     }
     
     private void setLabelStyle(Label label){
@@ -287,6 +315,7 @@ public class AddMilkProductionScreen extends Form implements Screen{
             infoDialog.show(100, 100, 11, 11, true);
         }
         else if(response.equals(DataHandler.ACKNOWLEDGE_OK)){
+            farmer.update();
             final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.success));
             infoDialog.setDialogType(Dialog.TYPE_INFO);
             final Command backCommand = new Command(Locale.getStringInLocale(locale, StringResources.okay));

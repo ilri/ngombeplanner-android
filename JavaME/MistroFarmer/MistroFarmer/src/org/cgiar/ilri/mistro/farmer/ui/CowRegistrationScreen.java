@@ -69,7 +69,8 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
     private Label sireL;
     private ComboBox sireCB;
     private Label damL;
-    private ComboBox damCB;
+    //private ComboBox damCB;
+    private TextField damTF;
     private Label countryL;
     private ComboBox countryCB;
     private Label strawNumberL;
@@ -275,11 +276,14 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
         setLabelStyle(damL);
         this.addComponent(damL);
         
-        String[] damNames = getValidDams();
+        /*String[] damNames = getValidDams();
         damCB = new ComboBox(damNames);
         setComponentStyle(damCB, true);
         damCB.setRenderer(new MistroListCellRenderer(damNames));
-        this.addComponent(damCB);
+        this.addComponent(damCB);*/
+        damTF = new TextField();
+        setComponentStyle(damTF, false);
+        this.addComponent(damTF);
         
         embryoNumberL = new Label(Locale.getStringInLocale(locale, StringResources.embryo_number));
         setLabelStyle(embryoNumberL);
@@ -382,9 +386,10 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
                 sire.setEarTagNumber(selectedSire.getEarTagNumber());
 
                 Dam dam = new Dam();
-                Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
+                /*Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
                 dam.setName(selectedDam.getName());
-                dam.setEarTagNumber(selectedDam.getEarTagNumber());
+                dam.setEarTagNumber(selectedDam.getEarTagNumber());*/
+                dam.setEarTagNumber(damTF.getText());
                 thisCow.setDam(dam);
                 String[] countries = GeneralArrays.all_countries;
                 sire.setCountryOfOrigin(countries[countryCB.getSelectedIndex()]);
@@ -396,9 +401,10 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
                 thisCow.setSire(sire);
 
                 Dam dam = new Dam();
-                Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
+                /*Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
                 dam.setName(selectedDam.getName());
-                dam.setEarTagNumber(selectedDam.getEarTagNumber());
+                dam.setEarTagNumber(selectedDam.getEarTagNumber());*/
+                dam.setEarTagNumber(damTF.getText());
                 thisCow.setDam(dam);
             }
             else if(serviceTypesInEN[serviceTypeCB.getSelectedIndex()].equals(Cow.SERVICE_TYPE_ET)){
@@ -574,7 +580,8 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
             setLabelFocusable(strawNumberL, false);
             setComponentFocusable(strawNumberTF, false);
             setLabelFocusable(damL, false);
-            setComponentFocusable(damCB, false);
+            //setComponentFocusable(damCB, false);
+            setComponentFocusable(damTF, false);
             setLabelFocusable(embryoNumberL, false);
             setComponentFocusable(embryoNumberTF, false);
             setLabelFocusable(countryL, false);
@@ -650,7 +657,8 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
             setComponentFocusable(sireCB, true);
             
             setLabelFocusable(damL, true);
-            setComponentFocusable(damCB, true);
+            //setComponentFocusable(damCB, true);
+            setComponentFocusable(damTF, true);
             
             setLabelFocusable(countryL, true);
             setComponentFocusable(countryCB, true);
@@ -666,7 +674,8 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
             setComponentFocusable(sireCB, false);
             
             setLabelFocusable(damL, true);
-            setComponentFocusable(damCB, true);
+            //setComponentFocusable(damCB, true);
+            setComponentFocusable(damTF, true);
             
             setLabelFocusable(countryL, false);
             setComponentFocusable(countryCB, false);
@@ -682,7 +691,8 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
             setComponentFocusable(sireCB, false);
             
             setLabelFocusable(damL, false);
-            setComponentFocusable(damCB, false);
+            //setComponentFocusable(damCB, false);
+            setComponentFocusable(damTF, false);
             
             setLabelFocusable(countryL, false);
             setComponentFocusable(countryCB, false);
@@ -845,6 +855,7 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
                     infoDialog.show(100, 100, 11, 11, true);
                }
                else if(message.equals(DataHandler.ACKNOWLEDGE_OK)){
+                    farmer.update();
                     final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.successful_registration));
                     infoDialog.setDialogType(Dialog.TYPE_CONFIRMATION);
                     final Command placiboCommand = new Command("");
@@ -919,6 +930,7 @@ public class CowRegistrationScreen extends Form implements Screen, ActionListene
                     infoDialog.show(100, 100, 11, 11, true);
                }
                else if(message.equals(DataHandler.ACKNOWLEDGE_OK)){
+                    farmer.update();
                     final Dialog infoDialog = new Dialog(Locale.getStringInLocale(locale, StringResources.successful_registration));
                     infoDialog.setDialogType(Dialog.TYPE_CONFIRMATION);
                     final Command placiboCommand = new Command("");

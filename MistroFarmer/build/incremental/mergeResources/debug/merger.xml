@@ -4917,6 +4917,8 @@ true
                 </color>
                 <color name="black_overlay" >#66000000
                 </color>
+                <color name="dialog_bg_color" >#ffffff
+                </color>
             </file>
             <file
                 path="/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml"

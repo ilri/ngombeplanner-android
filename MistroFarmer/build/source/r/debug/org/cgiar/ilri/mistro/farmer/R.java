@@ -722,15 +722,16 @@ containing a value of this type.
         public static final int abs__bright_foreground_disabled_holo_light=0x7f060003;
         public static final int abs__bright_foreground_holo_dark=0x7f060004;
         public static final int abs__bright_foreground_holo_light=0x7f060005;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f060009;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f06000a;
-        public static final int abs__primary_text_holo_dark=0x7f06000b;
-        public static final int abs__primary_text_holo_light=0x7f06000c;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f06000a;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f06000b;
+        public static final int abs__primary_text_holo_dark=0x7f06000c;
+        public static final int abs__primary_text_holo_light=0x7f06000d;
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/colors.xml 
          */
         public static final int black_overlay=0x7f060006;
-        public static final int pressed_mistro=0x7f060007;
-        public static final int text_input_color=0x7f060008;
+        public static final int dialog_bg_color=0x7f060007;
+        public static final int pressed_mistro=0x7f060008;
+        public static final int text_input_color=0x7f060009;
     }
     public static final class dimen {
         /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-land/values.xml 

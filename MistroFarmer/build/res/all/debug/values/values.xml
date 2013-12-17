@@ -318,6 +318,7 @@
     <color name="abs__bright_foreground_holo_light">@color/abs__background_holo_dark</color>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/colors.xml -->
     <color name="black_overlay">#66000000</color>
+    <color name="dialog_bg_color">#ffffff</color>
     <color name="pressed_mistro">#CC96AA39</color>
     <color name="text_input_color">#527270</color>
     <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/attrs.xml -->
