@@ -62,6 +62,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmer_registration);
+        DataHandler.requestPermissionToUseSMS(this);
 
         //init child views
         fullNameTV=(TextView)this.findViewById(R.id.full_name_tv);
@@ -217,10 +218,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             else
             {
                 Log.d(TAG, farmer.getJsonObject().toString());
-                if (DataHandler.checkNetworkConnection(this, null))
-                {
-                    sendDataToServer(farmer.getJsonObject());
-                }
+                sendDataToServer(farmer.getJsonObject());
             }
         }
     }
@@ -346,7 +344,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         alertDialog.show();
     }
 
-    private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,Boolean>
+    private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,String>
     {
         ProgressDialog progressDialog;
 
@@ -357,32 +355,41 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         }
 
         @Override
-        protected Boolean doInBackground(JSONObject... params)
+        protected String doInBackground(JSONObject... params)
         {
             Log.d(TAG,"sending registration data to server");
-            String responseString=DataHandler.sendDataToServer(params[0].toString(),DataHandler.FARMER_REGISTRATION_URL);
-            if(responseString!=null && responseString.equals(DataHandler.ACKNOWLEDGE_OK))
-            {
-                return true;
-            }
-            return false;
+            String responseString=DataHandler.sendDataToServer(FarmerRegistrationActivity.this, params[0].toString(),DataHandler.FARMER_REGISTRATION_URL, true);
+
+            return responseString;
         }
 
         @Override
-        protected void onPostExecute(Boolean result)
+        protected void onPostExecute(String result)
         {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            if(result)
+
+            if(result == null){
+                Toast.makeText(FarmerRegistrationActivity.this,"something went wrong",Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("generic_sms_error", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("no_service", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("radio_off", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("server_not_receive_sms", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.ACKNOWLEDGE_OK))
             {
                 Log.d(TAG,"data successfully sent to server");
                 Utils.showSuccessfullRegistration(FarmerRegistrationActivity.this,null);
                 //Intent intent=new Intent(FarmerRegistrationActivity.this,LandingActivity.class);
                 //startActivity(intent);
-            }
-            else
-            {
-                Toast.makeText(FarmerRegistrationActivity.this,"something went wrong",Toast.LENGTH_LONG).show();
             }
         }
     }

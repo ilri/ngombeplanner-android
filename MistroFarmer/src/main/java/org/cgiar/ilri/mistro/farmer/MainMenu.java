@@ -45,6 +45,7 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        DataHandler.requestPermissionToUseSMS(this);
 
         milkProductionB=(Button)this.findViewById(R.id.milk_production_b);
         milkProductionB.setOnClickListener(this);
@@ -228,10 +229,7 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
     private class CoordinateHandler extends AsyncTask<JSONObject, Integer, String>{
         @Override
         protected String doInBackground(JSONObject... params) {
-            if(DataHandler.checkNetworkConnection(MainMenu.this, null)){
-                return DataHandler.sendDataToServer(params[0].toString(),DataHandler.FARMER_REGISTER_FARM_COORDS_URL);
-            }
-            return null;
+            return DataHandler.sendDataToServer(MainMenu.this, params[0].toString(),DataHandler.FARMER_REGISTER_FARM_COORDS_URL, false);
         }
 
         @Override

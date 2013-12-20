@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Android.iml" filepath="$PROJECT_DIR$/Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/MistroFarmer/MistroFarmer.iml" filepath="$PROJECT_DIR$/MistroFarmer/MistroFarmer.iml" />
       <module fileurl="file://$PROJECT_DIR$/MistroFarmerProject.iml" filepath="$PROJECT_DIR$/MistroFarmerProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/actionbarsherlock.iml" filepath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/actionbarsherlock.iml" />

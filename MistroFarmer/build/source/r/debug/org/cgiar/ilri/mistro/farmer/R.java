@@ -9,18 +9,18 @@ package org.cgiar.ilri.mistro.farmer;
 
 public final class R {
     public static final class array {
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int age_type_array_en=0x7f040000;
         public static final int birth_types_en=0x7f040001;
         public static final int breeds_array_en=0x7f040002;
         public static final int calf_suckling_types_en=0x7f040003;
         public static final int causes_of_death_en=0x7f040004;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/countries.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/countries.xml 
          */
         public static final int common_countries=0x7f040005;
         public static final int countries=0x7f040006;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int cow_event_types_en=0x7f040007;
         public static final int cow_servicing_types_en=0x7f040008;
@@ -178,7 +178,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int activityChooserViewStyle=0x7f010061;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -704,10 +704,10 @@ containing a value of this type.
         public static final int windowSplitActionBar=0x7f01005f;
     }
     public static final class bool {
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w480dp/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w480dp/values.xml 
          */
         public static final int abs__action_bar_embed_tabs=0x7f050000;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-sw600dp/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-sw600dp/values.xml 
          */
         public static final int abs__action_bar_expanded_action_views_exclusive=0x7f050001;
         public static final int abs__config_actionMenuItemAllCaps=0x7f050002;
@@ -726,7 +726,7 @@ containing a value of this type.
         public static final int abs__primary_text_disable_only_holo_light=0x7f06000b;
         public static final int abs__primary_text_holo_dark=0x7f06000c;
         public static final int abs__primary_text_holo_light=0x7f06000d;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/colors.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/colors.xml 
          */
         public static final int black_overlay=0x7f060006;
         public static final int dialog_bg_color=0x7f060007;
@@ -734,12 +734,12 @@ containing a value of this type.
         public static final int text_input_color=0x7f060009;
     }
     public static final class dimen {
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-land/values.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-hdpi-1024x600/values.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-mdpi-1024x600/values.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-land-hdpi-1024x600/values.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-land-mdpi-1024x600/values.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-xlarge/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-land/values.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-hdpi-1024x600/values.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-mdpi-1024x600/values.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-land-hdpi-1024x600/values.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-large-land-mdpi-1024x600/values.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-xlarge/values.xml 
          */
         public static final int abs__action_bar_default_height=0x7f080000;
         public static final int abs__action_bar_icon_vertical_padding=0x7f080001;
@@ -756,12 +756,12 @@ containing a value of this type.
         public static final int abs__dropdownitem_text_padding_right=0x7f08000a;
         public static final int abs__search_view_preferred_width=0x7f08000b;
         public static final int abs__search_view_text_min_width=0x7f08000c;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/dimens.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/dimens.xml 
          */
         public static final int activity_f_r_edit_text_margin_left=0x7f08000d;
         public static final int activity_f_r_edit_text_margin_top=0x7f08000e;
         public static final int activity_f_r_text_view_margin_top=0x7f08000f;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-sw720dp-land/dimens.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values-sw720dp-land/dimens.xml 
          */
         public static final int activity_horizontal_margin=0x7f080010;
         public static final int activity_landing_btn_layout_height=0x7f080011;
@@ -927,7 +927,7 @@ containing a value of this type.
         public static final int abs__action_bar_subtitle=0x7f070011;
         public static final int abs__action_bar_title=0x7f070010;
         public static final int abs__action_context_bar=0x7f070021;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
          */
         public static final int abs__action_menu_divider=0x7f07000a;
         public static final int abs__action_menu_presenter=0x7f07000b;
@@ -1085,9 +1085,9 @@ containing a value of this type.
         public static final int wrap_content=0x7f070009;
     }
     public static final class integer {
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w360dp/values.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w500dp/values.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w600dp/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w360dp/values.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w500dp/values.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-w600dp/values.xml 
          */
         public static final int abs__max_action_buttons=0x7f090000;
     }
@@ -1157,23 +1157,23 @@ containing a value of this type.
         public static final int abs__searchview_description_voice=0x7f0a000a;
         public static final int abs__shareactionprovider_share_with=0x7f0a000b;
         public static final int abs__shareactionprovider_share_with_application=0x7f0a000c;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int action_not_allowed_en=0x7f0a000d;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
         public static final int action_settings=0x7f0a000e;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int add_an_event_en=0x7f0a000f;
         public static final int add_en=0x7f0a0010;
         public static final int add_production_en=0x7f0a0011;
         public static final int age_diff_from_dob_en=0x7f0a0012;
         public static final int age_en=0x7f0a0013;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
         public static final int app_name=0x7f0a0014;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int are_you_in_farm_en=0x7f0a0015;
         public static final int artificial_inseminamtion_en=0x7f0a0016;
@@ -1192,136 +1192,143 @@ containing a value of this type.
         public static final int cow_registration_proper_en=0x7f0a0023;
         public static final int dam_en=0x7f0a0024;
         public static final int dam_registration_en=0x7f0a0025;
-        public static final int date_en=0x7f0a0026;
-        public static final int date_in_future_en=0x7f0a0027;
-        public static final int date_of_birth_en=0x7f0a0028;
-        public static final int deformity_en=0x7f0a0029;
-        public static final int ear_tag_number_en=0x7f0a002a;
-        public static final int embryo_number_en=0x7f0a002b;
-        public static final int enable_gps_en=0x7f0a002c;
-        public static final int enable_network_en=0x7f0a002d;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
+        public static final int data_not_sent_to_server_en=0x7f0a0026;
+        public static final int date_en=0x7f0a0027;
+        public static final int date_in_future_en=0x7f0a0028;
+        public static final int date_of_birth_en=0x7f0a0029;
+        public static final int deformity_en=0x7f0a002a;
+        public static final int ear_tag_number_en=0x7f0a002b;
+        public static final int embryo_number_en=0x7f0a002c;
+        public static final int enable_gps_en=0x7f0a002d;
+        public static final int enable_network_en=0x7f0a002e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int english=0x7f0a002e;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        public static final int english=0x7f0a002f;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int enter_dam_etn_en=0x7f0a002f;
-        public static final int enter_date_en=0x7f0a0030;
-        public static final int enter_ear_tag_no_or_name_en=0x7f0a0031;
-        public static final int enter_ear_tag_number_en=0x7f0a0032;
-        public static final int enter_embryo_number_en=0x7f0a0033;
-        public static final int enter_number_times_cow_milked_en=0x7f0a0034;
-        public static final int enter_previous_live_births_en=0x7f0a0035;
-        public static final int enter_quantity_of_milk_produced_en=0x7f0a0036;
-        public static final int enter_straw_number_en=0x7f0a0037;
-        public static final int enter_your_mistro_id_en=0x7f0a0038;
-        public static final int enter_your_mobile_no_en=0x7f0a0039;
-        public static final int enter_your_name_en=0x7f0a003a;
-        public static final int event_en=0x7f0a003b;
-        public static final int event_only_for_female_cattle_en=0x7f0a003c;
-        public static final int event_successfully_recorded_en=0x7f0a003d;
-        public static final int event_too_old_en=0x7f0a003e;
-        public static final int events_en=0x7f0a003f;
-        public static final int extension_p_en=0x7f0a0040;
-        public static final int failed_to_authenticate_en=0x7f0a0041;
-        public static final int farm_coords_successfully_reg_en=0x7f0a0042;
-        public static final int farmer_registration_en=0x7f0a0043;
-        public static final int fertility_en=0x7f0a0044;
-        public static final int finish_en=0x7f0a0045;
-        public static final int full_name_en=0x7f0a0046;
-        public static final int gps_narrowing_down_on_loc_en=0x7f0a0047;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
+        public static final int enter_dam_etn_en=0x7f0a0030;
+        public static final int enter_date_en=0x7f0a0031;
+        public static final int enter_ear_tag_no_or_name_en=0x7f0a0032;
+        public static final int enter_ear_tag_number_en=0x7f0a0033;
+        public static final int enter_embryo_number_en=0x7f0a0034;
+        public static final int enter_number_times_cow_milked_en=0x7f0a0035;
+        public static final int enter_previous_live_births_en=0x7f0a0036;
+        public static final int enter_quantity_of_milk_produced_en=0x7f0a0037;
+        public static final int enter_straw_number_en=0x7f0a0038;
+        public static final int enter_your_mistro_id_en=0x7f0a0039;
+        public static final int enter_your_mobile_no_en=0x7f0a003a;
+        public static final int enter_your_name_en=0x7f0a003b;
+        public static final int event_en=0x7f0a003c;
+        public static final int event_only_for_female_cattle_en=0x7f0a003d;
+        public static final int event_successfully_recorded_en=0x7f0a003e;
+        public static final int event_too_old_en=0x7f0a003f;
+        public static final int events_en=0x7f0a0040;
+        public static final int extension_p_en=0x7f0a0041;
+        public static final int failed_to_authenticate_en=0x7f0a0042;
+        public static final int farm_coords_successfully_reg_en=0x7f0a0043;
+        public static final int farmer_registration_en=0x7f0a0044;
+        public static final int fertility_en=0x7f0a0045;
+        public static final int finish_en=0x7f0a0046;
+        public static final int full_name_en=0x7f0a0047;
+        public static final int generic_sms_error_en=0x7f0a0048;
+        public static final int gps_narrowing_down_on_loc_en=0x7f0a0049;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int hello_world=0x7f0a0048;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        public static final int hello_world=0x7f0a004a;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int information_successfully_sent_to_server_en=0x7f0a0049;
-        public static final int loading_please_wait_en=0x7f0a004a;
-        public static final int logging_in_from_different_device_en=0x7f0a004b;
-        public static final int login_anyway_en=0x7f0a004c;
-        public static final int login_en=0x7f0a004d;
-        public static final int main_menu_en=0x7f0a004e;
-        public static final int maximum_of_four_breeds_en=0x7f0a004f;
-        public static final int measurement_type_en=0x7f0a0050;
-        public static final int milk_data_too_old_en=0x7f0a0051;
-        public static final int milk_production_en=0x7f0a0052;
-        public static final int milk_too_much_en=0x7f0a0053;
-        public static final int milking_times_too_much_en=0x7f0a0054;
-        public static final int mobile_number_en=0x7f0a0055;
-        public static final int name_en=0x7f0a0056;
-        public static final int new_mobile_number_en=0x7f0a0057;
-        public static final int next_en=0x7f0a0058;
-        public static final int next_screen_is_calf_registration_en=0x7f0a0059;
-        public static final int next_screen_is_cow_registration_en=0x7f0a005a;
-        public static final int no_data_received_en=0x7f0a005b;
-        public static final int no_en=0x7f0a005c;
-        public static final int no_of_days_in_servicing_en=0x7f0a005d;
-        public static final int no_sim_card_en=0x7f0a005e;
-        public static final int no_times_milked_in_a_day_en=0x7f0a005f;
-        public static final int number_of_cows_en=0x7f0a0060;
-        public static final int okay_en=0x7f0a0061;
-        public static final int old_mobile_number_en=0x7f0a0062;
-        public static final int old_number_not_in_system_en=0x7f0a0063;
-        public static final int other_countries_en=0x7f0a0064;
-        public static final int past_events_en=0x7f0a0065;
-        public static final int previous_en=0x7f0a0066;
-        public static final int previous_live_births_en=0x7f0a0067;
-        public static final int problem_connecting_to_server_en=0x7f0a0068;
-        public static final int problem_in_data_sent_en=0x7f0a0069;
-        public static final int production_for_time_already_exists_en=0x7f0a006a;
-        public static final int production_history_en=0x7f0a006b;
-        public static final int quantity_en=0x7f0a006c;
-        public static final int reason_for_enabling_gps_en=0x7f0a006d;
-        public static final int reason_for_enabling_network_en=0x7f0a006e;
-        public static final int register_en=0x7f0a006f;
-        public static final int remarks_en=0x7f0a0070;
-        public static final int select_service_type_en=0x7f0a0071;
-        public static final int service_type_used_en=0x7f0a0072;
-        public static final int servicing_bull_ear_tag_number_en=0x7f0a0073;
-        public static final int servicing_bull_name_en=0x7f0a0074;
-        public static final int servicing_en=0x7f0a0075;
-        public static final int sex_en=0x7f0a0076;
-        public static final int sim_card_not_registered_en=0x7f0a0077;
-        public static final int sim_card_registration_en=0x7f0a0078;
-        public static final int sire_en=0x7f0a0079;
-        public static final int sire_registration_en=0x7f0a007a;
-        public static final int something_went_wrong_try_again_en=0x7f0a007b;
-        public static final int specify_en=0x7f0a007c;
-        public static final int start_date_en=0x7f0a007d;
-        public static final int straw_number_en=0x7f0a007e;
-        public static final int successful_registration_en=0x7f0a007f;
-        public static final int successful_registration_instructions_en=0x7f0a0080;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
+        public static final int incur_network_sms_charges_en=0x7f0a004b;
+        public static final int information_successfully_sent_to_server_en=0x7f0a004c;
+        public static final int loading_please_wait_en=0x7f0a004d;
+        public static final int logging_in_from_different_device_en=0x7f0a004e;
+        public static final int login_anyway_en=0x7f0a004f;
+        public static final int login_en=0x7f0a0050;
+        public static final int main_menu_en=0x7f0a0051;
+        public static final int maximum_of_four_breeds_en=0x7f0a0052;
+        public static final int measurement_type_en=0x7f0a0053;
+        public static final int milk_data_too_old_en=0x7f0a0054;
+        public static final int milk_production_en=0x7f0a0055;
+        public static final int milk_too_much_en=0x7f0a0056;
+        public static final int milking_times_too_much_en=0x7f0a0057;
+        public static final int mobile_number_en=0x7f0a0058;
+        public static final int name_en=0x7f0a0059;
+        public static final int new_mobile_number_en=0x7f0a005a;
+        public static final int next_en=0x7f0a005b;
+        public static final int next_screen_is_calf_registration_en=0x7f0a005c;
+        public static final int next_screen_is_cow_registration_en=0x7f0a005d;
+        public static final int no_data_received_en=0x7f0a005e;
+        public static final int no_en=0x7f0a005f;
+        public static final int no_of_days_in_servicing_en=0x7f0a0060;
+        public static final int no_service_en=0x7f0a0061;
+        public static final int no_sim_card_en=0x7f0a0062;
+        public static final int no_times_milked_in_a_day_en=0x7f0a0063;
+        public static final int number_of_cows_en=0x7f0a0064;
+        public static final int okay_en=0x7f0a0065;
+        public static final int old_mobile_number_en=0x7f0a0066;
+        public static final int old_number_not_in_system_en=0x7f0a0067;
+        public static final int other_countries_en=0x7f0a0068;
+        public static final int past_events_en=0x7f0a0069;
+        public static final int previous_en=0x7f0a006a;
+        public static final int previous_live_births_en=0x7f0a006b;
+        public static final int problem_connecting_to_server_en=0x7f0a006c;
+        public static final int problem_in_data_sent_en=0x7f0a006d;
+        public static final int production_for_time_already_exists_en=0x7f0a006e;
+        public static final int production_history_en=0x7f0a006f;
+        public static final int quantity_en=0x7f0a0070;
+        public static final int radio_off_en=0x7f0a0071;
+        public static final int reason_for_enabling_gps_en=0x7f0a0072;
+        public static final int reason_for_enabling_network_en=0x7f0a0073;
+        public static final int register_en=0x7f0a0074;
+        public static final int remarks_en=0x7f0a0075;
+        public static final int select_service_type_en=0x7f0a0076;
+        public static final int server_not_receive_sms_en=0x7f0a0077;
+        public static final int service_type_used_en=0x7f0a0078;
+        public static final int servicing_bull_ear_tag_number_en=0x7f0a0079;
+        public static final int servicing_bull_name_en=0x7f0a007a;
+        public static final int servicing_en=0x7f0a007b;
+        public static final int sex_en=0x7f0a007c;
+        public static final int sim_card_not_registered_en=0x7f0a007d;
+        public static final int sim_card_registration_en=0x7f0a007e;
+        public static final int sire_en=0x7f0a007f;
+        public static final int sire_registration_en=0x7f0a0080;
+        public static final int sms_charges_en=0x7f0a0081;
+        public static final int something_went_wrong_try_again_en=0x7f0a0082;
+        public static final int specify_en=0x7f0a0083;
+        public static final int start_date_en=0x7f0a0084;
+        public static final int straw_number_en=0x7f0a0085;
+        public static final int successful_registration_en=0x7f0a0086;
+        public static final int successful_registration_instructions_en=0x7f0a0087;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int swahili=0x7f0a0081;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        public static final int swahili=0x7f0a0088;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int time_en=0x7f0a0082;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings.xml 
+        public static final int time_en=0x7f0a0089;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int title_activity_add_event=0x7f0a0083;
-        public static final int title_activity_cow_registration=0x7f0a0084;
-        public static final int title_activity_events=0x7f0a0085;
-        public static final int title_activity_events_history=0x7f0a0086;
-        public static final int title_activity_farmer_registration=0x7f0a0087;
-        public static final int title_activity_fertility=0x7f0a0088;
-        public static final int title_activity_main_menu=0x7f0a0089;
-        public static final int title_activity_milk_procution_history=0x7f0a008a;
-        public static final int title_activity_milk_production=0x7f0a008b;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/strings_en.xml 
+        public static final int title_activity_add_event=0x7f0a008a;
+        public static final int title_activity_cow_registration=0x7f0a008b;
+        public static final int title_activity_events=0x7f0a008c;
+        public static final int title_activity_events_history=0x7f0a008d;
+        public static final int title_activity_farmer_registration=0x7f0a008e;
+        public static final int title_activity_fertility=0x7f0a008f;
+        public static final int title_activity_main_menu=0x7f0a0090;
+        public static final int title_activity_milk_procution_history=0x7f0a0091;
+        public static final int title_activity_milk_production=0x7f0a0092;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int today_en=0x7f0a008c;
-        public static final int type_of_birth_en=0x7f0a008d;
-        public static final int vet_used_en=0x7f0a008e;
-        public static final int welcome_en=0x7f0a008f;
-        public static final int yes_en=0x7f0a0090;
-        public static final int yesterday_en=0x7f0a0091;
-        public static final int your_mistro_id_en=0x7f0a0092;
+        public static final int today_en=0x7f0a0093;
+        public static final int type_of_birth_en=0x7f0a0094;
+        public static final int vet_used_en=0x7f0a0095;
+        public static final int welcome_en=0x7f0a0096;
+        public static final int yes_en=0x7f0a0097;
+        public static final int yesterday_en=0x7f0a0098;
+        public static final int your_mistro_id_en=0x7f0a0099;
     }
     public static final class style {
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v11/styles.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v14/styles.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/styles.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values-v11/styles.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values-v14/styles.xml 
          */
         public static final int ActionBar_Solid_Mistro=0x7f0b0000;
         public static final int ActionBar_Transparent_Mistro=0x7f0b0001;
@@ -1335,11 +1342,11 @@ containing a value of this type.
         public static final int FullscreenTheme=0x7f0b0008;
         public static final int PopupMenu_Mistro=0x7f0b0009;
         public static final int ProgressBar_Mistro=0x7f0b000a;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
          */
         public static final int Sherlock___TextAppearance_Small=0x7f0b000b;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v11/values.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v11/values.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml 
          */
         public static final int Sherlock___Theme=0x7f0b000c;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0b000d;
@@ -1377,18 +1384,18 @@ containing a value of this type.
         public static final int TextAppearance_Sherlock_Widget_PopupMenu_Large=0x7f0b002d;
         public static final int TextAppearance_Sherlock_Widget_PopupMenu_Small=0x7f0b002e;
         public static final int TextAppearance_Sherlock_Widget_TextView_SpinnerItem=0x7f0b002f;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/styles.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v11/styles.xml 
- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v14/styles.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/styles.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values-v11/styles.xml 
+ From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values-v14/styles.xml 
          */
         public static final int Theme_Mistro=0x7f0b0030;
         public static final int Theme_Mistro_Widget=0x7f0b0031;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
          */
         public static final int Theme_Sherlock=0x7f0b0032;
         public static final int Theme_Sherlock_Light=0x7f0b0033;
         public static final int Theme_Sherlock_Light_DarkActionBar=0x7f0b0034;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml 
          */
         public static final int Theme_Sherlock_Light_NoActionBar=0x7f0b0035;
         public static final int Theme_Sherlock_NoActionBar=0x7f0b0036;
@@ -1441,7 +1448,7 @@ containing a value of this type.
         public static final int Widget_Sherlock_TextView_SpinnerItem=0x7f0b0065;
     }
     public static final class styleable {
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values/attrs.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/attrs.xml 
            <p>Includes the following attributes:</p>
            <table>
            <colgroup align="left" />
@@ -1476,7 +1483,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name android:buttonBarStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarStyle = 0;
-        /**  From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values/values.xml 
            <p>Includes the following attributes:</p>
            <table>
            <colgroup align="left" />

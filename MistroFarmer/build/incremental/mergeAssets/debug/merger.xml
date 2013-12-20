@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merger>
 
-    <dataSet config="MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar" >
-        <source path="/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/assets" />
+    <dataSet config="AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar" >
+        <source path="/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/assets" />
     </dataSet>
     <dataSet config="main" >
-        <source path="/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/assets" />
+        <source path="/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/debug/assets" />
+        <source path="/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/debug/assets" />
     </dataSet>
 
 </merger>

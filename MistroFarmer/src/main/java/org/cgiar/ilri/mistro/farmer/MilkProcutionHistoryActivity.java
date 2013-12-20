@@ -54,6 +54,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milk_production_history);
+        DataHandler.requestPermissionToUseSMS(this);
 
         productionHistoryIDs=new ArrayList<String>();
         metrics=new DisplayMetrics();
@@ -109,18 +110,15 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
 
     private void fetchProductionHistory()
     {
-        if(DataHandler.checkNetworkConnection(this,null))
+        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        ProductionHistoryThread productionHistoryThread=new ProductionHistoryThread();
+        if(productionHistoryIDs.size()==0)
         {
-            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-            ProductionHistoryThread productionHistoryThread=new ProductionHistoryThread();
-            if(productionHistoryIDs.size()==0)
-            {
-                productionHistoryThread.execute(telephonyManager.getSimSerialNumber(),"-1");
-            }
-            else
-            {
-                productionHistoryThread.execute(telephonyManager.getSimSerialNumber(),productionHistoryIDs.get(productionHistoryIDs.size()-1));
-            }
+            productionHistoryThread.execute(telephonyManager.getSimSerialNumber(),"-1");
+        }
+        else
+        {
+            productionHistoryThread.execute(telephonyManager.getSimSerialNumber(),productionHistoryIDs.get(productionHistoryIDs.size()-1));
         }
     }
 
@@ -142,7 +140,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
             {
                 jsonObject.put("simCardSN",params[0]);
                 jsonObject.put("fromID",params[1]);
-                String result=DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_FETCH_MILK_PRODUCTION_HISTORY_URL);
+                String result=DataHandler.sendDataToServer(MilkProcutionHistoryActivity.this, jsonObject.toString(),DataHandler.FARMER_FETCH_MILK_PRODUCTION_HISTORY_URL, true);
                 Log.d(TAG,"result gotten from server = "+result);
                 return result;
             }
@@ -161,6 +159,18 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
             if(result==null)
             {
                 Toast.makeText(MilkProcutionHistoryActivity.this,"server error",Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                Toast.makeText(MilkProcutionHistoryActivity.this, Locale.getStringInLocale("generic_sms_error", MilkProcutionHistoryActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+                Toast.makeText(MilkProcutionHistoryActivity.this, Locale.getStringInLocale("no_service", MilkProcutionHistoryActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+                Toast.makeText(MilkProcutionHistoryActivity.this, Locale.getStringInLocale("radio_off", MilkProcutionHistoryActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                Toast.makeText(MilkProcutionHistoryActivity.this, Locale.getStringInLocale("server_not_receive_sms", MilkProcutionHistoryActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.NO_DATA))
             {

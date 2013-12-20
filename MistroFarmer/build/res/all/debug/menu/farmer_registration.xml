@@ -7,4 +7,4 @@
           android:title="@string/swahili"
           android:orderInCategory="2"
           android:showAsAction="never" />
-</menu><!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/menu/farmer_registration.xml -->
+</menu><!-- From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/menu/farmer_registration.xml -->

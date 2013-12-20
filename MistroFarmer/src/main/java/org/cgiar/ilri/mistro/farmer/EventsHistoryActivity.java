@@ -54,6 +54,7 @@ public class EventsHistoryActivity extends SherlockActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_history);
+        DataHandler.requestPermissionToUseSMS(this);
 
         eventHistoryIDs = new ArrayList<String>();
         metrics=new DisplayMetrics();
@@ -107,17 +108,13 @@ public class EventsHistoryActivity extends SherlockActivity {
     }
 
     private void fetchEventsHistory() {
-        if(DataHandler.checkNetworkConnection(this, null)) {
-            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-            CowEventHistoryThread cowEventHistoryThread =new CowEventHistoryThread();
-            if(eventHistoryIDs.size() == 0){//first time
-                cowEventHistoryThread.execute(telephonyManager.getSimSerialNumber(), "-1");
-            }
-            else {
-                cowEventHistoryThread.execute(telephonyManager.getSimSerialNumber(), eventHistoryIDs.get(eventHistoryIDs.size()-1));
-            }
-
-
+        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        CowEventHistoryThread cowEventHistoryThread =new CowEventHistoryThread();
+        if(eventHistoryIDs.size() == 0){//first time
+            cowEventHistoryThread.execute(telephonyManager.getSimSerialNumber(), "-1");
+        }
+        else {
+            cowEventHistoryThread.execute(telephonyManager.getSimSerialNumber(), eventHistoryIDs.get(eventHistoryIDs.size()-1));
         }
     }
 
@@ -138,7 +135,7 @@ public class EventsHistoryActivity extends SherlockActivity {
             try {
                 jsonObject.put("simCardSN",params[0]);
                 jsonObject.put("fromID",params[1]);
-                result = DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_FETCH_COW_EVENTS_HISTORY_URL);
+                result = DataHandler.sendDataToServer(EventsHistoryActivity.this, jsonObject.toString(),DataHandler.FARMER_FETCH_COW_EVENTS_HISTORY_URL, true);
             }
             catch (JSONException e) {
                 e.printStackTrace();
@@ -154,6 +151,18 @@ public class EventsHistoryActivity extends SherlockActivity {
             progressDialog.dismiss();
             if(result == null) {
                 Toast.makeText(EventsHistoryActivity.this, serverError, Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                Toast.makeText(EventsHistoryActivity.this, Locale.getStringInLocale("generic_sms_error", EventsHistoryActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+                Toast.makeText(EventsHistoryActivity.this, Locale.getStringInLocale("no_service", EventsHistoryActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+                Toast.makeText(EventsHistoryActivity.this, Locale.getStringInLocale("radio_off", EventsHistoryActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                Toast.makeText(EventsHistoryActivity.this, Locale.getStringInLocale("server_not_receive_sms", EventsHistoryActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.NO_DATA)) {
                 Toast.makeText(EventsHistoryActivity.this, noDataReceived, Toast.LENGTH_LONG).show();

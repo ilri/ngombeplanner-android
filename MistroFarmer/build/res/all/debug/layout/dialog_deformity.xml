@@ -28,4 +28,4 @@
             android:id="@+id/dialog_deformity_okay_b"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normal_button_layout_height"/>
-</LinearLayout><!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/layout/dialog_deformity.xml -->
+</LinearLayout><!-- From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/layout/dialog_deformity.xml -->

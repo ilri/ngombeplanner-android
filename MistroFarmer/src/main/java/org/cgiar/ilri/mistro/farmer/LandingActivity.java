@@ -57,6 +57,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
+        DataHandler.requestPermissionToUseSMS(this);
 
         //initialize child views
         loginButton=(Button)this.findViewById(R.id.login_button);
@@ -161,19 +162,15 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
 
     private void authenticateUser()
     {
-        if(DataHandler.checkNetworkConnection(this,null))
+        Log.d(TAG, "Authenticate user called");
+        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        if(telephonyManager.getSimSerialNumber()!=null)
         {
-            Log.d(TAG, "Authenticate user called");
-            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-            if(telephonyManager.getSimSerialNumber()!=null)
-            {
-                UserAuthenticationThread authenticationThread=new UserAuthenticationThread();
-                authenticationThread.execute(telephonyManager.getSimSerialNumber());
-            }
-            else{
-                Toast.makeText(this,Locale.getStringInLocale("no_sim_card",this),Toast.LENGTH_LONG).show();
-            }
-
+            UserAuthenticationThread authenticationThread=new UserAuthenticationThread();
+            authenticationThread.execute(telephonyManager.getSimSerialNumber());
+        }
+        else{
+            Toast.makeText(this,Locale.getStringInLocale("no_sim_card",this),Toast.LENGTH_LONG).show();
         }
     }
 
@@ -198,7 +195,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             {
                 jsonObject.put("simCardSN",params[0]);
                 //jsonObject.put("mobileNumber",params[1]);
-                String result = DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_AUTHENTICATION_URL);
+                String result = DataHandler.sendDataToServer(LandingActivity.this, jsonObject.toString(),DataHandler.FARMER_AUTHENTICATION_URL, true);
                 return result;
             }
             catch (JSONException e)
@@ -217,6 +214,18 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             if(result==null)
             {
                 Toast.makeText(LandingActivity.this,serverError,Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                Toast.makeText(LandingActivity.this, Locale.getStringInLocale("generic_sms_error", LandingActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+                Toast.makeText(LandingActivity.this, Locale.getStringInLocale("no_service", LandingActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+                Toast.makeText(LandingActivity.this, Locale.getStringInLocale("radio_off", LandingActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                Toast.makeText(LandingActivity.this, Locale.getStringInLocale("server_not_receive_sms", LandingActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED))
             {
@@ -268,15 +277,11 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
 
     private void registerSimCard()
     {
-        if(DataHandler.checkNetworkConnection(this,null))
+        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        if(telephonyManager.getSimSerialNumber()!=null)
         {
-            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-            if(telephonyManager.getSimSerialNumber()!=null)
-            {
-                SimCardRegistrationThread simCardRegistrationThread=new SimCardRegistrationThread();
-                simCardRegistrationThread.execute(oldMobileNumberET.getText().toString(),newMobileNumberET.getText().toString(),telephonyManager.getSimSerialNumber());
-            }
-
+            SimCardRegistrationThread simCardRegistrationThread=new SimCardRegistrationThread();
+            simCardRegistrationThread.execute(oldMobileNumberET.getText().toString(),newMobileNumberET.getText().toString(),telephonyManager.getSimSerialNumber());
         }
     }
 
@@ -301,7 +306,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
                 jsonObject.put("oldMobileNumber",params[0]);
                 jsonObject.put("newMobileNumber",params[1]);
                 jsonObject.put("newSimCardSN",params[2]);
-                result= DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_SIM_CARD_REGISTRATION_URL);
+                result= DataHandler.sendDataToServer(LandingActivity.this, jsonObject.toString(),DataHandler.FARMER_SIM_CARD_REGISTRATION_URL, true);
                 return result;
             }
             catch (JSONException e)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Mistro Farmer</string>
+    <string name="app_name">Ngombe Planner</string>
     <string name="title_activity_farmer_registration">Register Farmer</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>

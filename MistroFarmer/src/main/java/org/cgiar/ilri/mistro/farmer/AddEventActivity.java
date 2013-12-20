@@ -101,6 +101,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+        DataHandler.requestPermissionToUseSMS(this);
 
         cowIdentifierTV=(TextView)findViewById(R.id.cow_identifier_tv);
         cowIdentifierS=(Spinner)findViewById(R.id.cow_identifier_s);
@@ -467,57 +468,53 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
 
     private void sendEvent()
     {
-        if(validateInput() && DataHandler.checkNetworkConnection(this,null))
-        {
-            String[] eventTypes = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
-            String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
-            String[] eventSubtypes = Locale.getArrayInLocale("birth_types",this,Locale.LOCALE_ENGLISH);
-            if(selectedEvent.equals("Birth") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
-                AlertDialog cowRegistrationAlertDialog = constructCalfRegistrationDialog();
-                cowRegistrationAlertDialog.show();
-            }
-            else if(selectedEvent.equals("Acquisition")) {
-                AlertDialog cowRegistrationAlertDialog = constructCowRegistrationDialog();
-                cowRegistrationAlertDialog.show();
-            }
-            else {
-                String selectedCowETN = cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()];
-                String selectedCowName = cowNameArray[cowIdentifierS.getSelectedItemPosition()];
-                TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-                String serialNumber = telephonyManager.getSimSerialNumber();
-                JSONObject jsonObject = new JSONObject();
-                try
-                {
-                    String[] causesOfDeathInEN = Locale.getArrayInLocale("causes_of_death",AddEventActivity.this,Locale.LOCALE_ENGLISH);
-                    jsonObject.put("simCardSN", serialNumber);
-                    jsonObject.put("cowEarTagNumber", selectedCowETN);
-                    jsonObject.put("cowName", selectedCowName);
-                    jsonObject.put("date", dateET.getText().toString());
-                    jsonObject.put("eventType", selectedEvent);
-                    jsonObject.put("remarks", remarksET.getText().toString());
-                    jsonObject.put("strawNumber", strawNumberET.getText().toString());
-                    jsonObject.put("vetUsed", vetUsedET.getText().toString());
-                    jsonObject.put("bullName", bullNameACTV.getText().toString());
-                    jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
-                    jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
-                    if(servicingIDs != null) {
-                        jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
-                    }
-                    if(selectedEvent.equals("Birth")){
-                        String[] birthTypesInEN = Locale.getArrayInLocale("birth_types", AddEventActivity.this, Locale.LOCALE_ENGLISH);
-                        jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
-                        jsonObject.put("liveBirths", liveBirthsET.getText().toString());
-                    }
-                    jsonObject.put("causeOfDeath", causesOfDeathInEN[causeOfDeathS.getSelectedItemPosition()]);
-                    CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
-                    cowEventAdditionThread.execute(jsonObject);
+        String[] eventTypes = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
+        String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
+        String[] eventSubtypes = Locale.getArrayInLocale("birth_types",this,Locale.LOCALE_ENGLISH);
+        if(selectedEvent.equals("Birth") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
+            AlertDialog cowRegistrationAlertDialog = constructCalfRegistrationDialog();
+            cowRegistrationAlertDialog.show();
+        }
+        else if(selectedEvent.equals("Acquisition")) {
+            AlertDialog cowRegistrationAlertDialog = constructCowRegistrationDialog();
+            cowRegistrationAlertDialog.show();
+        }
+        else {
+            String selectedCowETN = cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()];
+            String selectedCowName = cowNameArray[cowIdentifierS.getSelectedItemPosition()];
+            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+            String serialNumber = telephonyManager.getSimSerialNumber();
+            JSONObject jsonObject = new JSONObject();
+            try
+            {
+                String[] causesOfDeathInEN = Locale.getArrayInLocale("causes_of_death",AddEventActivity.this,Locale.LOCALE_ENGLISH);
+                jsonObject.put("simCardSN", serialNumber);
+                jsonObject.put("cowEarTagNumber", selectedCowETN);
+                jsonObject.put("cowName", selectedCowName);
+                jsonObject.put("date", dateET.getText().toString());
+                jsonObject.put("eventType", selectedEvent);
+                jsonObject.put("remarks", remarksET.getText().toString());
+                jsonObject.put("strawNumber", strawNumberET.getText().toString());
+                jsonObject.put("vetUsed", vetUsedET.getText().toString());
+                jsonObject.put("bullName", bullNameACTV.getText().toString());
+                jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
+                jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
+                if(servicingIDs != null) {
+                    jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
                 }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
+                if(selectedEvent.equals("Birth")){
+                    String[] birthTypesInEN = Locale.getArrayInLocale("birth_types", AddEventActivity.this, Locale.LOCALE_ENGLISH);
+                    jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
+                    jsonObject.put("liveBirths", liveBirthsET.getText().toString());
                 }
+                jsonObject.put("causeOfDeath", causesOfDeathInEN[causeOfDeathS.getSelectedItemPosition()]);
+                CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
+                cowEventAdditionThread.execute(jsonObject);
             }
-
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -645,7 +642,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         @Override
         protected String doInBackground(JSONObject... params)
         {
-            String result = DataHandler.sendDataToServer(params[0].toString(), DataHandler.FARMER_ADD_COW_EVENT_URL);
+            String result = DataHandler.sendDataToServer(AddEventActivity.this, params[0].toString(), DataHandler.FARMER_ADD_COW_EVENT_URL, true);
             return result;
         }
 
@@ -656,6 +653,18 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             progressDialog.dismiss();
             if(result == null){
                 Toast.makeText(AddEventActivity.this,Locale.getStringInLocale("problem_connecting_to_server",AddEventActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("generic_sms_error", AddEventActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("no_service", AddEventActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("radio_off", AddEventActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("server_not_receive_sms", AddEventActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.ACKNOWLEDGE_OK))
             {
@@ -742,7 +751,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             try
             {
                 jsonObject.put("simCardSN",params[0]);
-                String result= DataHandler.sendDataToServer(jsonObject.toString(), DataHandler.FARMER_FETCH_COW_IDENTIFIERS_URL);
+                String result= DataHandler.sendDataToServer(AddEventActivity.this, jsonObject.toString(), DataHandler.FARMER_FETCH_COW_IDENTIFIERS_URL, true);
                 return result;
             }
             catch (JSONException e)
@@ -825,7 +834,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             JSONObject jsonObject = new JSONObject();
             try {
                 jsonObject.put("simCardSN",params[0]);
-                result = DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_FETCH_COW_SERVICING_EVENTS_URL);
+                result = DataHandler.sendDataToServer(AddEventActivity.this, jsonObject.toString(),DataHandler.FARMER_FETCH_COW_SERVICING_EVENTS_URL, true);
             }
             catch (JSONException e) {
                 e.printStackTrace();

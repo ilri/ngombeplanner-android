@@ -140,4 +140,4 @@
             android:paddingRight="@dimen/normal_button_padding_side"/>
     </LinearLayout>
 </ScrollView>
-<!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/layout/dialog_add_milk_production.xml -->
+<!-- From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/layout/dialog_add_milk_production.xml -->

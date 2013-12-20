@@ -207,4 +207,11 @@
     <string name="action_not_allowed_en">Action not allowed here</string>
     <string name="are_you_in_farm_en">Are you in your farm?</string>
     <string name="farm_coords_successfully_reg_en">Farm coordinates successfully registered</string>
+    <string name="sms_charges_en">SMS Charges</string>
+    <string name="incur_network_sms_charges_en">You are not connected to the internet. You will therefore incur your standard network SMS charge to send data to the server.</string>
+    <string name="data_not_sent_to_server_en">Data not sent to server</string>
+    <string name="generic_sms_error_en">Something went wrong while sending an SMS to the server. Make sure your phone can send SMSs</string>
+    <string name="no_service_en">Unable to send SMSs to the server because your device does not have a good enough network connection</string>
+    <string name="radio_off_en">Your device is currently unable to send SMSs. Make sure it has a SIM card inserted and that it is not on Airplane mode</string>
+    <string name="server_not_receive_sms_en">An SMS was sent to the server but it did not receive it</string>
 </resources>

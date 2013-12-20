@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v14/styles.xml -->
+    <!-- From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values-v14/styles.xml -->
     <style name="ActionBar.Solid.Mistro" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
         <item name="android:background">@drawable/ab_solid_mistro</item>
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_mistro</item>
@@ -13,7 +13,7 @@
         <item name="android:background">@drawable/ab_transparent_mistro</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Mistro</item>
     </style>
-    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml -->
+    <!-- From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml -->
     <style name="Sherlock.__Theme" parent="android:Theme.Holo" />
 
     <style name="Sherlock.__Theme.DarkActionBar" parent="android:Theme.Holo.Light.DarkActionBar">
@@ -59,7 +59,7 @@
     <style name="TextAppearance.Sherlock.Widget.PopupMenu.Large" parent="android:TextAppearance.Holo.Widget.PopupMenu.Large" />
 
     <style name="TextAppearance.Sherlock.Widget.PopupMenu.Small" parent="android:TextAppearance.Holo.Widget.PopupMenu.Small" />
-    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/values-v14/styles.xml -->
+    <!-- From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values-v14/styles.xml -->
     <style name="Theme.Mistro" parent="@style/Theme.Sherlock.Light">
         <item name="android:actionBarItemBackground">@drawable/selectable_background_mistro</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Mistro</item>
@@ -76,7 +76,7 @@
         <item name="android:popupMenuStyle">@style/PopupMenu.Mistro</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Mistro</item>
     </style>
-    <!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/build/exploded-bundles/MistroFarmerProjectLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml -->
+    <!-- From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/build/exploded-bundles/AndroidLibrariesActionBarSherlockActionbarsherlockUnspecified.aar/res/values-v14/values.xml -->
     <style name="Theme.Sherlock.Light.NoActionBar">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>

@@ -30,4 +30,4 @@
             android:paddingLeft="@dimen/normal_button_padding_side"
             android:paddingRight="@dimen/normal_button_padding_side"/>
 </LinearLayout>
-<!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/layout/activity_main_menu.xml -->
+<!-- From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/layout/activity_main_menu.xml -->

@@ -7,4 +7,4 @@
         android:drawable="@drawable/spinner_ab_focused_mistro" />
     <item android:drawable="@drawable/spinner_ab_default_mistro" />
 </selector>
-<!-- From: file:/home/jason/public_html/MistroFarmerProject/MistroFarmer/src/main/res/drawable/spinner_background_ab_mistro.xml -->
+<!-- From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/drawable/spinner_background_ab_mistro.xml -->

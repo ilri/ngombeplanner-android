@@ -110,6 +110,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cow_registration);
+        DataHandler.requestPermissionToUseSMS(this);
 
         Bundle bundle = this.getIntent().getExtras();
         if(bundle!=null) {
@@ -483,10 +484,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                 if(index == (numberOfCows-1))//last cow
                 {
                     Log.d(TAG, farmer.getJsonObject().toString());
-                    //TODO: send to server
-                    if (DataHandler.checkNetworkConnection(this, null)) {
-                        sendDataToServer(farmer.getJsonObject());
-                    }
+                    sendDataToServer(farmer.getJsonObject());
                 }
                 else
                 {
@@ -934,7 +932,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         serverRegistrationThread.execute(jsonObject);
     }
 
-    private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,Boolean> {
+    private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,String> {
         private ProgressDialog progressDialog;
 
         @Override
@@ -944,20 +942,34 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         }
 
         @Override
-        protected Boolean doInBackground(JSONObject... params) {
+        protected String doInBackground(JSONObject... params) {
             Log.d(TAG,"sending registration data to server");
-            String responseString=DataHandler.sendDataToServer(params[0].toString(), DataHandler.FARMER_REGISTRATION_URL);
-            if(responseString!=null && responseString.equals(DataHandler.ACKNOWLEDGE_OK)) {
-                return true;
-            }
-            return false;
+            String responseString=DataHandler.sendDataToServer(CowRegistrationActivity.this, params[0].toString(), DataHandler.FARMER_REGISTRATION_URL, true);
+
+            return responseString;
         }
 
         @Override
-        protected void onPostExecute(Boolean result) {
+        protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            if(result) {
+
+            if(result == null) {
+                Toast.makeText(CowRegistrationActivity.this,Locale.getStringInLocale("problem_connecting_to_server",CowRegistrationActivity.this),Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("generic_sms_error", CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+                Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("no_service", CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+                Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("radio_off", CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("server_not_receive_sms", CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
                 Log.d(TAG,"data successfully sent to server");
                 if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
                     Utils.showSuccessfullRegistration(CowRegistrationActivity.this,null);
@@ -967,9 +979,6 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                     Intent intent = new Intent(CowRegistrationActivity.this, EventsActivity.class);
                     startActivity(intent);
                 }
-            }
-            else {
-                Toast.makeText(CowRegistrationActivity.this,Locale.getStringInLocale("problem_connecting_to_server",CowRegistrationActivity.this),Toast.LENGTH_LONG).show();
             }
         }
     }

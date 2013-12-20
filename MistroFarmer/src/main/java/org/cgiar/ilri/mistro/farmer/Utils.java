@@ -83,4 +83,15 @@ public class Utils
         AlertDialog alertDialog=alertDialogBuilder.create();
         alertDialog.show();
     }
+
+    public static AlertDialog createSMSDialog(Context context, DialogInterface.OnClickListener onClickListener){
+        AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(context);
+        alertDialogBuilder.setTitle(Locale.getStringInLocale("sms_charges", context));
+        alertDialogBuilder
+                .setMessage(Locale.getStringInLocale("incur_network_sms_charges", context))
+                .setCancelable(false)
+                .setPositiveButton(Locale.getStringInLocale("okay",context), onClickListener)
+                .setNegativeButton(Locale.getStringInLocale("cancel",context), onClickListener);
+        return alertDialogBuilder.create();
+    }
 }

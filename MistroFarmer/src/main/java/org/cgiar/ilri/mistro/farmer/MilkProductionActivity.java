@@ -74,6 +74,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milk_production);
+        DataHandler.requestPermissionToUseSMS(this);
 
         addProductionB=(Button)this.findViewById(R.id.add_production_b);
         addProductionB.setOnClickListener(this);
@@ -216,12 +217,9 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
 
     private void fetchCowIdentifiers()
     {
-        if(DataHandler.checkNetworkConnection(this,null))
-        {
-            CowIdentifierThread cowIdentifierThread=new CowIdentifierThread();
-            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-            cowIdentifierThread.execute(telephonyManager.getSimSerialNumber());
-        }
+        CowIdentifierThread cowIdentifierThread=new CowIdentifierThread();
+        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        cowIdentifierThread.execute(telephonyManager.getSimSerialNumber());
     }
 
     private void setCowIdentifiers(String[] cowArray)
@@ -252,7 +250,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             {
                 jsonObject.put("simCardSN",params[0]);
                 jsonObject.put("cowSex", Cow.SEX_FEMALE);
-                String result=DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_FETCH_COW_IDENTIFIERS_URL);
+                String result=DataHandler.sendDataToServer(MilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_FETCH_COW_IDENTIFIERS_URL, true);
                 return result;
             }
             catch (JSONException e)
@@ -267,42 +265,59 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            try
-            {
-                JSONObject jsonObject=new JSONObject(result);
-                JSONArray cowNamesArray=jsonObject.getJSONArray("cowNames");
-                JSONArray earTagNumbersArray=jsonObject.getJSONArray("earTagNumbers");
-                String[] cowArray=new String[cowNamesArray.length()];
-                String[] earTagArray=new String[cowNamesArray.length()];
-                for(int i=0;i<cowNamesArray.length();i++)
-                {
-                    cowArray[i]=cowNamesArray.get(i).toString();
-                    earTagArray[i]=earTagNumbersArray.get(i).toString();
-                }
-                //TODO: warn user if no cows
-                if(cowArray.length==0)
-                {
-                    Toast.makeText(MilkProductionActivity.this,"no cows fetched",Toast.LENGTH_LONG).show();
-                }
-                MilkProductionActivity.this.cowNameArray =cowArray;
-                MilkProductionActivity.this.cowEarTagNumberArray=earTagArray;
-                String[] identifierArray=new String[cowArray.length];
-                for (int i=0;i<cowArray.length;i++)
-                {
-                    if(cowArray[i]!=null&&!cowArray[i].equals(""))
-                    {
-                        identifierArray[i]=cowArray[i];
-                    }
-                    else
-                    {
-                        identifierArray[i]=earTagArray[i];
-                    }
-                }
-                setCowIdentifiers(identifierArray);
+            if(result == null ){
+                Toast.makeText(MilkProductionActivity.this,"server error",Toast.LENGTH_LONG).show();
             }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
+            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                Toast.makeText(MilkProductionActivity.this, Locale.getStringInLocale("generic_sms_error", MilkProductionActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+                Toast.makeText(MilkProductionActivity.this, Locale.getStringInLocale("no_service", MilkProductionActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+                Toast.makeText(MilkProductionActivity.this, Locale.getStringInLocale("radio_off", MilkProductionActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                Toast.makeText(MilkProductionActivity.this, Locale.getStringInLocale("server_not_receive_sms", MilkProductionActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else{
+                try
+                {
+                    JSONObject jsonObject=new JSONObject(result);
+                    JSONArray cowNamesArray=jsonObject.getJSONArray("cowNames");
+                    JSONArray earTagNumbersArray=jsonObject.getJSONArray("earTagNumbers");
+                    String[] cowArray=new String[cowNamesArray.length()];
+                    String[] earTagArray=new String[cowNamesArray.length()];
+                    for(int i=0;i<cowNamesArray.length();i++)
+                    {
+                        cowArray[i]=cowNamesArray.get(i).toString();
+                        earTagArray[i]=earTagNumbersArray.get(i).toString();
+                    }
+                    //TODO: warn user if no cows
+                    if(cowArray.length==0)
+                    {
+                        Toast.makeText(MilkProductionActivity.this,"no cows fetched",Toast.LENGTH_LONG).show();
+                    }
+                    MilkProductionActivity.this.cowNameArray =cowArray;
+                    MilkProductionActivity.this.cowEarTagNumberArray=earTagArray;
+                    String[] identifierArray=new String[cowArray.length];
+                    for (int i=0;i<cowArray.length;i++)
+                    {
+                        if(cowArray[i]!=null&&!cowArray[i].equals(""))
+                        {
+                            identifierArray[i]=cowArray[i];
+                        }
+                        else
+                        {
+                            identifierArray[i]=earTagArray[i];
+                        }
+                    }
+                    setCowIdentifiers(identifierArray);
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
             }
 
         }
@@ -310,30 +325,26 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
 
     private void sendMilkProductionData()
     {
-        if(DataHandler.checkNetworkConnection(this,null))
+        if(validateInput())
         {
-            if(validateInput())
-            {
-                TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-                MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
-                String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
-                String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times", this, Locale.LOCALE_ENGLISH);
-                String quantityType = "";
-                if(quantityTypesInEN.length == quantityTypes.length) {
-                    DataHandler.setSharedPreference(MilkProductionActivity.this, DataHandler.SP_KEY_MILK_QUANTITY_TYPE, String.valueOf(quantityTypeS.getSelectedItemPosition()));
-                    quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
-                }
-                String milkingTime = "";
-                if(milkingTimesInEN.length > 0){
-                    milkingTime = milkingTimesInEN[timeS.getSelectedItemPosition()];
-                }
-
-                String[] calfSucklingTypesInEN = Locale.getArrayInLocale("calf_suckling_types",this,Locale.LOCALE_ENGLISH);
-                String calfSucklingType = calfSucklingTypesInEN[calfSucklingS.getSelectedItemPosition()];
-                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(),noMilkingET.getText().toString(),calfSucklingType);
+            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+            MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
+            String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
+            String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times", this, Locale.LOCALE_ENGLISH);
+            String quantityType = "";
+            if(quantityTypesInEN.length == quantityTypes.length) {
+                DataHandler.setSharedPreference(MilkProductionActivity.this, DataHandler.SP_KEY_MILK_QUANTITY_TYPE, String.valueOf(quantityTypeS.getSelectedItemPosition()));
+                quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
             }
-        }
+            String milkingTime = "";
+            if(milkingTimesInEN.length > 0){
+                milkingTime = milkingTimesInEN[timeS.getSelectedItemPosition()];
+            }
 
+            String[] calfSucklingTypesInEN = Locale.getArrayInLocale("calf_suckling_types",this,Locale.LOCALE_ENGLISH);
+            String calfSucklingType = calfSucklingTypesInEN[calfSucklingS.getSelectedItemPosition()];
+            milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(),noMilkingET.getText().toString(),calfSucklingType);
+        }
     }
 
     private boolean validateInput()
@@ -434,7 +445,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                 jsonObject.put("date", params[6]);
                 jsonObject.put("noMilkingTimes",params[7]);
                 jsonObject.put("calfSuckling",params[8]);
-                String result=DataHandler.sendDataToServer(jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL);
+                String result=DataHandler.sendDataToServer(MilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL, true);
                 Log.d(TAG,"data sent to server, result = "+result);
                 return result;
             }
