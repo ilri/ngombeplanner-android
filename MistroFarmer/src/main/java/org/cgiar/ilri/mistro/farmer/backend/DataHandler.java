@@ -420,14 +420,14 @@ public class DataHandler
                         if(phoneNumber.equals(SMS_SERVER_ADDRESS)){
                             Log.d(TAG, "SMS received from server");
                             if(getSharedPreference(context, SP_KEY_SMS_RESPONSE,"").length()==0){
-                                if(isJSONStringValid(message)){
+                                if(isExpectedString(message)){
                                     Log.d(TAG, "SMS is valid json saved to shared preferences");
                                     setSharedPreference(context, SP_KEY_SMS_RESPONSE, message);
                                 }
                                 else{
                                     String cachedMessage = getSharedPreference(context, SP_KEY_SMS_CACHE, "");
                                     cachedMessage = cachedMessage + message;
-                                    if(isJSONStringValid(cachedMessage)){
+                                    if(isExpectedString(cachedMessage)){
                                         Log.d(TAG, "cached message + SMS is valid json saved to shared preferences");
                                         setSharedPreference(context, SP_KEY_SMS_RESPONSE, cachedMessage);
                                     }
@@ -452,7 +452,7 @@ public class DataHandler
             }
         }
 
-        private boolean isJSONStringValid(String test) {
+        private boolean isExpectedString(String test) {
             boolean valid = false;
 
             try{
@@ -471,6 +471,14 @@ public class DataHandler
                 catch(JSONException ex) {
                     valid = false;
                 }
+            }
+
+            if(valid==false && test!=null){
+                if(test.equals(ACKNOWLEDGE_OK)) valid = true;
+                else if(test.equals(DATA_ERROR)) valid = true;
+                else if(test.equals(NO_DATA)) valid = true;
+                else if(test.equals(CODE_SIM_CARD_REGISTERED)) valid = true;
+                else if(test.equals(CODE_SIM_CARD_REGISTERED)) valid = true;
             }
 
             return valid;
