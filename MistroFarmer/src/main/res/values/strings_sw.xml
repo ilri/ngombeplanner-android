@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="login_sw">Ingia</string>
+    <string name="login_anyway_sw">Ingia</string>
+    <string name="register_sw">Jisajili</string>
+    <string name="full_name_sw">Jina Kamili</string>
+    <string name="mobile_number_sw">Namba Ya Simu</string>
+    <string name="extension_p_sw">Afisa wa Ukulima</string>
+    <string name="number_of_cows_sw">Idadi ya Ngombe</string>
+    <string-array name="sex_array_sw">
+        <item>Kike</item>
+        <item>Kiume</item>
+    </string-array>
+    <string name="name_sw">Jina</string>
+    <string name="ear_tag_number_sw">Namba ya Sikio</string>
+    <string name="age_sw">Umri</string>
+    <string name="date_of_birth_sw">Tarehe ya kuzaliwa</string>
+    <string name="breed_sw">Aina ya mifugo</string>
+    <string name="sex_sw">Sex</string>
+    <string name="deformity_sw">Deformity</string>
+    <string name="sire_sw">Sire</string>
+    <string name="dam_sw">Dam</string>
+    <string name="previous_sw">Iliopita</string>
+    <string name="next_sw">Ijayo</string>
+    <string name="finish_sw">Maliza</string>
+    <string name="okay_sw">Sawa</string>
+    <string name="farmer_registration_sw">Sajili Mkulima</string>
+    <string name="cow_registration_sw">Sajili ngombe, Ngombe namba </string>
+    <string name="cow_registration_proper_sw">Sajili Ngombe</string>
+    <string name="dam_registration_sw">Dam Registration</string>
+    <string name="sire_registration_sw">Sire Registration</string>
+    <string-array name="age_type_array_sw">
+        <item>Siku</item>
+        <item>Mwezi</item>
+        <item>Mwaka</item>
+    </string-array>
+    <string-array name="breeds_array_sw">
+        <item>Ayrshire</item>
+        <item>Boran</item>
+        <item>Charolais</item>
+        <item>Aberdeen Angus</item>
+        <item>Simmental</item>
+        <item>Friesian</item>
+        <item>Guernsey</item>
+        <item>Hereford</item>
+        <item>Jersey</item>
+        <item>Ankole</item>
+        <item>Limousine</item>
+        <item>Brahman</item>
+        <item>Santa Getrude</item>
+        <item>Piemontese</item>
+        <item>Red Poll</item>
+        <item>Sahiwal</item>
+        <item>Nganda</item>
+        <item>Fleckviah</item>
+        <item>Brown Swiss</item>
+        <item>Zebu</item>
+    </string-array>
+    <string-array name="deformities_array_sw">
+        <item>Blind</item>
+        <item>Lame</item>
+        <item>Abnormal teat number</item>
+        <item>Crooked feet</item>
+        <item>Clef palate</item>
+        <item>Nyingine</item>
+    </string-array>
+    <string name="service_type_used_sw">Service Type Used</string>
+    <string-array name="service_types_sw">
+        <item>Bull</item>
+        <item>Artificial Insemination</item>
+        <item>Embryo Transfer</item>
+    </string-array>
+    <string name="maximum_of_four_breeds_sw">Upeo wa mifugo nne</string>
+    <string name="country_of_origin_sw">Sire\'s country of Origin</string>
+    <string name="specify_sw">Bainisha</string>
+    <string name="straw_number_sw">Straw Number</string>
+    <string name="vet_used_sw">Daktari aliyetumiwa</string>
+    <string name="servicing_bull_name_sw">Servicing Bull Name</string>
+    <string name="servicing_bull_ear_tag_number_sw">Servicing Bull Ear Tag Number</string>
+    <string name="embryo_number_sw">Embryo Number</string>
+    <string name="enable_gps_sw">Wezesha GPS</string>
+    <string name="reason_for_enabling_gps_sw">Unahitaji kuwezesha GPS kabla ya kuendelea. Bonyeza \'Sawa\' ili kuwawezesha GPS</string>
+    <string name="cancel_sw">Cancel</string>
+    <string name="enable_network_sw">Enable Internet</string>
+    <string name="reason_for_enabling_network_sw">This application requires an internet connection for it to work/. Press Okay to enable the internet</string>
+    <string name="successful_registration_sw">Successful Registration</string>
+    <string name="successful_registration_instructions_sw">You have been successfully registered. You will receive an SMS instructing you on how to login</string>
+    <string name="your_mistro_id_sw">Your Mistro ID</string>
+    <string name="enter_your_mistro_id_sw">Ingiza kitambulisho yako ya Mistro</string>
+    <string name="failed_to_authenticate_sw">Tumeshindwa kuthibitisha simu yako. Tafadhali jaribu tena</string>
+    <string name="logging_in_from_different_device_sw">Unatumia simu ambayo haijatumiwa tena. Bado unataka kuingia?</string>
+    <string name="yes_sw">Ndio</string>
+    <string name="no_sw">Hapana</string>
+    <string name="milk_production_sw">Milk Production</string>
+    <string name="events_sw">Matukio</string>
+    <string name="main_menu_sw">Menu Kuu</string>
+    <string name="sim_card_not_registered_sw">Unatumia kadi ya simu ambayo haijasajiliwa katika mtandao huu.</string>
+    <string name="sim_card_registration_sw">Kusajili kwa Kadi ya Simu</string>
+    <string name="new_mobile_number_sw">Namba ya simu hii</string>
+    <string name="old_mobile_number_sw">Namba ya simu ya kitambo</string>
+    <string name="old_number_not_in_system_sw">Inaonekana kama namba yako ya simu ya kitambo haijasajiliwa katika mtandao huu. Wasiliana na msimamizi wa mtandao huu ili akusaidie.</string>
+    <string name="welcome_sw">Karibu</string>
+    <string name="add_production_sw">Add Production</string>
+    <string name="production_history_sw">Production History</string>
+    <string name="cow_sw">Ngombe</string>
+    <string name="time_sw">Wakati</string>
+    <string name="quantity_sw">Kiasi</string>
+    <string name="measurement_type_sw">Measurement type</string>
+    <string name="add_sw">Ongeza</string>
+    <string-array name="milking_times_sw">
+        <item>Asubuhi</item>
+        <item>Alasiri</item>
+        <item>Jioni</item>
+        <item>Jumla</item>
+    </string-array>
+    <string-array name="quantity_types_sw">
+        <item>Lita</item>
+        <item>Kilo</item>
+    </string-array>
+    <string name="enter_quantity_of_milk_produced_sw">Tafadhali ingiza kiasi ya maziwa yaliyokamuliwa</string>
+    <string name="information_successfully_sent_to_server_sw">Habari imepachikwa mtanaoni</string>
+    <string name="problem_in_data_sent_sw">Kunashida na habari unayotaka kutuma</string>
+    <string name="production_for_time_already_exists_sw">You have already entered the amount you got from this cow from this date</string>
+    <string name="problem_connecting_to_server_sw">A problem occurred while trying to connect to the Server</string>
+    <string name="date_sw">Tarehe</string>
+    <string name="no_data_received_sw">No data received</string>
+    <string name="today_sw">Leo</string>
+    <string name="yesterday_sw">Jana</string>
+    <string name="enter_your_name_sw">Tafadhali ingiza jina lako</string>
+    <string name="enter_your_mobile_no_sw">Tafadhali nigiza namba yako ya simu</string>
+    <string name="enter_ear_tag_number_sw">Tafadhali ingiza namba ya Sikio ya ngombe</string>
+    <string name="enter_ear_tag_no_or_name_sw">Tafadhali ingiza jina au namba ya Sikio ya ngombe</string>
+    <string name="enter_straw_number_sw">Please enter the Sire\'s straw number</string>
+    <string name="enter_embryo_number_sw">Tafadhali ingiza namba ya kiini tete</string>
+    <string name="add_an_event_sw">Ongeza tukio</string>
+    <string name="past_events_sw">Historia ya matukio</string>
+    <string name="remarks_sw">Maoni</string>
+    <string name="event_sw">Tukio</string>
+    <string-array name="cow_event_types_sw">
+        <item>Kuzaliwa</item>
+        <item>Kuanza kwa utoaji wa maziwa</item>
+        <item>Dry Off</item>
+        <item>Bloat</item>
+        <item>Ugonjwa</item>
+        <item>Kifo</item>
+        <item>Kununua</item>
+        <item>Kuuza</item>
+        <item>Upandikizaji</item>
+        <item>Bull Servicing</item>
+        <item>Signs of Heat</item>
+    </string-array>
+    <string-array name="cow_servicing_types_sw">
+        <item>Upandikizaji</item>
+        <item>Kukwewa na ndume</item>
+    </string-array>
+    <string name="enter_date_sw">Tafadhali ingiza tarehe</string>
+    <string name="date_in_future_sw">Tarehe ulioingiza si sahihi</string>
+    <string name="event_successfully_recorded_sw">Tukio uliyotuma imewekwa kwenye kumbukumbu</string>
+    <string name="something_went_wrong_try_again_sw">Data haijatumwa. Jaribu kutuma tene</string>
+    <string name="loading_please_wait_sw">Tafadhali ngoja...</string>
+    <string name="type_of_birth_sw">Aina ya uzazi</string>
+    <string-array name="birth_types_sw">
+        <item>Kawaida</item>
+        <item>Still</item>
+        <item>Premature</item>
+        <item>Utoaji mimba</item>
+    </string-array>
+    <string name="calf_registration_sw">Sajili ndama</string>
+    <string name="next_screen_is_calf_registration_sw">Unahitajika kusajili ndama aliyezaliwa. Bonyeza \'Ijayo\' ili kumsajili</string>
+    <string name="next_screen_is_cow_registration_sw">Unahitajika kusajili ngombe uliyenunua. Bonyeza \'Ijayo\' ili kumsajili</string>
+    <string name="event_too_old_sw">Haukubaliwi kuripoti tukio iliyo tendeka zaidi ya mwezi mmoja</string>
+    <string name="milk_data_too_old_sw">haukubaliwi kuripoti tukio iliyo tendeka zaidi ya mwezi mmoja</string>
+    <string name="milk_too_much_sw">Kiasi ya maziwa ulioingiza ni mingi sana</string>
+    <string name="start_date_sw">Tarehe ya kuanza</string>
+    <string name="no_of_days_in_servicing_sw">Idadi ya masiku katika kitendo ya kukwea</string>
+    <string name="associated_servicing_sw">Bull Services</string>
+    <string name="country_not_found_sw">Nchi ulioingiza haipatikani</string>
+    <string name="cause_of_death_sw">Sababu ya kifo</string>
+    <string-array name="causes_of_death_sw">
+        <item>Kifo ya kawaida</item>
+        <item>Ugonjwa</item>
+        <item>Kuumia</item>
+    </string-array>
+    <string name="gps_narrowing_down_on_loc_sw">Tafadhali ngoja mbaka GPS ipate eneo lako</string>
+    <string name="event_only_for_female_cattle_sw">Tukio inaweza kutendeka kwa ngombe wa kike pekee</string>
+    <string name="other_countries_sw">Inchi nyingine</string>
+    <string name="no_times_milked_in_a_day_sw">No. of times milked per day</string>
+    <string name="calf_suckling_sw">Ndama ananyonya?</string>
+    <string-array name="calf_suckling_types_sw">
+        <item>Hapana</item>
+        <item>Ndio</item>
+    </string-array>
+    <string name="enter_number_times_cow_milked_sw">Please enter the number of times the cow is normally milked per day</string>
+    <string name="milking_times_too_much_sw">No. of times cow is milked should not be more than 10</string>
+    <string name="fertility_sw">Uzazi</string>
+    <string name="servicing_sw">Servicing</string>
+    <string name="calving_sw">Kuzaa</string>
+    <string name="select_service_type_sw">Select servicing type</string>
+    <string name="artificial_inseminamtion_sw">Upandikizaji</string>
+    <string name="bull_servicing_sw">Kukwewa na ndume</string>
+    <string name="no_sim_card_sw">Kadi ya simu haipo</string>
+    <string name="previous_live_births_sw">Number of previous births</string>
+    <string name="enter_previous_live_births_sw">Please enter the number of previous births by this cow</string>
+    <string name="enter_dam_etn_sw">Enter dam\'s ear tag number</string>
+    <string name="age_diff_from_dob_sw">Cow\'s age appears to conflict with the cow\'s Date of birth</string>
+    <string name="action_not_allowed_sw">Hatua haikubaliki hapa</string>
+    <string name="are_you_in_farm_sw">Uko kwa shamba yako?</string>
+    <string name="farm_coords_successfully_reg_sw">Eneo la shamba lako imepachikwa kwenye kumbukumbu</string>
+    <string name="sms_charges_sw">Garama ya SMS</string>
+    <string name="incur_network_sms_charges_sw">Simu yako hiwasiliani na mtandao wa intaneti. Kwa hivyo ripoti itatumwa kwa kutumia SMS. Garama ya SMS ni kwako.</string>
+    <string name="data_not_sent_to_server_sw">Ripoti haijatumwa kwa mtandao</string>
+    <string name="generic_sms_error_sw">Ripoti haijatumwa mtandao. Hakikisha kwamba simu yako inaweza kutuma SMS</string>
+    <string name="no_service_sw">Nguvu ya signali ya simu yako haitoshi kutuma SMS</string>
+    <string name="radio_off_sw">Hakikisha kwamba simu yako iko na kadi ya simu</string>
+    <string name="server_not_receive_sms_sw">Simu yako imetuma SMS lakini mtandao haupokea ujumbe (SMS) huo</string>
+</resources>

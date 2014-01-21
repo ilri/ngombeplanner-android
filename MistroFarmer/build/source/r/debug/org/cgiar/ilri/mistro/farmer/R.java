@@ -12,23 +12,79 @@ public final class R {
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int age_type_array_en=0x7f040000;
-        public static final int birth_types_en=0x7f040001;
-        public static final int breeds_array_en=0x7f040002;
-        public static final int calf_suckling_types_en=0x7f040003;
-        public static final int causes_of_death_en=0x7f040004;
-        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/countries.xml 
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
          */
-        public static final int common_countries=0x7f040005;
-        public static final int countries=0x7f040006;
+        public static final int age_type_array_sw=0x7f040001;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int cow_event_types_en=0x7f040007;
-        public static final int cow_servicing_types_en=0x7f040008;
-        public static final int deformities_array_en=0x7f040009;
-        public static final int milking_times_en=0x7f04000a;
-        public static final int quantity_types_en=0x7f04000b;
-        public static final int service_types_en=0x7f04000c;
-        public static final int sex_array_en=0x7f04000d;
+        public static final int birth_types_en=0x7f040002;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int birth_types_sw=0x7f040003;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int breeds_array_en=0x7f040004;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int breeds_array_sw=0x7f040005;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int calf_suckling_types_en=0x7f040006;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int calf_suckling_types_sw=0x7f040007;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int causes_of_death_en=0x7f040008;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int causes_of_death_sw=0x7f040009;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/countries.xml 
+         */
+        public static final int common_countries=0x7f04000a;
+        public static final int countries=0x7f04000b;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int cow_event_types_en=0x7f04000c;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int cow_event_types_sw=0x7f04000d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int cow_servicing_types_en=0x7f04000e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int cow_servicing_types_sw=0x7f04000f;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int deformities_array_en=0x7f040010;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int deformities_array_sw=0x7f040011;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int milking_times_en=0x7f040012;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int milking_times_sw=0x7f040013;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int quantity_types_en=0x7f040014;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int quantity_types_sw=0x7f040015;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int service_types_en=0x7f040016;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int service_types_sw=0x7f040017;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int sex_array_en=0x7f040018;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int sex_array_sw=0x7f040019;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1160,170 +1216,747 @@ containing a value of this type.
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
         public static final int action_not_allowed_en=0x7f0a000d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int action_not_allowed_sw=0x7f0a000e;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int action_settings=0x7f0a000e;
+        public static final int action_settings=0x7f0a000f;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int add_an_event_en=0x7f0a000f;
-        public static final int add_en=0x7f0a0010;
-        public static final int add_production_en=0x7f0a0011;
-        public static final int age_diff_from_dob_en=0x7f0a0012;
-        public static final int age_en=0x7f0a0013;
+        public static final int add_an_event_en=0x7f0a0010;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int add_an_event_sw=0x7f0a0011;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int add_en=0x7f0a0012;
+        public static final int add_production_en=0x7f0a0013;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int add_production_sw=0x7f0a0014;
+        public static final int add_sw=0x7f0a0015;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int age_diff_from_dob_en=0x7f0a0016;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int age_diff_from_dob_sw=0x7f0a0017;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int age_en=0x7f0a0018;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int age_sw=0x7f0a0019;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int app_name=0x7f0a0014;
+        public static final int app_name=0x7f0a001a;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int are_you_in_farm_en=0x7f0a0015;
-        public static final int artificial_inseminamtion_en=0x7f0a0016;
-        public static final int associated_servicing_en=0x7f0a0017;
-        public static final int breed_en=0x7f0a0018;
-        public static final int bull_servicing_en=0x7f0a0019;
-        public static final int calf_registration_en=0x7f0a001a;
-        public static final int calf_suckling_en=0x7f0a001b;
-        public static final int calving_en=0x7f0a001c;
-        public static final int cancel_en=0x7f0a001d;
-        public static final int cause_of_death_en=0x7f0a001e;
-        public static final int country_not_found_en=0x7f0a001f;
-        public static final int country_of_origin_en=0x7f0a0020;
-        public static final int cow_en=0x7f0a0021;
-        public static final int cow_registration_en=0x7f0a0022;
-        public static final int cow_registration_proper_en=0x7f0a0023;
-        public static final int dam_en=0x7f0a0024;
-        public static final int dam_registration_en=0x7f0a0025;
-        public static final int data_not_sent_to_server_en=0x7f0a0026;
-        public static final int date_en=0x7f0a0027;
-        public static final int date_in_future_en=0x7f0a0028;
-        public static final int date_of_birth_en=0x7f0a0029;
-        public static final int deformity_en=0x7f0a002a;
-        public static final int ear_tag_number_en=0x7f0a002b;
-        public static final int embryo_number_en=0x7f0a002c;
-        public static final int enable_gps_en=0x7f0a002d;
-        public static final int enable_network_en=0x7f0a002e;
+        public static final int are_you_in_farm_en=0x7f0a001b;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int are_you_in_farm_sw=0x7f0a001c;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int artificial_inseminamtion_en=0x7f0a001d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int artificial_inseminamtion_sw=0x7f0a001e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int associated_servicing_en=0x7f0a001f;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int associated_servicing_sw=0x7f0a0020;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int breed_en=0x7f0a0021;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int breed_sw=0x7f0a0022;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int bull_servicing_en=0x7f0a0023;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int bull_servicing_sw=0x7f0a0024;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int calf_registration_en=0x7f0a0025;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int calf_registration_sw=0x7f0a0026;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int calf_suckling_en=0x7f0a0027;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int calf_suckling_sw=0x7f0a0028;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int calving_en=0x7f0a0029;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int calving_sw=0x7f0a002a;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int cancel_en=0x7f0a002b;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int cancel_sw=0x7f0a002c;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int cause_of_death_en=0x7f0a002d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int cause_of_death_sw=0x7f0a002e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int country_not_found_en=0x7f0a002f;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int country_not_found_sw=0x7f0a0030;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int country_of_origin_en=0x7f0a0031;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int country_of_origin_sw=0x7f0a0032;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int cow_en=0x7f0a0033;
+        public static final int cow_registration_en=0x7f0a0034;
+        public static final int cow_registration_proper_en=0x7f0a0035;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int cow_registration_proper_sw=0x7f0a0036;
+        public static final int cow_registration_sw=0x7f0a0037;
+        public static final int cow_sw=0x7f0a0038;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int dam_en=0x7f0a0039;
+        public static final int dam_registration_en=0x7f0a003a;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int dam_registration_sw=0x7f0a003b;
+        public static final int dam_sw=0x7f0a003c;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int data_not_sent_to_server_en=0x7f0a003d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int data_not_sent_to_server_sw=0x7f0a003e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int date_en=0x7f0a003f;
+        public static final int date_in_future_en=0x7f0a0040;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int date_in_future_sw=0x7f0a0041;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int date_of_birth_en=0x7f0a0042;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int date_of_birth_sw=0x7f0a0043;
+        public static final int date_sw=0x7f0a0044;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int deformity_en=0x7f0a0045;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int deformity_sw=0x7f0a0046;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int ear_tag_number_en=0x7f0a0047;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int ear_tag_number_sw=0x7f0a0048;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int embryo_number_en=0x7f0a0049;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int embryo_number_sw=0x7f0a004a;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enable_gps_en=0x7f0a004b;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enable_gps_sw=0x7f0a004c;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enable_network_en=0x7f0a004d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enable_network_sw=0x7f0a004e;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int english=0x7f0a002f;
+        public static final int english=0x7f0a004f;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int enter_dam_etn_en=0x7f0a0030;
-        public static final int enter_date_en=0x7f0a0031;
-        public static final int enter_ear_tag_no_or_name_en=0x7f0a0032;
-        public static final int enter_ear_tag_number_en=0x7f0a0033;
-        public static final int enter_embryo_number_en=0x7f0a0034;
-        public static final int enter_number_times_cow_milked_en=0x7f0a0035;
-        public static final int enter_previous_live_births_en=0x7f0a0036;
-        public static final int enter_quantity_of_milk_produced_en=0x7f0a0037;
-        public static final int enter_straw_number_en=0x7f0a0038;
-        public static final int enter_your_mistro_id_en=0x7f0a0039;
-        public static final int enter_your_mobile_no_en=0x7f0a003a;
-        public static final int enter_your_name_en=0x7f0a003b;
-        public static final int event_en=0x7f0a003c;
-        public static final int event_only_for_female_cattle_en=0x7f0a003d;
-        public static final int event_successfully_recorded_en=0x7f0a003e;
-        public static final int event_too_old_en=0x7f0a003f;
-        public static final int events_en=0x7f0a0040;
-        public static final int extension_p_en=0x7f0a0041;
-        public static final int failed_to_authenticate_en=0x7f0a0042;
-        public static final int farm_coords_successfully_reg_en=0x7f0a0043;
-        public static final int farmer_registration_en=0x7f0a0044;
-        public static final int fertility_en=0x7f0a0045;
-        public static final int finish_en=0x7f0a0046;
-        public static final int full_name_en=0x7f0a0047;
-        public static final int generic_sms_error_en=0x7f0a0048;
-        public static final int gps_narrowing_down_on_loc_en=0x7f0a0049;
+        public static final int enter_dam_etn_en=0x7f0a0050;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_dam_etn_sw=0x7f0a0051;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_date_en=0x7f0a0052;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_date_sw=0x7f0a0053;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_ear_tag_no_or_name_en=0x7f0a0054;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_ear_tag_no_or_name_sw=0x7f0a0055;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_ear_tag_number_en=0x7f0a0056;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_ear_tag_number_sw=0x7f0a0057;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_embryo_number_en=0x7f0a0058;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_embryo_number_sw=0x7f0a0059;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_number_times_cow_milked_en=0x7f0a005a;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_number_times_cow_milked_sw=0x7f0a005b;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_previous_live_births_en=0x7f0a005c;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_previous_live_births_sw=0x7f0a005d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_quantity_of_milk_produced_en=0x7f0a005e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_quantity_of_milk_produced_sw=0x7f0a005f;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_straw_number_en=0x7f0a0060;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_straw_number_sw=0x7f0a0061;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_your_mistro_id_en=0x7f0a0062;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_your_mistro_id_sw=0x7f0a0063;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_your_mobile_no_en=0x7f0a0064;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_your_mobile_no_sw=0x7f0a0065;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int enter_your_name_en=0x7f0a0066;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int enter_your_name_sw=0x7f0a0067;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int event_en=0x7f0a0068;
+        public static final int event_only_for_female_cattle_en=0x7f0a0069;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int event_only_for_female_cattle_sw=0x7f0a006a;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int event_successfully_recorded_en=0x7f0a006b;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int event_successfully_recorded_sw=0x7f0a006c;
+        public static final int event_sw=0x7f0a006d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int event_too_old_en=0x7f0a006e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int event_too_old_sw=0x7f0a006f;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int events_en=0x7f0a0070;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int events_sw=0x7f0a0071;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int extension_p_en=0x7f0a0072;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int extension_p_sw=0x7f0a0073;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int failed_to_authenticate_en=0x7f0a0074;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int failed_to_authenticate_sw=0x7f0a0075;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int farm_coords_successfully_reg_en=0x7f0a0076;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int farm_coords_successfully_reg_sw=0x7f0a0077;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int farmer_registration_en=0x7f0a0078;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int farmer_registration_sw=0x7f0a0079;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int fertility_en=0x7f0a007a;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int fertility_sw=0x7f0a007b;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int finish_en=0x7f0a007c;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int finish_sw=0x7f0a007d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int full_name_en=0x7f0a007e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int full_name_sw=0x7f0a007f;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int generic_sms_error_en=0x7f0a0080;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int generic_sms_error_sw=0x7f0a0081;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int gps_narrowing_down_on_loc_en=0x7f0a0082;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int gps_narrowing_down_on_loc_sw=0x7f0a0083;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int hello_world=0x7f0a004a;
+        public static final int hello_world=0x7f0a0084;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int incur_network_sms_charges_en=0x7f0a004b;
-        public static final int information_successfully_sent_to_server_en=0x7f0a004c;
-        public static final int loading_please_wait_en=0x7f0a004d;
-        public static final int logging_in_from_different_device_en=0x7f0a004e;
-        public static final int login_anyway_en=0x7f0a004f;
-        public static final int login_en=0x7f0a0050;
-        public static final int main_menu_en=0x7f0a0051;
-        public static final int maximum_of_four_breeds_en=0x7f0a0052;
-        public static final int measurement_type_en=0x7f0a0053;
-        public static final int milk_data_too_old_en=0x7f0a0054;
-        public static final int milk_production_en=0x7f0a0055;
-        public static final int milk_too_much_en=0x7f0a0056;
-        public static final int milking_times_too_much_en=0x7f0a0057;
-        public static final int mobile_number_en=0x7f0a0058;
-        public static final int name_en=0x7f0a0059;
-        public static final int new_mobile_number_en=0x7f0a005a;
-        public static final int next_en=0x7f0a005b;
-        public static final int next_screen_is_calf_registration_en=0x7f0a005c;
-        public static final int next_screen_is_cow_registration_en=0x7f0a005d;
-        public static final int no_data_received_en=0x7f0a005e;
-        public static final int no_en=0x7f0a005f;
-        public static final int no_of_days_in_servicing_en=0x7f0a0060;
-        public static final int no_service_en=0x7f0a0061;
-        public static final int no_sim_card_en=0x7f0a0062;
-        public static final int no_times_milked_in_a_day_en=0x7f0a0063;
-        public static final int number_of_cows_en=0x7f0a0064;
-        public static final int okay_en=0x7f0a0065;
-        public static final int old_mobile_number_en=0x7f0a0066;
-        public static final int old_number_not_in_system_en=0x7f0a0067;
-        public static final int other_countries_en=0x7f0a0068;
-        public static final int past_events_en=0x7f0a0069;
-        public static final int previous_en=0x7f0a006a;
-        public static final int previous_live_births_en=0x7f0a006b;
-        public static final int problem_connecting_to_server_en=0x7f0a006c;
-        public static final int problem_in_data_sent_en=0x7f0a006d;
-        public static final int production_for_time_already_exists_en=0x7f0a006e;
-        public static final int production_history_en=0x7f0a006f;
-        public static final int quantity_en=0x7f0a0070;
-        public static final int radio_off_en=0x7f0a0071;
-        public static final int reason_for_enabling_gps_en=0x7f0a0072;
-        public static final int reason_for_enabling_network_en=0x7f0a0073;
-        public static final int register_en=0x7f0a0074;
-        public static final int remarks_en=0x7f0a0075;
-        public static final int select_service_type_en=0x7f0a0076;
-        public static final int server_not_receive_sms_en=0x7f0a0077;
-        public static final int service_type_used_en=0x7f0a0078;
-        public static final int servicing_bull_ear_tag_number_en=0x7f0a0079;
-        public static final int servicing_bull_name_en=0x7f0a007a;
-        public static final int servicing_en=0x7f0a007b;
-        public static final int sex_en=0x7f0a007c;
-        public static final int sim_card_not_registered_en=0x7f0a007d;
-        public static final int sim_card_registration_en=0x7f0a007e;
-        public static final int sire_en=0x7f0a007f;
-        public static final int sire_registration_en=0x7f0a0080;
-        public static final int sms_charges_en=0x7f0a0081;
-        public static final int something_went_wrong_try_again_en=0x7f0a0082;
-        public static final int specify_en=0x7f0a0083;
-        public static final int start_date_en=0x7f0a0084;
-        public static final int straw_number_en=0x7f0a0085;
-        public static final int successful_registration_en=0x7f0a0086;
-        public static final int successful_registration_instructions_en=0x7f0a0087;
+        public static final int incur_network_sms_charges_en=0x7f0a0085;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int incur_network_sms_charges_sw=0x7f0a0086;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int information_successfully_sent_to_server_en=0x7f0a0087;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int information_successfully_sent_to_server_sw=0x7f0a0088;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int loading_please_wait_en=0x7f0a0089;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int loading_please_wait_sw=0x7f0a008a;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int logging_in_from_different_device_en=0x7f0a008b;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int logging_in_from_different_device_sw=0x7f0a008c;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int login_anyway_en=0x7f0a008d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int login_anyway_sw=0x7f0a008e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int login_en=0x7f0a008f;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int login_sw=0x7f0a0090;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int main_menu_en=0x7f0a0091;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int main_menu_sw=0x7f0a0092;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int maximum_of_four_breeds_en=0x7f0a0093;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int maximum_of_four_breeds_sw=0x7f0a0094;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int measurement_type_en=0x7f0a0095;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int measurement_type_sw=0x7f0a0096;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int milk_data_too_old_en=0x7f0a0097;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int milk_data_too_old_sw=0x7f0a0098;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int milk_production_en=0x7f0a0099;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int milk_production_sw=0x7f0a009a;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int milk_too_much_en=0x7f0a009b;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int milk_too_much_sw=0x7f0a009c;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int milking_times_too_much_en=0x7f0a009d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int milking_times_too_much_sw=0x7f0a009e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int mobile_number_en=0x7f0a009f;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int mobile_number_sw=0x7f0a00a0;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int name_en=0x7f0a00a1;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int name_sw=0x7f0a00a2;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int new_mobile_number_en=0x7f0a00a3;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int new_mobile_number_sw=0x7f0a00a4;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int next_en=0x7f0a00a5;
+        public static final int next_screen_is_calf_registration_en=0x7f0a00a6;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int next_screen_is_calf_registration_sw=0x7f0a00a7;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int next_screen_is_cow_registration_en=0x7f0a00a8;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int next_screen_is_cow_registration_sw=0x7f0a00a9;
+        public static final int next_sw=0x7f0a00aa;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int no_data_received_en=0x7f0a00ab;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int no_data_received_sw=0x7f0a00ac;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int no_en=0x7f0a00ad;
+        public static final int no_of_days_in_servicing_en=0x7f0a00ae;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int no_of_days_in_servicing_sw=0x7f0a00af;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int no_service_en=0x7f0a00b0;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int no_service_sw=0x7f0a00b1;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int no_sim_card_en=0x7f0a00b2;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int no_sim_card_sw=0x7f0a00b3;
+        public static final int no_sw=0x7f0a00b4;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int no_times_milked_in_a_day_en=0x7f0a00b5;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int no_times_milked_in_a_day_sw=0x7f0a00b6;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int number_of_cows_en=0x7f0a00b7;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int number_of_cows_sw=0x7f0a00b8;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int okay_en=0x7f0a00b9;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int okay_sw=0x7f0a00ba;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int old_mobile_number_en=0x7f0a00bb;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int old_mobile_number_sw=0x7f0a00bc;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int old_number_not_in_system_en=0x7f0a00bd;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int old_number_not_in_system_sw=0x7f0a00be;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int other_countries_en=0x7f0a00bf;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int other_countries_sw=0x7f0a00c0;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int past_events_en=0x7f0a00c1;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int past_events_sw=0x7f0a00c2;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int previous_en=0x7f0a00c3;
+        public static final int previous_live_births_en=0x7f0a00c4;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int previous_live_births_sw=0x7f0a00c5;
+        public static final int previous_sw=0x7f0a00c6;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int problem_connecting_to_server_en=0x7f0a00c7;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int problem_connecting_to_server_sw=0x7f0a00c8;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int problem_in_data_sent_en=0x7f0a00c9;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int problem_in_data_sent_sw=0x7f0a00ca;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int production_for_time_already_exists_en=0x7f0a00cb;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int production_for_time_already_exists_sw=0x7f0a00cc;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int production_history_en=0x7f0a00cd;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int production_history_sw=0x7f0a00ce;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int quantity_en=0x7f0a00cf;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int quantity_sw=0x7f0a00d0;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int radio_off_en=0x7f0a00d1;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int radio_off_sw=0x7f0a00d2;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int reason_for_enabling_gps_en=0x7f0a00d3;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int reason_for_enabling_gps_sw=0x7f0a00d4;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int reason_for_enabling_network_en=0x7f0a00d5;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int reason_for_enabling_network_sw=0x7f0a00d6;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int register_en=0x7f0a00d7;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int register_sw=0x7f0a00d8;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int remarks_en=0x7f0a00d9;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int remarks_sw=0x7f0a00da;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int select_service_type_en=0x7f0a00db;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int select_service_type_sw=0x7f0a00dc;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int server_not_receive_sms_en=0x7f0a00dd;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int server_not_receive_sms_sw=0x7f0a00de;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int service_type_used_en=0x7f0a00df;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int service_type_used_sw=0x7f0a00e0;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int servicing_bull_ear_tag_number_en=0x7f0a00e1;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int servicing_bull_ear_tag_number_sw=0x7f0a00e2;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int servicing_bull_name_en=0x7f0a00e3;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int servicing_bull_name_sw=0x7f0a00e4;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int servicing_en=0x7f0a00e5;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int servicing_sw=0x7f0a00e6;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int sex_en=0x7f0a00e7;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int sex_sw=0x7f0a00e8;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int sim_card_not_registered_en=0x7f0a00e9;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int sim_card_not_registered_sw=0x7f0a00ea;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int sim_card_registration_en=0x7f0a00eb;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int sim_card_registration_sw=0x7f0a00ec;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int sire_en=0x7f0a00ed;
+        public static final int sire_registration_en=0x7f0a00ee;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int sire_registration_sw=0x7f0a00ef;
+        public static final int sire_sw=0x7f0a00f0;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int sms_charges_en=0x7f0a00f1;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int sms_charges_sw=0x7f0a00f2;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int something_went_wrong_try_again_en=0x7f0a00f3;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int something_went_wrong_try_again_sw=0x7f0a00f4;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int specify_en=0x7f0a00f5;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int specify_sw=0x7f0a00f6;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int start_date_en=0x7f0a00f7;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int start_date_sw=0x7f0a00f8;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int straw_number_en=0x7f0a00f9;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int straw_number_sw=0x7f0a00fa;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int successful_registration_en=0x7f0a00fb;
+        public static final int successful_registration_instructions_en=0x7f0a00fc;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int successful_registration_instructions_sw=0x7f0a00fd;
+        public static final int successful_registration_sw=0x7f0a00fe;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int swahili=0x7f0a0088;
+        public static final int swahili=0x7f0a00ff;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int time_en=0x7f0a0089;
+        public static final int time_en=0x7f0a0100;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int time_sw=0x7f0a0101;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings.xml 
          */
-        public static final int title_activity_add_event=0x7f0a008a;
-        public static final int title_activity_cow_registration=0x7f0a008b;
-        public static final int title_activity_events=0x7f0a008c;
-        public static final int title_activity_events_history=0x7f0a008d;
-        public static final int title_activity_farmer_registration=0x7f0a008e;
-        public static final int title_activity_fertility=0x7f0a008f;
-        public static final int title_activity_main_menu=0x7f0a0090;
-        public static final int title_activity_milk_procution_history=0x7f0a0091;
-        public static final int title_activity_milk_production=0x7f0a0092;
+        public static final int title_activity_add_event=0x7f0a0102;
+        public static final int title_activity_cow_registration=0x7f0a0103;
+        public static final int title_activity_events=0x7f0a0104;
+        public static final int title_activity_events_history=0x7f0a0105;
+        public static final int title_activity_farmer_registration=0x7f0a0106;
+        public static final int title_activity_fertility=0x7f0a0107;
+        public static final int title_activity_main_menu=0x7f0a0108;
+        public static final int title_activity_milk_procution_history=0x7f0a0109;
+        public static final int title_activity_milk_production=0x7f0a010a;
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
          */
-        public static final int today_en=0x7f0a0093;
-        public static final int type_of_birth_en=0x7f0a0094;
-        public static final int vet_used_en=0x7f0a0095;
-        public static final int welcome_en=0x7f0a0096;
-        public static final int yes_en=0x7f0a0097;
-        public static final int yesterday_en=0x7f0a0098;
-        public static final int your_mistro_id_en=0x7f0a0099;
+        public static final int today_en=0x7f0a010b;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int today_sw=0x7f0a010c;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int type_of_birth_en=0x7f0a010d;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int type_of_birth_sw=0x7f0a010e;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int vet_used_en=0x7f0a010f;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int vet_used_sw=0x7f0a0110;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int welcome_en=0x7f0a0111;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int welcome_sw=0x7f0a0112;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int yes_en=0x7f0a0113;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int yes_sw=0x7f0a0114;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int yesterday_en=0x7f0a0115;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int yesterday_sw=0x7f0a0116;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_en.xml 
+         */
+        public static final int your_mistro_id_en=0x7f0a0117;
+        /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/strings_sw.xml 
+         */
+        public static final int your_mistro_id_sw=0x7f0a0118;
     }
     public static final class style {
         /**  From: file:/home/jason/public_html/ngombe_planner/Android/MistroFarmer/src/main/res/values/styles.xml 
