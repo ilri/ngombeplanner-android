@@ -15,5 +15,6 @@
     <string name="english">English</string>
     <string name="swahili">Kiswahili</string>
     <string name="title_activity_fertility">Fertility</string>
+    <string name="title_activity_add_milk_production">Add Milk Production</string>
 
 </resources>

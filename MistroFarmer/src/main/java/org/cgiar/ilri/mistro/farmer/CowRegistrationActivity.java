@@ -47,7 +47,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener
+public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener
 {
     public static final String TAG="CowRegistrationActivity";
     public static final String KEY_INDEX="index";
@@ -130,18 +130,18 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         dateOfBirthTV=(TextView)this.findViewById(R.id.date_of_birth_tv);
         //dateOfBirthTV.setVisibility(TextView.GONE); //date of birth appears not to be necessary
         dateOfBirthET=(EditText)this.findViewById(R.id.date_of_birth_et);
-        //dateOfBirthET.setOnFocusChangeListener(this);
+        dateOfBirthET.setOnFocusChangeListener(this);
         dateOfBirthET.setOnClickListener(this);
         //dateOfBirthET.setVisibility(TextView.GONE); //date of birth appears not to be necessary
         breedTV=(TextView)this.findViewById(R.id.breed_tv);
         breedET=(EditText)this.findViewById(R.id.breed_et);
-        //breedET.setOnFocusChangeListener(this);
+        breedET.setOnFocusChangeListener(this);
         breedET.setOnClickListener(this);
         sexTV=(TextView)this.findViewById(R.id.sex_tv);
         sexS=(Spinner)this.findViewById(R.id.sex_s);
         deformityTV=(TextView)this.findViewById(R.id.deformity_tv);
         deformityET=(EditText)this.findViewById(R.id.deformity_et);
-        //deformityET.setOnFocusChangeListener(this);
+        deformityET.setOnFocusChangeListener(this);
         deformityET.setOnClickListener(this);
         serviceTypeTV = (TextView)this.findViewById(R.id.service_type_tv);
         serviceTypeS = (Spinner)this.findViewById(R.id.service_type_s);
@@ -397,8 +397,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         String title = Locale.getStringInLocale("cow_registration",this)+" "+String.valueOf(index+1);
         this.setTitle(title);
         nameTV.setText(Locale.getStringInLocale("name",this));
-        earTagNumberTV.setText(Locale.getStringInLocale("ear_tag_number",this));
-        ageTV.setText(Locale.getStringInLocale("age",this));
+        earTagNumberTV.setText(" * "+Locale.getStringInLocale("ear_tag_number",this));
+        ageTV.setText(" * "+Locale.getStringInLocale("age",this));
         int ageTypeArrayID = Locale.getArrayIDInLocale("age_type_array",this);
         if(ageTypeArrayID!=0){
             ArrayAdapter<CharSequence> ageTypeArrayAdapter=ArrayAdapter.createFromResource(this, ageTypeArrayID, android.R.layout.simple_spinner_item);
@@ -407,7 +407,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         }
         dateOfBirthTV.setText(Locale.getStringInLocale("date_of_birth",this));
         breedTV.setText(Locale.getStringInLocale("breed",this));
-        sexTV.setText(Locale.getStringInLocale("sex",this));
+        sexTV.setText(" * "+Locale.getStringInLocale("sex",this));
         int sexArrayID = Locale.getArrayIDInLocale("sex_array",this);
         if(sexArrayID!=0) {
             ArrayAdapter<CharSequence> sexArrayAdapter=ArrayAdapter.createFromResource(this, sexArrayID, android.R.layout.simple_spinner_item);
@@ -932,6 +932,25 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         serverRegistrationThread.execute(jsonObject);
     }
 
+    @Override
+    public void onFocusChange(View view, boolean hasFocus) {
+        if(view == dateOfBirthET && hasFocus){
+            if(dateOfBirthET.getText().toString().length() ==0 ){
+                dateOfBirthETClicked();
+            }
+        }
+        else if(view == breedET && hasFocus){
+            if(breedET.getText().toString().length() == 0){
+                breedETClicked();
+            }
+        }
+        else if(view == deformityET && hasFocus){
+            if(deformityET.getText().toString().length() == 0){
+                deformityETClicked();
+            }
+        }
+    }
+
     private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,String> {
         private ProgressDialog progressDialog;
 
@@ -955,7 +974,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
             progressDialog.dismiss();
 
             if(result == null) {
-                Toast.makeText(CowRegistrationActivity.this,Locale.getStringInLocale("problem_connecting_to_server",CowRegistrationActivity.this),Toast.LENGTH_LONG).show();
+                String httpError = DataHandler.getSharedPreference(CowRegistrationActivity.this, "http_error", "No Error thrown to application. Something must be really wrong");
+                Toast.makeText(CowRegistrationActivity.this,httpError,Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
                 Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("generic_sms_error", CowRegistrationActivity.this), Toast.LENGTH_LONG).show();

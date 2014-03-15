@@ -22,11 +22,14 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Mistro" >
-        <!--<receiver android:name="org.cgiar.ilri.mistro.farmer.backend.SMSHandler">
+
+        <!--
+        <receiver android:name="org.cgiar.ilri.mistro.farmer.backend.SMSHandler">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVER" />
             </intent-filter>
-        </receiver>-->
+        </receiver>
+        -->
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.LandingActivity"
             android:label="@string/app_name"
@@ -72,6 +75,10 @@
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.FertilityActivity"
             android:label="@string/title_activity_fertility" >
+        </activity>
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.AddMilkProductionActivity"
+            android:label="@string/title_activity_add_milk_production" >
         </activity>
     </application>
 

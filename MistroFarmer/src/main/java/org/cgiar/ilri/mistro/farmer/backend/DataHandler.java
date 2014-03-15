@@ -37,6 +37,8 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +59,8 @@ public class DataHandler
     //private static final String BASE_URL="http://192.168.2.232/~jason/MistroFarmerProject/web";
     //private static final String BASE_URL="http://10.0.2.2/~jason/MistroFarmerProject/web";
     public static final String SMS_SERVER_ADDRESS = "+254723572302";
-    private static final String BASE_URL="http://hpc.ilri.cgiar.org/~jrogena/mistro_web";
+    //private static final String BASE_URL="http://hpc.ilri.cgiar.org/~jrogena/mistro_web";
+    private static final String BASE_URL="http://azizi.ilri.cgiar.org/ngombe_planner";
     public static final String FARMER_REGISTRATION_URL="/php/farmer/registration.php";
     public static final String FARMER_AUTHENTICATION_URL="/php/farmer/authentication.php";
     public static final String FARMER_SIM_CARD_REGISTRATION_URL="/php/farmer/sim_card_registration.php";
@@ -140,7 +143,7 @@ public class DataHandler
     public static String sendDataToServer(Context context, String jsonString, String appendedURL, boolean waitForResponse) {
         String response;
         if(checkNetworkConnection(context)){
-            response = sendDataUsingHttpConnection(jsonString, appendedURL);
+            response = sendDataUsingHttpConnection(context, jsonString, appendedURL);
         }
         else{
             response = sendDataUsingSMS(context, jsonString, appendedURL, waitForResponse);
@@ -204,14 +207,13 @@ public class DataHandler
         return null;
     }
 
-    private static String sendDataUsingHttpConnection(String jsonString, String appendedURL) {
+    private static String sendDataUsingHttpConnection(Context context, String jsonString, String appendedURL) {
         HttpParams httpParameters = new BasicHttpParams();
         HttpConnectionParams.setConnectionTimeout(httpParameters, HTTP_POST_TIMEOUT);
         HttpConnectionParams.setSoTimeout(httpParameters, HTTP_RESPONSE_TIMEOUT);
         HttpClient httpClient=new DefaultHttpClient(httpParameters);
         HttpPost httpPost=new HttpPost(BASE_URL+appendedURL);
-        try
-        {
+        try{
             List<NameValuePair> nameValuePairs=new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("json", jsonString));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -232,11 +234,27 @@ public class DataHandler
                 Log.e(TAG, "Status Code "+String.valueOf(httpResponse.getStatusLine().getStatusCode())+" passed");
             }
         }
-        catch (Exception e)
-        {
+        catch (Exception e){
             e.printStackTrace();
+            setSharedPreference(context, "http_error", e.getMessage());
+        }
+        if(isConnectedToServer(HTTP_POST_TIMEOUT)){
+            setSharedPreference(context, "http_error", "This application was unable to reach http://azizi.ilri.cgiar.org within "+String.valueOf(HTTP_POST_TIMEOUT/1000)+" seconds. Try resetting your network connection");
         }
         return  null;
+    }
+
+    private static boolean isConnectedToServer(int timeout) {
+        try{
+            URL myUrl = new URL("http://azizi.ilri.cgiar.org");
+            URLConnection connection = myUrl.openConnection();
+            connection.setConnectTimeout(timeout);
+            connection.connect();
+            return true;
+        } catch (Exception e) {
+            // Handle your exceptions
+            return false;
+        }
     }
 
     private static String convertStreamToString(InputStream inputStream)

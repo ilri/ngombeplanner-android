@@ -150,10 +150,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     private void initTextInViews()
     {
         setTitle(Locale.getStringInLocale("farmer_registration",this));
-        fullNameTV.setText(Locale.getStringInLocale("full_name",this));
-        extensionPersonnelTV.setText(Locale.getStringInLocale("extension_p",this));
-        mobileNumberTV.setText(Locale.getStringInLocale("mobile_number",this));
-        numberOfCowsTV.setText(Locale.getStringInLocale("number_of_cows",this));
+        fullNameTV.setText(" * "+Locale.getStringInLocale("full_name",this));
+        extensionPersonnelTV.setText(" * "+Locale.getStringInLocale("extension_p",this));
+        mobileNumberTV.setText(" * "+Locale.getStringInLocale("mobile_number",this));
+        numberOfCowsTV.setText(" * "+Locale.getStringInLocale("number_of_cows",this));
         registerButton.setText(Locale.getStringInLocale("register",this));
         gpsAlertDialogTitle=Locale.getStringInLocale("enable_gps",this);
         gpsAlertDialogText=Locale.getStringInLocale("reason_for_enabling_gps",this);
@@ -290,6 +290,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             Toast.makeText(this,mobileNoETEmptyWarning,Toast.LENGTH_LONG).show();
             return false;
         }
+        if(extensionPersonnelET.getText().toString() == null || extensionPersonnelET.getText().toString().length() == 0){
+            Toast.makeText(this, Locale.getStringInLocale("enter_extension_personnel_name", this), Toast.LENGTH_LONG).show();
+            return  false;
+        }
         if(isInFarm && (longitude == null || longitude.length() == 0 || latitude == null || latitude.length() == 0)) {
             Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
             return false;
@@ -370,7 +374,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             progressDialog.dismiss();
 
             if(result == null){
-                Toast.makeText(FarmerRegistrationActivity.this,"something went wrong",Toast.LENGTH_LONG).show();
+                String httpError = DataHandler.getSharedPreference(FarmerRegistrationActivity.this, "http_error", "No Error thrown to application. Something must be really wrong");
+                Toast.makeText(FarmerRegistrationActivity.this,httpError,Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
                 Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("generic_sms_error", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();

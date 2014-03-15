@@ -1,3 +1,22 @@
-/JavaME/MistroFarmer/MistroFarmer/nbproject/private/
-/JavaME/MistroFarmer/MistroFarmer/build/
-/JavaME/MistroFarmer/MistroFarmer/dist/
+#built application files
+*.apk
+*.ap_
+
+#files from dex vm
+*.dex
+
+#Class files
+*.class
+
+#Gradle files
+.gradle/
+MistroFarmer/build/
+
+#Local configuration files
+local.properties
+
+#Intellij IDEA files
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/datasrouces.xml
+.idea/dataSources.ids

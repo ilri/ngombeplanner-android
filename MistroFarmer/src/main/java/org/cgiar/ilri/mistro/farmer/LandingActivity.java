@@ -77,6 +77,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
 
         //init text according to locale
         initTextInViews();
+        Toast.makeText(this, "Version 0.8 Revision 2", Toast.LENGTH_LONG).show();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -213,7 +214,8 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             loginSessionOn=false;
             if(result==null)
             {
-                Toast.makeText(LandingActivity.this,serverError,Toast.LENGTH_LONG).show();
+                String httpError = DataHandler.getSharedPreference(LandingActivity.this, "http_error", "No Error thrown to application. Something must be really wrong");
+                Toast.makeText(LandingActivity.this,httpError,Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
                 Toast.makeText(LandingActivity.this, Locale.getStringInLocale("generic_sms_error", LandingActivity.this), Toast.LENGTH_LONG).show();

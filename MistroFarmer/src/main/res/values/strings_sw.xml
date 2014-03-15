@@ -129,6 +129,7 @@
     <string name="yesterday_sw">Jana</string>
     <string name="enter_your_name_sw">Tafadhali ingiza jina lako</string>
     <string name="enter_your_mobile_no_sw">Tafadhali nigiza namba yako ya simu</string>
+    <string name="enter_extension_personnel_name_sw">Tafadhali ingiza jina kamili ya afisaa wa ukulima</string>
     <string name="enter_ear_tag_number_sw">Tafadhali ingiza namba ya Sikio ya ngombe</string>
     <string name="enter_ear_tag_no_or_name_sw">Tafadhali ingiza jina au namba ya Sikio ya ngombe</string>
     <string name="enter_straw_number_sw">Please enter the Sire\'s straw number</string>
@@ -158,7 +159,7 @@
     <string name="date_in_future_sw">Tarehe ulioingiza si sahihi</string>
     <string name="event_successfully_recorded_sw">Tukio uliyotuma imewekwa kwenye kumbukumbu</string>
     <string name="something_went_wrong_try_again_sw">Data haijatumwa. Jaribu kutuma tene</string>
-    <string name="loading_please_wait_sw">Tafadhali ngoja...</string>
+    <string name="loading_please_wait_sw">Tafadhali subiri...</string>
     <string name="type_of_birth_sw">Aina ya uzazi</string>
     <string-array name="birth_types_sw">
         <item>Kawaida</item>

@@ -4,11 +4,14 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.app.Activity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
@@ -36,75 +38,62 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class MilkProductionActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener
-{
-    private final String dateFormat="dd/MM/yyyy";
+public class AddMilkProductionActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
-    private static final String TAG="MilkProductionActivity";
-    private Button addProductionB;
-    private Button productionHistoryB;
-    private Dialog addMilkProductionDialog;
+    private final String dateFormat="dd/MM/yyyy";
+    private static final String TAG="AddMilkProductionActivity";
+
     private TextView cowTV;
     private Spinner cowS;
+    private TextView dateTV;
+    private EditText dateET;
     private TextView timeTV;
     private Spinner timeS;
     private TextView quantityTV;
     private EditText quantityET;
-    private Button addMilkProductionAddB;
-    private String[] cowNameArray;
-    private String[] cowEarTagNumberArray;
-    private String quantityETEmptyWarning;
-    private String infoSuccessfullySent;
-    private String problemInData;
-    private String loadingPleaseWait;
     private TextView quantityTypeTV;
     private Spinner quantityTypeS;
-    private String[] quantityTypes;
-    private TextView dateTV;
-    private EditText dateET;
-    private DatePickerDialog datePickerDialog;
+    private Button addMilkProductionAddB;
     private TextView noMilkingTV;
     private EditText noMilkingET;
     private TextView calfSucklingTV;
-    private String[] calfSucklingTypes;
     private Spinner calfSucklingS;
+    private DatePickerDialog datePickerDialog;
+
+    private String[] cowNameArray;
+    private String[] cowEarTagNumberArray;
+    private String[] quantityTypes;
+    private String[] calfSucklingTypes;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_milk_production);
+        setContentView(R.layout.activity_add_milk_production);
         DataHandler.requestPermissionToUseSMS(this);
 
-        addProductionB=(Button)this.findViewById(R.id.add_production_b);
-        addProductionB.setOnClickListener(this);
-        productionHistoryB =(Button)this.findViewById(R.id.production_history_b);
-        productionHistoryB.setOnClickListener(this);
-        addMilkProductionDialog=new Dialog(this);
-        addMilkProductionDialog.setContentView(R.layout.dialog_add_milk_production);
-        cowTV=(TextView)addMilkProductionDialog.findViewById(R.id.cow_tv);
-        cowS=(Spinner)addMilkProductionDialog.findViewById(R.id.cow_s);
-        dateTV=(TextView)addMilkProductionDialog.findViewById(R.id.date_tv);
-        dateET=(EditText)addMilkProductionDialog.findViewById(R.id.date_et);
+        cowTV=(TextView)this.findViewById(R.id.cow_tv);
+        cowS=(Spinner)this.findViewById(R.id.cow_s);
+        dateTV=(TextView)this.findViewById(R.id.date_tv);
+        dateET=(EditText)this.findViewById(R.id.date_et);
         dateET.setOnClickListener(this);
-        timeTV=(TextView)addMilkProductionDialog.findViewById(R.id.time_tv);
-        timeS=(Spinner)addMilkProductionDialog.findViewById(R.id.time_s);
-        quantityTV=(TextView)addMilkProductionDialog.findViewById(R.id.quantity_tv);
-        quantityET=(EditText)addMilkProductionDialog.findViewById(R.id.quantity_et);
-        quantityTypeTV=(TextView)addMilkProductionDialog.findViewById(R.id.quantity_type_tv);
-        quantityTypeS=(Spinner)addMilkProductionDialog.findViewById(R.id.quantity_type_s);
-        addMilkProductionAddB=(Button)addMilkProductionDialog.findViewById(R.id.dialog_add_milk_add_b);
-        noMilkingTV = (TextView)addMilkProductionDialog.findViewById(R.id.no_milking_tv);
-        noMilkingET = (EditText)addMilkProductionDialog.findViewById(R.id.no_milking_et);
-        calfSucklingTV = (TextView)addMilkProductionDialog.findViewById(R.id.calf_suckling_tv);
-        calfSucklingS = (Spinner)addMilkProductionDialog.findViewById(R.id.calf_suckling_s);
+        timeTV=(TextView)this.findViewById(R.id.time_tv);
+        timeS=(Spinner)this.findViewById(R.id.time_s);
+        quantityTV=(TextView)this.findViewById(R.id.quantity_tv);
+        quantityET=(EditText)this.findViewById(R.id.quantity_et);
+        quantityTypeTV=(TextView)this.findViewById(R.id.quantity_type_tv);
+        quantityTypeS=(Spinner)this.findViewById(R.id.quantity_type_s);
+        addMilkProductionAddB=(Button)this.findViewById(R.id.dialog_add_milk_add_b);
+        noMilkingTV = (TextView)this.findViewById(R.id.no_milking_tv);
+        noMilkingET = (EditText)this.findViewById(R.id.no_milking_et);
+        calfSucklingTV = (TextView)this.findViewById(R.id.calf_suckling_tv);
+        calfSucklingS = (Spinner)this.findViewById(R.id.calf_suckling_s);
         addMilkProductionAddB.setOnClickListener(this);
 
         initTextInViews();
         fetchCowIdentifiers();
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.milk_production, menu);
         return true;
@@ -126,12 +115,9 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         return false;
     }
 
-    public void initTextInViews()
-    {
-        this.setTitle(Locale.getStringInLocale("milk_production",this));
-        addProductionB.setText(Locale.getStringInLocale("add_production",this));
-        productionHistoryB.setText(Locale.getStringInLocale("production_history",this));
-        addMilkProductionDialog.setTitle(Locale.getStringInLocale("add_production",this));
+    public void initTextInViews() {
+        this.setTitle(Locale.getStringInLocale("add_production",this));
+
         cowTV.setText(Locale.getStringInLocale("cow",this));
         dateTV.setText(Locale.getStringInLocale("date",this));
         timeTV.setText(Locale.getStringInLocale("time",this));
@@ -143,10 +129,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             milkingTimesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             timeS.setAdapter(milkingTimesArrayAdapter);
         }
-        quantityETEmptyWarning=Locale.getStringInLocale("enter_quantity_of_milk_produced",this);
-        infoSuccessfullySent=Locale.getStringInLocale("information_successfully_sent_to_server",this);
-        problemInData=Locale.getStringInLocale("production_for_time_already_exists",this);
-        loadingPleaseWait = Locale.getStringInLocale("loading_please_wait",this);
+
         quantityTypeTV.setText(Locale.getStringInLocale("measurement_type",this));
 
         quantityTypes = Locale.getArrayInLocale("quantity_types",this);
@@ -175,30 +158,16 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     }
 
     @Override
-    public void onClick(View view)
-    {
-        if(view==addProductionB)
-        {
-            //addMilkProductionDialog.show();
-            Intent intent = new Intent(MilkProductionActivity.this, AddMilkProductionActivity.class);
-            startActivity(intent);
-        }
-        else if(view==addMilkProductionAddB)
-        {
+    public void onClick(View view) {
+        if(view==addMilkProductionAddB) {
             sendMilkProductionData();
-        }
-        else if(view==productionHistoryB)
-        {
-            Intent intent=new Intent(MilkProductionActivity.this,MilkProcutionHistoryActivity.class);
-            startActivity(intent);
         }
         else if(view==dateET) {
             dateETClicked();
         }
     }
 
-    private void dateETClicked()
-    {
+    private void dateETClicked() {
         Date date=new Date();
         Calendar calendar=new GregorianCalendar();
         calendar.setTime(date);
@@ -208,24 +177,111 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
-    {
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         String dateString=String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear+1)+"/"+String.valueOf(year);
         dateET.setText(dateString);
-        if(!validateDate()){
+        if(!validateDate()) {
             dateET.setText("");
         }
     }
 
-    private void fetchCowIdentifiers()
+    private void sendMilkProductionData()
     {
+        if(validateInput())
+        {
+            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+            MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
+            String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
+            String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times", this, Locale.LOCALE_ENGLISH);
+            String quantityType = "";
+            if(quantityTypesInEN.length == quantityTypes.length) {
+                DataHandler.setSharedPreference(AddMilkProductionActivity.this, DataHandler.SP_KEY_MILK_QUANTITY_TYPE, String.valueOf(quantityTypeS.getSelectedItemPosition()));
+                quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
+            }
+            String milkingTime = "";
+            if(milkingTimesInEN.length > 0){
+                milkingTime = milkingTimesInEN[timeS.getSelectedItemPosition()];
+            }
+
+            String[] calfSucklingTypesInEN = Locale.getArrayInLocale("calf_suckling_types",this,Locale.LOCALE_ENGLISH);
+            String calfSucklingType = calfSucklingTypesInEN[calfSucklingS.getSelectedItemPosition()];
+            milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(),noMilkingET.getText().toString(),calfSucklingType);
+        }
+    }
+
+    private boolean validateInput()
+    {
+        String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
+        String quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
+        if(quantityET.getText().toString()==null) {
+            Toast.makeText(this, Locale.getStringInLocale("enter_quantity_of_milk_produced",this), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(quantityET.getText().toString().length()<=0) {
+            Toast.makeText(this, Locale.getStringInLocale("enter_quantity_of_milk_produced",this), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(dateET.getText().toString()==null||dateET.getText().toString().length()==0) {
+            Toast.makeText(this,Locale.getStringInLocale("enter_date",this),Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(!validateDate()) {
+            return false;
+        }
+        else if(quantityType.equals("Litres") || quantityType.equals("KGs")) {
+            if(Integer.parseInt(quantityET.getText().toString()) > 30) {
+                Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+        else if(quantityType.equals("Cups")) {
+            if(Integer.parseInt(quantityET.getText().toString()) > (30*3.3)) {
+                Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+        if(noMilkingET.getText().toString()==null || noMilkingET.getText().toString().trim().length()==0) {
+            Toast.makeText(this, Locale.getStringInLocale("enter_number_times_cow_milked",this),Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(Integer.parseInt(noMilkingET.getText().toString())>10) {
+            Toast.makeText(this, Locale.getStringInLocale("milking_times_too_much",this), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateDate() {
+        try {
+            Date dateEntered=new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateET.getText().toString());
+            Date today=new Date();
+            long milisecondDifference = today.getTime() - dateEntered.getTime();
+            long days = milisecondDifference / 86400000;
+            if((today.getTime()-dateEntered.getTime())<0) {
+                Toast.makeText(this,Locale.getStringInLocale("date_in_future",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+            else if(days > 30) {//more than one month
+                Toast.makeText(this,Locale.getStringInLocale("milk_data_too_old",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void fetchCowIdentifiers() {
         CowIdentifierThread cowIdentifierThread=new CowIdentifierThread();
         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         cowIdentifierThread.execute(telephonyManager.getSimSerialNumber());
     }
 
-    private void setCowIdentifiers(String[] cowArray)
-    {
+    private void setCowIdentifiers(String[] cowArray) {
         if(cowS!=null)
         {
             ArrayAdapter<String> cowsArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,cowArray);
@@ -233,7 +289,60 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             cowS.setAdapter(cowsArrayAdapter);
         }
     }
-    
+
+    private class MilkProductionDataAdditionThread extends AsyncTask<String,Integer,String>
+    {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(AddMilkProductionActivity.this, "",Locale.getStringInLocale("loading_please_wait",AddMilkProductionActivity.this), true);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.d(TAG, "at milkProductionDataAdditionThread");
+            JSONObject jsonObject=new JSONObject();
+            try
+            {
+                jsonObject.put("simCardSN",params[0]);
+                jsonObject.put("cowName",params[1]);
+                jsonObject.put("cowEarTagNumber",params[2]);
+                jsonObject.put("time",params[3]);
+                jsonObject.put("quantity",params[4]);
+                jsonObject.put("quantityType",params[5]);
+                jsonObject.put("date", params[6]);
+                jsonObject.put("noMilkingTimes",params[7]);
+                jsonObject.put("calfSuckling",params[8]);
+                String result=DataHandler.sendDataToServer(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL, true);
+                Log.d(TAG,"data sent to server, result = "+result);
+                return result;
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+            super.onPostExecute(result);
+            progressDialog.dismiss();
+            if(result==null) {
+                Toast.makeText(AddMilkProductionActivity.this,"server error",Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
+                Toast.makeText(AddMilkProductionActivity.this,Locale.getStringInLocale("information_successfully_sent_to_server", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.DATA_ERROR)) {
+                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("production_for_time_already_exists", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
     private class CowIdentifierThread extends AsyncTask<String,Integer,String>
     {
         private ProgressDialog progressDialog;
@@ -241,7 +350,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(MilkProductionActivity.this, "",loadingPleaseWait, true);
+            progressDialog = ProgressDialog.show(AddMilkProductionActivity.this, "",Locale.getStringInLocale("loading_please_wait", AddMilkProductionActivity.this), true);
         }
 
         @Override
@@ -252,7 +361,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             {
                 jsonObject.put("simCardSN",params[0]);
                 jsonObject.put("cowSex", Cow.SEX_FEMALE);
-                String result=DataHandler.sendDataToServer(MilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_FETCH_COW_IDENTIFIERS_URL, true);
+                String result=DataHandler.sendDataToServer(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_FETCH_COW_IDENTIFIERS_URL, true);
                 return result;
             }
             catch (JSONException e)
@@ -268,19 +377,19 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             super.onPostExecute(result);
             progressDialog.dismiss();
             if(result == null ){
-                Toast.makeText(MilkProductionActivity.this,"server error",Toast.LENGTH_LONG).show();
+                Toast.makeText(AddMilkProductionActivity.this,"server error",Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
-                Toast.makeText(MilkProductionActivity.this, Locale.getStringInLocale("generic_sms_error", MilkProductionActivity.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("generic_sms_error", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
-                Toast.makeText(MilkProductionActivity.this, Locale.getStringInLocale("no_service", MilkProductionActivity.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("no_service", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
-                Toast.makeText(MilkProductionActivity.this, Locale.getStringInLocale("radio_off", MilkProductionActivity.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("radio_off", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
-                Toast.makeText(MilkProductionActivity.this, Locale.getStringInLocale("server_not_receive_sms", MilkProductionActivity.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("server_not_receive_sms", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
             }
             else{
                 try
@@ -298,10 +407,10 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                     //TODO: warn user if no cows
                     if(cowArray.length==0)
                     {
-                        Toast.makeText(MilkProductionActivity.this,"no cows fetched",Toast.LENGTH_LONG).show();
+                        Toast.makeText(AddMilkProductionActivity.this,"no cows fetched",Toast.LENGTH_LONG).show();
                     }
-                    MilkProductionActivity.this.cowNameArray =cowArray;
-                    MilkProductionActivity.this.cowEarTagNumberArray=earTagArray;
+                    AddMilkProductionActivity.this.cowNameArray =cowArray;
+                    AddMilkProductionActivity.this.cowEarTagNumberArray=earTagArray;
                     String[] identifierArray=new String[cowArray.length];
                     for (int i=0;i<cowArray.length;i++)
                     {
@@ -322,160 +431,6 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
                 }
             }
 
-        }
-    }
-
-    private void sendMilkProductionData()
-    {
-        if(validateInput())
-        {
-            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-            MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
-            String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
-            String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times", this, Locale.LOCALE_ENGLISH);
-            String quantityType = "";
-            if(quantityTypesInEN.length == quantityTypes.length) {
-                DataHandler.setSharedPreference(MilkProductionActivity.this, DataHandler.SP_KEY_MILK_QUANTITY_TYPE, String.valueOf(quantityTypeS.getSelectedItemPosition()));
-                quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
-            }
-            String milkingTime = "";
-            if(milkingTimesInEN.length > 0){
-                milkingTime = milkingTimesInEN[timeS.getSelectedItemPosition()];
-            }
-
-            String[] calfSucklingTypesInEN = Locale.getArrayInLocale("calf_suckling_types",this,Locale.LOCALE_ENGLISH);
-            String calfSucklingType = calfSucklingTypesInEN[calfSucklingS.getSelectedItemPosition()];
-            milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(),noMilkingET.getText().toString(),calfSucklingType);
-        }
-    }
-
-    private boolean validateInput()
-    {
-        String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
-        String quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
-        if(quantityET.getText().toString()==null)
-        {
-            Toast.makeText(this,quantityETEmptyWarning,Toast.LENGTH_LONG).show();
-            return false;
-        }
-        else if(quantityET.getText().toString().length()<=0)
-        {
-            Toast.makeText(this,quantityETEmptyWarning,Toast.LENGTH_LONG).show();
-            return false;
-        }
-        else if(dateET.getText().toString()==null||dateET.getText().toString().length()==0)
-        {
-            Toast.makeText(this,Locale.getStringInLocale("enter_date",this),Toast.LENGTH_LONG).show();
-            return false;
-        }
-        else if(!validateDate()) {
-            return false;
-        }
-        else if(quantityType.equals("Litres") || quantityType.equals("KGs")) {
-            if(Integer.parseInt(quantityET.getText().toString()) > 30) {
-                Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
-                return false;
-            }
-        }
-        else if(quantityType.equals("Cups")) {
-            if(Integer.parseInt(quantityET.getText().toString()) > (30*3.3)) {
-                Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
-                return false;
-            }
-        }
-        if(noMilkingET.getText().toString()==null || noMilkingET.getText().toString().trim().length()==0){
-            Toast.makeText(this, Locale.getStringInLocale("enter_number_times_cow_milked",this),Toast.LENGTH_LONG).show();
-            return false;
-        }
-        else if(Integer.parseInt(noMilkingET.getText().toString())>10){
-            Toast.makeText(this, Locale.getStringInLocale("milking_times_too_much",this), Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }
-
-    private boolean validateDate() {
-        try
-        {
-            Date dateEntered=new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateET.getText().toString());
-            Date today=new Date();
-            long milisecondDifference = today.getTime() - dateEntered.getTime();
-            long days = milisecondDifference / 86400000;
-            if((today.getTime()-dateEntered.getTime())<0)
-            {
-                Toast.makeText(this,Locale.getStringInLocale("date_in_future",this),Toast.LENGTH_LONG).show();
-                return false;
-            }
-            else if(days > 30) {//more than one month
-                Toast.makeText(this,Locale.getStringInLocale("milk_data_too_old",this),Toast.LENGTH_LONG).show();
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private class MilkProductionDataAdditionThread extends AsyncTask<String,Integer,String>
-    {
-        private ProgressDialog progressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = ProgressDialog.show(MilkProductionActivity.this, "",loadingPleaseWait, true);
-        }
-
-        @Override
-        protected String doInBackground(String... params)
-        {
-            Log.d(TAG,"at milkProductionDataAdditionThread");
-            JSONObject jsonObject=new JSONObject();
-            try
-            {
-                jsonObject.put("simCardSN",params[0]);
-                jsonObject.put("cowName",params[1]);
-                jsonObject.put("cowEarTagNumber",params[2]);
-                jsonObject.put("time",params[3]);
-                jsonObject.put("quantity",params[4]);
-                jsonObject.put("quantityType",params[5]);
-                jsonObject.put("date", params[6]);
-                jsonObject.put("noMilkingTimes",params[7]);
-                jsonObject.put("calfSuckling",params[8]);
-                String result=DataHandler.sendDataToServer(MilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL, true);
-                Log.d(TAG,"data sent to server, result = "+result);
-                return result;
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result)
-        {
-            super.onPostExecute(result);
-            progressDialog.dismiss();
-            if(result==null)
-            {
-                Toast.makeText(MilkProductionActivity.this,"server error",Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.ACKNOWLEDGE_OK))
-            {
-                addMilkProductionDialog.dismiss();
-                Toast.makeText(MilkProductionActivity.this,infoSuccessfullySent,Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.DATA_ERROR))
-            {
-                Toast.makeText(MilkProductionActivity.this,problemInData,Toast.LENGTH_LONG).show();
-            }
         }
     }
 }
