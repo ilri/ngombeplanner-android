@@ -1,1 +1,2 @@
-include ':MistroFarmer', ':libraries:ActionBarSherlock:actionbarsherlock'
+//include ':MistroFarmer', ':libraries:ActionBarSherlock:actionbarsherlock'
+include ':MistroFarmer'

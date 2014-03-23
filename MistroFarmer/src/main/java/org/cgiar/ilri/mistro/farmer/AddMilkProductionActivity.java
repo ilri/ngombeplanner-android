@@ -336,6 +336,9 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
             }
             else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
                 Toast.makeText(AddMilkProductionActivity.this,Locale.getStringInLocale("information_successfully_sent_to_server", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AddMilkProductionActivity.this, MilkProductionActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
             else if(result.equals(DataHandler.DATA_ERROR)) {
                 Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("production_for_time_already_exists", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();

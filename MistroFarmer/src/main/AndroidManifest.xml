@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="17" /> <!--using target sdk version of 17 because actionbarsherlock uses 17. Otherwise gradle is unable to build project-->
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

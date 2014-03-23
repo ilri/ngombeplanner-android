@@ -8,6 +8,7 @@
     <dimen name="activity_padding_top">5dp</dimen>
     <dimen name="activity_padding_bottom">15dp</dimen>
     <dimen name="activity_padding_side">20dp</dimen>
+    <dimen name="activity_a_m_p_table_row_margin_top">10dp</dimen>
     <dimen name="activity_f_r_edit_text_margin_top">5dp</dimen>
     <dimen name="activity_f_r_edit_text_margin_left">15dp</dimen>
     <dimen name="activity_f_r_text_view_margin_top">18dp</dimen>

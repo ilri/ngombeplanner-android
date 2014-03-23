@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.5.+'
+        classpath 'com.android.tools.build:gradle:0.7.+'
     }
 }
 apply plugin: 'android'
@@ -16,8 +16,10 @@ dependencies {
 
 	// You must install or update the Support Repository through the SDK manager to use this dependency.
 	// The Support Repository (separate from the corresponding library) can be found in the Extras category.
-	// compile 'com.android.support:support-v4:13.0.+'
-	compile 'com.android.support:appcompat-v7:18.0.0'
+	compile 'com.android.support:support-v4:13.0.+'
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    //compile 'com.android.support:appcompat-v7:18.0.0'
+    //compile project(':libraries:ActionBarSherlock:actionbarsherlock')
 }
 
 android {
@@ -26,6 +28,6 @@ android {
 
     defaultConfig {
         minSdkVersion 7
-        targetSdkVersion 16
+        targetSdkVersion 17
     }
 }
