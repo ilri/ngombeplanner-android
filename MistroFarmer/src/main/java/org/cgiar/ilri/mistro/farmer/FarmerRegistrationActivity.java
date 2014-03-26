@@ -151,7 +151,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     {
         setTitle(Locale.getStringInLocale("farmer_registration",this));
         fullNameTV.setText(" * "+Locale.getStringInLocale("full_name",this));
-        extensionPersonnelTV.setText(" * "+Locale.getStringInLocale("extension_p",this));
+        extensionPersonnelTV.setText(Locale.getStringInLocale("extension_p",this));
         mobileNumberTV.setText(" * "+Locale.getStringInLocale("mobile_number",this));
         numberOfCowsTV.setText(" * "+Locale.getStringInLocale("number_of_cows",this));
         registerButton.setText(Locale.getStringInLocale("register",this));
@@ -290,10 +290,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
             Toast.makeText(this,mobileNoETEmptyWarning,Toast.LENGTH_LONG).show();
             return false;
         }
-        if(extensionPersonnelET.getText().toString() == null || extensionPersonnelET.getText().toString().length() == 0){
+        /*if(extensionPersonnelET.getText().toString() == null || extensionPersonnelET.getText().toString().length() == 0){
             Toast.makeText(this, Locale.getStringInLocale("enter_extension_personnel_name", this), Toast.LENGTH_LONG).show();
             return  false;
-        }
+        }*/
         if(isInFarm && (longitude == null || longitude.length() == 0 || latitude == null || latitude.length() == 0)) {
             Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
             return false;

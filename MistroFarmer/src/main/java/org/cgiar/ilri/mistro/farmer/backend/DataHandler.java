@@ -58,7 +58,7 @@ public class DataHandler
     private static final int HTTP_RESPONSE_TIMEOUT =20000;
     //private static final String BASE_URL="http://192.168.2.232/~jason/MistroFarmerProject/web";
     //private static final String BASE_URL="http://10.0.2.2/~jason/MistroFarmerProject/web";
-    public static final String SMS_SERVER_ADDRESS = "+254723572302";
+    public static final String SMS_SERVER_ADDRESS = "+254708944137";
     //private static final String BASE_URL="http://hpc.ilri.cgiar.org/~jrogena/mistro_web";
     private static final String BASE_URL="http://azizi.ilri.cgiar.org/ngombe_planner";
     public static final String FARMER_REGISTRATION_URL="/php/farmer/registration.php";
