@@ -80,8 +80,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private Spinner servicingS;
     private TextView causeOfDeathTV;
     private Spinner causeOfDeathS;
-    private TextView liveBirthsTV;
-    private EditText liveBirthsET;
+    /*private TextView liveBirthsTV;
+    private EditText liveBirthsET;*/
 
     private String[] cowNameArray;
     private String[] cowEarTagNumberArray;
@@ -130,8 +130,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         noOfServicingDaysET = (EditText)findViewById(R.id.no_of_servicing_days_et);
         remarksTV=(TextView)findViewById(R.id.remarks_tv);
         remarksET=(EditText)findViewById(R.id.remarks_et);
-        liveBirthsTV = (TextView)findViewById(R.id.live_births_tv);
-        liveBirthsET = (EditText)findViewById(R.id.live_births_et);
+        /*liveBirthsTV = (TextView)findViewById(R.id.live_births_tv);
+        liveBirthsET = (EditText)findViewById(R.id.live_births_et);*/
         okayB=(Button)findViewById(R.id.okay_b);
         okayB.setOnClickListener(this);
 
@@ -273,7 +273,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         sendUnsuccessfulWarning=Locale.getStringInLocale("something_went_wrong_try_again",this);
         loadingPleaseWait = Locale.getStringInLocale("loading_please_wait",this);
         servicingTV.setText(Locale.getStringInLocale("associated_servicing",this));
-        liveBirthsTV.setText(Locale.getStringInLocale("previous_live_births",this));
+        //liveBirthsTV.setText(Locale.getStringInLocale("previous_live_births",this));
     }
 
     private void fetchCowIdentifiers()
@@ -329,8 +329,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         servicingS.setVisibility(Spinner.GONE);
         causeOfDeathTV.setVisibility(TextView.GONE);
         causeOfDeathS.setVisibility(Spinner.GONE);
-        liveBirthsTV.setVisibility(TextView.GONE);
-        liveBirthsET.setVisibility(EditText.GONE);
+        /*liveBirthsTV.setVisibility(TextView.GONE);
+        liveBirthsET.setVisibility(EditText.GONE);*/
         String[] eventTypesEN = Locale.getArrayInLocale("cow_event_types", this, Locale.LOCALE_ENGLISH);
         if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {
             birthEventSelected();
@@ -341,8 +341,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             cowIdentifierS.setVisibility(Spinner.VISIBLE);
             cowIdentifierTV.setVisibility(TextView.VISIBLE);
             okayB.setText(Locale.getStringInLocale("next",this));
-            liveBirthsTV.setVisibility(TextView.VISIBLE);
-            liveBirthsET.setVisibility(EditText.VISIBLE);
+            /*liveBirthsTV.setVisibility(TextView.VISIBLE);
+            liveBirthsET.setVisibility(EditText.VISIBLE);*/
         }
         else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Abortion")) {
             servicingTV.setVisibility(TextView.VISIBLE);
@@ -440,10 +440,10 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             }
         }
         if(selectedEvent.equals("Birth")){
-            if(liveBirthsET.getText().toString()==null || liveBirthsET.getText().toString().trim().length()==0){
+            /*if(liveBirthsET.getText().toString()==null || liveBirthsET.getText().toString().trim().length()==0){
                 Toast.makeText(this,Locale.getStringInLocale("enter_previous_live_births",this),Toast.LENGTH_LONG).show();
                 return false;
-            }
+            }*/
         }
         return true;
     }
@@ -515,7 +515,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 if(selectedEvent.equals("Birth")){
                     String[] birthTypesInEN = Locale.getArrayInLocale("birth_types", AddEventActivity.this, Locale.LOCALE_ENGLISH);
                     jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
-                    jsonObject.put("liveBirths", liveBirthsET.getText().toString());
+                    //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
                 }
                 jsonObject.put("causeOfDeath", causesOfDeathInEN[causeOfDeathS.getSelectedItemPosition()]);
                 CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
@@ -555,7 +555,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                             if(servicingIDs != null) {
                                 jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
                             }
-                            jsonObject.put("liveBirths", liveBirthsET.getText().toString());
+                            //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
 
                             thisCalf.setPiggyBack(jsonObject.toString());
                         } catch (JSONException e) {
