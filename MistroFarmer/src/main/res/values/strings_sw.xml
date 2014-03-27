@@ -76,8 +76,8 @@
     <string name="specify_sw">Bainisha</string>
     <string name="straw_number_sw">Straw Number</string>
     <string name="vet_used_sw">Daktari aliyetumiwa</string>
-    <string name="servicing_bull_name_sw">Servicing Bull Name</string>
-    <string name="servicing_bull_ear_tag_number_sw">Servicing Bull Ear Tag Number</string>
+    <string name="servicing_bull_name_sw">Jina la Ndume aliyetumiwa</string>
+    <string name="servicing_bull_ear_tag_number_sw">Namba ya Sikio ya Ndume aliyetumiwa</string>
     <string name="embryo_number_sw">Embryo Number</string>
     <string name="enable_gps_sw">Wezesha GPS</string>
     <string name="reason_for_enabling_gps_sw">Unahitaji kuwezesha GPS kabla ya kuendelea. Bonyeza \'Sawa\' ili kuwawezesha GPS</string>
@@ -174,6 +174,8 @@
     <string name="milk_data_too_old_sw">haukubaliwi kuripoti tukio iliyo tendeka zaidi ya mwezi mmoja</string>
     <string name="milk_too_much_sw">Kiasi ya maziwa ulioingiza ni mingi sana</string>
     <string name="start_date_sw">Tarehe ya kuanza</string>
+    <string name="date_served_sw">Tarehe ya kukwea</string>
+    <string name="date_of_insemination_sw">Tarehe ya kuingiza</string>
     <string name="no_of_days_in_servicing_sw">Idadi ya masiku katika kitendo ya kukwea</string>
     <string name="associated_servicing_sw">Bull Services</string>
     <string name="country_not_found_sw">Nchi ulioingiza haipatikani</string>

@@ -202,10 +202,15 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 eventTypeSelected();
 
                 this.setTitle(Locale.getStringInLocale("bull_servicing",this));
+                dateTV.setText(Locale.getStringInLocale("date_served", this));
                 eventTypeTV.setVisibility(TextView.GONE);
                 eventTypeS.setVisibility(Spinner.GONE);
                 noOfServicingDaysTV.setVisibility(TextView.GONE);
                 noOfServicingDaysET.setVisibility(EditText.GONE);
+                bullNameTV.setVisibility(TextView.VISIBLE);
+                bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                bullETNTV.setVisibility(TextView.VISIBLE);
+                bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);
                 remarksTV.setVisibility(TextView.GONE);
                 remarksET.setVisibility(EditText.GONE);
             }
@@ -221,12 +226,13 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 eventTypeSelected();
 
                 this.setTitle(Locale.getStringInLocale("artificial_inseminamtion",this));
+                dateTV.setText(Locale.getStringInLocale("date_of_insemination", this));
                 eventTypeTV.setVisibility(TextView.GONE);
                 eventTypeS.setVisibility(Spinner.GONE);
-                bullNameTV.setVisibility(TextView.VISIBLE);
-                bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
-                bullETNTV.setVisibility(TextView.VISIBLE);
-                bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                bullNameTV.setVisibility(TextView.GONE);
+                bullNameACTV.setVisibility(AutoCompleteTextView.GONE);
+                bullETNTV.setVisibility(TextView.GONE);
+                bullETNACTV.setVisibility(AutoCompleteTextView.GONE);
                 remarksTV.setVisibility(TextView.GONE);
                 remarksET.setVisibility(EditText.GONE);
             }
@@ -349,6 +355,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             okayB.setText(Locale.getStringInLocale("next",this));
         }
         else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
+            dateTV.setText(Locale.getStringInLocale("date_of_insemination", this));
             strawNumberTV.setVisibility(TextView.VISIBLE);
             strawNumberET.setVisibility(EditText.VISIBLE);
             vetUsedTV.setVisibility(TextView.VISIBLE);
@@ -359,6 +366,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             cowIdentifierTV.setVisibility(TextView.VISIBLE);
         }
         else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Bull Servicing")) {
+            dateTV.setText(Locale.getStringInLocale("date_served", this));
             bullNameTV.setVisibility(TextView.VISIBLE);
             bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
             bullETNTV.setVisibility(TextView.VISIBLE);
