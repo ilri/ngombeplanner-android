@@ -98,7 +98,7 @@
                     android:paddingLeft="20dp"
                     android:layout_weight="0.5"/>
             </TableRow>
-            <TableRow
+            <!--<TableRow
                 android:layout_height="40dp"
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/activity_a_m_p_table_row_margin_top">
@@ -131,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:layout_weight="0.5"/>
-            </TableRow>
+            </TableRow>-->
         </TableLayout>
         <Button
             android:id="@+id/dialog_add_milk_add_b"

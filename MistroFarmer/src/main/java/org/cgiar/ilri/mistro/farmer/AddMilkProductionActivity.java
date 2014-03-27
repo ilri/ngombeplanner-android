@@ -54,10 +54,10 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
     private TextView quantityTypeTV;
     private Spinner quantityTypeS;
     private Button addMilkProductionAddB;
-    private TextView noMilkingTV;
+    /*private TextView noMilkingTV;
     private EditText noMilkingET;
     private TextView calfSucklingTV;
-    private Spinner calfSucklingS;
+    private Spinner calfSucklingS;*/
     private DatePickerDialog datePickerDialog;
 
     private String[] cowNameArray;
@@ -83,10 +83,10 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         quantityTypeTV=(TextView)this.findViewById(R.id.quantity_type_tv);
         quantityTypeS=(Spinner)this.findViewById(R.id.quantity_type_s);
         addMilkProductionAddB=(Button)this.findViewById(R.id.dialog_add_milk_add_b);
-        noMilkingTV = (TextView)this.findViewById(R.id.no_milking_tv);
+        /*noMilkingTV = (TextView)this.findViewById(R.id.no_milking_tv);
         noMilkingET = (EditText)this.findViewById(R.id.no_milking_et);
         calfSucklingTV = (TextView)this.findViewById(R.id.calf_suckling_tv);
-        calfSucklingS = (Spinner)this.findViewById(R.id.calf_suckling_s);
+        calfSucklingS = (Spinner)this.findViewById(R.id.calf_suckling_s);*/
         addMilkProductionAddB.setOnClickListener(this);
 
         initTextInViews();
@@ -148,13 +148,13 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
             quantityTypeS.setSelection(defaultQuantityTypeIndex);
 
 
-        noMilkingTV.setText(Locale.getStringInLocale("no_times_milked_in_a_day",this));
-        calfSucklingTV.setText(Locale.getStringInLocale("calf_suckling",this));
+        //noMilkingTV.setText(Locale.getStringInLocale("no_times_milked_in_a_day",this));
+        //calfSucklingTV.setText(Locale.getStringInLocale("calf_suckling",this));
 
-        calfSucklingTypes = Locale.getArrayInLocale("calf_suckling_types",this);
+        /*calfSucklingTypes = Locale.getArrayInLocale("calf_suckling_types",this);
         ArrayAdapter<String> calfSucklingTypesArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,calfSucklingTypes);
         calfSucklingTypesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        calfSucklingS.setAdapter(calfSucklingTypesArrayAdapter);
+        calfSucklingS.setAdapter(calfSucklingTypesArrayAdapter);*/
     }
 
     @Override
@@ -203,9 +203,10 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
                 milkingTime = milkingTimesInEN[timeS.getSelectedItemPosition()];
             }
 
-            String[] calfSucklingTypesInEN = Locale.getArrayInLocale("calf_suckling_types",this,Locale.LOCALE_ENGLISH);
-            String calfSucklingType = calfSucklingTypesInEN[calfSucklingS.getSelectedItemPosition()];
-            milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(),noMilkingET.getText().toString(),calfSucklingType);
+            /*String[] calfSucklingTypesInEN = Locale.getArrayInLocale("calf_suckling_types",this,Locale.LOCALE_ENGLISH);
+            String calfSucklingType = calfSucklingTypesInEN[calfSucklingS.getSelectedItemPosition()];*/
+            //milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(),noMilkingET.getText().toString(),calfSucklingType);
+            milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString());
         }
     }
 
@@ -240,14 +241,14 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
                 return false;
             }
         }
-        if(noMilkingET.getText().toString()==null || noMilkingET.getText().toString().trim().length()==0) {
+       /* if(noMilkingET.getText().toString()==null || noMilkingET.getText().toString().trim().length()==0) {
             Toast.makeText(this, Locale.getStringInLocale("enter_number_times_cow_milked",this),Toast.LENGTH_LONG).show();
             return false;
         }
         else if(Integer.parseInt(noMilkingET.getText().toString())>10) {
             Toast.makeText(this, Locale.getStringInLocale("milking_times_too_much",this), Toast.LENGTH_LONG).show();
             return false;
-        }
+        }*/
         return true;
     }
 
@@ -313,8 +314,8 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
                 jsonObject.put("quantity",params[4]);
                 jsonObject.put("quantityType",params[5]);
                 jsonObject.put("date", params[6]);
-                jsonObject.put("noMilkingTimes",params[7]);
-                jsonObject.put("calfSuckling",params[8]);
+                /*jsonObject.put("noMilkingTimes",params[7]);
+                jsonObject.put("calfSuckling",params[8]);*/
                 String result=DataHandler.sendDataToServer(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL, true);
                 Log.d(TAG,"data sent to server, result = "+result);
                 return result;
