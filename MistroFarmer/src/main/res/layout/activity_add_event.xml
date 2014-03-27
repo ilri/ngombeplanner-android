@@ -148,7 +148,7 @@
             android:textSize="@dimen/normal_text_size"
             android:visibility="gone"
             android:textColor="@color/text_input_color"/>
-        <TextView
+        <!--<TextView
             android:id="@+id/bull_etn_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:textSize="@dimen/normal_text_size"
             android:visibility="gone"
-            android:textColor="@color/text_input_color"/>
+            android:textColor="@color/text_input_color"/>-->
         <TextView
             android:id="@+id/no_of_servicing_days_tv"
             android:layout_width="wrap_content"

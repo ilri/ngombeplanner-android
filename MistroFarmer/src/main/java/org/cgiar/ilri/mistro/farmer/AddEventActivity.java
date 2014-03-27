@@ -72,8 +72,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private EditText vetUsedET;
     private TextView bullNameTV;
     private AutoCompleteTextView bullNameACTV;
-    private TextView bullETNTV;
-    private AutoCompleteTextView bullETNACTV;
+    /*private TextView bullETNTV;
+    private AutoCompleteTextView bullETNACTV;*/
     private TextView noOfServicingDaysTV;
     private EditText noOfServicingDaysET;
     private TextView servicingTV;
@@ -124,8 +124,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         causeOfDeathS = (Spinner)findViewById(R.id.cause_of_death_s);
         bullNameTV = (TextView)findViewById(R.id.bull_name_tv);
         bullNameACTV = (AutoCompleteTextView)findViewById(R.id.bull_name_actv);
-        bullETNTV = (TextView)findViewById(R.id.bull_etn_tv);
-        bullETNACTV = (AutoCompleteTextView)findViewById(R.id.bull_etn_actv);
+        /*bullETNTV = (TextView)findViewById(R.id.bull_etn_tv);
+        bullETNACTV = (AutoCompleteTextView)findViewById(R.id.bull_etn_actv);*/
         noOfServicingDaysTV = (TextView)findViewById(R.id.no_of_servicing_days_tv);
         noOfServicingDaysET = (EditText)findViewById(R.id.no_of_servicing_days_et);
         remarksTV=(TextView)findViewById(R.id.remarks_tv);
@@ -209,8 +209,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 noOfServicingDaysET.setVisibility(EditText.GONE);
                 bullNameTV.setVisibility(TextView.VISIBLE);
                 bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
-                bullETNTV.setVisibility(TextView.VISIBLE);
-                bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                /*bullETNTV.setVisibility(TextView.VISIBLE);
+                bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);*/
                 remarksTV.setVisibility(TextView.GONE);
                 remarksET.setVisibility(EditText.GONE);
             }
@@ -231,8 +231,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 eventTypeS.setVisibility(Spinner.GONE);
                 bullNameTV.setVisibility(TextView.GONE);
                 bullNameACTV.setVisibility(AutoCompleteTextView.GONE);
-                bullETNTV.setVisibility(TextView.GONE);
-                bullETNACTV.setVisibility(AutoCompleteTextView.GONE);
+                /*bullETNTV.setVisibility(TextView.GONE);
+                bullETNACTV.setVisibility(AutoCompleteTextView.GONE);*/
                 remarksTV.setVisibility(TextView.GONE);
                 remarksET.setVisibility(EditText.GONE);
             }
@@ -262,7 +262,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             causeOfDeathS.setAdapter(causesOfDeathArrayAdapter);
         }
         bullNameTV.setText(Locale.getStringInLocale("servicing_bull_name",this));
-        bullETNTV.setText(Locale.getStringInLocale("servicing_bull_ear_tag_number",this));
+        bullNameACTV.setHint(Locale.getStringInLocale("servicing_bull_identifier_hint", this));
+        //bullETNTV.setText(Locale.getStringInLocale("servicing_bull_ear_tag_number",this));
         noOfServicingDaysTV.setText(Locale.getStringInLocale("no_of_days_in_servicing",this));
         remarksTV.setText(Locale.getStringInLocale("remarks",this));
         okayB.setText(Locale.getStringInLocale("okay",this));
@@ -316,8 +317,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         vetUsedET.setVisibility(EditText.GONE);
         bullNameTV.setVisibility(TextView.GONE);
         bullNameACTV.setVisibility(AutoCompleteTextView.GONE);
-        bullETNTV.setVisibility(TextView.GONE);
-        bullETNACTV.setVisibility(AutoCompleteTextView.GONE);
+        /*bullETNTV.setVisibility(TextView.GONE);
+        bullETNACTV.setVisibility(AutoCompleteTextView.GONE);*/
         remarksTV.setVisibility(TextView.GONE);
         remarksET.setVisibility(EditText.GONE);
         cowIdentifierS.setVisibility(Spinner.GONE);
@@ -369,8 +370,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             dateTV.setText(Locale.getStringInLocale("date_served", this));
             bullNameTV.setVisibility(TextView.VISIBLE);
             bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
-            bullETNTV.setVisibility(TextView.VISIBLE);
-            bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+            /*bullETNTV.setVisibility(TextView.VISIBLE);
+            bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);*/
             remarksTV.setVisibility(TextView.VISIBLE);
             remarksET.setVisibility(EditText.VISIBLE);
             cowIdentifierS.setVisibility(Spinner.VISIBLE);
@@ -505,7 +506,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 jsonObject.put("strawNumber", strawNumberET.getText().toString());
                 jsonObject.put("vetUsed", vetUsedET.getText().toString());
                 jsonObject.put("bullName", bullNameACTV.getText().toString());
-                jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
+                //jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
                 jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
                 if(servicingIDs != null) {
                     jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));

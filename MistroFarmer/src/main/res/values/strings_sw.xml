@@ -76,7 +76,8 @@
     <string name="specify_sw">Bainisha</string>
     <string name="straw_number_sw">Straw Number</string>
     <string name="vet_used_sw">Daktari aliyetumiwa</string>
-    <string name="servicing_bull_name_sw">Jina la Ndume aliyetumiwa</string>
+    <string name="servicing_bull_name_sw">Ndume aliyetumiwa</string>
+    <string name="servicing_bull_identifier_hint_sw">Ingiza jina, namba ya sikio au kitambulisho (ID) ya ndume</string>
     <string name="servicing_bull_ear_tag_number_sw">Namba ya Sikio ya Ndume aliyetumiwa</string>
     <string name="embryo_number_sw">Embryo Number</string>
     <string name="enable_gps_sw">Wezesha GPS</string>
