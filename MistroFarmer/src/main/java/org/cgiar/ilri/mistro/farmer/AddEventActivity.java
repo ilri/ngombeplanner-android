@@ -505,7 +505,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 jsonObject.put("remarks", remarksET.getText().toString());
                 jsonObject.put("strawNumber", strawNumberET.getText().toString());
                 jsonObject.put("vetUsed", vetUsedET.getText().toString());
-                jsonObject.put("bullName", bullNameACTV.getText().toString());
+                //jsonObject.put("bullName", bullNameACTV.getText().toString());
+                jsonObject.put("bullEarTagNo", bullNameACTV.getText().toString());
                 //jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
                 jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
                 if(servicingIDs != null) {
