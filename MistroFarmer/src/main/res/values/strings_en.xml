@@ -79,6 +79,14 @@
     <string name="servicing_bull_name_en">Bull used</string>
     <string name="servicing_bull_identifier_hint_en">Enter the name, ear tag number or ID of bull</string>
     <string name="servicing_bull_ear_tag_number_en">Ear tag number of the Bull used</string>
+    <string name="bull_owner_en">Who owns the bull?</string>
+    <string name="name_bull_owner_en">Name of bull owner</string>
+    <string-array name="bull_owners_en">
+        <item>Own bull</item>
+        <item>Another farmer</item>
+        <item>A group</item>
+    </string-array>
+    <string name="name_of_other_farmer_or_group_en">Enter the name of the farmer or group</string>
     <string name="embryo_number_en">Embryo Number</string>
     <string name="enable_gps_en">Enable GPS</string>
     <string name="reason_for_enabling_gps_en">You need to enable your GPS before you can continue. Press Okay to enable GPS</string>

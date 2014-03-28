@@ -72,6 +72,11 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private EditText vetUsedET;
     private TextView bullNameTV;
     private AutoCompleteTextView bullNameACTV;
+    private TextView bullOwnerTV;
+    private Spinner bullOwnerS;
+    private TextView specBullOwnerTV;
+    private EditText specBullOwnerET;
+
     /*private TextView bullETNTV;
     private AutoCompleteTextView bullETNACTV;*/
     private TextView noOfServicingDaysTV;
@@ -124,6 +129,11 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         causeOfDeathS = (Spinner)findViewById(R.id.cause_of_death_s);
         bullNameTV = (TextView)findViewById(R.id.bull_name_tv);
         bullNameACTV = (AutoCompleteTextView)findViewById(R.id.bull_name_actv);
+        bullOwnerTV = (TextView)findViewById(R.id.bull_owner_tv);
+        bullOwnerS = (Spinner)findViewById(R.id.bull_owner_s);
+        bullOwnerS.setOnItemSelectedListener(this);
+        specBullOwnerTV = (TextView)findViewById(R.id.spec_bull_owner_tv);
+        specBullOwnerET = (EditText)findViewById(R.id.spec_bull_owner_et);
         /*bullETNTV = (TextView)findViewById(R.id.bull_etn_tv);
         bullETNACTV = (AutoCompleteTextView)findViewById(R.id.bull_etn_actv);*/
         noOfServicingDaysTV = (TextView)findViewById(R.id.no_of_servicing_days_tv);
@@ -209,6 +219,10 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 noOfServicingDaysET.setVisibility(EditText.GONE);
                 bullNameTV.setVisibility(TextView.VISIBLE);
                 bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                bullOwnerTV.setVisibility(TextView.VISIBLE);
+                bullOwnerS.setVisibility(Spinner.VISIBLE);
+                //specBullOwnerTV.setVisibility(TextView.VISIBLE);
+                //specBullOwnerET.setVisibility(EditText.VISIBLE);
                 /*bullETNTV.setVisibility(TextView.VISIBLE);
                 bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);*/
                 remarksTV.setVisibility(TextView.GONE);
@@ -231,6 +245,10 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 eventTypeS.setVisibility(Spinner.GONE);
                 bullNameTV.setVisibility(TextView.GONE);
                 bullNameACTV.setVisibility(AutoCompleteTextView.GONE);
+                bullOwnerTV.setVisibility(TextView.GONE);
+                bullOwnerS.setVisibility(Spinner.GONE);
+                specBullOwnerTV.setVisibility(TextView.GONE);
+                specBullOwnerET.setVisibility(EditText.GONE);
                 /*bullETNTV.setVisibility(TextView.GONE);
                 bullETNACTV.setVisibility(AutoCompleteTextView.GONE);*/
                 remarksTV.setVisibility(TextView.GONE);
@@ -263,6 +281,18 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
         bullNameTV.setText(Locale.getStringInLocale("servicing_bull_name",this));
         bullNameACTV.setHint(Locale.getStringInLocale("servicing_bull_identifier_hint", this));
+        bullOwnerTV.setText(Locale.getStringInLocale("bull_owner", this));
+
+        int bullOwnersID = Locale.getArrayIDInLocale("bull_owners", this);
+        if(bullOwnersID != 0){
+            ArrayAdapter<CharSequence> bullOwnerArrayAdapter = ArrayAdapter.createFromResource(this, bullOwnersID, android.R.layout.simple_spinner_item);
+            bullOwnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            bullOwnerS.setAdapter(bullOwnerArrayAdapter);
+        }
+
+        specBullOwnerTV.setText(Locale.getStringInLocale("name_bull_owner", this));
+        specBullOwnerET.setHint(Locale.getStringInLocale("name_of_other_farmer_or_group", this));
+
         //bullETNTV.setText(Locale.getStringInLocale("servicing_bull_ear_tag_number",this));
         noOfServicingDaysTV.setText(Locale.getStringInLocale("no_of_days_in_servicing",this));
         remarksTV.setText(Locale.getStringInLocale("remarks",this));
@@ -317,6 +347,10 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         vetUsedET.setVisibility(EditText.GONE);
         bullNameTV.setVisibility(TextView.GONE);
         bullNameACTV.setVisibility(AutoCompleteTextView.GONE);
+        bullOwnerTV.setVisibility(TextView.GONE);
+        bullOwnerS.setVisibility(Spinner.GONE);
+        specBullOwnerTV.setVisibility(TextView.GONE);
+        specBullOwnerET.setVisibility(EditText.GONE);
         /*bullETNTV.setVisibility(TextView.GONE);
         bullETNACTV.setVisibility(AutoCompleteTextView.GONE);*/
         remarksTV.setVisibility(TextView.GONE);
@@ -370,6 +404,10 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             dateTV.setText(Locale.getStringInLocale("date_served", this));
             bullNameTV.setVisibility(TextView.VISIBLE);
             bullNameACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+            bullOwnerTV.setVisibility(TextView.VISIBLE);
+            bullOwnerS.setVisibility(Spinner.VISIBLE);
+            specBullOwnerTV.setVisibility(TextView.VISIBLE);
+            specBullOwnerET.setVisibility(EditText.VISIBLE);
             /*bullETNTV.setVisibility(TextView.VISIBLE);
             bullETNACTV.setVisibility(AutoCompleteTextView.VISIBLE);*/
             remarksTV.setVisibility(TextView.VISIBLE);
@@ -400,6 +438,17 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent == eventTypeS) {
             eventTypeSelected();
+        }
+        else if(parent == bullOwnerS){
+            String[] bullOwnersInEN = Locale.getArrayInLocale("bull_owners", this, Locale.LOCALE_ENGLISH);
+            if(bullOwnersInEN[bullOwnerS.getSelectedItemPosition()].equals("Own bull")){
+                specBullOwnerET.setVisibility(EditText.GONE);
+                specBullOwnerTV.setVisibility(TextView.GONE);
+            }
+            else{
+                specBullOwnerET.setVisibility(EditText.VISIBLE);
+                specBullOwnerTV.setVisibility(TextView.VISIBLE);
+            }
         }
     }
 
@@ -506,7 +555,23 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 jsonObject.put("strawNumber", strawNumberET.getText().toString());
                 jsonObject.put("vetUsed", vetUsedET.getText().toString());
                 //jsonObject.put("bullName", bullNameACTV.getText().toString());
-                jsonObject.put("bullEarTagNo", bullNameACTV.getText().toString());
+
+                //check if hint put as value of bullNameACTV
+                String bullEarTagNo = bullNameACTV.getText().toString();
+                if(bullEarTagNo.equals(Locale.getStringInLocale("servicing_bull_identifier_hint", AddEventActivity.this)))
+                    bullEarTagNo = "";
+                jsonObject.put("bullEarTagNo", bullEarTagNo);
+
+                if(selectedEvent.equals("Bull Servicing")){
+                    String[] bullOwnersInEN = Locale.getArrayInLocale("bull_owners", AddEventActivity.this, Locale.LOCALE_ENGLISH);
+                    jsonObject.put("bullOwner", bullOwnersInEN[bullOwnerS.getSelectedItemPosition()]);
+
+                    //check if hint put as value of EditText
+                    String bullOwnerName = specBullOwnerET.getText().toString();
+                    if(bullOwnerName.equals(Locale.getStringInLocale("name_of_other_farmer_or_group", AddEventActivity.this)))
+                        bullOwnerName = "";
+                    jsonObject.put("bullOwnerName", bullOwnerName);
+                }
                 //jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
                 jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
                 if(servicingIDs != null) {

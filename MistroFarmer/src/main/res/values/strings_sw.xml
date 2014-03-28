@@ -79,6 +79,14 @@
     <string name="servicing_bull_name_sw">Ndume aliyetumiwa</string>
     <string name="servicing_bull_identifier_hint_sw">Ingiza jina, namba ya sikio au kitambulisho (ID) ya ndume</string>
     <string name="servicing_bull_ear_tag_number_sw">Namba ya Sikio ya Ndume aliyetumiwa</string>
+    <string name="bull_owner_sw">Nani anamiliki ndume?</string>
+    <string name="name_bull_owner_sw">Jina ya mmiliki</string>
+    <string-array name="bull_owners_sw">
+        <item>Ndume ni yangu</item>
+        <item>Ndume ni ya mkulima mwingine</item>
+        <item>Ndume ni ya kundi</item>
+    </string-array>
+    <string name="name_of_other_farmer_or_group_sw">Ingiza jina ya mkulima au kundi</string>
     <string name="embryo_number_sw">Embryo Number</string>
     <string name="enable_gps_sw">Wezesha GPS</string>
     <string name="reason_for_enabling_gps_sw">Unahitaji kuwezesha GPS kabla ya kuendelea. Bonyeza \'Sawa\' ili kuwawezesha GPS</string>
