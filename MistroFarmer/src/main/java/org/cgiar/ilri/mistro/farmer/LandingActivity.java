@@ -77,7 +77,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
 
         //init text according to locale
         initTextInViews();
-        Toast.makeText(this, "Version 0.8 Revision 8", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Version 0.8 Revision 9", Toast.LENGTH_LONG).show();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

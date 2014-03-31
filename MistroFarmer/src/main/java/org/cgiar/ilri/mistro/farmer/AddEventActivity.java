@@ -509,7 +509,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 Toast.makeText(this,dateInFuture,Toast.LENGTH_LONG).show();
                 return false;
             }
-            else if(days > 30) {//more than one month
+            else if(days > 15) {//more than 15 days
                 Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
                 return false;
             }

@@ -262,7 +262,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
                 Toast.makeText(this,Locale.getStringInLocale("date_in_future",this),Toast.LENGTH_LONG).show();
                 return false;
             }
-            else if(days > 30) {//more than one month
+            else if(days > 15) {//more than 15 days
                 Toast.makeText(this,Locale.getStringInLocale("milk_data_too_old",this),Toast.LENGTH_LONG).show();
                 return false;
             }

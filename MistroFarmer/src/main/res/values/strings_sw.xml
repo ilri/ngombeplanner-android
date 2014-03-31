@@ -179,8 +179,8 @@
     <string name="calf_registration_sw">Sajili ndama</string>
     <string name="next_screen_is_calf_registration_sw">Unahitajika kusajili ndama aliyezaliwa. Bonyeza \'Ijayo\' ili kumsajili</string>
     <string name="next_screen_is_cow_registration_sw">Unahitajika kusajili ngombe uliyenunua. Bonyeza \'Ijayo\' ili kumsajili</string>
-    <string name="event_too_old_sw">Haukubaliwi kuripoti tukio iliyo tendeka zaidi ya mwezi mmoja</string>
-    <string name="milk_data_too_old_sw">haukubaliwi kuripoti tukio iliyo tendeka zaidi ya mwezi mmoja</string>
+    <string name="event_too_old_sw">Haukubaliwi kuripoti tukio iliyo tendeka zaidi ya siku kumi na tano</string>
+    <string name="milk_data_too_old_sw">haukubaliwi kuripoti tukio iliyo tendeka zaidi ya siku kumi na tano</string>
     <string name="milk_too_much_sw">Kiasi ya maziwa ulioingiza ni mingi sana</string>
     <string name="start_date_sw">Tarehe ya kuanza</string>
     <string name="date_served_sw">Tarehe ya kukwea</string>
