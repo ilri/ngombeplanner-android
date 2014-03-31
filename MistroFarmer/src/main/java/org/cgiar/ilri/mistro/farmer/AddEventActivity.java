@@ -159,6 +159,30 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_DATE, dateET.getText().toString());
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_REMARKS, remarksET.getText().toString());
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_STRAW_NUMBER, strawNumberET.getText().toString());
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_VET_USED, vetUsedET.getText().toString());
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_NAME, bullNameACTV.getText().toString());
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_OWNER, specBullOwnerET.getText().toString());
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_NO_SERVICING_DAYS, noOfServicingDaysET.getText().toString());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dateET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_DATE, ""));
+        remarksET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_REMARKS, ""));
+        strawNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_STRAW_NUMBER, ""));
+        vetUsedET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_VET_USED, ""));
+        bullNameACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_NAME, ""));
+        specBullOwnerET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_OWNER, ""));
+        noOfServicingDaysET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_NO_SERVICING_DAYS, ""));
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.add_event, menu);

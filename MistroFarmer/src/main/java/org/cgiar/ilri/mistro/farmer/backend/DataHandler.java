@@ -76,6 +76,30 @@ public class DataHandler
     public static final String SP_KEY_USE_SMS_TO_SEND_DATA = "useSMSToSendData";
     public static final String SP_KEY_SMS_RESPONSE = "smsResponse";
     public static final String SP_KEY_SMS_CACHE = "smsCache";
+
+    public static final String SP_KEY_AEA_DATE = "addEventActivityDate";
+    public static final String SP_KEY_AEA_REMARKS = "addEventActivityRemarks";
+    public static final String SP_KEY_AEA_STRAW_NUMBER = "addEventActivityStrawNumber";
+    public static final String SP_KEY_AEA_VET_USED = "addEventActivityVetUsed";
+    public static final String SP_KEY_AEA_BULL_NAME = "addEventActivityBullName";
+    public static final String SP_KEY_AEA_BULL_OWNER = "addEventActivityBullOwner";
+    public static final String SP_KEY_AEA_NO_SERVICING_DAYS = "addEventActivityNoServicingDays";
+    public static final String SP_KEY_AMPA_DATE = "addMilkProductionActivityDate";
+    public static final String SP_KEY_AMPA_QUANTITY = "addMilkProductionActivityQuantity";
+    public static final String SP_KEY_CRA_NAME = "cowRegistrationActivityName";
+    public static final String SP_KEY_CRA_EAR_TAG_NUMBER = "cowRegistrationActivityEarTagNumber";
+    public static final String SP_KEY_CRA_AGE = "cowRegistrationActivityAge";
+    public static final String SP_KEY_CRA_DATE_OF_BIRTH = "cowRegistrationActivityDateOfBirth";
+    public static final String SP_KEY_CRA_BREED = "cowRegistrationActivityBreed";
+    public static final String SP_KEY_CRA_DEFORMITY = "cowRegistrationActivityDeformity";
+    public static final String SP_KEY_CRA_STRAW_NUMBER = "cowRegistrationActivityStrawNumber";
+    public static final String SP_KEY_CRA_DAM = "cowRegistrationActivityDam";
+    public static final String SP_KEY_CRA_EMBRYO_NUMBER = "cowRegistrationActivityEmbryoNumber";
+    public static final String SP_KEY_CRA_COUNTRY_OF_ORIGIN = "cowRegistrationActivityCountryOfOrigin";
+    public static final String SP_KEY_FRA_FULL_NAME = "farmerRegistrationActivityFullName";
+    public static final String SP_KEY_FRA_EXTENSION_PERSONNEL = "farmerRegistrationActivityExtensionPersonnel";
+    public static final String SP_KEY_FRA_MOBILE_NUMBER = "farmerRegistrationActivityMobileNumber";
+
     public static final String CAN_SEND_USING_SMS = "canSend";
     public static final String CANNOT_SEND_USING_SMS = "cannotSend";
     public static final String SMS_DELIMITER = "#*#*";

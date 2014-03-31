@@ -109,6 +109,11 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     protected void onResume()
     {
         super.onResume();
+
+        fullNameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, ""));
+        extensionPersonnelET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, ""));
+        mobileNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, ""));
+
         Bundle bundle=this.getIntent().getExtras();
         if(bundle!=null)
         {
@@ -141,6 +146,11 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
     protected void onPause()
     {
         super.onPause();
+
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, fullNameET.getText().toString());
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, extensionPersonnelET.getText().toString());
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, mobileNumberET.getText().toString());
+
         if(locationManager!=null)
         {
             locationManager.removeUpdates(this);

@@ -93,6 +93,20 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         fetchCowIdentifiers();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_DATE, dateET.getText().toString());
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_QUANTITY, quantityET.getText().toString());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dateET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AMPA_DATE, ""));
+        quantityET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AMPA_QUANTITY, ""));
+    }
+
     public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.milk_production, menu);
