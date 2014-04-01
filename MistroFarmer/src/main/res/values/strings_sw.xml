@@ -226,4 +226,7 @@
     <string name="no_service_sw">Nguvu ya signali ya simu yako haitoshi kutuma SMS</string>
     <string name="radio_off_sw">Hakikisha kwamba simu yako iko na kadi ya simu</string>
     <string name="server_not_receive_sms_sw">Simu yako imetuma SMS lakini mtandao haupokea ujumbe (SMS) huo</string>
+    <string name="logout_sw">Toka</string>
+    <string name="back_sw">Rudi</string>
+    <string name="back_to_main_menu_sw">Rudi kwa Menu Kuu</string>
 </resources>

@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.Menu;
+import com.actionbarsherlock.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -54,11 +54,13 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
     private TextView quantityTypeTV;
     private Spinner quantityTypeS;
     private Button addMilkProductionAddB;
+    private Button cancelB;
     /*private TextView noMilkingTV;
     private EditText noMilkingET;
     private TextView calfSucklingTV;
     private Spinner calfSucklingS;*/
     private DatePickerDialog datePickerDialog;
+    private Menu menu;
 
     private String[] cowNameArray;
     private String[] cowEarTagNumberArray;
@@ -88,6 +90,8 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         calfSucklingTV = (TextView)this.findViewById(R.id.calf_suckling_tv);
         calfSucklingS = (Spinner)this.findViewById(R.id.calf_suckling_s);*/
         addMilkProductionAddB.setOnClickListener(this);
+        cancelB = (Button)this.findViewById(R.id.cancel_b);
+        cancelB.setOnClickListener(this);
 
         initTextInViews();
         fetchCowIdentifiers();
@@ -110,6 +114,8 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
     public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.milk_production, menu);
+        this.menu = menu;
+        initMenuText();
         return true;
     }
 
@@ -125,6 +131,11 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
             initTextInViews();
             Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
             return true;
+        }
+        else if(item.getItemId() == R.id.action_back_main_menu) {
+            Intent intent = new Intent(this, MainMenu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         }
         return false;
     }
@@ -161,6 +172,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         if(defaultQuantityTypeIndex < quantityTypes.length)
             quantityTypeS.setSelection(defaultQuantityTypeIndex);
 
+        cancelB.setText(Locale.getStringInLocale("cancel", this));
 
         //noMilkingTV.setText(Locale.getStringInLocale("no_times_milked_in_a_day",this));
         //calfSucklingTV.setText(Locale.getStringInLocale("calf_suckling",this));
@@ -169,6 +181,15 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         ArrayAdapter<String> calfSucklingTypesArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,calfSucklingTypes);
         calfSucklingTypesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         calfSucklingS.setAdapter(calfSucklingTypesArrayAdapter);*/
+
+        initMenuText();
+    }
+
+    private void initMenuText(){
+        if(this.menu != null){
+            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
+            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
+        }
     }
 
     @Override
@@ -178,6 +199,11 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         }
         else if(view==dateET) {
             dateETClicked();
+        }
+        else if(view == cancelB){
+            Intent intent = new Intent(this, MilkProductionActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         }
     }
 

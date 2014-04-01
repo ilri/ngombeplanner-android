@@ -2,6 +2,7 @@ package org.cgiar.ilri.mistro.farmer;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -36,6 +37,7 @@ import java.util.List;
 public class EventsHistoryActivity extends SherlockActivity {
     private static final String TAG="EventsHistoryActivity";
 
+    private Menu menu;
     private TableLayout eventsHistoryTL;
     private TextView dateTV;
     private TextView cowNameTV;
@@ -71,6 +73,8 @@ public class EventsHistoryActivity extends SherlockActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.events_history, menu);
+        this.menu = menu;
+        initMenuText();
         return true;
     }
 
@@ -86,6 +90,11 @@ public class EventsHistoryActivity extends SherlockActivity {
             initTextInViews();
             Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
             return true;
+        }
+        else if(item.getItemId() == R.id.action_back_main_menu) {
+            Intent intent = new Intent(this, MainMenu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         }
         return false;
     }
@@ -104,6 +113,15 @@ public class EventsHistoryActivity extends SherlockActivity {
         if(eventTypes == null) {
             eventTypes = new String[1];
             eventTypes[0] = "";
+        }
+
+        initMenuText();
+    }
+
+    private void initMenuText(){
+        if(this.menu != null){
+            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
+            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
         }
     }
 

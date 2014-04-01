@@ -14,4 +14,5 @@
     <dimen name="activity_f_r_text_view_margin_top">18dp</dimen>
     <dimen name="normal_button_layout_height">50dp</dimen>
     <dimen name="normal_button_padding_side">15dp</dimen>
+    <dimen name="back_button_width">100dp</dimen>
 </resources>

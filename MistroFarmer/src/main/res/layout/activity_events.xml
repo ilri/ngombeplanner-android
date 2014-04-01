@@ -19,5 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/normal_button_layout_height"
             android:layout_marginTop="40dp"/>
+    <Button
+        android:id="@+id/back_b"
+        android:layout_width="@dimen/back_button_width"
+        android:layout_height="50dp"
+        android:layout_marginTop="90dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"/>
 
 </LinearLayout>

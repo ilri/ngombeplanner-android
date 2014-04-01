@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
@@ -16,8 +17,10 @@ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 
 public class FertilityActivity extends SherlockActivity implements View.OnClickListener{
 
+    private Menu menu;
     private Button servicingB;
     private Button calvingB;
+    private Button backB;
 
     private Dialog servicingTypeDialog;
     private Button bullB;
@@ -34,6 +37,9 @@ public class FertilityActivity extends SherlockActivity implements View.OnClickL
         calvingB = (Button) this.findViewById(R.id.calving_b);
         calvingB.setOnClickListener(this);
 
+        backB = (Button) this.findViewById(R.id.back_b);
+        backB.setOnClickListener(this);
+
         servicingTypeDialog =new Dialog(this);
         servicingTypeDialog.setContentView(R.layout.dialog_servicing_type);
         bullB =(Button) servicingTypeDialog.findViewById(R.id.bull_b);
@@ -47,6 +53,8 @@ public class FertilityActivity extends SherlockActivity implements View.OnClickL
     public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.milk_production, menu);
+        this.menu = menu;
+        initMenuText();
         return true;
     }
 
@@ -63,6 +71,11 @@ public class FertilityActivity extends SherlockActivity implements View.OnClickL
             Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
             return true;
         }
+        else if(item.getItemId() == R.id.action_back_main_menu) {
+            Intent intent = new Intent(this, MainMenu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
         return false;
     }
 
@@ -73,6 +86,15 @@ public class FertilityActivity extends SherlockActivity implements View.OnClickL
         servicingTypeDialog.setTitle(Locale.getStringInLocale("select_service_type",this));
         aiB.setText(Locale.getStringInLocale("artificial_inseminamtion",this));
         bullB.setText(Locale.getStringInLocale("bull_servicing",this));
+        backB.setText(Locale.getStringInLocale("back", this));
+        initMenuText();
+    }
+
+    private void initMenuText(){
+        if(this.menu != null){
+            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
+            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
+        }
     }
 
     @Override
@@ -97,6 +119,11 @@ public class FertilityActivity extends SherlockActivity implements View.OnClickL
             intent.putExtra(AddEventActivity.KEY_MODE, AddEventActivity.MODE_SERVICING);
             intent.putExtra(AddEventActivity.KEY_SERVICING_TYPE, Cow.SERVICE_TYPE_AI);
             servicingTypeDialog.dismiss();
+            startActivity(intent);
+        }
+        else if(view == backB){
+            Intent intent = new Intent(this, MainMenu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
     }

@@ -226,4 +226,7 @@
     <string name="no_service_en">Unable to send SMSs to the server because your device does not have a good enough network connection</string>
     <string name="radio_off_en">Your device is currently unable to send SMSs. Make sure it has a SIM card inserted and that it is not on Airplane mode</string>
     <string name="server_not_receive_sms_en">An SMS was sent to the server but it did not receive it</string>
+    <string name="logout_en">Logout</string>
+    <string name="back_en">Back</string>
+    <string name="back_to_main_menu_en">Back to Main Menu</string>
 </resources>

@@ -10,8 +10,7 @@
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/activity_padding_side"
         android:paddingRight="@dimen/activity_padding_side"
-        android:orientation="vertical"
-        android:background="@color/dialog_bg_color">
+        android:orientation="vertical">
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -133,14 +132,30 @@
                     android:layout_weight="0.5"/>
             </TableRow>-->
         </TableLayout>
-        <Button
-            android:id="@+id/dialog_add_milk_add_b"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="@dimen/normal_button_layout_height"
-            android:layout_gravity="right"
-            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
-            android:paddingLeft="@dimen/normal_button_padding_side"
-            android:paddingRight="@dimen/normal_button_padding_side"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="bottom">
+            <Button
+                android:id="@+id/cancel_b"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/normal_button_layout_height"
+                android:paddingLeft="@dimen/normal_button_padding_side"
+                android:paddingRight="@dimen/normal_button_padding_side"
+                android:textSize="@dimen/normal_text_size"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/dialog_add_milk_add_b"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/normal_button_layout_height"
+                android:paddingLeft="@dimen/normal_button_padding_side"
+                android:paddingRight="@dimen/normal_button_padding_side"
+                android:textSize="@dimen/normal_text_size"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>

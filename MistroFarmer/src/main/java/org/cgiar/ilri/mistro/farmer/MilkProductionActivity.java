@@ -41,8 +41,10 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     private final String dateFormat="dd/MM/yyyy";
 
     private static final String TAG="MilkProductionActivity";
+    private Menu menu;
     private Button addProductionB;
     private Button productionHistoryB;
+    private Button backB;
     private Dialog addMilkProductionDialog;
     private TextView cowTV;
     private Spinner cowS;
@@ -80,6 +82,8 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         addProductionB.setOnClickListener(this);
         productionHistoryB =(Button)this.findViewById(R.id.production_history_b);
         productionHistoryB.setOnClickListener(this);
+        backB = (Button)this.findViewById(R.id.back_b);
+        backB.setOnClickListener(this);
         addMilkProductionDialog=new Dialog(this);
         addMilkProductionDialog.setContentView(R.layout.dialog_add_milk_production);
         cowTV=(TextView)addMilkProductionDialog.findViewById(R.id.cow_tv);
@@ -107,6 +111,8 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.milk_production, menu);
+        this.menu = menu;
+        initMenuText();
         return true;
     }
 
@@ -122,6 +128,11 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             initTextInViews();
             Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
             return true;
+        }
+        else if(item.getItemId() == R.id.action_back_main_menu) {
+            Intent intent = new Intent(this, MainMenu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         }
         return false;
     }
@@ -172,6 +183,16 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         ArrayAdapter<String> calfSucklingTypesArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,calfSucklingTypes);
         calfSucklingTypesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         calfSucklingS.setAdapter(calfSucklingTypesArrayAdapter);
+        backB.setText(Locale.getStringInLocale("back", this));
+
+        initMenuText();
+    }
+
+    private void initMenuText(){
+        if(this.menu != null){
+            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
+            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
+        }
     }
 
     @Override
@@ -194,6 +215,11 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         }
         else if(view==dateET) {
             dateETClicked();
+        }
+        else if(view==backB){
+            Intent intent = new Intent(this, MainMenu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         }
     }
 

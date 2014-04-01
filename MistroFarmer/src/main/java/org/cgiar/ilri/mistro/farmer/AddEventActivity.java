@@ -54,6 +54,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     public static final String MODE_CALVING="Birth";
     public static final String KEY_SERVICING_TYPE="servicingType";
 
+    private Menu menu;
     private TextView cowIdentifierTV;
     private Spinner cowIdentifierS;
     private TextView dateTV;
@@ -65,6 +66,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private TextView remarksTV;
     private EditText remarksET;
     private Button okayB;
+    private Button cancelB;
     private DatePickerDialog datePickerDialog;
     private TextView strawNumberTV;
     private EditText strawNumberET;
@@ -144,6 +146,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         liveBirthsET = (EditText)findViewById(R.id.live_births_et);*/
         okayB=(Button)findViewById(R.id.okay_b);
         okayB.setOnClickListener(this);
+        cancelB = (Button)findViewById(R.id.cancel_b);
+        cancelB.setOnClickListener(this);
 
         initTextInViews();
         fetchCowIdentifiers();
@@ -186,6 +190,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.add_event, menu);
+        this.menu = menu;
+        initMenuText();
         return true;
     }
 
@@ -201,6 +207,11 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             initTextInViews();
             Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
             return true;
+        }
+        else if(item.getItemId() == R.id.action_back_main_menu) {
+            Intent intent = new Intent(this, MainMenu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         }
         return false;
     }
@@ -328,6 +339,17 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         loadingPleaseWait = Locale.getStringInLocale("loading_please_wait",this);
         servicingTV.setText(Locale.getStringInLocale("associated_servicing",this));
         //liveBirthsTV.setText(Locale.getStringInLocale("previous_live_births",this));
+
+        cancelB.setText(Locale.getStringInLocale("cancel", this));
+
+        initMenuText();
+    }
+
+    private void initMenuText(){
+        if(this.menu != null){
+            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
+            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
+        }
     }
 
     private void fetchCowIdentifiers()
@@ -357,6 +379,17 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         else if(view==dateET)
         {
             dateETClicked();
+        }
+        else if(view == cancelB){
+            Intent intent;
+            if(presetMode != null && (presetMode.equals(MODE_CALVING) || presetMode.equals(MODE_SERVICING))){
+                intent = new Intent(this, FertilityActivity.class);
+            }
+            else{
+                intent = new Intent(this, EventsActivity.class);
+            }
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         }
     }
 
@@ -884,7 +917,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 //TODO: warn user if no cows
                 if(cowArray.length==0)
                 {
-                    Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("no_data_received",AddEventActivity.this), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("no_data_received",AddEventActivity.this), Toast.LENGTH_LONG).show();
+                    Log.w(TAG, "No data received from the server");
                 }
                 AddEventActivity.this.cowNameArray =cowArray;
                 AddEventActivity.this.cowEarTagNumberArray=earTagArray;
@@ -950,7 +984,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("problem_connecting_to_server",AddEventActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.NO_DATA)) {
-                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("no_data_received",AddEventActivity.this), Toast.LENGTH_LONG).show();
+                //Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("no_data_received",AddEventActivity.this), Toast.LENGTH_LONG).show();
+                Log.w(TAG, "No data received from the server");
             }
             else {
                 try {

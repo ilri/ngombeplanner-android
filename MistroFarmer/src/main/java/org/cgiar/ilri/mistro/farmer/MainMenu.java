@@ -35,6 +35,7 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
     private Button milkProductionB;
     private Button fertilityB;
     private Button eventsB;
+    private Button logoutB;
     private String regLatitude;
     private String regLongitude;
     private LocationManager locationManager;
@@ -53,6 +54,8 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
         fertilityB.setOnClickListener(this);
         eventsB =(Button)this.findViewById(R.id.events_b);
         eventsB.setOnClickListener(this);
+        logoutB = (Button)this.findViewById(R.id.logout_b);
+        logoutB.setOnClickListener(this);
 
         Bundle bundle=this.getIntent().getExtras();
         if(bundle != null){
@@ -92,6 +95,7 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
         milkProductionB.setText(Locale.getStringInLocale("milk_production", this));
         fertilityB.setText(Locale.getStringInLocale("fertility",this));
         eventsB.setText(Locale.getStringInLocale("events",this));
+        logoutB.setText(Locale.getStringInLocale("logout", this));
     }
 
     @Override
@@ -109,6 +113,11 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
         else if(view==eventsB)
         {
             Intent intent=new Intent(this,EventsActivity.class);
+            startActivity(intent);
+        }
+        else if(view==logoutB){
+            Intent intent = new Intent(this, LandingActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
     }

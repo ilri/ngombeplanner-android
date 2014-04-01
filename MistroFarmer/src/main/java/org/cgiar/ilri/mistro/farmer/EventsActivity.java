@@ -3,7 +3,7 @@ package org.cgiar.ilri.mistro.farmer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
+import com.actionbarsherlock.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,8 +17,10 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
 public class EventsActivity extends SherlockActivity implements View.OnClickListener
 {
 
+    private Menu menu;
     private Button addEventB;
     private Button eventHistoryB;
+    private Button backB;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -29,13 +31,17 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
         addEventB.setOnClickListener(this);
         eventHistoryB=(Button)findViewById(R.id.event_history_b);
         eventHistoryB.setOnClickListener(this);
+        backB = (Button)findViewById(R.id.back_b);
+        backB.setOnClickListener(this);
 
         initTextInViews();
     }
 
-    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.events, menu);
+        this.menu = menu;
+        initMenuText();
         return true;
     }
 
@@ -52,6 +58,11 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
             Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
             return true;
         }
+        else if(item.getItemId() == R.id.action_back_main_menu) {
+            Intent intent = new Intent(this, MainMenu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
         return false;
     }
 
@@ -60,6 +71,15 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
         setTitle(Locale.getStringInLocale("events",this));
         addEventB.setText(Locale.getStringInLocale("add_an_event",this));
         eventHistoryB.setText(Locale.getStringInLocale("past_events",this));
+        backB.setText(Locale.getStringInLocale("back", this));
+        initMenuText();
+    }
+
+    private void initMenuText(){
+        if(this.menu != null){
+            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
+            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
+        }
     }
 
     @Override
@@ -73,6 +93,11 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
         else if(view == eventHistoryB)
         {
             Intent intent=new Intent(this,EventsHistoryActivity.class);
+            startActivity(intent);
+        }
+        else if(view == backB){
+            Intent intent = new Intent(this, MainMenu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
     }
