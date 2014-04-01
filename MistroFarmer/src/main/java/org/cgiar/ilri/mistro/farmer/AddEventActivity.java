@@ -539,13 +539,11 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
 
     private boolean validateInput()
     {
-        if(dateET.getText().toString()==null||dateET.getText().toString().length()==0)
-        {
+        if(dateET.getText().toString()==null||dateET.getText().toString().length()==0) {
             Toast.makeText(this,enterDate,Toast.LENGTH_LONG).show();
             return false;
         }
-        else
-        {
+        else {
             if(!validateDate()){
                 return false;
             }
@@ -596,69 +594,79 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
 
     private void sendEvent()
     {
-        String[] eventTypes = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
-        String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
-        String[] eventSubtypes = Locale.getArrayInLocale("birth_types",this,Locale.LOCALE_ENGLISH);
-        if(selectedEvent.equals("Birth") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
-            AlertDialog cowRegistrationAlertDialog = constructCalfRegistrationDialog();
-            cowRegistrationAlertDialog.show();
-        }
-        else if(selectedEvent.equals("Acquisition")) {
-            AlertDialog cowRegistrationAlertDialog = constructCowRegistrationDialog();
-            cowRegistrationAlertDialog.show();
-        }
-        else {
-            String selectedCowETN = cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()];
-            String selectedCowName = cowNameArray[cowIdentifierS.getSelectedItemPosition()];
-            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-            String serialNumber = telephonyManager.getSimSerialNumber();
-            JSONObject jsonObject = new JSONObject();
-            try
-            {
-                String[] causesOfDeathInEN = Locale.getArrayInLocale("causes_of_death",AddEventActivity.this,Locale.LOCALE_ENGLISH);
-                jsonObject.put("simCardSN", serialNumber);
-                jsonObject.put("cowEarTagNumber", selectedCowETN);
-                jsonObject.put("cowName", selectedCowName);
-                jsonObject.put("date", dateET.getText().toString());
-                jsonObject.put("eventType", selectedEvent);
-                jsonObject.put("remarks", remarksET.getText().toString());
-                jsonObject.put("strawNumber", strawNumberET.getText().toString());
-                jsonObject.put("vetUsed", vetUsedET.getText().toString());
-                //jsonObject.put("bullName", bullNameACTV.getText().toString());
+        if(validateInput()){
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_DATE, "");
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_REMARKS, "");
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_STRAW_NUMBER, "");
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_VET_USED, "");
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_NAME, "");
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_OWNER, "");
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_NO_SERVICING_DAYS, "");
 
-                //check if hint put as value of bullNameACTV
-                String bullEarTagNo = bullNameACTV.getText().toString();
-                if(bullEarTagNo.equals(Locale.getStringInLocale("servicing_bull_identifier_hint", AddEventActivity.this)))
-                    bullEarTagNo = "";
-                jsonObject.put("bullEarTagNo", bullEarTagNo);
-
-                if(selectedEvent.equals("Bull Servicing")){
-                    String[] bullOwnersInEN = Locale.getArrayInLocale("bull_owners", AddEventActivity.this, Locale.LOCALE_ENGLISH);
-                    jsonObject.put("bullOwner", bullOwnersInEN[bullOwnerS.getSelectedItemPosition()]);
-
-                    //check if hint put as value of EditText
-                    String bullOwnerName = specBullOwnerET.getText().toString();
-                    if(bullOwnerName.equals(Locale.getStringInLocale("name_of_other_farmer_or_group", AddEventActivity.this)))
-                        bullOwnerName = "";
-                    jsonObject.put("bullOwnerName", bullOwnerName);
-                }
-                //jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
-                jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
-                if(servicingIDs != null) {
-                    jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
-                }
-                if(selectedEvent.equals("Birth")){
-                    String[] birthTypesInEN = Locale.getArrayInLocale("birth_types", AddEventActivity.this, Locale.LOCALE_ENGLISH);
-                    jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
-                    //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
-                }
-                jsonObject.put("causeOfDeath", causesOfDeathInEN[causeOfDeathS.getSelectedItemPosition()]);
-                CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
-                cowEventAdditionThread.execute(jsonObject);
+            String[] eventTypes = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
+            String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
+            String[] eventSubtypes = Locale.getArrayInLocale("birth_types",this,Locale.LOCALE_ENGLISH);
+            if(selectedEvent.equals("Birth") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
+                AlertDialog cowRegistrationAlertDialog = constructCalfRegistrationDialog();
+                cowRegistrationAlertDialog.show();
             }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
+            else if(selectedEvent.equals("Acquisition")) {
+                AlertDialog cowRegistrationAlertDialog = constructCowRegistrationDialog();
+                cowRegistrationAlertDialog.show();
+            }
+            else {
+                String selectedCowETN = cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()];
+                String selectedCowName = cowNameArray[cowIdentifierS.getSelectedItemPosition()];
+                TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+                String serialNumber = telephonyManager.getSimSerialNumber();
+                JSONObject jsonObject = new JSONObject();
+                try
+                {
+                    String[] causesOfDeathInEN = Locale.getArrayInLocale("causes_of_death",AddEventActivity.this,Locale.LOCALE_ENGLISH);
+                    jsonObject.put("simCardSN", serialNumber);
+                    jsonObject.put("cowEarTagNumber", selectedCowETN);
+                    jsonObject.put("cowName", selectedCowName);
+                    jsonObject.put("date", dateET.getText().toString());
+                    jsonObject.put("eventType", selectedEvent);
+                    jsonObject.put("remarks", remarksET.getText().toString());
+                    jsonObject.put("strawNumber", strawNumberET.getText().toString());
+                    jsonObject.put("vetUsed", vetUsedET.getText().toString());
+                    //jsonObject.put("bullName", bullNameACTV.getText().toString());
+
+                    //check if hint put as value of bullNameACTV
+                    String bullEarTagNo = bullNameACTV.getText().toString();
+                    if(bullEarTagNo.equals(Locale.getStringInLocale("servicing_bull_identifier_hint", AddEventActivity.this)))
+                        bullEarTagNo = "";
+                    jsonObject.put("bullEarTagNo", bullEarTagNo);
+
+                    if(selectedEvent.equals("Bull Servicing")){
+                        String[] bullOwnersInEN = Locale.getArrayInLocale("bull_owners", AddEventActivity.this, Locale.LOCALE_ENGLISH);
+                        jsonObject.put("bullOwner", bullOwnersInEN[bullOwnerS.getSelectedItemPosition()]);
+
+                        //check if hint put as value of EditText
+                        String bullOwnerName = specBullOwnerET.getText().toString();
+                        if(bullOwnerName.equals(Locale.getStringInLocale("name_of_other_farmer_or_group", AddEventActivity.this)))
+                            bullOwnerName = "";
+                        jsonObject.put("bullOwnerName", bullOwnerName);
+                    }
+                    //jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
+                    jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
+                    if(servicingIDs != null) {
+                        jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
+                    }
+                    if(selectedEvent.equals("Birth")){
+                        String[] birthTypesInEN = Locale.getArrayInLocale("birth_types", AddEventActivity.this, Locale.LOCALE_ENGLISH);
+                        jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
+                        //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
+                    }
+                    jsonObject.put("causeOfDeath", causesOfDeathInEN[causeOfDeathS.getSelectedItemPosition()]);
+                    CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
+                    cowEventAdditionThread.execute(jsonObject);
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -178,6 +178,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
 
     private void cacheFarmer(boolean isInFarm)
     {
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, "");
+
         if(farmer==null)
         {
             farmer=new Farmer();

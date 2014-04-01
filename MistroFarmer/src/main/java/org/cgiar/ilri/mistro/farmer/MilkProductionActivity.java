@@ -105,7 +105,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
         addMilkProductionAddB.setOnClickListener(this);
 
         initTextInViews();
-        fetchCowIdentifiers();
+        //fetchCowIdentifiers();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

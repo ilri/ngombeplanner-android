@@ -243,6 +243,9 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
     {
         if(validateInput())
         {
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_DATE, "");
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_QUANTITY, "");
+
             TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
             MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
             String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);

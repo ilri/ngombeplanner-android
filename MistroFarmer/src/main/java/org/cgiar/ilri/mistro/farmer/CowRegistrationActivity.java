@@ -798,8 +798,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     private boolean validateInput() {
         String earTagNumberText=earTagNumberET.getText().toString();
         String nameText=nameET.getText().toString();
-        if(earTagNumberText==null||earTagNumberText.equals("")) {
-            Toast.makeText(this,Locale.getStringInLocale("enter_ear_tag_number",this),Toast.LENGTH_LONG).show();
+        if((earTagNumberText==null||earTagNumberText.equals("")) && (nameText==null||nameText.equals(""))) {
+            Toast.makeText(this,Locale.getStringInLocale("enter_ear_tag_no_or_name",this),Toast.LENGTH_LONG).show();
             return false;
         }
         if(countryOfOriginACTV.getText().toString().length() > 0) {
@@ -853,6 +853,17 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
     }
 
     private void cacheThisCow() {
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, "");
+
         if(thisCow==null) {
             thisCow=new Cow(true);
         }
