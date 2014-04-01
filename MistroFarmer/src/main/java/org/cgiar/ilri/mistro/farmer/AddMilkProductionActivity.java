@@ -1,5 +1,6 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -133,9 +134,22 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
             return true;
         }
         else if(item.getItemId() == R.id.action_back_main_menu) {
-            Intent intent = new Intent(this, MainMenu.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
+            DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(which==DialogInterface.BUTTON_POSITIVE){
+                        dialog.dismiss();
+                        Intent intent = new Intent(AddMilkProductionActivity.this, MainMenu.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
+                    }
+                    else{
+                        dialog.cancel();
+                    }
+                }
+            };
+            AlertDialog mainMenuDialog = Utils.createMainMenuDialog(this, onClickListener);
+            mainMenuDialog.show();
         }
         return false;
     }

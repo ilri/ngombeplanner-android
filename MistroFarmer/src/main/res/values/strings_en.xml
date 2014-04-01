@@ -229,4 +229,6 @@
     <string name="logout_en">Logout</string>
     <string name="back_en">Back</string>
     <string name="back_to_main_menu_en">Back to Main Menu</string>
+    <string name="warning_en">Warning</string>
+    <string name="action_will_be_canceled_en">If you choose to go back to the Main Menu the data you have entered in this screen will be lost. Press \'Okay\' if this is fine.</string>
 </resources>
