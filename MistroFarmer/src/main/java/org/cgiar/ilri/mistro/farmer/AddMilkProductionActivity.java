@@ -14,6 +14,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.actionbarsherlock.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -78,6 +79,10 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         cowS=(Spinner)this.findViewById(R.id.cow_s);
         dateTV=(TextView)this.findViewById(R.id.date_tv);
         dateET=(EditText)this.findViewById(R.id.date_et);
+
+        InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(dateET.getWindowToken(), 0);
+
         dateET.setOnClickListener(this);
         timeTV=(TextView)this.findViewById(R.id.time_tv);
         timeS=(Spinner)this.findViewById(R.id.time_s);

@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -77,7 +79,14 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
 
         //init text according to locale
         initTextInViews();
-        Toast.makeText(this, "Version 0.8 Revision 13", Toast.LENGTH_LONG).show();
+
+        //get version name for the application and toast it
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            Toast.makeText(this, "Version "+pInfo.versionName, Toast.LENGTH_LONG).show();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
