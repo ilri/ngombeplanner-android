@@ -8,7 +8,8 @@
 
     <ScrollView
             android:layout_height="match_parent"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:layout_weight="95">
         <TableLayout
                 android:id="@+id/events_history_tl"
                 android:layout_height="wrap_content"
@@ -55,5 +56,11 @@
             </TableRow>
         </TableLayout>
     </ScrollView>
-
+    <Button
+        android:id="@+id/back_b"
+        android:layout_width="@dimen/back_button_width"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_weight="5"/>
 </LinearLayout>

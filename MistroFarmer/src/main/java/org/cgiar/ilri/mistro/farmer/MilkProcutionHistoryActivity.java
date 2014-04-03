@@ -366,7 +366,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Vi
                 if(quantityTypes != null && quantityTypesInEN.length == quantityTypes.length) {
                     for(int j = 0; j < quantityTypesInEN.length; j++) {
                         if(quantityType.equals(quantityTypesInEN[j])) {
-                            quantityString = quantityString +" ("+quantityTypes[j]+")";
+                            quantityString = quantityString +" "+quantityTypes[j];
                             break;
                         }
                     }

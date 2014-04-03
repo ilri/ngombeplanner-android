@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class EventsHistoryActivity extends SherlockActivity {
+public class EventsHistoryActivity extends SherlockActivity implements View.OnClickListener {
     private static final String TAG="EventsHistoryActivity";
 
     private Menu menu;
@@ -43,6 +44,7 @@ public class EventsHistoryActivity extends SherlockActivity {
     private TextView cowNameTV;
     private TextView eventTV;
     private DisplayMetrics metrics;
+    private Button backB;
 
     private String noDataReceived;
     private String serverError;
@@ -65,6 +67,8 @@ public class EventsHistoryActivity extends SherlockActivity {
         dateTV = (TextView)findViewById(R.id.date_tv);
         cowNameTV = (TextView)findViewById(R.id.cow_name_tv);
         eventTV = (TextView)findViewById(R.id.event_tv);
+        backB = (Button)findViewById(R.id.back_b);
+        backB.setOnClickListener(this);
 
         initTextInViews();
         fetchEventsHistory();
@@ -114,6 +118,7 @@ public class EventsHistoryActivity extends SherlockActivity {
             eventTypes = new String[1];
             eventTypes[0] = "";
         }
+        backB.setText(Locale.getStringInLocale("back", this));
 
         initMenuText();
     }
@@ -133,6 +138,15 @@ public class EventsHistoryActivity extends SherlockActivity {
         }
         else {
             cowEventHistoryThread.execute(telephonyManager.getSimSerialNumber(), eventHistoryIDs.get(eventHistoryIDs.size()-1));
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == backB){
+            Intent intent = new Intent(this, EventsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         }
     }
 
