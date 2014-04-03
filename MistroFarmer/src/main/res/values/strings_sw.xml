@@ -231,4 +231,5 @@
     <string name="back_to_main_menu_sw">Rudi kwa Menu Kuu</string>
     <string name="warning_sw">Onyo</string>
     <string name="action_will_be_canceled_sw">Habari uliyoingiza katika ukurasa huu itapotea ukiamua kurudi kwa Menu Kuu. Bonyeza \'Sawa\' kama hii ni sawa na wewe.</string>
+    <string name="total_sw">Jumla</string>
 </resources>
