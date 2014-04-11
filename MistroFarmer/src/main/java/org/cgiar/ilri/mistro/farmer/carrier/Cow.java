@@ -44,6 +44,7 @@ public class Cow implements Parcelable, Serializable {
     private String serviceType;
     private String otherDeformity;
     private String piggyBack;
+    private List<Event> events;
 
     public Cow(boolean isNotDamOrSire) {
         name = "";
@@ -65,6 +66,7 @@ public class Cow implements Parcelable, Serializable {
         serviceType = "";
         otherDeformity = "";
         piggyBack = "";
+        this.events = new ArrayList<Event>();
     }
 
     public Cow(Parcel in) {
@@ -147,6 +149,14 @@ public class Cow implements Parcelable, Serializable {
         this.countryOfOrigin = countryOfOrigin;
     }
 
+    public void addEvent(Event event){
+        this.events.add(event);
+    }
+
+    public void setEvents(List<Event> events){
+        this.events = events;
+    }
+
     public String getName() {
         return name;
     }
@@ -209,6 +219,10 @@ public class Cow implements Parcelable, Serializable {
 
     public String getCountryOfOrigin() {
         return countryOfOrigin;
+    }
+
+    public List<Event> getEvents(){
+        return this.events;
     }
 
     @Override

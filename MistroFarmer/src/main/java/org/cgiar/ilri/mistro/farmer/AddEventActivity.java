@@ -100,6 +100,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
     private String loadingPleaseWait;
     private List<Integer> servicingIDs;
     private List<String> servicingTypes;
+    private Farmer farmer;
 
     private String presetMode;
     private String presetServicingType;
@@ -886,8 +887,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
     }
 
-    private class CowIdentifierThread extends AsyncTask<String,Integer,String>
-    {
+    private class CowIdentifierThread extends AsyncTask<String,Integer,Farmer> {
 
         private ProgressDialog progressDialog;
 
@@ -898,48 +898,34 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
 
         @Override
-        protected String doInBackground(String... params)
-        {
-            JSONObject jsonObject=new JSONObject();
-            try
-            {
-                jsonObject.put("simCardSN",params[0]);
-                String result= DataHandler.sendDataToServer(AddEventActivity.this, jsonObject.toString(), DataHandler.FARMER_FETCH_COW_IDENTIFIERS_URL, true);
-                return result;
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
-            return null;
+        protected Farmer doInBackground(String... params) {
+            Farmer farmer = DataHandler.getFarmerData(AddEventActivity.this);
+            return farmer;
         }
 
         @Override
-        protected void onPostExecute(String result)
-        {
-            super.onPostExecute(result);
+        protected void onPostExecute(Farmer farmer) {
+            super.onPostExecute(farmer);
             progressDialog.dismiss();
-            try
-            {
-                JSONObject jsonObject=new JSONObject(result);
-                JSONArray cowNamesArray=jsonObject.getJSONArray("cowNames");
-                JSONArray earTagNumbersArray=jsonObject.getJSONArray("earTagNumbers");
-                JSONArray sexTextArray = jsonObject.getJSONArray("sex");
-                String[] cowArray=new String[cowNamesArray.length()];
-                String[] earTagArray=new String[cowNamesArray.length()];
-                String[] sexArray=new String[cowNamesArray.length()];
-                List<String> femaleList = new ArrayList<String>();
-                for(int i=0;i<cowNamesArray.length();i++)
-                {
-                    cowArray[i]=cowNamesArray.get(i).toString();
-                    earTagArray[i]=earTagNumbersArray.get(i).toString();
-                    sexArray[i]=sexTextArray.get(i).toString();
+
+            if(farmer == null){
+                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("unable_to_fetch_cached_data", AddEventActivity.this),Toast.LENGTH_LONG).show();
+            }
+            else{
+                AddEventActivity.this.farmer = farmer;
+                List<Cow> cows = farmer.getCows();
+                String[] cowArray=new String[cows.size()];
+                String[] earTagArray=new String[cows.size()];
+                String[] sexArray=new String[cows.size()];
+
+                for(int i=0;i<cows.size();i++) {
+                    cowArray[i]=cows.get(i).getName();
+                    earTagArray[i]=cows.get(i).getEarTagNumber();
+                    sexArray[i]=cows.get(i).getSex();
                 }
-                //TODO: warn user if no cows
-                if(cowArray.length==0)
-                {
-                    //Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("no_data_received",AddEventActivity.this), Toast.LENGTH_LONG).show();
-                    Log.w(TAG, "No data received from the server");
+
+                if(cowArray.length==0) {
+                    Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("you_do_not_have_cows", AddEventActivity.this),Toast.LENGTH_LONG).show();
                 }
                 AddEventActivity.this.cowNameArray =cowArray;
                 AddEventActivity.this.cowEarTagNumberArray=earTagArray;
@@ -958,11 +944,6 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 }
                 setCowIdentifiers(identifierArray);
             }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
-
         }
     }
 

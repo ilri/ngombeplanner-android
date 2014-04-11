@@ -232,4 +232,7 @@
     <string name="warning_sw">Onyo</string>
     <string name="action_will_be_canceled_sw">Habari uliyoingiza katika ukurasa huu itapotea ukiamua kurudi kwa Menu Kuu. Bonyeza \'Sawa\' kama hii ni sawa na wewe.</string>
     <string name="total_sw">Jumla</string>
+    <string name="unable_to_fetch_cached_data_sw">Data iliyohifadhiwa kwa simu yako hipatikani</string>
+    <string name="you_do_not_have_female_cows_sw">Hauna ng\'ombe wa kike</string>
+    <string name="you_do_not_have_cows_sw">Hauna ng\'ombe</string>
 </resources>

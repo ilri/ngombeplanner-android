@@ -9,11 +9,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import org.cgiar.ilri.mistro.farmer.R;
@@ -30,6 +32,12 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.cgiar.ilri.mistro.farmer.Utils;
+import org.cgiar.ilri.mistro.farmer.backend.database.DatabaseHelper;
+import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.Dam;
+import org.cgiar.ilri.mistro.farmer.carrier.Event;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+import org.cgiar.ilri.mistro.farmer.carrier.Sire;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -111,6 +119,13 @@ public class DataHandler
     public static final String SMS_ERROR_RADIO_OFF = "sms_radio_off_error";
     public static final String SMS_ERROR_RESULT_CANCELLED = "sms_result_cancelled_error";
 
+    /**
+     * This method checks whether the application can access the internet
+     *
+     * @param context   The activity/service from where you want to check for the connection
+     *
+     * @return  True if the application can connect to the internet and False if not
+     */
     public static boolean checkNetworkConnection(Context context){
         ConnectivityManager connectivityManager=(ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
@@ -123,8 +138,11 @@ public class DataHandler
     }
 
     /**
+     * This method checks if an internet connection is available and asks the user whether it can use SMS instead
+     * if no internet connection is found.
+     * Please do not run this method in the UI thread.
      *
-     * @param context
+     * @param context   The activity/service from where you want to check for the connection
      */
     public static void requestPermissionToUseSMS(final Context context){
         if(!checkNetworkConnection(context)){
@@ -175,6 +193,17 @@ public class DataHandler
         return response;
     }
 
+    /**
+     * This method sends data to the server using SMS
+     *
+     * @param context   The activity/service sending the data
+     * @param jsonString    The json string to be sent
+     * @param appendedURL   The page on the server to which the data is to be sent. All pages accessible from this app are specified in DataHandler
+     *                      eg DataHandler.FARMER_REGISTRATION_URL
+     * @param waitForResponse   Set to true if UI will be waiting for a response from the server
+     *
+     * @return  The response from the server
+     */
     private static String sendDataUsingSMS(final Context context, String jsonString, String appendedURL, boolean waitForResponse){
         if(getSharedPreference(context, SP_KEY_USE_SMS_TO_SEND_DATA,CANNOT_SEND_USING_SMS).equals(CAN_SEND_USING_SMS)){
             //clear shared preference meant to store server's response
@@ -436,6 +465,223 @@ public class DataHandler
                     break;
             }
         }
+    }
+
+    /**
+     * This method saves farmer details into a SQLite database.
+     * Run this method in a thread running asynchronously to the UI thread.
+     *
+     * @param context The activity/service from where you want to save the farmer details
+     * @param farmerData Data for the farmer represented as a JSONObject
+     */
+    public static void saveFarmerData(Context context, JSONObject farmerData){
+        DatabaseHelper databaseHelper = new DatabaseHelper(context);
+        SQLiteDatabase writableDB = databaseHelper.getWritableDatabase();
+
+
+        //insert farmer data
+        if(writableDB.isOpen()){
+            try{
+                String[] columns = new String[]{"id","name","mobile_no","location_county","location_district","gps_longitude", "gps_latitude", "date_added", "sim_card_sn"};
+                String[] columnValues = new String[columns.length];
+
+                columnValues[0] = farmerData.getString("id");
+                columnValues[1] = farmerData.getString("name");
+                columnValues[2] = farmerData.getString("mobile_no");
+                columnValues[3] = farmerData.getString("location_county");
+                columnValues[4] = farmerData.getString("location_district");
+                columnValues[5] = farmerData.getString("gps_longitude");
+                columnValues[6] = farmerData.getString("gps_latitude");
+                columnValues[7] = farmerData.getString("date_added");
+                columnValues[8] = farmerData.getString("sim_card_sn");
+
+                databaseHelper.runInsertQuery(databaseHelper.TABLE_FARMER, columns, columnValues, 0, writableDB);
+
+                //insert cow data
+                JSONArray cowData = farmerData.getJSONArray("cows");
+                for(int i = 0; i < cowData.length(); i++){
+                    JSONObject currCow = cowData.getJSONObject(i);
+                    columns = new String[]{"id", "farmer_id", "name", "ear_tag_number", "date_of_birth", "age", "age_type", "sex", "sire_id", "dam_id", "date_added", "service_type", "country_id", "bull_owner", "owner_name"};
+                    columnValues = new String[columns.length];
+
+                    columnValues[0] = currCow.getString("id");
+                    columnValues[1] = currCow.getString("farmer_id");
+                    columnValues[2] = currCow.getString("name");
+                    columnValues[3] = currCow.getString("ear_tag_number");
+                    columnValues[4] = currCow.getString("date_of_birth");
+                    columnValues[5] = currCow.getString("age");
+                    columnValues[6] = currCow.getString("age_type");
+                    columnValues[7] = currCow.getString("sex");
+                    columnValues[8] = currCow.getString("sire_id");
+                    columnValues[9] = currCow.getString("dam_id");
+                    columnValues[10] = currCow.getString("date_added");
+                    columnValues[11] = currCow.getString("service_type");
+                    columnValues[12] = currCow.getString("country_id");
+                    columnValues[13] = currCow.getString("bull_owner");
+                    columnValues[14] = currCow.getString("owner_name");
+
+                    databaseHelper.runInsertQuery(databaseHelper.TABLE_COW, columns, columnValues, 0, writableDB);
+
+                    JSONArray cowEvents = currCow.getJSONArray("events");
+                    for(int j = 0; j < cowEvents.length(); j++){
+                        JSONObject currEvent = cowEvents.getJSONObject(j);
+
+                        columns = new String[]{"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births"};
+                        columnValues = new String[columns.length];
+
+                        columnValues[0] = currEvent.getString("id");
+                        columnValues[1] = currEvent.getString("cow_id");
+                        columnValues[2] = currEvent.getString("event_name");
+                        columnValues[3] = currEvent.getString("remarks");
+                        columnValues[4] = currEvent.getString("event_date");
+                        columnValues[5] = currEvent.getString("birth_type");
+                        columnValues[6] = currEvent.getString("parent_cow_event");
+                        columnValues[7] = currEvent.getString("bull_id");
+                        columnValues[8] = currEvent.getString("servicing_days");
+                        columnValues[9] = currEvent.getString("cause_of_death");
+                        columnValues[10] = currEvent.getString("no_of_live_births");
+
+                        databaseHelper.runInsertQuery(databaseHelper.TABLE_EVENT, columns, columnValues, 0, writableDB);
+                    }
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            Log.e(TAG, "Writable database did not open. Was unable to save cow data into the SQLite DB");
+        }
+
+        //close the database
+        writableDB.close();
+        databaseHelper.close();
+    }
+
+    /**
+     * This method gets cached farmer data from the SQLite database
+     * @param context The activity/service from where you want to get the farmer data
+     *
+     * @return Returns null if something goes wrong or a farmer object if successful
+     */
+    public static Farmer getFarmerData(Context context){
+        Farmer farmer = null;
+        DatabaseHelper databaseHelper = new DatabaseHelper(context);
+        SQLiteDatabase readableDB = databaseHelper.getReadableDatabase();
+
+        //fetch farmer data
+        TelephonyManager telephonyManager=(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        String simCardSN = telephonyManager.getSimSerialNumber();
+
+        String[] columns = new String[]{"id","name","mobile_no","gps_longitude", "gps_latitude", "sim_card_sn"};
+        String selection  = "sim_card_sn='"+simCardSN+"'";
+        String[][] result = databaseHelper.runSelectQuery(readableDB,databaseHelper.TABLE_FARMER, columns, selection, null, null, null, null, null);
+        if(result.length == 1){//only one farmer should have this sim card sn
+
+            String farmerID = result[0][0];
+            farmer = new Farmer();
+            farmer.setFullName(result[0][1]);
+            farmer.setMobileNumber(result[0][2]);
+            farmer.setLongitude(result[0][3]);
+            farmer.setLatitude(result[0][4]);
+            farmer.setSimCardSN(result[0][5]);
+
+            //fetch cow data
+            columns = new String[]{"id", "name", "ear_tag_number", "date_of_birth", "age", "age_type", "sex", "sire_id", "dam_id", "date_added", "service_type", "country_id", "bull_owner", "owner_name"};
+            selection = "farmer_id="+farmerID;
+            result = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
+            if(result.length > 0){
+                for(int cowIndex = 0 ; cowIndex < result.length; cowIndex++){
+                    Cow currCow = new Cow(true);
+
+                    String cowID = result[cowIndex][0];
+                    currCow.setName(result[cowIndex][1]);
+                    currCow.setEarTagNumber(result[cowIndex][2]);
+                    Log.d(TAG, "Current cow's name and eartag number are "+result[cowIndex][1]+ " " + result[cowIndex][2]);
+                    currCow.setDateOfBirth(result[cowIndex][3]); //TODO: not sure if this will work
+                    if(result[cowIndex][4].length() > 0){
+                        currCow.setAge(Integer.parseInt(result[cowIndex][4]));
+                    }
+                    currCow.setAgeType(result[cowIndex][5]);
+                    currCow.setSex(result[cowIndex][6]);
+                    currCow.setServiceType(result[cowIndex][10]);
+
+                    //set sire
+                    if(result[cowIndex][7].length() > 0){
+                        selection = "id="+result[cowIndex][7];
+                        String[][] sireRes = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
+                        if(sireRes.length == 1){
+                            Sire sire = new Sire();
+                            sire.setName(result[cowIndex][1]);
+                            sire.setEarTagNumber(result[cowIndex][2]);
+
+                            currCow.setSire(sire);
+                        }
+                        else{
+                            Log.w(TAG, "No sire fetched for current cow");
+                            Log.w(TAG, " cow's id = "+result[cowIndex][0]);
+                            Log.w(TAG, " sire's id = "+result[cowIndex][7]);
+                        }
+                    }
+
+                    //set dam
+                    if(result[cowIndex][8].length() > 0){
+                        selection = "id="+result[cowIndex][7];
+                        String[][] damRes = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
+                        if(damRes.length == 1){
+                            Dam dam = new Dam();
+                            dam.setName(result[cowIndex][1]);
+                            dam.setEarTagNumber(result[cowIndex][2]);
+
+                            currCow.setDam(dam);
+                        }
+                        else{
+                            Log.w(TAG, "No dam fetched for current cow");
+                            Log.w(TAG, " cow's id = "+result[cowIndex][0]);
+                            Log.w(TAG, " dam's id = "+result[cowIndex][8]);
+                        }
+                    }
+
+                    //fetch cow events
+                    columns = new String[] {"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births"};
+                    selection = "cow_id="+cowID;
+                    result = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_EVENT, columns, selection, null, null, null, null, null);
+                    for(int eventIndex = 0; eventIndex < result.length; eventIndex++){
+                        Event currEvent = new Event();
+
+                        currEvent.setId(Integer.parseInt(result[eventIndex][0]));
+                        currEvent.setType(result[eventIndex][2]);
+                        currEvent.setRemarks(result[eventIndex][3]);
+                        currEvent.setEventDate(result[eventIndex][4]);
+                        currEvent.setBirthType(result[eventIndex][5]);
+                        if(result[eventIndex][6].length() > 0)
+                            currEvent.setParentCowEventID(Integer.parseInt(result[eventIndex][6]));
+                        if(result[eventIndex][7].length() > 0)
+                            currEvent.setBullID(Integer.parseInt(result[eventIndex][7]));
+                        if(result[eventIndex][8].length() > 0)
+                            currEvent.setServicingDays(Integer.parseInt(result[eventIndex][8]));
+                        currEvent.setCod(result[eventIndex][9]);
+                        if(result[eventIndex][10].length() > 0)
+                            currEvent.setNoOfLiveBirths(Integer.parseInt(result[eventIndex][10]));
+
+                        currCow.addEvent(currEvent);
+                    }
+                    farmer.addCow(currCow);
+                }
+            }
+            else{
+                Log.w(TAG, "No cows fetched from database");
+                Log.w(TAG, " farmer's id = "+farmerID);
+                Log.w(TAG, " farmer's name = "+farmer.getFullName());
+            }
+        }
+        else{
+            Log.e(TAG, "Unable to get cached farmer data. Might be because no farmer in has the provided simCardSN or more than one do");
+            Log.e(TAG, " SimcardSN = "+simCardSN);
+            Log.e(TAG, " Number of fetched farmers = "+String.valueOf(result.length));
+        }
+
+        return farmer;
     }
 
     /**

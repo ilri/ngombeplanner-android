@@ -137,6 +137,17 @@ public class Farmer implements Parcelable, Serializable
         return cows;
     }
 
+    public List<Cow> getCows(String sex){
+        List<Cow> newCowList = new ArrayList<Cow>();
+
+        //get all cows with the specific sex
+        for(int i = 0; i < cows.size(); i++){
+            if(cows.get(i).getSex().equals(sex))
+                newCowList.add(cows.get(i));
+        }
+        return newCowList;
+    }
+
     public Cow getCow(int index)
     {
         if(index<cows.size())

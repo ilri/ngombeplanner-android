@@ -32,12 +32,12 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
     private static final String TAG="MainMenu";
     public static final String KEY_LONGITUDE = "longitude";
     public static final String KEY_LATITUDE = "latitude";
+    public static final String KEY_FARMER_DATA = "farmerData";
     private Button milkProductionB;
     private Button fertilityB;
     private Button eventsB;
     private Button logoutB;
-    private String regLatitude;
-    private String regLongitude;
+    private JSONObject farmerData;
     private LocationManager locationManager;
     private String longitude;
     private String latitude;
@@ -59,9 +59,17 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
 
         Bundle bundle=this.getIntent().getExtras();
         if(bundle != null){
-            regLatitude = bundle.getString(KEY_LATITUDE);
-            regLongitude = bundle.getString(KEY_LONGITUDE);
-            registerCoords();
+            String farmerJSONString = bundle.getString(KEY_FARMER_DATA);
+
+            try{
+                farmerData = new JSONObject(farmerJSONString);
+                registerCoords();
+
+                Toast.makeText(this, Locale.getStringInLocale("welcome", this)+" "+farmerData.getString("name"), Toast.LENGTH_LONG).show();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         initTextInViews();
@@ -123,8 +131,14 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
     }
 
     private void registerCoords(){
-        if(regLongitude==null || regLongitude.trim().length()==0 || regLatitude==null || regLatitude.trim().length()==0){
-            buildGPSAlert();
+        try {
+            String regLongitude = farmerData.getString("gps_longitude");
+            String regLatitude = farmerData.getString("gps_latitude");
+            if(regLongitude==null || regLongitude.trim().length()==0 || regLatitude==null || regLatitude.trim().length()==0){
+                buildGPSAlert();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
