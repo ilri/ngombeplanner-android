@@ -31,6 +31,7 @@ import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.Dam;
+import org.cgiar.ilri.mistro.farmer.carrier.Event;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -794,8 +795,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
 
         @Override
-        protected String doInBackground(JSONObject... params)
-        {
+        protected String doInBackground(JSONObject... params) {
             String result = DataHandler.sendDataToServer(AddEventActivity.this, params[0].toString(), DataHandler.FARMER_ADD_COW_EVENT_URL, true);
             return result;
         }
@@ -953,7 +953,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         cowEventHistoryThread.execute(telephonyManager.getSimSerialNumber());
     }
 
-    private class CowEventHistoryThread extends AsyncTask<String, Integer, String> {
+    private class CowEventHistoryThread extends AsyncTask<String, Integer, Farmer> {
 
         ProgressDialog progressDialog;
 
@@ -964,8 +964,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            String result = null;
+        protected Farmer doInBackground(String... params) {
+            /*String result = null;
             JSONObject jsonObject = new JSONObject();
             try {
                 jsonObject.put("simCardSN",params[0]);
@@ -973,24 +973,21 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
             }
             catch (JSONException e) {
                 e.printStackTrace();
-            }
+            }*/
 
-            return result;
+            Farmer farmer = DataHandler.getFarmerData(AddEventActivity.this);
+            return farmer;
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
+        protected void onPostExecute(Farmer farmer) {
+            super.onPostExecute(farmer);
             progressDialog.dismiss();
-            if(result == null) {
-                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("problem_connecting_to_server",AddEventActivity.this), Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.NO_DATA)) {
-                //Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("no_data_received",AddEventActivity.this), Toast.LENGTH_LONG).show();
-                Log.w(TAG, "No data received from the server");
+            if(farmer == null) {
+                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("unable_to_fetch_cached_data",AddEventActivity.this), Toast.LENGTH_LONG).show();
             }
             else {
-                try {
+                /*try {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray historyArray = jsonObject.getJSONArray("history");
                     List<String> servicingNames = new ArrayList<String>();
@@ -1009,7 +1006,33 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
+                }*/
+
+                List<Cow> allCows = farmer.getCows();
+                List<String> servicingNames = new ArrayList<String>();
+                servicingIDs = new ArrayList<Integer>();
+                servicingTypes = new ArrayList<String>();
+                for(int cowIndex = 0; cowIndex < allCows.size(); cowIndex++){
+                    //get all the events associated with this cow
+                    Cow currentCow = allCows.get(cowIndex);
+                    List<Event> cowEvents = currentCow.getEvents();
+                    for(int eventIndex = 0; eventIndex < cowEvents.size(); eventIndex++){
+                        Event currentEvent = cowEvents.get(eventIndex);
+                        if(currentEvent.isServicingEvent()){
+                            servicingIDs.add(currentEvent.getId());
+                            servicingTypes.add(currentEvent.getType());
+                            String name = currentCow.getEarTagNumber();
+                            if(name == null || name.length() == 0){
+                                name = currentCow.getName();
+                            }
+                            servicingNames.add(currentEvent.getEventDate()+" (" + name + ")");
+                        }
+                    }
                 }
+
+                ArrayAdapter<String> servicingsArrayAdapter=new ArrayAdapter<String>(AddEventActivity.this,android.R.layout.simple_spinner_dropdown_item,servicingNames);
+                servicingsArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                servicingS.setAdapter(servicingsArrayAdapter);
             }
         }
     }

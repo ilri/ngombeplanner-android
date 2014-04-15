@@ -575,94 +575,97 @@ public class DataHandler
 
         String[] columns = new String[]{"id","name","mobile_no","gps_longitude", "gps_latitude", "sim_card_sn"};
         String selection  = "sim_card_sn='"+simCardSN+"'";
-        String[][] result = databaseHelper.runSelectQuery(readableDB,databaseHelper.TABLE_FARMER, columns, selection, null, null, null, null, null);
-        if(result.length == 1){//only one farmer should have this sim card sn
+        String[][] farmerResult = databaseHelper.runSelectQuery(readableDB,databaseHelper.TABLE_FARMER, columns, selection, null, null, null, null, null);
+        if(farmerResult.length == 1){//only one farmer should have this sim card sn
 
-            String farmerID = result[0][0];
+            String farmerID = farmerResult[0][0];
             farmer = new Farmer();
-            farmer.setFullName(result[0][1]);
-            farmer.setMobileNumber(result[0][2]);
-            farmer.setLongitude(result[0][3]);
-            farmer.setLatitude(result[0][4]);
-            farmer.setSimCardSN(result[0][5]);
+            farmer.setFullName(farmerResult[0][1]);
+            farmer.setMobileNumber(farmerResult[0][2]);
+            farmer.setLongitude(farmerResult[0][3]);
+            farmer.setLatitude(farmerResult[0][4]);
+            farmer.setSimCardSN(farmerResult[0][5]);
 
             //fetch cow data
             columns = new String[]{"id", "name", "ear_tag_number", "date_of_birth", "age", "age_type", "sex", "sire_id", "dam_id", "date_added", "service_type", "country_id", "bull_owner", "owner_name"};
             selection = "farmer_id="+farmerID;
-            result = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
-            if(result.length > 0){
-                for(int cowIndex = 0 ; cowIndex < result.length; cowIndex++){
+
+            String[][] cowResult = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
+            if(cowResult.length > 0){
+                for(int cowIndex = 0 ; cowIndex < cowResult.length; cowIndex++){
                     Cow currCow = new Cow(true);
 
-                    String cowID = result[cowIndex][0];
-                    currCow.setName(result[cowIndex][1]);
-                    currCow.setEarTagNumber(result[cowIndex][2]);
-                    Log.d(TAG, "Current cow's name and eartag number are "+result[cowIndex][1]+ " " + result[cowIndex][2]);
-                    currCow.setDateOfBirth(result[cowIndex][3]); //TODO: not sure if this will work
-                    if(result[cowIndex][4].length() > 0){
-                        currCow.setAge(Integer.parseInt(result[cowIndex][4]));
+                    String cowID = cowResult[cowIndex][0];
+                    currCow.setName(cowResult[cowIndex][1]);
+                    currCow.setEarTagNumber(cowResult[cowIndex][2]);
+                    Log.d(TAG, "Current cow's name and eartag number are "+cowResult[cowIndex][1]+ " " + cowResult[cowIndex][2]);
+                    currCow.setDateOfBirth(cowResult[cowIndex][3]); //TODO: not sure if this will work
+                    if(cowResult[cowIndex][4].length() > 0){
+                        currCow.setAge(Integer.parseInt(cowResult[cowIndex][4]));
                     }
-                    currCow.setAgeType(result[cowIndex][5]);
-                    currCow.setSex(result[cowIndex][6]);
-                    currCow.setServiceType(result[cowIndex][10]);
+                    currCow.setAgeType(cowResult[cowIndex][5]);
+                    currCow.setSex(cowResult[cowIndex][6]);
+                    currCow.setServiceType(cowResult[cowIndex][10]);
 
                     //set sire
-                    if(result[cowIndex][7].length() > 0){
-                        selection = "id="+result[cowIndex][7];
+                    if(cowResult[cowIndex][7].length() > 0){
+                        columns = new String[]{"id", "name", "ear_tag_number", "date_of_birth", "age", "age_type", "sex", "sire_id", "dam_id", "date_added", "service_type", "country_id", "bull_owner", "owner_name"};
+                        selection = "id="+cowResult[cowIndex][7];
                         String[][] sireRes = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
                         if(sireRes.length == 1){
                             Sire sire = new Sire();
-                            sire.setName(result[cowIndex][1]);
-                            sire.setEarTagNumber(result[cowIndex][2]);
+                            sire.setName(sireRes[cowIndex][1]);
+                            sire.setEarTagNumber(sireRes[cowIndex][2]);
 
                             currCow.setSire(sire);
                         }
                         else{
                             Log.w(TAG, "No sire fetched for current cow");
-                            Log.w(TAG, " cow's id = "+result[cowIndex][0]);
-                            Log.w(TAG, " sire's id = "+result[cowIndex][7]);
+                            Log.w(TAG, " cow's id = "+cowResult[cowIndex][0]);
+                            Log.w(TAG, " sire's id = "+cowResult[cowIndex][7]);
                         }
                     }
 
                     //set dam
-                    if(result[cowIndex][8].length() > 0){
-                        selection = "id="+result[cowIndex][7];
+                    if(cowResult[cowIndex][8].length() > 0){
+                        columns = new String[]{"id", "name", "ear_tag_number", "date_of_birth", "age", "age_type", "sex", "sire_id", "dam_id", "date_added", "service_type", "country_id", "bull_owner", "owner_name"};
+                        selection = "id="+cowResult[cowIndex][7];
                         String[][] damRes = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
                         if(damRes.length == 1){
                             Dam dam = new Dam();
-                            dam.setName(result[cowIndex][1]);
-                            dam.setEarTagNumber(result[cowIndex][2]);
+                            dam.setName(damRes[cowIndex][1]);
+                            dam.setEarTagNumber(damRes[cowIndex][2]);
 
                             currCow.setDam(dam);
                         }
                         else{
                             Log.w(TAG, "No dam fetched for current cow");
-                            Log.w(TAG, " cow's id = "+result[cowIndex][0]);
-                            Log.w(TAG, " dam's id = "+result[cowIndex][8]);
+                            Log.w(TAG, " cow's id = "+cowResult[cowIndex][0]);
+                            Log.w(TAG, " dam's id = "+cowResult[cowIndex][8]);
                         }
                     }
 
                     //fetch cow events
                     columns = new String[] {"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births"};
                     selection = "cow_id="+cowID;
-                    result = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_EVENT, columns, selection, null, null, null, null, null);
-                    for(int eventIndex = 0; eventIndex < result.length; eventIndex++){
+                    String[][] eventResult = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_EVENT, columns, selection, null, null, null, null, null);
+                    for(int eventIndex = 0; eventIndex < eventResult.length; eventIndex++){
                         Event currEvent = new Event();
 
-                        currEvent.setId(Integer.parseInt(result[eventIndex][0]));
-                        currEvent.setType(result[eventIndex][2]);
-                        currEvent.setRemarks(result[eventIndex][3]);
-                        currEvent.setEventDate(result[eventIndex][4]);
-                        currEvent.setBirthType(result[eventIndex][5]);
-                        if(result[eventIndex][6].length() > 0)
-                            currEvent.setParentCowEventID(Integer.parseInt(result[eventIndex][6]));
-                        if(result[eventIndex][7].length() > 0)
-                            currEvent.setBullID(Integer.parseInt(result[eventIndex][7]));
-                        if(result[eventIndex][8].length() > 0)
-                            currEvent.setServicingDays(Integer.parseInt(result[eventIndex][8]));
-                        currEvent.setCod(result[eventIndex][9]);
-                        if(result[eventIndex][10].length() > 0)
-                            currEvent.setNoOfLiveBirths(Integer.parseInt(result[eventIndex][10]));
+                        currEvent.setId(Integer.parseInt(eventResult[eventIndex][0]));
+                        currEvent.setType(eventResult[eventIndex][2]);
+                        currEvent.setRemarks(eventResult[eventIndex][3]);
+                        currEvent.setEventDate(eventResult[eventIndex][4]);
+                        currEvent.setBirthType(eventResult[eventIndex][5]);
+                        if(eventResult[eventIndex][6].length() > 0)
+                            currEvent.setParentCowEventID(Integer.parseInt(eventResult[eventIndex][6]));
+                        if(eventResult[eventIndex][7].length() > 0)
+                            currEvent.setBullID(Integer.parseInt(eventResult[eventIndex][7]));
+                        if(eventResult[eventIndex][8].length() > 0)
+                            currEvent.setServicingDays(Integer.parseInt(eventResult[eventIndex][8]));
+                        currEvent.setCod(eventResult[eventIndex][9]);
+                        if(eventResult[eventIndex][10].length() > 0)
+                            currEvent.setNoOfLiveBirths(Integer.parseInt(eventResult[eventIndex][10]));
 
                         currCow.addEvent(currEvent);
                     }
@@ -678,7 +681,7 @@ public class DataHandler
         else{
             Log.e(TAG, "Unable to get cached farmer data. Might be because no farmer in has the provided simCardSN or more than one do");
             Log.e(TAG, " SimcardSN = "+simCardSN);
-            Log.e(TAG, " Number of fetched farmers = "+String.valueOf(result.length));
+            Log.e(TAG, " Number of fetched farmers = "+String.valueOf(farmerResult.length));
         }
 
         return farmer;

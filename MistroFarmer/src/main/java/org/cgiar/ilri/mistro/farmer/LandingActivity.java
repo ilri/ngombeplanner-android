@@ -184,8 +184,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         }
     }
 
-    private class UserAuthenticationThread extends AsyncTask<String,Integer,String>
-    {
+    private class UserAuthenticationThread extends AsyncTask<String,Integer,String> {
         ProgressDialog progressDialog;
 
         @Override

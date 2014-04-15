@@ -84,6 +84,13 @@ public class Event {
         this.servicingDays = servicingDays;
     }
 
+    public boolean isServicingEvent(){
+        if(type.equals("Artificial Insemination") || type.equals("Bull Servicing")){
+            return true;
+        }
+        return false;
+    }
+
     public String getCod() {
         return cod;
     }
