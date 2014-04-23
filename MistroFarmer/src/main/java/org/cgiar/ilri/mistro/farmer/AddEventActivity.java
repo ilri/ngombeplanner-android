@@ -784,7 +784,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         return alertDialog;
     }
 
-    private class CowEventAdditionThread extends AsyncTask<JSONObject, Integer, String>
+    private class CowEventAdditionThread extends AsyncTask<JSONObject, Integer, Boolean>
     {
         private ProgressDialog progressDialog;
 
@@ -795,32 +795,18 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
 
         @Override
-        protected String doInBackground(JSONObject... params) {
-            String result = DataHandler.sendDataToServer(AddEventActivity.this, params[0].toString(), DataHandler.FARMER_ADD_COW_EVENT_URL, true);
-            return result;
+        protected Boolean doInBackground(JSONObject... params) {
+            //public static final void cacheRequest(Context context, String jsonString, String appendedURL){
+            boolean response = DataHandler.cacheRequest(AddEventActivity.this, params[0].toString(), DataHandler.FARMER_ADD_COW_EVENT_URL);
+            return response;
         }
 
         @Override
-        protected void onPostExecute(String result)
+        protected void onPostExecute(Boolean result)
         {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            if(result == null){
-                Toast.makeText(AddEventActivity.this,Locale.getStringInLocale("problem_connecting_to_server",AddEventActivity.this), Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
-                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("generic_sms_error", AddEventActivity.this), Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
-                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("no_service", AddEventActivity.this), Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
-                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("radio_off", AddEventActivity.this), Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
-                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("server_not_receive_sms", AddEventActivity.this), Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.ACKNOWLEDGE_OK))
+            if(result == true)
             {
                 Toast.makeText(AddEventActivity.this, eventRecorded, Toast.LENGTH_LONG).show();
                 Intent intent;

@@ -79,6 +79,7 @@ public class DataHandler
     public static final String FARMER_FETCH_COW_EVENTS_HISTORY_URL="/php/farmer/fetch_cow_events_history.php";
     public static final String FARMER_FETCH_COW_SERVICING_EVENTS_URL="/php/farmer/fetch_servicing_events.php";
     public static final String FARMER_REGISTER_FARM_COORDS_URL="/php/farmer/register_farm_coords.php";
+    public static final String FARMER_ADD_CACHED_DATA_URL="/php/farmer/add_cached_data.php";
     public static final String SP_KEY_LOCALE = "locale";
     public static final String SP_KEY_MILK_QUANTITY_TYPE = "milkQuantityTYpe";
     public static final String SP_KEY_USE_SMS_TO_SEND_DATA = "useSMSToSendData";
@@ -526,7 +527,7 @@ public class DataHandler
                     for(int j = 0; j < cowEvents.length(); j++){
                         JSONObject currEvent = cowEvents.getJSONObject(j);
 
-                        columns = new String[]{"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births"};
+                        columns = new String[]{"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server"};
                         columnValues = new String[columns.length];
 
                         columnValues[0] = currEvent.getString("id");
@@ -540,6 +541,7 @@ public class DataHandler
                         columnValues[8] = currEvent.getString("servicing_days");
                         columnValues[9] = currEvent.getString("cause_of_death");
                         columnValues[10] = currEvent.getString("no_of_live_births");
+                        columnValues[11] = "1";
 
                         databaseHelper.runInsertQuery(databaseHelper.TABLE_EVENT, columns, columnValues, 0, writableDB);
                     }
@@ -646,7 +648,7 @@ public class DataHandler
                     }
 
                     //fetch cow events
-                    columns = new String[] {"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births"};
+                    columns = new String[] {"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server"};
                     selection = "cow_id="+cowID;
                     String[][] eventResult = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_EVENT, columns, selection, null, null, null, null, null);
                     for(int eventIndex = 0; eventIndex < eventResult.length; eventIndex++){
@@ -666,6 +668,12 @@ public class DataHandler
                         currEvent.setCod(eventResult[eventIndex][9]);
                         if(eventResult[eventIndex][10].length() > 0)
                             currEvent.setNoOfLiveBirths(Integer.parseInt(eventResult[eventIndex][10]));
+                        if(eventResult[eventIndex][11].equals("1")){
+                            currEvent.setSavedOnServer(true);
+                        }
+                        else{
+                            currEvent.setSavedOnServer(false);
+                        }
 
                         currCow.addEvent(currEvent);
                     }
@@ -685,6 +693,99 @@ public class DataHandler
         }
 
         return farmer;
+    }
+
+    /**
+     * This method caches data that would have been sent to the server. Note that this method has an almost identical arguement
+     * signature similar to the sendDataToServer method.
+     *
+     * @param context   The activity/service from where you want to save cache the request
+     * @param jsonString    The valid json string containing data for the request as you would have sent it in a normal request
+     * @param appendedURL   The URI for the module on the server which you want the request to go to (eventually) e.g FARMER_ADD_COW_EVENT_URL
+     */
+    public static final boolean cacheRequest(Context context, String jsonString, String appendedURL){
+        //TODO: do stuff
+        DatabaseHelper databaseHelper = new DatabaseHelper(context);
+        SQLiteDatabase writableDB = databaseHelper.getWritableDatabase();
+        if(writableDB.isOpen()){
+            String[] columns = new String[]{"url", "json"};
+            String[] values = new String[columns.length];
+            values[0] = appendedURL;
+            values[1] = jsonString;
+
+            databaseHelper.runInsertQuery(databaseHelper.TABLE_CACHED_REQUESTS, columns, values, -1, writableDB);
+            return true;
+        }
+        else{
+            Log.e(TAG, "Writable database did not open. Was unable to cache request in the SQLite DB. Choosing to send the data to the server instead");
+            sendDataToServer(context, jsonString, appendedURL, false);
+        }
+        return false;
+    }
+
+    /**
+     * This method sends cached data to the server
+     *
+     * @param waitForResponse If set to true, this method will wait for the response from the server and returns it to the caller
+     * @param context   The activity/service from where you want to send the data to the server
+     */
+    public static final String sendCachedRequests(Context context, boolean waitForResponse){
+        Log.d(TAG, "Sending cached data to server");
+        //public static String sendDataToServer(Context context, String jsonString, String appendedURL, boolean waitForResponse) {
+        DatabaseHelper databaseHelper = new DatabaseHelper(context);
+        SQLiteDatabase writableDB = databaseHelper.getWritableDatabase();
+        if(writableDB.isOpen()){
+            String[] columns = new String[]{"id","url", "json"};
+            String[][] result = databaseHelper.runSelectQuery(writableDB, databaseHelper.TABLE_CACHED_REQUESTS, columns, null, null, null, null, null, null);
+            List<String> ids = new ArrayList<String>();
+            if(result != null){
+                try{
+                    JSONArray requests = new JSONArray();
+                    for(int requestIndex = 0; requestIndex < result.length; requestIndex++){
+                        JSONObject currRequest = new JSONObject();
+                        ids.add(result[requestIndex][0]);
+                        String currRequestURL = result[requestIndex][1];
+                        JSONObject currRequestData = new JSONObject(result[requestIndex][2]);
+                        currRequest.put("requestURL", currRequestURL);
+                        currRequest.put("requestData", currRequestData);
+                        requests.put(currRequest);
+                    }
+                    TelephonyManager telephonyManager=(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+                    String simCardSN = telephonyManager.getSimSerialNumber();
+                    if(simCardSN!=null){
+                        JSONObject finalRequest = new JSONObject();
+                        finalRequest.put("simCardSN", simCardSN);
+                        finalRequest.put("pastRequests", requests);
+                        if(requests.length() > 0){
+                            Log.d(TAG, "Sending the following cached data "+finalRequest.toString());
+                            String response = sendDataToServer(context, finalRequest.toString(), FARMER_ADD_CACHED_DATA_URL, waitForResponse);
+                            if(response != null && !response.equals(CODE_USER_NOT_AUTHENTICATED)){
+                                //delete the saved data from cache
+                                String[] idsArray = new String[ids.size()];
+                                idsArray = ids.toArray(idsArray);
+                                databaseHelper.runDeleteQuery(writableDB, databaseHelper.TABLE_CACHED_REQUESTS, "id", idsArray);
+                                Log.d(TAG, "Deleted cached requests from SQLite database");
+                            }
+                            return response;
+                        }
+                        else {
+                            Log.d(TAG, "No Cached data in database");
+                            return  NO_DATA;
+                        }
+                    }
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            else{
+                Log.w(TAG, "Did not get any cached requests in the SQLite database, exiting");
+            }
+        }
+        else{
+            Log.e(TAG, "Readable database did not open. Was una");
+        }
+        return null;
     }
 
     /**

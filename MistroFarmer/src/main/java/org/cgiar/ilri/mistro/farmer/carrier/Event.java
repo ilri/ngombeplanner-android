@@ -15,6 +15,7 @@ public class Event {
     private int noOfLiveBirths;
     private String type;
     private String remarks;
+    private boolean savedOnServer;
 
     public Event(){
 
@@ -89,6 +90,14 @@ public class Event {
             return true;
         }
         return false;
+    }
+
+    public void setSavedOnServer(boolean savedOnServer){
+        this.savedOnServer = savedOnServer;
+    }
+
+    public boolean getSavedOnServer(){
+        return savedOnServer;
     }
 
     public String getCod() {

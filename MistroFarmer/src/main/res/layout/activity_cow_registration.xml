@@ -89,7 +89,7 @@
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:textSize="@dimen/normal_text_size"
             android:textColor="@color/text_input_color"
-            android:inputType="date"/>
+            android:inputType="none"/>
         <TextView
             android:id="@+id/breed_tv"
             android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:textSize="@dimen/normal_text_size"
             android:textColor="@color/text_input_color"
-            android:inputType="textCapWords|textNoSuggestions"/>
+            android:inputType="date|none"/>
         <TextView
             android:id="@+id/sex_tv"
             android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
                 android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
                 android:textSize="@dimen/normal_text_size"
                 android:textColor="@color/text_input_color"
-                android:inputType="text"/>
+                android:inputType="none"/>
         <TextView
             android:id="@+id/service_type_tv"
             android:layout_width="wrap_content"

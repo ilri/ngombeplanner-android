@@ -23,6 +23,9 @@ import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
+import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.Event;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -150,7 +153,7 @@ public class EventsHistoryActivity extends SherlockActivity implements View.OnCl
         }
     }
 
-    private class CowEventHistoryThread extends AsyncTask<String, Integer, String> {
+    private class CowEventHistoryThread extends AsyncTask<String, Integer, Farmer> {
 
         ProgressDialog progressDialog;
 
@@ -161,9 +164,8 @@ public class EventsHistoryActivity extends SherlockActivity implements View.OnCl
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            String result = null;
-            JSONObject jsonObject = new JSONObject();
+        protected Farmer doInBackground(String... params) {
+            /*JSONObject jsonObject = new JSONObject();
             try {
                 jsonObject.put("simCardSN",params[0]);
                 jsonObject.put("fromID",params[1]);
@@ -171,20 +173,29 @@ public class EventsHistoryActivity extends SherlockActivity implements View.OnCl
             }
             catch (JSONException e) {
                 e.printStackTrace();
+            }*/
+            String result = DataHandler.sendCachedRequests(EventsHistoryActivity.this, true);//send cached data and receive updated farmer data
+            if(result != null && !result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)){//no data fetched for this farmer
+                try {//try converting the response into a jsonobject. It might not work if the DataHandler returns a response code
+                    Log.d(TAG, "response is "+result);
+                    DataHandler.saveFarmerData(EventsHistoryActivity.this, new JSONObject(result));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-
-
-            return result;
+            return DataHandler.getFarmerData(EventsHistoryActivity.this);
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
+        protected void onPostExecute(Farmer farmer) {
+            super.onPostExecute(farmer);
             progressDialog.dismiss();
-            if(result == null) {
-                Toast.makeText(EventsHistoryActivity.this, serverError, Toast.LENGTH_LONG).show();
+
+            if(farmer == null) {
+                Toast.makeText(EventsHistoryActivity.this, Locale.getStringInLocale("unable_to_fetch_cached_data", EventsHistoryActivity.this), Toast.LENGTH_LONG).show();
             }
-            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+
+            /*else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
                 Toast.makeText(EventsHistoryActivity.this, Locale.getStringInLocale("generic_sms_error", EventsHistoryActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
@@ -198,14 +209,41 @@ public class EventsHistoryActivity extends SherlockActivity implements View.OnCl
             }
             else if(result.equals(DataHandler.NO_DATA)) {
                 Toast.makeText(EventsHistoryActivity.this, noDataReceived, Toast.LENGTH_LONG).show();
-            }
+            }*/
             else {
-                try {
+                /*try {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray historyArray = jsonObject.getJSONArray("history");
                     addTableRows(historyArray);
                 }
                 catch (JSONException e) {
+                    e.printStackTrace();
+                }*/
+                try{
+                    List<Cow> allCows = farmer.getCows();
+                    JSONArray historyArray = new JSONArray();
+                    for(int cowIndex = 0; cowIndex < allCows.size(); cowIndex++){
+                        //append all events for this cow to the UI
+                        List<Event> cowEvents = allCows.get(cowIndex).getEvents();
+                        for(int eventIndex = 0; eventIndex < cowEvents.size(); eventIndex++){
+                            //cow_name, ear_tag_number, event.*,
+                            JSONObject currEventJSON = new JSONObject();
+                            currEventJSON.put("cow_name", allCows.get(cowIndex).getName());
+                            currEventJSON.put("ear_tag_number", allCows.get(cowIndex).getEarTagNumber());
+                            currEventJSON.put("id", cowEvents.get(eventIndex).getId());
+                            currEventJSON.put("remarks", cowEvents.get(eventIndex).getRemarks());
+                            currEventJSON.put("event_date", cowEvents.get(eventIndex).getEventDate());
+                            currEventJSON.put("event_name", cowEvents.get(eventIndex).getType());
+                            currEventJSON.put("birth_type", cowEvents.get(eventIndex).getBirthType());
+                            currEventJSON.put("parent_cow_event", cowEvents.get(eventIndex).getParentCowEventID());
+                            currEventJSON.put("servicing_days", cowEvents.get(eventIndex).getServicingDays());
+                            historyArray.put(currEventJSON);
+                        }
+                    }
+
+                    addTableRows(historyArray);
+                }
+                catch (Exception e){
                     e.printStackTrace();
                 }
             }
