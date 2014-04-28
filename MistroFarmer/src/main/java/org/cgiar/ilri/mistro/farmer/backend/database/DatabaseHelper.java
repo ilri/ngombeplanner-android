@@ -18,11 +18,13 @@ import java.io.Serializable;
 public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
 
     public static final String DB_NAME = "ngombe_planner";
-    public static final int DB_VERSION = 5;
+    public static final int DB_VERSION = 6;
     public static final String TABLE_FARMER = "farmer";
     public static final String TABLE_COW = "cow";
     public static final String TABLE_EVENT = "event";
     public static final String TABLE_CACHED_REQUESTS = "cached_requests";
+    public static final String TABLE_MILK_PRODUCTION = "milk_production";
+
     private static final String TAG = "DatabaseHelper";
 
     /**
@@ -46,6 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
 		db.execSQL("CREATE TABLE " + TABLE_COW + " (id INTEGER PRIMARY KEY, farmer_id INTEGER, name TEXT, ear_tag_number TEXT, date_of_birth TEXT, age INTEGER, age_type TEXT, sex TEXT, sire_id INTEGER, dam_id INTEGER, date_added TEXT, service_type TEXT, country_id INTEGER, bull_owner TEXT, owner_name TEXT);");
         db.execSQL("CREATE TABLE "+TABLE_EVENT+" (id INTEGER PRIMARY KEY, cow_id INTEGER, event_name TEXT, remarks TEXT, event_date TEXT, birth_type TEXT, parent_cow_event INTEGER, bull_id INTEGER, servicing_days INTEGER, cod TEXT, no_of_live_births INTEGER, saved_on_server INTEGER)");
         db.execSQL("CREATE TABLE "+TABLE_CACHED_REQUESTS+" (id INTEGER PRIMARY KEY AUTOINCREMENT, url TEXT, json TEXT)");
+        db.execSQL("CREATE TABLE "+TABLE_MILK_PRODUCTION+" (id INTEGER PRIMARY KEY, cow_id INTEGER, time TEXT, quantity INTEGER, date_added TEXT, date TEXT, quantity_type TEXT)");
         //insert any static data to the db now
     }
 
@@ -64,6 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_FARMER);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_EVENT);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_CACHED_REQUESTS);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_MILK_PRODUCTION);
 
         //recreate the database
         onCreate(db);

@@ -806,8 +806,10 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            if(result == true)
-            {
+            if(result == null || result == false){
+                Toast.makeText(AddEventActivity.this, sendUnsuccessfulWarning, Toast.LENGTH_LONG).show();
+            }
+            else if(result == true) {
                 Toast.makeText(AddEventActivity.this, eventRecorded, Toast.LENGTH_LONG).show();
                 Intent intent;
                 if(presetMode != null && (presetMode.equals(MODE_SERVICING) || presetMode.equals(MODE_CALVING))){
@@ -819,10 +821,6 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 }
                 startActivity(intent);
-            }
-            else
-            {
-                Toast.makeText(AddEventActivity.this, sendUnsuccessfulWarning, Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -37,6 +37,7 @@ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.Dam;
 import org.cgiar.ilri.mistro.farmer.carrier.Event;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+import org.cgiar.ilri.mistro.farmer.carrier.MilkProduction;
 import org.cgiar.ilri.mistro.farmer.carrier.Sire;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -544,6 +545,26 @@ public class DataHandler
 
                         databaseHelper.runInsertQuery(databaseHelper.TABLE_EVENT, columns, columnValues, 0, writableDB);
                     }
+
+                    JSONArray cowMilkProduction = currCow.getJSONArray("milk_production");
+                    for(int j = 0; j < cowMilkProduction.length(); j++){
+                        JSONObject currMProduction = cowMilkProduction.getJSONObject(j);
+                        //(id INTEGER PRIMARY KEY, cow_id INTEGER, time TEXT, quantity INTEGER, date_added TEXT, date TEXT, quantity_type TEXT)");
+                        columns = new String[]{"id", "cow_id", "time", "quantity", "date_added", "date", "quantity_type"};
+
+                        columnValues = new String[columns.length];
+
+                        columnValues[0] = currMProduction.getString("id");
+                        columnValues[1] = currMProduction.getString("cow_id");
+                        columnValues[2] = currMProduction.getString("time");
+                        columnValues[3] = currMProduction.getString("quantity");
+                        columnValues[4] = currMProduction.getString("date_added");
+                        columnValues[5] = currMProduction.getString("date");
+                        columnValues[6] = currMProduction.getString("quantity_type");
+
+                        databaseHelper.runInsertQuery(databaseHelper.TABLE_MILK_PRODUCTION, columns, columnValues, 0, writableDB);
+
+                    }
                 }
             }
             catch (Exception e){
@@ -676,6 +697,23 @@ public class DataHandler
 
                         currCow.addEvent(currEvent);
                     }
+
+                    //(id INTEGER PRIMARY KEY, cow_id INTEGER, time TEXT, quantity INTEGER, date_added TEXT, date TEXT, quantity_type TEXT)");
+                    columns = new String[] {"id", "cow_id", "time", "quantity", "date_added", "date", "quantity_type"};
+                    selection = "cow_id="+cowID;
+                    String[][] mpResult = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_MILK_PRODUCTION, columns, selection, null, null, null, null, null);
+                    for(int mpIndex = 0; mpIndex < mpResult.length; mpIndex++){
+                        MilkProduction currMP = new MilkProduction();
+
+                        currMP.setId(Integer.parseInt(mpResult[mpIndex][0]));
+                        currMP.setTime(mpResult[mpIndex][2]);
+                        currMP.setQuantity(Integer.parseInt(mpResult[mpIndex][3]));
+                        currMP.setDateAdded(mpResult[mpIndex][4]);
+                        currMP.setDate(mpResult[mpIndex][5]);
+                        currMP.setQuantityType(mpResult[mpIndex][6]);
+
+                        currCow.addMilkProduction(currMP);
+                    }
                     farmer.addCow(currCow);
                 }
             }
@@ -761,9 +799,9 @@ public class DataHandler
                             if(response != null && !response.equals(CODE_USER_NOT_AUTHENTICATED)){
                                 //delete the saved data from cache
                                 databaseHelper.runTruncateQuery(writableDB, databaseHelper.TABLE_CACHED_REQUESTS);
-                                String[] idsArray = new String[ids.size()];
+                                /*String[] idsArray = new String[ids.size()];
                                 idsArray = ids.toArray(idsArray);
-                                databaseHelper.runDeleteQuery(writableDB, databaseHelper.TABLE_CACHED_REQUESTS, "id", idsArray);
+                                databaseHelper.runDeleteQuery(writableDB, databaseHelper.TABLE_CACHED_REQUESTS, "id", idsArray);*/
                                 Log.d(TAG, "Deleted cached requests from SQLite database");
                             }
                             return response;

@@ -23,6 +23,9 @@ import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
+import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+import org.cgiar.ilri.mistro.farmer.carrier.MilkProduction;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -170,7 +173,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Vi
         }
     }
 
-    private class ProductionHistoryThread extends AsyncTask<String,Integer,String>
+    private class ProductionHistoryThread extends AsyncTask<String,Integer,Farmer>
     {
         private ProgressDialog progressDialog;
 
@@ -181,9 +184,9 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Vi
         }
 
         @Override
-        protected String doInBackground(String... params)
+        protected Farmer doInBackground(String... params)
         {
-            JSONObject jsonObject=new JSONObject();
+            /*JSONObject jsonObject=new JSONObject();
             try
             {
                 jsonObject.put("simCardSN",params[0]);
@@ -196,19 +199,31 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Vi
             {
                 e.printStackTrace();
             }
-            return null;
+            return null;*/
+
+
+            String result = DataHandler.sendCachedRequests(MilkProcutionHistoryActivity.this, true);//send cached data and receive updated farmer data
+            if(result != null && !result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)){//no data fetched for this farmer
+                try {//try converting the response into a jsonobject. It might not work if the DataHandler returns a response code
+                    Log.d(TAG, "response is "+result);
+                    DataHandler.saveFarmerData(MilkProcutionHistoryActivity.this, new JSONObject(result));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return DataHandler.getFarmerData(MilkProcutionHistoryActivity.this);
         }
 
         @Override
-        protected void onPostExecute(String result)
+        protected void onPostExecute(Farmer farmer)
         {
-            super.onPostExecute(result);
+            super.onPostExecute(farmer);
             progressDialog.dismiss();
-            if(result==null)
+            if(farmer==null)
             {
                 Toast.makeText(MilkProcutionHistoryActivity.this,"server error",Toast.LENGTH_LONG).show();
             }
-            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+            /*else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
                 Toast.makeText(MilkProcutionHistoryActivity.this, Locale.getStringInLocale("generic_sms_error", MilkProcutionHistoryActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
@@ -223,10 +238,10 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Vi
             else if(result.equals(DataHandler.NO_DATA))
             {
                 Toast.makeText(MilkProcutionHistoryActivity.this,noDataWarning,Toast.LENGTH_LONG).show();
-            }
+            }*/
             else
             {
-                try
+                /*try
                 {
                     JSONObject jsonObject=new JSONObject(result);
                     JSONArray historyArray=jsonObject.getJSONArray("history");
@@ -235,6 +250,32 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Vi
                 }
                 catch (JSONException e)
                 {
+                    e.printStackTrace();
+                }*/
+                try{
+                    List<Cow> allCows = farmer.getCows();
+                    JSONArray historyArray = new JSONArray();
+                    for(int cowIndex = 0; cowIndex < allCows.size(); cowIndex++){
+                        //append all events for this cow to the UI
+                        List<MilkProduction> cowMP = allCows.get(cowIndex).getMilkProduction();
+                        for(int mpIndex = 0; mpIndex < cowMP.size(); mpIndex++){
+                            JSONObject currMP = new JSONObject();
+                            currMP.put("id", cowMP.get(mpIndex).getId());
+                            currMP.put("date", cowMP.get(mpIndex).getDate());
+                            currMP.put("time", cowMP.get(mpIndex).getTime());
+                            currMP.put("name", allCows.get(cowIndex).getName());
+                            currMP.put("ear_tag_number", allCows.get(cowIndex).getEarTagNumber());
+                            currMP.put("quantity_type", cowMP.get(mpIndex).getQuantityType());
+                            currMP.put("quantity", cowMP.get(mpIndex).getQuantity());
+
+                            historyArray.put(currMP);
+                        }
+                    }
+
+                    addTotalTableRows(historyArray);
+                    addHistoryTableRows(historyArray);
+                }
+                catch (Exception e){
                     e.printStackTrace();
                 }
             }

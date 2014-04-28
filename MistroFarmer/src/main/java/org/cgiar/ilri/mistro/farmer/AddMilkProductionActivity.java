@@ -356,7 +356,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         }
     }
 
-    private class MilkProductionDataAdditionThread extends AsyncTask<String,Integer,String>
+    private class MilkProductionDataAdditionThread extends AsyncTask<String, Integer, Boolean>
     {
         private ProgressDialog progressDialog;
 
@@ -367,7 +367,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Boolean doInBackground(String... params) {
             Log.d(TAG, "at milkProductionDataAdditionThread");
             JSONObject jsonObject=new JSONObject();
             try
@@ -381,7 +381,8 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
                 jsonObject.put("date", params[6]);
                 /*jsonObject.put("noMilkingTimes",params[7]);
                 jsonObject.put("calfSuckling",params[8]);*/
-                String result=DataHandler.sendDataToServer(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL, true);
+                //String result=DataHandler.sendDataToServer(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL, true);
+                boolean result=DataHandler.cacheRequest(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL);
                 Log.d(TAG,"data sent to server, result = "+result);
                 return result;
             }
@@ -393,22 +394,22 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         }
 
         @Override
-        protected void onPostExecute(String result)
+        protected void onPostExecute(Boolean result)
         {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            if(result==null) {
-                Toast.makeText(AddMilkProductionActivity.this,"server error",Toast.LENGTH_LONG).show();
+            if(result==null || result == false) {
+                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("something_went_wrong_try_again", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
             }
-            else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
-                Toast.makeText(AddMilkProductionActivity.this,Locale.getStringInLocale("information_successfully_sent_to_server", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
+            else if(result == true) {
+                Toast.makeText(AddMilkProductionActivity.this,Locale.getStringInLocale("event_successfully_recorded", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AddMilkProductionActivity.this, MilkProductionActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
-            else if(result.equals(DataHandler.DATA_ERROR)) {
+            /*else if(result.equals(DataHandler.DATA_ERROR)) {
                 Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("production_for_time_already_exists", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
-            }
+            }*/
         }
     }
 
