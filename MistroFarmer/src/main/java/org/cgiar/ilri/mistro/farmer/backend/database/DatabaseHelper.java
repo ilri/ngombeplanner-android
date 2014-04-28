@@ -42,8 +42,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "+TABLE_FARMER+" (id INTEGER PRIMARY KEY, name TEXT, mobile_no TEXT, location_county TEXT, location_district TEXT, gps_longitude TEXT, gps_latitude TEXT, date_added TEXT, sim_card_sn TEXT);");
-		db.execSQL("CREATE TABLE "+TABLE_COW+" (id INTEGER PRIMARY KEY, farmer_id INTEGER, name TEXT, ear_tag_number TEXT, date_of_birth TEXT, age INTEGER, age_type TEXT, sex TEXT, sire_id INTEGER, dam_id INTEGER, date_added TEXT, service_type TEXT, country_id INTEGER, bull_owner TEXT, owner_name TEXT);");
+        db.execSQL("CREATE TABLE " + TABLE_FARMER + " (id INTEGER PRIMARY KEY, name TEXT, mobile_no TEXT, location_county TEXT, location_district TEXT, gps_longitude TEXT, gps_latitude TEXT, date_added TEXT, sim_card_sn TEXT);");
+		db.execSQL("CREATE TABLE " + TABLE_COW + " (id INTEGER PRIMARY KEY, farmer_id INTEGER, name TEXT, ear_tag_number TEXT, date_of_birth TEXT, age INTEGER, age_type TEXT, sex TEXT, sire_id INTEGER, dam_id INTEGER, date_added TEXT, service_type TEXT, country_id INTEGER, bull_owner TEXT, owner_name TEXT);");
         db.execSQL("CREATE TABLE "+TABLE_EVENT+" (id INTEGER PRIMARY KEY, cow_id INTEGER, event_name TEXT, remarks TEXT, event_date TEXT, birth_type TEXT, parent_cow_event INTEGER, bull_id INTEGER, servicing_days INTEGER, cod TEXT, no_of_live_births INTEGER, saved_on_server INTEGER)");
         db.execSQL("CREATE TABLE "+TABLE_CACHED_REQUESTS+" (id INTEGER PRIMARY KEY AUTOINCREMENT, url TEXT, json TEXT)");
         //insert any static data to the db now
@@ -86,11 +86,11 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
      */
     public String[][] runSelectQuery(SQLiteDatabase db, String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit) {
 
-        Log.d(TAG, "About to run select query on "+table+" table");
+        Log.d(TAG, "About to run select query on " + table + " table");
         Cursor cursor=db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
         if(cursor.getCount()!=-1) {
             String[][] result=new String[cursor.getCount()][columns.length];
-            Log.d("runSelectQuery", "number of rows " + String.valueOf(cursor.getCount()));
+            Log.d(TAG, "number of rows " + String.valueOf(cursor.getCount()));
             int c1=0;
             cursor.moveToFirst();
             while(c1<cursor.getCount()) {
@@ -160,6 +160,18 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
 
             cv.clear();
         }
+    }
+
+    /**
+     * This method deletes all data in a table. Please be careful, this method will delete all the data in that table
+     *
+     * @param db    The writable database
+     * @param table The table to truncate
+     */
+    public void runTruncateQuery(SQLiteDatabase db, String table){
+        Log.w(TAG, "About to truncate table "+table);
+        String query = "DELETE FROM "+table;
+        runQuery(db, query);
     }
 
     /**

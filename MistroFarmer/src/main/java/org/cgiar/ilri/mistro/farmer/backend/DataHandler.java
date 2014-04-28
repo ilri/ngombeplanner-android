@@ -64,11 +64,10 @@ public class DataHandler
     private static final long SMS_RESPONSE_TIMEOUT = 300000;
     private static final int HTTP_POST_TIMEOUT =20000;
     private static final int HTTP_RESPONSE_TIMEOUT =20000;
-    //private static final String BASE_URL="http://192.168.2.232/~jason/MistroFarmerProject/web";
-    //private static final String BASE_URL="http://10.0.2.2/~jason/MistroFarmerProject/web";
     public static final String SMS_SERVER_ADDRESS = "+254708944137";
-    //private static final String BASE_URL="http://hpc.ilri.cgiar.org/~jrogena/mistro_web";
-    private static final String BASE_URL="http://azizi.ilri.cgiar.org/ngombe_planner";
+    //private static final String BASE_URL="http://azizi.ilri.cgiar.org/ngombe_planner";
+    //private static final String BASE_URL="http://192.168.14.102/~jason/ngombe_planner/WebServer";
+    private static final String BASE_URL="http://172.26.23.48/~jason/ngombe_planner/WebServer";
     public static final String FARMER_REGISTRATION_URL="/php/farmer/registration.php";
     public static final String FARMER_AUTHENTICATION_URL="/php/farmer/authentication.php";
     public static final String FARMER_SIM_CARD_REGISTRATION_URL="/php/farmer/sim_card_registration.php";
@@ -730,7 +729,7 @@ public class DataHandler
      * @param context   The activity/service from where you want to send the data to the server
      */
     public static final String sendCachedRequests(Context context, boolean waitForResponse){
-        Log.d(TAG, "Sending cached data to server");
+        Log.d(TAG, "Trying to send cached data to server");
         //public static String sendDataToServer(Context context, String jsonString, String appendedURL, boolean waitForResponse) {
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
         SQLiteDatabase writableDB = databaseHelper.getWritableDatabase();
@@ -761,6 +760,7 @@ public class DataHandler
                             String response = sendDataToServer(context, finalRequest.toString(), FARMER_ADD_CACHED_DATA_URL, waitForResponse);
                             if(response != null && !response.equals(CODE_USER_NOT_AUTHENTICATED)){
                                 //delete the saved data from cache
+                                databaseHelper.runTruncateQuery(writableDB, databaseHelper.TABLE_CACHED_REQUESTS);
                                 String[] idsArray = new String[ids.size()];
                                 idsArray = ids.toArray(idsArray);
                                 databaseHelper.runDeleteQuery(writableDB, databaseHelper.TABLE_CACHED_REQUESTS, "id", idsArray);
