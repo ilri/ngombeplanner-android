@@ -232,4 +232,7 @@
     <string name="warning_en">Warning</string>
     <string name="action_will_be_canceled_en">If you choose to go back to the Main Menu data you have entered in this screen will be lost. Press \'Okay\' if this is okay with you.</string>
     <string name="total_en">Total</string>
+    <string name="unable_to_fetch_cached_data_en">Unable to fetch some of the data cached on you device</string>
+    <string name="you_do_not_have_female_cows_en">You do not seem to have female cows</string>
+    <string name="you_do_not_have_cows_en">You do not seem to have cows</string>
 </resources>

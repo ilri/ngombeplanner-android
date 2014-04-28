@@ -1,9 +1,12 @@
 package org.cgiar.ilri.mistro.farmer;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import com.actionbarsherlock.view.Menu;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,10 +15,14 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class EventsActivity extends SherlockActivity implements View.OnClickListener
 {
+    private String TAG = "EventsActivity";
 
     private Menu menu;
     private Button addEventB;
@@ -96,9 +103,39 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
             startActivity(intent);
         }
         else if(view == backB){
+            SendCachedDataThread sendCachedDataThread = new SendCachedDataThread();
+            sendCachedDataThread.execute(1);
+
             Intent intent = new Intent(this, MainMenu.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
+        }
+    }
+
+    private class SendCachedDataThread extends AsyncTask<Integer, Integer, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            String result = DataHandler.sendCachedRequests(EventsActivity.this, true);//send cached data and receive updated farmer data
+            if(result != null && !result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)){//no data fetched for this farmer
+                try {//try converting the response into a jsonobject. It might not work if the DataHandler returns a response code
+                    Log.d(TAG, "response is " + result);
+                    DataHandler.saveFarmerData(EventsActivity.this, new JSONObject(result));
+                    return true;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+
+            if(result == true){
+                Toast.makeText(EventsActivity.this, Locale.getStringInLocale("information_successfully_sent_to_server", EventsActivity.this), Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

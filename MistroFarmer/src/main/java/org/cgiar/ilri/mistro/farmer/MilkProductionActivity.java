@@ -26,6 +26,7 @@ import com.actionbarsherlock.view.MenuItem;
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.MilkProduction;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -217,6 +218,9 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             dateETClicked();
         }
         else if(view==backB){
+            SendCachedDataThread sendCachedDataThread = new SendCachedDataThread();
+            sendCachedDataThread.execute(1);
+
             Intent intent = new Intent(this, MainMenu.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
@@ -501,6 +505,33 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
             else if(result.equals(DataHandler.DATA_ERROR))
             {
                 Toast.makeText(MilkProductionActivity.this,problemInData,Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private class SendCachedDataThread extends AsyncTask<Integer, Integer, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            String result = DataHandler.sendCachedRequests(MilkProductionActivity.this, true);//send cached data and receive updated farmer data
+            if(result != null && !result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)){//no data fetched for this farmer
+                try {//try converting the response into a jsonobject. It might not work if the DataHandler returns a response code
+                    Log.d(TAG, "response is " + result);
+                    DataHandler.saveFarmerData(MilkProductionActivity.this, new JSONObject(result));
+                    return true;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+
+            if(result == true){
+                Toast.makeText(MilkProductionActivity.this, Locale.getStringInLocale("information_successfully_sent_to_server", MilkProductionActivity.this), Toast.LENGTH_LONG).show();
             }
         }
     }

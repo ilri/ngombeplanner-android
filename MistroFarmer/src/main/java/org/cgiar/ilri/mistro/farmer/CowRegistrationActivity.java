@@ -1035,11 +1035,43 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
                     Utils.showSuccessfullRegistration(CowRegistrationActivity.this,null);
                 }
                 else {
+                    //get updated farmer data
+                    DataUpdateThread dataUpdateThread = new DataUpdateThread();
+                    dataUpdateThread.execute(1);
+
                     Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("event_successfully_recorded",CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(CowRegistrationActivity.this, EventsActivity.class);
                     startActivity(intent);
                 }
             }
+        }
+    }
+
+    private class DataUpdateThread extends AsyncTask<Integer, Integer, Integer>{
+
+        @Override
+        protected Integer doInBackground(Integer... params)
+        {
+            JSONObject jsonObject=new JSONObject();
+            try
+            {
+                TelephonyManager telephonyManager=(TelephonyManager)CowRegistrationActivity.this.getSystemService(Context.TELEPHONY_SERVICE);
+                String simcardSN  = telephonyManager.getSimSerialNumber();
+                if(simcardSN != null){
+                    jsonObject.put("simCardSN",params[0]);
+                    //jsonObject.put("mobileNumber",params[1]);
+                    String result = DataHandler.sendDataToServer(CowRegistrationActivity.this, jsonObject.toString(),DataHandler.FARMER_AUTHENTICATION_URL, true);
+                    JSONObject farmerData = new JSONObject(result);
+                    DataHandler.saveFarmerData(CowRegistrationActivity.this, farmerData);
+                    return 1;
+
+                }
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }

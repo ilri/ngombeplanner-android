@@ -30,6 +30,7 @@ import com.actionbarsherlock.view.MenuItem;
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class AddMilkProductionActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
@@ -64,6 +66,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
     private DatePickerDialog datePickerDialog;
     private Menu menu;
 
+    private Farmer farmer;
     private String[] cowNameArray;
     private String[] cowEarTagNumberArray;
     private String[] quantityTypes;
@@ -353,7 +356,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         }
     }
 
-    private class MilkProductionDataAdditionThread extends AsyncTask<String,Integer,String>
+    private class MilkProductionDataAdditionThread extends AsyncTask<String, Integer, Boolean>
     {
         private ProgressDialog progressDialog;
 
@@ -364,7 +367,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Boolean doInBackground(String... params) {
             Log.d(TAG, "at milkProductionDataAdditionThread");
             JSONObject jsonObject=new JSONObject();
             try
@@ -378,7 +381,8 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
                 jsonObject.put("date", params[6]);
                 /*jsonObject.put("noMilkingTimes",params[7]);
                 jsonObject.put("calfSuckling",params[8]);*/
-                String result=DataHandler.sendDataToServer(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL, true);
+                //String result=DataHandler.sendDataToServer(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL, true);
+                boolean result=DataHandler.cacheRequest(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL);
                 Log.d(TAG,"data sent to server, result = "+result);
                 return result;
             }
@@ -390,26 +394,26 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         }
 
         @Override
-        protected void onPostExecute(String result)
+        protected void onPostExecute(Boolean result)
         {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            if(result==null) {
-                Toast.makeText(AddMilkProductionActivity.this,"server error",Toast.LENGTH_LONG).show();
+            if(result==null || result == false) {
+                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("something_went_wrong_try_again", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
             }
-            else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
-                Toast.makeText(AddMilkProductionActivity.this,Locale.getStringInLocale("information_successfully_sent_to_server", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
+            else if(result == true) {
+                Toast.makeText(AddMilkProductionActivity.this,Locale.getStringInLocale("event_successfully_recorded", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AddMilkProductionActivity.this, MilkProductionActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
-            else if(result.equals(DataHandler.DATA_ERROR)) {
+            /*else if(result.equals(DataHandler.DATA_ERROR)) {
                 Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("production_for_time_already_exists", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
-            }
+            }*/
         }
     }
 
-    private class CowIdentifierThread extends AsyncTask<String,Integer,String>
+    private class CowIdentifierThread extends AsyncTask<String,Integer,Farmer>
     {
         private ProgressDialog progressDialog;
 
@@ -420,81 +424,52 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
         }
 
         @Override
-        protected String doInBackground(String... params)
+        protected Farmer doInBackground(String... params)
         {
-            JSONObject jsonObject=new JSONObject();
-            try
-            {
-                jsonObject.put("simCardSN",params[0]);
-                jsonObject.put("cowSex", Cow.SEX_FEMALE);
-                String result=DataHandler.sendDataToServer(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_FETCH_COW_IDENTIFIERS_URL, true);
-                return result;
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
-            return null;
+            Farmer farmer = DataHandler.getFarmerData(AddMilkProductionActivity.this);
+            return farmer;
         }
 
         @Override
-        protected void onPostExecute(String result)
+        protected void onPostExecute(Farmer farmer)
         {
-            super.onPostExecute(result);
+            super.onPostExecute(farmer);
             progressDialog.dismiss();
-            if(result == null ){
-                Toast.makeText(AddMilkProductionActivity.this,"server error",Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
-                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("generic_sms_error", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
-                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("no_service", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
-                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("radio_off", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
-            }
-            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
-                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("server_not_receive_sms", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
+            if(farmer == null ){
+                Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("unable_to_fetch_cached_data", AddMilkProductionActivity.this),Toast.LENGTH_LONG).show();
             }
             else{
-                try
-                {
-                    JSONObject jsonObject=new JSONObject(result);
-                    JSONArray cowNamesArray=jsonObject.getJSONArray("cowNames");
-                    JSONArray earTagNumbersArray=jsonObject.getJSONArray("earTagNumbers");
-                    String[] cowArray=new String[cowNamesArray.length()];
-                    String[] earTagArray=new String[cowNamesArray.length()];
-                    for(int i=0;i<cowNamesArray.length();i++)
-                    {
-                        cowArray[i]=cowNamesArray.get(i).toString();
-                        earTagArray[i]=earTagNumbersArray.get(i).toString();
-                    }
-                    //TODO: warn user if no cows
-                    if(cowArray.length==0)
-                    {
-                        Toast.makeText(AddMilkProductionActivity.this,"no cows fetched",Toast.LENGTH_LONG).show();
-                    }
-                    AddMilkProductionActivity.this.cowNameArray =cowArray;
-                    AddMilkProductionActivity.this.cowEarTagNumberArray=earTagArray;
-                    String[] identifierArray=new String[cowArray.length];
-                    for (int i=0;i<cowArray.length;i++)
-                    {
-                        if(cowArray[i]!=null&&!cowArray[i].equals(""))
-                        {
-                            identifierArray[i]=cowArray[i];
-                        }
-                        else
-                        {
-                            identifierArray[i]=earTagArray[i];
-                        }
-                    }
-                    setCowIdentifiers(identifierArray);
+                AddMilkProductionActivity.this.farmer = farmer;
+
+                //get cow names and ear tag numbers
+                List<Cow> cows = farmer.getCows(Cow.SEX_FEMALE);
+
+                String[] cowArray=new String[cows.size()];
+                String[] earTagArray=new String[cows.size()];
+                for(int i=0;i<cows.size();i++) {
+                    cowArray[i]=cows.get(i).getName();
+                    earTagArray[i]=cows.get(i).getEarTagNumber();
                 }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
+
+                if(cowArray.length==0) {
+                    Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("you_do_not_have_female_cows", AddMilkProductionActivity.this),Toast.LENGTH_LONG).show();
                 }
+
+                AddMilkProductionActivity.this.cowNameArray =cowArray;
+                AddMilkProductionActivity.this.cowEarTagNumberArray=earTagArray;
+                String[] identifierArray=new String[cowArray.length];
+                for (int i=0;i<cowArray.length;i++)
+                {
+                    if(cowArray[i]!=null&&!cowArray[i].equals(""))
+                    {
+                        identifierArray[i]=cowArray[i];
+                    }
+                    else
+                    {
+                        identifierArray[i]=earTagArray[i];
+                    }
+                }
+                setCowIdentifiers(identifierArray);
             }
 
         }

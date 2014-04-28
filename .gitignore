@@ -11,6 +11,10 @@
 #Gradle files
 .gradle/
 MistroFarmer/build/
+gradle/wrapper/gradle-wrapper.properties
+MistroFarmer/build.gradle
+MistroFarmer/MistroFarmer.iml
+Android.iml
 
 #Local configuration files
 local.properties
@@ -20,3 +24,4 @@ local.properties
 .idea/tasks.xml
 .idea/datasrouces.xml
 .idea/dataSources.ids
+.idea/misc.xml

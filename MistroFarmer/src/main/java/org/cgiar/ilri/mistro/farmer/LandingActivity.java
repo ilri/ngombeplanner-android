@@ -184,8 +184,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         }
     }
 
-    private class UserAuthenticationThread extends AsyncTask<String,Integer,String>
-    {
+    private class UserAuthenticationThread extends AsyncTask<String,Integer,String> {
         ProgressDialog progressDialog;
 
         @Override
@@ -243,19 +242,14 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
                 showRegisterOrLoginDialog();
             }
             else {
-                try{
-                    JSONObject jsonObject = new JSONObject(result);
-                    String longitude = jsonObject.getString("gps_longitude");
-                    String latitude = jsonObject.getString("gps_latitude");
-                    Toast.makeText(LandingActivity.this, welcomeText+" "+jsonObject.getString("name"),Toast.LENGTH_LONG).show();
-                    Intent intent=new Intent(LandingActivity.this,MainMenu.class);
-                    intent.putExtra(MainMenu.KEY_LATITUDE,latitude);
-                    intent.putExtra(MainMenu.KEY_LONGITUDE,longitude);
-                    startActivity(intent);
-                }
-                catch (JSONException e){
-                    e.printStackTrace();
-                }
+                //save farmer data in the database
+                SaveFarmerDataThread saveFarmerDataThread = new SaveFarmerDataThread();
+                saveFarmerDataThread.execute(result);
+
+                Intent intent=new Intent(LandingActivity.this,MainMenu.class);
+                Log.d(TAG, result);
+                intent.putExtra(MainMenu.KEY_FARMER_DATA, result);
+                startActivity(intent);
             }
         }
 
@@ -336,10 +330,9 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             Log.d(TAG,"sim card registration *****"+result);
             if(result==null)
             {
-                Toast.makeText(LandingActivity.this,"Server Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(LandingActivity.this, Locale.getStringInLocale("problem_connecting_to_server", LandingActivity.this),Toast.LENGTH_LONG).show();
             }
-            else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED))
-            {
+            else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)) {
                 Utils.showGenericAlertDialog(LandingActivity.this,simCardRegistrationText,oldNumberNotInSystemText,okayText,null,null,null);
             }
             else if(result.equals(DataHandler.CODE_SIM_CARD_REGISTERED))
@@ -349,4 +342,29 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
             }
         }
     }
+
+    private class SaveFarmerDataThread extends AsyncTask<String, Integer, Integer>{
+
+        @Override
+        protected Integer doInBackground(String... params) {
+            Log.d(TAG, "About to save farmer data in the database");
+
+            try {
+                JSONObject farmerData = new JSONObject(params[0]);
+                DataHandler.saveFarmerData(LandingActivity.this, farmerData);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return 0;
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+
+            Log.d(TAG, "Finished caching farmer data in SQLite database");
+        }
+    }
+
 }

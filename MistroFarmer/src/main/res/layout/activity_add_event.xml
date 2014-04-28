@@ -68,7 +68,7 @@
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:textSize="@dimen/normal_text_size"
             android:textColor="@color/text_input_color"
-            android:inputType="date"/>
+            android:inputType="none"/>
         <TextView
             android:id="@+id/servicing_tv"
             android:layout_width="wrap_content"

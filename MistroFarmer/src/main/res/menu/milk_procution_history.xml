@@ -9,5 +9,5 @@
           android:showAsAction="never" />
     <item android:id="@+id/action_back_main_menu"
         android:orderInCategory="3"
-        android:showAsAction="ifRoom" />
+        android:showAsAction="never" />
 </menu>
