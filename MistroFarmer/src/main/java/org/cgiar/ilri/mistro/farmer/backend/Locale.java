@@ -13,6 +13,9 @@ public class Locale {
     private static final String TAG = "Locale";
     public static final String LOCALE_ENGLISH="en";
     public static final String LOCALE_SWAHILI="sw";
+    public static final String LOCALE_LUHYA="lh";
+    public static final String LOCALE_KALENJIN="kl";
+
     //public static final String SHARED_PREFERENCES_KEY = "locale";
     public static String getStringInLocale(String stringName, Context context) {
         String localeCode = getLocaleCode(context);

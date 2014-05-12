@@ -62,7 +62,16 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
         else if(item.getItemId() == R.id.action_swahili) {
             Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
             initTextInViews();
-            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_luhya) {
+            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+            initTextInViews();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_kalenjin) {
+            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+            initTextInViews();
             return true;
         }
         else if(item.getItemId() == R.id.action_back_main_menu) {
@@ -70,6 +79,7 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
+
         return false;
     }
 

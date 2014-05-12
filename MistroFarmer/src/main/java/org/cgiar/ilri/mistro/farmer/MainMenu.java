@@ -91,7 +91,16 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
         else if(item.getItemId() == R.id.action_swahili) {
             Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
             initTextInViews();
-            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_luhya) {
+            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+            initTextInViews();
+            return true;
+        }
+        else if(item.getItemId() == R.id.action_kalenjin) {
+            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+            initTextInViews();
             return true;
         }
         return false;
