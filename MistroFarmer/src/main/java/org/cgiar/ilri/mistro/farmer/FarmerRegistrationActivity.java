@@ -285,6 +285,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
                         {
                             dialog.cancel();
                             Intent intent=new Intent(FarmerRegistrationActivity.this,LandingActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                             startActivity(intent);
                         }
                     });
