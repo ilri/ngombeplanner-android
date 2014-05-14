@@ -20,7 +20,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EventsActivity extends SherlockActivity implements View.OnClickListener
+public class EventsActivity extends SherlockActivity implements MistroActivity, View.OnClickListener
 {
     private String TAG = "EventsActivity";
 
@@ -54,24 +54,7 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        if(item.getItemId() == R.id.action_english) {
-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_swahili) {
-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_luhya) {
-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_kalenjin) {
-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
-            initTextInViews();
+        if(Language.processLanguageMenuItemSelected(this, this, item)){
             return true;
         }
         else if(item.getItemId() == R.id.action_back_main_menu) {
@@ -83,7 +66,8 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
         return false;
     }
 
-    private void initTextInViews()
+    @Override
+    public void initTextInViews()
     {
         setTitle(Locale.getStringInLocale("events",this));
         addEventB.setText(Locale.getStringInLocale("add_an_event",this));

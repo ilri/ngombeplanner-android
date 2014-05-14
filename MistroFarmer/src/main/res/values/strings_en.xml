@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- English -->
     <string name="login_en">Login</string>
     <string name="login_anyway_en">Login Anyway</string>
     <string name="register_en">Register</string>

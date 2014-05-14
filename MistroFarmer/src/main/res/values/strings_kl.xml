@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Kalenjin -->
     <string name="login_kl">yaat</string>
     <string name="login_anyway_kl">yaat inyeei</string>
     <string name="register_kl">siret</string>

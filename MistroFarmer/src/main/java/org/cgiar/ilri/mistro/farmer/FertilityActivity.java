@@ -15,7 +15,7 @@ import com.actionbarsherlock.view.MenuItem;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 
-public class FertilityActivity extends SherlockActivity implements View.OnClickListener{
+public class FertilityActivity extends SherlockActivity implements MistroActivity, View.OnClickListener{
 
     private Menu menu;
     private Button servicingB;
@@ -60,24 +60,7 @@ public class FertilityActivity extends SherlockActivity implements View.OnClickL
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        if(item.getItemId() == R.id.action_english) {
-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_swahili) {
-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_luhya) {
-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_kalenjin) {
-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
-            initTextInViews();
+        if(Language.processLanguageMenuItemSelected(this, this, item)){
             return true;
         }
         else if(item.getItemId() == R.id.action_back_main_menu) {
@@ -88,7 +71,8 @@ public class FertilityActivity extends SherlockActivity implements View.OnClickL
         return false;
     }
 
-    private void initTextInViews(){
+    @Override
+    public void initTextInViews(){
         this.setTitle(Locale.getStringInLocale("fertility",this));
         servicingB.setText(Locale.getStringInLocale("servicing",this));
         calvingB.setText(Locale.getStringInLocale("calving",this));

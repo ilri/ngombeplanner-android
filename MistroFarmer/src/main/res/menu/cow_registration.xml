@@ -5,14 +5,18 @@
         android:showAsAction="never" />
     <item android:id="@+id/action_swahili"
         android:title="@string/swahili"
-        android:orderInCategory="4"
+        android:orderInCategory="5"
         android:showAsAction="never" />
     <item android:id="@+id/action_kalenjin"
         android:title="@string/kalenjin"
         android:orderInCategory="2"
         android:showAsAction="never" />
+    <item android:id="@+id/action_kikabras"
+        android:title="@string/kikabrasi"
+        android:orderInCategory="3"
+        android:showAsAction="never" />
     <item android:id="@+id/action_luhya"
         android:title="@string/luhya"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         android:showAsAction="never" />
 </menu>

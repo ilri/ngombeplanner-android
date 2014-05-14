@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Kikabrasi -->
+    <string name="login_kr">injisia/fungula</string>
+    <string name="login_anyway_kr">fungula tu</string>
+    <string name="register_kr">andichisia</string>
+    <string name="full_name_kr">mera kosi</string>
+    <string name="mobile_number_kr">inamba yolusimu</string>
+    <string name="extension_p_kr">mofisa ko bukarakacha/kokhuchendera omukunda  </string>
+    <string name="number_of_cows_kr">tsingombe tsianga</string>
+    <string-array name="sex_array_kr">
+        <item>ikhasi</item>
+        <item>isatsa</item>
+    </string-array>
+    <string name="name_kr">lira</string>
+    <string name="ear_tag_number_kr">lira lili khushirwi</string>
+    <string name="age_kr">emiaka</string>
+    <string name="date_of_birth_kr">mwaka kwo khwivulwa</string>
+    <string name="breed_kr">oluya</string>
+    <string name="sex_kr">ikhasi nomba isatsa</string>
+    <string name="deformity_kr">obulema</string>
+    <string name="sire_kr">samwana</string>
+    <string name="dam_kr">nyina</string>
+    <string name="previous_kr">sha anyamu</string>
+    <string name="next_kr">shilondakho</string>
+    <string name="finish_kr">mala/malilisia</string>
+    <string name="okay_kr">obulai</string>
+    <string name="farmer_registration_kr">obwandichishi bwo mulimi</string>
+    <string name="cow_registration_kr">obwandichishi bwe ingombe</string>
+    <string name="cow_registration_proper_kr">obwandichishi bwe dwasi</string>
+    <string name="dam_registration_kr">obwandichisi bwa nyina</string>
+    <string name="sire_registration_kr">obwandichisi bwa samwana</string>
+    <string-array name="age_type_array_kr">
+        <item>tsisiku</item>
+        <item>emiesi</item>
+        <item>emiaka</item>
+    </string-array>
+    <string-array name="breeds_array_kr">
+        <item>Ayrshire</item>
+        <item>Boran</item>
+        <item>Charolais</item>
+        <item>Aberdeen Angus</item>
+        <item>Simmental</item>
+        <item>Friesian</item>
+        <item>Guernsey</item>
+        <item>Hereford</item>
+        <item>Jersey</item>
+        <item>Ankole</item>
+        <item>Limousine</item>
+        <item>Brahman</item>
+        <item>Santa Getrude</item>
+        <item>Piemontese</item>
+        <item>Red Poll</item>
+        <item>Sahiwal</item>
+        <item>Nganda</item>
+        <item>Fleckviah</item>
+        <item>Brown Swiss</item>
+        <item>Zebu</item>
+    </string-array>
+    <string-array name="deformities_array_kr">
+        <item>Imbofu</item>
+        <item>yalema</item>
+        <item>Tsimbele tsiavura tsinne</item>
+        <item>Makatswa</item>
+        <item>molu kakavukhana</item>
+        <item>eshindi</item>
+    </string-array>
+    <string name="service_type_used_kr">Obukhonyi bwarumikha</string>
+    <string-array name="service_types_kr">
+        <item>Esulusi</item>
+        <item>Okhurumia nende omupira</item>
+        <item>Embryo Transfer</item>
+    </string-array>
+    <string name="maximum_of_four_breeds_kr">etsi bridi/oluya tsiula tsine</string>
+    <string name="country_of_origin_kr">eshivala shia samwana arulamwo</string>
+    <string name="specify_kr">kololosia</string>
+    <string name="straw_number_kr">enamba yili khu mpira</string>
+    <string name="vet_used_kr">vetnari wetsa</string>
+    <string name="servicing_bull_name_kr">esulusi yarumikha</string>
+    <string name="servicing_bull_identifier_hint_kr">injisia elira/enamba yili khushirwi/eslusi</string>
+    <string name="servicing_bull_ear_tag_number_kr">enamba yili khu shirwi she sulusi</string>
+    <string name="bull_owner_kr">wina mwene esulusi?</string>
+    <string name="name_bull_owner_kr">elira lia mwene esulusi</string>
+    <string-array name="bull_owners_kr">
+        <item>esulusi ya hango</item>
+        <item>omulimi wundi</item>
+        <item>eshikundi</item>
+    </string-array>
+    <string name="name_of_other_farmer_or_group_kr">injisia elira lio mulimi nomba eshikundi</string>
+    <string name="embryo_number_kr">Embryo Number</string>
+    <string name="enable_gps_kr">fungula e GPS</string>
+    <string name="reason_for_krabling_gps_kr">kenyanga ofungule e GPS  noshili okhutsilila</string>
+    <string name="cancel_kr">futa</string>
+    <string name="enable_network_kr">fungula intanet</string>
+    <string name="reason_for_krabling_network_kr">eshipindi shino shenyanga intanet khoikhole.finya ok okhufungula intanet.</string>
+    <string name="successful_registration_kr">yandichisie obulayi</string>
+    <string name="successful_registration_instructions_kr">wandichiswe obulayi.olanyola sms okhumanyia khuli ofungula</string>
+    <string name="your_mistro_id_kr">Your Mistro ID</string>
+    <string name="enter_your_mistro_id_kr">Please enter your Mistro ID</string>
+    <string name="failed_to_authenticate_kr">sholaonyolekhanga murekodi tawe.tema okhufungula khandi</string>
+    <string name="logging_in_from_different_device_kr">kafwananga otemamamanga okhurumishila amashini amacheni.Oshenyanga okhufungula?</string>
+    <string name="yes_kr">kario</string>
+    <string name="no_kr">tawe</string>
+    <string name="milk_production_kr">esabu ya mabele</string>
+    <string name="events_kr">efikhole</string>
+    <string name="main_menu_kr">Main Menu</string>
+    <string name="sim_card_not_registered_kr">olarumishilanga esimkadi yishili okhurumikha mumashini kano.</string>
+    <string name="sim_card_registration_kr">okwandichisia esimkadi</string>
+    <string name="new_mobile_number_kr">enamba ye mobaili yimbia</string>
+    <string name="old_mobile_number_kr">enamba ye mobaili ikhulu</string>
+    <string name="old_number_not_in_system_kr">kalafwananga enamba ikhulu shiayandichiswa mumashini tawe.reva wusinjilile amashini akhulombele</string>
+    <string name="welcome_kr">karibu</string>
+    <string name="add_production_kr">tesakho okhurusia khwa mabele</string>
+    <string name="production_history_kr">yarusinja yiriena amabele khale</string>
+    <string name="cow_kr">edwasi</string>
+    <string name="time_kr">eisaa</string>
+    <string name="quantity_kr">eshikhashina</string>
+    <string name="measurement_type_kr">opimanga oriena</string>
+    <string name="add_kr">tesakho okhurusia khwa mabele</string>
+    <string-array name="milking_times_kr">
+        <item>mabwibwi</item>
+        <item>mushitere</item>
+        <item>angalove</item>
+        <item>ambasia/tsukasia alala</item>
+    </string-array>
+    <string-array name="quantity_types_kr">
+        <item>etsilita</item>
+        <item>etsikilo</item>
+    </string-array>
+    <string name="enter_quantity_of_milk_produced_kr">injisia esabu ya mabele mutsikilo</string>
+    <string name="information_successfully_sent_to_server_kr">makhuba karumilwe obulayi mustesheni</string>
+    <string name="problem_in_data_sent_kr">kafwana khuli nende eshida nende amakhuba kotema okhuruma</string>
+    <string name="production_for_time_already_exists_kr">winjisie khale esabu yiwanyolile okhurula mungome yino</string>
+    <string name="problem_connecting_to_server_kr">eshida yarulile notemanga okhuconecta nenda mustesheni</string>
+    <string name="date_kr">etare</string>
+    <string name="no_data_received_kr">amakhuba shikanyoleshe tawe</string>
+    <string name="today_kr">bulano</string>
+    <string name="yesterday_kr">mungolove</string>
+    <string name="enter_your_name_kr">injisia elira</string>
+    <string name="enter_your_mobile_no_kr">injisia enamba yoyo yolusimu</string>
+    <string name="enter_extension_personnel_name_kr">injisia enamba ye simu yomukarakacha/amra kosi</string>
+    <string name="enter_ear_tag_number_kr">injisia enamba yo khushirwi sheingombe</string>
+    <string name="enter_ear_tag_no_or_name_kr">injsia enamba yo khushirwi sheingombe/elira</string>
+    <string name="enter_straw_number_kr">injisia enamba ya samwana yompira</string>
+    <string name="enter_embryo_number_kr">injisia enamba ya nyina yompira</string>
+    <string name="add_an_event_kr">tesa eshikhole</string>
+    <string name="past_events_kr">efikhole fia khale</string>
+    <string name="remarks_kr">obuloli</string>
+    <string name="event_kr">efikhole </string>
+    <string-array name="cow_event_types_kr">
+        <item>khwibulwa</item>
+        <item>okhuchaka okhushela</item>
+        <item>okhumila</item>
+        <item>inda okhufimba</item>
+        <item>obulwale</item>
+        <item>lifwa</item>
+        <item>okhulera</item>
+        <item>okhukusia</item>
+        <item>Okhurumia nende omupira</item>
+        <item>okhurumia nende esulusi</item>
+        <item>etsidalili tsiokhwenya esulusi</item>
+    </string-array>
+    <string-array name="cow_servicing_types_kr">
+        <item>Okhurumia nende omupira</item>
+        <item>okhurumia nende esulusi</item>
+    </string-array>
+    <string name="enter_date_kr">injisia etare</string>
+    <string name="date_in_future_kr">etare yiwinjisie ifwananga ni ya imbeli</string>
+    <string name="event_successfully_recorded_kr">eshikhole shandichisibwe obulayi</string>
+    <string name="something_went_wrong_try_again_kr">eshindu shibiyile.tema okhuruma khandi amakhuba</string>
+    <string name="loading_please_wait_kr">khwirejekhanga.linda atiti</string>
+    <string name="type_of_birth_kr">yebulwa iriena</string>
+    <string-array name="birth_types_kr">
+        <item>yebulwa  eyinamu</item>
+        <item>yebulwa yifwile</item>
+        <item>yebulwa tsisuku tsishili</item>
+        <item>yawululwa</item>
+    </string-array>
+    <string name="calf_registration_kr">andichisia eshimosi</string>
+    <string name="next_screen_is_calf_registration_kr">mupicha yilondakho kenya wandichisieeshimosi shebulwa.finya khu ilondakho okhwandichisia eshimosi</string>
+    <string name="next_screen_is_cow_registration_kr">mupicha yilondakho kenyanga wandichisie edwasi yakulwa.shebulwa.finya khu ilondakho okhwandichisia eshimosi</string>
+    <string name="event_too_old_kr">shonyala okhutesakho eshikhole shavura etsisuku kumi nende tsirano tawe</string>
+    <string name="milk_data_too_old_kr">shonyala okhutesakho esabu ya mabele yavura etsisuku kumi nende tsirano tawe</string>
+    <string name="milk_too_much_kr">esabu ya mabele yiwandichisie neyinyingi sana</string>
+    <string name="start_date_kr">etare yokhuchaka</string>
+    <string name="date_served_kr">eisiku yo khurumia/okhwirusia</string>
+    <string name="date_of_insemination_kr">eisiku yo khurumianende omupira</string>
+    <string name="no_of_days_in_servicing_kr">tsisukutsianga okhurula niyiruma/irukha</string>
+    <string name="associated_servicing_kr">okhwirusia nende esulusi</string>
+    <string name="country_not_found_kr">eshibala shiwinjisie shinyolekhanaga tawe</string>
+    <string name="cause_of_death_kr">shina sharela lifwa</string>
+    <string-array name="causes_of_death_kr">
+        <item>khufwa kwa kawaida</item>
+        <item>khufwa khwobulwale</item>
+        <item>khufwa khwo khuwumia</item>
+    </string-array>
+    <string name="gps_narrowing_down_on_loc_kr">linda GPS ikhave avundu womenyile</string>
+    <string name="event_only_for_female_cattle_kr">eshikhole shovukule shinyolekhanga mutsingombe tsikhasi tsionyene</string>
+    <string name="other_countries_kr">mufivala findi</string>
+    <string name="no_times_milked_in_a_day_kr">okhamanga/oshelanga khanga khusuku</string>
+    <string name="calf_suckling_kr">eshimosi okhununa</string>
+    <string-array name="calf_suckling_types_kr">
+        <item>tawe</item>
+        <item>kario</item>
+    </string-array>
+    <string name="enter_number_times_cow_milked_kr">injisia ingombe yishelungwa khanga khusuku</string>
+    <string name="milking_times_too_much_kr">esabu yokhushela/okhukhama kenyanga ileshe okhubura kumi tawe</string>
+    <string name="fertility_kr">yanera</string>
+    <string name="servicing_kr">okhurumia</string>
+    <string name="calving_kr">okhwibula</string>
+    <string name="select_service_type_kr">cakula aina yokhwirusia</string>
+    <string name="artificial_inseminamtion_kr">okhwirusia nende omupira</string>
+    <string name="bull_servicing_kr">okhwirusia nende esulusi</string>
+    <string name="no_sim_card_kr">esimkadi shilimo tawe</string>
+    <string name="previous_live_births_kr">injsia efimosi fia yebula fiosi</string>
+    <string name="enter_previous_live_births_kr">injisi amebulo ke ingombe ino kosi</string>
+    <string name="enter_dam_etn_kr">injisia enamba ya nyina ya khushirwi</string>
+    <string name="age_diff_from_dob_kr">emiaka che ingombe ino chaburana nende eisuku yokhwibulwa</string>
+    <string name="action_not_allowed_kr">eshikhole shino shienyakhanga ano tawe</string>
+    <string name="are_you_in_farm_kr">wuvele mukunda kukwo?</string>
+    <string name="farm_coords_successfully_reg_kr"> obulayi tsio mukunda tsiandichisw</string>
+    <string name="sms_charges_kr">oburunji bwa sms</string>
+    <string name="incur_network_sms_charges_kr">sholi ambi nende intanet tawe.olarunjivwa kama sms okhuruma amakhuba kano mustesheni</string>
+    <string name="data_not_sent_to_server_kr">amakhuba karumilwe mustesheni</string>
+    <string name="generic_sms_error_kr">eshindu shabiyile norumanga sms mustesheni.cheka niva esimu yao inyala okhuruma amakhuba kano </string>
+    <string name="no_service_kr">shikhunyala okhuruma amakhuba kano mustesheni tawe shijila amashini kakao kabula enetwak</string>
+    <string name="radio_off_kr">amashini kakao shikanyala okhuruma sms tawe.cheka niva amashini kako kafunjile enetwaka</string>
+    <string name="server_not_receive_sms_kr">sms yarumilwe mustesheni lakini shibanyolile tawe</string>
+    <string name="logout_kr">simia</string>
+    <string name="back_kr">kalukha anyuma</string>
+    <string name="back_to_main_menu_kr">kalukha anyuma mu \'main menu\'</string>
+    <string name="warning_kr">hatari</string>
+    <string name="action_will_be_canceled_kr">nokalukha anyuma mu \'main menu\' amakhuba kosi kalatiba mumashini.finya \'okay\' nivombu nobulayi</string>
+    <string name="total_kr">tesa kosi alala</string>
+    <string name="unable_to_fetch_cached_data_kr">shikhunyala okhubukula amakhuba kosi kali mumashini kako tawe</string>
+    <string name="you_do_not_have_female_cows_kr">ofwanaga sholinende tsingombe tsikhasi tawe</string>
+    <string name="you_do_not_have_cows_kr">ofwanaga sholinende etsingombe tsidwasi tawe</string>
+</resources>

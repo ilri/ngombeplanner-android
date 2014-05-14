@@ -45,7 +45,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class AddEventActivity extends SherlockActivity implements View.OnClickListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener, Spinner.OnItemSelectedListener
+public class AddEventActivity extends SherlockActivity implements MistroActivity, View.OnClickListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener, Spinner.OnItemSelectedListener
 {
     public static final String TAG="AddEventActivity";
     private final String dateFormat="dd/MM/yyyy";
@@ -199,24 +199,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        if(item.getItemId() == R.id.action_english) {
-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_swahili) {
-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_luhya) {
-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_kalenjin) {
-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
-            initTextInViews();
+        if(Language.processLanguageMenuItemSelected(this, this, item)){
             return true;
         }
         else if(item.getItemId() == R.id.action_back_main_menu) {
@@ -316,8 +299,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
         }
     }
 
-    private void initTextInViews()
-    {
+    @Override
+    public void initTextInViews() {
         setTitle(Locale.getStringInLocale("add_an_event",this));
         cowIdentifierTV.setText(Locale.getStringInLocale("cow",this));
         dateTV.setText(Locale.getStringInLocale("date",this));

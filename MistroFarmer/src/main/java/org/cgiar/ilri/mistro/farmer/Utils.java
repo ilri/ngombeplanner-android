@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
 
+import com.actionbarsherlock.view.MenuItem;
+
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 
 /**

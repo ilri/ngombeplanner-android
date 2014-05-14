@@ -47,7 +47,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener
+public class CowRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener
 {
     public static final String TAG="CowRegistrationActivity";
     public static final String KEY_INDEX="index";
@@ -193,24 +193,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        if(item.getItemId() == R.id.action_english) {
-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_swahili) {
-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_luhya) {
-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_kalenjin) {
-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
-            initTextInViews();
+        if(Language.processLanguageMenuItemSelected(this, this, item)){
             return true;
         }
         return false;
@@ -431,7 +414,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
         return super.onKeyDown(keyCode, event);
     }
 
-    private void initTextInViews() {
+    @Override
+    public void initTextInViews() {
         String title = Locale.getStringInLocale("cow_registration",this)+" "+String.valueOf(index+1);
         this.setTitle(title);
         nameTV.setText(Locale.getStringInLocale("name",this));

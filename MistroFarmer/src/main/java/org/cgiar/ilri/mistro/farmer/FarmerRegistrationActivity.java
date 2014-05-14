@@ -30,7 +30,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.json.JSONObject;
 
-public class FarmerRegistrationActivity extends SherlockActivity implements View.OnClickListener,LocationListener
+public class FarmerRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener,LocationListener
 {
     public static final String TAG="FarmerRegistrationActivity";
 
@@ -91,25 +91,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        if(item.getItemId() == R.id.action_english) {
-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_swahili) {
-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
-            initTextInViews();
-            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_luhya) {
-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_kalenjin) {
-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
-            initTextInViews();
+        if(Language.processLanguageMenuItemSelected(this, this, item)){
             return true;
         }
         return false;
@@ -167,7 +149,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
         }
     }
 
-    private void initTextInViews()
+    @Override
+    public void initTextInViews()
     {
         setTitle(Locale.getStringInLocale("farmer_registration",this));
         fullNameTV.setText(" * "+Locale.getStringInLocale("full_name",this));

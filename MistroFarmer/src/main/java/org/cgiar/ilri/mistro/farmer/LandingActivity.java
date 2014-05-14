@@ -28,7 +28,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LandingActivity extends SherlockActivity implements View.OnClickListener
+public class LandingActivity extends SherlockActivity implements MistroActivity, View.OnClickListener
 {
     private static final String TAG="LandingActivity";
     private Button loginButton;
@@ -97,24 +97,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        if(item.getItemId() == R.id.action_english) {
-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_swahili) {
-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_luhya) {
-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_kalenjin) {
-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
-            initTextInViews();
+        if(Language.processLanguageMenuItemSelected(this, this, item)){
             return true;
         }
         return false;
@@ -126,7 +109,8 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
         super.onResume();
     }
 
-    private void initTextInViews()
+    @Override
+    public void initTextInViews()
     {
         loginButton.setText(Locale.getStringInLocale("login", this));
         registerButton.setText(Locale.getStringInLocale("register", this));

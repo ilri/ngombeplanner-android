@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- Luhya -->
     <string name="login_lh">fungula/ injira</string>
     <string name="login_anyway_lh">injira yosi yosi</string>
     <string name="register_lh">handichisia</string>

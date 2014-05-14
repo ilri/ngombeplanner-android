@@ -27,7 +27,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainMenu extends SherlockActivity implements View.OnClickListener, LocationListener
+public class MainMenu extends SherlockActivity implements MistroActivity, View.OnClickListener, LocationListener
 {
     private static final String TAG="MainMenu";
     public static final String KEY_LONGITUDE = "longitude";
@@ -83,30 +83,14 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener, 
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        if(item.getItemId() == R.id.action_english) {
-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_swahili) {
-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_luhya) {
-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
-            initTextInViews();
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_kalenjin) {
-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
-            initTextInViews();
+        if(Language.processLanguageMenuItemSelected(this, this, item)){
             return true;
         }
         return false;
     }
 
-    private void initTextInViews()
+    @Override
+    public void initTextInViews()
     {
         this.setTitle(Locale.getStringInLocale("main_menu",this));
         milkProductionB.setText(Locale.getStringInLocale("milk_production", this));
