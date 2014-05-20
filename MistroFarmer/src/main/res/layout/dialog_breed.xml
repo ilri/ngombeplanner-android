@@ -6,14 +6,14 @@
     <ScrollView
             android:id="@+id/dialog_breed_sv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="250dp">
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
             <ListView
                     android:id="@+id/breed_lv"
-                    android:layout_height="300dp"
+                    android:layout_height="2000dp"
                     android:layout_width="match_parent"/>
         </LinearLayout>
     </ScrollView>

@@ -93,6 +93,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private ListView breedLV;
     private Button dialogBreedOkayB;
     private Dialog deformityDialog;
+    private ScrollView deformitySV;
     private ListView deformityLV;
     private EditText specifyET;
     private Button dialogDeformityOkayB;
@@ -175,11 +176,19 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         dialogBreedOkayB=(Button)breedDialog.findViewById(R.id.dialog_breed_okay_b);
         dialogBreedOkayB.setOnClickListener(this);
         breedDialogSV=(ScrollView)breedDialog.findViewById(R.id.dialog_breed_sv);
+
+        int activityHeight = this.getResources().getDisplayMetrics().heightPixels;
+        breedDialogSV.getLayoutParams().height = (int)(activityHeight * 0.70);
+
         breedLV=(ListView)breedDialog.findViewById(R.id.breed_lv);
         breedLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         breedLV.setOnItemClickListener(this);
         deformityDialog =new Dialog(this);
         deformityDialog.setContentView(R.layout.dialog_deformity);
+        deformitySV = (ScrollView)deformityDialog.findViewById(R.id.deformity_sv);
+
+        deformitySV.getLayoutParams().height = (int)(activityHeight * 0.70);
+
         deformityLV =(ListView) deformityDialog.findViewById(R.id.deformity_lv);
         deformityLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         deformityLV.setOnItemClickListener(this);
@@ -189,6 +198,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
 
         initTextInViews();
     }
+
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
@@ -500,6 +511,19 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         ArrayAdapter<String> breedArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,breeds);
         breedLV.setAdapter(breedArrayAdapter);
         dialogBreedOkayB.setText(Locale.getStringInLocale("okay",this));
+        int totalBreedSVHeight = 0;
+        for (int i = 0, len = breedArrayAdapter.getCount(); i < len; i++) {
+            View listItem = breedArrayAdapter.getView(i, null, breedLV);
+            //listItem.measure(0, 0);
+            int list_child_item_height = listItem.getLayoutParams().height + breedLV.getDividerHeight();//item height
+            totalBreedSVHeight += list_child_item_height; //
+        }
+        if(totalBreedSVHeight > 0){
+            breedLV.getLayoutParams().height = totalBreedSVHeight;
+            if(breedDialogSV.getLayoutParams().height > totalBreedSVHeight){
+                breedDialogSV.getLayoutParams().height = totalBreedSVHeight;
+            }
+        }
 
         deformityDialog.setTitle(Locale.getStringInLocale("deformity",this));
         deformities=Locale.getArrayInLocale("deformities_array",this);
@@ -513,6 +537,19 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
         ArrayAdapter countryArrayAdapter = ArrayAdapter.createFromResource(this,R.array.countries,android.R.layout.select_dialog_item);
         countryOfOriginACTV.setAdapter(countryArrayAdapter);
+        int totalDeformitySVHeight = 0;
+        for (int i = 0, len = deformityArrayAdapter.getCount(); i < len; i++) {
+            View listItem = deformityArrayAdapter.getView(i, null, deformityLV);
+            //listItem.measure(0, 0);
+            int list_child_item_height = listItem.getLayoutParams().height + deformityLV.getDividerHeight();//item height
+            totalDeformitySVHeight += list_child_item_height; //
+        }
+        if(totalDeformitySVHeight > 0){
+            deformityLV.getLayoutParams().height = totalDeformitySVHeight;
+            if(deformitySV.getLayoutParams().height > (totalDeformitySVHeight + 30)){
+                deformitySV.getLayoutParams().height= totalDeformitySVHeight + 30;
+            }
+        }
 
         ArrayAdapter<CharSequence> commonCountriesArrayAdapter = ArrayAdapter.createFromResource(this,R.array.common_countries,android.R.layout.simple_spinner_item);
         commonCountriesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
