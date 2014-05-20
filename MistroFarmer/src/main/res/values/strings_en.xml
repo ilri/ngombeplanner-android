@@ -237,5 +237,6 @@
     <string name="you_do_not_have_cows_en">You do not seem to have cows</string>
 
     <!-- Added after translation-->
-    <string name="age_or_dob_en">You can enter either the cow\'s age or the date of birth</string>
+    <string name="age_or_dob_en">You can enter either the cow\'s age or date of birth</string>
+    <string name="enter_age_or_dob_en">Please enter either the cow\'s age or date of birth</string>
 </resources>

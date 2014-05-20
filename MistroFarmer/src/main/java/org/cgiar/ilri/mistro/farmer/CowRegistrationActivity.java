@@ -878,6 +878,11 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                     e.printStackTrace();
                 }
             }*/
+
+            if(dateOfBirthET.getText().toString().trim().equals("") && ageET.getText().toString().trim().equals("")){
+                Toast.makeText(this, Locale.getStringInLocale("enter_age_or_dob", this), Toast.LENGTH_LONG).show(); 
+                return false;
+            }
         }
         return true;
     }
