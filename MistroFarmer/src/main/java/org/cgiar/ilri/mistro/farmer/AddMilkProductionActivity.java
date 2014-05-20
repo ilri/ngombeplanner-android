@@ -47,6 +47,8 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
     private final String dateFormat="dd/MM/yyyy";
     private static final String TAG="AddMilkProductionActivity";
 
+    private boolean cacheData;
+
     private TextView cowTV;
     private Spinner cowS;
     private TextView dateTV;
@@ -78,6 +80,8 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
         setContentView(R.layout.activity_add_milk_production);
         DataHandler.requestPermissionToUseSMS(this);
 
+        cacheData = true;
+
         cowTV=(TextView)this.findViewById(R.id.cow_tv);
         cowS=(Spinner)this.findViewById(R.id.cow_s);
         dateTV=(TextView)this.findViewById(R.id.date_tv);
@@ -106,18 +110,37 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
         fetchCowIdentifiers();
     }
 
+    private void cacheEditTextData(){
+        if(cacheData){
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_DATE, dateET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_QUANTITY, quantityET.getText().toString());
+        }
+    }
+
+    private void restoreEditTextData(){
+        dateET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AMPA_DATE, ""));
+        quantityET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AMPA_QUANTITY, ""));
+    }
+
+    private void clearEditTextDataCache(){
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_DATE, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_QUANTITY, "");
+
+        cacheData = false;
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_DATE, dateET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_QUANTITY, quantityET.getText().toString());
+
+        cacheEditTextData();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        dateET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AMPA_DATE, ""));
-        quantityET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AMPA_QUANTITY, ""));
+
+        restoreEditTextData();
     }
 
     public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -139,6 +162,9 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
                 public void onClick(DialogInterface dialog, int which) {
                     if(which==DialogInterface.BUTTON_POSITIVE){
                         dialog.dismiss();
+
+                        clearEditTextDataCache();
+
                         Intent intent = new Intent(AddMilkProductionActivity.this, MainMenu.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
@@ -216,6 +242,9 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
             dateETClicked();
         }
         else if(view == cancelB){
+
+            clearEditTextDataCache();
+
             Intent intent = new Intent(this, MilkProductionActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
@@ -396,6 +425,9 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
             }
             else if(result == true) {
                 Toast.makeText(AddMilkProductionActivity.this,Locale.getStringInLocale("event_successfully_recorded", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
+
+                clearEditTextDataCache();
+
                 Intent intent = new Intent(AddMilkProductionActivity.this, MilkProductionActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);

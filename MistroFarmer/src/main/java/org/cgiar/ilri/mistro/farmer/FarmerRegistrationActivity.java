@@ -34,6 +34,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
 {
     public static final String TAG="FarmerRegistrationActivity";
 
+    private boolean cacheData;
+
     private String latitude;
     private String longitude;
     private TextView fullNameTV;
@@ -65,6 +67,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
         DataHandler.requestPermissionToUseSMS(this);
 
         //init child views
+        cacheData = true;
+
         fullNameTV=(TextView)this.findViewById(R.id.full_name_tv);
         fullNameET=(EditText)this.findViewById(R.id.full_name_et);
         extensionPersonnelTV=(TextView)this.findViewById(R.id.extension_personnel_tv);
@@ -97,14 +101,34 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
         return false;
     }
 
+    private void cacheEditTextData(){
+        if(cacheData) {
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, fullNameET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, extensionPersonnelET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, mobileNumberET.getText().toString());
+        }
+    }
+
+    private void restoreEditTextData(){
+        fullNameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, ""));
+        extensionPersonnelET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, ""));
+        mobileNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, ""));
+    }
+
+    private void clearEditTextDataCache(){
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, "");
+
+        cacheData = false;
+    }
+
     @Override
     protected void onResume()
     {
         super.onResume();
 
-        fullNameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, ""));
-        extensionPersonnelET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, ""));
-        mobileNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, ""));
+        restoreEditTextData();
 
         Bundle bundle=this.getIntent().getExtras();
         if(bundle!=null)
@@ -139,9 +163,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
     {
         super.onPause();
 
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, fullNameET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, extensionPersonnelET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, mobileNumberET.getText().toString());
+        cacheEditTextData();
 
         if(locationManager!=null)
         {
@@ -152,10 +174,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
     @Override
     public void initTextInViews()
     {
-        setTitle(Locale.getStringInLocale("farmer_registration",this));
-        fullNameTV.setText(" * "+Locale.getStringInLocale("full_name",this));
-        extensionPersonnelTV.setText(Locale.getStringInLocale("extension_p",this));
-        mobileNumberTV.setText(" * "+Locale.getStringInLocale("mobile_number",this));
+        setTitle(Locale.getStringInLocale("farmer_registration", this));
+        fullNameTV.setText(" * " + Locale.getStringInLocale("full_name", this));
+        extensionPersonnelTV.setText(Locale.getStringInLocale("extension_p", this));
+        mobileNumberTV.setText(" * " + Locale.getStringInLocale("mobile_number", this));
         numberOfCowsTV.setText(" * "+Locale.getStringInLocale("number_of_cows",this));
         registerButton.setText(Locale.getStringInLocale("register",this));
         gpsAlertDialogTitle=Locale.getStringInLocale("enable_gps",this);
@@ -212,8 +234,11 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
             String numberOfCowsString=numberOfCowsET.getText().toString();
             if(numberOfCowsString!=null && numberOfCowsString.length()>0 && Integer.parseInt(numberOfCowsString)>0)
             {
+                clearEditTextDataCache();
+
                 int numberOfCows=Integer.valueOf(numberOfCowsString);
                 Intent intent=new Intent(FarmerRegistrationActivity.this,CowRegistrationActivity.class);
+
                 //intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
                 intent.putExtra(CowRegistrationActivity.KEY_INDEX,0);
                 intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS,numberOfCows);

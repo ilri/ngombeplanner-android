@@ -35,7 +35,6 @@ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.Dam;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.cgiar.ilri.mistro.farmer.carrier.Sire;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,6 +48,8 @@ import java.util.List;
 
 public class CowRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener
 {
+    private boolean cacheData;
+
     public static final String TAG="CowRegistrationActivity";
     public static final String KEY_INDEX="index";
     public static final String KEY_NUMBER_OF_COWS="numberOfCows";
@@ -57,6 +58,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private EditText nameET;
     private TextView earTagNumberTV;
     private EditText earTagNumberET;
+    private TextView ageOrDOBHintTV;
     private TextView ageTV;
     private Spinner ageS;
     private EditText ageET;
@@ -112,6 +114,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         setContentView(R.layout.activity_cow_registration);
         DataHandler.requestPermissionToUseSMS(this);
 
+        cacheData = true;
+
         Bundle bundle = this.getIntent().getExtras();
         if(bundle!=null) {
             index=bundle.getInt(KEY_INDEX);
@@ -124,6 +128,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         nameET=(EditText)this.findViewById(R.id.name_et);
         earTagNumberTV=(TextView)this.findViewById(R.id.ear_tag_number_tv);
         earTagNumberET=(EditText)this.findViewById(R.id.ear_tag_number_et);
+        ageOrDOBHintTV = (TextView) this.findViewById(R.id.age_or_dob_hint_tv);
         ageTV=(TextView)this.findViewById(R.id.age_tv);
         ageS=(Spinner)this.findViewById(R.id.age_s);
         ageET=(EditText)this.findViewById(R.id.age_et);
@@ -199,27 +204,23 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         return false;
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        //Incase the activity is hidden partially/fully save the data in edittexts
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, nameET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, earTagNumberET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, ageET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, dateOfBirthET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, breedET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, deformityET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, strawNumberET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, damACTV.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, embryoNumberET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, countryOfOriginACTV.getText().toString());
+    private void cacheEditTextData(){
+        if(cacheData) {
+            //Incase the activity is hidden partially/fully save the data in edittexts
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, nameET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, earTagNumberET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, ageET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, dateOfBirthET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, breedET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, deformityET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, strawNumberET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, damACTV.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, embryoNumberET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, countryOfOriginACTV.getText().toString());
+        }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
+    private void restoreEditTextData(){
         //incase the activity was hidden partially for a moment, restore what the user had already entered
         nameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, ""));
         earTagNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, ""));
@@ -231,6 +232,35 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         damACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, ""));
         embryoNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, ""));
         countryOfOriginACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, ""));
+    }
+
+    private void clearEditTextDataCache(){
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, "");
+
+        cacheData = false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        cacheEditTextData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        restoreEditTextData();
 
         Bundle bundle=this.getIntent().getExtras();
         if(bundle != null) {
@@ -420,6 +450,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         this.setTitle(title);
         nameTV.setText(Locale.getStringInLocale("name",this));
         earTagNumberTV.setText(" * "+Locale.getStringInLocale("ear_tag_number",this));
+
+        ageOrDOBHintTV.setText(Locale.getStringInLocale("age_or_dob", this));
+
         ageTV.setText(" * "+Locale.getStringInLocale("age",this));
         int ageTypeArrayID = Locale.getArrayIDInLocale("age_type_array",this);
         if(ageTypeArrayID!=0){
@@ -490,6 +523,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     public void onClick(View view) {
         if(view==previousButton) {
             cacheThisCow();
+            clearEditTextDataCache();//we don't want data on this cow entered on a previous or next cow
             Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
             intent.putExtra(KEY_INDEX,index-1);
             intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
@@ -503,6 +537,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 cacheThisCow();
                 Bundle bundle=new Bundle();
                 bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
+
+                clearEditTextDataCache();
+
                 if(index == (numberOfCows-1))//last cow
                 {
                     Log.d(TAG, farmer.getJsonObject().toString());
@@ -808,7 +845,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 Toast.makeText(this,Locale.getStringInLocale("country_not_found",this),Toast.LENGTH_LONG).show();
                 return false;
             }
-            if(!dateOfBirthET.getText().toString().trim().equals("") && !ageET.getText().toString().trim().equals("")){
+            /*if(!dateOfBirthET.getText().toString().trim().equals("") && !ageET.getText().toString().trim().equals("")){
                 String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array",this,Locale.LOCALE_ENGLISH);
                 String ageType = ageTypesInEN[ageS.getSelectedItemPosition()];
                 float unitAge = 0;
@@ -832,7 +869,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                     long msDiff = Math.abs(ageMs - enteredDateMs);
                     float unitDiff = msDiff / unitAge;
                     if(unitDiff > 1){
-                        Toast.makeText(this, /*Locale.getStringInLocale("age_diff_from_dob",this)*/String.valueOf(unitDiff),Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, Locale.getStringInLocale("age_diff_from_dob",this),Toast.LENGTH_LONG).show();
                         return false;
                     }
                 }
@@ -840,7 +877,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 {
                     e.printStackTrace();
                 }
-            }
+            }*/
         }
         return true;
     }
@@ -1023,6 +1060,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("server_not_receive_sms", CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
+
+                clearEditTextDataCache();
+
                 Log.d(TAG,"data successfully sent to server");
                 if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
                     Utils.showSuccessfullRegistration(CowRegistrationActivity.this,null);

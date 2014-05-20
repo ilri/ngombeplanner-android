@@ -47,6 +47,8 @@ import java.util.List;
 
 public class AddEventActivity extends SherlockActivity implements MistroActivity, View.OnClickListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener, Spinner.OnItemSelectedListener
 {
+    private Boolean cacheData;
+
     public static final String TAG="AddEventActivity";
     private final String dateFormat="dd/MM/yyyy";
 
@@ -112,6 +114,8 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
         setContentView(R.layout.activity_add_event);
         DataHandler.requestPermissionToUseSMS(this);
 
+        cacheData = true;
+
         cowIdentifierTV=(TextView)findViewById(R.id.cow_identifier_tv);
         cowIdentifierS=(Spinner)findViewById(R.id.cow_identifier_s);
         dateTV=(TextView)findViewById(R.id.date_tv);
@@ -165,21 +169,19 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_DATE, dateET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_REMARKS, remarksET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_STRAW_NUMBER, strawNumberET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_VET_USED, vetUsedET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_NAME, bullNameACTV.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_OWNER, specBullOwnerET.getText().toString());
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_NO_SERVICING_DAYS, noOfServicingDaysET.getText().toString());
+    private void cacheEditTextData(){
+        if(cacheData) {
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_DATE, dateET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_REMARKS, remarksET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_STRAW_NUMBER, strawNumberET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_VET_USED, vetUsedET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_NAME, bullNameACTV.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_OWNER, specBullOwnerET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_NO_SERVICING_DAYS, noOfServicingDaysET.getText().toString());
+        }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private void restoreEditTextData(){
         dateET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_DATE, ""));
         remarksET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_REMARKS, ""));
         strawNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_STRAW_NUMBER, ""));
@@ -187,6 +189,32 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
         bullNameACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_NAME, ""));
         specBullOwnerET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_OWNER, ""));
         noOfServicingDaysET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_AEA_NO_SERVICING_DAYS, ""));
+    }
+
+    private void clearEditTextDataCache(){
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_DATE, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_REMARKS, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_STRAW_NUMBER, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_VET_USED, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_NAME, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_OWNER, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_NO_SERVICING_DAYS, "");
+
+        cacheData = false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        cacheEditTextData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        restoreEditTextData();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -208,6 +236,9 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
                 public void onClick(DialogInterface dialog, int which) {
                     if(which==DialogInterface.BUTTON_POSITIVE){
                         dialog.dismiss();
+
+                        clearEditTextDataCache();
+
                         Intent intent = new Intent(AddEventActivity.this, MainMenu.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
@@ -389,6 +420,9 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
         }
         else if(view == cancelB){
             Intent intent;
+
+            clearEditTextDataCache();
+
             if(presetMode != null && (presetMode.equals(MODE_CALVING) || presetMode.equals(MODE_SERVICING))){
                 intent = new Intent(this, FertilityActivity.class);
             }
@@ -710,6 +744,8 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
 
                         farmer.setCow(thisCalf, 0);
 
+                        clearEditTextDataCache();
+
                         Intent intent = new Intent(AddEventActivity.this, CowRegistrationActivity.class);
                         //intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
                         intent.putExtra(CowRegistrationActivity.KEY_INDEX, 0);
@@ -755,6 +791,8 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
                         }
                         thisCow.setMode(Cow.MODE_ADULT_COW_REGISTRATION);
                         farmer.setCow(thisCow, 0);
+
+                        clearEditTextDataCache();
 
                         Intent intent = new Intent(AddEventActivity.this, CowRegistrationActivity.class);
                         //intent.putExtra(CowRegistrationActivity.KEY_MODE,CowRegistrationActivity.MODE_COW);
@@ -804,6 +842,9 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
             else if(result == true) {
                 Toast.makeText(AddEventActivity.this, eventRecorded, Toast.LENGTH_LONG).show();
                 Intent intent;
+
+                clearEditTextDataCache();
+
                 if(presetMode != null && (presetMode.equals(MODE_SERVICING) || presetMode.equals(MODE_CALVING))){
                     intent = new Intent(AddEventActivity.this, FertilityActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

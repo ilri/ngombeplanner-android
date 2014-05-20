@@ -65,7 +65,7 @@ public class DataHandler
     private static final long SMS_RESPONSE_TIMEOUT = 300000;
     private static final int HTTP_POST_TIMEOUT =20000;
     private static final int HTTP_RESPONSE_TIMEOUT =20000;
-    public static final String SMS_SERVER_ADDRESS = "+254708944137";
+    public static final String SMS_SERVER_ADDRESS = "+254708090206";
     private static final String BASE_URL="http://azizi.ilri.cgiar.org/ngombe_planner";
     //private static final String BASE_URL="http://192.168.14.102/~jason/ngombe_planner/WebServer";
     //private static final String BASE_URL="http://172.26.23.48/~jason/ngombe_planner/WebServer";
