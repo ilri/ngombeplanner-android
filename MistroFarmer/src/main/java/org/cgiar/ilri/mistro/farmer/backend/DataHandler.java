@@ -62,6 +62,8 @@ public class DataHandler
     public static final String DATA_ERROR="934342";
     public static final String CODE_USER_NOT_AUTHENTICATED="43322";
     public static final String CODE_SIM_CARD_REGISTERED="83242";
+    public static final String CODE_NUMBER_IN_USE="032443";
+
     private static final String TAG="DataHandler";
     private static final long SMS_RESPONSE_TIMEOUT = 300000;
     private static final int HTTP_POST_TIMEOUT =20000;
@@ -955,7 +957,7 @@ public class DataHandler
                 else if(test.equals(DATA_ERROR)) valid = true;
                 else if(test.equals(NO_DATA)) valid = true;
                 else if(test.equals(CODE_SIM_CARD_REGISTERED)) valid = true;
-                else if(test.equals(CODE_SIM_CARD_REGISTERED)) valid = true;
+                else if(test.equals(CODE_NUMBER_IN_USE)) valid = true;
             }
 
             return valid;

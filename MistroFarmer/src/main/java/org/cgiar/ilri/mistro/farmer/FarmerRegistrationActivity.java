@@ -426,6 +426,9 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
             else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
                 Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("server_not_receive_sms", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
             }
+            else if(result.equals(DataHandler.CODE_NUMBER_IN_USE)){
+                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("number_in_use", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
             else if(result.equals(DataHandler.ACKNOWLEDGE_OK))
             {
                 Log.d(TAG,"data successfully sent to server");

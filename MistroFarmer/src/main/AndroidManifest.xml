@@ -57,30 +57,28 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.cgiar.ilri.mistro.farmer.MilkProcutionHistoryActivity"
-            android:label="@string/title_activity_milk_procution_history" >
+            android:name="org.cgiar.ilri.mistro.farmer.MilkProcutionHistoryActivity" >
         </activity>
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.EventsActivity"
-            android:label="@string/title_activity_events" >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.AddEventActivity"
-            android:label="@string/title_activity_add_event"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.cgiar.ilri.mistro.farmer.EventsHistoryActivity"
-            android:label="@string/title_activity_events_history" >
+            android:name="org.cgiar.ilri.mistro.farmer.EventsHistoryActivity" >
         </activity>
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.FertilityActivity"
-            android:label="@string/title_activity_fertility" >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.AddMilkProductionActivity"
-            android:label="@string/title_activity_add_milk_production"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

@@ -1101,6 +1101,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
                 Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("server_not_receive_sms", CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
             }
+            else if(result.equals(DataHandler.CODE_NUMBER_IN_USE)){
+                Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("number_in_use", CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
             else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
 
                 clearEditTextDataCache();
