@@ -722,6 +722,11 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
                         JSONObject jsonObject = new JSONObject();
                         String[] birthTypesInEN = Locale.getArrayInLocale("birth_types", AddEventActivity.this, Locale.LOCALE_ENGLISH);
                         try {
+                            String selectedCowETN = cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()];
+                            String selectedCowName = cowNameArray[cowIdentifierS.getSelectedItemPosition()];
+
+                            jsonObject.put("motherETN", selectedCowETN);
+                            jsonObject.put("motherName", selectedCowName);
                             jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
                             if(servicingIDs != null) {
                                 jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
