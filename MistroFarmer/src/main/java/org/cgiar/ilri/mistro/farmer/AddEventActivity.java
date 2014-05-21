@@ -49,7 +49,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
 {
     private Boolean cacheData;
 
-    public static final String TAG="AddEventActivity";
+    public  final String TAG="AddEventActivity";
     private final String dateFormat="dd/MM/yyyy";
 
     public static final String KEY_MODE="mode";
@@ -679,7 +679,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
                     }
                     //jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
                     jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
-                    if(servicingIDs != null) {
+                    if(servicingIDs != null && servicingS.getSelectedItemPosition() != -1) {
                         jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
                     }
                     if(selectedEvent.equals("Birth")){

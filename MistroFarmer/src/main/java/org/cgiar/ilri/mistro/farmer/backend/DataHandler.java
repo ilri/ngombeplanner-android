@@ -483,6 +483,12 @@ public class DataHandler
         //insert farmer data
         if(writableDB.isOpen()){
             try{
+                //remove all the data associated to farmer
+                databaseHelper.runTruncateQuery(writableDB, databaseHelper.TABLE_FARMER);
+                databaseHelper.runTruncateQuery(writableDB, databaseHelper.TABLE_COW);
+                databaseHelper.runTruncateQuery(writableDB, databaseHelper.TABLE_MILK_PRODUCTION);
+                databaseHelper.runTruncateQuery(writableDB, databaseHelper.TABLE_EVENT);
+
                 String[] columns = new String[]{"id","name","mobile_no","location_county","location_district","gps_longitude", "gps_latitude", "date_added", "sim_card_sn"};
                 String[] columnValues = new String[columns.length];
 
