@@ -9,7 +9,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.jar.JarInputStream;
 
@@ -17,6 +20,8 @@ import java.util.jar.JarInputStream;
  * Created by jason on 8/5/13.
  */
 public class Cow implements Parcelable, Serializable {
+    private static final String DEFAULT_DOB = "0000-00-00 00:00:00";
+    private static final String DOB_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String TAG = "Cow";
     public static final String SEX_MALE = "Male";
     public static final String SEX_FEMALE = "Female";
@@ -31,6 +36,7 @@ public class Cow implements Parcelable, Serializable {
     private String name;
     private String earTagNumber;
     private String dateOfBirth;
+    private String dateAdded;
     private int age;
     private String ageType;
     private List<String> breeds;
@@ -51,6 +57,7 @@ public class Cow implements Parcelable, Serializable {
         name = "";
         earTagNumber = "";
         dateOfBirth = "";
+        dateAdded = "";
         age = -1;
         ageType = "";
         this.breeds = new ArrayList<String>();
@@ -90,6 +97,14 @@ public class Cow implements Parcelable, Serializable {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setDateAdded(String dateAdded){
+        this.dateAdded = dateAdded;
+    }
+
+    public String getDateAdded(){
+        return dateAdded;
     }
 
     public void setAge(int age) {
@@ -237,6 +252,61 @@ public class Cow implements Parcelable, Serializable {
 
     public List<Event> getEvents(){
         return this.events;
+    }
+
+    public long getAgeMilliseconds(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DOB_FORMAT);
+
+        long ageFromDOB = 0l;
+        if(!dateOfBirth.equals(DEFAULT_DOB)){
+            try {
+
+                Date dob=dateFormat.parse(this.dateOfBirth);
+                long dobMilliseconds = dob.getTime();
+
+                Date today = new Date();
+                ageFromDOB = today.getTime() - dobMilliseconds;
+            }
+            catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        long ageFromAge = 0l;
+        long ageUnits = 0l;
+        if(ageType.equals(AGE_TYPE_DAY)) ageUnits = 86400000l;
+        else if(ageType.equals(AGE_TYPE_MONTH)) ageUnits = 86400000l * 30;
+        else if(ageType.equals(AGE_TYPE_YEAR)) ageUnits = 86400000l * 365;
+
+        ageFromAge = ageUnits * this.age;
+        try {
+            Date dateAdded = dateFormat.parse(this.dateAdded);
+            long dateAddedMill = dateAdded.getTime();
+
+            Date today = new Date();
+
+            ageFromAge = ageFromAge + (today.getTime() - dateAddedMill);
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+        if(ageFromAge>ageFromDOB) {
+            Log.d(TAG, "We might want to use the cows age instead of date of birth");
+            Log.d(TAG, "Cows age "+this.ageType+" = "+String.valueOf(this.age));
+            Log.d(TAG, "Cows date of birth = "+this.dateOfBirth);
+            Log.d(TAG, "Age in milliseconds = "+String.valueOf(ageFromAge));
+            return ageFromAge;
+        }
+        else {
+            Log.d(TAG, "We might want to use the cows date of birth instead of age");
+            Log.d(TAG, "Cows age "+this.ageType+" = "+String.valueOf(this.age));
+            Log.d(TAG, "Cows date of birth = "+this.dateOfBirth);
+            Log.d(TAG, "Age in milliseconds = "+String.valueOf(ageFromDOB));
+            return ageFromDOB;
+        }
     }
 
     @Override

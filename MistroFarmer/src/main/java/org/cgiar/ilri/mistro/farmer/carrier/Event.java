@@ -1,10 +1,17 @@
 package org.cgiar.ilri.mistro.farmer.carrier;
 
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by jrogena on 09/04/14.
  */
 public class Event {
     private static final String TAG = "Event";
+    private static final String DATE_FORMAT = "YYYY-MM-dd HH:mm:ss";
     private int id;
     private String eventDate;
     private String birthType;
@@ -16,6 +23,7 @@ public class Event {
     private String type;
     private String remarks;
     private boolean savedOnServer;
+    private String dateAdded;
 
     public Event(){
 
@@ -47,6 +55,31 @@ public class Event {
 
     public String getEventDate() {
         return eventDate;
+    }
+
+    public void setDateAdded(String dateAdded){
+        this.dateAdded = dateAdded;
+    }
+
+    public String getDateAdded(){
+        return  dateAdded;
+    }
+
+    public long getDateAddedMillisecods(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+
+        long result = 0;
+
+        try {
+            Date dateAdded = dateFormat.parse(this.dateAdded);
+            result = dateAdded.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Log.d(TAG, "Event date added in milliseconds = "+String.valueOf(result));
+
+        return result;
     }
 
     public void setEventDate(String eventDate) {

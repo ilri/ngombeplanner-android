@@ -23,10 +23,10 @@
                 android:visibility="gone"
                 android:textColor="@color/text_input_color"
                 android:inputType="textCapSentences"/>
+            <Button
+                android:id="@+id/dialog_deformity_okay_b"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normal_button_layout_height"/>
         </LinearLayout>
     </ScrollView>
-    <Button
-            android:id="@+id/dialog_deformity_okay_b"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normal_button_layout_height"/>
 </LinearLayout>

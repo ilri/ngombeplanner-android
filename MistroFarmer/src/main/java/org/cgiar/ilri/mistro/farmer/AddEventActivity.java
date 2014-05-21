@@ -32,6 +32,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.Dam;
 import org.cgiar.ilri.mistro.farmer.carrier.Event;
+import org.cgiar.ilri.mistro.farmer.carrier.EventConstraint;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -103,6 +104,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
     private String loadingPleaseWait;
     private List<Integer> servicingIDs;
     private List<String> servicingTypes;
+    private List<EventConstraint> eventConstraints;
     private Farmer farmer;
 
     private String presetMode;
@@ -590,6 +592,45 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
                 return false;
             }*/
         }
+
+        Cow selectedCow = farmer.getCows().get(cowIdentifierS.getSelectedItemPosition());
+        if(selectedCow != null){
+            if(selectedEvent.equals("Birth")){
+                for(int i = 0; i < eventConstraints.size(); i++){
+                    EventConstraint currConstraint = eventConstraints.get(i);
+                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_CALVING)){
+                        if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
+                            Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
+                            return false;
+                        }
+                    }
+                }
+            }
+            else if(selectedEvent.equals("Start of Lactation")){
+                for(int i = 0; i < eventConstraints.size(); i++){
+                    EventConstraint currConstraint = eventConstraints.get(i);
+                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILKING)){
+                        if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
+                            Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
+                            return false;
+                        }
+                    }
+                }
+            }
+            else if(selectedEvent.equals("Artificial Insemination") || selectedEvent.equals("Bull Servicing") || selectedEvent.equals("Signs of Heat")){
+                for(int i = 0; i < eventConstraints.size(); i++){
+                    EventConstraint currConstraint = eventConstraints.get(i);
+                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MATURITY)){
+                        if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
+                            Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
+                            return false;
+                        }
+                    }
+                }
+            }
+
+        }
+
         return true;
     }
 
@@ -922,6 +963,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
         @Override
         protected Farmer doInBackground(String... params) {
             Farmer farmer = DataHandler.getFarmerData(AddEventActivity.this);
+            eventConstraints = DataHandler.getEventConstraints(AddEventActivity.this);
             return farmer;
         }
 

@@ -36,6 +36,7 @@ import org.cgiar.ilri.mistro.farmer.backend.database.DatabaseHelper;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.Dam;
 import org.cgiar.ilri.mistro.farmer.carrier.Event;
+import org.cgiar.ilri.mistro.farmer.carrier.EventConstraint;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.cgiar.ilri.mistro.farmer.carrier.MilkProduction;
 import org.cgiar.ilri.mistro.farmer.carrier.Sire;
@@ -533,7 +534,7 @@ public class DataHandler
                     for(int j = 0; j < cowEvents.length(); j++){
                         JSONObject currEvent = cowEvents.getJSONObject(j);
 
-                        columns = new String[]{"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server"};
+                        columns = new String[]{"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server", "date_added"};
                         columnValues = new String[columns.length];
 
                         columnValues[0] = currEvent.getString("id");
@@ -548,6 +549,7 @@ public class DataHandler
                         columnValues[9] = currEvent.getString("cause_of_death");
                         columnValues[10] = currEvent.getString("no_of_live_births");
                         columnValues[11] = "1";
+                        columnValues[12] = currEvent.getString("date_added");
 
                         databaseHelper.runInsertQuery(databaseHelper.TABLE_EVENT, columns, columnValues, 0, writableDB);
                     }
@@ -571,6 +573,22 @@ public class DataHandler
                         databaseHelper.runInsertQuery(databaseHelper.TABLE_MILK_PRODUCTION, columns, columnValues, 0, writableDB);
 
                     }
+                }
+
+                JSONArray eventsConstraints = farmerData.getJSONArray("event_constraints");
+                for(int i = 0; i < eventsConstraints.length(); i++){
+                    JSONObject currConstraint = eventsConstraints.getJSONObject(i);
+
+                    //id INTEGER PRIMARY KEY, event TEXT, time INTEGER, time_units TEXT
+                    columns = new String[]{"id", "event", "time", "time_units"};
+                    columnValues = new String[columns.length];
+
+                    columnValues[0] = currConstraint.getString("id");
+                    columnValues[1] = currConstraint.getString("event");
+                    columnValues[2] = currConstraint.getString("time");
+                    columnValues[3] = currConstraint.getString("time_units");
+
+                    databaseHelper.runInsertQuery(databaseHelper.TABLE_EVENTS_CONSTRAINTS, columns, columnValues, 0, writableDB);
                 }
             }
             catch (Exception e){
@@ -631,6 +649,7 @@ public class DataHandler
                     if(cowResult[cowIndex][4].length() > 0){
                         currCow.setAge(Integer.parseInt(cowResult[cowIndex][4]));
                     }
+                    currCow.setDateAdded(cowResult[cowIndex][9]);
                     currCow.setAgeType(cowResult[cowIndex][5]);
                     currCow.setSex(cowResult[cowIndex][6]);
                     currCow.setServiceType(cowResult[cowIndex][10]);
@@ -644,6 +663,7 @@ public class DataHandler
                             Sire sire = new Sire();
                             sire.setName(sireRes[cowIndex][1]);
                             sire.setEarTagNumber(sireRes[cowIndex][2]);
+                            sire.setDateAdded(sireRes[cowIndex][9]);
 
                             currCow.setSire(sire);
                         }
@@ -663,6 +683,7 @@ public class DataHandler
                             Dam dam = new Dam();
                             dam.setName(damRes[cowIndex][1]);
                             dam.setEarTagNumber(damRes[cowIndex][2]);
+                            dam.setDateAdded(damRes[cowIndex][9]);
 
                             currCow.setDam(dam);
                         }
@@ -674,7 +695,7 @@ public class DataHandler
                     }
 
                     //fetch cow events
-                    columns = new String[] {"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server"};
+                    columns = new String[] {"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server", "date_added"};
                     selection = "cow_id="+cowID;
                     String[][] eventResult = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_EVENT, columns, selection, null, null, null, null, null);
                     for(int eventIndex = 0; eventIndex < eventResult.length; eventIndex++){
@@ -700,6 +721,7 @@ public class DataHandler
                         else{
                             currEvent.setSavedOnServer(false);
                         }
+                        currEvent.setDateAdded(eventResult[eventIndex][12]);
 
                         currCow.addEvent(currEvent);
                     }
@@ -736,6 +758,23 @@ public class DataHandler
         }
 
         return farmer;
+    }
+
+    public static List<EventConstraint> getEventConstraints(Context context){
+        List<EventConstraint> result = new ArrayList<EventConstraint>();
+        DatabaseHelper databaseHelper = new DatabaseHelper(context);
+        SQLiteDatabase readableDB = databaseHelper.getReadableDatabase();
+
+        String[] columns = new String[]{"id", "event", "time", "time_units"};
+        String[][] constraintResult = databaseHelper.runSelectQuery(readableDB,databaseHelper.TABLE_EVENTS_CONSTRAINTS, columns, null, null, null, null, null, null);
+        if(constraintResult.length > 0){
+            for(int i = 0; i < constraintResult.length; i++){
+                String[] currConstraint = constraintResult[i];
+                result.add(new EventConstraint(Integer.parseInt(currConstraint[0]), currConstraint[1], Integer.parseInt(currConstraint[2]), currConstraint[3]));
+            }
+        }
+
+        return result;
     }
 
     /**

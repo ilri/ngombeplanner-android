@@ -331,6 +331,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
             Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
             return false;
         }
+        if(numberOfCowsET.getText().toString().length()==0){
+            Toast.makeText(this,Locale.getStringInLocale("enter_no_cows_own",this),Toast.LENGTH_LONG).show();
+            return false;
+        }
         return true;
     }
 

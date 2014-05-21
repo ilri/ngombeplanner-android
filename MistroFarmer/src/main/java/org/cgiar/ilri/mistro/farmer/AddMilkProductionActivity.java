@@ -30,6 +30,7 @@ import com.actionbarsherlock.view.MenuItem;
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+import org.cgiar.ilri.mistro.farmer.carrier.EventConstraint;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,6 +74,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
     private String[] cowEarTagNumberArray;
     private String[] quantityTypes;
     private String[] calfSucklingTypes;
+    private List<EventConstraint> eventConstraints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -328,6 +330,22 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
                 return false;
             }
         }
+
+        if(cowS.getSelectedItemPosition() != -1){
+            Cow selectedCow = farmer.getCows(Cow.SEX_FEMALE).get(cowS.getSelectedItemPosition());
+            if(selectedCow != null){
+                for(int i = 0; i < eventConstraints.size(); i++){
+                    EventConstraint currConstraint = eventConstraints.get(i);
+                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILKING)){
+                        if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
+                            Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
        /* if(noMilkingET.getText().toString()==null || noMilkingET.getText().toString().trim().length()==0) {
             Toast.makeText(this, Locale.getStringInLocale("enter_number_times_cow_milked",this),Toast.LENGTH_LONG).show();
             return false;
@@ -452,6 +470,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
         protected Farmer doInBackground(String... params)
         {
             Farmer farmer = DataHandler.getFarmerData(AddMilkProductionActivity.this);
+            eventConstraints = DataHandler.getEventConstraints(AddMilkProductionActivity.this);
             return farmer;
         }
 

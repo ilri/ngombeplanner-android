@@ -520,8 +520,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         }
         if(totalBreedSVHeight > 0){
             breedLV.getLayoutParams().height = totalBreedSVHeight;
-            if(breedDialogSV.getLayoutParams().height > totalBreedSVHeight){
-                breedDialogSV.getLayoutParams().height = totalBreedSVHeight;
+            if(breedDialogSV.getLayoutParams().height > (totalBreedSVHeight + dialogBreedOkayB.getLayoutParams().height)){
+                breedDialogSV.getLayoutParams().height = totalBreedSVHeight + dialogBreedOkayB.getLayoutParams().height;
             }
         }
 
@@ -546,8 +546,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         }
         if(totalDeformitySVHeight > 0){
             deformityLV.getLayoutParams().height = totalDeformitySVHeight;
-            if(deformitySV.getLayoutParams().height > (totalDeformitySVHeight + 30)){
-                deformitySV.getLayoutParams().height= totalDeformitySVHeight + 30;
+            if(deformitySV.getLayoutParams().height > (totalDeformitySVHeight + specifyET.getLayoutParams().height + dialogDeformityOkayB.getLayoutParams().height)){
+                deformitySV.getLayoutParams().height= totalDeformitySVHeight + specifyET.getLayoutParams().height + dialogDeformityOkayB.getLayoutParams().height;
             }
         }
 
