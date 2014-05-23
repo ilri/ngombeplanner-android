@@ -374,6 +374,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
                                                 if(which==DialogInterface.BUTTON_POSITIVE){
                                                     dialog.dismiss();
                                                     milkQuantityFine = true;
+                                                    Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("press_add_again", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
                                                 }
                                                 else{
                                                     dialog.cancel();
