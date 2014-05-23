@@ -77,6 +77,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
     private String[] calfSucklingTypes;
     private List<EventConstraint> eventConstraints;
     private boolean milkQuantityFine;
+    private boolean milkFluctuation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
 
         cacheData = true;
         milkQuantityFine = false;
+        milkFluctuation = false;
 
         cowTV=(TextView)this.findViewById(R.id.cow_tv);
         cowS=(Spinner)this.findViewById(R.id.cow_s);
@@ -298,7 +300,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
             /*String[] calfSucklingTypesInEN = Locale.getArrayInLocale("calf_suckling_types",this,Locale.LOCALE_ENGLISH);
             String calfSucklingType = calfSucklingTypesInEN[calfSucklingS.getSelectedItemPosition()];*/
             //milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(),noMilkingET.getText().toString(),calfSucklingType);
-            milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString());
+            milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(), Boolean.toString(milkFluctuation));
         }
     }
 
@@ -374,10 +376,12 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
                                                 if(which==DialogInterface.BUTTON_POSITIVE){
                                                     dialog.dismiss();
                                                     milkQuantityFine = true;
+                                                    milkFluctuation = true;
                                                     Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("press_add_again", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
                                                 }
                                                 else{
                                                     dialog.cancel();
+                                                    milkFluctuation = false;
                                                     milkQuantityFine = false;
                                                 }
                                             }
@@ -472,6 +476,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
                 jsonObject.put("quantity",params[4]);
                 jsonObject.put("quantityType",params[5]);
                 jsonObject.put("date", params[6]);
+                jsonObject.put("fluctuation", params[7]);
                 /*jsonObject.put("noMilkingTimes",params[7]);
                 jsonObject.put("calfSuckling",params[8]);*/
                 //String result=DataHandler.sendDataToServer(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL, true);
