@@ -32,6 +32,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.EventConstraint;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+import org.cgiar.ilri.mistro.farmer.carrier.MilkProduction;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,6 +76,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
     private String[] quantityTypes;
     private String[] calfSucklingTypes;
     private List<EventConstraint> eventConstraints;
+    private boolean milkQuantityFine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
         DataHandler.requestPermissionToUseSMS(this);
 
         cacheData = true;
+        milkQuantityFine = false;
 
         cowTV=(TextView)this.findViewById(R.id.cow_tv);
         cowS=(Spinner)this.findViewById(R.id.cow_s);
@@ -334,14 +337,63 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
         if(cowS.getSelectedItemPosition() != -1){
             Cow selectedCow = farmer.getCows(Cow.SEX_FEMALE).get(cowS.getSelectedItemPosition());
             if(selectedCow != null){
+
                 for(int i = 0; i < eventConstraints.size(); i++){
                     EventConstraint currConstraint = eventConstraints.get(i);
+                    //enforce age constraint
                     if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILKING)){
                         if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
                             Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
                             return false;
                         }
                     }
+
+                    else if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_FLACTUATION) && !milkQuantityFine){
+                        //TODO: convert units to whatever farmer uses to measure milk e.g cups
+                        int threshold = currConstraint.getValue();
+                        String thresholdUnits = currConstraint.getUnits();
+
+                        String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times", this, Locale.LOCALE_ENGLISH);
+                        MilkProduction lastMP = selectedCow.getLastMilking(milkingTimesInEN[timeS.getSelectedItemPosition()]);
+                        if(lastMP.getDate().length()>0){//date set. means this object is not an empty object
+                            try {
+                                long lastMilking = lastMP.getDateMilliseconds();
+                                Date currMilkingDate = new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateET.getText().toString());
+                                long currMilking = currMilkingDate.getTime();
+
+                                int dayDiff = (int)((currMilking - lastMilking)/86400000);
+                                int yieldDiff = Math.abs(Integer.parseInt(quantityET.getText().toString()) - lastMP.getQuantity());
+
+                                if(dayDiff != 0) {
+                                    int diff = yieldDiff / dayDiff;//spread the difference in yield among the days passed
+
+                                    if(diff  > threshold){
+                                        DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                if(which==DialogInterface.BUTTON_POSITIVE){
+                                                    dialog.dismiss();
+                                                    milkQuantityFine = true;
+                                                }
+                                                else{
+                                                    dialog.cancel();
+                                                    milkQuantityFine = false;
+                                                }
+                                            }
+                                        };
+                                        AlertDialog milkFluctuationDialog = Utils.createMilkFluctuationDialog(this, onClickListener);
+                                        milkFluctuationDialog.show();
+                                        return false;
+                                    }
+                                }
+                            }
+                            catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+                        milkQuantityFine = true;
+                    }
+                    //check for drastic flactuation in milk production
                 }
             }
         }

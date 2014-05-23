@@ -242,4 +242,5 @@
     <string name="cow_too_young_en">The selected cow is too young</string>
     <string name="enter_no_cows_own_en">Enter the number of cows you own</string>
     <string name="number_in_use_en">The number (or sim card) you are using has already been registered with another user</string>
+    <string name="milk_inconsistent_en">The quantity of milk you have entered appears to be wrong. Press okay if you are certain this is the right amount</string>
 </resources>

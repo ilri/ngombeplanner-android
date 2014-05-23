@@ -298,6 +298,7 @@ public class Cow implements Parcelable, Serializable {
             Log.d(TAG, "Cows age "+this.ageType+" = "+String.valueOf(this.age));
             Log.d(TAG, "Cows date of birth = "+this.dateOfBirth);
             Log.d(TAG, "Age in milliseconds = "+String.valueOf(ageFromAge));
+            Log.d(TAG, "Alternate age = "+String.valueOf(ageFromDOB));
             return ageFromAge;
         }
         else {
@@ -305,8 +306,29 @@ public class Cow implements Parcelable, Serializable {
             Log.d(TAG, "Cows age "+this.ageType+" = "+String.valueOf(this.age));
             Log.d(TAG, "Cows date of birth = "+this.dateOfBirth);
             Log.d(TAG, "Age in milliseconds = "+String.valueOf(ageFromDOB));
+            Log.d(TAG, "Alternate age = "+String.valueOf(ageFromAge));
             return ageFromDOB;
         }
+    }
+
+    public MilkProduction getLastMilking(String milkingTime){
+        MilkProduction lastMP = new MilkProduction();
+
+        long latestTime = 0;
+        int latestMPIndex = -1;
+        for(int i = 0; i < milkProduction.size(); i++){
+            MilkProduction currMP = milkProduction.get(i);
+            if(currMP.getTime().equals(milkingTime) && currMP.getDateMilliseconds() > latestTime){
+                latestTime = currMP.getDateMilliseconds();
+                latestMPIndex = i;
+            }
+        }
+
+        if(latestMPIndex != -1){
+            lastMP = milkProduction.get(latestMPIndex);
+        }
+
+        return lastMP;
     }
 
     @Override

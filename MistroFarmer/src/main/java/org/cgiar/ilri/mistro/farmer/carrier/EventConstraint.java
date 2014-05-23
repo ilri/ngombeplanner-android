@@ -17,6 +17,7 @@ public class EventConstraint {
     public static final String CONSTRAINT_BIRTH_TO_LACTATION = "MaxTimeBirthLactation";
     public static final String CONSTRAINT_MILKING = "Milking";
     public static final String CONSTRAINT_CALVING = "Calving";
+    public static final String CONSTRAINT_MILK_FLACTUATION = "DeltaMilk";
 
     private int id;
     private String event;
@@ -75,5 +76,13 @@ public class EventConstraint {
         Log.d(TAG, "Event constraint Time milliseconds = "+String.valueOf(result));
 
         return result;
+    }
+
+    public int getValue(){
+        return this.time;
+    }
+
+    public String getUnits(){
+        return this.timeUnits;
     }
 }

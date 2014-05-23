@@ -107,4 +107,15 @@ public class Utils
                 .setNegativeButton(Locale.getStringInLocale("cancel",context), onClickListener);
         return alertDialogBuilder.create();
     }
+
+    public static AlertDialog createMilkFluctuationDialog(Context context, DialogInterface.OnClickListener onClickListener){
+        AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(context);
+        alertDialogBuilder.setTitle(Locale.getStringInLocale("warning", context));
+        alertDialogBuilder
+                .setMessage(Locale.getStringInLocale("milk_inconsistent", context))
+                .setCancelable(false)
+                .setPositiveButton(Locale.getStringInLocale("okay",context), onClickListener)
+                .setNegativeButton(Locale.getStringInLocale("cancel",context), onClickListener);
+        return alertDialogBuilder.create();
+    }
 }

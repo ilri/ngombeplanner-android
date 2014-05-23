@@ -1,5 +1,7 @@
 package org.cgiar.ilri.mistro.farmer.carrier;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by jason on 4/28/14.
  */
@@ -11,6 +13,7 @@ public class MilkProduction {
     public static final String TIME_COMBINED = "Combined";
     public static final String QUANTITY_TYPE_LITRES = "Litres";
     public static final String QUANTITY_TYPE_KGS = "KGs";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
     private int id;
     private String time;
     private int quantity;
@@ -66,6 +69,20 @@ public class MilkProduction {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public long getDateMilliseconds(){
+        long result = 0;
+
+        try{
+            SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+            result = dateFormat.parse(this.date).getTime();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public String getQuantityType() {
