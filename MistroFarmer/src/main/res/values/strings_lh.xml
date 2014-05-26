@@ -35,27 +35,51 @@
         <item>emiesi</item>
         <item>emiaka/emika</item>
     </string-array>
+    <string-array name="c_breeds_array_lh">
+        <item>Friesian</item>
+        <item>Jersey</item>
+        <item>Ankole</item>
+        <item>Boran</item>
+        <item>Ayrshire</item>
+        <item>Zebu</item>
+        <item>Sahiwal</item>
+        <item>Guernsey</item>
+        <item>Aberdeen Angus</item>
+        <item>Hereford</item>
+        <item>Nganda</item>
+    </string-array>
+    <string-array name="uc_breeds_array_lh">
+        <item>Charolais</item>
+        <item>Simmental</item>
+        <item>Limousine</item>
+        <item>Brahman</item>
+        <item>Santa Getrude</item>
+        <item>Piemontese</item>
+        <item>Red Poll</item>
+        <item>Fleckviah</item>
+        <item>Brown Swiss</item>
+    </string-array>
     <string-array name="breeds_array_lh">
-        <item>ayrshire</item>
-        <item>boran</item>
-        <item>charolais</item>
-        <item>aberdeen angus</item>
-        <item>simmental</item>
-        <item>friesian</item>
-        <item>guernsey</item>
-        <item>hereford</item>
-        <item>jersey</item>
-        <item>ankole</item>
-        <item>limousine</item>
-        <item>brahman</item>
-        <item>santa getrude</item>
-        <item>piemontese</item>
-        <item>red poll</item>
-        <item>sahiwal</item>
-        <item>nganda</item>
-        <item>fleckviah</item>
-        <item>brown swiss</item>
-        <item>zebu</item>
+        <item>Ayrshire</item>
+        <item>Boran</item>
+        <item>Charolais</item>
+        <item>Aberdeen Angus</item>
+        <item>Simmental</item>
+        <item>Friesian</item>
+        <item>Guernsey</item>
+        <item>Hereford</item>
+        <item>Jersey</item>
+        <item>Ankole</item>
+        <item>Limousine</item>
+        <item>Brahman</item>
+        <item>Santa Getrude</item>
+        <item>Piemontese</item>
+        <item>Red Poll</item>
+        <item>Sahiwal</item>
+        <item>Nganda</item>
+        <item>Fleckviah</item>
+        <item>Brown Swiss</item>
+        <item>Zebu</item>
     </string-array>
     <string-array name="deformities_array_lh">
         <item>obubofu</item>

@@ -35,6 +35,30 @@
         <item>araweek</item>
         <item>kenyishek</item>
     </string-array>
+    <string-array name="c_breeds_array_kl">
+        <item>Friesian</item>
+        <item>Jersey</item>
+        <item>Ankole</item>
+        <item>Boran</item>
+        <item>Ayrshire</item>
+        <item>Zebu</item>
+        <item>Sahiwal</item>
+        <item>Guernsey</item>
+        <item>Aberdeen Angus</item>
+        <item>Hereford</item>
+        <item>Nganda</item>
+    </string-array>
+    <string-array name="uc_breeds_array_kl">
+        <item>Charolais</item>
+        <item>Simmental</item>
+        <item>Limousine</item>
+        <item>Brahman</item>
+        <item>Santa Getrude</item>
+        <item>Piemontese</item>
+        <item>Red Poll</item>
+        <item>Fleckviah</item>
+        <item>Brown Swiss</item>
+    </string-array>
     <string-array name="breeds_array_kl">
         <item>Ayrshire</item>
         <item>Boran</item>

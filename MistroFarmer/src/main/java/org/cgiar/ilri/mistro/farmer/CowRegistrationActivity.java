@@ -1,12 +1,19 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -46,7 +53,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class CowRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener
+public class CowRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener, LocationListener
 {
     private boolean cacheData;
 
@@ -109,6 +116,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private Farmer farmer;
     private List<Cow> validSires;
     private List<Cow> validDams;
+    private LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,6 +275,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         super.onPause();
 
         cacheEditTextData();
+
+        if(locationManager!=null) {
+            locationManager.removeUpdates(this);
+        }
     }
 
     @Override
@@ -336,6 +348,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                     deformityET.setText(deformity);
 
                     if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
+                        if(farmer.isInFarm()){
+                            getGPSCoordinates();
+                        }
+
                         List<Cow> allCows = farmer.getCows();
                         validSires = new ArrayList<Cow>();
                         validSires.add(new Cow(false));
@@ -443,6 +459,21 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 Log.d(TAG,"Farmer object is null");
             }
 
+        }
+    }
+
+    private void getGPSCoordinates() {
+        locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
+        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            //Toast.makeText(this,"gps started",Toast.LENGTH_LONG).show();
+            Criteria criteria=new Criteria();
+            String provider=locationManager.getBestProvider(criteria,false);
+            Location location=locationManager.getLastKnownLocation(provider);
+            locationManager.requestLocationUpdates(provider, 18000, 1000, this);//If farmer  is moving at 200km/h, will still be able to update!
+            if(location!=null)
+            {
+                onLocationChanged(location);
+            }
         }
     }
 
@@ -1065,6 +1096,37 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 deformityETClicked();
             }
         }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        String latitude=String.valueOf(location.getLatitude());
+        String longitude=String.valueOf(location.getLongitude());
+        Log.d(TAG,"latitude : "+latitude);
+        Log.d(TAG,"longitude : "+longitude);
+
+        if(this.farmer.isInFarm() && (this.farmer.getLatitude() == null || this.farmer.getLatitude().length() == 0)){
+            this.farmer.setLatitude(latitude);
+        }
+
+        if(this.farmer.isInFarm() && (this.farmer.getLongitude() == null || this.farmer.getLongitude().length() == 0)){
+            this.farmer.setLongitude(longitude);
+        }
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 
     private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,String> {

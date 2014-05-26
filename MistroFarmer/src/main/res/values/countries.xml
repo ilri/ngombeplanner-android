@@ -126,7 +126,7 @@
         <item>Namibia</item>
         <item>Nauru</item>
         <item>Nepal</item>
-        <item>Netherlands</item>
+        <item>Netherlands (Holland)</item>
         <item>New Zealand</item>
         <item>Nicaragua</item>
         <item>Niger</item>
@@ -203,6 +203,8 @@
         <item>Tanzania</item>
         <item>Uganda</item>
         <item>Ethiopia</item>
+        <item>United States</item>
+        <item>Netherlands (Holland)</item>
         <item>Other</item>
     </string-array>
 </resources>

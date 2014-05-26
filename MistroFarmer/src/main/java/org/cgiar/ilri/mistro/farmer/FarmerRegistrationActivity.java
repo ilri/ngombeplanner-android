@@ -9,6 +9,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -57,6 +58,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
     private String mobileNoETEmptyWarning;
     private  LocationManager locationManager;
     private String loadingPleaseWait;
+    private boolean isInFarm;
 
     private Farmer farmer;
     @Override
@@ -68,6 +70,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
 
         //init child views
         cacheData = true;
+        isInFarm = false;
 
         fullNameTV=(TextView)this.findViewById(R.id.full_name_tv);
         fullNameET=(EditText)this.findViewById(R.id.full_name_et);
@@ -255,8 +258,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
         }
     }
 
-    private void getGPSCoordinates()
-    {
+    private void getGPSCoordinates() {
         locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
         if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
         {
@@ -299,7 +301,6 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
                     });
             AlertDialog alertDialog=alertDialogBuilder.create();
             alertDialog.show();
-
         }
     }
 
@@ -328,8 +329,9 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
             return  false;
         }*/
         if(isInFarm && (longitude == null || longitude.length() == 0 || latitude == null || latitude.length() == 0)) {
-            Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
-            return false;
+            //Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
+            //return false;
+            Log.w(TAG, "GPS location not obtained. Will try to get it in next screen");
         }
         if(numberOfCowsET.getText().toString().length()==0){
             Toast.makeText(this,Locale.getStringInLocale("enter_no_cows_own",this),Toast.LENGTH_LONG).show();

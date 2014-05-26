@@ -29,6 +29,7 @@ public class Farmer implements Parcelable, Serializable
     private String latitude;
     private String simCardSN;
     private String mode;
+    private boolean isInFarm;
 
     public Farmer()
     {
@@ -40,6 +41,7 @@ public class Farmer implements Parcelable, Serializable
         latitude="";
         simCardSN ="";
         mode = "";
+        isInFarm = false;
     }
 
     public Farmer(Parcel source)
@@ -137,6 +139,10 @@ public class Farmer implements Parcelable, Serializable
         return cows;
     }
 
+    public boolean isInFarm(){
+        return isInFarm;
+    }
+
     public List<Cow> getCows(String sex){
         List<Cow> newCowList = new ArrayList<Cow>();
 
@@ -186,6 +192,8 @@ public class Farmer implements Parcelable, Serializable
         dest.writeString(latitude);
         dest.writeString(simCardSN);
         dest.writeString(mode);
+        if(isInFarm) dest.writeInt(1);
+        else dest.writeInt(0);
     }
 
     public void readFromParcel(Parcel in)
@@ -198,6 +206,10 @@ public class Farmer implements Parcelable, Serializable
         this.latitude=in.readString();
         this.simCardSN =in.readString();
         this.mode = in.readString();
+
+        int isInFarm = in.readInt();
+        if(isInFarm == 1) this.isInFarm = true;
+        else this.isInFarm = false;
     }
 
     public static final Creator<Farmer> CREATOR=new Creator<Farmer>()
