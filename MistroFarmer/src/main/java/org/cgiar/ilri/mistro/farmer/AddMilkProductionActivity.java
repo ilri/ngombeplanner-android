@@ -363,7 +363,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
                                 Date currMilkingDate = new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateET.getText().toString());
                                 long currMilking = currMilkingDate.getTime();
 
-                                int dayDiff = (int)((currMilking - lastMilking)/86400000);
+                                int dayDiff = (int)Math.abs((currMilking - lastMilking)/86400000);
                                 int yieldDiff = Math.abs(Integer.parseInt(quantityET.getText().toString()) - lastMP.getQuantity());
 
                                 if(dayDiff != 0) {

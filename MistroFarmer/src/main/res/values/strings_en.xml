@@ -35,6 +35,30 @@
         <item>Months</item>
         <item>Years</item>
     </string-array>
+    <string-array name="c_breeds_array_en">
+        <item>Friesian</item>
+        <item>Jersey</item>
+        <item>Ankole</item>
+        <item>Boran</item>
+        <item>Ayrshire</item>
+        <item>Zebu</item>
+        <item>Sahiwal</item>
+        <item>Guernsey</item>
+        <item>Aberdeen Angus</item>
+        <item>Hereford</item>
+        <item>Nganda</item>
+    </string-array>
+    <string-array name="uc_breeds_array_en">
+        <item>Charolais</item>
+        <item>Simmental</item>
+        <item>Limousine</item>
+        <item>Brahman</item>
+        <item>Santa Getrude</item>
+        <item>Piemontese</item>
+        <item>Red Poll</item>
+        <item>Fleckviah</item>
+        <item>Brown Swiss</item>
+    </string-array>
     <string-array name="breeds_array_en">
         <item>Ayrshire</item>
         <item>Boran</item>
@@ -65,7 +89,7 @@
         <item>Clef palate</item>
         <item>Other</item>
     </string-array>
-    <string name="service_type_used_en">Service Type Used</string>
+    <string name="service_type_used_en">Service method Used</string>
     <string-array name="service_types_en">
         <item>Bull</item>
         <item>Artificial Insemination</item>
@@ -217,7 +241,7 @@
     <string name="enter_dam_etn_en">Enter dam\'s ear tag number</string>
     <string name="age_diff_from_dob_en">Cow\'s age appears to conflict with the cow\'s Date of birth</string>
     <string name="action_not_allowed_en">Action not allowed here</string>
-    <string name="are_you_in_farm_en">Are you in your farm?</string>
+    <string name="are_you_in_farm_en">Ng\'ombe Planner will try to record your farm\'s GPS coordinates. Are you currently in your farm?</string>
     <string name="farm_coords_successfully_reg_en">Farm coordinates successfully registered</string>
     <string name="sms_charges_en">SMS Charges</string>
     <string name="incur_network_sms_charges_en">You are not connected to the internet. You will therefore incur your standard network SMS charge to send data to the server.</string>
@@ -237,6 +261,7 @@
     <string name="you_do_not_have_cows_en">You do not seem to have cows</string>
 
     <!-- Added after translation-->
+    <string name="ear_tag_no_or_name_en">You can enter the either the cow\'s name or ear tag number</string>
     <string name="age_or_dob_en">You can enter either the cow\'s age or date of birth</string>
     <string name="enter_age_or_dob_en">Please enter either the cow\'s age or date of birth</string>
     <string name="cow_too_young_en">The selected cow is too young</string>

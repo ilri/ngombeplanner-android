@@ -54,6 +54,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     public static final String KEY_INDEX="index";
     public static final String KEY_NUMBER_OF_COWS="numberOfCows";
     private final String dateFormat="dd/MM/yyyy";
+    private TextView nameETNHintTV;
     private TextView nameTV;
     private EditText nameET;
     private TextView earTagNumberTV;
@@ -125,6 +126,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         selectedBreeds = 0;
 
         //init views
+        nameETNHintTV = (TextView) this.findViewById(R.id.name_eta_hint_tv);
         nameTV=(TextView)this.findViewById(R.id.name_tv);
         nameET=(EditText)this.findViewById(R.id.name_et);
         earTagNumberTV=(TextView)this.findViewById(R.id.ear_tag_number_tv);
@@ -459,12 +461,14 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     public void initTextInViews() {
         String title = Locale.getStringInLocale("cow_registration",this)+" "+String.valueOf(index+1);
         this.setTitle(title);
+
+        nameETNHintTV.setText(" * " + Locale.getStringInLocale("ear_tag_no_or_name", this));
         nameTV.setText(Locale.getStringInLocale("name",this));
-        earTagNumberTV.setText(" * "+Locale.getStringInLocale("ear_tag_number",this));
+        earTagNumberTV.setText(Locale.getStringInLocale("ear_tag_number",this));
 
-        ageOrDOBHintTV.setText(Locale.getStringInLocale("age_or_dob", this));
+        ageOrDOBHintTV.setText(" * " + Locale.getStringInLocale("age_or_dob", this));
 
-        ageTV.setText(" * "+Locale.getStringInLocale("age",this));
+        ageTV.setText(Locale.getStringInLocale("age",this));
         int ageTypeArrayID = Locale.getArrayIDInLocale("age_type_array",this);
         if(ageTypeArrayID!=0){
             ArrayAdapter<CharSequence> ageTypeArrayAdapter=ArrayAdapter.createFromResource(this, ageTypeArrayID, android.R.layout.simple_spinner_item);
