@@ -23,10 +23,16 @@
                 android:visibility="gone"
                 android:textColor="@color/text_input_color"
                 android:inputType="textCapSentences"/>
+            <CheckBox
+                android:id="@+id/no_deformity_cb"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"/>
             <Button
                 android:id="@+id/dialog_deformity_okay_b"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/normal_button_layout_height"/>
+                android:layout_height="@dimen/normal_button_layout_height"
+                android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

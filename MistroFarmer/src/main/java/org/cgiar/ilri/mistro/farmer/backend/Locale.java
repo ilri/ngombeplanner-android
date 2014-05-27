@@ -93,6 +93,72 @@ public class Locale {
         return value;
     }
 
+    public static String[] translateArrayToEnglish(Context context, String arrayName, String[] arrayInLocale){
+        if(arrayInLocale != null){
+            String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, Locale.LOCALE_ENGLISH);
+            String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
+
+            String[] translatedArray = new String[arrayInLocale.length];
+            for(int i = 0; i < arrayInLocale.length; i++){
+                for(int j = 0; j < allStringsInLocale.length; j++){
+                    if(arrayInLocale[i].equals(allStringsInLocale[j])){
+                        translatedArray[i] = allStringsInEN[j];
+                    }
+                }
+            }
+
+            return translatedArray;
+        }
+        return null;
+    }
+
+    public static String[] translateArrayToLocale(Context context, String arrayName, String[] arrayInEN){
+        if(arrayInEN != null){
+            String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, Locale.LOCALE_ENGLISH);
+            String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
+
+            String[] translatedArray = new String[arrayInEN.length];
+            for(int i = 0; i < arrayInEN.length; i++){
+                for(int j = 0; j < allStringsInEN.length; j++){
+                    if(arrayInEN[i].equals(allStringsInEN[j])){
+                        translatedArray[i] = allStringsInLocale[j];
+                    }
+                }
+            }
+
+            return translatedArray;
+        }
+        return null;
+    }
+
+    public static String translateStringToEnglish(Context context, String arrayName, String string){
+        if(string != null){
+            String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
+            String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, LOCALE_ENGLISH);
+
+            for(int i = 0; i < allStringsInLocale.length; i++){
+                if(string.equals(allStringsInLocale[i])){
+                    return allStringsInEN[i];
+                }
+            }
+        }
+        return null;
+    }
+
+    public static String translateStringToLocale(Context context, String arrayName, String string){
+        if(string != null){
+            String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
+            String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, LOCALE_ENGLISH);
+
+            for(int i = 0; i < allStringsInEN.length; i++){
+                if(string.equals(allStringsInEN[i])){
+                    return allStringsInLocale[i];
+                }
+            }
+        }
+        return null;
+    }
+
     public static void switchLocale(String newLocaleCode, Context context) {
         /*SharedPreferences.Editor editor = context.getSharedPreferences(context.getString(R.string.app_name),Context.MODE_PRIVATE).edit();
         editor.putString(SHARED_PREFERENCES_KEY,newLocaleCode);

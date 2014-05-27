@@ -103,6 +103,7 @@ public class DataHandler
     public static final String SP_KEY_CRA_AGE = "cowRegistrationActivityAge";
     public static final String SP_KEY_CRA_DATE_OF_BIRTH = "cowRegistrationActivityDateOfBirth";
     public static final String SP_KEY_CRA_BREED = "cowRegistrationActivityBreed";
+    public static final String SP_KEY_CRA_BREED_OTHER = "cowRegistrationActivityOtherBreed";
     public static final String SP_KEY_CRA_DEFORMITY = "cowRegistrationActivityDeformity";
     public static final String SP_KEY_CRA_STRAW_NUMBER = "cowRegistrationActivityStrawNumber";
     public static final String SP_KEY_CRA_DAM = "cowRegistrationActivityDam";

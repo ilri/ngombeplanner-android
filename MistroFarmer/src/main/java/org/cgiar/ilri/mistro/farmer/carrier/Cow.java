@@ -1,9 +1,11 @@
 package org.cgiar.ilri.mistro.farmer.carrier;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +14,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.jar.JarInputStream;
@@ -22,6 +25,7 @@ import java.util.jar.JarInputStream;
 public class Cow implements Parcelable, Serializable {
     private static final String DEFAULT_DOB = "0000-00-00 00:00:00";
     private static final String DOB_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String OTHER_BREED = "Another Breed";
     public static final String TAG = "Cow";
     public static final String SEX_MALE = "Male";
     public static final String SEX_FEMALE = "Female";
@@ -49,6 +53,7 @@ public class Cow implements Parcelable, Serializable {
     private String mode;
     private String serviceType;
     private String otherDeformity;
+    private String otherBreed;
     private String piggyBack;
     private List<Event> events;
     private List<MilkProduction> milkProduction;
@@ -73,6 +78,7 @@ public class Cow implements Parcelable, Serializable {
         countryOfOrigin = "";
         serviceType = "";
         otherDeformity = "";
+        otherBreed = "";
         piggyBack = "";
         this.events = new ArrayList<Event>();
         this.milkProduction = new ArrayList<MilkProduction>();
@@ -115,10 +121,13 @@ public class Cow implements Parcelable, Serializable {
         this.ageType = ageType;
     }
 
-    public void setBreeds(String[] breeds) {
+    public void setBreeds(String[] breeds, Context context) {
+        //translate breeds to english
+        String[] translatedBreeds =  Locale.translateArrayToEnglish(context, "c_breeds_array", breeds);//assuming that the breeds array is a member of c_breeds_array
+
         this.breeds = new ArrayList<String>();
-        for (int i = 0; i < breeds.length; i++) {
-            this.breeds.add(breeds[i]);
+        for (int i = 0; i < translatedBreeds.length; i++) {
+            this.breeds.add(translatedBreeds[i]);
         }
     }
 
@@ -135,23 +144,45 @@ public class Cow implements Parcelable, Serializable {
         Log.d(TAG, "other deformity set to "+otherDeformity);
     }
 
-    public void addBreed(String breed) {
-        this.breeds.add(breed);
+    public void setOtherBreed(Context context, String otherBreed){
+        //translate to english
+        String translatedBreed = Locale.translateStringToEnglish(context, "breeds_array", otherBreed);
+        this.otherBreed = translatedBreed;
+    }
+
+    public String getOtherBreed(Context context){
+        //other breed stored here is in english
+        String translatedBreed = Locale.translateStringToLocale(context, "breeds_array", otherBreed);
+
+        return translatedBreed;
+    }
+
+    public void addBreed(Context context, String breed) {
+        //translate to english
+
+        String translatedString = Locale.translateStringToEnglish(context, "breeds_array", breed);//assuming here that breed is not going to be 'Other breed' string
+        this.breeds.add(translatedString);
     }
 
     public void setSex(String sex) {
         this.sex = sex;
     }
 
-    public void setDeformities(String[] deformities) {
+    public void setDeformities(String[] deformities, Context context) {
+        //translate to english
+        String[] translatedDeformities = Locale.translateArrayToEnglish(context, "deformities_array", deformities);
+
         this.deformities = new ArrayList<String>();
-        for (int i = 0; i < deformities.length; i++) {
-            this.deformities.add(deformities[i]);
+        for (int i = 0; i < translatedDeformities.length; i++) {
+            this.deformities.add(translatedDeformities[i]);
         }
     }
 
-    public void addDeformity(String deformity) {
-        this.deformities.add(deformity);
+    public void addDeformity(Context context, String deformity) {
+        //translate to english
+        String translatedDeformity = Locale.translateStringToEnglish(context, "deformities_array", deformity);
+
+        this.deformities.add(translatedDeformity);
     }
 
     public void setSire(Sire sire) {
@@ -223,16 +254,26 @@ public class Cow implements Parcelable, Serializable {
         return otherDeformity;
     }
 
-    public List<String> getBreeds() {
-        return breeds;
+    public List<String> getBreeds(Context context) {
+        //breeds stored in this object are in english, translate them to current locale
+        String[] stringArray = Locale.translateArrayToLocale(context, "breeds_array", breeds.toArray(new String[breeds.size()]));
+
+        List<String> translatedBreeds = new ArrayList<String>(Arrays.asList(stringArray));
+
+        return translatedBreeds;
     }
 
     public String getSex() {
         return sex;
     }
 
-    public List<String> getDeformities() {
-        return deformities;
+    public List<String> getDeformities(Context context) {
+        //deformities are in english. translate them to current locale
+        String[] deformitiesInLocale = Locale.translateArrayToLocale(context, "deformities_array", deformities.toArray(new String[deformities.size()]));//TODO: not sure that will work
+
+        List<String> translatedDeformities = new ArrayList<String>(Arrays.asList(deformitiesInLocale));
+
+        return translatedDeformities;
     }
 
     public Sire getSire() {
@@ -358,6 +399,7 @@ public class Cow implements Parcelable, Serializable {
         dest.writeString(mode);
         dest.writeString(serviceType);
         dest.writeString(otherDeformity);
+        dest.writeString(otherBreed);
         dest.writeString(piggyBack);
     }
 
@@ -384,6 +426,7 @@ public class Cow implements Parcelable, Serializable {
         mode = in.readString();
         serviceType = in.readString();
         otherDeformity = in.readString();
+        otherBreed = in.readString();
         piggyBack = in.readString();
     }
 
@@ -409,8 +452,14 @@ public class Cow implements Parcelable, Serializable {
             jsonObject.put("ageType", ageType);
             JSONArray breedJsonArray = new JSONArray();
             for (int i = 0; i < breeds.size(); i++) {
-                breedJsonArray.put(i, breeds.get(i));
+                if(breeds.get(i).equals(OTHER_BREED)){
+                    breedJsonArray.put(i, otherBreed);//replace the value of 'other breed' with actual breed
+                }
+                else {
+                    breedJsonArray.put(i, breeds.get(i));
+                }
             }
+
             jsonObject.put("breeds", breedJsonArray);
             jsonObject.put("sex", sex);
             JSONArray deformityJsonArray = new JSONArray();

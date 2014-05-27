@@ -1,11 +1,9 @@
 package org.cgiar.ilri.mistro.farmer;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
@@ -13,16 +11,18 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -53,7 +53,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class CowRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener, LocationListener
+public class CowRegistrationActivity extends SherlockActivity implements MistroActivity,
+        View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,
+        Spinner.OnItemSelectedListener, View.OnFocusChangeListener, LocationListener, CheckBox.OnCheckedChangeListener
 {
     private boolean cacheData;
 
@@ -74,6 +76,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private EditText dateOfBirthET;
     private TextView breedTV;
     private EditText breedET;
+    private TextView anotherBreedTV;
+    private AutoCompleteTextView breedACTV;
     private TextView sexTV;
     private Spinner sexS;
     private TextView deformityTV;
@@ -103,6 +107,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private Dialog deformityDialog;
     private ScrollView deformitySV;
     private ListView deformityLV;
+    private CheckBox noDeformityCB;
     private EditText specifyET;
     private Button dialogDeformityOkayB;
 
@@ -110,6 +115,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private int numberOfCows;
     private int selectedBreeds;
     private String[] breeds;
+    private String[] uncommonBreeds;
     private String[] deformities;
     private String deformityOSpecifyText;
     private Cow thisCow;
@@ -153,6 +159,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         breedET=(EditText)this.findViewById(R.id.breed_et);
         breedET.setOnFocusChangeListener(this);
         breedET.setOnClickListener(this);
+        anotherBreedTV = (TextView)this.findViewById(R.id.another_breed_tv);
+        breedACTV = (AutoCompleteTextView)this.findViewById(R.id.breed_actv);
         sexTV=(TextView)this.findViewById(R.id.sex_tv);
         sexS=(Spinner)this.findViewById(R.id.sex_s);
         deformityTV=(TextView)this.findViewById(R.id.deformity_tv);
@@ -203,6 +211,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         deformityLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         deformityLV.setOnItemClickListener(this);
         specifyET=(EditText)deformityDialog.findViewById(R.id.specify_et);
+        noDeformityCB = (CheckBox)deformityDialog.findViewById(R.id.no_deformity_cb);
+        noDeformityCB.setOnCheckedChangeListener(this);
         dialogDeformityOkayB =(Button) deformityDialog.findViewById(R.id.dialog_deformity_okay_b);
         dialogDeformityOkayB.setOnClickListener(this);
 
@@ -227,27 +237,34 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
 
     private void cacheEditTextData(){
         if(cacheData) {
+            Log.i(TAG, "Edit text data cached");
             //Incase the activity is hidden partially/fully save the data in edittexts
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, nameET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, earTagNumberET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, ageET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, dateOfBirthET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, breedET.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED_OTHER, breedACTV.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, deformityET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, strawNumberET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, damACTV.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, embryoNumberET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, countryOfOriginACTV.getText().toString());
         }
+        else{
+            Log.i(TAG, "Edit text data NOT cached");
+        }
     }
 
     private void restoreEditTextData(){
+        Log.i(TAG, "Edit text data restored");
         //incase the activity was hidden partially for a moment, restore what the user had already entered
         nameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, ""));
         earTagNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, ""));
         ageET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, ""));
         dateOfBirthET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, ""));
         breedET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, ""));
+        breedACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_BREED_OTHER, ""));
         deformityET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, ""));
         strawNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, ""));
         damACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, ""));
@@ -256,11 +273,14 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     }
 
     private void clearEditTextDataCache(){
+        Log.i(TAG, "Edit text cache cleared");
+
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED_OTHER, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, "");
@@ -284,8 +304,6 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     @Override
     protected void onResume() {
         super.onResume();
-
-        restoreEditTextData();
 
         Bundle bundle=this.getIntent().getExtras();
         if(bundle != null) {
@@ -312,7 +330,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                             ageS.setSelection(i);
                         }
                     }
-                    List<String> savedBreeds=thisCow.getBreeds();
+                    List<String> savedBreeds=thisCow.getBreeds(this);//returns breeds in current locale
                     String breed="";
                     for (int i=0;i<savedBreeds.size();i++) {
                         if(i==0) {
@@ -320,6 +338,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                         }
                         else {
                             breed=breed+", "+savedBreeds.get(i);
+                        }
+
+                        if(savedBreeds.get(i).equals(breeds[breeds.length-1])){
+                            breedACTV.setText(thisCow.getOtherBreed(this));//returns other breed in current locale
                         }
                     }
                     breedET.setText(breed);
@@ -332,7 +354,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                             sexS.setSelection(i);
                         }
                     }
-                    List<String> savedDeformities=thisCow.getDeformities();
+                    List<String> savedDeformities=thisCow.getDeformities(this);//returns deformities in current locale
                     String deformity="";
                     for (int i=0;i<savedDeformities.size();i++) {
                         if(i==0) {
@@ -460,6 +482,11 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             }
 
         }
+
+        if(nameET.getText().toString().trim().length() == 0 && earTagNumberET.getText().toString().trim().length() == 0){
+            //means that when the activity paused the last time it did not save data to the cow object. Try to get data from shared preferences
+            restoreEditTextData();
+        }
     }
 
     private void getGPSCoordinates() {
@@ -508,6 +535,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         }
         dateOfBirthTV.setText(Locale.getStringInLocale("date_of_birth",this));
         breedTV.setText(Locale.getStringInLocale("breed",this));
+        anotherBreedTV.setText(Locale.getStringInLocale("extra_breed", this));
+        breedACTV.setHint(Locale.getStringInLocale("specify_breed_here", this));
         sexTV.setText(" * "+Locale.getStringInLocale("sex",this));
         int sexArrayID = Locale.getArrayIDInLocale("sex_array",this);
         if(sexArrayID!=0) {
@@ -538,7 +567,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         }
 
         breedDialog.setTitle(Locale.getStringInLocale("breed",this));
-        breeds=Locale.getArrayInLocale("breeds_array",this);
+        breeds=Locale.getArrayInLocale("c_breeds_array",this);
+        uncommonBreeds=Locale.getArrayInLocale("uc_breeds_array",this);
         if(breeds==null) {
             breeds = new String[1];
             breeds[0] = "";
@@ -559,6 +589,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 breedDialogSV.getLayoutParams().height = totalBreedSVHeight + dialogBreedOkayB.getLayoutParams().height;
             }
         }
+        ArrayAdapter<String> uncommonBreedsArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, uncommonBreeds);
+        breedACTV.setAdapter(uncommonBreedsArrayAdapter);
+
 
         deformityDialog.setTitle(Locale.getStringInLocale("deformity",this));
         deformities=Locale.getArrayInLocale("deformities_array",this);
@@ -568,7 +601,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         }
         ArrayAdapter<String> deformityArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,deformities);
         deformityLV.setAdapter(deformityArrayAdapter);
-        specifyET.setHint(Locale.getStringInLocale("specify",this));
+        specifyET.setHint(Locale.getStringInLocale("specify", this));
+        noDeformityCB.setText(Locale.getStringInLocale("no_deformity", this));
         dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
         ArrayAdapter countryArrayAdapter = ArrayAdapter.createFromResource(this,R.array.countries,android.R.layout.select_dialog_item);
         countryOfOriginACTV.setAdapter(countryArrayAdapter);
@@ -579,10 +613,21 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             int list_child_item_height = listItem.getLayoutParams().height + deformityLV.getDividerHeight();//item height
             totalDeformitySVHeight += list_child_item_height; //
         }
+
+        Log.d(TAG, "Height of no deformity checkbox = "+String.valueOf(noDeformityCB.getLayoutParams().height));
+        Log.d(TAG, "Margin top of deformity checkbox = "+String.valueOf(((ViewGroup.MarginLayoutParams)noDeformityCB.getLayoutParams()).topMargin));
+
         if(totalDeformitySVHeight > 0){
             deformityLV.getLayoutParams().height = totalDeformitySVHeight;
-            if(deformitySV.getLayoutParams().height > (totalDeformitySVHeight + specifyET.getLayoutParams().height + dialogDeformityOkayB.getLayoutParams().height)){
-                deformitySV.getLayoutParams().height= totalDeformitySVHeight + specifyET.getLayoutParams().height + dialogDeformityOkayB.getLayoutParams().height;
+            int svChildrenHeight = totalDeformitySVHeight +
+                    specifyET.getLayoutParams().height +
+                    noDeformityCB.getLayoutParams().height +
+                    ((ViewGroup.MarginLayoutParams)noDeformityCB.getLayoutParams()).topMargin +
+                    dialogDeformityOkayB.getLayoutParams().height +
+                    ((ViewGroup.MarginLayoutParams)dialogDeformityOkayB.getLayoutParams()).topMargin;
+
+            if(deformitySV.getLayoutParams().height > svChildrenHeight){
+                deformitySV.getLayoutParams().height= svChildrenHeight;
             }
         }
 
@@ -791,6 +836,18 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 selectedBreeds--;
                 Toast.makeText(this,Locale.getStringInLocale("maximum_of_four_breeds",this),Toast.LENGTH_LONG).show();
             }
+
+            if(position==breeds.length - 1){//the last item should be other breed
+                if(breedLV.isItemChecked(position)){
+                    breedACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                    anotherBreedTV.setVisibility(TextView.VISIBLE);
+                }
+                else{
+                    breedACTV.setVisibility(AutoCompleteTextView.GONE);
+                    breedACTV.setText("");
+                    anotherBreedTV.setVisibility(TextView.GONE);
+                }
+            }
         }
         else if(parent==deformityLV) {
             if(position==deformities.length-1){ //last deformity. should be other
@@ -802,6 +859,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                     specifyET.setText("");
                 }
             }
+
+            noDeformityCB.setChecked(false);
         }
     }
 
@@ -904,6 +963,64 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             Toast.makeText(this,Locale.getStringInLocale("enter_ear_tag_no_or_name",this),Toast.LENGTH_LONG).show();
             return false;
         }
+
+        if(dateOfBirthET.getText().toString().trim().equals("") && ageET.getText().toString().trim().equals("")){
+            Toast.makeText(this, Locale.getStringInLocale("enter_age_or_dob", this), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if (!dateOfBirthET.getText().toString().trim().equals("") && !ageET.getText().toString().trim().equals("")) {//both dob and age are set
+            String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array", this, Locale.LOCALE_ENGLISH);
+            String ageType = ageTypesInEN[ageS.getSelectedItemPosition()];
+            float unitAge = 0;
+            if (ageType.equals("Years")) {
+                unitAge = 31557600000L;
+            } else if (ageType.equals("Months")) {
+                unitAge = 2628000000L;
+            } else if (ageType.equals("Days")) {
+                unitAge = 86400000L;
+            }
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+
+            try {
+                Date enteredDate = simpleDateFormat.parse(dateOfBirthET.getText().toString());
+                long enteredDateMs = enteredDate.getTime();
+                long ageMs = (long) (new Date().getTime() - (Integer.parseInt(ageET.getText().toString()) * unitAge));
+                long msDiff = Math.abs(ageMs - enteredDateMs);
+                float unitDiff = msDiff / unitAge;
+                if (unitDiff > 1) {
+                    Toast.makeText(this, Locale.getStringInLocale("age_diff_from_dob", this), Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(breedACTV.getVisibility() == AutoCompleteTextView.VISIBLE){//user selected other breed in breedET
+            if(breedACTV.getText().toString().trim().length() == 0){//user did not specify other breed
+                Toast.makeText(this, Locale.getStringInLocale("enter_breed", this), Toast.LENGTH_LONG).show();
+                breedACTV.requestFocus();
+                return false;
+            }
+            else{
+                String[] uncommonBreedsInEN = Locale.getArrayInLocale("uc_breeds_array", this, Locale.LOCALE_ENGLISH);
+                String enteredBreed = breedACTV.getText().toString();
+                boolean breedKnown = false;
+                for(int i = 0; i < uncommonBreedsInEN.length; i++){
+                    if(uncommonBreedsInEN[i].equals(enteredBreed)){
+                        breedKnown = true;
+                    }
+                }
+
+                if(!breedKnown){
+                    Toast.makeText(this, Locale.getStringInLocale("breed_unknown", this), Toast.LENGTH_LONG).show();
+                    breedACTV.requestFocus();
+                    return false;
+                }
+            }
+        }
+
         if(countryOfOriginACTV.getText().toString().length() > 0) {
             String[] countries = this.getResources().getStringArray(R.array.countries);
             boolean countryFound = false;
@@ -917,59 +1034,13 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 Toast.makeText(this,Locale.getStringInLocale("country_not_found",this),Toast.LENGTH_LONG).show();
                 return false;
             }
-            /*if(!dateOfBirthET.getText().toString().trim().equals("") && !ageET.getText().toString().trim().equals("")){
-                String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array",this,Locale.LOCALE_ENGLISH);
-                String ageType = ageTypesInEN[ageS.getSelectedItemPosition()];
-                float unitAge = 0;
-                if(ageType.equals("Years")){
-                    unitAge = 31557600000L;
-                }
-                else if(ageType.equals("Months")){
-                    unitAge = 2628000000L;
-                }
-                else if(ageType.equals("Days")){
-                    unitAge = 86400000L;
-                }
-
-                SimpleDateFormat simpleDateFormat=new SimpleDateFormat(dateFormat);
-
-                try
-                {
-                    Date enteredDate=simpleDateFormat.parse(dateOfBirthET.getText().toString());
-                    long enteredDateMs = enteredDate.getTime();
-                    long  ageMs = (long)(new Date().getTime() - (Integer.parseInt(ageET.getText().toString())*unitAge));
-                    long msDiff = Math.abs(ageMs - enteredDateMs);
-                    float unitDiff = msDiff / unitAge;
-                    if(unitDiff > 1){
-                        Toast.makeText(this, Locale.getStringInLocale("age_diff_from_dob",this),Toast.LENGTH_LONG).show();
-                        return false;
-                    }
-                }
-                catch (ParseException e)
-                {
-                    e.printStackTrace();
-                }
-            }*/
-
-            if(dateOfBirthET.getText().toString().trim().equals("") && ageET.getText().toString().trim().equals("")){
-                Toast.makeText(this, Locale.getStringInLocale("enter_age_or_dob", this), Toast.LENGTH_LONG).show(); 
-                return false;
-            }
         }
+
         return true;
     }
 
     private void cacheThisCow() {
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, "");
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, "");
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, "");
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, "");
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, "");
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, "");
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, "");
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, "");
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, "");
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, "");
+        clearEditTextDataCache();
 
         if(thisCow==null) {
             thisCow=new Cow(true);
@@ -992,9 +1063,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
         }
         thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
-        thisCow.setBreeds(breedET.getText().toString().split(", "));
-        thisCow.setDeformities(deformityET.getText().toString().split(", "));
-        String[] selectedDeformities = deformityET.getText().toString().split(", ");
+        thisCow.setBreeds(breedET.getText().toString().split(", "), this);
+        thisCow.setOtherBreed(this, breedACTV.getText().toString());
+        thisCow.setDeformities(deformityET.getText().toString().split(", "), this);
         thisCow.setOtherDeformity(specifyET.getText().toString());
         thisCow.setCountryOfOrigin(countryOfOriginACTV.getText().toString());
         String[] sexInEN = Locale.getArrayInLocale("sex_array",this,Locale.LOCALE_ENGLISH);
@@ -1127,6 +1198,24 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(buttonView.equals(noDeformityCB)){
+            if(isChecked){
+                deformityLV.clearChoices();
+                ArrayAdapter<String> deformityArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,deformities);
+                deformityLV.setAdapter(deformityArrayAdapter);
+                specifyET.setVisibility(EditText.GONE);
+                specifyET.setText("");
+
+                deformityET.setHint(Locale.getStringInLocale("no_deformity", this));
+            }
+            else{
+                deformityET.setHint("");
+            }
+        }
     }
 
     private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,String> {

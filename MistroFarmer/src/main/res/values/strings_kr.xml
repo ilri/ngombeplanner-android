@@ -47,6 +47,7 @@
         <item>Aberdeen Angus</item>
         <item>Hereford</item>
         <item>Nganda</item>
+        <item>Another Breed</item>
     </string-array>
     <string-array name="uc_breeds_array_kr">
         <item>Charolais</item>
