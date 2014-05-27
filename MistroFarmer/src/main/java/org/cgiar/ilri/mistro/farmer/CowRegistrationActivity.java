@@ -55,7 +55,7 @@ import java.util.List;
 
 public class CowRegistrationActivity extends SherlockActivity implements MistroActivity,
         View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,
-        Spinner.OnItemSelectedListener, View.OnFocusChangeListener, LocationListener, CheckBox.OnCheckedChangeListener
+        Spinner.OnItemSelectedListener, View.OnFocusChangeListener, LocationListener, CheckBox.OnCheckedChangeListener, View.OnLongClickListener
 {
     private boolean cacheData;
 
@@ -154,6 +154,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         dateOfBirthET=(EditText)this.findViewById(R.id.date_of_birth_et);
         dateOfBirthET.setOnFocusChangeListener(this);
         dateOfBirthET.setOnClickListener(this);
+        dateOfBirthET.setOnLongClickListener(this);
         //dateOfBirthET.setVisibility(TextView.GONE); //date of birth appears not to be necessary
         breedTV=(TextView)this.findViewById(R.id.breed_tv);
         breedET=(EditText)this.findViewById(R.id.breed_et);
@@ -1216,6 +1217,15 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 deformityET.setHint("");
             }
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if(v.equals(dateOfBirthET)){
+            Log.w(TAG, "About to delete date in dateOfBirthET");
+            dateOfBirthET.setText("");
+        }
+        return false;
     }
 
     private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,String> {
