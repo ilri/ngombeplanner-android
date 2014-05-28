@@ -13,16 +13,19 @@ import java.io.Serializable;
 public class Sire extends Cow implements Serializable
 {
     private String strawNumber;
+    private String owner;
+    private String ownerType;
 
     public Sire()
     {
         super(false);
         setSex(SEX_MALE);
         strawNumber="";
+        owner = "";
+        ownerType = "";
     }
 
-    public Sire(Parcel source)
-    {
+    public Sire(Parcel source) {
         this();
         readFromParcel(source);
     }
@@ -36,11 +39,29 @@ public class Sire extends Cow implements Serializable
         return strawNumber;
     }
 
+    public void setOwner(String owner){
+        this.owner = owner;
+    }
+
+    public String getOwner(){
+        return this.owner;
+    }
+
+    public String getOwnerType() {
+        return ownerType;
+    }
+
+    public void setOwnerType(String ownerType) {
+        this.ownerType = ownerType;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags)
     {
         super.writeToParcel(dest, flags);
         dest.writeString(strawNumber);
+        dest.writeString(owner);
+        dest.writeString(ownerType);
     }
 
     @Override
@@ -48,6 +69,8 @@ public class Sire extends Cow implements Serializable
     {
         super.readFromParcel(in);
         strawNumber=in.readString();
+        owner=in.readString();
+        ownerType=in.readString();
     }
 
     public static final Creator<Sire> CREATOR=new Creator<Sire>()
@@ -73,6 +96,8 @@ public class Sire extends Cow implements Serializable
         {
             jsonObject.put("type","sire");
             jsonObject.put("strawNumber",((strawNumber==null) ? "":strawNumber));
+            jsonObject.put("owner", owner);
+            jsonObject.put("ownerType", ownerType);
         }
         catch (JSONException e)
         {

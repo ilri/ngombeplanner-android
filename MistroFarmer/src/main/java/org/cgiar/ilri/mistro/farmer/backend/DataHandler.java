@@ -107,6 +107,7 @@ public class DataHandler
     public static final String SP_KEY_CRA_DEFORMITY = "cowRegistrationActivityDeformity";
     public static final String SP_KEY_CRA_STRAW_NUMBER = "cowRegistrationActivityStrawNumber";
     public static final String SP_KEY_CRA_DAM = "cowRegistrationActivityDam";
+    public static final String SP_KEY_CRA_SIRE = "cowRegistrationActivitySire";
     public static final String SP_KEY_CRA_EMBRYO_NUMBER = "cowRegistrationActivityEmbryoNumber";
     public static final String SP_KEY_CRA_COUNTRY_OF_ORIGIN = "cowRegistrationActivityCountryOfOrigin";
     public static final String SP_KEY_FRA_FULL_NAME = "farmerRegistrationActivityFullName";

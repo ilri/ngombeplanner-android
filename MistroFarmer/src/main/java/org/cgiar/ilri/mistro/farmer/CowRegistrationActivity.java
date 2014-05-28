@@ -44,6 +44,7 @@ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.cgiar.ilri.mistro.farmer.carrier.Sire;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -86,6 +87,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private Spinner serviceTypeS;
     private TextView sireTV;
     private Spinner sireS;
+    private AutoCompleteTextView sireACTV;
     private TextView strawNumberTV;
     private EditText strawNumberET;
     private TextView damTV;
@@ -173,12 +175,12 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         serviceTypeS.setOnItemSelectedListener(this);
         sireTV = (TextView)this.findViewById(R.id.sire_tv);
         sireS = (Spinner)this.findViewById(R.id.sire_s);
+        sireACTV = (AutoCompleteTextView)this.findViewById(R.id.sire_actv);
         strawNumberTV = (TextView)this.findViewById(R.id.straw_number_tv);
         strawNumberET = (EditText)this.findViewById(R.id.straw_number_et);
         damTV = (TextView)this.findViewById(R.id.dam_tv);
         damS = (Spinner)this.findViewById(R.id.dam_s);
         damACTV = (AutoCompleteTextView)this.findViewById(R.id.dam_actv);
-        damACTV.setHint(Locale.getStringInLocale("enter_dam_etn",this));
         embryoNumberTV = (TextView)this.findViewById(R.id.embryo_number_tv);
         embryoNumberET = (EditText)this.findViewById(R.id.embryo_number_et);
         countryOfOriginTV = (TextView)this.findViewById(R.id.country_of_origin_tv);
@@ -249,6 +251,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, deformityET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, strawNumberET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, damACTV.getText().toString());
+            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, sireACTV.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, embryoNumberET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, countryOfOriginACTV.getText().toString());
         }
@@ -269,6 +272,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         deformityET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, ""));
         strawNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, ""));
         damACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, ""));
+        sireACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, ""));
         embryoNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, ""));
         countryOfOriginACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, ""));
     }
@@ -285,6 +289,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, "");
+        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, "");
 
@@ -428,6 +433,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                         if(damSelection != -1)
                             damACTV.setText(validDamNames.get(damSelection));
 
+                        ArrayAdapter<String> siresACTVAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, validSireNames);
+                        sireACTV.setAdapter(siresACTVAdapter);
+                        if(sireSelection != -1)
+                            sireACTV.setText(validSireNames.get(sireSelection));
 
                         for(int i = 0; i < serviceTypesInEN.length; i++) {
                             if(serviceTypesInEN[i].equals("Bull") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_BULL)) {
@@ -447,11 +456,12 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                         serviceTypeTV.setVisibility(TextView.GONE);
                         serviceTypeS.setVisibility(Spinner.GONE);
                         sireTV.setVisibility(TextView.GONE);
-                        sireS.setVisibility(Spinner.GONE);
+//                        sireS.setVisibility(Spinner.GONE);
                         strawNumberTV.setVisibility(TextView.GONE);
                         strawNumberET.setVisibility(EditText.GONE);
                         damTV.setVisibility(TextView.GONE);
-                        damS.setVisibility(Spinner.GONE);
+//                        damS.setVisibility(Spinner.GONE);
+                        sireACTV.setVisibility(AutoCompleteTextView.GONE);
                         damACTV.setVisibility(AutoCompleteTextView.GONE);
                         embryoNumberTV.setVisibility(TextView.GONE);
                         embryoNumberET.setVisibility(EditText.GONE);
@@ -605,6 +615,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         specifyET.setHint(Locale.getStringInLocale("specify", this));
         noDeformityCB.setText(Locale.getStringInLocale("no_deformity", this));
         dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
+
+        sireACTV.setHint(Locale.getStringInLocale("enter_sire_etn", this));
+        damACTV.setHint(Locale.getStringInLocale("enter_dam_etn",this));
+
         ArrayAdapter countryArrayAdapter = ArrayAdapter.createFromResource(this,R.array.countries,android.R.layout.select_dialog_item);
         countryOfOriginACTV.setAdapter(countryArrayAdapter);
         countryOfOriginACTV.setHint(Locale.getStringInLocale("specify_other_country", this));
@@ -902,17 +916,21 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             changeServiceType();
         }
         else if(parent == commonCountriesS) {
-            String[] commonCountries = getResources().getStringArray(R.array.common_countries);
-            if(commonCountries[commonCountriesS.getSelectedItemPosition()].equals("Other")) {
-                countryOfOriginACTV.setVisibility(AutoCompleteTextView.VISIBLE);
-                countryOfOriginTV.setVisibility(TextView.VISIBLE);
-                countryOfOriginACTV.setText("");
-            }
-            else {
-                countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
-                countryOfOriginTV.setVisibility(TextView.GONE);
-                countryOfOriginACTV.setText(commonCountries[commonCountriesS.getSelectedItemPosition()]);
-            }
+            toggleCountryOfOriginVisibility();
+        }
+    }
+
+    private void toggleCountryOfOriginVisibility(){
+        String[] commonCountries = getResources().getStringArray(R.array.common_countries);
+        if(commonCountries[commonCountriesS.getSelectedItemPosition()].equals("Other")) {
+            countryOfOriginACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+            countryOfOriginTV.setVisibility(TextView.VISIBLE);
+            countryOfOriginACTV.setText("");
+        }
+        else {
+            countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
+            countryOfOriginTV.setVisibility(TextView.GONE);
+            countryOfOriginACTV.setText(commonCountries[commonCountriesS.getSelectedItemPosition()]);
         }
     }
 
@@ -920,38 +938,52 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         String[] serviceTypesInEN = Locale.getArrayInLocale("service_types", this, Locale.LOCALE_ENGLISH);
         if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Bull")) {
             sireTV.setVisibility(TextView.VISIBLE);
-            sireS.setVisibility(Spinner.VISIBLE);
+//            sireS.setVisibility(Spinner.VISIBLE);
             strawNumberTV.setVisibility(TextView.GONE);
             strawNumberET.setVisibility(EditText.GONE);
             damTV.setVisibility(TextView.VISIBLE);
 //            damS.setVisibility(Spinner.VISIBLE);
             damS.setVisibility(Spinner.GONE);
             damACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+            sireACTV.setVisibility(AutoCompleteTextView.VISIBLE);
             embryoNumberTV.setVisibility(TextView.GONE);
             embryoNumberET.setVisibility(EditText.GONE);
+            commonCountriesTV.setVisibility(TextView.VISIBLE);
+            commonCountriesS.setVisibility(Spinner.VISIBLE);
+            toggleCountryOfOriginVisibility();
         }
         else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
             sireTV.setVisibility(TextView.GONE);
-            sireS.setVisibility(Spinner.GONE);
+//            sireS.setVisibility(Spinner.GONE);
             strawNumberTV.setVisibility(TextView.VISIBLE);
             strawNumberET.setVisibility(EditText.VISIBLE);
             damTV.setVisibility(TextView.VISIBLE);
 //            damS.setVisibility(Spinner.VISIBLE);
             damS.setVisibility(Spinner.GONE);
             damACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+            sireACTV.setVisibility(AutoCompleteTextView.GONE);
             embryoNumberTV.setVisibility(TextView.GONE);
             embryoNumberET.setVisibility(EditText.GONE);
+            commonCountriesTV.setVisibility(TextView.GONE);
+            commonCountriesS.setVisibility(Spinner.GONE);
+            countryOfOriginTV.setVisibility(TextView.GONE);
+            countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
         }
         else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Embryo Transfer")) {
             sireTV.setVisibility(TextView.GONE);
-            sireS.setVisibility(Spinner.GONE);
+//            sireS.setVisibility(Spinner.GONE);
             strawNumberTV.setVisibility(TextView.GONE);
             strawNumberET.setVisibility(EditText.GONE);
             damTV.setVisibility(TextView.GONE);
             damS.setVisibility(Spinner.GONE);
             damACTV.setVisibility(AutoCompleteTextView.GONE);
+            sireACTV.setVisibility(AutoCompleteTextView.GONE);
             embryoNumberTV.setVisibility(TextView.VISIBLE);
             embryoNumberET.setVisibility(EditText.VISIBLE);
+            commonCountriesTV.setVisibility(TextView.GONE);
+            commonCountriesS.setVisibility(Spinner.GONE);
+            countryOfOriginTV.setVisibility(TextView.GONE);
+            countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
         }
     }
 
@@ -1084,8 +1116,18 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 thisCow.setServiceType(Cow.SERVICE_TYPE_BULL);
 
                 Sire sire = new Sire();
-                sire.setName(validSires.get(sireS.getSelectedItemPosition()).getName());
-                sire.setEarTagNumber(validSires.get(sireS.getSelectedItemPosition()).getEarTagNumber());
+//                sire.setName(validSires.get(sireS.getSelectedItemPosition()).getName());
+//                sire.setEarTagNumber(validSires.get(sireS.getSelectedItemPosition()).getEarTagNumber());
+
+                for(int i = 0; i < validSires.size(); i++){
+                    if(sireACTV.getText().toString().equals(validSires.get(i).getEarTagNumber()+" ("+validSires.get(i).getName()+")")){
+                        sire.setEarTagNumber(validSires.get(i).getEarTagNumber());
+                        sire.setName(validSires.get(i).getName());
+                    }
+                }
+                if(sire.getEarTagNumber().trim().equals("")){//if not yet set then assume the sire is not part of the herd
+                    sire.setEarTagNumber(sireACTV.getText().toString());
+                }
                 thisCow.setSire(sire);
 
                 Dam dam =new Dam();
@@ -1098,7 +1140,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                         dam.setName(validDams.get(i).getName());
                     }
                 }
-                if(dam.getEmbryoNumber().trim().equals("")){
+                if(dam.getEarTagNumber().trim().equals("")){//if not yet set then assume the dam is not part of the herd
                     dam.setEarTagNumber(damACTV.getText().toString());
                 }
                 thisCow.setDam(dam);

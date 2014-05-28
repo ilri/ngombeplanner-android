@@ -276,4 +276,5 @@
     <string name="breed_unknown_en">The breed you entered is unknown</string>
     <string name="extra_breed_en">Extra Breed</string>
     <string name="specify_other_country_en">Specify other country here</string>
+    <string name="enter_sire_etn_en">Enter the sire\'s ear tag number</string>
 </resources>
