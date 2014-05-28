@@ -26,8 +26,8 @@
     <string name="finish_en">Finish</string>
     <string name="okay_en">Okay</string>
     <string name="farmer_registration_en">Farmer Registration</string>
-    <string name="cow_registration_en">Cow Registration, Cow</string>
-    <string name="cow_registration_proper_en">Cow Registration</string>
+    <string name="cow_registration_en">Animal Registration, Animal</string>
+    <string name="cow_registration_proper_en">Animal Registration</string>
     <string name="dam_registration_en">Dam Registration</string>
     <string name="sire_registration_en">Sire Registration</string>
     <string-array name="age_type_array_en">
@@ -184,6 +184,9 @@
         <item>Artificial Insemination</item>
         <item>Bull Servicing</item>
         <item>Signs of Heat</item>
+        <item>Deworming</item>
+        <item>Dipping or Spraying</item>
+        <item>Vaccination</item>
     </string-array>
     <string-array name="cow_servicing_types_en">
         <item>Artificial Insemination</item>
@@ -277,4 +280,6 @@
     <string name="extra_breed_en">Extra Breed</string>
     <string name="specify_other_country_en">Specify other country here</string>
     <string name="enter_sire_etn_en">Enter the sire\'s ear tag number</string>
+    <string name="sire_owner_en">Sire\'s Owner</string>
+    <string name="name_sire_owner_en">Name of Sire\'s Owner</string>
 </resources>

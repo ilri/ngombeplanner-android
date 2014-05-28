@@ -12,6 +12,7 @@ import java.io.Serializable;
  */
 public class Sire extends Cow implements Serializable
 {
+    public static final String SIRE_OWNER_OWN_BULL = "";
     private String strawNumber;
     private String owner;
     private String ownerType;

@@ -122,6 +122,14 @@ public class Cow implements Parcelable, Serializable {
     }
 
     public void setBreeds(String[] breeds, Context context) {
+        if(breeds.length == 1){//might mean that there were no breeds
+            if(breeds[0].length() == 0){
+                Log.w(TAG, "Appears like the user did not specify any breed, Setting size of breed array to 0");
+                breeds = new String[0];
+            }
+        }
+
+        Log.d(TAG, "***** size of breeds = "+String.valueOf(breeds.length));
         //translate breeds to english
         String[] translatedBreeds =  Locale.translateArrayToEnglish(context, "c_breeds_array", breeds);//assuming that the breeds array is a member of c_breeds_array
 
@@ -169,6 +177,13 @@ public class Cow implements Parcelable, Serializable {
     }
 
     public void setDeformities(String[] deformities, Context context) {
+        if(deformities.length == 1){//might mean that there were no breeds
+            if(deformities[0].length() == 0){
+                Log.w(TAG, "Appears like user did not specify any deformity, setting size of deformity array to 0");
+                deformities = new String[0];
+            }
+        }
+
         //translate to english
         String[] translatedDeformities = Locale.translateArrayToEnglish(context, "deformities_array", deformities);
 
@@ -256,7 +271,7 @@ public class Cow implements Parcelable, Serializable {
 
     public List<String> getBreeds(Context context) {
         //breeds stored in this object are in english, translate them to current locale
-        String[] stringArray = Locale.translateArrayToLocale(context, "breeds_array", breeds.toArray(new String[breeds.size()]));
+        String[] stringArray = Locale.translateArrayToLocale(context, "c_breeds_array", breeds.toArray(new String[breeds.size()]));
 
         List<String> translatedBreeds = new ArrayList<String>(Arrays.asList(stringArray));
 

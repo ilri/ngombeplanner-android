@@ -184,6 +184,9 @@
         <item>boishet ab mbiret</item>
         <item>boishet ab kirgit</item>
         <item>kaborunoshek ab maget ab kirgit</item>
+        <item>Deworming</item>
+        <item>Dipping or Spraying</item>
+        <item>Vaccination</item>
     </string-array>
     <string-array name="cow_servicing_types_kl">
         <item>boishet ab mbiret</item>

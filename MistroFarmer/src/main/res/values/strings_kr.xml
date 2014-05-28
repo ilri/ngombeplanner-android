@@ -184,6 +184,9 @@
         <item>Okhurumia nende omupira</item>
         <item>okhurumia nende esulusi</item>
         <item>etsidalili tsiokhwenya esulusi</item>
+        <item>Deworming</item>
+        <item>Dipping or Spraying</item>
+        <item>Vaccination</item>
     </string-array>
     <string-array name="cow_servicing_types_kr">
         <item>Okhurumia nende omupira</item>

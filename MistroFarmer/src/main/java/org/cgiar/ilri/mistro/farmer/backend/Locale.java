@@ -95,12 +95,16 @@ public class Locale {
 
     public static String[] translateArrayToEnglish(Context context, String arrayName, String[] arrayInLocale){
         if(arrayInLocale != null){
+            Log.d(TAG, "Trying to translate array to english");
             String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, Locale.LOCALE_ENGLISH);
             String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
 
             String[] translatedArray = new String[arrayInLocale.length];
             for(int i = 0; i < arrayInLocale.length; i++){
                 for(int j = 0; j < allStringsInLocale.length; j++){
+                    Log.d(TAG, "Current actual string = "+arrayInLocale[i]);
+                    Log.d(TAG, "Current string in english =  "+allStringsInEN[j]);
+                    Log.d(TAG, "Current string in locale = "+allStringsInLocale[j]);
                     if(arrayInLocale[i].equals(allStringsInLocale[j])){
                         translatedArray[i] = allStringsInEN[j];
                     }
@@ -114,12 +118,16 @@ public class Locale {
 
     public static String[] translateArrayToLocale(Context context, String arrayName, String[] arrayInEN){
         if(arrayInEN != null){
+            Log.d(TAG, "Trying to translate array to current locale");
             String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, Locale.LOCALE_ENGLISH);
             String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
 
             String[] translatedArray = new String[arrayInEN.length];
             for(int i = 0; i < arrayInEN.length; i++){
                 for(int j = 0; j < allStringsInEN.length; j++){
+                    Log.d(TAG, "Current actual string = "+arrayInEN[i]);
+                    Log.d(TAG, "Current string in english =  "+allStringsInEN[j]);
+                    Log.d(TAG, "Current string in locale = "+allStringsInLocale[j]);
                     if(arrayInEN[i].equals(allStringsInEN[j])){
                         translatedArray[i] = allStringsInLocale[j];
                     }

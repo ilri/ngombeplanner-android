@@ -42,9 +42,9 @@ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.Dam;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.cgiar.ilri.mistro.farmer.carrier.Sire;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -88,6 +88,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private TextView sireTV;
     private Spinner sireS;
     private AutoCompleteTextView sireACTV;
+    private TextView sireOwnerTV;
+    private Spinner sireOwnerS;
+    private TextView sireOwnerNameTV;
+    private EditText sireOwnerNameET;
     private TextView strawNumberTV;
     private EditText strawNumberET;
     private TextView damTV;
@@ -125,6 +129,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private List<Cow> validSires;
     private List<Cow> validDams;
     private LocationManager locationManager;
+    private int selectedSireOwner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +181,11 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         sireTV = (TextView)this.findViewById(R.id.sire_tv);
         sireS = (Spinner)this.findViewById(R.id.sire_s);
         sireACTV = (AutoCompleteTextView)this.findViewById(R.id.sire_actv);
+        sireOwnerTV = (TextView)this.findViewById(R.id.sire_owner_tv);
+        sireOwnerS = (Spinner)this.findViewById(R.id.sire_owner_s);
+        sireOwnerS.setOnItemSelectedListener(this);
+        sireOwnerNameTV = (TextView)this.findViewById(R.id.sire_owner_name_tv);
+        sireOwnerNameET = (EditText)this.findViewById(R.id.sire_owner_name_et);
         strawNumberTV = (TextView)this.findViewById(R.id.straw_number_tv);
         strawNumberET = (EditText)this.findViewById(R.id.straw_number_et);
         damTV = (TextView)this.findViewById(R.id.dam_tv);
@@ -337,6 +347,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                         }
                     }
                     List<String> savedBreeds=thisCow.getBreeds(this);//returns breeds in current locale
+                    Log.d(TAG, "Cow breeds are "+savedBreeds);
                     String breed="";
                     for (int i=0;i<savedBreeds.size();i++) {
                         if(i==0) {
@@ -345,9 +356,12 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                         else {
                             breed=breed+", "+savedBreeds.get(i);
                         }
-
+                        Log.d(TAG, "current breed index =  "+String.valueOf(i));
+                        Log.d(TAG, "saved breeds length =  "+String.valueOf(savedBreeds.size()));
                         if(savedBreeds.get(i).equals(breeds[breeds.length-1])){
                             breedACTV.setText(thisCow.getOtherBreed(this));//returns other breed in current locale
+                            anotherBreedTV.setVisibility(TextView.VISIBLE);
+                            breedACTV.setVisibility(AutoCompleteTextView.VISIBLE);
                         }
                     }
                     breedET.setText(breed);
@@ -415,6 +429,15 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                             }
                         }
 
+                        selectedSireOwner = -1;
+                        String[] sireOwners = Locale.getArrayInLocale("bull_owners", this, Locale.LOCALE_ENGLISH);
+                        for(int i = 0; i < sireOwners.length; i++){
+                            if(sireOwners[i].equals(thisCow.getSire().getOwnerType())){
+                                selectedSireOwner = i;
+                            }
+                        }
+                        sireOwnerNameET.setText(thisCow.getSire().getOwner());
+
                         String[] serviceTypesInEN = Locale.getArrayInLocale("service_types",this,Locale.LOCALE_ENGLISH);
 
                         ArrayAdapter<String> siresArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,validSireNames);
@@ -462,6 +485,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                         damTV.setVisibility(TextView.GONE);
 //                        damS.setVisibility(Spinner.GONE);
                         sireACTV.setVisibility(AutoCompleteTextView.GONE);
+                        sireOwnerTV.setVisibility(TextView.GONE);
+                        sireOwnerS.setVisibility(Spinner.GONE);
+                        sireOwnerNameTV.setVisibility(TextView.GONE);
+                        sireOwnerNameET.setVisibility(EditText.GONE);
                         damACTV.setVisibility(AutoCompleteTextView.GONE);
                         embryoNumberTV.setVisibility(TextView.GONE);
                         embryoNumberET.setVisibility(EditText.GONE);
@@ -563,7 +590,23 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             serviceTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             serviceTypeS.setAdapter(serviceTypesAdapter);
         }
+
         sireTV.setText(Locale.getStringInLocale("sire",this));
+        sireOwnerTV.setText(Locale.getStringInLocale("sire_owner", this));
+
+        int sireOwnersID = Locale.getArrayIDInLocale("bull_owners", this);
+        if(sireOwnersID != 0){
+            ArrayAdapter<CharSequence> sireOwnersAdapter = ArrayAdapter.createFromResource(this,sireOwnersID,android.R.layout.simple_spinner_item);
+            sireOwnersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sireOwnerS.setAdapter(sireOwnersAdapter);
+
+            if(selectedSireOwner != -1){
+                sireOwnerS.setSelection(selectedSireOwner);
+            }
+        }
+
+        sireOwnerNameTV.setText(Locale.getStringInLocale("name_sire_owner", this));
+        sireOwnerNameET.setHint(Locale.getStringInLocale("name_of_other_farmer_or_group", this));
         damTV.setText(Locale.getStringInLocale("dam",this));
         strawNumberTV.setText(Locale.getStringInLocale("straw_number",this));
         embryoNumberTV.setText(Locale.getStringInLocale("embryo_number",this));
@@ -918,6 +961,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         else if(parent == commonCountriesS) {
             toggleCountryOfOriginVisibility();
         }
+        else if(parent == sireOwnerS){
+            toggleSireOwnerVisibility();
+        }
     }
 
     private void toggleCountryOfOriginVisibility(){
@@ -938,6 +984,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         String[] serviceTypesInEN = Locale.getArrayInLocale("service_types", this, Locale.LOCALE_ENGLISH);
         if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Bull")) {
             sireTV.setVisibility(TextView.VISIBLE);
+            sireOwnerTV.setVisibility(TextView.VISIBLE);
+            sireOwnerS.setVisibility(Spinner.VISIBLE);
+            toggleSireOwnerVisibility();
 //            sireS.setVisibility(Spinner.VISIBLE);
             strawNumberTV.setVisibility(TextView.GONE);
             strawNumberET.setVisibility(EditText.GONE);
@@ -954,6 +1003,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         }
         else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
             sireTV.setVisibility(TextView.GONE);
+            sireOwnerTV.setVisibility(TextView.GONE);
+            sireOwnerS.setVisibility(Spinner.GONE);
+            sireOwnerNameTV.setVisibility(TextView.GONE);
+            sireOwnerNameET.setVisibility(EditText.GONE);
 //            sireS.setVisibility(Spinner.GONE);
             strawNumberTV.setVisibility(TextView.VISIBLE);
             strawNumberET.setVisibility(EditText.VISIBLE);
@@ -971,6 +1024,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         }
         else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Embryo Transfer")) {
             sireTV.setVisibility(TextView.GONE);
+            sireOwnerTV.setVisibility(TextView.GONE);
+            sireOwnerS.setVisibility(Spinner.GONE);
+            sireOwnerNameTV.setVisibility(TextView.GONE);
+            sireOwnerNameET.setVisibility(EditText.GONE);
 //            sireS.setVisibility(Spinner.GONE);
             strawNumberTV.setVisibility(TextView.GONE);
             strawNumberET.setVisibility(EditText.GONE);
@@ -1128,6 +1185,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                 if(sire.getEarTagNumber().trim().equals("")){//if not yet set then assume the sire is not part of the herd
                     sire.setEarTagNumber(sireACTV.getText().toString());
                 }
+
+                String[] sireOwnersInEN = Locale.getArrayInLocale("bull_owners", this, Locale.LOCALE_ENGLISH);
+                sire.setOwnerType(sireOwnersInEN[sireOwnerS.getSelectedItemPosition()]);
+                sire.setOwner(sireOwnerNameET.getText().toString());
                 thisCow.setSire(sire);
 
                 Dam dam =new Dam();
@@ -1211,6 +1272,18 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             if(deformityET.getText().toString().length() == 0){
                 deformityETClicked();
             }
+        }
+    }
+
+    private void toggleSireOwnerVisibility(){
+        String[] sireOwnersInEN = Locale.getArrayInLocale("bull_owners", this, Locale.LOCALE_ENGLISH);
+        if(sireOwnersInEN[sireOwnerS.getSelectedItemPosition()].equals("Own bull")){
+            sireOwnerNameTV.setVisibility(TextView.GONE);
+            sireOwnerNameET.setVisibility(EditText.GONE);
+        }
+        else{
+            sireOwnerNameTV.setVisibility(TextView.VISIBLE);
+            sireOwnerNameET.setVisibility(EditText.VISIBLE);
         }
     }
 
