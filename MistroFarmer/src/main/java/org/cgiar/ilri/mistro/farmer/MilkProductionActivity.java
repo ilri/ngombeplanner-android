@@ -77,7 +77,7 @@ public class MilkProductionActivity extends SherlockActivity implements MistroAc
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milk_production);
-        DataHandler.requestPermissionToUseSMS(this);
+        //DataHandler.requestPermissionToUseSMS(this);
 
         addProductionB=(Button)this.findViewById(R.id.add_production_b);
         addProductionB.setOnClickListener(this);

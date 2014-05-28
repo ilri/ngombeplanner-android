@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
 
     public static final String DB_NAME = "ngombe_planner";
-    public static final int DB_VERSION = 9;
+    public static final int DB_VERSION = 10;
     public static final String TABLE_FARMER = "farmer";
     public static final String TABLE_COW = "cow";
     public static final String TABLE_EVENT = "event";

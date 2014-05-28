@@ -83,7 +83,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_milk_production);
-        DataHandler.requestPermissionToUseSMS(this);
+        //DataHandler.requestPermissionToUseSMS(this);
 
         cacheData = true;
         milkQuantityFine = false;

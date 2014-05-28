@@ -135,7 +135,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cow_registration);
-        DataHandler.requestPermissionToUseSMS(this);
+        //DataHandler.requestPermissionToUseSMS(this);
 
         cacheData = true;
 

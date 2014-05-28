@@ -63,6 +63,7 @@ public class DataHandler
     public static final String CODE_USER_NOT_AUTHENTICATED="43322";
     public static final String CODE_SIM_CARD_REGISTERED="83242";
     public static final String CODE_NUMBER_IN_USE="032443";
+    public static final String NO_CONNECTION = "43387";
 
     private static final String TAG="DataHandler";
     private static final long SMS_RESPONSE_TIMEOUT = 300000;
@@ -194,7 +195,8 @@ public class DataHandler
             response = sendDataUsingHttpConnection(context, jsonString, appendedURL);
         }
         else{
-            response = sendDataUsingSMS(context, jsonString, appendedURL, waitForResponse);
+            //response = sendDataUsingSMS(context, jsonString, appendedURL, waitForResponse);
+            return null;
         }
         return response;
     }

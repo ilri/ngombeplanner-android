@@ -69,7 +69,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Mi
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milk_production_history);
-        DataHandler.requestPermissionToUseSMS(this);
+        //DataHandler.requestPermissionToUseSMS(this);
 
         productionHistoryIDs=new ArrayList<String>();
         metrics=new DisplayMetrics();

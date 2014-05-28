@@ -66,7 +66,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmer_registration);
-        DataHandler.requestPermissionToUseSMS(this);
+        //DataHandler.requestPermissionToUseSMS(this);
 
         //init child views
         cacheData = true;

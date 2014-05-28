@@ -114,7 +114,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-        DataHandler.requestPermissionToUseSMS(this);
+        //DataHandler.requestPermissionToUseSMS(this);
 
         cacheData = true;
 

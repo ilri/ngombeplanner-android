@@ -46,7 +46,7 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        DataHandler.requestPermissionToUseSMS(this);
+        //DataHandler.requestPermissionToUseSMS(this);
 
         milkProductionB=(Button)this.findViewById(R.id.milk_production_b);
         milkProductionB.setOnClickListener(this);

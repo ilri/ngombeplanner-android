@@ -59,7 +59,7 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
-        DataHandler.requestPermissionToUseSMS(this);
+        //DataHandler.requestPermissionToUseSMS(this);
 
         //initialize child views
         loginButton=(Button)this.findViewById(R.id.login_button);
