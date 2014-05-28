@@ -665,9 +665,9 @@ public class DataHandler
                         String[][] sireRes = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
                         if(sireRes.length == 1){
                             Sire sire = new Sire();
-                            sire.setName(sireRes[cowIndex][1]);
-                            sire.setEarTagNumber(sireRes[cowIndex][2]);
-                            sire.setDateAdded(sireRes[cowIndex][9]);
+                            sire.setName(sireRes[0][1]);
+                            sire.setEarTagNumber(sireRes[0][2]);
+                            sire.setDateAdded(sireRes[0][9]);
 
                             currCow.setSire(sire);
                         }
@@ -685,9 +685,9 @@ public class DataHandler
                         String[][] damRes = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
                         if(damRes.length == 1){
                             Dam dam = new Dam();
-                            dam.setName(damRes[cowIndex][1]);
-                            dam.setEarTagNumber(damRes[cowIndex][2]);
-                            dam.setDateAdded(damRes[cowIndex][9]);
+                            dam.setName(damRes[0][1]);
+                            dam.setEarTagNumber(damRes[0][2]);
+                            dam.setDateAdded(damRes[0][9]);
 
                             currCow.setDam(dam);
                         }
