@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import org.cgiar.ilri.mistro.farmer.R;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jason on 9/5/13.
@@ -178,5 +180,39 @@ public class Locale {
         /*SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
         return sharedPreferences.getString(SHARED_PREFERENCES_KEY, LOCALE_ENGLISH);*/
         return DataHandler.getSharedPreference(context, DataHandler.SP_KEY_LOCALE, LOCALE_ENGLISH);
+    }
+
+    public static String getLocaleCode(Context context, String language){
+        String code = "";
+        if(language.equals(context.getString(R.string.english))) code = LOCALE_ENGLISH;
+        else if(language.equals(context.getString(R.string.swahili))) code = LOCALE_SWAHILI;
+        else if(language.equals(context.getString(R.string.kalenjin))) code = LOCALE_KALENJIN;
+        else if(language.equals(context.getString(R.string.kikabrasi))) code = LOCALE_KIKABRAS;
+        else if(language.equals(context.getString(R.string.luhya))) code = LOCALE_LUHYA;
+
+        return code;
+    }
+
+    public static String getLanguage(Context context, String localeCode){
+        String language = "";
+
+        if(localeCode.equals(LOCALE_ENGLISH)) language = context.getString(R.string.english);
+        if(localeCode.equals(LOCALE_SWAHILI)) language = context.getString(R.string.swahili);
+        if(localeCode.equals(LOCALE_KALENJIN)) language = context.getString(R.string.kalenjin);
+        if(localeCode.equals(LOCALE_KIKABRAS)) language = context.getString(R.string.kikabrasi);
+        if(localeCode.equals(LOCALE_LUHYA)) language = context.getString(R.string.luhya);
+
+        return language;
+    }
+
+    public static List<String> getAllLanguages(Context context){
+        List<String> languages = new ArrayList<String>();
+        languages.add(context.getString(R.string.english));
+        languages.add(context.getString(R.string.swahili));
+        languages.add(context.getString(R.string.luhya));
+        languages.add(context.getString(R.string.kikabrasi));
+        languages.add(context.getString(R.string.kalenjin));
+
+        return languages;
     }
 }

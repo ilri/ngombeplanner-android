@@ -282,4 +282,5 @@
     <string name="enter_sire_etn_en">Enter the sire\'s ear tag number</string>
     <string name="sire_owner_en">Sire\'s Owner</string>
     <string name="name_sire_owner_en">Name of Sire\'s Owner</string>
+    <string name="preferred_language_en">Preferred language</string>
 </resources>

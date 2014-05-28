@@ -16,8 +16,10 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +31,11 @@ import com.actionbarsherlock.view.MenuItem;
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FarmerRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener,LocationListener
 {
@@ -41,8 +47,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
     private String longitude;
     private TextView fullNameTV;
     private EditText fullNameET;
+    private TextView preferredLanguageTV;
+    private Spinner preferredLanguageS;
     private TextView extensionPersonnelTV;
-    private EditText extensionPersonnelET;
+    private Spinner extensionPersonnelS;
     private TextView mobileNumberTV;
     private EditText mobileNumberET;
     private TextView numberOfCowsTV;
@@ -58,7 +66,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
     private String mobileNoETEmptyWarning;
     private  LocationManager locationManager;
     private String loadingPleaseWait;
+    private List<String> vetNames;
     private boolean isInFarm;
+    private List<String> languages;
+    private int preferredLanguageIndex;
 
     private Farmer farmer;
     @Override
@@ -69,13 +80,17 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
         //DataHandler.requestPermissionToUseSMS(this);
 
         //init child views
+        languages = Locale.getAllLanguages(this);
         cacheData = true;
         isInFarm = false;
+        preferredLanguageIndex = -1;
 
         fullNameTV=(TextView)this.findViewById(R.id.full_name_tv);
         fullNameET=(EditText)this.findViewById(R.id.full_name_et);
+        preferredLanguageTV = (TextView)this.findViewById(R.id.preferred_language_tv);
+        preferredLanguageS = (Spinner)this.findViewById(R.id.preferred_language_s);
         extensionPersonnelTV=(TextView)this.findViewById(R.id.extension_personnel_tv);
-        extensionPersonnelET=(EditText)this.findViewById(R.id.extension_personnel_et);
+        extensionPersonnelS=(Spinner)this.findViewById(R.id.extension_personnel_s);
         mobileNumberTV=(TextView)this.findViewById(R.id.mobile_number_tv);
         mobileNumberET=(EditText)this.findViewById(R.id.mobile_number_et);
         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
@@ -88,6 +103,9 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
 
         //init text according to locale
         initTextInViews();
+
+        FetchVetsThread fetchVetsThread = new FetchVetsThread();
+        fetchVetsThread.execute(0);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -107,20 +125,17 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
     private void cacheEditTextData(){
         if(cacheData) {
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, fullNameET.getText().toString());
-            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, extensionPersonnelET.getText().toString());
             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, mobileNumberET.getText().toString());
         }
     }
 
     private void restoreEditTextData(){
         fullNameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, ""));
-        extensionPersonnelET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, ""));
         mobileNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, ""));
     }
 
     private void clearEditTextDataCache(){
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, "");
-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, "");
         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, "");
 
         cacheData = false;
@@ -142,7 +157,30 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
         {
             fullNameET.setText(farmer.getFullName());
             Log.d(TAG, "Full name: " + farmer.getFullName());
-            extensionPersonnelET.setText(farmer.getExtensionPersonnel());
+            List<String> tmpVetNames = new ArrayList<String>();
+            tmpVetNames.add("");
+            String selectedEP = farmer.getExtensionPersonnel();
+            int epSelection = 0;
+            if(selectedEP!= null && selectedEP.length() > 0){
+                tmpVetNames.add(selectedEP);
+                epSelection = 1;
+            }
+            ArrayAdapter<String> epArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,tmpVetNames);
+            epArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            extensionPersonnelS.setAdapter(epArrayAdapter);
+            extensionPersonnelS.setSelection(epSelection);
+
+            String prefLocale = farmer.getPreferredLocale();
+            if(prefLocale != null && prefLocale.length() > 0){
+                for(int i = 0; i < languages.size(); i++){
+                    if(languages.get(i).equals(Locale.getLanguage(this, prefLocale))){
+                        preferredLanguageIndex = i;
+                    }
+                }
+            }
+
+            Log.d(TAG, "Preferred locale: "+farmer.getPreferredLocale());
+
             Log.d(TAG,"Extension Personnel: "+farmer.getExtensionPersonnel());
             mobileNumberET.setText(farmer.getMobileNumber());
             Log.d(TAG,"Mobile number: "+farmer.getMobileNumber());
@@ -182,6 +220,14 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
         extensionPersonnelTV.setText(Locale.getStringInLocale("extension_p", this));
         mobileNumberTV.setText(" * " + Locale.getStringInLocale("mobile_number", this));
         numberOfCowsTV.setText(" * "+Locale.getStringInLocale("number_of_cows",this));
+        preferredLanguageTV.setText(" * "+Locale.getStringInLocale("preferred_language", this));
+
+        ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, languages);
+        languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        preferredLanguageS.setAdapter(languageAdapter);
+
+        if(preferredLanguageIndex != -1) preferredLanguageS.setSelection(preferredLanguageIndex);
+
         registerButton.setText(Locale.getStringInLocale("register",this));
         gpsAlertDialogTitle=Locale.getStringInLocale("enable_gps",this);
         gpsAlertDialogText=Locale.getStringInLocale("reason_for_enabling_gps",this);
@@ -205,7 +251,17 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
             farmer=new Farmer();
         }
         farmer.setFullName(fullNameET.getText().toString());
-        farmer.setExtensionPersonnel(extensionPersonnelET.getText().toString());
+        if(vetNames != null && extensionPersonnelS.getSelectedItemPosition() != -1){
+            farmer.setExtensionPersonnel(vetNames.get(extensionPersonnelS.getSelectedItemPosition()));
+        }
+        else{
+            farmer.setExtensionPersonnel("");
+        }
+
+        if(languages != null && preferredLanguageS.getSelectedItemPosition() != -1){
+            farmer.setPreferredLocale(Locale.getLocaleCode(this, languages.get(preferredLanguageS.getSelectedItemPosition())));
+        }
+
         farmer.setMobileNumber(mobileNumberET.getText().toString());
         farmer.setCowNumber((numberOfCowsET.getText().toString()==null||numberOfCowsET.getText().toString().length()==0) ? 0:Integer.parseInt(numberOfCowsET.getText().toString()));//Integer.parseInt(numberOfCowsET.getText().toString())
         if(isInFarm) {
@@ -437,6 +493,64 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
                 Utils.showSuccessfullRegistration(FarmerRegistrationActivity.this,null);
                 //Intent intent=new Intent(FarmerRegistrationActivity.this,LandingActivity.class);
                 //startActivity(intent);
+            }
+        }
+    }
+
+    private class FetchVetsThread extends AsyncTask<Integer, Integer, String>{
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(FarmerRegistrationActivity.this, "",loadingPleaseWait, true);
+        }
+
+        @Override
+        protected String doInBackground(Integer... params) {
+            Log.d(TAG, "Fetching vets from server");
+
+            return DataHandler.sendDataToServer(FarmerRegistrationActivity.this, "", DataHandler.FARMER_FETCH_VETS_URL, true);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            progressDialog.dismiss();
+
+            if(result == null){
+                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("problem_connecting_to_server", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else{
+                try{
+                    Log.d(TAG, "result is "+result);
+                    JSONArray vetJsonArray = new JSONArray(result);
+                    vetNames = new ArrayList<String>();
+                    vetNames.add("");
+                    for(int i = 0; i < vetJsonArray.length(); i++){
+                        vetNames.add(vetJsonArray.getJSONObject(i).getString("name"));
+                    }
+
+                    int selection = 0;
+                    if(farmer != null){
+                        String selectedEP = farmer.getExtensionPersonnel();
+                        if(selectedEP != null && selectedEP.length() > 0){
+                            for(int i =0; i < vetNames.size(); i++){
+                                if(vetNames.get(i).equals(selectedEP)){
+                                    selection = i;
+                                }
+                            }
+                        }
+                    }
+
+                    ArrayAdapter<String> epArrayAdapter = new ArrayAdapter<String>(FarmerRegistrationActivity.this, android.R.layout.simple_spinner_item, vetNames);
+                    epArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    extensionPersonnelS.setAdapter(epArrayAdapter);
+                    extensionPersonnelS.setSelection(selection);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
     }

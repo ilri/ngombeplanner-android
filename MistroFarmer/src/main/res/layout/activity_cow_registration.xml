@@ -232,7 +232,7 @@
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:textSize="@dimen/normal_text_size"
             android:textColor="@color/text_input_color"
-            android:inputType="text"/>
+            android:inputType="textCapWords|textPersonName"/>
         <TextView
             android:id="@+id/straw_number_tv"
             android:layout_height="wrap_content"

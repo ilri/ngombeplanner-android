@@ -29,6 +29,7 @@ public class Farmer implements Parcelable, Serializable
     private String latitude;
     private String simCardSN;
     private String mode;
+    private String preferredLocale;
     private boolean isInFarm;
 
     public Farmer()
@@ -41,6 +42,7 @@ public class Farmer implements Parcelable, Serializable
         latitude="";
         simCardSN ="";
         mode = "";
+        preferredLocale = "";
         isInFarm = false;
     }
 
@@ -101,6 +103,14 @@ public class Farmer implements Parcelable, Serializable
         {
             Log.e(TAG,"Trying to add cow in index greater than size of Cow list");
         }
+    }
+
+    public String getPreferredLocale() {
+        return preferredLocale;
+    }
+
+    public void setPreferredLocale(String preferredLocale) {
+        this.preferredLocale = preferredLocale;
     }
 
     public void addCow(Cow cow)
@@ -194,6 +204,7 @@ public class Farmer implements Parcelable, Serializable
         dest.writeString(mode);
         if(isInFarm) dest.writeInt(1);
         else dest.writeInt(0);
+        dest.writeString(preferredLocale);
     }
 
     public void readFromParcel(Parcel in)
@@ -210,6 +221,7 @@ public class Farmer implements Parcelable, Serializable
         int isInFarm = in.readInt();
         if(isInFarm == 1) this.isInFarm = true;
         else this.isInFarm = false;
+        this.preferredLocale = in.readString();
     }
 
     public static final Creator<Farmer> CREATOR=new Creator<Farmer>()
@@ -245,6 +257,7 @@ public class Farmer implements Parcelable, Serializable
             jsonObject.put("latitude",((latitude==null) ? "":latitude));
             jsonObject.put("simCardSN",((simCardSN ==null) ? "": simCardSN));
             jsonObject.put("mode",((mode ==null) ? "": mode));
+            jsonObject.put("preferredLocale", preferredLocale);
         }
         catch (JSONException e)
         {
