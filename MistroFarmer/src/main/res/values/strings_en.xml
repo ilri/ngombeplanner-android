@@ -221,7 +221,7 @@
     </string-array>
     <string name="gps_narrowing_down_on_loc_en">Please wait while GPS narrows down on your location</string>
     <string name="event_only_for_female_cattle_en">The selected event can only occur in female cattle</string>
-    <string name="other_countries_en">Other Countries</string>
+    <string name="other_countries_en">Extra Countries</string>
     <string name="no_times_milked_in_a_day_en">No. of times milked per day</string>
     <string name="calf_suckling_en">Calf suckling</string>
     <string-array name="calf_suckling_types_en">
@@ -262,7 +262,7 @@
     <string name="you_do_not_have_cows_en">You do not seem to have cows</string>
 
     <!-- Added after translation-->
-    <string name="ear_tag_no_or_name_en">You can enter the either the cow\'s name or ear tag number</string>
+    <string name="ear_tag_no_or_name_en">You can enter either the cow\'s name or ear tag number</string>
     <string name="age_or_dob_en">You can enter either the cow\'s age or date of birth</string>
     <string name="enter_age_or_dob_en">Please enter either the cow\'s age or date of birth</string>
     <string name="cow_too_young_en">The selected cow is too young</string>
@@ -275,4 +275,5 @@
     <string name="enter_breed_en">Please specify the other breed</string>
     <string name="breed_unknown_en">The breed you entered is unknown</string>
     <string name="extra_breed_en">Extra Breed</string>
+    <string name="specify_other_country_en">Specify other country here</string>
 </resources>

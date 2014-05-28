@@ -607,6 +607,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
         ArrayAdapter countryArrayAdapter = ArrayAdapter.createFromResource(this,R.array.countries,android.R.layout.select_dialog_item);
         countryOfOriginACTV.setAdapter(countryArrayAdapter);
+        countryOfOriginACTV.setHint(Locale.getStringInLocale("specify_other_country", this));
+
         int totalDeformitySVHeight = 0;
         for (int i = 0, len = deformityArrayAdapter.getCount(); i < len; i++) {
             View listItem = deformityArrayAdapter.getView(i, null, deformityLV);
