@@ -173,6 +173,7 @@
     <string name="remarks_kl">tesyi ki nekoaak ana nekoikeer</string>
     <string name="event_kl">yautiet</string>
     <string-array name="cow_event_types_kl">
+        <item></item>
         <item>siget</item>
         <item>taunet ab keiysyet</item>
         <item>kolug</item>

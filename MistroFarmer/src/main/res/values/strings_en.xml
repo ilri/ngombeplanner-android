@@ -173,6 +173,7 @@
     <string name="remarks_en">Remarks</string>
     <string name="event_en">Event</string>
     <string-array name="cow_event_types_en">
+        <item></item>
         <item>Birth</item>
         <item>Start of Lactation</item>
         <item>Dry Off</item>
@@ -283,4 +284,5 @@
     <string name="sire_owner_en">Sire\'s Owner</string>
     <string name="name_sire_owner_en">Name of Sire\'s Owner</string>
     <string name="preferred_language_en">Preferred language</string>
+    <string name="select_an_event_en">Please select an event</string>
 </resources>

@@ -173,6 +173,7 @@
     <string name="remarks_kr">obuloli</string>
     <string name="event_kr">efikhole </string>
     <string-array name="cow_event_types_kr">
+        <item></item>
         <item>khwibulwa</item>
         <item>okhuchaka okhushela</item>
         <item>okhumila</item>

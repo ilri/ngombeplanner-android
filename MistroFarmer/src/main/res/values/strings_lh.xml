@@ -173,6 +173,7 @@
     <string name="remarks_lh">akandi khwo</string>
     <string name="event_lh">shikhole</string>
     <string-array name="cow_event_types_lh">
+        <item></item>
         <item>khurula/khwibula</item>
         <item>khuchaka okhununia</item>
         <item>dry off</item>

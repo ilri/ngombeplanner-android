@@ -572,6 +572,9 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
 
     private boolean validateInput()
     {
+
+        String[] eventTypesInEN = Locale.getArrayInLocale("cow_event_types",this, Locale.LOCALE_ENGLISH);
+        String selectedEvent = eventTypesInEN[eventTypeS.getSelectedItemPosition()];
         if(dateET.getText().toString()==null||dateET.getText().toString().length()==0) {
             Toast.makeText(this,enterDate,Toast.LENGTH_LONG).show();
             return false;
@@ -581,8 +584,10 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
                 return false;
             }
         }
-        String[] eventTypesInEN = Locale.getArrayInLocale("cow_event_types",this, Locale.LOCALE_ENGLISH);
-        String selectedEvent = eventTypesInEN[eventTypeS.getSelectedItemPosition()];
+        if(selectedEvent.length() == 0){
+            Toast.makeText(this,Locale.getStringInLocale("select_an_event",this),Toast.LENGTH_LONG).show();
+            return false;
+        }
         if(selectedEvent.equals("Abortion") || selectedEvent.equals("Birth") || selectedEvent.equals("Start of Lactation") || selectedEvent.equals("Dry Off") || selectedEvent.equals("Artificial Insemination") || selectedEvent.equals("Bull Servicing")) {
             if(cowSexArray != null && cowSexArray[cowIdentifierS.getSelectedItemPosition()].equals(Cow.SEX_MALE)) {
                 Toast.makeText(this,Locale.getStringInLocale("event_only_for_female_cattle",this),Toast.LENGTH_LONG).show();

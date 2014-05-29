@@ -173,6 +173,7 @@
     <string name="remarks_sw">Maoni</string>
     <string name="event_sw">Tukio</string>
     <string-array name="cow_event_types_sw">
+        <item></item>
         <item>Kuzaliwa</item>
         <item>Kuanza kwa utoaji wa maziwa</item>
         <item>Dry Off</item>
