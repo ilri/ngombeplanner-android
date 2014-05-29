@@ -58,6 +58,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
     public static final String MODE_CALVING="Birth";
     public static final String KEY_SERVICING_TYPE="servicingType";
 
+    private EditText phantomET;
     private Menu menu;
     private TextView cowIdentifierTV;
     private Spinner cowIdentifierS;
@@ -118,6 +119,8 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
 
         cacheData = true;
 
+        phantomET = (EditText) this.findViewById(R.id.phantom_et);
+        phantomET.requestFocus();
         cowIdentifierTV=(TextView)findViewById(R.id.cow_identifier_tv);
         cowIdentifierS=(Spinner)findViewById(R.id.cow_identifier_s);
         dateTV=(TextView)findViewById(R.id.date_tv);

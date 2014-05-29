@@ -319,6 +319,9 @@ public class EventsHistoryActivity extends SherlockActivity implements MistroAct
                     if(eventTypesInEN[j].equals(jsonObject.getString("event_name"))) {
                         index = j;
                     }
+                    else if(jsonObject.getString("event_name").equals("Calving")){
+                        eventTypeString = Locale.getStringInLocale("calving", EventsHistoryActivity.this);
+                    }
                 }
                 if(eventTypesInEN.length == eventTypes.length && index != -1) {
                     eventTypeString = eventTypes[index];
