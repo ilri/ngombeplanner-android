@@ -684,7 +684,7 @@ public class DataHandler
                     //set dam
                     if(cowResult[cowIndex][8].length() > 0){
                         columns = new String[]{"id", "name", "ear_tag_number", "date_of_birth", "age", "age_type", "sex", "sire_id", "dam_id", "date_added", "service_type", "country_id", "bull_owner", "owner_name"};
-                        selection = "id="+cowResult[cowIndex][7];
+                        selection = "id="+cowResult[cowIndex][8];
                         String[][] damRes = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
                         if(damRes.length == 1){
                             Dam dam = new Dam();
