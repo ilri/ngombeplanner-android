@@ -196,6 +196,7 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
             try
             {
                 jsonObject.put("simCardSN",params[0]);
+                jsonObject.put("deviceType", "Android");
                 //jsonObject.put("mobileNumber",params[1]);
                 String result = DataHandler.sendDataToServer(LandingActivity.this, jsonObject.toString(),DataHandler.FARMER_AUTHENTICATION_URL, true);
                 return result;

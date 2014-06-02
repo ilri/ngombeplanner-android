@@ -340,17 +340,20 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
             Cow selectedCow = farmer.getCows(Cow.SEX_FEMALE).get(cowS.getSelectedItemPosition());
             if(selectedCow != null){
 
-                for(int i = 0; i < eventConstraints.size(); i++){
+                for(int i = 0; i < eventConstraints.size(); i++) {
                     EventConstraint currConstraint = eventConstraints.get(i);
                     //enforce age constraint
-                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILKING)){
-                        if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
-                            Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
+                    if (currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILKING)) {
+                        if (selectedCow.getAgeMilliseconds() < currConstraint.getTimeMilliseconds()) {
+                            Toast.makeText(this, Locale.getStringInLocale("cow_too_young", this), Toast.LENGTH_LONG).show();
                             return false;
                         }
                     }
+                }
 
-                    else if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_FLACTUATION) && !milkQuantityFine){
+                for(int i = 0; i < eventConstraints.size(); i++){
+                    EventConstraint currConstraint = eventConstraints.get(i);
+                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_FLACTUATION) && !milkQuantityFine){
                         //TODO: convert units to whatever farmer uses to measure milk e.g cups
                         int threshold = currConstraint.getValue();
                         String thresholdUnits = currConstraint.getUnits();
