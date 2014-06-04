@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Kipsigis -->
+    <string name="login_kp">Yaat</string>
+    <string name="login_anyway_kp">Yaat inyeei</string>
+    <string name="register_kp">Siret</string>
+    <string name="full_name_kp">Kainaik tugul</string>
+    <string name="mobile_number_kp">Simet</string>
+    <string name="extension_p_kp">Kanetindet</string>
+    <string name="number_of_cows_kp">Tuka ata</string>
+    <string-array name="sex_array_kp">
+        <item>Chepyoso</item>
+        <item>Muren</item>
+    </string-array>
+    <string name="name_kp">Kainet</string>
+    <string name="ear_tag_number_kp">Siret ab iitit</string>
+    <string name="age_kp">Kenyishek</string>
+    <string name="date_of_birth_kp">Betut ab siget</string>
+    <string name="breed_kp">Keswot</string>
+    <string name="sex_kp">Kirgit anan roriat</string>
+    <string name="deformity_kp">Deformity</string>
+    <string name="sire_kp">Kirgit</string>
+    <string name="dam_kp">Gamet</string>
+    <string name="previous_kp">Chekikopata</string>
+    <string name="next_kp">Cherubei</string>
+    <string name="finish_kp">Kobek</string>
+    <string name="okay_kp">Unot</string>
+    <string name="farmer_registration_kp">Siretab kabotik</string>
+    <string name="cow_registration_kp">Siretab tuga</string>
+    <string name="cow_registration_proper_kp">Siretab tuga</string>
+    <string name="dam_registration_kp">Siretab kametwokik</string>
+    <string name="sire_registration_kp">Siretab kirgit</string>
+    <string-array name="age_type_array_kp">
+        <item>Betushek</item>
+        <item>Araweek</item>
+        <item>Kenyishek</item>
+    </string-array>
+    <string-array name="c_breeds_array_kp">
+        <item>Friesian</item>
+        <item>Jersey</item>
+        <item>Ankole</item>
+        <item>Boran</item>
+        <item>Ayrshire</item>
+        <item>Zebu</item>
+        <item>Sahiwal</item>
+        <item>Guernsey</item>
+        <item>Aberdeen Angus</item>
+        <item>Hereford</item>
+        <item>Nganda</item>
+        <item>Another Breed</item>
+    </string-array>
+    <string-array name="uc_breeds_array_kp">
+        <item>Charolais</item>
+        <item>Simmental</item>
+        <item>Limousine</item>
+        <item>Brahman</item>
+        <item>Santa Getrude</item>
+        <item>Piemontese</item>
+        <item>Red Poll</item>
+        <item>Fleckviah</item>
+        <item>Brown Swiss</item>
+    </string-array>
+    <string-array name="breeds_array_kp">
+        <item>Ayrshire</item>
+        <item>Boran</item>
+        <item>Charolais</item>
+        <item>Aberdeen Angus</item>
+        <item>Simmental</item>
+        <item>Friesian</item>
+        <item>Guernsey</item>
+        <item>Hereford</item>
+        <item>Jersey</item>
+        <item>Ankole</item>
+        <item>Limousine</item>
+        <item>Brahman</item>
+        <item>Santa Getrude</item>
+        <item>Piemontese</item>
+        <item>Red Poll</item>
+        <item>Sahiwal</item>
+        <item>Nganda</item>
+        <item>Fleckviah</item>
+        <item>Brown Swiss</item>
+        <item>Zebu</item>
+    </string-array>
+    <string-array name="deformities_array_kp">
+        <item>Koraat</item>
+        <item>Ing\'wolii</item>
+        <item>Abnormal teat number</item>
+        <item>Crooked feet</item>
+        <item>Clef palate</item>
+        <item>Agee</item>
+    </string-array>
+    <string name="service_type_used_kp">Kirgit/keswotab mbiret</string>
+    <string-array name="service_types_kp">
+        <item>Kirgit</item>
+        <item>Keswotab mbiret</item>
+        <item>Embryo Transfer</item>
+    </string-array>
+    <string name="maximum_of_four_breeds_kp">A maximum of four breeds</string>
+    <string name="country_of_origin_kp">Emet nebunu kirgit</string>
+    <string name="specify_kp">Ibesyei</string>
+    <string name="straw_number_kp">Nambarit ab mbiret</string>
+    <string name="vet_used_kp">Kanyoindet nekeboishe</string>
+    <string name="servicing_bull_name_kp">Kirgit nikiboishe</string>
+    <string name="servicing_bull_identifier_hint_kp">Siir kainet anan ko nambarit ab statiat nebo kirgit</string>
+    <string name="servicing_bull_ear_tag_number_kp">Nambarit ab statiat nebo kirgit nekeboishe</string>
+    <string name="bull_owner_kp">Bo ng\'o kirgit</string>
+    <string name="name_bull_owner_kp">Kainet ab nebo kirgit</string>
+    <string-array name="bull_owners_kp">
+        <item>Nenyun kirgit</item>
+        <item>Kabotindet agee</item>
+        <item>Grupit</item>
+    </string-array>
+    <string name="name_of_other_farmer_or_group_kp">Kainet ab grupit anan ko kabatindet</string>
+    <string name="embryo_number_kp">Embryo Number</string>
+    <string name="enable_gps_kp">Yaat GPS</string>
+    <string name="reason_for_kpabling_gps_kp">Nyolu iyaat GPS sitestai</string>
+    <string name="cancel_kp">Itonon</string>
+    <string name="enable_network_kp">Yaat internet</string>
+    <string name="reason_for_kpabling_network_kp">Maagat internet asikobois simet</string>
+    <string name="successful_registration_kp">Kakiyan siret</string>
+    <string name="successful_registration_instructions_kp">Kakosulnda sirisiet ng\'ung.inyoru sirutiet ne ibarun ole kiyatitoi mashinit</string>
+    <string name="your_mistro_id_kp">Your Mistro ID</string>
+    <string name="enter_your_mistro_id_kp">Please enter your Mistro ID</string>
+    <string name="failed_to_authenticate_kp">Yee maimuch kosuulnda siret iketyi kora</string>
+    <string name="logging_in_from_different_device_kp">Tagu kuyo iyatee mashinit nemo chomiboishe</string>
+    <string name="yes_kp">Iyan</string>
+    <string name="no_kp">Eshe</string>
+    <string name="milk_production_kp">Kesutik ab jego</string>
+    <string name="events_kp">Yautiet</string>
+    <string name="main_menu_kp">Yee ke taune</string>
+    <string name="sim_card_not_registered_kp">Ngu ibaishe lainda ne tomo ibaishe eng simet nito</string>
+    <string name="sim_card_registration_kp">Siret ab lainda nebo simet</string>
+    <string name="new_mobile_number_kp">Nambarit ab simet ne lel</string>
+    <string name="old_mobile_number_kp">Nambarit ab simet ne gi tai</string>
+    <string name="old_number_not_in_system_kp">Tagu kuyo nambarit neiboishe ko masirat eng mashinit. Birchi kanetindet si kobaarun eng nambarit nyi \(phone number\)</string>
+    <string name="welcome_kp">Itagaat</string>
+    <string name="add_production_kp">Tes kesutik ab jego</string>
+    <string name="production_history_kp">Kesutik   ab jego</string>
+    <string name="cow_kp">Teta</string>
+    <string name="time_kp">Sait</string>
+    <string name="quantity_kp">Jetya</string>
+    <string name="measurement_type_kp">Yei pimondoi jego</string>
+    <string name="add_kp">Tesyi</string>
+    <string-array name="milking_times_kp">
+        <item>Karoon</item>
+        <item>Peet</item>
+        <item>Koskoliny</item>
+        <item>Kituiyo</item>
+    </string-array>
+    <string-array name="quantity_types_kp">
+        <item>Litaishek</item>
+        <item>Kiloishek</item>
+    </string-array>
+    <string name="enter_quantity_of_milk_produced_kp">Siret jego oletee eng kiloishek</string>
+    <string name="information_successfully_sent_to_server_kp">Kakiyaan eng mashinit</string>
+    <string name="problem_in_data_sent_kp">Tagu kuyo manamegei sirutik kuk chekeyokte. Nyalu iketyi koraa</string>
+    <string name="production_for_time_already_exists_kp">Keketyi isir tukuk chebo tanyi ak kaisir</string>
+    <string name="problem_connecting_to_server_kp">Kabit makoset yee katyemei kwo internet eng mashinit</string>
+    <string name="date_kp">Tarikit</string>
+    <string name="no_data_received_kp">Manyoor mashinit tukuk che yokte</string>
+    <string name="today_kp">Raini</string>
+    <string name="yesterday_kp">Amut</string>
+    <string name="enter_your_name_kp">Sir kaineng\'ung</string>
+    <string name="enter_your_mobile_no_kp">Sir nambarit ab simet</string>
+    <string name="enter_extension_personnel_name_kp">Siir kainaik chebo kanetindet</string>
+    <string name="enter_ear_tag_number_kp">Sir nambarit ab statiat netinye teta</string>
+    <string name="enter_ear_tag_no_or_name_kp">Sir nambarit ab statiat ana ko kainet ab teta</string>
+    <string name="enter_straw_number_kp">Sir namberit ab keswot ne bo kirgit</string>
+    <string name="enter_embryo_number_kp">Please enter the Dam\'s embryo number</string>
+    <string name="add_an_event_kp">Tesyi yautiet</string>
+    <string name="past_events_kp">Yautik che kokobata</string>
+    <string name="remarks_kp">Tesyi ki nekoaak ana nekoikeer</string>
+    <string name="event_kp">Yautiet</string>
+    <string-array name="cow_event_types_kp">
+        <item></item>
+        <item>Siget</item>
+        <item>Taunet ab keiysyet</item>
+        <item>Kolug</item>
+        <item>Wireneet</item>
+        <item>Miondo</item>
+        <item>Meet</item>
+        <item>Kenyoor</item>
+        <item>Kealda</item>
+        <item>Boishet ab mbiret</item>
+        <item>Boishet ab kirgit</item>
+        <item>Kaborunoshek ab maget ab kirgit</item>
+        <item>Kokoret</item>
+        <item>Dip</item>
+        <item>Chanjo</item>
+    </string-array>
+    <string-array name="cow_servicing_types_kp">
+        <item>Boishet ab mbiret</item>
+        <item>Boishet ab kirgit</item>
+    </string-array>
+    <string name="enter_date_kp">Sir tarigit</string>
+    <string name="date_in_future_kp">Taku kuyo kesir tarigit ne mi tai</string>
+    <string name="event_successfully_recorded_kp">Kachobok siranatok</string>
+    <string name="something_went_wrong_try_again_kp">Kayaat kii. Tiem koraa</string>
+    <string name="loading_please_wait_kp">Iyoktoi… igeny…..</string>
+    <string name="type_of_birth_kp">Siget neune</string>
+    <string-array name="birth_types_kp">
+        <item>Ne kararan</item>
+        <item>Kakii moita nemo sabe \(meat moita\)</item>
+        <item>Kakii amait betushek</item>
+        <item>Keoos</item>
+    </string-array>
+    <string name="calf_registration_kp">Siretab moek</string>
+    <string name="next_screen_is_calf_registration_kp">Yerubei magaat isir moita ne kayiey</string>
+    <string name="next_screen_is_cow_registration_kp">Nyolu isir kora teta ne toot</string>
+    <string name="event_too_old_kp">Me yaanat itesyi ki nekapit kogakopata betushek tamanu ak mut</string>
+    <string name="milk_data_too_old_kp">Meyaanat kesiir jego che kakopata betushek taman ak mutu</string>
+    <string name="milk_too_much_kp">Kachang\'a jego che kesir</string>
+    <string name="start_date_kp">Betutab taunet</string>
+    <string name="date_served_kp">Date Served</string>
+    <string name="date_of_insemination_kp">Betut ne kikilonyi teta mbiret</string>
+    <string name="no_of_days_in_servicing_kp">No. of Days in Servicing</string>
+    <string name="associated_servicing_kp">Bull Services</string>
+    <string name="country_not_found_kp">Emet ne kesir ko mabitunat</string>
+    <string name="cause_of_death_kp">Kabun nee meet</string>
+    <string-array name="causes_of_death_kp">
+        <item>Kamee buch</item>
+        <item>Myondo</item>
+        <item>Kaumian</item>
+    </string-array>
+    <string name="gps_narrowing_down_on_loc_kp">Igeny yotok kocheng\'e GPS yee imi</string>
+    <string name="event_only_for_female_cattle_kp">Yeokse kii eng tuga/rorwek kityo</string>
+    <string name="other_countries_kp">Emotunweek alak</string>
+    <string name="no_times_milked_in_a_day_kp">Nambarinik che ityokyini eng betut</string>
+    <string name="calf_suckling_kp">Rerie moita</string>
+    <string-array name="calf_suckling_types_kp">
+        <item>Aacha</item>
+        <item>Wooi</item>
+    </string-array>
+    <string name="enter_number_times_cow_milked_kp">Ityokyini teta ata eng betut</string>
+    <string name="milking_times_too_much_kp">Manyolu ityokyi teta kosir taman eng betut</string>
+    <string name="fertility_kp">Akwoiyet</string>
+    <string name="servicing_kp">Boishet ab kirgit</string>
+    <string name="calving_kp">Iyotet</string>
+    <string name="select_service_type_kp">AI\/I anan kirgit</string>
+    <string name="artificial_inseminamtion_kp">Boishet ab mbiret</string>
+    <string name="bull_servicing_kp">Boishet ab kirgit</string>
+    <string name="no_sim_card_kp">Mami lainda eng simet</string>
+    <string name="previous_live_births_kp">Kikoyie konyil ata</string>
+    <string name="enter_previous_live_births_kp">Please enter the number of previous births by this cow</string>
+    <string name="enter_dam_etn_kp">Nambarit ab statiat nebo teta</string>
+    <string name="age_diff_from_dob_kp">Kenyit ab teta kotagu kuyo makargei ak betut ab siget nebo teta</string>
+    <string name="action_not_allowed_kp">Meyaanat tukuk che kessir</string>
+    <string name="are_you_in_farm_kp">Tos imi mbar</string>
+    <string name="farm_coords_successfully_reg_kp">Kakosirak sirutik ab mbaren\'gung</string>
+    <string name="sms_charges_kp">Lipanet ab sirutiet</string>
+    <string name="incur_network_sms_charges_kp">Memitei internet koboruu komaiyotook sirutik che kesiir</string>
+    <string name="data_not_sent_to_server_kp">Maiyoktook sirutik kuk</string>
+    <string name="generic_sms_error_kp">Mayooktookj sirutiet eng mashinit. Ketyi koraa</string>
+    <string name="no_service_kp">Myooktook cheng yeemi network ne kararan</string>
+    <string name="radio_off_kp">Your device is currently unable to send SMSs. Make sure it has a SIM card inserted and that it is not on Airplane mode</string>
+    <string name="server_not_receive_sms_kp">An SMS was sent to the server but it did not receive it</string>
+    <string name="logout_kp">Keer</string>
+    <string name="back_kp">Leet</string>
+    <string name="back_to_main_menu_kp">Wekee yee ketoune</string>
+    <string name="warning_kp">Kerkongiet</string>
+    <string name="action_will_be_canceled_kp">Ngot ti wekei leet kobetos tukul che kaisir</string>
+    <string name="total_kp">Kotugul</string>
+    <string name="unable_to_fetch_cached_data_kp">Mitei tukuk che kesir che makinyor eng simet </string>
+    <string name="you_do_not_have_female_cows_kp">Uyo metinyei  rorwek anan ko tuga che kigei</string>
+    <string name="you_do_not_have_cows_kp">Uyo metinyei tuga</string>
+
+    <string name="ear_tag_no_or_name_kp">Sir kainetab teta anan ko nambaritab statiat</string>
+    <string name="age_or_dob_kp">Imuchi isir kenyishekab teta ana ko tarikitab siget</string>
+    <string name="enter_age_or_dob_kp">Sir kenyishekab teta ana ko tarikitab siget. </string>
+    <string name="cow_too_young_kp">Teta nekelewen kotoku mining</string>
+    <string name="enter_no_cows_own_kp">Sir tuga cheitinye</string>
+    <string name="number_in_use_kp">Laindab simet neiboishie kokikesirchi temindet age</string>
+    <string name="milk_inconsistent_kp">Uwon chego chekesir kou ma unot.ketyi iker ak iyoonchi kot ko unot</string>
+    <string name="press_add_again_kp">Ketyi ichil tesyinet</string>
+    <string name="no_deformity_kp">Ma solomwo</string>
+    <string name="specify_breed_here_kp">Sir ile keswot ngi\'ro eng\' u</string>
+    <string name="enter_breed_kp">Sir keswotab teta </string>
+    <string name="breed_unknown_kp">Keswotab teta ne kaisir komokingen.</string>
+    <string name="extra_breed_kp">Keswot age neter</string>
+    <string name="specify_other_country_kp">Sir emet eng\' u</string>
+    <string name="enter_sire_etn_kp">Sir nambaritab statiat nebo kirgit</string>
+    <string name="sire_owner_kp">Bo ngo kirgit.</string>
+    <string name="name_sire_owner_kp">Sir kainetab nebo kirgit</string>
+    <string name="preferred_language_kp">Sir kutit nechome iboishe.</string>
+    <string name="select_an_event_kp">Lewen yautiet</string>
+
+</resources>

@@ -324,17 +324,41 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
             return false;
         }
         else if(quantityType.equals("Litres") || quantityType.equals("KGs")) {
-            if(Integer.parseInt(quantityET.getText().toString()) > 30) {
+            String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times", this, Locale.LOCALE_ENGLISH);
+            if(milkingTimesInEN[timeS.getSelectedItemPosition()].equals("Combined")){
+                for(int i = 0; i < eventConstraints.size(); i++){
+                    EventConstraint currConstraint = eventConstraints.get(i);
+                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_MAX_COMBINED)){
+                        if(Integer.parseInt(quantityET.getText().toString()) > currConstraint.getValue()){
+                            Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
+                            return false;
+                        }
+                    }
+                }
+            }
+            else{
+                for(int i = 0; i < eventConstraints.size(); i++){
+                    EventConstraint currConstraint = eventConstraints.get(i);
+                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_MAX_SITTING)){
+                        if(Integer.parseInt(quantityET.getText().toString()) > currConstraint.getValue()){
+                            Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            /*if(Integer.parseInt(quantityET.getText().toString()) > 30) {
                 Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
                 return false;
-            }
+            }*/
         }
-        else if(quantityType.equals("Cups")) {
+        /*else if(quantityType.equals("Cups")) {
             if(Integer.parseInt(quantityET.getText().toString()) > (30*3.3)) {
                 Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
                 return false;
             }
-        }
+        }*/
 
         if(cowS.getSelectedItemPosition() != -1){
             Cow selectedCow = farmer.getCows(Cow.SEX_FEMALE).get(cowS.getSelectedItemPosition());

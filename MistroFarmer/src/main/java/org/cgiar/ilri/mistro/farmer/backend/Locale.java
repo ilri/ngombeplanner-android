@@ -15,9 +15,10 @@ public class Locale {
     private static final String TAG = "Locale";
     public static final String LOCALE_ENGLISH="en";
     public static final String LOCALE_SWAHILI="sw";
-    public static final String LOCALE_LUHYA="lh";
-    public static final String LOCALE_KALENJIN="kl";
+    public static final String LOCALE_LUTSOTSO="lu";
+    public static final String LOCALE_NANDI="nn";
     public static final String LOCALE_KIKABRAS="kr";
+    public static final String LOCALE_KIPSIGIS="kp";
 
     //public static final String SHARED_PREFERENCES_KEY = "locale";
     public static String getStringInLocale(String stringName, Context context) {
@@ -186,9 +187,10 @@ public class Locale {
         String code = "";
         if(language.equals(context.getString(R.string.english))) code = LOCALE_ENGLISH;
         else if(language.equals(context.getString(R.string.swahili))) code = LOCALE_SWAHILI;
-        else if(language.equals(context.getString(R.string.kalenjin))) code = LOCALE_KALENJIN;
+        else if(language.equals(context.getString(R.string.nandi))) code = LOCALE_NANDI;
+        else if(language.equals(context.getString(R.string.kipsigis))) code = LOCALE_KIPSIGIS;
         else if(language.equals(context.getString(R.string.kikabrasi))) code = LOCALE_KIKABRAS;
-        else if(language.equals(context.getString(R.string.luhya))) code = LOCALE_LUHYA;
+        else if(language.equals(context.getString(R.string.lutsotso))) code = LOCALE_LUTSOTSO;
 
         return code;
     }
@@ -198,9 +200,10 @@ public class Locale {
 
         if(localeCode.equals(LOCALE_ENGLISH)) language = context.getString(R.string.english);
         if(localeCode.equals(LOCALE_SWAHILI)) language = context.getString(R.string.swahili);
-        if(localeCode.equals(LOCALE_KALENJIN)) language = context.getString(R.string.kalenjin);
+        if(localeCode.equals(LOCALE_NANDI)) language = context.getString(R.string.nandi);
+        if(localeCode.equals(LOCALE_KIPSIGIS)) language = context.getString(R.string.kipsigis);
         if(localeCode.equals(LOCALE_KIKABRAS)) language = context.getString(R.string.kikabrasi);
-        if(localeCode.equals(LOCALE_LUHYA)) language = context.getString(R.string.luhya);
+        if(localeCode.equals(LOCALE_LUTSOTSO)) language = context.getString(R.string.lutsotso);
 
         return language;
     }
@@ -209,9 +212,10 @@ public class Locale {
         List<String> languages = new ArrayList<String>();
         languages.add(context.getString(R.string.english));
         languages.add(context.getString(R.string.swahili));
-        languages.add(context.getString(R.string.luhya));
+        languages.add(context.getString(R.string.lutsotso));
         languages.add(context.getString(R.string.kikabrasi));
-        languages.add(context.getString(R.string.kalenjin));
+        languages.add(context.getString(R.string.nandi));
+        languages.add(context.getString(R.string.kipsigis));
 
         return languages;
     }

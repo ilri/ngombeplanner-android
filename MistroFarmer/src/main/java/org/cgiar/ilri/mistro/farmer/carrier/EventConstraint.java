@@ -18,6 +18,8 @@ public class EventConstraint {
     public static final String CONSTRAINT_MILKING = "Milking";
     public static final String CONSTRAINT_CALVING = "Calving";
     public static final String CONSTRAINT_MILK_FLACTUATION = "DeltaMilk";
+    public static final String CONSTRAINT_MILK_MAX_SITTING = "MaxMilkSitting";
+    public static final String CONSTRAINT_MILK_MAX_COMBINED = "MaxMilkCombined";
 
     private int id;
     private String event;

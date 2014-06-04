@@ -7,22 +7,25 @@
         android:title="@string/swahili"
         android:orderInCategory="5"
         android:showAsAction="never" />
-    <item android:id="@+id/action_kalenjin"
-        android:title="@string/kalenjin"
+    <item android:id="@+id/action_nandi"
+        android:title="@string/nandi"
         android:orderInCategory="2"
         android:showAsAction="never" />
     <item android:id="@+id/action_kikabras"
         android:title="@string/kikabrasi"
         android:orderInCategory="3"
         android:showAsAction="never" />
-    <item android:id="@+id/action_luhya"
-        android:title="@string/luhya"
+    <item android:id="@+id/action_lutsotso"
+        android:title="@string/lutsotso"
         android:orderInCategory="4"
+        android:showAsAction="never" />
+    <item android:id="@+id/action_kipsigis"
+        android:title="@string/kipsigis"
+        android:orderInCategory="6"
         android:showAsAction="never" />
 
 
-
     <item android:id="@+id/action_back_main_menu"
-        android:orderInCategory="6"
+        android:orderInCategory="7"
         android:showAsAction="never" />
 </menu>

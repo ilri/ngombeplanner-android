@@ -23,18 +23,23 @@ public interface MistroActivity {
                 mistroActivity.initTextInViews();
                 return true;
             }
-            else if(item.getItemId() == R.id.action_luhya) {
-                Locale.switchLocale(Locale.LOCALE_LUHYA, context);
+            else if(item.getItemId() == R.id.action_lutsotso) {
+                Locale.switchLocale(Locale.LOCALE_LUTSOTSO, context);
                 mistroActivity.initTextInViews();
                 return true;
             }
-            else if(item.getItemId() == R.id.action_kalenjin) {
-                Locale.switchLocale(Locale.LOCALE_KALENJIN, context);
+            else if(item.getItemId() == R.id.action_nandi) {
+                Locale.switchLocale(Locale.LOCALE_NANDI, context);
                 mistroActivity.initTextInViews();
                 return true;
             }
             else if(item.getItemId() == R.id.action_kikabras) {
                 Locale.switchLocale(Locale.LOCALE_KIKABRAS, context);
+                mistroActivity.initTextInViews();
+                return true;
+            }
+            else if(item.getItemId() == R.id.action_kipsigis) {
+                Locale.switchLocale(Locale.LOCALE_KIPSIGIS, context);
                 mistroActivity.initTextInViews();
                 return true;
             }

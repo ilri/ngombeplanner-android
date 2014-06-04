@@ -14,8 +14,9 @@
     <string name="title_activity_events_history">Past Events</string>
     <string name="english">English</string>
     <string name="swahili">Kiswahili</string>
-    <string name="kalenjin">Kalenjin</string>
-    <string name="luhya">Luhya</string>
+    <string name="nandi">Nandi</string>
+    <string name="kipsigis">Kipsigis</string>
+    <string name="lutsotso">Lutsotso</string>
     <string name="kikabrasi">Kikabrasi</string>
     <string name="title_activity_fertility">Fertility</string>
     <string name="title_activity_add_milk_production">Add Milk Production</string>
