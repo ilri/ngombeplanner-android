@@ -5,7 +5,7 @@
     <string name="login_anyway_en">Login Anyway</string>
     <string name="register_en">Register</string>
     <string name="full_name_en">Full Name</string>
-    <string name="mobile_number_en">Mobile Number</string>
+    <string name="mobile_number_en">Modem\'s Number</string>
     <string name="extension_p_en">Extension Personnel</string>
     <string name="number_of_cows_en">Number of Cows</string>
     <string-array name="sex_array_en">
