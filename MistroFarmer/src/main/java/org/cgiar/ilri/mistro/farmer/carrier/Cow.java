@@ -37,6 +37,14 @@ public class Cow implements Parcelable, Serializable {
     public static final String SERVICE_TYPE_BULL = "Bull";
     public static final String SERVICE_TYPE_AI = "AI";
     public static final String SERVICE_TYPE_ET = "ET";
+
+    public static final String MILKING_S_HEIFER = "heifer";
+    public static final String MILKING_S_ADULT_MILKING = "adult_milking";
+    public static final String MILKING_S_ADULT_NOT_MILKING = "adult_not_milking";
+
+    public static final String COW_IN_CALF = "In calf";
+    public static final String COW_NOT_IN_CALF = "Not in calf";
+
     private String name;
     private String earTagNumber;
     private String dateOfBirth;
@@ -57,6 +65,8 @@ public class Cow implements Parcelable, Serializable {
     private String piggyBack;
     private List<Event> events;
     private List<MilkProduction> milkProduction;
+    private String milkingStatus;
+    private boolean inCalf;
 
     public Cow(boolean isNotDamOrSire) {
         name = "";
@@ -82,11 +92,70 @@ public class Cow implements Parcelable, Serializable {
         piggyBack = "";
         this.events = new ArrayList<Event>();
         this.milkProduction = new ArrayList<MilkProduction>();
+        milkingStatus = "";
+        inCalf = false;
     }
 
     public Cow(Parcel in) {
         this(true);
         readFromParcel(in);
+    }
+
+    /**
+     * This method returns the milking status of cow in english
+     *
+     * @return Milking status in English or a blank string if unable to
+     *          convert milking status to english text
+     */
+    public String getMilkingStatus() {
+        if(milkingStatus.equals(MILKING_S_HEIFER)){
+            return "Heifer";
+        }
+        else if(milkingStatus.equals(MILKING_S_ADULT_MILKING)){
+            return "Cow being milked";
+        }
+        else if(milkingStatus.equals(MILKING_S_ADULT_NOT_MILKING)){
+            return "Cow not being milked";
+        }
+        return "";
+    }
+
+    /**
+     * This method sets the milking status for the cow
+     *
+     * @param milkingStatus The milking status text (not code) in english
+     * @param context The activity/service you are calling this method from
+     */
+    public void setMilkingStatus(String milkingStatus, Context context) {
+        if(milkingStatus.equals("Heifer")){
+            this.milkingStatus = MILKING_S_HEIFER;
+        }
+        else if(milkingStatus.equals("Cow being milked")){
+            this.milkingStatus = MILKING_S_ADULT_MILKING;
+        }
+        else if(milkingStatus.equals("Cow not being milked")){
+            this.milkingStatus = MILKING_S_ADULT_NOT_MILKING;
+        }
+
+        Log.d(TAG, " ****************** Milking status now is  "+this.milkingStatus);
+    }
+
+    /**
+     * This method returns the milking status code for the cow
+     * Compare with Cow.MILKING_S_HEIFER etc
+     *
+     * @return
+     */
+    public String getMilkingStatusCode() {
+        return this.milkingStatus;
+    }
+
+    public boolean isInCalf() {
+        return inCalf;
+    }
+
+    public void setInCalf(boolean inCalf) {
+        this.inCalf = inCalf;
     }
 
     public void setMode(String mode) {
@@ -416,6 +485,13 @@ public class Cow implements Parcelable, Serializable {
         dest.writeString(otherDeformity);
         dest.writeString(otherBreed);
         dest.writeString(piggyBack);
+        dest.writeString(milkingStatus);
+        if(isInCalf()){
+            dest.writeInt(1);
+        }
+        else{
+            dest.writeInt(0);
+        }
     }
 
     public void readFromParcel(Parcel in) {
@@ -443,6 +519,14 @@ public class Cow implements Parcelable, Serializable {
         otherDeformity = in.readString();
         otherBreed = in.readString();
         piggyBack = in.readString();
+        milkingStatus = in.readString();
+        int inCalf = in.readInt();
+        if(inCalf == 1){
+            this.inCalf = true;
+        }
+        else{
+            this.inCalf = false;
+        }
     }
 
     public static final Creator<Cow> CREATOR = new Creator<Cow>() {
@@ -494,6 +578,12 @@ public class Cow implements Parcelable, Serializable {
             if(piggyBack!=null && piggyBack.length()>0) {
                 jsonObject.put("piggyBack",piggyBack);
             }
+            int inCalf = 0;
+            if(this.inCalf){
+                inCalf = 1;
+            }
+            jsonObject.put("inCalf", inCalf);
+            jsonObject.put("milkingStatus", milkingStatus);
         } catch (JSONException e) {
             e.printStackTrace();
         }

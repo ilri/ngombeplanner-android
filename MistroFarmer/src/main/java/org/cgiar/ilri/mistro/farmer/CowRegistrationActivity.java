@@ -9,6 +9,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -81,6 +82,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private AutoCompleteTextView breedACTV;
     private TextView sexTV;
     private Spinner sexS;
+    private TextView milkingStatusTV;
+    private Spinner milkingStatusS;
+    private TextView inCalfStatusTV;
+    private Spinner inCalfStatusS;
     private TextView deformityTV;
     private EditText deformityET;
     private TextView serviceTypeTV;
@@ -171,6 +176,11 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         breedACTV = (AutoCompleteTextView)this.findViewById(R.id.breed_actv);
         sexTV=(TextView)this.findViewById(R.id.sex_tv);
         sexS=(Spinner)this.findViewById(R.id.sex_s);
+        sexS.setOnItemSelectedListener(this);
+        milkingStatusTV = (TextView)this.findViewById(R.id.milking_status_tv);
+        milkingStatusS = (Spinner)this.findViewById(R.id.milking_status_s);
+        inCalfStatusTV = (TextView)this.findViewById(R.id.in_calf_status_tv);
+        inCalfStatusS = (Spinner)this.findViewById(R.id.in_calf_status_s);
         deformityTV=(TextView)this.findViewById(R.id.deformity_tv);
         deformityET=(EditText)this.findViewById(R.id.deformity_et);
         deformityET.setOnFocusChangeListener(this);
@@ -369,6 +379,24 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
                     for(int i = 0; i < sexInEN.length; i++) {
                         if(sexInEN[i].equals("Female") && thisCow.getSex().equals(Cow.SEX_FEMALE)) {
                             sexS.setSelection(i);
+                            toggleFemaleCowViewsVisibility();
+                            String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
+                            String[] inCalfArrayInEN = Locale.getArrayInLocale("cow_in_calf_array", this, Locale.LOCALE_ENGLISH);
+                            for(int j = 0; j < milkingStatusInEN.length; j++){
+                                Log.d(TAG, " ********** Saved milking status = "+thisCow.getMilkingStatus());
+                                if(milkingStatusInEN[j].equals(thisCow.getMilkingStatus())){
+                                    milkingStatusS.setSelection(j);
+                                }
+                            }
+                            for(int j = 0; j < inCalfArrayInEN.length; j++){
+                                if(inCalfArrayInEN[j].equals(Cow.COW_IN_CALF) && thisCow.isInCalf()){
+                                    inCalfStatusS.setSelection(j);
+                                }
+                                else if(inCalfArrayInEN[j].equals(Cow.COW_NOT_IN_CALF) && !thisCow.isInCalf()){
+                                    inCalfStatusS.setSelection(j);
+                                }
+                            }
+
                         }
                         else if(sexInEN[i].equals("Male") && thisCow.getSex().equals(Cow.SEX_MALE)) {
                             sexS.setSelection(i);
@@ -582,6 +610,17 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             sexArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             sexS.setAdapter(sexArrayAdapter);
         }
+
+        milkingStatusTV.setText(" * " + Locale.getStringInLocale("cow_status", this));
+        inCalfStatusTV.setText(" * " + Locale.getStringInLocale("cow_in_calf", this));
+        ArrayAdapter<CharSequence> milkingStatusAdapter = ArrayAdapter.createFromResource(this, Locale.getArrayIDInLocale("cow_status_array", this), android.R.layout.simple_spinner_item);
+        milkingStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        milkingStatusS.setAdapter(milkingStatusAdapter);
+
+        ArrayAdapter<CharSequence> inCalfAdapter = ArrayAdapter.createFromResource(this, Locale.getArrayIDInLocale("cow_in_calf_array", this), android.R.layout.simple_spinner_item);
+        inCalfAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        inCalfStatusS.setAdapter(inCalfAdapter);
+
         deformityTV.setText(Locale.getStringInLocale("deformity",this));
         serviceTypeTV.setText(Locale.getStringInLocale("service_type_used",this));
         int serviceTypesSireArrayID = Locale.getArrayIDInLocale("service_types",this);
@@ -964,6 +1003,28 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         else if(parent == sireOwnerS){
             toggleSireOwnerVisibility();
         }
+        else if(parent == sexS){
+            toggleFemaleCowViewsVisibility();
+        }
+    }
+
+    private void toggleFemaleCowViewsVisibility(){
+        Log.d(TAG, "Toggling female views");
+        String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
+        if(sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){
+            milkingStatusS.setVisibility(Spinner.VISIBLE);
+            milkingStatusTV.setVisibility(TextView.VISIBLE);
+
+            inCalfStatusS.setVisibility(Spinner.VISIBLE);
+            inCalfStatusTV.setVisibility(TextView.VISIBLE);
+        }
+        else{
+            milkingStatusS.setVisibility(Spinner.GONE);
+            milkingStatusTV.setVisibility(TextView.GONE);
+
+            inCalfStatusS.setVisibility(Spinner.GONE);
+            inCalfStatusTV.setVisibility(TextView.GONE);
+        }
     }
 
     private void toggleCountryOfOriginVisibility(){
@@ -1054,6 +1115,20 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         if((earTagNumberText==null||earTagNumberText.equals("")) && (nameText==null||nameText.equals(""))) {
             Toast.makeText(this,Locale.getStringInLocale("enter_ear_tag_no_or_name",this),Toast.LENGTH_LONG).show();
             return false;
+        }
+
+        String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
+        if(sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){
+            String[] inCalfArray = Locale.getArrayInLocale("cow_in_calf_array",this);
+            String[] milkingStatusArray = Locale.getArrayInLocale("cow_status_array",this);
+            if(inCalfStatusS.getSelectedItemPosition() == -1 || inCalfArray[inCalfStatusS.getSelectedItemPosition()].length() == 0){
+                Toast.makeText(this, Locale.getStringInLocale("enter_in_calf_status", this), Toast.LENGTH_LONG).show();
+                return false;
+            }
+            if(milkingStatusS.getSelectedItemPosition() == -1 || milkingStatusArray[milkingStatusS.getSelectedItemPosition()].length() == 0){
+                Toast.makeText(this, Locale.getStringInLocale("enter_milk_status_of_cow", this), Toast.LENGTH_LONG).show();
+                return false;
+            }
         }
 
         if(dateOfBirthET.getText().toString().trim().equals("") && ageET.getText().toString().trim().equals("")){
@@ -1163,6 +1238,16 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         String[] sexInEN = Locale.getArrayInLocale("sex_array",this,Locale.LOCALE_ENGLISH);
         if(sexInEN[sexS.getSelectedItemPosition()].equals("Female")) {
             thisCow.setSex(Cow.SEX_FEMALE);
+
+            String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
+            thisCow.setMilkingStatus(milkingStatusInEN[milkingStatusS.getSelectedItemPosition()], this);
+            String[] inCalfArrayInEN = Locale.getArrayInLocale("cow_in_calf_array", this, Locale.LOCALE_ENGLISH);
+            if(inCalfArrayInEN[inCalfStatusS.getSelectedItemPosition()].equals(Cow.COW_IN_CALF)){
+                thisCow.setInCalf(true);
+            }
+            else{
+                thisCow.setInCalf(false);
+            }
         }
         else if(sexInEN[sexS.getSelectedItemPosition()].equals("Male")) {
             thisCow.setSex(Cow.SEX_MALE);

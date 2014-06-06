@@ -287,4 +287,19 @@
     <string name="preferred_language_lu">Olubolo lwawachama</string>
     <string name="select_an_event_lu">yaula eshikhole</string>
 
+    <string name="cow_status_lu">Status of the cow</string>
+    <string-array name="cow_status_array_lu">
+        <item></item>
+        <item>Heifer</item>
+        <item>Cow being milked</item>
+        <item>Cow not being milked</item>
+    </string-array>
+    <string name="cow_in_calf_lu">Is the cow in calf?</string>
+    <string-array name="cow_in_calf_array_lu">
+        <item></item>
+        <item>In calf</item>
+        <item>Not in calf</item>
+    </string-array>
+    <string name="enter_milk_status_of_cow_lu">Please enter the status of cow</string>
+    <string name="enter_in_calf_status_lu">Please enter the status of cow</string>
 </resources>

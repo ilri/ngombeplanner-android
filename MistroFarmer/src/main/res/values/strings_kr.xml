@@ -283,4 +283,20 @@
     <string name="name_sire_owner_kr">Elira lia mwene samwana</string>
     <string name="preferred_language_kr">Olubolo lwa wayanza okhurumishila</string>
     <string name="select_an_event_kr">Noyanza chakula eshikhole</string>
+
+    <string name="cow_status_kr">Status of the cow</string>
+    <string-array name="cow_status_array_kr">
+        <item></item>
+        <item>Heifer</item>
+        <item>Cow being milked</item>
+        <item>Cow not being milked</item>
+    </string-array>
+    <string name="cow_in_calf_kr">Is the cow in calf?</string>
+    <string-array name="cow_in_calf_array_kr">
+        <item></item>
+        <item>In calf</item>
+        <item>Not in calf</item>
+    </string-array>
+    <string name="enter_milk_status_of_cow_kr">Please enter the status of cow</string>
+    <string name="enter_in_calf_status_kr">Please enter the status of cow</string>
 </resources>
