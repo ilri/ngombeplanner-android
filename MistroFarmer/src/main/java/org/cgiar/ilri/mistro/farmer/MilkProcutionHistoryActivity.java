@@ -394,7 +394,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Mi
                 tableRow.addView(rowSeparator3);
 
                 String quantityType = jsonObject.getString("quantity_type");
-                String quantityString = jsonObject.getString("quantity");
+                String quantityString = String.format("%.2f", Float.parseFloat(jsonObject.getString("quantity")));
                 String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this, Locale.LOCALE_ENGLISH);
                 String[] quantityTypes = Locale.getArrayInLocale("quantity_types", this);
                 if(quantityTypes != null && quantityTypesInEN.length == quantityTypes.length) {
@@ -479,7 +479,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Mi
                 else{//Milk production from this cow already iterated through before i
                     //3. Increment quantity and dates
                     Log.d(TAG, "Updating data for "+cowKey);
-                    currCowData[4] = String.valueOf(Integer.parseInt(currCowData[4])+Integer.parseInt(convertedQuantity));
+                    currCowData[4] = String.valueOf(Float.parseFloat(currCowData[4]) + Float.parseFloat(convertedQuantity));
 
                     //4. Check if current milk reading is in the date extremes (first date or last date)
                     Log.d(TAG, "start time string = "+currCowData[2]);
@@ -576,7 +576,9 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Mi
             final View rowSeparator2=generateRowSeparator(index + 2322, tableRowHeight);
             tableRow.addView(rowSeparator2);
 
-            final TextView quantity = generateTextView(currCowData[4]+" "+currCowData[5] ,922+index, tableRowHeight, tableTextSize);
+            String formattedQuantity = String.format("%.2f" ,Float.parseFloat(currCowData[4]));
+
+            final TextView quantity = generateTextView(formattedQuantity+" "+currCowData[5] ,922+index, tableRowHeight, tableTextSize);
             tableRow.addView(quantity);
 
             productionTotalTL.addView(tableRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,tableRowHeight));

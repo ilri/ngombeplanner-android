@@ -25,3 +25,4 @@ local.properties
 .idea/datasrouces.xml
 .idea/dataSources.ids
 .idea/misc.xml
+.idea/libraries/

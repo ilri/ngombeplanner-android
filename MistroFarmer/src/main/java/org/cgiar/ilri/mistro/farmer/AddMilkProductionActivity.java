@@ -340,7 +340,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
                 for(int i = 0; i < eventConstraints.size(); i++){
                     EventConstraint currConstraint = eventConstraints.get(i);
                     if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_MAX_SITTING)){
-                        if(Integer.parseInt(quantityET.getText().toString()) > currConstraint.getValue()){
+                        if(Float.parseFloat(quantityET.getText().toString()) > currConstraint.getValue()){
                             Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
                             return false;
                         }
@@ -391,10 +391,10 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
                                 long currMilking = currMilkingDate.getTime();
 
                                 int dayDiff = (int)Math.abs((currMilking - lastMilking)/86400000);
-                                int yieldDiff = Math.abs(Integer.parseInt(quantityET.getText().toString()) - lastMP.getQuantity());
+                                float yieldDiff = Math.abs(Float.parseFloat(quantityET.getText().toString()) - lastMP.getQuantity());
 
                                 if(dayDiff != 0) {
-                                    int diff = yieldDiff / dayDiff;//spread the difference in yield among the days passed
+                                    float diff = yieldDiff / dayDiff;//spread the difference in yield among the days passed
 
                                     if(diff  > threshold){
                                         DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {

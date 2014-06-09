@@ -742,7 +742,7 @@ public class DataHandler
 
                         currMP.setId(Integer.parseInt(mpResult[mpIndex][0]));
                         currMP.setTime(mpResult[mpIndex][2]);
-                        currMP.setQuantity(Integer.parseInt(mpResult[mpIndex][3]));
+                        currMP.setQuantity(Float.parseFloat(mpResult[mpIndex][3]));
                         currMP.setDateAdded(mpResult[mpIndex][4]);
                         currMP.setDate(mpResult[mpIndex][5]);
                         currMP.setQuantityType(mpResult[mpIndex][6]);

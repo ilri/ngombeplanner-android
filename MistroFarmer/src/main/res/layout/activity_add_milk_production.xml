@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:gravity="center"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:paddingLeft="20dp"
                     android:layout_weight="0.5"/>
             </TableRow>

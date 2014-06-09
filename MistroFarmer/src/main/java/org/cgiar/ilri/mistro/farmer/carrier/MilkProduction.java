@@ -16,7 +16,7 @@ public class MilkProduction {
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private int id;
     private String time;
-    private int quantity;
+    private float quantity;
     private String dateAdded;
     private String date;
     private String quantityType;
@@ -47,11 +47,11 @@ public class MilkProduction {
         this.time = time;
     }
 
-    public int getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 
