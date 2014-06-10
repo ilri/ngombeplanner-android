@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -114,6 +115,16 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
         return true;
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            Intent intent = new Intent(FarmerRegistrationActivity.this, LandingActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         if(Language.processLanguageMenuItemSelected(this, this, item)){
@@ -190,7 +201,6 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
             {
                 getGPSCoordinates();
             }
-            Log.d(TAG, "Cows be like " + String.valueOf(farmer.getCows()));
         }
         else
         {
