@@ -276,11 +276,18 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
 
     private void registerSimCard()
     {
-        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        if(telephonyManager.getSimSerialNumber()!=null)
-        {
-            SimCardRegistrationThread simCardRegistrationThread=new SimCardRegistrationThread();
-            simCardRegistrationThread.execute(oldMobileNumberET.getText().toString(),newMobileNumberET.getText().toString(),telephonyManager.getSimSerialNumber());
+        if(oldMobileNumberET.getText().toString().length() == 0){
+            Toast.makeText(this, Locale.getStringInLocale("enter_old_phone_no", this), Toast.LENGTH_LONG).show();
+        }
+        else if(newMobileNumberET.getText().toString().length() == 0){
+            Toast.makeText(this, Locale.getStringInLocale("enter_new_phone_no", this), Toast.LENGTH_LONG).show();
+        }
+        else{
+            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+            if(telephonyManager.getSimSerialNumber()!=null) {
+                SimCardRegistrationThread simCardRegistrationThread=new SimCardRegistrationThread();
+                simCardRegistrationThread.execute(oldMobileNumberET.getText().toString(),newMobileNumberET.getText().toString(),telephonyManager.getSimSerialNumber());
+            }
         }
     }
 

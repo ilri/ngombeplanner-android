@@ -307,4 +307,6 @@
     <string name="epersonnel_tshoot_nn">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
     <string name="enter_two_names_nn">Enter at least two names</string>
     <string name="phone_number_not_valid_nn">The phone number you entered is not valid</string>
+    <string name="enter_old_phone_no_nn">Please enter your old phone number</string>
+    <string name="enter_new_phone_no_nn">Please enter your new phone number</string>
 </resources>
