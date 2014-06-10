@@ -122,7 +122,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     private EditText specifyET;
     private Button dialogDeformityOkayB;
 
-    private int index;
+    private int index;//index of cow in the list of cows
     private int numberOfCows;
     private int selectedBreeds;
     private String[] breeds;
@@ -335,7 +335,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         if(bundle != null) {
             farmer=bundle.getParcelable(Farmer.PARCELABLE_KEY);
             if(farmer!=null){
-                if(farmer.getMode().equals(Farmer.MODE_NEW_COW_REGISTRATION) || index == 0) {
+                if(farmer.getMode().equals(Farmer.MODE_NEW_COW_REGISTRATION)) {
                     previousButton.setVisibility(Button.INVISIBLE);
                 }
                 thisCow = farmer.getCow(index);
@@ -573,7 +573,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION) && index>0){
+            if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)){
                 Toast.makeText(this,Locale.getStringInLocale("action_not_allowed",this),Toast.LENGTH_LONG).show();
                 return false;
             }
@@ -740,13 +740,26 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
         if(view==previousButton) {
             cacheThisCow();
             clearEditTextDataCache();//we don't want data on this cow entered on a previous or next cow
-            Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
-            intent.putExtra(KEY_INDEX,index-1);
-            intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
-            Bundle bundle=new Bundle();
-            bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
-            intent.putExtras(bundle);
-            startActivity(intent);
+
+            if(this.index > 0){
+                Intent intent=new Intent(CowRegistrationActivity.this, CowRegistrationActivity.class);
+                intent.putExtra(KEY_INDEX,index-1);
+                intent.putExtra(KEY_NUMBER_OF_COWS,numberOfCows);
+                Bundle bundle=new Bundle();
+                bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+            else if(this.index == 0){
+                Intent intent = new Intent(CowRegistrationActivity.this, FarmerRegistrationActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putParcelable(Farmer.PARCELABLE_KEY, farmer);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+            else{
+                Log.e(TAG, "Current cow index is out of range ("+String.valueOf(this.index)+")");
+            }
         }
         else if(view==nextButton) {
             if(validateInput()) {

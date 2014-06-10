@@ -190,6 +190,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
             {
                 getGPSCoordinates();
             }
+            Log.d(TAG, "Cows be like " + String.valueOf(farmer.getCows()));
         }
         else
         {

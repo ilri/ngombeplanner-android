@@ -80,6 +80,13 @@ public class Farmer implements Parcelable, Serializable
         return this.mode;
     }
 
+    /**
+     * This methods inits the number of cows the farmer has.
+     * Be warned that calling this function when this farmer object
+     * already has cows will invalidate the previous cows.
+     *
+     * @param number    The number of cows
+     */
     public void setCowNumber(int number)
     {
         this.cows=new ArrayList<Cow>();
