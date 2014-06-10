@@ -777,7 +777,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
                             jsonObject.put("motherETN", selectedCowETN);
                             jsonObject.put("motherName", selectedCowName);
                             jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
-                            if(servicingIDs != null) {
+                            if(servicingIDs != null && servicingS.getSelectedItemPosition() != -1) {
                                 jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
                             }
                             //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
@@ -786,7 +786,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        if(servicingTypes != null) {
+                        if(servicingTypes != null && servicingS.getSelectedItemPosition() != -1) {
                             if (servicingTypes.get(servicingS.getSelectedItemPosition()).equals("Artificial Insemination")) {
                                 thisCalf.setServiceType(Cow.SERVICE_TYPE_AI);
                             } else if (servicingTypes.get(servicingS.getSelectedItemPosition()).equals("Bull Servicing")) {
