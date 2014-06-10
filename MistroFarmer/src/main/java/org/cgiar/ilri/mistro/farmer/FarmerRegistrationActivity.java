@@ -385,21 +385,37 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
             Toast.makeText(this,nameETEmptyWarning,Toast.LENGTH_LONG).show();
             return false;
         }
+        else if(nameText.split(" ").length < 2){
+            Toast.makeText(this, Locale.getStringInLocale("enter_two_names", this), Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         String mobileNumberText=mobileNumberET.getText().toString();
         if(mobileNumberText==null||mobileNumberText.equals(""))
         {
             Toast.makeText(this,mobileNoETEmptyWarning,Toast.LENGTH_LONG).show();
             return false;
         }
-        /*if(extensionPersonnelET.getText().toString() == null || extensionPersonnelET.getText().toString().length() == 0){
-            Toast.makeText(this, Locale.getStringInLocale("enter_extension_personnel_name", this), Toast.LENGTH_LONG).show();
+        else if(mobileNumberText.length() != 10){
+            Toast.makeText(this, Locale.getStringInLocale("phone_number_not_valid", this), Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if(vetNames == null){
+            Toast.makeText(this, Locale.getStringInLocale("epersonnel_tshoot", this), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if(extensionPersonnelS.getSelectedItemPosition() == -1 || vetNames.get(extensionPersonnelS.getSelectedItemPosition()).length() == 0){
+            Toast.makeText(this, Locale.getStringInLocale("select_epersonnel", this), Toast.LENGTH_LONG).show();
             return  false;
-        }*/
+        }
+
         if(isInFarm && (longitude == null || longitude.length() == 0 || latitude == null || latitude.length() == 0)) {
             //Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
             //return false;
-            Log.w(TAG, "GPS location not obtained. Will try to get it in next screen");
+            Log.w(TAG, Locale.getStringInLocale("unable_to_lock_gps", this));
         }
+
         if(numberOfCowsET.getText().toString().length()==0){
             Toast.makeText(this,Locale.getStringInLocale("enter_no_cows_own",this),Toast.LENGTH_LONG).show();
             return false;
@@ -530,7 +546,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
             progressDialog.dismiss();
 
             if(result == null){
-                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("problem_connecting_to_server", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("unable_to_get_epersonnel", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
             }
             else{
                 try{

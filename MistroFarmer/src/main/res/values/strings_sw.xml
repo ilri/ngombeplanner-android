@@ -300,4 +300,11 @@
     </string-array>
     <string name="enter_milk_status_of_cow_sw">Please enter the status of cow</string>
     <string name="enter_in_calf_status_sw">Please enter the status of cow</string>
+    <string name="select_epersonnel_sw">Please select an extension personnel</string>
+    <string name="unable_to_get_epersonnel_sw">Unable to fetch extension Personnel</string>
+    <string name="unable_to_lock_gps_sw">GPS location was not obtained. Will try to get it in next screen</string>
+    <string name="gps_recorded_sw">GPS recorded</string>
+    <string name="epersonnel_tshoot_sw">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
+    <string name="enter_two_names_sw">Enter at least two names</string>
+    <string name="phone_number_not_valid_sw">The phone number you entered is not valid</string>
 </resources>
