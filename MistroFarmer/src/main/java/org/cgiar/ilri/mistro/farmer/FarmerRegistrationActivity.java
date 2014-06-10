@@ -31,6 +31,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
+import org.cgiar.ilri.mistro.farmer.backend.database.DatabaseHelper;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -538,7 +539,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
         protected String doInBackground(Integer... params) {
             Log.d(TAG, "Fetching vets from server");
 
-            return DataHandler.sendDataToServer(FarmerRegistrationActivity.this, "", DataHandler.FARMER_FETCH_VETS_URL, true);
+            return DataHandler.sendDataToServer(FarmerRegistrationActivity.this, "", DataHandler.FARMER_FETCH_VETS_URL, true, DatabaseHelper.TABLE_EXTENSION_PERSONNEL);
         }
 
         @Override

@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This class handles transactions to the SQLite database
@@ -18,13 +21,18 @@ import java.io.Serializable;
 public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
 
     public static final String DB_NAME = "ngombe_planner";
-    public static final int DB_VERSION = 11;
+    public static final int DB_VERSION = 12;
     public static final String TABLE_FARMER = "farmer";
     public static final String TABLE_COW = "cow";
     public static final String TABLE_EVENT = "event";
     public static final String TABLE_CACHED_REQUESTS = "cached_requests";
     public static final String TABLE_MILK_PRODUCTION = "milk_production";
     public static final String TABLE_EVENTS_CONSTRAINTS = "events_constraints";
+    public static final String TABLE_EXTENSION_PERSONNEL = "extension_personnel";
+
+    public static final String[] COLUMNS_EXTENSION_PERSONNEL = {"id", "name", "mobile_no", "date_added"};
+
+    private final Map<String, String[]> tableColumns = new HashMap<String, String[]>();
 
     private static final String TAG = "DatabaseHelper";
 
@@ -36,6 +44,12 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
         Log.d(TAG, "Database version = "+DB_VERSION);
+
+        tableColumns.put(TABLE_EXTENSION_PERSONNEL, COLUMNS_EXTENSION_PERSONNEL);
+    }
+
+    public String[] getAllColumns(String table){
+        return tableColumns.get(table);
     }
 
     /**
@@ -47,10 +61,11 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_FARMER + " (id INTEGER PRIMARY KEY, name TEXT, mobile_no TEXT, location_county TEXT, location_district TEXT, gps_longitude TEXT, gps_latitude TEXT, date_added TEXT, sim_card_sn TEXT);");
 		db.execSQL("CREATE TABLE " + TABLE_COW + " (id INTEGER PRIMARY KEY, farmer_id INTEGER, name TEXT, ear_tag_number TEXT, date_of_birth TEXT, age INTEGER, age_type TEXT, sex TEXT, sire_id INTEGER, dam_id INTEGER, date_added TEXT, service_type TEXT, country_id INTEGER, bull_owner TEXT, owner_name TEXT);");
-        db.execSQL("CREATE TABLE "+TABLE_EVENT+" (id INTEGER PRIMARY KEY, cow_id INTEGER, event_name TEXT, remarks TEXT, event_date TEXT, birth_type TEXT, parent_cow_event INTEGER, bull_id INTEGER, servicing_days INTEGER, cod TEXT, no_of_live_births INTEGER, saved_on_server INTEGER, date_added TEXT)");
-        db.execSQL("CREATE TABLE "+TABLE_CACHED_REQUESTS+" (id INTEGER PRIMARY KEY AUTOINCREMENT, url TEXT, json TEXT)");
-        db.execSQL("CREATE TABLE "+TABLE_MILK_PRODUCTION+" (id INTEGER PRIMARY KEY, cow_id INTEGER, time TEXT, quantity INTEGER, date_added TEXT, date TEXT, quantity_type TEXT)");
-        db.execSQL("CREATE TABLE "+TABLE_EVENTS_CONSTRAINTS+" (id INTEGER PRIMARY KEY, event TEXT, time INTEGER, time_units TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_EVENT + " (id INTEGER PRIMARY KEY, cow_id INTEGER, event_name TEXT, remarks TEXT, event_date TEXT, birth_type TEXT, parent_cow_event INTEGER, bull_id INTEGER, servicing_days INTEGER, cod TEXT, no_of_live_births INTEGER, saved_on_server INTEGER, date_added TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_CACHED_REQUESTS + " (id INTEGER PRIMARY KEY AUTOINCREMENT, url TEXT, json TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_MILK_PRODUCTION + " (id INTEGER PRIMARY KEY, cow_id INTEGER, time TEXT, quantity INTEGER, date_added TEXT, date TEXT, quantity_type TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_EVENTS_CONSTRAINTS + " (id INTEGER PRIMARY KEY, event TEXT, time INTEGER, time_units TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_EXTENSION_PERSONNEL + " (id INTEGER PRIMARY KEY, name TEXT, mobile_no TEXT, date_added TEXT)");
         //insert any static data to the db now
     }
 
@@ -65,12 +80,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(TAG, "About to update the database. All data will be lost");
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_COW);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_FARMER);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_EVENT);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_CACHED_REQUESTS);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_MILK_PRODUCTION);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_EVENTS_CONSTRAINTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_COW);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FARMER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CACHED_REQUESTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MILK_PRODUCTION);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENTS_CONSTRAINTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXTENSION_PERSONNEL);
 
         //recreate the database
         onCreate(db);

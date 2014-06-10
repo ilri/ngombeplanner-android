@@ -50,6 +50,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -200,6 +201,103 @@ public class DataHandler
             return null;
         }
         return response;
+    }
+
+    /**
+     * This method sends the string corresponding to a jsonObject or jsonArray to the server. Note that if string is not from the specified types of
+     * objects the server might not reply as expected. This function also caches the results from the server into the specified table and fetches
+     * data from the cache table if no response from the server.
+     * This method should only be called from within an asynchronous thread. Refer to android.os.AsyncTask
+     *
+     * @param context The context from where the data is being sent
+     * @param jsonString The string corresponding to either a jsonObject or a jsonArray
+     * @param appendedURL The page on the server to which the data is to be sent. All pages accessible from this app are specified in DataHandler
+     *                    eg DataHandler.FARMER_REGISTRATION_URL
+     * @param waitForResponse Set to true if UI will be waiting for a response from the server
+     * @param cacheTable The table to be used as a cache for the data obtained from the server
+     *
+     * @return The response from the server
+     */
+    public static String sendDataToServer(Context context, String jsonString, String appendedURL, boolean waitForResponse, String cacheTable) {
+        String response = null;
+        if(checkNetworkConnection(context)){//try to
+            response = sendDataUsingHttpConnection(context, jsonString, appendedURL);
+
+            cacheServerData(context, response, cacheTable);
+        }
+        if(response == null){//means that either there was no connection to the server or a null was returned
+            return getCachedServerData(context, cacheTable);
+        }
+        return response;
+    }
+
+    private static void cacheServerData(Context context, String serverResponse, String cacheTable){
+        if(serverResponse != null){
+            try{
+                DatabaseHelper databaseHelper = new DatabaseHelper(context);
+                SQLiteDatabase writableDatabase = databaseHelper.getWritableDatabase();
+
+                JSONArray serverData = new JSONArray(serverResponse);
+                String[] columns = null;
+
+                databaseHelper.runTruncateQuery(writableDatabase, cacheTable);//Delete the cache that was already in the database
+
+                for(int i = 0; i < serverData.length(); i++){
+                    JSONObject currentRow = serverData.getJSONObject(i);
+                    if(i == 0){//initialize the columns to be saved in the cache table
+                        List<String> tmpColumns = new ArrayList<String>();
+                        Iterator<String> keys = currentRow.keys();
+                        while(keys.hasNext()){
+                            tmpColumns.add(keys.next());
+                        }
+
+                        columns = tmpColumns.toArray(new String[tmpColumns.size()]);
+                        Log.d(TAG, "Columns for the cache table are "+String.valueOf(columns));
+                    }
+
+                    if(columns != null){
+                        String[] columnValues = new String[columns.length];
+                        for(int j = 0; j < columns.length; j++){
+                            columnValues[j] = currentRow.getString(columns[j]);
+                        }
+
+                        databaseHelper.runInsertQuery(cacheTable, columns, columnValues, -1, writableDatabase);
+                    }
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static String getCachedServerData(Context context, String cacheTable){
+        try{
+            DatabaseHelper databaseHelper = new DatabaseHelper(context);
+            SQLiteDatabase readableDatabase = databaseHelper.getReadableDatabase();
+
+            String[] columns = databaseHelper.getAllColumns(cacheTable);
+            if(columns != null){
+                String[][] results = databaseHelper.runSelectQuery(readableDatabase, cacheTable, columns, null, null, null, null, null, null);
+                JSONArray jsonArray = new JSONArray();
+                for(int i = 0; i < results.length; i++){
+                    JSONObject currRow = new JSONObject();
+
+                    for(int j = 0; j < results[i].length; j++){
+                        currRow.put(columns[j], results[i][j]);
+                    }
+
+                    jsonArray.put(currRow);
+                }
+
+                return jsonArray.toString();
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     /**
@@ -376,7 +474,7 @@ public class DataHandler
      */
     public static String getSharedPreference(Context context, String sharedPreferenceKey, String defaultValue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
-        Log.d(TAG, "value of "+sharedPreferenceKey+" is "+sharedPreferences.getString(sharedPreferenceKey, defaultValue));
+        Log.d(TAG, "value of " + sharedPreferenceKey + " is " + sharedPreferences.getString(sharedPreferenceKey, defaultValue));
         return sharedPreferences.getString(sharedPreferenceKey, defaultValue);
     }
 
