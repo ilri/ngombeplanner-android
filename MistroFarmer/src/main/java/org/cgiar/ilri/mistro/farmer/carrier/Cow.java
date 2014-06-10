@@ -68,6 +68,7 @@ public class Cow implements Parcelable, Serializable {
     private String milkingStatus;
     private boolean inCalf;
 
+
     public Cow(boolean isNotDamOrSire) {
         name = "";
         earTagNumber = "";
@@ -138,6 +139,10 @@ public class Cow implements Parcelable, Serializable {
         }
 
         Log.d(TAG, " ****************** Milking status now is  "+this.milkingStatus);
+    }
+
+    public void setMilkingStatus(String milkingStatus){
+        this.milkingStatus = milkingStatus;
     }
 
     /**

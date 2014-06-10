@@ -614,7 +614,7 @@ public class DataHandler
                 JSONArray cowData = farmerData.getJSONArray("cows");
                 for(int i = 0; i < cowData.length(); i++){
                     JSONObject currCow = cowData.getJSONObject(i);
-                    columns = new String[]{"id", "farmer_id", "name", "ear_tag_number", "date_of_birth", "age", "age_type", "sex", "sire_id", "dam_id", "date_added", "service_type", "country_id", "bull_owner", "owner_name"};
+                    columns = new String[]{"id", "farmer_id", "name", "ear_tag_number", "date_of_birth", "age", "age_type", "sex", "sire_id", "dam_id", "date_added", "service_type", "country_id", "bull_owner", "owner_name", "milking_status"};
                     columnValues = new String[columns.length];
 
                     columnValues[0] = currCow.getString("id");
@@ -632,6 +632,7 @@ public class DataHandler
                     columnValues[12] = currCow.getString("country_id");
                     columnValues[13] = currCow.getString("bull_owner");
                     columnValues[14] = currCow.getString("owner_name");
+                    columnValues[15] = currCow.getString("milking_status");
 
                     databaseHelper.runInsertQuery(databaseHelper.TABLE_COW, columns, columnValues, 0, writableDB);
 
@@ -738,7 +739,7 @@ public class DataHandler
             farmer.setSimCardSN(farmerResult[0][5]);
 
             //fetch cow data
-            columns = new String[]{"id", "name", "ear_tag_number", "date_of_birth", "age", "age_type", "sex", "sire_id", "dam_id", "date_added", "service_type", "country_id", "bull_owner", "owner_name"};
+            columns = new String[]{"id", "name", "ear_tag_number", "date_of_birth", "age", "age_type", "sex", "sire_id", "dam_id", "date_added", "service_type", "country_id", "bull_owner", "owner_name", "milking_status"};
             selection = "farmer_id="+farmerID;
 
             String[][] cowResult = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_COW, columns, selection, null, null, null, null, null);
@@ -758,6 +759,7 @@ public class DataHandler
                     currCow.setAgeType(cowResult[cowIndex][5]);
                     currCow.setSex(cowResult[cowIndex][6]);
                     currCow.setServiceType(cowResult[cowIndex][10]);
+                    currCow.setMilkingStatus(cowResult[cowIndex][14]);
 
                     //set sire
                     if(cowResult[cowIndex][7].length() > 0){

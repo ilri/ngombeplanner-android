@@ -39,6 +39,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -308,6 +309,10 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
     {
         String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
         String quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
+        if(cowS.getSelectedItemPosition() == -1 || cowNameArray == null || cowNameArray.length == 0 || cowEarTagNumberArray.length == 0){
+            Toast.makeText(this, Locale.getStringInLocale("you_do_not_have_female_cows", this), Toast.LENGTH_LONG).show();
+            return false;
+        }
         if(quantityET.getText().toString()==null) {
             Toast.makeText(this, Locale.getStringInLocale("enter_quantity_of_milk_produced",this), Toast.LENGTH_LONG).show();
             return false;
@@ -571,7 +576,14 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
                 AddMilkProductionActivity.this.farmer = farmer;
 
                 //get cow names and ear tag numbers
-                List<Cow> cows = farmer.getCows(Cow.SEX_FEMALE);
+                List<Cow> allCows = farmer.getCows(Cow.SEX_FEMALE);
+                List<Cow> cows = new ArrayList<Cow>();
+                for(int i = 0; i < allCows.size(); i++){
+                    Cow currCow = allCows.get(i);
+                    if(currCow.getMilkingStatusCode().equals(Cow.MILKING_S_ADULT_MILKING)){
+                        cows.add(currCow);
+                    }
+                }
 
                 String[] cowArray=new String[cows.size()];
                 String[] earTagArray=new String[cows.size()];
