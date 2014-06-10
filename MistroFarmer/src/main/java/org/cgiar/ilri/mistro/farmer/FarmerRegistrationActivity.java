@@ -428,6 +428,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
     {
         latitude=String.valueOf(location.getLatitude());
         longitude=String.valueOf(location.getLongitude());
+        Toast.makeText(this, Locale.getStringInLocale("gps_recorded", this), Toast.LENGTH_LONG).show();
         Log.d(TAG,"latitude : "+latitude);
         Log.d(TAG,"longitude : "+longitude);
     }
