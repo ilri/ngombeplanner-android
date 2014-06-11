@@ -311,4 +311,12 @@
     <string name="phone_number_not_valid_en">The phone number you entered is not valid</string>
     <string name="enter_old_phone_no_en">Please enter your old phone number</string>
     <string name="enter_new_phone_no_en">Please enter your new phone number</string>
+    <string name="admin_functions_en">Admin Functions</string>
+    <string name="sim_card_not_admin_en">The sim card you are using is not allowed to log in as Admin</string>
+    <string name="edit_farmer_en">Edit Farmer</string>
+    <string name="edit_cow_en">Edit Cow</string>
+    <string name="admin_en">Admin</string>
+    <string name="edit_en">Edit</string>
+    <string name="select_farmer_en">Select a farmer</string>
+    <string name="select_en">Select</string>
 </resources>

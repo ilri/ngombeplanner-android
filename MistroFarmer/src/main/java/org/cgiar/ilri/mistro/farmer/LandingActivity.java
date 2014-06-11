@@ -14,6 +14,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
     private String welcomeText;
     private String loadingPleaseWait;
     private String serverError;
+    private CheckBox adminFuncCB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -76,6 +78,8 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
         newMobileNumberET=(EditText)changeSystemSimCardDialog.findViewById(R.id.new_mobile_number_et);
         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         newMobileNumberET.setText(telephonyManager.getLine1Number());
+
+        adminFuncCB = (CheckBox)this.findViewById(R.id.admin_func_cb);
 
         //init text according to locale
         initTextInViews();
@@ -131,6 +135,7 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
         welcomeText=Locale.getStringInLocale("welcome", this);
         loadingPleaseWait=Locale.getStringInLocale("loading_please_wait", this);
         serverError=Locale.getStringInLocale("problem_connecting_to_server", this);
+        adminFuncCB.setText(Locale.getStringInLocale("admin_functions", this));
     }
 
     private void startRegistrationActivity()
@@ -165,15 +170,28 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
 
     private void authenticateUser()
     {
-        Log.d(TAG, "Authenticate user called");
         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        if(telephonyManager.getSimSerialNumber()!=null)
-        {
-            UserAuthenticationThread authenticationThread=new UserAuthenticationThread();
-            authenticationThread.execute(telephonyManager.getSimSerialNumber());
+        if(!adminFuncCB.isChecked()){
+            Log.d(TAG, "Trying to log in as normal farmer");
+            if(telephonyManager.getSimSerialNumber()!=null)
+            {
+                UserAuthenticationThread authenticationThread=new UserAuthenticationThread();
+                authenticationThread.execute(telephonyManager.getSimSerialNumber());
+            }
+            else{
+                Toast.makeText(this,Locale.getStringInLocale("no_sim_card",this),Toast.LENGTH_LONG).show();
+            }
         }
         else{
-            Toast.makeText(this,Locale.getStringInLocale("no_sim_card",this),Toast.LENGTH_LONG).show();
+            Log.d(TAG, "Trying to log in as admin");
+            if(telephonyManager.getSimSerialNumber()!=null)
+            {
+                AdminAuthenticationThread authenticationThread=new AdminAuthenticationThread();
+                authenticationThread.execute(telephonyManager.getSimSerialNumber());
+            }
+            else{
+                Toast.makeText(this,Locale.getStringInLocale("no_sim_card",this),Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -243,6 +261,7 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
                 Intent intent=new Intent(LandingActivity.this,MainMenu.class);
                 Log.d(TAG, result);
                 intent.putExtra(MainMenu.KEY_FARMER_DATA, result);
+                intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_FARMER);
                 startActivity(intent);
             }
         }
@@ -271,6 +290,74 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
                     });
             AlertDialog alertDialog=alertDialogBuilder.create();
             alertDialog.show();
+        }
+    }
+
+    private class AdminAuthenticationThread extends AsyncTask<String,Integer,String> {
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            loginSessionOn=true;
+            progressDialog= ProgressDialog.show(LandingActivity.this, "",loadingPleaseWait, true);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            JSONObject jsonObject=new JSONObject();
+            try
+            {
+                jsonObject.put("simCardSN",params[0]);
+                jsonObject.put("deviceType", "Android");
+                //jsonObject.put("mobileNumber",params[1]);
+                String result = DataHandler.sendDataToServer(LandingActivity.this, jsonObject.toString(),DataHandler.ADMIN_AUTHENTICATION_URL, true);
+                return result;
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+            super.onPostExecute(result);
+            progressDialog.dismiss();
+            loginSessionOn=false;
+            if(result==null)
+            {
+                String httpError = DataHandler.getSharedPreference(LandingActivity.this, "http_error", "No Error thrown to application. Something must be really wrong");
+                Toast.makeText(LandingActivity.this,httpError,Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                Toast.makeText(LandingActivity.this, Locale.getStringInLocale("generic_sms_error", LandingActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+                Toast.makeText(LandingActivity.this, Locale.getStringInLocale("no_service", LandingActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+                Toast.makeText(LandingActivity.this, Locale.getStringInLocale("radio_off", LandingActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                Toast.makeText(LandingActivity.this, Locale.getStringInLocale("server_not_receive_sms", LandingActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED))
+            {
+                Log.w(TAG, "User trying to log in as admin with an unregistered Sim Card");
+                Toast.makeText(LandingActivity.this, Locale.getStringInLocale("sim_card_not_admin", LandingActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else{
+                Intent intent=new Intent(LandingActivity.this,MainMenu.class);
+                intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
+                intent.putExtra(MainMenu.KEY_ADMIN_DATA, result);
+                startActivity(intent);
+            }
         }
     }
 

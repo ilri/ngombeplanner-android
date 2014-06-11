@@ -308,4 +308,12 @@
     <string name="phone_number_not_valid_kr">The phone number you entered is not valid</string>
     <string name="enter_old_phone_no_kr">Please enter your old phone number</string>
     <string name="enter_new_phone_no_kr">Please enter your new phone number</string>
+    <string name="admin_functions_kr">Admin Functions</string>
+    <string name="sim_card_not_admin_kr">The sim card you are using is not allowed to log in as Admin</string>
+    <string name="edit_farmer_kr">Edit Farmer</string>
+    <string name="edit_cow_kr">Edit Cow</string>
+    <string name="admin_kr">Admin</string>
+    <string name="edit_kr">Edit</string>
+    <string name="select_farmer_kr">Select a farmer</string>
+    <string name="select_kr">Select</string>
 </resources>

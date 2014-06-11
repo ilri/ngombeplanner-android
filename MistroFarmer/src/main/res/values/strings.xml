@@ -20,5 +20,7 @@
     <string name="kikabrasi">Kikabrasi</string>
     <string name="title_activity_fertility">Fertility</string>
     <string name="title_activity_add_milk_production">Add Milk Production</string>
+    <string name="title_activity_edit_farmer">Edit Farmer</string>
+    <string name="title_activity_edit_farmer_selection">EditFarmerSelection</string>
 
 </resources>

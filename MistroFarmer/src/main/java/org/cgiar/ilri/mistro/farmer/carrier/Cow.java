@@ -102,6 +102,102 @@ public class Cow implements Parcelable, Serializable {
         readFromParcel(in);
     }
 
+    public Cow(JSONArray allCows, int index){
+        try {
+            JSONObject thisCow = allCows.getJSONObject(index);
+            initFromJSON(thisCow);
+
+            int sireID = (thisCow.getString("sire_id").equals("NULL")) ? -1 : thisCow.getInt("sire_id");
+            int damID = (thisCow.getString("dam_id").equals("NULL")) ? -1 : thisCow.getInt("dam_id");
+
+            if(sireID != -1){
+                for(int i = 0; i < allCows.length(); i++){
+                    JSONObject possibleSire = allCows.getJSONObject(i);
+                    if(possibleSire.getInt("id") == sireID){
+                        Sire sire = new Sire();
+                        sire.setName(possibleSire.getString("name"));
+                        sire.setEarTagNumber(possibleSire.getString("ear_tag_number"));
+                        sire.setOwner((possibleSire.getString("owner_name").equals("NULL")) ? "" : possibleSire.getString("owner_name"));
+                        sire.setOwnerType((possibleSire.getString("bull_owner").equals("NULL")) ? "" : possibleSire.getString("owner_name"));
+
+                        this.sire = sire;
+                    }
+                }
+            }
+            this.sire.setStrawNumber((thisCow.getString("straw").equals("NULL")) ? "" : thisCow.getString("straw"));
+
+            if(damID != -1){
+                for(int i = 0; i < allCows.length(); i++){
+                    JSONObject possibleDam = allCows.getJSONObject(i);
+                    if(possibleDam.getInt("id") == damID){
+                        Dam dam = new Dam();
+                        dam.setName(possibleDam.getString("name"));
+                        dam.setEarTagNumber(possibleDam.getString("ear_tag_number"));
+
+                        this.dam = dam;
+                    }
+                }
+            }
+            this.dam.setEmbryoNumber((thisCow.getString("embryo").equals("NULL")) ? "" : thisCow.getString("embryo"));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void initFromJSON(JSONObject jsonObject){
+        try {
+            name = jsonObject.getString("name");
+            earTagNumber = jsonObject.getString("ear_tag_number");
+            dateOfBirth = (jsonObject.getString("date_of_birth").equals("NULL")) ? "" : jsonObject.getString("date_of_birth");
+            dateAdded = jsonObject.getString("date_added");
+            age = (jsonObject.getString("age").equals("NULL")) ? -1 : jsonObject.getInt("age");
+            ageType = (jsonObject.getString("age_type").equals("NULL")) ? "" : jsonObject.getString("age_type");
+
+            JSONArray breedArray = jsonObject.getJSONArray("breed");
+            this.breeds = new ArrayList<String>(breedArray.length());
+            for(int i = 0; i < breedArray.length(); i++){
+                this.breeds.add(breedArray.getString(i));
+            }
+
+            sex = jsonObject.getString("sex");
+
+            JSONArray deformityArray = jsonObject.getJSONArray("deformity");
+            this.deformities = new ArrayList<String>(deformityArray.length());
+            for(int i = 0; i < deformityArray.length(); i++){
+                this.deformities.add(deformityArray.getString(i));
+            }
+            otherDeformity = jsonObject.getString("other_deformity");
+
+            sire = new Sire();
+            dam = new Dam();
+
+            mode = "";
+            countryOfOrigin = "";//only set this if is sire
+            serviceType = (jsonObject.getString("service_type").equals("NULL")) ? "" : jsonObject.getString("service_type");
+            otherBreed = "";
+            piggyBack = "";
+            this.events = new ArrayList<Event>();
+            this.milkProduction = new ArrayList<MilkProduction>();
+            if(this.sex.equals(SEX_MALE)){
+                milkingStatus = "";
+                inCalf = false;
+            }
+            else if(this.sex.equals(SEX_FEMALE)){
+                milkingStatus = (jsonObject.getString("milking_status").equals("NULL")) ? MILKING_S_ADULT_MILKING : jsonObject.getString("milking_status");
+                if(jsonObject.getString("in_calf").equals("1")){
+                    inCalf = true;
+                }
+                else{
+                    inCalf = false;
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * This method returns the milking status of cow in english
      *

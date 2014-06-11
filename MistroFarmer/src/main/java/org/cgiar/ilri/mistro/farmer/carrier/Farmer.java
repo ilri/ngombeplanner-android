@@ -52,6 +52,29 @@ public class Farmer implements Parcelable, Serializable
         readFromParcel(source);
     }
 
+    public Farmer(JSONObject farmerJsonObject, String extensionPersonnel){
+        try{
+            fullName = farmerJsonObject.getString("name");
+            this.extensionPersonnel = extensionPersonnel;
+            mobileNumber = farmerJsonObject.getString("mobile_no");
+            longitude = farmerJsonObject.getString("longitude");
+            latitude = farmerJsonObject.getString("latitude");
+            simCardSN = farmerJsonObject.getString("sim_card_sn");
+            preferredLocale = farmerJsonObject.getString("pref_locale");
+            isInFarm = false;
+
+            JSONArray cowArray = farmerJsonObject.getJSONArray("cows");
+            cows = new ArrayList<Cow>(cowArray.length());
+            for(int i = 0; i < cowArray.length(); i++){
+                Cow currCow = new Cow(cowArray, i);
+                cows.add(currCow);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void setFullName(String fullName)
     {
         this.fullName = fullName;

@@ -24,8 +24,14 @@ import com.actionbarsherlock.view.MenuItem;
 
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
+import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainMenu extends SherlockActivity implements MistroActivity, View.OnClickListener, LocationListener
 {
@@ -33,14 +39,25 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
     public static final String KEY_LONGITUDE = "longitude";
     public static final String KEY_LATITUDE = "latitude";
     public static final String KEY_FARMER_DATA = "farmerData";
+    public static final String KEY_MODE = "mode";
+    public static final String KEY_ADMIN_DATA = "adminData";
+
+    public static final String MODE_FARMER = "isFarmer";
+    public static final String MODE_ADMIN = "isAdmin";
+
     private Button milkProductionB;
     private Button fertilityB;
     private Button eventsB;
+    private Button editFarmerB;
+    private Button editCowB;
     private Button logoutB;
     private JSONObject farmerData;
+    private JSONObject adminData;
     private LocationManager locationManager;
     private String longitude;
     private String latitude;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -54,21 +71,57 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
         fertilityB.setOnClickListener(this);
         eventsB =(Button)this.findViewById(R.id.events_b);
         eventsB.setOnClickListener(this);
+        editFarmerB = (Button)this.findViewById(R.id.edit_farmer_b);
+        editFarmerB.setOnClickListener(this);
+        editCowB = (Button)this.findViewById(R.id.edit_cow_b);
+        editCowB.setOnClickListener(this);
         logoutB = (Button)this.findViewById(R.id.logout_b);
         logoutB.setOnClickListener(this);
 
         Bundle bundle=this.getIntent().getExtras();
         if(bundle != null){
-            String farmerJSONString = bundle.getString(KEY_FARMER_DATA);
+            String mode = bundle.getString(KEY_MODE);
+            if(mode != null){
+                switchMode(mode);
+                if(mode.equals(MODE_FARMER)){
+                    String farmerJSONString = bundle.getString(KEY_FARMER_DATA);
 
-            try{
-                farmerData = new JSONObject(farmerJSONString);
-                registerCoords();
+                    try{
+                        farmerData = new JSONObject(farmerJSONString);
+                        registerCoords();
 
-                Toast.makeText(this, Locale.getStringInLocale("welcome", this)+" "+farmerData.getString("name"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, Locale.getStringInLocale("welcome", this)+" "+farmerData.getString("name"), Toast.LENGTH_LONG).show();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                else if(mode.equals(MODE_ADMIN)){
+                    String adminJSONString = bundle.getString(KEY_ADMIN_DATA);
+
+                    try{
+                        adminData = new JSONObject(adminJSONString);
+
+                        JSONArray farmerJsonArray = adminData.getJSONArray("farmers");
+
+                        List<Farmer> farmers = new ArrayList<Farmer>(farmerJsonArray.length());
+                        for(int i = 0; i < farmerJsonArray.length(); i++){
+                            Farmer currFarmer = new Farmer(farmerJsonArray.getJSONObject(i), adminData.getString("name"));
+                            farmers.add(currFarmer);
+                        }
+
+                        Toast.makeText(this, Locale.getStringInLocale("welcome", this) + " " + adminData.getString("name") + " (" + Locale.getStringInLocale("admin", this) + ")", Toast.LENGTH_LONG).show();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    Log.e(TAG, "Unable to find out which mode to use in main menu");
+                }
             }
-            catch (Exception e){
-                e.printStackTrace();
+            else{
+                Log.e(TAG, "Mode is null. Not sure which mode to use");
             }
         }
 
@@ -94,9 +147,28 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
     {
         this.setTitle(Locale.getStringInLocale("main_menu",this));
         milkProductionB.setText(Locale.getStringInLocale("milk_production", this));
-        fertilityB.setText(Locale.getStringInLocale("fertility",this));
+        fertilityB.setText(Locale.getStringInLocale("fertility", this));
         eventsB.setText(Locale.getStringInLocale("events",this));
+        editFarmerB.setText(Locale.getStringInLocale("edit_farmer", this));
+        editCowB.setText(Locale.getStringInLocale("edit_cow", this));
         logoutB.setText(Locale.getStringInLocale("logout", this));
+    }
+
+    private void switchMode(String mode){
+        milkProductionB.setVisibility(View.GONE);
+        fertilityB.setVisibility(View.GONE);
+        eventsB.setVisibility(View.GONE);
+        editFarmerB.setVisibility(View.GONE);
+        editCowB.setVisibility(View.GONE);
+        if(mode.equals(MODE_FARMER)){
+            milkProductionB.setVisibility(View.VISIBLE);
+            fertilityB.setVisibility(View.VISIBLE);
+            eventsB.setVisibility(View.VISIBLE);
+        }
+        else if(mode.equals(MODE_ADMIN)){
+            editFarmerB.setVisibility(View.VISIBLE);
+            editCowB.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -114,6 +186,10 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
         else if(view==eventsB)
         {
             Intent intent=new Intent(this,EventsActivity.class);
+            startActivity(intent);
+        }
+        else if(view==editFarmerB){
+            Intent intent = new Intent(this, FarmerSelection.class);
             startActivity(intent);
         }
         else if(view==logoutB){
@@ -207,8 +283,8 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
     public void onLocationChanged(Location location) {
         latitude=String.valueOf(location.getLatitude());
         longitude=String.valueOf(location.getLongitude());
-        Log.d(TAG,"latitude : "+latitude);
-        Log.d(TAG,"longitude : "+longitude);
+        Log.d(TAG, "latitude : " + latitude);
+        Log.d(TAG, "longitude : " + longitude);
     }
 
     @Override

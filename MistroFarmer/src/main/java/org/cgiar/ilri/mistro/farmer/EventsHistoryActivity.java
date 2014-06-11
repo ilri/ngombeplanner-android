@@ -92,6 +92,7 @@ public class EventsHistoryActivity extends SherlockActivity implements MistroAct
         }
         else if(item.getItemId() == R.id.action_back_main_menu) {
             Intent intent = new Intent(this, MainMenu.class);
+            intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_FARMER);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }

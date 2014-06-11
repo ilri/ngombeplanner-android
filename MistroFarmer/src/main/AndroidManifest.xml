@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.cgiar.ilri.mistro.farmer"
-    android:versionCode="16"
-    android:versionName="0.9.9.7" >
+    android:versionCode="17"
+    android:versionName="1.0.1" >
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="17" /> <!--using target sdk version of 17 because actionbarsherlock uses 17. Otherwise gradle is unable to build project-->
+        android:targetSdkVersion="17" /> <!-- using target sdk version of 17 because actionbarsherlock uses 17. Otherwise gradle is unable to build project -->
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -56,8 +56,7 @@
             android:name="org.cgiar.ilri.mistro.farmer.MilkProductionActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name="org.cgiar.ilri.mistro.farmer.MilkProcutionHistoryActivity" >
+        <activity android:name="org.cgiar.ilri.mistro.farmer.MilkProcutionHistoryActivity" >
         </activity>
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.EventsActivity"
@@ -65,11 +64,10 @@
         </activity>
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.AddEventActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
-        <activity
-            android:name="org.cgiar.ilri.mistro.farmer.EventsHistoryActivity" >
+        <activity android:name="org.cgiar.ilri.mistro.farmer.EventsHistoryActivity" >
         </activity>
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.FertilityActivity"
@@ -77,8 +75,18 @@
         </activity>
         <activity
             android:name="org.cgiar.ilri.mistro.farmer.AddMilkProductionActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.EditFarmer"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.FarmerSelection"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
     </application>
 

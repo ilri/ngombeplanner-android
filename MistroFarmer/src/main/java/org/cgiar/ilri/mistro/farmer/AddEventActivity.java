@@ -245,6 +245,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
                         clearEditTextDataCache();
 
                         Intent intent = new Intent(AddEventActivity.this, MainMenu.class);
+                        intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_FARMER);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                     }

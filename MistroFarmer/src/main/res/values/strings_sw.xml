@@ -309,4 +309,12 @@
     <string name="phone_number_not_valid_sw">The phone number you entered is not valid</string>
     <string name="enter_old_phone_no_sw">Please enter your old phone number</string>
     <string name="enter_new_phone_no_sw">Please enter your new phone number</string>
+    <string name="admin_functions_sw">Admin Functions</string>
+    <string name="sim_card_not_admin_sw">The sim card you are using is not allowed to log in as Admin</string>
+    <string name="edit_farmer_sw">Edit Farmer</string>
+    <string name="edit_cow_sw">Edit Cow</string>
+    <string name="admin_sw">Admin</string>
+    <string name="edit_sw">Edit</string>
+    <string name="select_farmer_sw">Select a farmer</string>
+    <string name="select_sw">Select</string>
 </resources>

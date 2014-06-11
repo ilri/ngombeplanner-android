@@ -86,6 +86,9 @@ public class DataHandler
     public static final String FARMER_FETCH_COW_SERVICING_EVENTS_URL="/php/farmer/fetch_servicing_events.php";
     public static final String FARMER_REGISTER_FARM_COORDS_URL="/php/farmer/register_farm_coords.php";
     public static final String FARMER_ADD_CACHED_DATA_URL="/php/farmer/add_cached_data.php";
+
+    public static final String ADMIN_AUTHENTICATION_URL="/php/admin/authentication.php";
+
     public static final String SP_KEY_LOCALE = "locale";
     public static final String SP_KEY_MILK_QUANTITY_TYPE = "milkQuantityTYpe";
     public static final String SP_KEY_USE_SMS_TO_SEND_DATA = "useSMSToSendData";
