@@ -21,6 +21,9 @@ public class Farmer implements Parcelable, Serializable
     public static final String PARCELABLE_KEY="farmer";
     public static final String MODE_INITIAL_REGISTRATION = "initialRegistration";
     public static final String MODE_NEW_COW_REGISTRATION = "newCowRegistration";
+    public static final String MODE_EDIT_FARMER = "editFarmer";
+    public static final String MODE_EDIT_COW = "editCow";
+    private int id;
     private String fullName;
     private String extensionPersonnel;
     private String mobileNumber;
@@ -44,6 +47,7 @@ public class Farmer implements Parcelable, Serializable
         mode = "";
         preferredLocale = "";
         isInFarm = false;
+        id = -1;
     }
 
     public Farmer(Parcel source)
@@ -55,6 +59,7 @@ public class Farmer implements Parcelable, Serializable
     public Farmer(JSONObject farmerJsonObject, String extensionPersonnel){
         try{
             Log.d(TAG, "Json for this farmer = "+farmerJsonObject.toString());
+            id = farmerJsonObject.getInt("id");
             fullName = farmerJsonObject.getString("name");
             this.extensionPersonnel = extensionPersonnel;
             mobileNumber = farmerJsonObject.getString("mobile_no");
@@ -225,6 +230,7 @@ public class Farmer implements Parcelable, Serializable
     @Override
     public void writeToParcel(Parcel dest, int flags)
     {
+        dest.writeInt(id);
         dest.writeString(fullName);
         dest.writeString(extensionPersonnel);
         dest.writeString(mobileNumber);
@@ -240,6 +246,7 @@ public class Farmer implements Parcelable, Serializable
 
     public void readFromParcel(Parcel in)
     {
+        this.id = in.readInt();
         this.fullName=in.readString();
         this.extensionPersonnel=in.readString();
         this.mobileNumber=in.readString();
@@ -275,6 +282,7 @@ public class Farmer implements Parcelable, Serializable
         JSONObject jsonObject=new JSONObject();
         try
         {
+            jsonObject.put("id", id);
             jsonObject.put("fullName",((fullName==null) ? "":fullName));
             jsonObject.put("extensionPersonnel",((extensionPersonnel==null) ? "":extensionPersonnel));
             jsonObject.put("mobileNumber",((mobileNumber==null) ? "":mobileNumber));

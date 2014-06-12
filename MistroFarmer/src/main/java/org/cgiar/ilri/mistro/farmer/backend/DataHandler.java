@@ -88,6 +88,7 @@ public class DataHandler
     public static final String FARMER_ADD_CACHED_DATA_URL="/php/farmer/add_cached_data.php";
 
     public static final String ADMIN_AUTHENTICATION_URL="/php/admin/authentication.php";
+    public static final String ADMIN_EDIT_FARMER_URL="/php/admin/edit_farmer.php";
 
     public static final String SP_KEY_LOCALE = "locale";
     public static final String SP_KEY_MILK_QUANTITY_TYPE = "milkQuantityTYpe";

@@ -320,4 +320,13 @@
     <string name="select_farmer_en">Select a farmer</string>
     <string name="select_en">Select</string>
     <string name="phone_number_en">Phone Number</string>
+    <string name="farmer_profile_updated_en">Farmer\'s profile successfully updated</string>
+    <string name="enter_farmer_name_en">Please enter farmer\'s name</string>
+    <string name="enter_farmer_mobile_no_en">Please enter farmer\'s phone number</string>
+    <string name="farm_location_en">Farm location</string>
+    <string name="rec_farm_loc_en">Record farm\'s GPS location</string>
+    <string name="not_set_en">Not set</string>
+    <string name="are_you_in_farmers_farm_en">Are you currently in the farmer\'s farm?</string>
+    <string name="accuracy_en">Accuracy</string>
+    <string name="unknown_en">unknown</string>
 </resources>

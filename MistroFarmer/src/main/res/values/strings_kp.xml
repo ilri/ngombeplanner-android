@@ -318,4 +318,13 @@
     <string name="select_farmer_kp">Select a farmer</string>
     <string name="select_kp">Select</string>
     <string name="phone_number_kp">Phone Number</string>
+    <string name="farmer_profile_updated_kp">Farmer\'s profile successfully updated</string>
+    <string name="enter_farmer_name_kp">Please enter farmer\'s name</string>
+    <string name="enter_farmer_mobile_no_kp">Please enter farmer\'s phone number</string>
+    <string name="farm_location_kp">Farm location</string>
+    <string name="rec_farm_loc_kp">Record farm\'s GPS location</string>
+    <string name="not_set_kp">Not set</string>
+    <string name="are_you_in_farmers_farm_kp">Are you currently in the farmer\'s farm?</string>
+    <string name="accuracy_kp">Accuracy</string>
+    <string name="unknown_kp">unknown</string>
 </resources>
