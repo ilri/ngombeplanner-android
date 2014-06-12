@@ -70,31 +70,31 @@
             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
             android:textSize="@dimen/normal_text_size"
             android:textColor="@color/text_input_color" />
-        <TextView
-            android:id="@+id/number_of_cows_tv"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
-            android:textSize="@dimen/normal_text_size"/>
-        <EditText
-            android:id="@+id/number_of_cows_et"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
-            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
-            android:inputType="number"
-            android:gravity="center_horizontal"
-            android:textColor="@color/text_input_color"
-            android:textSize="@dimen/normal_text_size"/>
-        <Button
-            android:id="@+id/edit_b"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/normal_button_layout_height"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="bottom|right"
-            android:paddingLeft="@dimen/normal_button_padding_side"
-            android:paddingRight="@dimen/normal_button_padding_side"
-            android:textSize="@dimen/normal_text_size"/>
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/cancel_b"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/normal_button_layout_height"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="bottom|right"
+                android:paddingLeft="@dimen/normal_button_padding_side"
+                android:paddingRight="@dimen/normal_button_padding_side"
+                android:textSize="@dimen/normal_text_size"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/edit_b"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/normal_button_layout_height"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="bottom|right"
+                android:paddingLeft="@dimen/normal_button_padding_side"
+                android:paddingRight="@dimen/normal_button_padding_side"
+                android:textSize="@dimen/normal_text_size"
+                android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
 

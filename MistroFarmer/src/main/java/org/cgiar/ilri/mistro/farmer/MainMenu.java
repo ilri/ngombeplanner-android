@@ -56,6 +56,7 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
     private LocationManager locationManager;
     private String longitude;
     private String latitude;
+    private List<Farmer> farmers;
 
 
     @Override
@@ -98,17 +99,9 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
                 }
                 else if(mode.equals(MODE_ADMIN)){
                     String adminJSONString = bundle.getString(KEY_ADMIN_DATA);
-
+                    Log.d(TAG, " *** Admin data from login screen = "+adminJSONString);
                     try{
                         adminData = new JSONObject(adminJSONString);
-
-                        JSONArray farmerJsonArray = adminData.getJSONArray("farmers");
-
-                        List<Farmer> farmers = new ArrayList<Farmer>(farmerJsonArray.length());
-                        for(int i = 0; i < farmerJsonArray.length(); i++){
-                            Farmer currFarmer = new Farmer(farmerJsonArray.getJSONObject(i), adminData.getString("name"));
-                            farmers.add(currFarmer);
-                        }
 
                         Toast.makeText(this, Locale.getStringInLocale("welcome", this) + " " + adminData.getString("name") + " (" + Locale.getStringInLocale("admin", this) + ")", Toast.LENGTH_LONG).show();
                     }
@@ -189,8 +182,14 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
             startActivity(intent);
         }
         else if(view==editFarmerB){
-            Intent intent = new Intent(this, FarmerSelection.class);
-            startActivity(intent);
+            if(adminData != null){
+                Intent intent = new Intent(this, FarmerSelection.class);
+                intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData.toString());
+                startActivity(intent);
+            }
+            else {
+                Log.w(TAG, "Admin data is null. Unable to move to the next activity");
+            }
         }
         else if(view==logoutB){
             Intent intent = new Intent(this, LandingActivity.class);

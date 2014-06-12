@@ -317,4 +317,5 @@
     <string name="edit_kp">Edit</string>
     <string name="select_farmer_kp">Select a farmer</string>
     <string name="select_kp">Select</string>
+    <string name="phone_number_kp">Phone Number</string>
 </resources>

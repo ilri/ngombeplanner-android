@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,8 +108,8 @@ public class Cow implements Parcelable, Serializable {
             JSONObject thisCow = allCows.getJSONObject(index);
             initFromJSON(thisCow);
 
-            int sireID = (thisCow.getString("sire_id").equals("NULL")) ? -1 : thisCow.getInt("sire_id");
-            int damID = (thisCow.getString("dam_id").equals("NULL")) ? -1 : thisCow.getInt("dam_id");
+            int sireID = (DataHandler.isNull(thisCow.getString("sire_id"))) ? -1 : thisCow.getInt("sire_id");
+            int damID = (DataHandler.isNull(thisCow.getString("dam_id"))) ? -1 : thisCow.getInt("dam_id");
 
             if(sireID != -1){
                 for(int i = 0; i < allCows.length(); i++){
@@ -117,14 +118,14 @@ public class Cow implements Parcelable, Serializable {
                         Sire sire = new Sire();
                         sire.setName(possibleSire.getString("name"));
                         sire.setEarTagNumber(possibleSire.getString("ear_tag_number"));
-                        sire.setOwner((possibleSire.getString("owner_name").equals("NULL")) ? "" : possibleSire.getString("owner_name"));
-                        sire.setOwnerType((possibleSire.getString("bull_owner").equals("NULL")) ? "" : possibleSire.getString("owner_name"));
+                        sire.setOwner((DataHandler.isNull(possibleSire.getString("owner_name"))) ? "" : possibleSire.getString("owner_name"));
+                        sire.setOwnerType((DataHandler.isNull(possibleSire.getString("bull_owner"))) ? "" : possibleSire.getString("owner_name"));
 
                         this.sire = sire;
                     }
                 }
             }
-            this.sire.setStrawNumber((thisCow.getString("straw").equals("NULL")) ? "" : thisCow.getString("straw"));
+            this.sire.setStrawNumber((DataHandler.isNull(thisCow.getString("straw"))) ? "" : thisCow.getString("straw"));
 
             if(damID != -1){
                 for(int i = 0; i < allCows.length(); i++){
@@ -138,7 +139,7 @@ public class Cow implements Parcelable, Serializable {
                     }
                 }
             }
-            this.dam.setEmbryoNumber((thisCow.getString("embryo").equals("NULL")) ? "" : thisCow.getString("embryo"));
+            this.dam.setEmbryoNumber((DataHandler.isNull(thisCow.getString("embryo"))) ? "" : thisCow.getString("embryo"));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -149,10 +150,10 @@ public class Cow implements Parcelable, Serializable {
         try {
             name = jsonObject.getString("name");
             earTagNumber = jsonObject.getString("ear_tag_number");
-            dateOfBirth = (jsonObject.getString("date_of_birth").equals("NULL")) ? "" : jsonObject.getString("date_of_birth");
+            dateOfBirth = (DataHandler.isNull(jsonObject.getString("date_of_birth"))) ? "" : jsonObject.getString("date_of_birth");
             dateAdded = jsonObject.getString("date_added");
-            age = (jsonObject.getString("age").equals("NULL")) ? -1 : jsonObject.getInt("age");
-            ageType = (jsonObject.getString("age_type").equals("NULL")) ? "" : jsonObject.getString("age_type");
+            age = (DataHandler.isNull(jsonObject.getString("age"))) ? -1 : jsonObject.getInt("age");
+            ageType = (DataHandler.isNull(jsonObject.getString("age_type"))) ? "" : jsonObject.getString("age_type");
 
             JSONArray breedArray = jsonObject.getJSONArray("breed");
             this.breeds = new ArrayList<String>(breedArray.length());
@@ -174,7 +175,7 @@ public class Cow implements Parcelable, Serializable {
 
             mode = "";
             countryOfOrigin = "";//only set this if is sire
-            serviceType = (jsonObject.getString("service_type").equals("NULL")) ? "" : jsonObject.getString("service_type");
+            serviceType = (DataHandler.isNull(jsonObject.getString("service_type"))) ? "" : jsonObject.getString("service_type");
             otherBreed = "";
             piggyBack = "";
             this.events = new ArrayList<Event>();
@@ -184,7 +185,7 @@ public class Cow implements Parcelable, Serializable {
                 inCalf = false;
             }
             else if(this.sex.equals(SEX_FEMALE)){
-                milkingStatus = (jsonObject.getString("milking_status").equals("NULL")) ? MILKING_S_ADULT_MILKING : jsonObject.getString("milking_status");
+                milkingStatus = (DataHandler.isNull(jsonObject.getString("milking_status"))) ? MILKING_S_ADULT_MILKING : jsonObject.getString("milking_status");
                 if(jsonObject.getString("in_calf").equals("1")){
                     inCalf = true;
                 }

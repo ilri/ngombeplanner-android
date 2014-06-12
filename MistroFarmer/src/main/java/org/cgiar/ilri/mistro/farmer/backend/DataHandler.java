@@ -1071,4 +1071,13 @@ public class DataHandler
             return valid;
         }
     }
+
+    public static boolean isNull(String string){
+        if(string == null || string.equals("NULL") || string.equals("null")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

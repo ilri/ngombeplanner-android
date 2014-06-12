@@ -54,11 +54,12 @@ public class Farmer implements Parcelable, Serializable
 
     public Farmer(JSONObject farmerJsonObject, String extensionPersonnel){
         try{
+            Log.d(TAG, "Json for this farmer = "+farmerJsonObject.toString());
             fullName = farmerJsonObject.getString("name");
             this.extensionPersonnel = extensionPersonnel;
             mobileNumber = farmerJsonObject.getString("mobile_no");
-            longitude = farmerJsonObject.getString("longitude");
-            latitude = farmerJsonObject.getString("latitude");
+            longitude = farmerJsonObject.getString("gps_longitude");
+            latitude = farmerJsonObject.getString("gps_latitude");
             simCardSN = farmerJsonObject.getString("sim_card_sn");
             preferredLocale = farmerJsonObject.getString("pref_locale");
             isInFarm = false;

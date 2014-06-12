@@ -353,6 +353,7 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
                 Toast.makeText(LandingActivity.this, Locale.getStringInLocale("sim_card_not_admin", LandingActivity.this), Toast.LENGTH_LONG).show();
             }
             else{
+                Log.d(TAG, "Admin data from server = "+result);
                 Intent intent=new Intent(LandingActivity.this,MainMenu.class);
                 intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
                 intent.putExtra(MainMenu.KEY_ADMIN_DATA, result);

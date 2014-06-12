@@ -317,4 +317,5 @@
     <string name="edit_nn">Edit</string>
     <string name="select_farmer_nn">Select a farmer</string>
     <string name="select_nn">Select</string>
+    <string name="phone_number_nn">Phone Number</string>
 </resources>
