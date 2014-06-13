@@ -31,9 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FarmerSelection extends SherlockActivity implements MistroActivity, View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class FarmerSelectionActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private static final String TAG = "FarmerSelection";
+    private static final String TAG = "FarmerSelectionActivity";
     public static final String KEY_ADMIN_DATA= "adminData";
 
     private Menu menu;
@@ -115,10 +115,6 @@ public class FarmerSelection extends SherlockActivity implements MistroActivity,
             allFarmers = new ArrayList<Farmer>(farmerData.length());
             filteredFarmers = new ArrayList<Farmer>(farmerData.length());
             for (int i = 0; i < farmerData.length(); i++) {
-                String ePersonnel = "";
-                if (!farmerData.getJSONObject(i).getString("extension_personnel_id").equals("NULL")) {
-                    ePersonnel = adminData.getString("name");
-                }
                 Farmer currFarmer = new Farmer(farmerData.getJSONObject(i));
                 allFarmers.add(currFarmer);
                 filteredFarmers.add(currFarmer);
@@ -191,7 +187,7 @@ public class FarmerSelection extends SherlockActivity implements MistroActivity,
             if(selectFarmerS.getSelectedItemPosition() != -1 && filteredFarmers.size() > selectFarmerS.getSelectedItemPosition()){
                 Log.d(TAG, "Selected farmer index = "+String.valueOf(selectFarmerS.getSelectedItemPosition()));
                 Farmer selectedFarmer = filteredFarmers.get(selectFarmerS.getSelectedItemPosition());
-                Intent intent = new Intent(this, EditFarmer.class);
+                Intent intent = new Intent(this, EditFarmerActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(Farmer.PARCELABLE_KEY, selectedFarmer);
                 intent.putExtras(bundle);
@@ -260,7 +256,7 @@ public class FarmerSelection extends SherlockActivity implements MistroActivity,
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(FarmerSelection.this, "", Locale.getStringInLocale("loading_please_wait", FarmerSelection.this), true);
+            progressDialog = ProgressDialog.show(FarmerSelectionActivity.this, "", Locale.getStringInLocale("loading_please_wait", FarmerSelectionActivity.this), true);
         }
 
         @Override
@@ -271,7 +267,7 @@ public class FarmerSelection extends SherlockActivity implements MistroActivity,
                 jsonObject.put("simCardSN",params[0]);
                 jsonObject.put("deviceType", "Android");
                 //jsonObject.put("mobileNumber",params[1]);
-                String result = DataHandler.sendDataToServer(FarmerSelection.this, jsonObject.toString(), DataHandler.ADMIN_AUTHENTICATION_URL, true);
+                String result = DataHandler.sendDataToServer(FarmerSelectionActivity.this, jsonObject.toString(), DataHandler.ADMIN_AUTHENTICATION_URL, true);
                 return result;
             }
             catch (JSONException e)
@@ -286,24 +282,24 @@ public class FarmerSelection extends SherlockActivity implements MistroActivity,
             super.onPostExecute(result);
             progressDialog.dismiss();
             if(result==null){
-                String httpError = DataHandler.getSharedPreference(FarmerSelection.this, "http_error", "No Error thrown to application. Something must be really wrong");
-                Toast.makeText(FarmerSelection.this, httpError, Toast.LENGTH_LONG).show();
+                String httpError = DataHandler.getSharedPreference(FarmerSelectionActivity.this, "http_error", "No Error thrown to application. Something must be really wrong");
+                Toast.makeText(FarmerSelectionActivity.this, httpError, Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
-                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("generic_sms_error", FarmerSelection.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(FarmerSelectionActivity.this, Locale.getStringInLocale("generic_sms_error", FarmerSelectionActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
-                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("no_service", FarmerSelection.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(FarmerSelectionActivity.this, Locale.getStringInLocale("no_service", FarmerSelectionActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
-                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("radio_off", FarmerSelection.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(FarmerSelectionActivity.this, Locale.getStringInLocale("radio_off", FarmerSelectionActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
-                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("server_not_receive_sms", FarmerSelection.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(FarmerSelectionActivity.this, Locale.getStringInLocale("server_not_receive_sms", FarmerSelectionActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)){
                 Log.w(TAG, "Admin not authenticated. May mean he/she changed sim cards after logging in");
-                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("sim_card_not_admin", FarmerSelection.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(FarmerSelectionActivity.this, Locale.getStringInLocale("sim_card_not_admin", FarmerSelectionActivity.this), Toast.LENGTH_LONG).show();
             }
             else{
                 loadAdminData(result);

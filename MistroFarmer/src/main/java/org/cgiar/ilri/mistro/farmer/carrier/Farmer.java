@@ -69,16 +69,17 @@ public class Farmer implements Parcelable, Serializable
             simCardSN = farmerJsonObject.getString("sim_card_sn");
             preferredLocale = farmerJsonObject.getString("pref_locale");
             isInFarm = false;
-
-            JSONArray cowArray = farmerJsonObject.getJSONArray("cows");
-            cows = new ArrayList<Cow>(cowArray.length());
-            for(int i = 0; i < cowArray.length(); i++){
-                Cow currCow = new Cow(cowArray, i);
-                cows.add(currCow);
-            }
         }
         catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public void setCows(JSONArray cowArray){
+        cows = new ArrayList<Cow>(cowArray.length());
+        for(int i = 0; i < cowArray.length(); i++){
+            Cow currCow = new Cow(cowArray, i);
+            cows.add(currCow);
         }
     }
 

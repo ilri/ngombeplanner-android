@@ -25,13 +25,10 @@ import com.actionbarsherlock.view.MenuItem;
 import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MainMenu extends SherlockActivity implements MistroActivity, View.OnClickListener, LocationListener
 {
@@ -186,8 +183,8 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
         }
         else if(view==editFarmerB){
             if(adminData != null){
-                Intent intent = new Intent(this, FarmerSelection.class);
-                intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData.toString());
+                Intent intent = new Intent(this, FarmerSelectionActivity.class);
+                intent.putExtra(FarmerSelectionActivity.KEY_ADMIN_DATA, adminData.toString());
                 startActivity(intent);
             }
             else {

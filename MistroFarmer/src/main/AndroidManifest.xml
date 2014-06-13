@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.cgiar.ilri.mistro.farmer"
     android:versionCode="17"
-    android:versionName="1.0.1" >
+    android:versionName="1.0.2" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -79,12 +79,22 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="org.cgiar.ilri.mistro.farmer.EditFarmer"
+            android:name="org.cgiar.ilri.mistro.farmer.EditFarmerActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="org.cgiar.ilri.mistro.farmer.FarmerSelection"
+            android:name="org.cgiar.ilri.mistro.farmer.FarmerSelectionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.EditCowActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="org.cgiar.ilri.mistro.farmer.CowSelectionActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>

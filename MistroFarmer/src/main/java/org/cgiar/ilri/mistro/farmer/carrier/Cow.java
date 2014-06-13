@@ -24,6 +24,7 @@ import java.util.jar.JarInputStream;
  * Created by jason on 8/5/13.
  */
 public class Cow implements Parcelable, Serializable {
+    public static final String PARCELABLE_KEY = "thisCow";
     private static final String DEFAULT_DOB = "0000-00-00 00:00:00";
     private static final String DOB_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static final String OTHER_BREED = "Another Breed";
@@ -46,6 +47,7 @@ public class Cow implements Parcelable, Serializable {
     public static final String COW_IN_CALF = "In calf";
     public static final String COW_NOT_IN_CALF = "Not in calf";
 
+    private int id;
     private String name;
     private String earTagNumber;
     private String dateOfBirth;
@@ -96,6 +98,7 @@ public class Cow implements Parcelable, Serializable {
         this.milkProduction = new ArrayList<MilkProduction>();
         milkingStatus = "";
         inCalf = false;
+        id = -1;
     }
 
     public Cow(Parcel in) {
@@ -148,6 +151,7 @@ public class Cow implements Parcelable, Serializable {
 
     private void initFromJSON(JSONObject jsonObject){
         try {
+            id = jsonObject.getInt("id");
             name = jsonObject.getString("name");
             earTagNumber = jsonObject.getString("ear_tag_number");
             dateOfBirth = (DataHandler.isNull(jsonObject.getString("date_of_birth"))) ? "" : jsonObject.getString("date_of_birth");
@@ -565,6 +569,7 @@ public class Cow implements Parcelable, Serializable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(name);
         dest.writeString(earTagNumber);
         dest.writeString(dateOfBirth);
@@ -597,6 +602,7 @@ public class Cow implements Parcelable, Serializable {
     }
 
     public void readFromParcel(Parcel in) {
+        id = in.readInt();
         name = in.readString();
         earTagNumber = in.readString();
         dateOfBirth = in.readString();
@@ -646,6 +652,7 @@ public class Cow implements Parcelable, Serializable {
     public JSONObject getJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("id", id);
             jsonObject.put("name", ((name == null) ? "" : name));
             jsonObject.put("earTagNumber", ((earTagNumber == null) ? "" : earTagNumber));
             jsonObject.put("dateOfBirth", ((dateOfBirth == null) ? "" : dateOfBirth));

@@ -1,6 +1,5 @@
 package org.cgiar.ilri.mistro.farmer;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -38,8 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class EditFarmer extends SherlockActivity implements MistroActivity, View.OnClickListener, LocationListener {
-    private static final String TAG = "EditFarmer";
+public class EditFarmerActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, LocationListener {
+    private static final String TAG = "EditFarmerActivity";
 
 
     private Menu menu;
@@ -120,7 +119,7 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
 
                         clearEditTextDataCache();
 
-                        Intent intent = new Intent(EditFarmer.this, MainMenu.class);
+                        Intent intent = new Intent(EditFarmerActivity.this, MainMenu.class);
                         intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
@@ -173,7 +172,7 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
         super.onResume();
         Bundle bundle = this.getIntent().getExtras();
         if(bundle != null){
-            adminData = bundle.getString(FarmerSelection.KEY_ADMIN_DATA);
+            adminData = bundle.getString(FarmerSelectionActivity.KEY_ADMIN_DATA);
             farmer = bundle.getParcelable(Farmer.PARCELABLE_KEY);
             if(farmer != null){
                 fullNameET.setText(farmer.getFullName());
@@ -225,8 +224,8 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
     @Override
     public void onClick(View v) {
         if(v.equals(cancelB)){
-            Intent intent = new Intent(this, FarmerSelection.class);
-            intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData);
+            Intent intent = new Intent(this, FarmerSelectionActivity.class);
+            intent.putExtra(FarmerSelectionActivity.KEY_ADMIN_DATA, adminData);
             startActivity(intent);
         }
         else if(v.equals(recordLocB)){
@@ -292,7 +291,7 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
         if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             //Toast.makeText(this,"gps started",Toast.LENGTH_LONG).show();
             locationGotten = false;
-            gpsProgressDialog = ProgressDialog.show(EditFarmer.this, "", Locale.getStringInLocale("accuracy", EditFarmer.this) + " : " +Locale.getStringInLocale("unknown", EditFarmer.this), true);
+            gpsProgressDialog = ProgressDialog.show(EditFarmerActivity.this, "", Locale.getStringInLocale("accuracy", EditFarmerActivity.this) + " : " +Locale.getStringInLocale("unknown", EditFarmerActivity.this), true);
             gpsProgressDialog.setCancelable(true);
             gpsProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
@@ -454,14 +453,14 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(EditFarmer.this, "", Locale.getStringInLocale("loading_please_wait", EditFarmer.this), true);
+            progressDialog = ProgressDialog.show(EditFarmerActivity.this, "", Locale.getStringInLocale("loading_please_wait", EditFarmerActivity.this), true);
         }
 
         @Override
         protected String doInBackground(Integer... params) {
             Log.d(TAG, "Fetching extension personnel from server");
 
-            return DataHandler.sendDataToServer(EditFarmer.this, "", DataHandler.FARMER_FETCH_VETS_URL, true, DatabaseHelper.TABLE_EXTENSION_PERSONNEL);
+            return DataHandler.sendDataToServer(EditFarmerActivity.this, "", DataHandler.FARMER_FETCH_VETS_URL, true, DatabaseHelper.TABLE_EXTENSION_PERSONNEL);
         }
 
         @Override
@@ -470,7 +469,7 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
             progressDialog.dismiss();
 
             if(result == null){
-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("unable_to_get_epersonnel", EditFarmer.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("unable_to_get_epersonnel", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
             }
             else{
                 try{
@@ -494,7 +493,7 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
                         }
                     }
 
-                    ArrayAdapter<String> epArrayAdapter = new ArrayAdapter<String>(EditFarmer.this, android.R.layout.simple_spinner_item, vetNames);
+                    ArrayAdapter<String> epArrayAdapter = new ArrayAdapter<String>(EditFarmerActivity.this, android.R.layout.simple_spinner_item, vetNames);
                     epArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     extensionPersonnelS.setAdapter(epArrayAdapter);
                     extensionPersonnelS.setSelection(selection);
@@ -512,12 +511,12 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(EditFarmer.this, "", Locale.getStringInLocale("loading_please_wait", EditFarmer.this), true);
+            progressDialog = ProgressDialog.show(EditFarmerActivity.this, "", Locale.getStringInLocale("loading_please_wait", EditFarmerActivity.this), true);
         }
 
         @Override
         protected String doInBackground(String... params) {
-            return DataHandler.sendDataToServer(EditFarmer.this, params[0], DataHandler.ADMIN_EDIT_FARMER_URL, true);
+            return DataHandler.sendDataToServer(EditFarmerActivity.this, params[0], DataHandler.ADMIN_EDIT_FARMER_URL, true);
         }
 
         @Override
@@ -526,29 +525,29 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
             progressDialog.dismiss();
 
             if(result == null) {
-                String httpError = DataHandler.getSharedPreference(EditFarmer.this, "http_error", "No Error thrown to application. Something must be really wrong");
-                Toast.makeText(EditFarmer.this,httpError,Toast.LENGTH_LONG).show();
+                String httpError = DataHandler.getSharedPreference(EditFarmerActivity.this, "http_error", "No Error thrown to application. Something must be really wrong");
+                Toast.makeText(EditFarmerActivity.this,httpError,Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("generic_sms_error", EditFarmer.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("generic_sms_error", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("no_service", EditFarmer.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("no_service", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("radio_off", EditFarmer.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("radio_off", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("server_not_receive_sms", EditFarmer.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("server_not_receive_sms", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.CODE_NUMBER_IN_USE)){
-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("number_in_use", EditFarmer.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("number_in_use", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
             }
             else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("farmer_profile_updated", EditFarmer.this), Toast.LENGTH_LONG).show();
+                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("farmer_profile_updated", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(EditFarmer.this, FarmerSelection.class);
-                //intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData);
+                Intent intent = new Intent(EditFarmerActivity.this, FarmerSelectionActivity.class);
+                //intent.putExtra(FarmerSelectionActivity.KEY_ADMIN_DATA, adminData);
                 startActivity(intent);
             }
         }
