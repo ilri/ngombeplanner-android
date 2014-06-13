@@ -329,4 +329,9 @@
     <string name="are_you_in_farmers_farm_lu">Are you currently in the farmer\'s farm?</string>
     <string name="accuracy_lu">Accuracy</string>
     <string name="unknown_lu">unknown</string>
+    <string name="filter_farmers_lu">Filter farmers</string>
+    <string name="all_farmers_lu">All farmers</string>
+    <string name="farmers_no_epersonnel_lu">Farmers with no extension personnel</string>
+    <string name="farmers_tied_to_lu">Farmers tied to</string>
+    <string name="super_admin_lu">Super Admin</string>
 </resources>
