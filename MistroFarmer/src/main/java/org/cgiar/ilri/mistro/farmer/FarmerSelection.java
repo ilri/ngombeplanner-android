@@ -1,48 +1,63 @@
 package org.cgiar.ilri.mistro.farmer;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.cgiar.ilri.mistro.farmer.backend.Locale;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FarmerSelection extends SherlockActivity implements MistroActivity, View.OnClickListener {
+public class FarmerSelection extends SherlockActivity implements MistroActivity, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "FarmerSelection";
     public static final String KEY_ADMIN_DATA= "adminData";
 
     private Menu menu;
 
+    private TextView filterFarmersTV;
+    private Spinner filterFarmersS;
     private TextView selectFarmerTV;
     private Spinner selectFarmerS;
     private Button selectB;
     private Button backB;
 
-    private List<Farmer> farmers;
+    private List<Farmer> allFarmers;
+    private List<Farmer> filteredFarmers;
     private JSONObject adminData;
+    private List<String> filters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmer_selection);
 
+        filterFarmersTV = (TextView)findViewById(R.id.filter_farmers_tv);
+        filterFarmersS = (Spinner)findViewById(R.id.filter_farmers_s);
+        filterFarmersS.setOnItemSelectedListener(this);
         selectFarmerTV = (TextView)findViewById(R.id.select_farmer_tv);
         selectFarmerS = (Spinner)findViewById(R.id.select_farmer_s);
 
@@ -61,33 +76,73 @@ public class FarmerSelection extends SherlockActivity implements MistroActivity,
         Bundle bundle=this.getIntent().getExtras();
         if(bundle != null){
             String adminJSONString = bundle.getString(KEY_ADMIN_DATA);
-            try{
-                adminData = new JSONObject(adminJSONString);
-                JSONArray farmerData = adminData.getJSONArray("farmers");
-
-                farmers = new ArrayList<Farmer>(farmerData.length());
-                for(int i = 0; i < farmerData.length(); i++){
-                    String ePersonnel = "";
-                    if(!farmerData.getJSONObject(i).getString("extension_personnel_id").equals("NULL")){
-                        ePersonnel = adminData.getString("name");
-                    }
-                    Farmer currFarmer = new Farmer(farmerData.getJSONObject(i), ePersonnel);
-                    farmers.add(currFarmer);
-                }
-
-                List<String> farmerNames = new ArrayList<String>(farmers.size());
-                for(int i = 0; i < farmers.size(); i++){
-                    Farmer currFarmer = farmers.get(i);
-                    farmerNames.add(currFarmer.getFullName());
-                }
-
-                ArrayAdapter<String> farmerArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, farmerNames);
-                farmerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                selectFarmerS.setAdapter(farmerArrayAdapter);
+            loadAdminData(adminJSONString);
+        }
+        else{
+            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+            if(telephonyManager != null){
+                GetFarmerDataThread getFarmerDataThread = new GetFarmerDataThread();
+                getFarmerDataThread.execute(telephonyManager.getSimSerialNumber());
             }
-            catch (Exception e){
-
+            else{
+                Toast.makeText(this,Locale.getStringInLocale("no_sim_card",this),Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    private void loadAdminData(String adminJSONString){
+        try {
+            adminData = new JSONObject(adminJSONString);
+            JSONArray farmerData = adminData.getJSONArray("farmers");
+
+            filters = new ArrayList<String>();
+            filters.add(Locale.getStringInLocale("all_farmers", this));
+            filters.add(Locale.getStringInLocale("farmers_no_epersonnel", this));
+            if(adminData.getInt("is_super") == 1){//admin is super
+                JSONArray allEPersonnel = adminData.getJSONArray("extension_personnel");
+                for(int i = 0; i < allEPersonnel.length(); i++){
+                    JSONObject currEPersonnel = allEPersonnel.getJSONObject(i);
+                    filters.add(Locale.getStringInLocale("farmers_tied_to", this) + " " + currEPersonnel.getString("name"));
+                }
+            }
+            else{
+                filters.add(Locale.getStringInLocale("farmers_tied_to", this) +" "+ adminData.getString("name"));
+            }
+            ArrayAdapter<String> filterArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, filters);
+            filterArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            filterFarmersS.setAdapter(filterArrayAdapter);
+
+            allFarmers = new ArrayList<Farmer>(farmerData.length());
+            filteredFarmers = new ArrayList<Farmer>(farmerData.length());
+            for (int i = 0; i < farmerData.length(); i++) {
+                String ePersonnel = "";
+                if (!farmerData.getJSONObject(i).getString("extension_personnel_id").equals("NULL")) {
+                    ePersonnel = adminData.getString("name");
+                }
+                Farmer currFarmer = new Farmer(farmerData.getJSONObject(i));
+                allFarmers.add(currFarmer);
+                filteredFarmers.add(currFarmer);
+            }
+
+            setFilteredFarmerList(filteredFarmers);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setFilteredFarmerList(List<Farmer> filteredFarmers){
+        List<String> farmerNames = new ArrayList<String>(filteredFarmers.size());
+        for (int i = 0; i < filteredFarmers.size(); i++) {
+            Farmer currFarmer = filteredFarmers.get(i);
+            farmerNames.add(currFarmer.getFullName());
+        }
+
+        ArrayAdapter<String> farmerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, farmerNames);
+        farmerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectFarmerS.setAdapter(farmerArrayAdapter);
+
+        if(this.filteredFarmers != filteredFarmers) {
+            this.filteredFarmers = filteredFarmers;
         }
     }
 
@@ -117,6 +172,7 @@ public class FarmerSelection extends SherlockActivity implements MistroActivity,
     public void initTextInViews() {
         setTitle(Locale.getStringInLocale("select_farmer", this));
 
+        filterFarmersTV.setText(Locale.getStringInLocale("filter_farmers", this));
         selectFarmerTV.setText(Locale.getStringInLocale("select_farmer", this));
         selectB.setText(Locale.getStringInLocale("select", this));
         backB.setText(Locale.getStringInLocale("back", this));
@@ -132,9 +188,9 @@ public class FarmerSelection extends SherlockActivity implements MistroActivity,
     @Override
     public void onClick(View v) {
         if(v.equals(selectB)){
-            if(selectFarmerS.getSelectedItemPosition() != -1 && farmers.size() > selectFarmerS.getSelectedItemPosition()){
+            if(selectFarmerS.getSelectedItemPosition() != -1 && filteredFarmers.size() > selectFarmerS.getSelectedItemPosition()){
                 Log.d(TAG, "Selected farmer index = "+String.valueOf(selectFarmerS.getSelectedItemPosition()));
-                Farmer selectedFarmer = farmers.get(selectFarmerS.getSelectedItemPosition());
+                Farmer selectedFarmer = filteredFarmers.get(selectFarmerS.getSelectedItemPosition());
                 Intent intent = new Intent(this, EditFarmer.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(Farmer.PARCELABLE_KEY, selectedFarmer);
@@ -148,6 +204,110 @@ public class FarmerSelection extends SherlockActivity implements MistroActivity,
             intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
             intent.putExtra(MainMenu.KEY_ADMIN_DATA, adminData.toString());
             startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(parent == filterFarmersS){
+            if(filterFarmersS.getSelectedItemPosition() == 0){//all farmers
+                List<Farmer> newlyFilteredFarmers = this.allFarmers;
+                setFilteredFarmerList(newlyFilteredFarmers);
+            }
+            else if(filterFarmersS.getSelectedItemPosition() == 1){//farmers without extension personnel
+                List<Farmer> newlyFilteredFarmers = new ArrayList<Farmer>();
+                for(int i =0; i<allFarmers.size(); i++){
+                    Farmer currFarmer = allFarmers.get(i);
+                    if(DataHandler.isNull(currFarmer.getExtensionPersonnel()) || currFarmer.getExtensionPersonnel().length() == 0){
+                        newlyFilteredFarmers.add(currFarmer);
+                    }
+                    else{
+                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not qualify to be null");
+                    }
+                }
+
+                setFilteredFarmerList(newlyFilteredFarmers);
+            }
+            else if(filterFarmersS.getSelectedItemPosition() != -1){
+                String selection = filters.get(filterFarmersS.getSelectedItemPosition());
+
+                List<Farmer> newlyFilteredFarmers = new ArrayList<Farmer>();
+                for(int i = 0; i < allFarmers.size(); i++){
+                    Farmer currFarmer = allFarmers.get(i);
+                    if(currFarmer.getExtensionPersonnel() != null && currFarmer.getExtensionPersonnel().length() > 0 &&
+                            selection.contains(currFarmer.getExtensionPersonnel())){
+                        newlyFilteredFarmers.add(currFarmer);
+                    }
+                    else{
+                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not match "+selection);
+                    }
+                }
+
+                setFilteredFarmerList(newlyFilteredFarmers);
+            }
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    private class GetFarmerDataThread extends AsyncTask<String, Integer, String>{
+
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(FarmerSelection.this, "", Locale.getStringInLocale("loading_please_wait", FarmerSelection.this), true);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            JSONObject jsonObject=new JSONObject();
+            try
+            {
+                jsonObject.put("simCardSN",params[0]);
+                jsonObject.put("deviceType", "Android");
+                //jsonObject.put("mobileNumber",params[1]);
+                String result = DataHandler.sendDataToServer(FarmerSelection.this, jsonObject.toString(), DataHandler.ADMIN_AUTHENTICATION_URL, true);
+                return result;
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            progressDialog.dismiss();
+            if(result==null){
+                String httpError = DataHandler.getSharedPreference(FarmerSelection.this, "http_error", "No Error thrown to application. Something must be really wrong");
+                Toast.makeText(FarmerSelection.this, httpError, Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("generic_sms_error", FarmerSelection.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("no_service", FarmerSelection.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("radio_off", FarmerSelection.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("server_not_receive_sms", FarmerSelection.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)){
+                Log.w(TAG, "Admin not authenticated. May mean he/she changed sim cards after logging in");
+                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("sim_card_not_admin", FarmerSelection.this), Toast.LENGTH_LONG).show();
+            }
+            else{
+                loadAdminData(result);
+            }
         }
     }
 }

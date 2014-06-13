@@ -102,8 +102,11 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
                     Log.d(TAG, " *** Admin data from login screen = "+adminJSONString);
                     try{
                         adminData = new JSONObject(adminJSONString);
-
-                        Toast.makeText(this, Locale.getStringInLocale("welcome", this) + " " + adminData.getString("name") + " (" + Locale.getStringInLocale("admin", this) + ")", Toast.LENGTH_LONG).show();
+                        String type = Locale.getStringInLocale("admin", this);
+                        if(adminData.getInt("is_super") == 1){
+                            type = Locale.getStringInLocale("super_admin", this);
+                        }
+                        Toast.makeText(this, Locale.getStringInLocale("welcome", this) + " " + adminData.getString("name") + " (" + type + ")", Toast.LENGTH_LONG).show();
                     }
                     catch (Exception e){
                         e.printStackTrace();

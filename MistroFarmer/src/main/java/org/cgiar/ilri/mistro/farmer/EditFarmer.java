@@ -548,7 +548,7 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
                 Toast.makeText(EditFarmer.this, Locale.getStringInLocale("farmer_profile_updated", EditFarmer.this), Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(EditFarmer.this, FarmerSelection.class);
-                intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData);
+                //intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData);
                 startActivity(intent);
             }
         }

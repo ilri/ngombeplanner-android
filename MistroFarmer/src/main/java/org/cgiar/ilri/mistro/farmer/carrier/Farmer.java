@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,12 +57,12 @@ public class Farmer implements Parcelable, Serializable
         readFromParcel(source);
     }
 
-    public Farmer(JSONObject farmerJsonObject, String extensionPersonnel){
+    public Farmer(JSONObject farmerJsonObject){
         try{
             Log.d(TAG, "Json for this farmer = "+farmerJsonObject.toString());
             id = farmerJsonObject.getInt("id");
             fullName = farmerJsonObject.getString("name");
-            this.extensionPersonnel = extensionPersonnel;
+            this.extensionPersonnel = (DataHandler.isNull(farmerJsonObject.getString("extension_personnel"))) ? "" : farmerJsonObject.getString("extension_personnel");
             mobileNumber = farmerJsonObject.getString("mobile_no");
             longitude = farmerJsonObject.getString("gps_longitude");
             latitude = farmerJsonObject.getString("gps_latitude");
