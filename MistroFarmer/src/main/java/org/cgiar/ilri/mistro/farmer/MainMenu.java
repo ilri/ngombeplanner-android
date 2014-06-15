@@ -191,6 +191,16 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
                 Log.w(TAG, "Admin data is null. Unable to move to the next activity");
             }
         }
+        else if(view==editCowB){
+            if(adminData != null){
+                Intent intent = new Intent(this, CowSelectionActivity.class);
+                intent.putExtra(CowSelectionActivity.KEY_ADMIN_DATA, adminData.toString());
+                startActivity(intent);
+            }
+            else {
+                Log.w(TAG, "Admin data is null. Unable to move to the next activity");
+            }
+        }
         else if(view==logoutB){
             Intent intent = new Intent(this, LandingActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

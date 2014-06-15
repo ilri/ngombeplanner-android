@@ -121,6 +121,7 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
 
                         Intent intent = new Intent(EditFarmerActivity.this, MainMenu.class);
                         intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
+                        intent.putExtra(MainMenu.KEY_ADMIN_DATA, adminData);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                     }

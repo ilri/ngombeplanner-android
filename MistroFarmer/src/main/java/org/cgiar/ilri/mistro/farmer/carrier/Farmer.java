@@ -75,6 +75,10 @@ public class Farmer implements Parcelable, Serializable
         }
     }
 
+    public int getId(){
+        return id;
+    }
+
     public void setCows(JSONArray cowArray){
         cows = new ArrayList<Cow>(cowArray.length());
         for(int i = 0; i < cowArray.length(); i++){

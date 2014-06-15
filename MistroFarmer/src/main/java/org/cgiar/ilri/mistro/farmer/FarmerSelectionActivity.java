@@ -158,6 +158,7 @@ public class FarmerSelectionActivity extends SherlockActivity implements MistroA
         else if(item.getItemId() == R.id.action_back_main_menu) {
             Intent intent = new Intent(this, MainMenu.class);
             intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
+            intent.putExtra(MainMenu.KEY_ADMIN_DATA, adminData.toString());
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }

@@ -123,6 +123,7 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
     private List<Cow> validSires;
     private List<Cow> validDams;
     private int selectedSireOwner;
+    private String adminData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -249,6 +250,7 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
 
                         Intent intent = new Intent(EditCowActivity.this, MainMenu.class);
                         intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
+                        intent.putExtra(MainMenu.KEY_ADMIN_DATA, adminData);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                     }
@@ -306,6 +308,7 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
 
         Bundle bundle=this.getIntent().getExtras();
         if(bundle != null) {
+            adminData=bundle.getString(MainMenu.KEY_ADMIN_DATA);
             farmer=bundle.getParcelable(Farmer.PARCELABLE_KEY);
             if(farmer!=null){
                 thisCow = farmer.getCow(index);
