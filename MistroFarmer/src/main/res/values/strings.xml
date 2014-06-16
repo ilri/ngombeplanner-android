@@ -24,5 +24,13 @@
     <string name="title_activity_edit_farmer_selection">EditFarmerSelection</string>
     <string name="title_activity_edit_cow">Edit Cow</string>
     <string name="title_activity_cow_selection">CowSelectionActivity</string>
+    <string-array name="sites">
+        <item></item>
+        <item>Butere</item>
+        <item>Kabrasi</item>
+        <item>Kaptumo</item>
+        <item>Meteitei</item>
+        <item>Siongiroi</item>
+    </string-array>
 
 </resources>

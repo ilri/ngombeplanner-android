@@ -36,6 +36,8 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
 
     private Menu menu;
 
+    private TextView filterFarmersTV;
+    private Spinner filterFarmersS;
     private TextView selectFarmerTV;
     private Spinner selectFarmerS;
     private TextView selectCowTV;
@@ -44,13 +46,18 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
     private Button backB;
 
     private JSONObject adminData;
-    private List<Farmer> farmers;
+    private List<Farmer> allFarmers;
+    private List<Farmer> filteredFarmers;
+    private List<String> filters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cow_selection);
 
+        filterFarmersTV = (TextView)findViewById(R.id.filter_farmers_tv);
+        filterFarmersS = (Spinner)findViewById(R.id.filter_farmers_s);
+        filterFarmersS.setOnItemSelectedListener(this);
         selectFarmerTV = (TextView)findViewById(R.id.select_farmer_tv);
         selectFarmerS = (Spinner)findViewById(R.id.select_farmer_s);
         selectFarmerS.setOnItemSelectedListener(this);
@@ -109,6 +116,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
     public void initTextInViews() {
         this.setTitle(Locale.getStringInLocale("select_cow", this));
 
+        filterFarmersTV.setText(Locale.getStringInLocale("filter_farmers", this));
         selectFarmerTV.setText(Locale.getStringInLocale("select_farmer", this));
         selectCowTV.setText(Locale.getStringInLocale("select_cow", this));
 
@@ -119,17 +127,37 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
     private void loadAdminData(String adminJSONString){
         try {
             adminData = new JSONObject(adminJSONString);
+
+            filters = new ArrayList<String>();
+            filters.add(Locale.getStringInLocale("all_farmers", this));
+            filters.add(Locale.getStringInLocale("farmers_no_epersonnel", this));
+            if(adminData.getInt("is_super") == 1){//admin is super
+                JSONArray allEPersonnel = adminData.getJSONArray("extension_personnel");
+                for(int i = 0; i < allEPersonnel.length(); i++){
+                    JSONObject currEPersonnel = allEPersonnel.getJSONObject(i);
+                    filters.add(Locale.getStringInLocale("farmers_tied_to", this) + " " + currEPersonnel.getString("name"));
+                }
+            }
+            else{
+                filters.add(Locale.getStringInLocale("farmers_tied_to", this) +" "+ adminData.getString("name"));
+            }
+            ArrayAdapter<String> filterArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, filters);
+            filterArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            filterFarmersS.setAdapter(filterArrayAdapter);
+
             JSONArray farmerData = adminData.getJSONArray("farmers");
 
-            farmers = new ArrayList<Farmer>(farmerData.length());
+            allFarmers = new ArrayList<Farmer>(farmerData.length());
+            filteredFarmers = new ArrayList<Farmer>(farmerData.length());
             for (int i = 0; i < farmerData.length(); i++) {
                 Farmer currFarmer = new Farmer(farmerData.getJSONObject(i));
-                farmers.add(currFarmer);
+                allFarmers.add(currFarmer);
+                filteredFarmers.add(currFarmer);
             }
 
-            List<String> farmerNames = new ArrayList<String>(farmers.size());
-            for (int i = 0; i < farmers.size(); i++) {
-                Farmer currFarmer = farmers.get(i);
+            List<String> farmerNames = new ArrayList<String>(filteredFarmers.size());
+            for (int i = 0; i < filteredFarmers.size(); i++) {
+                Farmer currFarmer = filteredFarmers.get(i);
                 farmerNames.add(currFarmer.getFullName());
             }
 
@@ -151,7 +179,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
             selectCowS.setAdapter(cowArrayAdapter);
 
             if(selectFarmerS.getSelectedItemPosition() != -1){
-                Farmer selectedFarmer = farmers.get(selectFarmerS.getSelectedItemPosition());
+                Farmer selectedFarmer = filteredFarmers.get(selectFarmerS.getSelectedItemPosition());
                 List<Cow> cows = selectedFarmer.getCows();
                 if(cows == null){
                     GetCowDataThread getCowDataThread = new GetCowDataThread(selectFarmerS.getSelectedItemPosition());
@@ -161,6 +189,60 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
                     loadCowData(cows);
                 }
             }
+        }
+
+        if(parent == filterFarmersS){
+            if(filterFarmersS.getSelectedItemPosition() == 0){//all farmers
+                List<Farmer> newlyFilteredFarmers = this.allFarmers;
+                setFilteredFarmerList(newlyFilteredFarmers);
+            }
+            else if(filterFarmersS.getSelectedItemPosition() == 1){//farmers without extension personnel
+                List<Farmer> newlyFilteredFarmers = new ArrayList<Farmer>();
+                for(int i =0; i<allFarmers.size(); i++){
+                    Farmer currFarmer = allFarmers.get(i);
+                    if(DataHandler.isNull(currFarmer.getExtensionPersonnel()) || currFarmer.getExtensionPersonnel().length() == 0){
+                        newlyFilteredFarmers.add(currFarmer);
+                    }
+                    else{
+                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not qualify to be null");
+                    }
+                }
+
+                setFilteredFarmerList(newlyFilteredFarmers);
+            }
+            else if(filterFarmersS.getSelectedItemPosition() != -1){
+                String selection = filters.get(filterFarmersS.getSelectedItemPosition());
+
+                List<Farmer> newlyFilteredFarmers = new ArrayList<Farmer>();
+                for(int i = 0; i < allFarmers.size(); i++){
+                    Farmer currFarmer = allFarmers.get(i);
+                    if(currFarmer.getExtensionPersonnel() != null && currFarmer.getExtensionPersonnel().length() > 0 &&
+                            selection.contains(currFarmer.getExtensionPersonnel())){
+                        newlyFilteredFarmers.add(currFarmer);
+                    }
+                    else{
+                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not match "+selection);
+                    }
+                }
+
+                setFilteredFarmerList(newlyFilteredFarmers);
+            }
+        }
+    }
+
+    private void setFilteredFarmerList(List<Farmer> filteredFarmers){
+        List<String> farmerNames = new ArrayList<String>(filteredFarmers.size());
+        for (int i = 0; i < filteredFarmers.size(); i++) {
+            Farmer currFarmer = filteredFarmers.get(i);
+            farmerNames.add(currFarmer.getFullName());
+        }
+
+        ArrayAdapter<String> farmerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, farmerNames);
+        farmerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectFarmerS.setAdapter(farmerArrayAdapter);
+
+        if(this.filteredFarmers != filteredFarmers) {
+            this.filteredFarmers = filteredFarmers;
         }
     }
 
@@ -197,7 +279,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
     public void onClick(View v) {
         if(v == selectB){
             if(selectFarmerS.getSelectedItemPosition() != -1){
-                Farmer selectedFarmer = farmers.get(selectFarmerS.getSelectedItemPosition());
+                Farmer selectedFarmer = filteredFarmers.get(selectFarmerS.getSelectedItemPosition());
                 if(selectedFarmer != null){
                     if(selectCowS.getSelectedItemPosition() != -1){
                         List<Cow> cows = selectedFarmer.getCows();
@@ -280,8 +362,15 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
                 try{
                     Log.d(TAG, "fetched cows  = "+result);
                     JSONArray cowJsonArray = new JSONArray(result);
-                    farmers.get(farmerIndex).setCows(cowJsonArray);
-                    loadCowData(farmers.get(farmerIndex).getCows());
+                    filteredFarmers.get(farmerIndex).setCows(cowJsonArray);
+                    loadCowData(filteredFarmers.get(farmerIndex).getCows());
+
+                    //add the cow list to the copy of the farmer object in the allFarmers list
+                    for(int i = 0; i < allFarmers.size(); i++){
+                        if(allFarmers.get(i).getId() == filteredFarmers.get(farmerIndex).getId()){
+                            allFarmers.get(i).setCows(cowJsonArray);
+                        }
+                    }
                 }
                 catch (Exception e){
                     e.printStackTrace();

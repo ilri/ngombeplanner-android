@@ -52,6 +52,10 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
     private EditText mobileNumberET;
     private TextView farmLocTV;
     private Button recordLocB;
+    private TextView siteTV;
+    private Spinner siteS;
+    private TextView isActiveTV;
+    private Spinner isActiveS;
     private Button editB;
     private Button cancelB;
 
@@ -88,6 +92,10 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
         farmLocTV = (TextView)findViewById(R.id.farm_loc_tv);
         recordLocB = (Button)findViewById(R.id.record_loc_b);
         recordLocB.setOnClickListener(this);
+        siteTV = (TextView)findViewById(R.id.site_tv);
+        siteS = (Spinner)findViewById(R.id.site_s);
+        isActiveTV = (TextView)findViewById(R.id.is_active_tv);
+        isActiveS = (Spinner)findViewById(R.id.is_active_s);
         editB=(Button)this.findViewById(R.id.edit_b);
         editB.setOnClickListener(this);
         cancelB =(Button)this.findViewById(R.id.cancel_b);
@@ -157,6 +165,18 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
 
         recordLocB.setText(Locale.getStringInLocale("rec_farm_loc", this));
 
+        siteTV.setText(Locale.getStringInLocale("site", this));
+
+        ArrayAdapter<String> siteArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.sites));
+        siteArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        siteS.setAdapter(siteArrayAdapter);
+
+        isActiveTV.setText(Locale.getStringInLocale("is_active", this));
+
+        ArrayAdapter<String> isActiveArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, Locale.getArrayInLocale("yes_no", this));
+        isActiveArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        isActiveS.setAdapter(isActiveArrayAdapter);
+
         editB.setText(Locale.getStringInLocale("edit", this));
         cancelB.setText(Locale.getStringInLocale("cancel", this));
     }
@@ -184,6 +204,23 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
                 for(int i = 0; i < languages.size(); i++){
                     if(languages.get(i).equals(prefLanguage)){
                         preferredLanguageS.setSelection(i);
+                    }
+                }
+
+                String[] yesNoInEN = Locale.getArrayInLocale("yes_no", this, Locale.LOCALE_ENGLISH);
+                for(int i = 0; i < yesNoInEN.length; i++){
+                    if(yesNoInEN[i].equals("Yes") && farmer.isActive()){
+                        isActiveS.setSelection(i);
+                    }
+                    else if(yesNoInEN[i].equals("No") && !farmer.isActive()){
+                        isActiveS.setSelection(i);
+                    }
+                }
+
+                String[] sites = getResources().getStringArray(R.array.sites);
+                for(int i = 0; i < sites.length; i++){
+                    if(sites[i].equals(farmer.getSite())){
+                        siteS.setSelection(i);
                     }
                 }
 
@@ -259,6 +296,19 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
         if(languages != null && preferredLanguageS.getSelectedItemPosition() != -1){
             farmer.setPreferredLocale(Locale.getLocaleCode(this, languages.get(preferredLanguageS.getSelectedItemPosition())));
         }
+
+        String[] yesNoInEN = Locale.getArrayInLocale("yes_no", this, Locale.LOCALE_ENGLISH);
+        if(isActiveS.getSelectedItemPosition() != -1){
+            if(yesNoInEN[isActiveS.getSelectedItemPosition()].equals("Yes")){
+                farmer.setActive(true);
+            }
+            else if(yesNoInEN[isActiveS.getSelectedItemPosition()].equals("No")){
+                farmer.setActive(false);
+            }
+        }
+
+        String[] sites = getResources().getStringArray(R.array.sites);
+        farmer.setSite(sites[siteS.getSelectedItemPosition()]);
 
         farmer.setMobileNumber(mobileNumberET.getText().toString());
 
@@ -444,6 +494,12 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
         else if(extensionPersonnelS.getSelectedItemPosition() == -1 || vetNames.get(extensionPersonnelS.getSelectedItemPosition()).length() == 0){
             Toast.makeText(this, Locale.getStringInLocale("select_epersonnel", this), Toast.LENGTH_LONG).show();
             return  false;
+        }
+
+        String[] sites = getResources().getStringArray(R.array.sites);
+        if(sites[siteS.getSelectedItemPosition()].length() == 0){
+            Toast.makeText(this, Locale.getStringInLocale("specify_site", this), Toast.LENGTH_LONG).show();
+            return false;
         }
         return true;
     }

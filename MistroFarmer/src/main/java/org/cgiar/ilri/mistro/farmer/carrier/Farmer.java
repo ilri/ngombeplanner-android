@@ -35,6 +35,8 @@ public class Farmer implements Parcelable, Serializable
     private String mode;
     private String preferredLocale;
     private boolean isInFarm;
+    private String site;
+    private boolean isActive;
 
     public Farmer()
     {
@@ -49,6 +51,8 @@ public class Farmer implements Parcelable, Serializable
         preferredLocale = "";
         isInFarm = false;
         id = -1;
+        site = "";
+        isActive = true;
     }
 
     public Farmer(Parcel source)
@@ -68,6 +72,13 @@ public class Farmer implements Parcelable, Serializable
             latitude = farmerJsonObject.getString("gps_latitude");
             simCardSN = farmerJsonObject.getString("sim_card_sn");
             preferredLocale = farmerJsonObject.getString("pref_locale");
+            site = (DataHandler.isNull(farmerJsonObject.getString("location_district"))) ? "" : farmerJsonObject.getString("location_district");
+            if(farmerJsonObject.getInt("is_active") == 1){
+                isActive = true;
+            }
+            else{
+                isActive = false;
+            }
             isInFarm = false;
         }
         catch (Exception e){
@@ -195,6 +206,22 @@ public class Farmer implements Parcelable, Serializable
         return isInFarm;
     }
 
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     public List<Cow> getCows(String sex){
         List<Cow> newCowList = new ArrayList<Cow>();
 
@@ -248,6 +275,9 @@ public class Farmer implements Parcelable, Serializable
         if(isInFarm) dest.writeInt(1);
         else dest.writeInt(0);
         dest.writeString(preferredLocale);
+        dest.writeString(site);
+        if(isActive) dest.writeInt(1);
+        else dest.writeInt(0);
     }
 
     public void readFromParcel(Parcel in)
@@ -266,6 +296,10 @@ public class Farmer implements Parcelable, Serializable
         if(isInFarm == 1) this.isInFarm = true;
         else this.isInFarm = false;
         this.preferredLocale = in.readString();
+        this.site = in.readString();
+        int isActive = in.readInt();
+        if(isActive == 1 ) this.isActive = true;
+        else this.isActive = false;
     }
 
     public static final Creator<Farmer> CREATOR=new Creator<Farmer>()
@@ -303,6 +337,10 @@ public class Farmer implements Parcelable, Serializable
             jsonObject.put("simCardSN",((simCardSN ==null) ? "": simCardSN));
             jsonObject.put("mode",((mode ==null) ? "": mode));
             jsonObject.put("preferredLocale", preferredLocale);
+            jsonObject.put("site", site);
+            int isActive = 1;
+            if(this.isActive == false) isActive = 0;
+            jsonObject.put("isActive", isActive);
         }
         catch (JSONException e)
         {

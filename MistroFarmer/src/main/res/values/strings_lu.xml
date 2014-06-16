@@ -334,4 +334,12 @@
     <string name="farmers_no_epersonnel_lu">Farmers with no extension personnel</string>
     <string name="farmers_tied_to_lu">Farmers tied to</string>
     <string name="super_admin_lu">Super Admin</string>
+    <string name="select_cow_lu">Select a cow</string>
+    <string name="site_lu">Site</string>
+    <string name="is_active_lu">Is active</string>
+    <string-array name="yes_no_lu">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
+    <string name="specify_site_lu">Please select a site</string>
 </resources>
