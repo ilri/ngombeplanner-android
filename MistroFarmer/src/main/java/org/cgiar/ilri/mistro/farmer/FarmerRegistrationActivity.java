@@ -53,6 +53,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
     private Spinner preferredLanguageS;
     private TextView extensionPersonnelTV;
     private Spinner extensionPersonnelS;
+    private TextView siteTV;
+    private Spinner siteS;
     private TextView mobileNumberTV;
     private EditText mobileNumberET;
     private TextView numberOfCowsTV;
@@ -96,6 +98,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
         mobileNumberTV=(TextView)this.findViewById(R.id.mobile_number_tv);
         mobileNumberET=(EditText)this.findViewById(R.id.mobile_number_et);
         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        siteTV = (TextView)this.findViewById(R.id.site_tv);
+        siteS = (Spinner)this.findViewById(R.id.site_s);
         //Toast.makeText(this,telephonyManager.getSimSerialNumber(),Toast.LENGTH_LONG).show();
         mobileNumberET.setText(telephonyManager.getLine1Number());
         numberOfCowsTV=(TextView)this.findViewById(R.id.number_of_cows_tv);
@@ -193,6 +197,13 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
 
             Log.d(TAG, "Preferred locale: "+farmer.getPreferredLocale());
 
+            String[] sites = this.getResources().getStringArray(R.array.sites);
+            for(int i = 0; i < sites.length;i++){
+                if(sites[i].equals(farmer.getSite())){
+                    siteS.setSelection(i);
+                }
+            }
+
             Log.d(TAG,"Extension Personnel: "+farmer.getExtensionPersonnel());
             mobileNumberET.setText(farmer.getMobileNumber());
             Log.d(TAG,"Mobile number: "+farmer.getMobileNumber());
@@ -229,10 +240,14 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
     {
         setTitle(Locale.getStringInLocale("farmer_registration", this));
         fullNameTV.setText(" * " + Locale.getStringInLocale("full_name", this));
-        extensionPersonnelTV.setText(Locale.getStringInLocale("extension_p", this));
+        extensionPersonnelTV.setText(" * " + Locale.getStringInLocale("extension_p", this));
         mobileNumberTV.setText(" * " + Locale.getStringInLocale("mobile_number", this));
         numberOfCowsTV.setText(" * "+Locale.getStringInLocale("number_of_cows",this));
         preferredLanguageTV.setText(" * "+Locale.getStringInLocale("preferred_language", this));
+        siteTV.setText(" * "+Locale.getStringInLocale("site", this));
+        ArrayAdapter<String> siteArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.sites));
+        siteArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        siteS.setAdapter(siteArrayAdapter);
 
         ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, languages);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -284,6 +299,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
             farmer.setLatitude("");
             farmer.setLongitude("");
         }
+        String[] sites = getResources().getStringArray(R.array.sites);
+        farmer.setSite(sites[siteS.getSelectedItemPosition()]);
         farmer.setMode(Farmer.MODE_INITIAL_REGISTRATION);
         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
         farmer.setSimCardSN(telephonyManager.getSimSerialNumber());
@@ -409,6 +426,12 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
         else if(extensionPersonnelS.getSelectedItemPosition() == -1 || vetNames.get(extensionPersonnelS.getSelectedItemPosition()).length() == 0){
             Toast.makeText(this, Locale.getStringInLocale("select_epersonnel", this), Toast.LENGTH_LONG).show();
             return  false;
+        }
+
+        String[] sites = getResources().getStringArray(R.array.sites);
+        if(siteS.getSelectedItemPosition() != -1 && sites[siteS.getSelectedItemPosition()].length() == 0){
+            Toast.makeText(this, Locale.getStringInLocale("specify_site", this), Toast.LENGTH_LONG).show();
+            return false;
         }
 
         if(isInFarm && (longitude == null || longitude.length() == 0 || latitude == null || latitude.length() == 0)) {

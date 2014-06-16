@@ -148,7 +148,7 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
     public void initTextInViews() {
         setTitle(Locale.getStringInLocale("edit_farmer", this));
         fullNameTV.setText(" * " + Locale.getStringInLocale("full_name", this));
-        extensionPersonnelTV.setText(Locale.getStringInLocale("extension_p", this));
+        extensionPersonnelTV.setText(" * " + Locale.getStringInLocale("extension_p", this));
 
         List<String> tmpVetNames = new ArrayList<String>();
         tmpVetNames.add("");
@@ -165,13 +165,13 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
 
         recordLocB.setText(Locale.getStringInLocale("rec_farm_loc", this));
 
-        siteTV.setText(Locale.getStringInLocale("site", this));
+        siteTV.setText(" * " + Locale.getStringInLocale("site", this));
 
         ArrayAdapter<String> siteArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.sites));
         siteArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         siteS.setAdapter(siteArrayAdapter);
 
-        isActiveTV.setText(Locale.getStringInLocale("is_active", this));
+        isActiveTV.setText(" * " + Locale.getStringInLocale("is_active", this));
 
         ArrayAdapter<String> isActiveArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, Locale.getArrayInLocale("yes_no", this));
         isActiveArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
