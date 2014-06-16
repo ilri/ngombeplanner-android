@@ -89,7 +89,8 @@ public class DataHandler
 
     public static final String ADMIN_AUTHENTICATION_URL="/php/admin/authentication.php";
     public static final String ADMIN_EDIT_FARMER_URL="/php/admin/edit_farmer.php";
-    public static final String ADMIN_GET_COWS_URL="/php/admin/get_cows.php";
+    public static final String ADMIN_GET_COWS_URL="/php/admin/fetch_cows.php";
+    public static final String ADMIN_EDIT_COW_URL="/php/admin/edit_cow.php";
 
     public static final String SP_KEY_LOCALE = "locale";
     public static final String SP_KEY_MILK_QUANTITY_TYPE = "milkQuantityTYpe";

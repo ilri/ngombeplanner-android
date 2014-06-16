@@ -178,7 +178,7 @@ public class Cow implements Parcelable, Serializable {
             dam = new Dam();
 
             mode = "";
-            countryOfOrigin = "";//only set this if is sire
+            countryOfOrigin = jsonObject.getString("country");
             serviceType = (DataHandler.isNull(jsonObject.getString("service_type"))) ? "" : jsonObject.getString("service_type");
             otherBreed = "";
             piggyBack = "";
@@ -296,7 +296,7 @@ public class Cow implements Parcelable, Serializable {
         this.ageType = ageType;
     }
 
-    public void setBreeds(String[] breeds, Context context) {
+    public void setBreeds(String[] breeds, Context context, boolean commonBreeds) {
         if(breeds.length == 1){//might mean that there were no breeds
             if(breeds[0].length() == 0){
                 Log.w(TAG, "Appears like the user did not specify any breed, Setting size of breed array to 0");
@@ -306,7 +306,13 @@ public class Cow implements Parcelable, Serializable {
 
         Log.d(TAG, "***** size of breeds = "+String.valueOf(breeds.length));
         //translate breeds to english
-        String[] translatedBreeds =  Locale.translateArrayToEnglish(context, "c_breeds_array", breeds);//assuming that the breeds array is a member of c_breeds_array
+        String[] translatedBreeds  = null;
+        if(commonBreeds){
+            translatedBreeds =  Locale.translateArrayToEnglish(context, "c_breeds_array", breeds);//assuming that the breeds array is a member of c_breeds_array
+        }
+        else{
+            translatedBreeds =  Locale.translateArrayToEnglish(context, "breeds_array", breeds);//assuming that the breeds array is a member of c_breeds_array
+        }
 
         this.breeds = new ArrayList<String>();
         for (int i = 0; i < translatedBreeds.length; i++) {

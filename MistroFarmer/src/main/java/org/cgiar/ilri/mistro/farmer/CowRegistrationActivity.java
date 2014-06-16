@@ -1243,7 +1243,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
             thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
         }
         thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
-        thisCow.setBreeds(breedET.getText().toString().split(", "), this);
+        thisCow.setBreeds(breedET.getText().toString().split(", "), this, true);
         thisCow.setOtherBreed(this, breedACTV.getText().toString());
         thisCow.setDeformities(deformityET.getText().toString().split(", "), this);
         thisCow.setOtherDeformity(specifyET.getText().toString());

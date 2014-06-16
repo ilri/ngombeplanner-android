@@ -40,8 +40,8 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
     private Spinner selectFarmerS;
     private TextView selectCowTV;
     private Spinner selectCowS;
-    private Button editB;
-    private Button cancelB;
+    private Button selectB;
+    private Button backB;
 
     private JSONObject adminData;
     private List<Farmer> farmers;
@@ -53,13 +53,13 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
 
         selectFarmerTV = (TextView)findViewById(R.id.select_farmer_tv);
         selectFarmerS = (Spinner)findViewById(R.id.select_farmer_s);
-        selectCowS.setOnItemSelectedListener(this);
+        selectFarmerS.setOnItemSelectedListener(this);
         selectCowTV = (TextView)findViewById(R.id.select_cow_tv);
         selectCowS = (Spinner)findViewById(R.id.select_cow_s);
-        editB = (Button)findViewById(R.id.edit_b);
-        editB.setOnClickListener(this);
-        cancelB = (Button)findViewById(R.id.cancel_b);
-        cancelB.setOnClickListener(this);
+        selectB = (Button)findViewById(R.id.select_b);
+        selectB.setOnClickListener(this);
+        backB = (Button)findViewById(R.id.back_b);
+        backB.setOnClickListener(this);
 
         initTextInViews();
     }
@@ -112,8 +112,8 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
         selectFarmerTV.setText(Locale.getStringInLocale("select_farmer", this));
         selectCowTV.setText(Locale.getStringInLocale("select_cow", this));
 
-        editB.setText(Locale.getStringInLocale("edit", this));
-        cancelB.setText(Locale.getStringInLocale("cancel", this));
+        selectB.setText(Locale.getStringInLocale("select", this));
+        backB.setText(Locale.getStringInLocale("back", this));
     }
 
     private void loadAdminData(String adminJSONString){
@@ -195,7 +195,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
 
     @Override
     public void onClick(View v) {
-        if(v == editB){
+        if(v == selectB){
             if(selectFarmerS.getSelectedItemPosition() != -1){
                 Farmer selectedFarmer = farmers.get(selectFarmerS.getSelectedItemPosition());
                 if(selectedFarmer != null){
@@ -218,7 +218,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
                 }
             }
         }
-        else if(v == cancelB){
+        else if(v == backB){
             Intent intent = new Intent(this, MainMenu.class);
             intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
             intent.putExtra(MainMenu.KEY_ADMIN_DATA, adminData.toString());
@@ -278,6 +278,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
             }
             else{
                 try{
+                    Log.d(TAG, "fetched cows  = "+result);
                     JSONArray cowJsonArray = new JSONArray(result);
                     farmers.get(farmerIndex).setCows(cowJsonArray);
                     loadCowData(farmers.get(farmerIndex).getCows());

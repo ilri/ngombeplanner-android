@@ -3,8 +3,10 @@ package org.cgiar.ilri.mistro.farmer;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -35,6 +37,8 @@ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
 import org.cgiar.ilri.mistro.farmer.carrier.Dam;
 import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
 import org.cgiar.ilri.mistro.farmer.carrier.Sire;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -385,7 +389,7 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
                     }
                     deformityET.setText(deformity);
 
-                    if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
+                    //if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
 
                         List<Cow> allCows = farmer.getCows();
                         validSires = new ArrayList<Cow>();
@@ -467,7 +471,7 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
                                 embryoNumberET.setText(thisCow.getDam().getEmbryoNumber());
                             }
                         }
-                    }
+                    /*}
                     else {
                         serviceTypeTV.setVisibility(TextView.GONE);
                         serviceTypeS.setVisibility(Spinner.GONE);
@@ -485,7 +489,7 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
                         damACTV.setVisibility(AutoCompleteTextView.GONE);
                         embryoNumberTV.setVisibility(TextView.GONE);
                         embryoNumberET.setVisibility(EditText.GONE);
-                    }
+                    }*/
 
                     countryOfOriginACTV.setText(thisCow.getCountryOfOrigin());
                 }
@@ -676,17 +680,27 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
     @Override
     public void onClick(View view) {
         if(view==cancelB) {
-           //TODO: go back to cow selection page
+            Intent intent = new Intent(this, CowSelectionActivity.class);
+            intent.putExtra(CowSelectionActivity.KEY_ADMIN_DATA, adminData.toString());
+            startActivity(intent);
         }
         else if(view==editB) {
             if(validateInput()) {
-                //cacheThisCow();//TODO: cache this cow
-                /*Bundle bundle=new Bundle();
-                bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);*/
+                try{
+                    cacheThisCow();
 
-                clearEditTextDataCache();
+                    JSONObject cowJsonObject = thisCow.getJsonObject();
+                    cowJsonObject.put("farmer_id", farmer.getId());
 
-                //TODO: send edited data to server
+                    clearEditTextDataCache();
+
+                    Log.d(TAG, "Json Object for cow = "+cowJsonObject.toString());
+                    EditCowThread editCowThread = new EditCowThread();
+                    editCowThread.execute(cowJsonObject.toString());
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
         else if(view==dateOfBirthET) {
@@ -1096,5 +1110,182 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
         }
 
         return true;
+    }
+
+    private void cacheThisCow() {
+        clearEditTextDataCache();
+
+        thisCow.setName(nameET.getText().toString());
+
+        thisCow.setEarTagNumber(earTagNumberET.getText().toString());
+        thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
+        thisCow.setAge((ageET.getText().toString() == null || ageET.getText().toString().length() == 0) ? -1 : Integer.parseInt(ageET.getText().toString()));
+        String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array",this,Locale.LOCALE_ENGLISH);
+        if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Days")) {
+            thisCow.setAgeType(Cow.AGE_TYPE_DAY);
+        }
+        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Months")) {
+            thisCow.setAgeType(Cow.AGE_TYPE_MONTH);
+        }
+        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Years")) {
+            thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
+        }
+        thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
+        thisCow.setBreeds(breedET.getText().toString().split(", "), this, false);
+
+        thisCow.setDeformities(deformityET.getText().toString().split(", "), this);
+        thisCow.setOtherDeformity(specifyET.getText().toString());
+        thisCow.setCountryOfOrigin(countryOfOriginACTV.getText().toString());
+        String[] sexInEN = Locale.getArrayInLocale("sex_array",this,Locale.LOCALE_ENGLISH);
+        if(sexInEN[sexS.getSelectedItemPosition()].equals("Female")) {
+            thisCow.setSex(Cow.SEX_FEMALE);
+
+            String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
+            thisCow.setMilkingStatus(milkingStatusInEN[milkingStatusS.getSelectedItemPosition()], this);
+            String[] inCalfArrayInEN = Locale.getArrayInLocale("cow_in_calf_array", this, Locale.LOCALE_ENGLISH);
+            if(inCalfArrayInEN[inCalfStatusS.getSelectedItemPosition()].equals(Cow.COW_IN_CALF)){
+                thisCow.setInCalf(true);
+            }
+            else{
+                thisCow.setInCalf(false);
+            }
+        }
+        else if(sexInEN[sexS.getSelectedItemPosition()].equals("Male")) {
+            thisCow.setSex(Cow.SEX_MALE);
+        }
+        //if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
+            String[] serviceTypesInEN = Locale.getArrayInLocale("service_types",this,Locale.LOCALE_ENGLISH);
+            if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Bull")) {
+                thisCow.setServiceType(Cow.SERVICE_TYPE_BULL);
+
+                Sire sire = new Sire();
+//                sire.setName(validSires.get(sireS.getSelectedItemPosition()).getName());
+//                sire.setEarTagNumber(validSires.get(sireS.getSelectedItemPosition()).getEarTagNumber());
+
+                for(int i = 0; i < validSires.size(); i++){
+                    if(sireACTV.getText().toString().equals(validSires.get(i).getEarTagNumber()+" ("+validSires.get(i).getName()+")")){
+                        sire.setEarTagNumber(validSires.get(i).getEarTagNumber());
+                        sire.setName(validSires.get(i).getName());
+                    }
+                }
+                if(sire.getEarTagNumber().trim().equals("")){//if not yet set then assume the sire is not part of the herd
+                    sire.setEarTagNumber(sireACTV.getText().toString());
+                }
+
+                String[] sireOwnersInEN = Locale.getArrayInLocale("bull_owners", this, Locale.LOCALE_ENGLISH);
+                sire.setOwnerType(sireOwnersInEN[sireOwnerS.getSelectedItemPosition()]);
+                sire.setOwner(sireOwnerNameET.getText().toString());
+                thisCow.setSire(sire);
+
+                Dam dam =new Dam();
+//                dam.setName(validDams.get(damS.getSelectedItemPosition()).getName());
+//                dam.setEarTagNumber(validDams.get(damS.getSelectedItemPosition()).getEarTagNumber());
+
+                for(int i = 0; i < validDams.size(); i++ ){
+                    if(damACTV.getText().toString().equals(validDams.get(i).getEarTagNumber()+" ("+validDams.get(i).getName()+")")){
+                        dam.setEarTagNumber(validDams.get(i).getEarTagNumber());
+                        dam.setName(validDams.get(i).getName());
+                    }
+                }
+                if(dam.getEarTagNumber().trim().equals("")){//if not yet set then assume the dam is not part of the herd
+                    dam.setEarTagNumber(damACTV.getText().toString());
+                }
+                thisCow.setDam(dam);
+            }
+            else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
+                thisCow.setServiceType(Cow.SERVICE_TYPE_AI);
+
+                Sire sire = new Sire();
+                sire.setStrawNumber(strawNumberET.getText().toString());
+                thisCow.setSire(sire);
+
+                Dam dam =new Dam();
+//                dam.setName(validDams.get(damS.getSelectedItemPosition()).getName());
+//                dam.setEarTagNumber(validDams.get(damS.getSelectedItemPosition()).getEarTagNumber());
+
+                for(int i = 0; i < validDams.size(); i++ ){
+                    if(damACTV.getText().toString().equals(validDams.get(i).getEarTagNumber()+" ("+validDams.get(i).getName()+")")){
+                        dam.setEarTagNumber(validDams.get(i).getEarTagNumber());
+                        dam.setName(validDams.get(i).getName());
+                    }
+                }
+                if(dam.getEmbryoNumber().trim().equals("")){
+                    dam.setEarTagNumber(damACTV.getText().toString());
+                }
+                thisCow.setDam(dam);
+            }
+            else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Embryo Transfer")) {
+                thisCow.setServiceType(Cow.SERVICE_TYPE_ET);
+
+                Dam dam =new Dam();
+//                dam.setName(validDams.get(damS.getSelectedItemPosition()).getName());
+//                dam.setEarTagNumber(validDams.get(damS.getSelectedItemPosition()).getEarTagNumber());
+
+                for(int i = 0; i < validDams.size(); i++ ){
+                    if(damACTV.getText().toString().equals(validDams.get(i).getEarTagNumber()+" ("+validDams.get(i).getName()+")")){
+                        dam.setEarTagNumber(validDams.get(i).getEarTagNumber());
+                        dam.setName(validDams.get(i).getName());
+                    }
+                }
+                if(dam.getEmbryoNumber().trim().equals("")){
+                    dam.setEarTagNumber(damACTV.getText().toString());
+                }
+                thisCow.setDam(dam);
+            }
+        //}
+        farmer.setCow(thisCow,index);
+    }
+
+    private class EditCowThread extends AsyncTask<String, Integer, String>{
+
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(EditCowActivity.this, "", Locale.getStringInLocale("loading_please_wait", EditCowActivity.this), true);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            return DataHandler.sendDataToServer(EditCowActivity.this, params[0], DataHandler.ADMIN_EDIT_COW_URL, true);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+
+            if(result==null){
+                String httpError = DataHandler.getSharedPreference(EditCowActivity.this, "http_error", "No Error thrown to application. Something must be really wrong");
+                Toast.makeText(EditCowActivity.this, httpError, Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                Toast.makeText(EditCowActivity.this, Locale.getStringInLocale("generic_sms_error", EditCowActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+                Toast.makeText(EditCowActivity.this, Locale.getStringInLocale("no_service", EditCowActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+                Toast.makeText(EditCowActivity.this, Locale.getStringInLocale("radio_off", EditCowActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                Toast.makeText(EditCowActivity.this, Locale.getStringInLocale("server_not_receive_sms", EditCowActivity.this), Toast.LENGTH_LONG).show();
+            }
+            else if(result.equals(DataHandler.ACKNOWLEDGE_OK)){
+                try{
+                    Intent intent = new Intent(EditCowActivity.this, CowSelectionActivity.class);
+                    intent.putExtra(CowSelectionActivity.KEY_ADMIN_DATA, adminData);//since this activity
+                    startActivity(intent);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            else{
+                Toast.makeText(EditCowActivity.this, Locale.getStringInLocale("problem_connecting_to_server", EditCowActivity.this), Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
