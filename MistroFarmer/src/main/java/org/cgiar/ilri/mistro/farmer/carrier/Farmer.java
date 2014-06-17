@@ -63,7 +63,7 @@ public class Farmer implements Parcelable, Serializable
 
     public Farmer(JSONObject farmerJsonObject){
         try{
-            Log.d(TAG, "Json for this farmer = "+farmerJsonObject.toString());
+            //Log.d(TAG, "Json for this farmer = "+farmerJsonObject.toString());
             id = farmerJsonObject.getInt("id");
             fullName = farmerJsonObject.getString("name");
             this.extensionPersonnel = (DataHandler.isNull(farmerJsonObject.getString("extension_personnel"))) ? "" : farmerJsonObject.getString("extension_personnel");

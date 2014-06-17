@@ -204,7 +204,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
                         newlyFilteredFarmers.add(currFarmer);
                     }
                     else{
-                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not qualify to be null");
+                        //Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not qualify to be null");
                     }
                 }
 
@@ -221,7 +221,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
                         newlyFilteredFarmers.add(currFarmer);
                     }
                     else{
-                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not match "+selection);
+                        //Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not match "+selection);
                     }
                 }
 
@@ -286,10 +286,12 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
                         if(cows != null){
                             Cow selectedCow = cows.get(selectCowS.getSelectedItemPosition());
                             if(selectedCow != null){
+                                Log.d(TAG, "Cow index = "+selectCowS.getSelectedItemPosition());
+                                Log.d(TAG, "Number of cows = "+cows.size());
                                 Intent intent=new Intent(this, EditCowActivity.class);
                                 intent.putExtra(MainMenu.KEY_ADMIN_DATA, adminData.toString());
-                                intent.putExtra(CowRegistrationActivity.KEY_INDEX, selectCowS.getSelectedItemPosition());
-                                intent.putExtra(CowRegistrationActivity.KEY_NUMBER_OF_COWS, cows.size());
+                                intent.putExtra(EditCowActivity.KEY_INDEX, selectCowS.getSelectedItemPosition());
+                                intent.putExtra(EditCowActivity.KEY_NUMBER_OF_COWS, cows.size());
                                 Bundle bundle=new Bundle();
                                 bundle.putParcelable(Farmer.PARCELABLE_KEY, selectedFarmer);
                                 intent.putExtras(bundle);

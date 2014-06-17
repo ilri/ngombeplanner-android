@@ -149,6 +149,10 @@ public class Cow implements Parcelable, Serializable {
         }
     }
 
+    public int getId(){
+        return this.id;
+    }
+
     private void initFromJSON(JSONObject jsonObject){
         try {
             id = jsonObject.getInt("id");

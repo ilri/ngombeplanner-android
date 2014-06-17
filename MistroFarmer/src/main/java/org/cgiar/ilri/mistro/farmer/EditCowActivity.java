@@ -317,6 +317,9 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
             if(farmer!=null){
                 thisCow = farmer.getCow(index);
                 if(thisCow != null) {
+                    Log.d(TAG, "ID for current cow is "+String.valueOf(thisCow.getId()));
+                    Log.d(TAG, "Index from bundle = "+String.valueOf(index));
+                    Log.d(TAG, "Number of animals from bundle = "+String.valueOf(numberOfCows));
                     nameET.setText(thisCow.getName());
                     earTagNumberET.setText(thisCow.getEarTagNumber());
                     dateOfBirthET.setText(thisCow.getDateOfBirth());

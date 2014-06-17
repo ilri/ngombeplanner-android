@@ -480,7 +480,7 @@ public class DataHandler
      */
     public static String getSharedPreference(Context context, String sharedPreferenceKey, String defaultValue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
-        Log.d(TAG, "value of " + sharedPreferenceKey + " is " + sharedPreferences.getString(sharedPreferenceKey, defaultValue));
+        //Log.d(TAG, "value of " + sharedPreferenceKey + " is " + sharedPreferences.getString(sharedPreferenceKey, defaultValue));
         return sharedPreferences.getString(sharedPreferenceKey, defaultValue);
     }
 
