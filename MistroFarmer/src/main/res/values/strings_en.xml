@@ -300,8 +300,8 @@
         <item>Not in calf</item>
     </string-array>
 
-    <string name="enter_milk_status_of_cow_en">Please enter the status of cow</string>
-    <string name="enter_in_calf_status_en">Please enter the status of cow</string>
+    <string name="enter_milk_status_of_cow_en">Please enter the milking status of cow</string>
+    <string name="enter_in_calf_status_en">Please enter the in calf status of cow</string>
     <string name="select_epersonnel_en">Please select an extension personnel</string>
     <string name="unable_to_get_epersonnel_en">Unable to fetch extension Personnel</string>
     <string name="unable_to_lock_gps_en">GPS location was not obtained. Will try to get it in next screen</string>
@@ -314,7 +314,7 @@
     <string name="admin_functions_en">Admin Functions</string>
     <string name="sim_card_not_admin_en">The sim card you are using is not allowed to log in as Admin</string>
     <string name="edit_farmer_en">Edit Farmer</string>
-    <string name="edit_cow_en">Edit Cow</string>
+    <string name="edit_cow_en">Edit Animal</string>
     <string name="admin_en">Admin</string>
     <string name="edit_en">Edit</string>
     <string name="select_farmer_en">Select a farmer</string>
@@ -334,7 +334,7 @@
     <string name="farmers_no_epersonnel_en">Farmers with no extension personnel</string>
     <string name="farmers_tied_to_en">Farmers tied to</string>
     <string name="super_admin_en">Super Admin</string>
-    <string name="select_cow_en">Select a cow</string>
+    <string name="select_cow_en">Select an Animal</string>
     <string name="site_en">Site</string>
     <string name="is_active_en">Is active</string>
     <string-array name="yes_no_en">
@@ -342,4 +342,7 @@
         <item>Yes</item>
     </string-array>
     <string name="specify_site_en">Please select a site</string>
+
+    <string name="save_en">Save</string>
+
 </resources>

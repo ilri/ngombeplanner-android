@@ -339,4 +339,6 @@
         <item>Yes</item>
     </string-array>
     <string name="specify_site_kr">Please select a site</string>
+
+    <string name="save_kr">Save</string>
 </resources>

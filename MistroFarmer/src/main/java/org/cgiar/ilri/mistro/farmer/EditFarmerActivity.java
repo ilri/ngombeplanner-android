@@ -177,7 +177,7 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
         isActiveArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         isActiveS.setAdapter(isActiveArrayAdapter);
 
-        editB.setText(Locale.getStringInLocale("edit", this));
+        editB.setText(Locale.getStringInLocale("save", this));
         cancelB.setText(Locale.getStringInLocale("cancel", this));
     }
 

@@ -340,4 +340,6 @@
         <item>Yes</item>
     </string-array>
     <string name="specify_site_sw">Please select a site</string>
+
+    <string name="save_sw">Save</string>
 </resources>

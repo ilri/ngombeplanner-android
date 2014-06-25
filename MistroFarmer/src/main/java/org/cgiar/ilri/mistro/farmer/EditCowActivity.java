@@ -599,7 +599,7 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
         countryOfOriginTV.setText(Locale.getStringInLocale("other_countries",this));
         commonCountriesTV.setText(Locale.getStringInLocale("country_of_origin",this));
         cancelB.setText(Locale.getStringInLocale("cancel",this));
-        editB.setText(Locale.getStringInLocale("edit", this));
+        editB.setText(Locale.getStringInLocale("save", this));
 
         breedDialog.setTitle(Locale.getStringInLocale("breed",this));
         breeds=Locale.getArrayInLocale("breeds_array",this);
