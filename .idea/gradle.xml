@@ -8,7 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/MistroFarmer" />
+            <option value="$PROJECT_DIR$/NgombePlanner" />
           </set>
         </option>
       </GradleProjectSettings>

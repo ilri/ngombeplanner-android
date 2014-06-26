@@ -10,10 +10,10 @@
 
 #Gradle files
 .gradle/
-MistroFarmer/build/
+NgombePlanner/build/
 gradle/wrapper/gradle-wrapper.properties
-MistroFarmer/build.gradle
-MistroFarmer/MistroFarmer.iml
+NgombePlanner/build.gradle
+NgombePlanner/NgombePlanner.iml
 Android.iml
 
 #Local configuration files

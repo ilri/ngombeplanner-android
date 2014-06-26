@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Android.iml" filepath="$PROJECT_DIR$/Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MistroFarmer/MistroFarmer.iml" filepath="$PROJECT_DIR$/MistroFarmer/MistroFarmer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NgombePlanner/NgombePlanner.iml" filepath="$PROJECT_DIR$/NgombePlanner/NgombePlanner.iml" />
     </modules>
   </component>
 </project>

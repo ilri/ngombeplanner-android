@@ -1,2 +1,2 @@
 //include ':MistroFarmer', ':libraries:ActionBarSherlock:actionbarsherlock'
-include ':MistroFarmer'
+include 'NgombePlanner'
