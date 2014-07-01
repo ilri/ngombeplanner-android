@@ -300,48 +300,49 @@
         <item>In calf</item>
         <item>Not in calf</item>
     </string-array>
-    <string name="enter_milk_status_of_cow_lu">Please enter the status of cow</string>
-    <string name="enter_in_calf_status_lu">Please enter the status of cow</string>
-    <string name="select_epersonnel_lu">Please select an extension personnel</string>
-    <string name="unable_to_get_epersonnel_lu">Unable to fetch extension Personnel</string>
-    <string name="unable_to_lock_gps_lu">GPS location was not obtained. Will try to get it in next screen</string>
-    <string name="gps_recorded_lu">GPS recorded</string>
-    <string name="epersonnel_tshoot_lu">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
-    <string name="enter_two_names_lu">Enter at least two names</string>
-    <string name="phone_number_not_valid_lu">The phone number you entered is not valid</string>
-    <string name="enter_old_phone_no_lu">Please enter your old phone number</string>
-    <string name="enter_new_phone_no_lu">Please enter your new phone number</string>
-    <string name="admin_functions_lu">Admin Functions</string>
-    <string name="sim_card_not_admin_lu">The sim card you are using is not allowed to log in as Admin</string>
-    <string name="edit_farmer_lu">Edit Farmer</string>
-    <string name="edit_cow_lu">Edit Cow</string>
-    <string name="admin_lu">Admin</string>
-    <string name="edit_lu">Edit</string>
-    <string name="select_farmer_lu">Select a farmer</string>
-    <string name="select_lu">Select</string>
-    <string name="phone_number_lu">Phone Number</string>
-    <string name="farmer_profile_updated_lu">Farmer\'s profile successfully updated</string>
-    <string name="enter_farmer_name_lu">Please enter farmer\'s name</string>
-    <string name="enter_farmer_mobile_no_lu">Please enter farmer\'s phone number</string>
-    <string name="farm_location_lu">Farm location</string>
-    <string name="rec_farm_loc_lu">Record farm\'s GPS location</string>
-    <string name="not_set_lu">Not set</string>
-    <string name="are_you_in_farmers_farm_lu">Are you currently in the farmer\'s farm?</string>
-    <string name="accuracy_lu">Accuracy</string>
-    <string name="unknown_lu">unknown</string>
-    <string name="filter_farmers_lu">Filter farmers</string>
-    <string name="all_farmers_lu">All farmers</string>
-    <string name="farmers_no_epersonnel_lu">Farmers with no extension personnel</string>
-    <string name="farmers_tied_to_lu">Farmers tied to</string>
-    <string name="super_admin_lu">Super Admin</string>
-    <string name="select_cow_lu">Select a cow</string>
-    <string name="site_lu">Site</string>
-    <string name="is_active_lu">Is active</string>
-    <string-array name="yes_no_lu">
-        <item>No</item>
-        <item>Yes</item>
-    </string-array>
-    <string name="specify_site_lu">Please select a site</string>
 
+    <string name="enter_milk_status_of_cow_lu">Handichisia ing\'ombe niisherwangwa noho tawe.</string>
+    <string name="enter_in_calf_status_lu">Handichisia ing\'ombe niiyatila inda noho tawe</string>
+    <string name="select_epersonnel_lu">Yaula omusinjilili</string>
+    <string name="unable_to_get_epersonnel_lu">Yaule omusinjilili tawe</string>
+    <string name="unable_to_lock_gps_lu">GPS siibukulilwe tawe. Ilabukulwa mu-shise shilondakhwo.</string>
+    <string name="gps_recorded_lu">GPS ibukulwe</string>
+    <string name="epersonnel_tshoot_lu">Siinyalilwe khuyaula omusinjilili tawe. Mina \'kalukha inyuma\' khuchachia khwandichisia obuyakha.</string>
+    <string name="enter_two_names_lu">Handichisia amera kabili.</string>
+    <string name="phone_number_not_valid_lu">Inamba yolusimu yawinjisiye siili abwene tawe.</string>
+    <string name="enter_old_phone_no_lu">Handichisia inamba ikhulu yolusimu.</string>
+    <string name="enter_new_phone_no_lu">Handichisia inamba imbiakha yolusimu.</string>
+    <string name="admin_functions_lu">Efikhole fiomusinjilili</string>
+    <string name="sim_card_not_admin_lu">Ikadi ya isimu yorumishira siinyala khwinjila mubusinjilili tawe.</string>
+    <string name="edit_farmer_lu">kasia omulimi</string>
+    <string name="edit_cow_lu">kasia ing\'ombe</string>
+    <string name="admin_lu">Obusinjilili</string>
+    <string name="edit_lu">Okhukasia obuhandiche</string>
+    <string name="select_farmer_lu">Yaula omulimi</string>
+    <string name="select_lu">Yaula</string>
+    <string name="phone_number_lu">Inamba yolusimu.</string>
+    <string name="farmer_profile_updated_lu">Habari yomulimi ichenjibwe obulai</string>
+    <string name="enter_farmer_name_lu">Handichisia amera komulimi.</string>
+    <string name="enter_farmer_mobile_no_lu">Handichisia inamba yolusimu yomulimi.</string>
+    <string name="farm_location_lu">mukunda kwomulimi kunyolekha hena.</string>
+    <string name="rec_farm_loc_lu">Handichisia GPS yomukunda</string>
+    <string name="not_set_lu">ikasibwe tawe.</string>
+    <string name="are_you_in_farmers_farm_lu">Oli mumukunda kwomulimi mubise bino.</string>
+    <string name="accuracy_lu">Obwene</string>
+    <string name="unknown_lu">Siimanyishe tawe</string>
+    <string name="filter_farmers_lu">Yaula abalimi</string>
+    <string name="all_farmers_lu">Abalimi bosi</string>
+    <string name="farmers_no_epersonnel_lu">Abalimi bakhali nende abasinjilili tawe.</string>
+    <string name="farmers_tied_to_lu">Abalimi basinjililwa nende</string>
+    <string name="super_admin_lu">Omusinjilili mukhongo.</string>
+    <string name="select_cow_lu">Yaula ing\'ombe</string>
+    <string name="site_lu">Womuradi Kunyolekha</string>
+    <string name="is_active_lu">Yandichisianja.</string>
+    <string-array name="yes_no_lu">
+        <item>Tawe</item>
+        <item>Hee</item>
+    </string-array>
     <string name="save_lu">Save</string>
+    <string name="specify_site_lu">Yaula womuradi kunyolekha.</string>
+
 </resources>

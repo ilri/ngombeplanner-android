@@ -298,48 +298,49 @@
         <item>In calf</item>
         <item>Not in calf</item>
     </string-array>
-    <string name="enter_milk_status_of_cow_sw">Please enter the status of cow</string>
-    <string name="enter_in_calf_status_sw">Please enter the status of cow</string>
-    <string name="select_epersonnel_sw">Please select an extension personnel</string>
-    <string name="unable_to_get_epersonnel_sw">Unable to fetch extension Personnel</string>
-    <string name="unable_to_lock_gps_sw">GPS location was not obtained. Will try to get it in next screen</string>
-    <string name="gps_recorded_sw">GPS recorded</string>
-    <string name="epersonnel_tshoot_sw">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
-    <string name="enter_two_names_sw">Enter at least two names</string>
-    <string name="phone_number_not_valid_sw">The phone number you entered is not valid</string>
-    <string name="enter_old_phone_no_sw">Please enter your old phone number</string>
-    <string name="enter_new_phone_no_sw">Please enter your new phone number</string>
-    <string name="admin_functions_sw">Admin Functions</string>
-    <string name="sim_card_not_admin_sw">The sim card you are using is not allowed to log in as Admin</string>
-    <string name="edit_farmer_sw">Edit Farmer</string>
-    <string name="edit_cow_sw">Edit Cow</string>
-    <string name="admin_sw">Admin</string>
-    <string name="edit_sw">Edit</string>
-    <string name="select_farmer_sw">Select a farmer</string>
-    <string name="select_sw">Select</string>
-    <string name="phone_number_sw">Phone Number</string>
-    <string name="farmer_profile_updated_sw">Farmer\'s profile successfully updated</string>
-    <string name="enter_farmer_name_sw">Please enter farmer\'s name</string>
-    <string name="enter_farmer_mobile_no_sw">Please enter farmer\'s phone number</string>
-    <string name="farm_location_sw">Farm location</string>
-    <string name="rec_farm_loc_sw">Record farm\'s GPS location</string>
-    <string name="not_set_sw">Not set</string>
-    <string name="are_you_in_farmers_farm_sw">Are you currently in the farmer\'s farm?</string>
-    <string name="accuracy_sw">Accuracy</string>
-    <string name="unknown_sw">unknown</string>
-    <string name="filter_farmers_sw">Filter farmers</string>
-    <string name="all_farmers_sw">All farmers</string>
-    <string name="farmers_no_epersonnel_sw">Farmers with no extension personnel</string>
-    <string name="farmers_tied_to_sw">Farmers tied to</string>
-    <string name="super_admin_sw">Super Admin</string>
-    <string name="select_cow_sw">Select a cow</string>
-    <string name="site_sw">Site</string>
-    <string name="is_active_sw">Is active</string>
-    <string-array name="yes_no_sw">
-        <item>No</item>
-        <item>Yes</item>
-    </string-array>
-    <string name="specify_site_sw">Please select a site</string>
 
+    <string name="enter_milk_status_of_cow_sw">Tafadhali ingiza hali ya maziwa ya ngombe</string>
+    <string name="enter_in_calf_status_sw">Tafadhali ingiza hali ya mimba ya ngombe</string>
+    <string name="select_epersonnel_sw">Tafadhali chagua afisa wa nyanjani</string>
+    <string name="unable_to_get_epersonnel_sw">Haiwezi kuleta afisa wa nyanjani.</string>
+    <string name="unable_to_lock_gps_sw">GPS ya eneo haipatikani.Utajaribu kuipata kwa ukurasa ufwatao.</string>
+    <string name="gps_recorded_sw">GPS imerekodiwa</string>
+    <string name="epersonnel_tshoot_sw">Haiwezi kuleta afisa wa nyanjani kutoka kwa mtandao.Jaribu kurudi nyuma na uanze uandikishaji.</string>
+    <string name="enter_two_names_sw">Jaza angalao majina mawili</string>
+    <string name="phone_number_not_valid_sw">Nambari ya simu uliyoingiza haitambuliki</string>
+    <string name="enter_old_phone_no_sw">Tafadhali ingiza nambari yako mzee ya simu.</string>
+    <string name="enter_new_phone_no_sw">Tafadhali ingiza nambari yako mpya ya simu</string>
+    <string name="admin_functions_sw">Kazi za msimamizi</string>
+    <string name="sim_card_not_admin_sw">Sim card unayotumia hairuhusiwi kutumika kama msimamizi</string>
+    <string name="edit_farmer_sw">Kurekebisha mkulima</string>
+    <string name="edit_cow_sw">Kurekebisha ng\'ombe</string>
+    <string name="admin_sw">Msimamizi</string>
+    <string name="edit_sw">Kurekebisha</string>
+    <string name="select_farmer_sw">Chagua mkulima</string>
+    <string name="select_sw">Chagua  </string>
+    <string name="phone_number_sw">Nambari ya simu</string>
+    <string name="farmer_profile_updated_sw">Ujumbe kuhusu mkulima umefanikiwa kuongezwa</string>
+    <string name="enter_farmer_name_sw">Tafadhali ingiza jina la mkulima</string>
+    <string name="enter_farmer_mobile_no_sw">Tafadhali ingiza nambari ya simu ya mkulima.</string>
+    <string name="farm_location_sw">Boma ya mkulima</string>
+    <string name="rec_farm_loc_sw">Rekodi  GPS ya shamba ya mkulima</string>
+    <string name="not_set_sw">Haijawekwa</string>
+    <string name="are_you_in_farmers_farm_sw">Uko katika boma ya mkulima?</string>
+    <string name="accuracy_sw">Usahihi au usawa</string>
+    <string name="unknown_sw">Haijulikani</string>
+    <string name="filter_farmers_sw">Chuja wakulima</string>
+    <string name="all_farmers_sw">Wakulima wote</string>
+    <string name="farmers_no_epersonnel_sw">Wakulima ambao hawana afisa wa nyanjani</string>
+    <string name="farmers_tied_to_sw">Wakulima wa</string>
+    <string name="super_admin_sw">Msimamizi mkuu</string>
+    <string name="select_cow_sw">Chagua ng\'ombe</string>
+    <string name="site_sw">Eneo</string>
+    <string name="is_active_sw">Inatenda kazi</string>
+    <string-array name="yes_no_sw">
+        <item>Hapana</item>
+        <item>Ndio</item>
+    </string-array>
     <string name="save_sw">Save</string>
+    <string name="specify_site_sw">Tafadhali chagua eneo</string>
+
 </resources>

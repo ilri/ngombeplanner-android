@@ -297,48 +297,49 @@
         <item>In calf</item>
         <item>Not in calf</item>
     </string-array>
-    <string name="enter_milk_status_of_cow_kr">Please enter the status of cow</string>
-    <string name="enter_in_calf_status_kr">Please enter the status of cow</string>
-    <string name="select_epersonnel_kr">Please select an extension personnel</string>
-    <string name="unable_to_get_epersonnel_kr">Unable to fetch extension Personnel</string>
-    <string name="unable_to_lock_gps_kr">GPS location was not obtained. Will try to get it in next screen</string>
-    <string name="gps_recorded_kr">GPS recorded</string>
-    <string name="epersonnel_tshoot_kr">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
-    <string name="enter_two_names_kr">Enter at least two names</string>
-    <string name="phone_number_not_valid_kr">The phone number you entered is not valid</string>
-    <string name="enter_old_phone_no_kr">Please enter your old phone number</string>
-    <string name="enter_new_phone_no_kr">Please enter your new phone number</string>
-    <string name="admin_functions_kr">Admin Functions</string>
-    <string name="sim_card_not_admin_kr">The sim card you are using is not allowed to log in as Admin</string>
-    <string name="edit_farmer_kr">Edit Farmer</string>
-    <string name="edit_cow_kr">Edit Cow</string>
-    <string name="admin_kr">Admin</string>
-    <string name="edit_kr">Edit</string>
-    <string name="select_farmer_kr">Select a farmer</string>
-    <string name="select_kr">Select</string>
-    <string name="phone_number_kr">Phone Number</string>
-    <string name="farmer_profile_updated_kr">Farmer\'s profile successfully updated</string>
-    <string name="enter_farmer_name_kr">Please enter farmer\'s name</string>
-    <string name="enter_farmer_mobile_no_kr">Please enter farmer\'s phone number</string>
-    <string name="farm_location_kr">Farm location</string>
-    <string name="rec_farm_loc_kr">Record farm\'s GPS location</string>
-    <string name="not_set_kr">Not set</string>
-    <string name="are_you_in_farmers_farm_kr">Are you currently in the farmer\'s farm?</string>
-    <string name="accuracy_kr">Accuracy</string>
-    <string name="unknown_kr">unknown</string>
-    <string name="filter_farmers_kr">Filter farmers</string>
-    <string name="all_farmers_kr">All farmers</string>
-    <string name="farmers_no_epersonnel_kr">Farmers with no extension personnel</string>
-    <string name="farmers_tied_to_kr">Farmers tied to</string>
-    <string name="super_admin_kr">Super Admin</string>
-    <string name="select_cow_kr">Select a cow</string>
-    <string name="site_kr">Site</string>
-    <string name="is_active_kr">Is active</string>
-    <string-array name="yes_no_kr">
-        <item>No</item>
-        <item>Yes</item>
-    </string-array>
-    <string name="specify_site_kr">Please select a site</string>
 
+    <string name="enter_milk_status_of_cow_kr">Noyanza injisia niva eing\'ombe yikhamwanga</string>
+    <string name="enter_in_calf_status_kr">Noyanza injisia niva eing\'ombe yatila</string>
+    <string name="select_epersonnel_kr">Noyanza chakula ofisa wukhuchendelelanga</string>
+    <string name="unable_to_get_epersonnel_kr">Shikhunyala okhunyola ofisa wokhuchendelelanga tawe.</string>
+    <string name="unable_to_lock_gps_kr">GPS shiyinyolekhanga tawe.Khulatema okhujinyola mushipindi shilondakho</string>
+    <string name="gps_recorded_kr">GPS yandichisivwe</string>
+    <string name="epersonnel_tshoot_kr">Shikhunyala okhunyola ofisa wukhuchendelelanga tawe.Finya \'anyuma\' alafu okalushile okhwandichisia khandi</string>
+    <string name="enter_two_names_kr">Injisia amera kavili</string>
+    <string name="phone_number_not_valid_kr">Enamba yo lusimu yiwinjisie shiyili awene tawe</string>
+    <string name="enter_old_phone_no_kr">Noyanza injisia enamba yiyo yolusimu eikhukhulu</string>
+    <string name="enter_new_phone_no_kr">Noyanza injisia enamba yiyo yolusimu eiyimbia</string>
+    <string name="admin_functions_kr">Admin functions\'</string>
+    <string name="sim_card_not_admin_kr">Esimkadi yolarumishilanga shiyinyala okhufungula \'Admin\' tawe</string>
+    <string name="edit_farmer_kr">Kalushila okhulenjelesia omulimi</string>
+    <string name="edit_cow_kr">Kalushila okhulenjelesia eing\'ombe</string>
+    <string name="admin_kr">Admin\'</string>
+    <string name="edit_kr">Kalushila okhulenjelesia</string>
+    <string name="select_farmer_kr">Chakula omulimi</string>
+    <string name="select_kr">Chakula</string>
+    <string name="phone_number_kr">Enamba yo lusimu</string>
+    <string name="farmer_profile_updated_kr">Amakhuba komulimi kavele awene</string>
+    <string name="enter_farmer_name_kr">Noyanza injisia elira lio omulimi</string>
+    <string name="enter_farmer_mobile_no_kr">Noyanza injisia elira lio omulimi</string>
+    <string name="farm_location_kr">Omukunda kuvele ena</string>
+    <string name="rec_farm_loc_kr">Andichisia e GPS</string>
+    <string name="not_set_kr">Yishili okhulombwa</string>
+    <string name="are_you_in_farmers_farm_kr">Wuvele khumukunda kwomulimi?</string>
+    <string name="accuracy_kr">Kave kamili</string>
+    <string name="unknown_kr">Shiyimanyishe tawe</string>
+    <string name="filter_farmers_kr">Chakula omulimi</string>
+    <string name="all_farmers_kr">Avalimi vosi</string>
+    <string name="farmers_no_epersonnel_kr">Avalimi vakhali nende ofisa wokhuvachendelelela</string>
+    <string name="farmers_tied_to_kr">Avalimi vali nende ofisa wokhuvachendelela</string>
+    <string name="super_admin_kr">Omusinjilisi wa amashini omukali</string>
+    <string name="select_cow_kr">Chakula ei ng\'ombe</string>
+    <string name="site_kr">Avundu womuradi kuli</string>
+    <string name="is_active_kr">Yilakholanga ekasi</string>
+    <string-array name="yes_no_kr">
+        <item>Tawe</item>
+        <item>kario</item>
+    </string-array>
     <string name="save_kr">Save</string>
+    <string name="specify_site_kr">Noyanza chakula avundu wo muradi kuli</string>
+
 </resources>

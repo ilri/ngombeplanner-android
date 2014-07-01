@@ -298,48 +298,50 @@
         <item>In calf</item>
         <item>Not in calf</item>
     </string-array>
-    <string name="enter_milk_status_of_cow_kp">Please enter the status of cow</string>
-    <string name="enter_in_calf_status_kp">Please enter the status of cow</string>
-    <string name="select_epersonnel_kp">Please select an extension personnel</string>
-    <string name="unable_to_get_epersonnel_kp">Unable to fetch extension Personnel</string>
-    <string name="unable_to_lock_gps_kp">GPS location was not obtained. Will try to get it in next screen</string>
-    <string name="gps_recorded_kp">GPS recorded</string>
-    <string name="epersonnel_tshoot_kp">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
-    <string name="enter_two_names_kp">Enter at least two names</string>
-    <string name="phone_number_not_valid_kp">The phone number you entered is not valid</string>
-    <string name="enter_old_phone_no_kp">Please enter your old phone number</string>
-    <string name="enter_new_phone_no_kp">Please enter your new phone number</string>
-    <string name="admin_functions_kp">Admin Functions</string>
-    <string name="sim_card_not_admin_kp">The sim card you are using is not allowed to log in as Admin</string>
-    <string name="edit_farmer_kp">Edit Farmer</string>
-    <string name="edit_cow_kp">Edit Cow</string>
-    <string name="admin_kp">Admin</string>
-    <string name="edit_kp">Edit</string>
-    <string name="select_farmer_kp">Select a farmer</string>
-    <string name="select_kp">Select</string>
-    <string name="phone_number_kp">Phone Number</string>
-    <string name="farmer_profile_updated_kp">Farmer\'s profile successfully updated</string>
-    <string name="enter_farmer_name_kp">Please enter farmer\'s name</string>
-    <string name="enter_farmer_mobile_no_kp">Please enter farmer\'s phone number</string>
-    <string name="farm_location_kp">Farm location</string>
-    <string name="rec_farm_loc_kp">Record farm\'s GPS location</string>
-    <string name="not_set_kp">Not set</string>
-    <string name="are_you_in_farmers_farm_kp">Are you currently in the farmer\'s farm?</string>
-    <string name="accuracy_kp">Accuracy</string>
-    <string name="unknown_kp">unknown</string>
-    <string name="filter_farmers_kp">Filter farmers</string>
-    <string name="all_farmers_kp">All farmers</string>
-    <string name="farmers_no_epersonnel_kp">Farmers with no extension personnel</string>
-    <string name="farmers_tied_to_kp">Farmers tied to</string>
-    <string name="super_admin_kp">Super Admin</string>
-    <string name="select_cow_kp">Select a cow</string>
-    <string name="site_kp">Site</string>
-    <string name="is_active_kp">Is active</string>
+
+    <string name="enter_milk_status_of_cow_kp">Sir kot kekei teta</string>
+    <string name="enter_in_calf_status_kp">Sir kot kotupcher teta</string>
+    <string name="select_epersonnel_kp">Lewen kanetindet</string>
+    <string name="unable_to_get_epersonnel_kp">Makinyor kanetindet</string>
+    <string name="unable_to_lock_gps_kp">Makinyor gps. Tyemei kenyor en\'g tai</string>
+    <string name="gps_recorded_kp">Kakesir gps</string>
+    <string name="epersonnel_tshoot_kp">Makinyor kanetindet eng\' mashinit.tyem iweke leet ak itau siret</string>
+    <string name="enter_two_names_kp">Sir kainaikuk aeng</string>
+    <string name="phone_number_not_valid_kp">Nambaitab simiot nekesir komanyolu</string>
+    <string name="enter_old_phone_no_kp">Sir nambaitab simoitt nekiboishe eng\' tai</string>
+    <string name="enter_new_phone_no_kp">Sir nambaitab simoit nekeboishe ng\'uni</string>
+    <string name="admin_functions_kp">Boishen kanetindet kityoo.</string>
+    <string name="sim_card_not_admin_kp">Nambaitab simet nekeboishe ko makichamchin koboishe kanetindet</string>
+    <string name="edit_farmer_kp">Ilitit yekesirte temindet</string>
+    <string name="edit_cow_kp">Ilitit yekesirte teta</string>
+    <string name="admin_kp">Kanetindet </string>
+    <string name="edit_kp">Ilitit</string>
+    <string name="select_farmer_kp">Lewen temindet</string>
+    <string name="select_kp">Lewen temindet</string>
+    <string name="phone_number_kp">Nambait ab simoit</string>
+    <string name="farmer_profile_updated_kp">Kakilitit sirutikab temindet</string>
+    <string name="enter_farmer_name_kp">Sir kainetab temindet</string>
+    <string name="enter_farmer_mobile_no_kp">Sir nambaitab simoitab temindet</string>
+    <string name="farm_location_kp">Olemi mbaret.</string>
+    <string name="rec_farm_loc_kp">Sir gps nebo mbaret</string>
+    <string name="not_set_kp">Tomo kesir gps</string>
+    <string name="are_you_in_farmers_farm_kp">Imiten mbar</string>
+    <string name="accuracy_kp">Chulaat</string>
+    <string name="unknown_kp">Making\'en</string>
+    <string name="filter_farmers_kp">Pchei temiik</string>
+    <string name="all_farmers_kp">Temiik tugul</string>
+    <string name="farmers_no_epersonnel_kp">Temiik chemakisirchi kanetindet</string>
+    <string name="farmers_tied_to_kp">Kabatik chekokisirchi</string>
+    <string name="super_admin_kp">Kanetindet neoo</string>
+    <string name="select_cow_kp">Lewen teta</string>
+    <string name="site_kp">Oleimi</string>
+    <string name="is_active_kp">Kakobois</string>
     <string-array name="yes_no_kp">
-        <item>No</item>
-        <item>Yes</item>
+        <item>Eshe</item>
+        <item>Iyan</item>
     </string-array>
-    <string name="specify_site_kp">Please select a site</string>
 
     <string name="save_kp">Save</string>
+    <string name="specify_site_kp">Lewen oleiboishe</string>
+
 </resources>
