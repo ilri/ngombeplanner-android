@@ -13,3 +13,11 @@ Building the project
     ./gradlew build 
 
  3. You can also import the Project as a local Android Studios project on your machine   
+
+
+Handling Android Studio's chmod Issues
+---------------------------------------
+
+Recent versions (0.8.9 specifically) arbitrary change file permissions in project. Workaround is to ignore permission changes
+
+    git config core.fileMode false

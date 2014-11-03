@@ -647,12 +647,19 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
             Date today=new Date();
             long milisecondDifference = today.getTime() - dateEntered.getTime();
             long days = milisecondDifference / 86400000;
+
+            String[] eventTypesEN = Locale.getArrayInLocale("cow_event_types", this, Locale.LOCALE_ENGLISH);
+
             if((today.getTime()-dateEntered.getTime())<0)
             {
                 Toast.makeText(this,dateInFuture,Toast.LENGTH_LONG).show();
                 return false;
             }
-            else if(days > 15) {//more than 15 days
+            else if(days > 15 && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {//more than 15 days for other events other than birth
+                Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+            else if(days > 730 && eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {//more than 2 years for births
                 Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
                 return false;
             }
