@@ -526,15 +526,17 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
                     if(thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)) {
                         this.setTitle(Locale.getStringInLocale("calf_registration",this));
                         setAgeFromDate(thisCow.getDateOfBirth());
-                        thisCow.setAge(Integer.parseInt(ageET.getText().toString()));
-                        if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Days")) {
-                            thisCow.setAgeType(Cow.AGE_TYPE_DAY);
-                        }
-                        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Months")) {
-                            thisCow.setAgeType(Cow.AGE_TYPE_MONTH);
-                        }
-                        else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Years")) {
-                            thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
+                        if(ageET.getText().toString().length() > 0){
+                            thisCow.setAge(Integer.parseInt(ageET.getText().toString()));
+                            if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Days")) {
+                                thisCow.setAgeType(Cow.AGE_TYPE_DAY);
+                            }
+                            else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Months")) {
+                                thisCow.setAgeType(Cow.AGE_TYPE_MONTH);
+                            }
+                            else if(ageTypesInEN[ageS.getSelectedItemPosition()].equals("Years")) {
+                                thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
+                            }
                         }
                     }
                 }

@@ -655,11 +655,15 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
                 Toast.makeText(this,dateInFuture,Toast.LENGTH_LONG).show();
                 return false;
             }
-            else if(days > 15 && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {//more than 15 days for other events other than birth
+            else if(days > 15 && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth") && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Dry Off")) {//more than 15 days for other events other than birth and dry off
                 Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
                 return false;
             }
             else if(days > 730 && eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {//more than 2 years for births
+                Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
+                return false;
+            }
+            else if(days > 180 && eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Dry Off")) {//more than 6 months for dry offs
                 Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
                 return false;
             }
