@@ -279,20 +279,35 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
         }
     }
 
+    /**
+     * This method restores text that was in edit text before the activity went to sleep
+     */
     private void restoreEditTextData(){
         Log.i(TAG, "Edit text data restored");
         //incase the activity was hidden partially for a moment, restore what the user had already entered
+        if(nameET.getText().toString().length() == 0)
         nameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, ""));
+        if(earTagNumberET.getText().toString().length() == 0)
         earTagNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, ""));
+        if(ageET.getText().toString().length() == 0)
         ageET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, ""));
+        if(dateOfBirthET.getText().toString().length() == 0)
         dateOfBirthET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, ""));
+        if(breedET.getText().toString().length() == 0)
         breedET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, ""));
+        if(breedACTV.getText().toString().length() == 0)
         breedACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_BREED_OTHER, ""));
+        if(deformityET.getText().toString().length() == 0)
         deformityET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, ""));
+        if(strawNumberET.getText().toString().length() == 0)
         strawNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, ""));
+        if(damACTV.getText().toString().length() == 0)
         damACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, ""));
+        if(sireACTV.getText().toString().length() == 0)
         sireACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, ""));
+        if(embryoNumberET.getText().toString().length() == 0)
         embryoNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, ""));
+        if(countryOfOriginACTV.getText().toString().length() == 0)
         countryOfOriginACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, ""));
     }
 
@@ -378,24 +393,26 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
                     for(int i = 0; i < sexInEN.length; i++) {
                         if(sexInEN[i].equals("Female") && thisCow.getSex().equals(Cow.SEX_FEMALE)) {
                             sexS.setSelection(i);
-                            toggleFemaleCowViewsVisibility();
-                            String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
-                            String[] inCalfArrayInEN = Locale.getArrayInLocale("cow_in_calf_array", this, Locale.LOCALE_ENGLISH);
-                            for(int j = 0; j < milkingStatusInEN.length; j++){
-                                Log.d(TAG, " ********** Saved milking status = "+thisCow.getMilkingStatus());
-                                if(milkingStatusInEN[j].equals(thisCow.getMilkingStatus())){
-                                    milkingStatusS.setSelection(j);
-                                }
-                            }
-                            for(int j = 0; j < inCalfArrayInEN.length; j++){
-                                if(inCalfArrayInEN[j].equals(Cow.COW_IN_CALF) && thisCow.isInCalf()){
-                                    inCalfStatusS.setSelection(j);
-                                }
-                                else if(inCalfArrayInEN[j].equals(Cow.COW_NOT_IN_CALF) && !thisCow.isInCalf()){
-                                    inCalfStatusS.setSelection(j);
-                                }
-                            }
+                            toggleCowViewsVisibility();
 
+                            if(!thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){
+                                String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
+                                String[] inCalfArrayInEN = Locale.getArrayInLocale("cow_in_calf_array", this, Locale.LOCALE_ENGLISH);
+                                for(int j = 0; j < milkingStatusInEN.length; j++){
+                                    Log.d(TAG, " ********** Saved milking status = "+thisCow.getMilkingStatus());
+                                    if(milkingStatusInEN[j].equals(thisCow.getMilkingStatus())){
+                                        milkingStatusS.setSelection(j);
+                                    }
+                                }
+                                for(int j = 0; j < inCalfArrayInEN.length; j++){
+                                    if(inCalfArrayInEN[j].equals(Cow.COW_IN_CALF) && thisCow.isInCalf()){
+                                        inCalfStatusS.setSelection(j);
+                                    }
+                                    else if(inCalfArrayInEN[j].equals(Cow.COW_NOT_IN_CALF) && !thisCow.isInCalf()){
+                                        inCalfStatusS.setSelection(j);
+                                    }
+                                }
+                            }
                         }
                         else if(sexInEN[i].equals("Male") && thisCow.getSex().equals(Cow.SEX_MALE)) {
                             sexS.setSelection(i);
@@ -934,6 +951,28 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
         breedDialog.show();
     }
 
+    /**
+     *This method updates views that need to be changed when it's a calf being registered
+     */
+    private void setCalfMode(){
+        nameTV.setText(Locale.getStringInLocale("calf_name", this));
+        earTagNumberTV.setText(Locale.getStringInLocale("calf_etn", this));
+
+        milkingStatusTV.setVisibility(TextView.GONE);
+        milkingStatusS.setVisibility(Spinner.GONE);
+        inCalfStatusTV.setVisibility(TextView.GONE);
+        inCalfStatusS.setVisibility(Spinner.GONE);
+
+        ageOrDOBHintTV.setVisibility(TextView.GONE);
+        ageTV.setVisibility(TextView.GONE);
+        ageET.setVisibility(EditText.GONE);
+        ageS.setVisibility(Spinner.GONE);
+
+        dateOfBirthET.setEnabled(false);
+        dateOfBirthTV.setTextColor(this.getResources().getColor(R.color.text_input_disabled_color));
+        dateOfBirthET.setTextColor(this.getResources().getColor(R.color.text_input_disabled_color));
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
@@ -1018,14 +1057,15 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
             toggleSireOwnerVisibility();
         }
         else if(parent == sexS){
-            toggleFemaleCowViewsVisibility();
+            toggleCowViewsVisibility();
         }
     }
 
-    private void toggleFemaleCowViewsVisibility(){
-        Log.d(TAG, "Toggling female views");
+    private void toggleCowViewsVisibility(){
+        Log.d(TAG, "Toggling cow views");
         String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
         if(sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){
+            Log.d(TAG, "Cow is female");
             milkingStatusS.setVisibility(Spinner.VISIBLE);
             milkingStatusTV.setVisibility(TextView.VISIBLE);
 
@@ -1033,11 +1073,17 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
             inCalfStatusTV.setVisibility(TextView.VISIBLE);
         }
         else{
+            Log.d(TAG, "Cow is male");
             milkingStatusS.setVisibility(Spinner.GONE);
             milkingStatusTV.setVisibility(TextView.GONE);
 
             inCalfStatusS.setVisibility(Spinner.GONE);
             inCalfStatusTV.setVisibility(TextView.GONE);
+        }
+
+        if(thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){
+            Log.d(TAG, "Animal is a calf");
+            setCalfMode();
         }
     }
 
@@ -1132,7 +1178,7 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
         }
 
         String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
-        if(sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){
+        if(!thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION) && sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){//only applies for female adults
             String[] inCalfArray = Locale.getArrayInLocale("cow_in_calf_array",this);
             String[] milkingStatusArray = Locale.getArrayInLocale("cow_status_array",this);
             if(inCalfStatusS.getSelectedItemPosition() == -1 || inCalfArray[inCalfStatusS.getSelectedItemPosition()].length() == 0){
@@ -1250,7 +1296,7 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
         thisCow.setOtherDeformity(specifyET.getText().toString());
         thisCow.setCountryOfOrigin(countryOfOriginACTV.getText().toString());
         String[] sexInEN = Locale.getArrayInLocale("sex_array",this,Locale.LOCALE_ENGLISH);
-        if(sexInEN[sexS.getSelectedItemPosition()].equals("Female")) {
+        if(sexInEN[sexS.getSelectedItemPosition()].equals("Female") && !thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)) {//adult females
             thisCow.setSex(Cow.SEX_FEMALE);
 
             String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
@@ -1262,6 +1308,10 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
             else{
                 thisCow.setInCalf(false);
             }
+        }
+        else if(sexInEN[sexS.getSelectedItemPosition()].equals("Female") && thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){//female calves
+            thisCow.setInCalf(false);
+            thisCow.setMilkingStatus(Cow.MILKING_S_HEIFER);
         }
         else if(sexInEN[sexS.getSelectedItemPosition()].equals("Male")) {
             thisCow.setSex(Cow.SEX_MALE);

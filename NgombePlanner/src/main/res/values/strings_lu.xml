@@ -345,4 +345,10 @@
     <string name="save_lu">Save</string>
     <string name="specify_site_lu">Yaula womuradi kunyolekha.</string>
 
+    <string name="event_date_lu">Event Date</string>
+    <string name="birth_date_lu">Date of Birth</string>
+    <string name="calf_name_lu">Calf\'s Name</string>
+    <string name="calf_etn_lu">Calf\'s Ear Tag Number</string>
+    <string name="birth_event_too_old_lu">You cannot register a calving that occurred more than 2 years ago</string>
+    <string name="dry_off_event_too_old_lu">You cannot add a dry off event that occurred more than 6 months ago</string>
 </resources>

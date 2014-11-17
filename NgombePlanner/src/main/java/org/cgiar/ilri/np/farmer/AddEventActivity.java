@@ -52,7 +52,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
 
     public static final String KEY_MODE="mode";
     public static final String MODE_SERVICING="Servicing";
-    public static final String MODE_CALVING="Birth";
+    public static final String MODE_CALVING="Calving";
     public static final String KEY_SERVICING_TYPE="servicingType";
 
     private EditText phantomET;
@@ -261,7 +261,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
         if(presetMode.equals(MODE_CALVING)){
             String[] eventTypesInEN = Locale.getArrayInLocale("cow_event_types",this);
             for(int i = 0; i < eventTypesInEN.length; i++){
-                if(eventTypesInEN[i].equals("Birth")){
+                if(eventTypesInEN[i].equals("Calving")){//**
                     eventTypeS.setSelection(i);
                     break;
                 }
@@ -270,6 +270,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
             eventTypeSelected();
 
             this.setTitle(Locale.getStringInLocale("calving",this));
+            dateTV.setText(Locale.getStringInLocale("birth_date",this));
             eventTypeTV.setVisibility(TextView.GONE);
             eventTypeS.setVisibility(Spinner.GONE);
             servicingTV.setVisibility(TextView.GONE);
@@ -337,7 +338,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
     public void initTextInViews() {
         setTitle(Locale.getStringInLocale("add_an_event",this));
         cowIdentifierTV.setText(Locale.getStringInLocale("cow",this));
-        dateTV.setText(Locale.getStringInLocale("date",this));
+        dateTV.setText(Locale.getStringInLocale("event_date",this));
         eventTypeTV.setText(Locale.getStringInLocale("event",this));
 
         int eventTypeArrayID = Locale.getArrayIDInLocale("cow_event_types",this);
@@ -439,7 +440,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
 
     private void eventTypeSelected(){
         okayB.setText(Locale.getStringInLocale("okay",this));
-        dateTV.setText(Locale.getStringInLocale("date",this));
+        dateTV.setText(Locale.getStringInLocale("event_date",this));
         eventSubtypeTV.setVisibility(TextView.GONE);
         eventSubtypeS.setVisibility(Spinner.GONE);
         strawNumberTV.setVisibility(TextView.GONE);
@@ -467,8 +468,9 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
         /*liveBirthsTV.setVisibility(TextView.GONE);
         liveBirthsET.setVisibility(EditText.GONE);*/
         String[] eventTypesEN = Locale.getArrayInLocale("cow_event_types", this, Locale.LOCALE_ENGLISH);
-        if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {
+        if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Calving")) {//**
             birthEventSelected();
+            dateTV.setText(Locale.getStringInLocale("birth_date", this));
             eventSubtypeTV.setVisibility(TextView.VISIBLE);
             eventSubtypeS.setVisibility(Spinner.VISIBLE);
             servicingTV.setVisibility(TextView.VISIBLE);
@@ -655,16 +657,16 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
                 Toast.makeText(this,dateInFuture,Toast.LENGTH_LONG).show();
                 return false;
             }
-            else if(days > 15 && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth") && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Dry Off")) {//more than 15 days for other events other than birth and dry off
+            else if(days > 15 && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Calving") && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Dry Off")) {//more than 15 days for other events other than birth and dry off
                 Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
                 return false;
             }
-            else if(days > 730 && eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {//more than 2 years for births
-                Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
+            else if(days > 730 && eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Calving")) {//more than 2 years for births
+                Toast.makeText(this,Locale.getStringInLocale("birth_event_too_old",this),Toast.LENGTH_LONG).show();
                 return false;
             }
             else if(days > 180 && eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Dry Off")) {//more than 6 months for dry offs
-                Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
+                Toast.makeText(this,Locale.getStringInLocale("dry_off_event_too_old",this),Toast.LENGTH_LONG).show();
                 return false;
             }
             else {
@@ -692,7 +694,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
             String[] eventTypes = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
             String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
             String[] eventSubtypes = Locale.getArrayInLocale("birth_types",this,Locale.LOCALE_ENGLISH);
-            if(selectedEvent.equals("Birth") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
+            if(selectedEvent.equals("Calving") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
                 AlertDialog cowRegistrationAlertDialog = constructCalfRegistrationDialog();
                 cowRegistrationAlertDialog.show();
             }
@@ -791,6 +793,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
                             }
                             //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
 
+                            jsonObject.put("eventDate", dateET.getText().toString());
                             thisCalf.setPiggyBack(jsonObject.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();

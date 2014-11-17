@@ -165,7 +165,7 @@
     <string name="enter_your_mobile_no_sw">Tafadhali nigiza namba yako ya simu</string>
     <string name="enter_extension_personnel_name_sw">Tafadhali ingiza jina kamili ya afisaa wa ukulima</string>
     <string name="enter_ear_tag_number_sw">Tafadhali ingiza namba ya Sikio ya ngombe</string>
-    <string name="enter_ear_tag_no_or_name_sw">Tafadhali ingiza jina au namba ya Sikio ya ngombe</string>
+    <string name="enter_ear_tag_no_or_name_sw">Tafadhali ingiza jina au namba ya Sikio</string>
     <string name="enter_straw_number_sw">Ingiza namba ya mpira ya mbegu</string>
     <string name="enter_embryo_number_sw">Tafadhali ingiza namba ya kiini tete</string>
     <string name="add_an_event_sw">Ongeza tukio</string>
@@ -343,4 +343,10 @@
     <string name="save_sw">Save</string>
     <string name="specify_site_sw">Tafadhali chagua eneo</string>
 
+    <string name="event_date_sw">Event Date</string>
+    <string name="birth_date_sw">Date of Birth</string>
+    <string name="calf_name_sw">Calf\'s Name</string>
+    <string name="calf_etn_sw">Calf\'s Ear Tag Number</string>
+    <string name="birth_event_too_old_sw">You cannot register a calving that occurred more than 2 years ago</string>
+    <string name="dry_off_event_too_old_sw">You cannot add a dry off event that occurred more than 6 months ago</string>
 </resources>

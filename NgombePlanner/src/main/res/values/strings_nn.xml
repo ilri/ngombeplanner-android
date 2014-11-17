@@ -343,4 +343,10 @@
     <string name="save_nn">Save</string>
     <string name="specify_site_nn">Lewen oleiboishe</string>
 
+    <string name="event_date_nn">Event Date</string>
+    <string name="birth_date_nn">Date of Birth</string>
+    <string name="calf_name_nn">Calf\'s Name</string>
+    <string name="calf_etn_nn">Calf\'s Ear Tag Number</string>
+    <string name="birth_event_too_old_nn">You cannot register a calving that occurred more than 2 years ago</string>
+    <string name="dry_off_event_too_old_nn">You cannot add a dry off event that occurred more than 6 months ago</string>
 </resources>

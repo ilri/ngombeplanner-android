@@ -342,4 +342,11 @@
     <string name="save_kr">Save</string>
     <string name="specify_site_kr">Noyanza chakula avundu wo muradi kuli</string>
 
+    <string name="event_date_kr">Event Date</string>
+    <string name="birth_date_kr">Date of Birth</string>
+    <string name="calf_name_kr">Calf\'s Name</string>
+    <string name="calf_etn_kr">Calf\'s Ear Tag Number</string>
+    <string name="birth_event_too_old_kr">You cannot register a calving that occurred more than 2 years ago</string>
+    <string name="dry_off_event_too_old_kr">You cannot add a dry off event that occurred more than 6 months ago</string>
+
 </resources>
