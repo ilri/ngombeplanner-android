@@ -21,6 +21,7 @@ Android.iml
 local.properties
 
 #Intellij IDEA files
+.idea
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/datasrouces.xml
