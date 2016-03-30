@@ -1,0 +1,885 @@
+From ccf5766ce30424a135d6c3832653609aba7c9060 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Tue, 27 May 2014 20:17:32 +0300
+Subject: [PATCH 169/213] Version 0.9.4: Splitting of common Breeds, No
+ deformity option, Translation of arrays and strings
+
+In cow registration activity, the breeds dialog now shows only
+popular breeds. Other breeds can be entered by selecting other breed
+in the breed dialog and inputing the breed in the autocompletetextview
+that appears (Same logic as coutries)
+
+No deformity option added to deformity dialog
+
+New methods added to Locale class for tranlation of Strings and array
+of strings
+---
+ MistroFarmer/src/main/AndroidManifest.xml          |   4 +-
+ .../mistro/farmer/CowRegistrationActivity.java     | 215 +++++++++++++++------
+ .../ilri/mistro/farmer/backend/DataHandler.java    |   1 +
+ .../cgiar/ilri/mistro/farmer/backend/Locale.java   |  66 +++++++
+ .../org/cgiar/ilri/mistro/farmer/carrier/Cow.java  |  79 ++++++--
+ .../main/res/layout/activity_cow_registration.xml  |  17 ++
+ .../src/main/res/layout/dialog_deformity.xml       |   8 +-
+ MistroFarmer/src/main/res/values/strings_en.xml    |   6 +
+ MistroFarmer/src/main/res/values/strings_kl.xml    |   1 +
+ MistroFarmer/src/main/res/values/strings_kr.xml    |   1 +
+ MistroFarmer/src/main/res/values/strings_lh.xml    |   1 +
+ MistroFarmer/src/main/res/values/strings_sw.xml    |   1 +
+ 12 files changed, 319 insertions(+), 81 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index f7a055e..1976cf1 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+-    android:versionCode="3"
+-    android:versionName="0.9.3" >
++    android:versionCode="4"
++    android:versionName="0.9.4" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index 3035634..eda2084 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -1,11 +1,9 @@
+ package org.cgiar.ilri.mistro.farmer;
+ 
+-import android.app.AlertDialog;
+ import android.app.DatePickerDialog;
+ import android.app.Dialog;
+ import android.app.ProgressDialog;
+ import android.content.Context;
+-import android.content.DialogInterface;
+ import android.content.Intent;
+ import android.location.Criteria;
+ import android.location.Location;
+@@ -13,16 +11,18 @@ import android.location.LocationListener;
+ import android.location.LocationManager;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
+-import android.provider.Settings;
+ import android.telephony.TelephonyManager;
+ import android.util.Log;
+ import android.util.SparseBooleanArray;
+ import android.view.KeyEvent;
+ import android.view.View;
++import android.view.ViewGroup;
+ import android.widget.AdapterView;
+ import android.widget.ArrayAdapter;
+ import android.widget.AutoCompleteTextView;
+ import android.widget.Button;
++import android.widget.CheckBox;
++import android.widget.CompoundButton;
+ import android.widget.DatePicker;
+ import android.widget.EditText;
+ import android.widget.ListView;
+@@ -53,7 +53,9 @@ import java.util.Date;
+ import java.util.GregorianCalendar;
+ import java.util.List;
+ 
+-public class CowRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener, LocationListener
++public class CowRegistrationActivity extends SherlockActivity implements MistroActivity,
++        View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,
++        Spinner.OnItemSelectedListener, View.OnFocusChangeListener, LocationListener, CheckBox.OnCheckedChangeListener
+ {
+     private boolean cacheData;
+ 
+@@ -74,6 +76,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     private EditText dateOfBirthET;
+     private TextView breedTV;
+     private EditText breedET;
++    private TextView anotherBreedTV;
++    private AutoCompleteTextView breedACTV;
+     private TextView sexTV;
+     private Spinner sexS;
+     private TextView deformityTV;
+@@ -103,6 +107,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     private Dialog deformityDialog;
+     private ScrollView deformitySV;
+     private ListView deformityLV;
++    private CheckBox noDeformityCB;
+     private EditText specifyET;
+     private Button dialogDeformityOkayB;
+ 
+@@ -110,6 +115,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     private int numberOfCows;
+     private int selectedBreeds;
+     private String[] breeds;
++    private String[] uncommonBreeds;
+     private String[] deformities;
+     private String deformityOSpecifyText;
+     private Cow thisCow;
+@@ -153,6 +159,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         breedET=(EditText)this.findViewById(R.id.breed_et);
+         breedET.setOnFocusChangeListener(this);
+         breedET.setOnClickListener(this);
++        anotherBreedTV = (TextView)this.findViewById(R.id.another_breed_tv);
++        breedACTV = (AutoCompleteTextView)this.findViewById(R.id.breed_actv);
+         sexTV=(TextView)this.findViewById(R.id.sex_tv);
+         sexS=(Spinner)this.findViewById(R.id.sex_s);
+         deformityTV=(TextView)this.findViewById(R.id.deformity_tv);
+@@ -203,6 +211,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         deformityLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+         deformityLV.setOnItemClickListener(this);
+         specifyET=(EditText)deformityDialog.findViewById(R.id.specify_et);
++        noDeformityCB = (CheckBox)deformityDialog.findViewById(R.id.no_deformity_cb);
++        noDeformityCB.setOnCheckedChangeListener(this);
+         dialogDeformityOkayB =(Button) deformityDialog.findViewById(R.id.dialog_deformity_okay_b);
+         dialogDeformityOkayB.setOnClickListener(this);
+ 
+@@ -227,27 +237,34 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+ 
+     private void cacheEditTextData(){
+         if(cacheData) {
++            Log.i(TAG, "Edit text data cached");
+             //Incase the activity is hidden partially/fully save the data in edittexts
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, nameET.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, earTagNumberET.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, ageET.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, dateOfBirthET.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, breedET.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED_OTHER, breedACTV.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, deformityET.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, strawNumberET.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, damACTV.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, embryoNumberET.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, countryOfOriginACTV.getText().toString());
+         }
++        else{
++            Log.i(TAG, "Edit text data NOT cached");
++        }
+     }
+ 
+     private void restoreEditTextData(){
++        Log.i(TAG, "Edit text data restored");
+         //incase the activity was hidden partially for a moment, restore what the user had already entered
+         nameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, ""));
+         earTagNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, ""));
+         ageET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, ""));
+         dateOfBirthET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, ""));
+         breedET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, ""));
++        breedACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_BREED_OTHER, ""));
+         deformityET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, ""));
+         strawNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, ""));
+         damACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, ""));
+@@ -256,11 +273,14 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     }
+ 
+     private void clearEditTextDataCache(){
++        Log.i(TAG, "Edit text cache cleared");
++
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED_OTHER, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, "");
+@@ -285,8 +305,6 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     protected void onResume() {
+         super.onResume();
+ 
+-        restoreEditTextData();
+-
+         Bundle bundle=this.getIntent().getExtras();
+         if(bundle != null) {
+             farmer=bundle.getParcelable(Farmer.PARCELABLE_KEY);
+@@ -312,7 +330,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                             ageS.setSelection(i);
+                         }
+                     }
+-                    List<String> savedBreeds=thisCow.getBreeds();
++                    List<String> savedBreeds=thisCow.getBreeds(this);//returns breeds in current locale
+                     String breed="";
+                     for (int i=0;i<savedBreeds.size();i++) {
+                         if(i==0) {
+@@ -321,6 +339,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                         else {
+                             breed=breed+", "+savedBreeds.get(i);
+                         }
++
++                        if(savedBreeds.get(i).equals(breeds[breeds.length-1])){
++                            breedACTV.setText(thisCow.getOtherBreed(this));//returns other breed in current locale
++                        }
+                     }
+                     breedET.setText(breed);
+                     String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
+@@ -332,7 +354,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                             sexS.setSelection(i);
+                         }
+                     }
+-                    List<String> savedDeformities=thisCow.getDeformities();
++                    List<String> savedDeformities=thisCow.getDeformities(this);//returns deformities in current locale
+                     String deformity="";
+                     for (int i=0;i<savedDeformities.size();i++) {
+                         if(i==0) {
+@@ -460,6 +482,11 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             }
+ 
+         }
++
++        if(nameET.getText().toString().trim().length() == 0 && earTagNumberET.getText().toString().trim().length() == 0){
++            //means that when the activity paused the last time it did not save data to the cow object. Try to get data from shared preferences
++            restoreEditTextData();
++        }
+     }
+ 
+     private void getGPSCoordinates() {
+@@ -508,6 +535,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         }
+         dateOfBirthTV.setText(Locale.getStringInLocale("date_of_birth",this));
+         breedTV.setText(Locale.getStringInLocale("breed",this));
++        anotherBreedTV.setText(Locale.getStringInLocale("extra_breed", this));
++        breedACTV.setHint(Locale.getStringInLocale("specify_breed_here", this));
+         sexTV.setText(" * "+Locale.getStringInLocale("sex",this));
+         int sexArrayID = Locale.getArrayIDInLocale("sex_array",this);
+         if(sexArrayID!=0) {
+@@ -538,7 +567,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         }
+ 
+         breedDialog.setTitle(Locale.getStringInLocale("breed",this));
+-        breeds=Locale.getArrayInLocale("breeds_array",this);
++        breeds=Locale.getArrayInLocale("c_breeds_array",this);
++        uncommonBreeds=Locale.getArrayInLocale("uc_breeds_array",this);
+         if(breeds==null) {
+             breeds = new String[1];
+             breeds[0] = "";
+@@ -559,6 +589,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                 breedDialogSV.getLayoutParams().height = totalBreedSVHeight + dialogBreedOkayB.getLayoutParams().height;
+             }
+         }
++        ArrayAdapter<String> uncommonBreedsArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, uncommonBreeds);
++        breedACTV.setAdapter(uncommonBreedsArrayAdapter);
++
+ 
+         deformityDialog.setTitle(Locale.getStringInLocale("deformity",this));
+         deformities=Locale.getArrayInLocale("deformities_array",this);
+@@ -568,7 +601,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         }
+         ArrayAdapter<String> deformityArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,deformities);
+         deformityLV.setAdapter(deformityArrayAdapter);
+-        specifyET.setHint(Locale.getStringInLocale("specify",this));
++        specifyET.setHint(Locale.getStringInLocale("specify", this));
++        noDeformityCB.setText(Locale.getStringInLocale("no_deformity", this));
+         dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
+         ArrayAdapter countryArrayAdapter = ArrayAdapter.createFromResource(this,R.array.countries,android.R.layout.select_dialog_item);
+         countryOfOriginACTV.setAdapter(countryArrayAdapter);
+@@ -579,10 +613,21 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             int list_child_item_height = listItem.getLayoutParams().height + deformityLV.getDividerHeight();//item height
+             totalDeformitySVHeight += list_child_item_height; //
+         }
++
++        Log.d(TAG, "Height of no deformity checkbox = "+String.valueOf(noDeformityCB.getLayoutParams().height));
++        Log.d(TAG, "Margin top of deformity checkbox = "+String.valueOf(((ViewGroup.MarginLayoutParams)noDeformityCB.getLayoutParams()).topMargin));
++
+         if(totalDeformitySVHeight > 0){
+             deformityLV.getLayoutParams().height = totalDeformitySVHeight;
+-            if(deformitySV.getLayoutParams().height > (totalDeformitySVHeight + specifyET.getLayoutParams().height + dialogDeformityOkayB.getLayoutParams().height)){
+-                deformitySV.getLayoutParams().height= totalDeformitySVHeight + specifyET.getLayoutParams().height + dialogDeformityOkayB.getLayoutParams().height;
++            int svChildrenHeight = totalDeformitySVHeight +
++                    specifyET.getLayoutParams().height +
++                    noDeformityCB.getLayoutParams().height +
++                    ((ViewGroup.MarginLayoutParams)noDeformityCB.getLayoutParams()).topMargin +
++                    dialogDeformityOkayB.getLayoutParams().height +
++                    ((ViewGroup.MarginLayoutParams)dialogDeformityOkayB.getLayoutParams()).topMargin;
++
++            if(deformitySV.getLayoutParams().height > svChildrenHeight){
++                deformitySV.getLayoutParams().height= svChildrenHeight;
+             }
+         }
+ 
+@@ -791,6 +836,18 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                 selectedBreeds--;
+                 Toast.makeText(this,Locale.getStringInLocale("maximum_of_four_breeds",this),Toast.LENGTH_LONG).show();
+             }
++
++            if(position==breeds.length - 1){//the last item should be other breed
++                if(breedLV.isItemChecked(position)){
++                    breedACTV.setVisibility(AutoCompleteTextView.VISIBLE);
++                    anotherBreedTV.setVisibility(TextView.VISIBLE);
++                }
++                else{
++                    breedACTV.setVisibility(AutoCompleteTextView.GONE);
++                    breedACTV.setText("");
++                    anotherBreedTV.setVisibility(TextView.GONE);
++                }
++            }
+         }
+         else if(parent==deformityLV) {
+             if(position==deformities.length-1){ //last deformity. should be other
+@@ -802,6 +859,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                     specifyET.setText("");
+                 }
+             }
++
++            noDeformityCB.setChecked(false);
+         }
+     }
+ 
+@@ -904,6 +963,64 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             Toast.makeText(this,Locale.getStringInLocale("enter_ear_tag_no_or_name",this),Toast.LENGTH_LONG).show();
+             return false;
+         }
++
++        if(dateOfBirthET.getText().toString().trim().equals("") && ageET.getText().toString().trim().equals("")){
++            Toast.makeText(this, Locale.getStringInLocale("enter_age_or_dob", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++        else if (!dateOfBirthET.getText().toString().trim().equals("") && !ageET.getText().toString().trim().equals("")) {//both dob and age are set
++            String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array", this, Locale.LOCALE_ENGLISH);
++            String ageType = ageTypesInEN[ageS.getSelectedItemPosition()];
++            float unitAge = 0;
++            if (ageType.equals("Years")) {
++                unitAge = 31557600000L;
++            } else if (ageType.equals("Months")) {
++                unitAge = 2628000000L;
++            } else if (ageType.equals("Days")) {
++                unitAge = 86400000L;
++            }
++
++            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
++
++            try {
++                Date enteredDate = simpleDateFormat.parse(dateOfBirthET.getText().toString());
++                long enteredDateMs = enteredDate.getTime();
++                long ageMs = (long) (new Date().getTime() - (Integer.parseInt(ageET.getText().toString()) * unitAge));
++                long msDiff = Math.abs(ageMs - enteredDateMs);
++                float unitDiff = msDiff / unitAge;
++                if (unitDiff > 1) {
++                    Toast.makeText(this, Locale.getStringInLocale("age_diff_from_dob", this), Toast.LENGTH_LONG).show();
++                    return false;
++                }
++            } catch (ParseException e) {
++                e.printStackTrace();
++            }
++        }
++
++        if(breedACTV.getVisibility() == AutoCompleteTextView.VISIBLE){//user selected other breed in breedET
++            if(breedACTV.getText().toString().trim().length() == 0){//user did not specify other breed
++                Toast.makeText(this, Locale.getStringInLocale("enter_breed", this), Toast.LENGTH_LONG).show();
++                breedACTV.requestFocus();
++                return false;
++            }
++            else{
++                String[] uncommonBreedsInEN = Locale.getArrayInLocale("uc_breeds_array", this, Locale.LOCALE_ENGLISH);
++                String enteredBreed = breedACTV.getText().toString();
++                boolean breedKnown = false;
++                for(int i = 0; i < uncommonBreedsInEN.length; i++){
++                    if(uncommonBreedsInEN[i].equals(enteredBreed)){
++                        breedKnown = true;
++                    }
++                }
++
++                if(!breedKnown){
++                    Toast.makeText(this, Locale.getStringInLocale("breed_unknown", this), Toast.LENGTH_LONG).show();
++                    breedACTV.requestFocus();
++                    return false;
++                }
++            }
++        }
++
+         if(countryOfOriginACTV.getText().toString().length() > 0) {
+             String[] countries = this.getResources().getStringArray(R.array.countries);
+             boolean countryFound = false;
+@@ -917,59 +1034,13 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                 Toast.makeText(this,Locale.getStringInLocale("country_not_found",this),Toast.LENGTH_LONG).show();
+                 return false;
+             }
+-            /*if(!dateOfBirthET.getText().toString().trim().equals("") && !ageET.getText().toString().trim().equals("")){
+-                String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array",this,Locale.LOCALE_ENGLISH);
+-                String ageType = ageTypesInEN[ageS.getSelectedItemPosition()];
+-                float unitAge = 0;
+-                if(ageType.equals("Years")){
+-                    unitAge = 31557600000L;
+-                }
+-                else if(ageType.equals("Months")){
+-                    unitAge = 2628000000L;
+-                }
+-                else if(ageType.equals("Days")){
+-                    unitAge = 86400000L;
+-                }
+-
+-                SimpleDateFormat simpleDateFormat=new SimpleDateFormat(dateFormat);
+-
+-                try
+-                {
+-                    Date enteredDate=simpleDateFormat.parse(dateOfBirthET.getText().toString());
+-                    long enteredDateMs = enteredDate.getTime();
+-                    long  ageMs = (long)(new Date().getTime() - (Integer.parseInt(ageET.getText().toString())*unitAge));
+-                    long msDiff = Math.abs(ageMs - enteredDateMs);
+-                    float unitDiff = msDiff / unitAge;
+-                    if(unitDiff > 1){
+-                        Toast.makeText(this, Locale.getStringInLocale("age_diff_from_dob",this),Toast.LENGTH_LONG).show();
+-                        return false;
+-                    }
+-                }
+-                catch (ParseException e)
+-                {
+-                    e.printStackTrace();
+-                }
+-            }*/
+-
+-            if(dateOfBirthET.getText().toString().trim().equals("") && ageET.getText().toString().trim().equals("")){
+-                Toast.makeText(this, Locale.getStringInLocale("enter_age_or_dob", this), Toast.LENGTH_LONG).show(); 
+-                return false;
+-            }
+         }
++
+         return true;
+     }
+ 
+     private void cacheThisCow() {
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, "");
++        clearEditTextDataCache();
+ 
+         if(thisCow==null) {
+             thisCow=new Cow(true);
+@@ -992,9 +1063,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             thisCow.setAgeType(Cow.AGE_TYPE_YEAR);
+         }
+         thisCow.setDateOfBirth(dateOfBirthET.getText().toString());
+-        thisCow.setBreeds(breedET.getText().toString().split(", "));
+-        thisCow.setDeformities(deformityET.getText().toString().split(", "));
+-        String[] selectedDeformities = deformityET.getText().toString().split(", ");
++        thisCow.setBreeds(breedET.getText().toString().split(", "), this);
++        thisCow.setOtherBreed(this, breedACTV.getText().toString());
++        thisCow.setDeformities(deformityET.getText().toString().split(", "), this);
+         thisCow.setOtherDeformity(specifyET.getText().toString());
+         thisCow.setCountryOfOrigin(countryOfOriginACTV.getText().toString());
+         String[] sexInEN = Locale.getArrayInLocale("sex_array",this,Locale.LOCALE_ENGLISH);
+@@ -1129,6 +1200,24 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+ 
+     }
+ 
++    @Override
++    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
++        if(buttonView.equals(noDeformityCB)){
++            if(isChecked){
++                deformityLV.clearChoices();
++                ArrayAdapter<String> deformityArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,deformities);
++                deformityLV.setAdapter(deformityArrayAdapter);
++                specifyET.setVisibility(EditText.GONE);
++                specifyET.setText("");
++
++                deformityET.setHint(Locale.getStringInLocale("no_deformity", this));
++            }
++            else{
++                deformityET.setHint("");
++            }
++        }
++    }
++
+     private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,String> {
+         private ProgressDialog progressDialog;
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+index 269bd34..b8324dd 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+@@ -103,6 +103,7 @@ public class DataHandler
+     public static final String SP_KEY_CRA_AGE = "cowRegistrationActivityAge";
+     public static final String SP_KEY_CRA_DATE_OF_BIRTH = "cowRegistrationActivityDateOfBirth";
+     public static final String SP_KEY_CRA_BREED = "cowRegistrationActivityBreed";
++    public static final String SP_KEY_CRA_BREED_OTHER = "cowRegistrationActivityOtherBreed";
+     public static final String SP_KEY_CRA_DEFORMITY = "cowRegistrationActivityDeformity";
+     public static final String SP_KEY_CRA_STRAW_NUMBER = "cowRegistrationActivityStrawNumber";
+     public static final String SP_KEY_CRA_DAM = "cowRegistrationActivityDam";
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
+index 14e659c..616f767 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
+@@ -93,6 +93,72 @@ public class Locale {
+         return value;
+     }
+ 
++    public static String[] translateArrayToEnglish(Context context, String arrayName, String[] arrayInLocale){
++        if(arrayInLocale != null){
++            String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, Locale.LOCALE_ENGLISH);
++            String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
++
++            String[] translatedArray = new String[arrayInLocale.length];
++            for(int i = 0; i < arrayInLocale.length; i++){
++                for(int j = 0; j < allStringsInLocale.length; j++){
++                    if(arrayInLocale[i].equals(allStringsInLocale[j])){
++                        translatedArray[i] = allStringsInEN[j];
++                    }
++                }
++            }
++
++            return translatedArray;
++        }
++        return null;
++    }
++
++    public static String[] translateArrayToLocale(Context context, String arrayName, String[] arrayInEN){
++        if(arrayInEN != null){
++            String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, Locale.LOCALE_ENGLISH);
++            String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
++
++            String[] translatedArray = new String[arrayInEN.length];
++            for(int i = 0; i < arrayInEN.length; i++){
++                for(int j = 0; j < allStringsInEN.length; j++){
++                    if(arrayInEN[i].equals(allStringsInEN[j])){
++                        translatedArray[i] = allStringsInLocale[j];
++                    }
++                }
++            }
++
++            return translatedArray;
++        }
++        return null;
++    }
++
++    public static String translateStringToEnglish(Context context, String arrayName, String string){
++        if(string != null){
++            String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
++            String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, LOCALE_ENGLISH);
++
++            for(int i = 0; i < allStringsInLocale.length; i++){
++                if(string.equals(allStringsInLocale[i])){
++                    return allStringsInEN[i];
++                }
++            }
++        }
++        return null;
++    }
++
++    public static String translateStringToLocale(Context context, String arrayName, String string){
++        if(string != null){
++            String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
++            String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, LOCALE_ENGLISH);
++
++            for(int i = 0; i < allStringsInEN.length; i++){
++                if(string.equals(allStringsInEN[i])){
++                    return allStringsInLocale[i];
++                }
++            }
++        }
++        return null;
++    }
++
+     public static void switchLocale(String newLocaleCode, Context context) {
+         /*SharedPreferences.Editor editor = context.getSharedPreferences(context.getString(R.string.app_name),Context.MODE_PRIVATE).edit();
+         editor.putString(SHARED_PREFERENCES_KEY,newLocaleCode);
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+index bf032bd..444ffe4 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+@@ -1,9 +1,11 @@
+ package org.cgiar.ilri.mistro.farmer.carrier;
+ 
++import android.content.Context;
+ import android.os.Parcel;
+ import android.os.Parcelable;
+ import android.util.Log;
+ 
++import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ import org.json.JSONArray;
+ import org.json.JSONException;
+ import org.json.JSONObject;
+@@ -12,6 +14,7 @@ import java.io.Serializable;
+ import java.text.ParseException;
+ import java.text.SimpleDateFormat;
+ import java.util.ArrayList;
++import java.util.Arrays;
+ import java.util.Date;
+ import java.util.List;
+ import java.util.jar.JarInputStream;
+@@ -22,6 +25,7 @@ import java.util.jar.JarInputStream;
+ public class Cow implements Parcelable, Serializable {
+     private static final String DEFAULT_DOB = "0000-00-00 00:00:00";
+     private static final String DOB_FORMAT = "yyyy-MM-dd HH:mm:ss";
++    private static final String OTHER_BREED = "Another Breed";
+     public static final String TAG = "Cow";
+     public static final String SEX_MALE = "Male";
+     public static final String SEX_FEMALE = "Female";
+@@ -49,6 +53,7 @@ public class Cow implements Parcelable, Serializable {
+     private String mode;
+     private String serviceType;
+     private String otherDeformity;
++    private String otherBreed;
+     private String piggyBack;
+     private List<Event> events;
+     private List<MilkProduction> milkProduction;
+@@ -73,6 +78,7 @@ public class Cow implements Parcelable, Serializable {
+         countryOfOrigin = "";
+         serviceType = "";
+         otherDeformity = "";
++        otherBreed = "";
+         piggyBack = "";
+         this.events = new ArrayList<Event>();
+         this.milkProduction = new ArrayList<MilkProduction>();
+@@ -115,10 +121,13 @@ public class Cow implements Parcelable, Serializable {
+         this.ageType = ageType;
+     }
+ 
+-    public void setBreeds(String[] breeds) {
++    public void setBreeds(String[] breeds, Context context) {
++        //translate breeds to english
++        String[] translatedBreeds =  Locale.translateArrayToEnglish(context, "c_breeds_array", breeds);//assuming that the breeds array is a member of c_breeds_array
++
+         this.breeds = new ArrayList<String>();
+-        for (int i = 0; i < breeds.length; i++) {
+-            this.breeds.add(breeds[i]);
++        for (int i = 0; i < translatedBreeds.length; i++) {
++            this.breeds.add(translatedBreeds[i]);
+         }
+     }
+ 
+@@ -135,23 +144,45 @@ public class Cow implements Parcelable, Serializable {
+         Log.d(TAG, "other deformity set to "+otherDeformity);
+     }
+ 
+-    public void addBreed(String breed) {
+-        this.breeds.add(breed);
++    public void setOtherBreed(Context context, String otherBreed){
++        //translate to english
++        String translatedBreed = Locale.translateStringToEnglish(context, "breeds_array", otherBreed);
++        this.otherBreed = translatedBreed;
++    }
++
++    public String getOtherBreed(Context context){
++        //other breed stored here is in english
++        String translatedBreed = Locale.translateStringToLocale(context, "breeds_array", otherBreed);
++
++        return translatedBreed;
++    }
++
++    public void addBreed(Context context, String breed) {
++        //translate to english
++
++        String translatedString = Locale.translateStringToEnglish(context, "breeds_array", breed);//assuming here that breed is not going to be 'Other breed' string
++        this.breeds.add(translatedString);
+     }
+ 
+     public void setSex(String sex) {
+         this.sex = sex;
+     }
+ 
+-    public void setDeformities(String[] deformities) {
++    public void setDeformities(String[] deformities, Context context) {
++        //translate to english
++        String[] translatedDeformities = Locale.translateArrayToEnglish(context, "deformities_array", deformities);
++
+         this.deformities = new ArrayList<String>();
+-        for (int i = 0; i < deformities.length; i++) {
+-            this.deformities.add(deformities[i]);
++        for (int i = 0; i < translatedDeformities.length; i++) {
++            this.deformities.add(translatedDeformities[i]);
+         }
+     }
+ 
+-    public void addDeformity(String deformity) {
+-        this.deformities.add(deformity);
++    public void addDeformity(Context context, String deformity) {
++        //translate to english
++        String translatedDeformity = Locale.translateStringToEnglish(context, "deformities_array", deformity);
++
++        this.deformities.add(translatedDeformity);
+     }
+ 
+     public void setSire(Sire sire) {
+@@ -223,16 +254,26 @@ public class Cow implements Parcelable, Serializable {
+         return otherDeformity;
+     }
+ 
+-    public List<String> getBreeds() {
+-        return breeds;
++    public List<String> getBreeds(Context context) {
++        //breeds stored in this object are in english, translate them to current locale
++        String[] stringArray = Locale.translateArrayToLocale(context, "breeds_array", breeds.toArray(new String[breeds.size()]));
++
++        List<String> translatedBreeds = new ArrayList<String>(Arrays.asList(stringArray));
++
++        return translatedBreeds;
+     }
+ 
+     public String getSex() {
+         return sex;
+     }
+ 
+-    public List<String> getDeformities() {
+-        return deformities;
++    public List<String> getDeformities(Context context) {
++        //deformities are in english. translate them to current locale
++        String[] deformitiesInLocale = Locale.translateArrayToLocale(context, "deformities_array", deformities.toArray(new String[deformities.size()]));//TODO: not sure that will work
++
++        List<String> translatedDeformities = new ArrayList<String>(Arrays.asList(deformitiesInLocale));
++
++        return translatedDeformities;
+     }
+ 
+     public Sire getSire() {
+@@ -358,6 +399,7 @@ public class Cow implements Parcelable, Serializable {
+         dest.writeString(mode);
+         dest.writeString(serviceType);
+         dest.writeString(otherDeformity);
++        dest.writeString(otherBreed);
+         dest.writeString(piggyBack);
+     }
+ 
+@@ -384,6 +426,7 @@ public class Cow implements Parcelable, Serializable {
+         mode = in.readString();
+         serviceType = in.readString();
+         otherDeformity = in.readString();
++        otherBreed = in.readString();
+         piggyBack = in.readString();
+     }
+ 
+@@ -409,8 +452,14 @@ public class Cow implements Parcelable, Serializable {
+             jsonObject.put("ageType", ageType);
+             JSONArray breedJsonArray = new JSONArray();
+             for (int i = 0; i < breeds.size(); i++) {
+-                breedJsonArray.put(i, breeds.get(i));
++                if(breeds.get(i).equals(OTHER_BREED)){
++                    breedJsonArray.put(i, otherBreed);//replace the value of 'other breed' with actual breed
++                }
++                else {
++                    breedJsonArray.put(i, breeds.get(i));
++                }
+             }
++
+             jsonObject.put("breeds", breedJsonArray);
+             jsonObject.put("sex", sex);
+             JSONArray deformityJsonArray = new JSONArray();
+diff --git a/MistroFarmer/src/main/res/layout/activity_cow_registration.xml b/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
+index 5beda11..2e80f5f 100644
+--- a/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
++++ b/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
+@@ -137,6 +137,23 @@
+             android:textSize="@dimen/normal_text_size"
+             android:textColor="@color/text_input_color"
+             android:inputType="date|none"/>
++        <TextView
++            android:id="@+id/another_breed_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"
++            android:visibility="gone"/>
++        <AutoCompleteTextView
++            android:id="@+id/breed_actv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:visibility="gone"
++            android:inputType="textCapWords|textPersonName" />
+ 
+         <TextView
+                 android:id="@+id/deformity_tv"
+diff --git a/MistroFarmer/src/main/res/layout/dialog_deformity.xml b/MistroFarmer/src/main/res/layout/dialog_deformity.xml
+index 7744e23..d0d7443 100644
+--- a/MistroFarmer/src/main/res/layout/dialog_deformity.xml
++++ b/MistroFarmer/src/main/res/layout/dialog_deformity.xml
+@@ -23,10 +23,16 @@
+                 android:visibility="gone"
+                 android:textColor="@color/text_input_color"
+                 android:inputType="textCapSentences"/>
++            <CheckBox
++                android:id="@+id/no_deformity_cb"
++                android:layout_width="match_parent"
++                android:layout_height="28dp"
++                android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"/>
+             <Button
+                 android:id="@+id/dialog_deformity_okay_b"
+                 android:layout_width="match_parent"
+-                android:layout_height="@dimen/normal_button_layout_height"/>
++                android:layout_height="@dimen/normal_button_layout_height"
++                android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top" />
+         </LinearLayout>
+     </ScrollView>
+ </LinearLayout>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 13960a4..220ec9a 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -47,6 +47,7 @@
+         <item>Aberdeen Angus</item>
+         <item>Hereford</item>
+         <item>Nganda</item>
++        <item>Another Breed</item>
+     </string-array>
+     <string-array name="uc_breeds_array_en">
+         <item>Charolais</item>
+@@ -269,4 +270,9 @@
+     <string name="number_in_use_en">The number (or sim card) you are using has already been registered with another user</string>
+     <string name="milk_inconsistent_en">The quantity of milk you have entered appears to be wrong. Press okay if you are certain this is the right amount</string>
+     <string name="press_add_again_en">Please press add again</string>
++    <string name="no_deformity_en">No deformity</string>
++    <string name="specify_breed_here_en">Specify other breed here</string>
++    <string name="enter_breed_en">Please specify the other breed</string>
++    <string name="breed_unknown_en">The breed you entered is unknown</string>
++    <string name="extra_breed_en">Extra Breed</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kl.xml b/MistroFarmer/src/main/res/values/strings_kl.xml
+index 7ad2f90..3472e35 100644
+--- a/MistroFarmer/src/main/res/values/strings_kl.xml
++++ b/MistroFarmer/src/main/res/values/strings_kl.xml
+@@ -47,6 +47,7 @@
+         <item>Aberdeen Angus</item>
+         <item>Hereford</item>
+         <item>Nganda</item>
++        <item>Another Breed</item>
+     </string-array>
+     <string-array name="uc_breeds_array_kl">
+         <item>Charolais</item>
+diff --git a/MistroFarmer/src/main/res/values/strings_kr.xml b/MistroFarmer/src/main/res/values/strings_kr.xml
+index ad3ab8c..684d006 100644
+--- a/MistroFarmer/src/main/res/values/strings_kr.xml
++++ b/MistroFarmer/src/main/res/values/strings_kr.xml
+@@ -47,6 +47,7 @@
+         <item>Aberdeen Angus</item>
+         <item>Hereford</item>
+         <item>Nganda</item>
++        <item>Another Breed</item>
+     </string-array>
+     <string-array name="uc_breeds_array_kr">
+         <item>Charolais</item>
+diff --git a/MistroFarmer/src/main/res/values/strings_lh.xml b/MistroFarmer/src/main/res/values/strings_lh.xml
+index 0ac1217..914c805 100644
+--- a/MistroFarmer/src/main/res/values/strings_lh.xml
++++ b/MistroFarmer/src/main/res/values/strings_lh.xml
+@@ -47,6 +47,7 @@
+         <item>Aberdeen Angus</item>
+         <item>Hereford</item>
+         <item>Nganda</item>
++        <item>Another Breed</item>
+     </string-array>
+     <string-array name="uc_breeds_array_lh">
+         <item>Charolais</item>
+diff --git a/MistroFarmer/src/main/res/values/strings_sw.xml b/MistroFarmer/src/main/res/values/strings_sw.xml
+index 38a42f7..d3ff4a2 100644
+--- a/MistroFarmer/src/main/res/values/strings_sw.xml
++++ b/MistroFarmer/src/main/res/values/strings_sw.xml
+@@ -47,6 +47,7 @@
+         <item>Aberdeen Angus</item>
+         <item>Hereford</item>
+         <item>Nganda</item>
++        <item>Another Breed</item>
+     </string-array>
+     <string-array name="uc_breeds_array_sw">
+         <item>Charolais</item>
+-- 
+2.7.1
+

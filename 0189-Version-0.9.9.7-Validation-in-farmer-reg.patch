@@ -1,0 +1,31 @@
+From 1827f3481c6acf8a2c5e12c3a2888464bda837c2 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Tue, 10 Jun 2014 10:10:50 +0300
+Subject: [PATCH 189/213] Version 0.9.9.7: Validation in farmer reg
+
+Validation in FarmerRegistrationActivity improved:
+   - At least two names for the farmer have to be entered
+   - Validation done on the number of digits in the mobile number
+   - An extension personnel has to be selected from the spinner
+   - User informed when gps is recored
+   - User informed if GPS not recorded by the time Farmer reg is
+     done
+---
+ .../java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java    | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+index 92152c8..dda5eeb 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+@@ -428,6 +428,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
+     {
+         latitude=String.valueOf(location.getLatitude());
+         longitude=String.valueOf(location.getLongitude());
++        Toast.makeText(this, Locale.getStringInLocale("gps_recorded", this), Toast.LENGTH_LONG).show();
+         Log.d(TAG,"latitude : "+latitude);
+         Log.d(TAG,"longitude : "+longitude);
+     }
+-- 
+2.7.1
+

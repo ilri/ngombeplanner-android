@@ -1,0 +1,177 @@
+From 14fe8ab4702d0e71b47c4270e2240e4dbb07dd05 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Tue, 10 Jun 2014 10:05:46 +0300
+Subject: [PATCH 188/213] Version 0.9.9.7: Validation in farmer reg
+
+Validation in FarmerRegistrationActivity improved:
+   - At least two names for the farmer have to be entered
+   - Validation done on the number of digits in the mobile number
+   - An extension personnel has to be selected from the spinner
+   - User informed when gps is recored
+   - User informed if GPS not recorded by the time Farmer reg is
+     done
+---
+ .../mistro/farmer/FarmerRegistrationActivity.java  | 26 +++++++++++++++++-----
+ MistroFarmer/src/main/res/values/strings_en.xml    |  7 ++++++
+ MistroFarmer/src/main/res/values/strings_kp.xml    |  7 ++++++
+ MistroFarmer/src/main/res/values/strings_kr.xml    |  7 ++++++
+ MistroFarmer/src/main/res/values/strings_lu.xml    |  7 ++++++
+ MistroFarmer/src/main/res/values/strings_nn.xml    |  7 ++++++
+ MistroFarmer/src/main/res/values/strings_sw.xml    |  7 ++++++
+ 7 files changed, 63 insertions(+), 5 deletions(-)
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+index 5faddb2..92152c8 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+@@ -385,21 +385,37 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
+             Toast.makeText(this,nameETEmptyWarning,Toast.LENGTH_LONG).show();
+             return false;
+         }
++        else if(nameText.split(" ").length < 2){
++            Toast.makeText(this, Locale.getStringInLocale("enter_two_names", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++
+         String mobileNumberText=mobileNumberET.getText().toString();
+         if(mobileNumberText==null||mobileNumberText.equals(""))
+         {
+             Toast.makeText(this,mobileNoETEmptyWarning,Toast.LENGTH_LONG).show();
+             return false;
+         }
+-        /*if(extensionPersonnelET.getText().toString() == null || extensionPersonnelET.getText().toString().length() == 0){
+-            Toast.makeText(this, Locale.getStringInLocale("enter_extension_personnel_name", this), Toast.LENGTH_LONG).show();
++        else if(mobileNumberText.length() != 10){
++            Toast.makeText(this, Locale.getStringInLocale("phone_number_not_valid", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++
++        if(vetNames == null){
++            Toast.makeText(this, Locale.getStringInLocale("epersonnel_tshoot", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++        else if(extensionPersonnelS.getSelectedItemPosition() == -1 || vetNames.get(extensionPersonnelS.getSelectedItemPosition()).length() == 0){
++            Toast.makeText(this, Locale.getStringInLocale("select_epersonnel", this), Toast.LENGTH_LONG).show();
+             return  false;
+-        }*/
++        }
++
+         if(isInFarm && (longitude == null || longitude.length() == 0 || latitude == null || latitude.length() == 0)) {
+             //Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
+             //return false;
+-            Log.w(TAG, "GPS location not obtained. Will try to get it in next screen");
++            Log.w(TAG, Locale.getStringInLocale("unable_to_lock_gps", this));
+         }
++
+         if(numberOfCowsET.getText().toString().length()==0){
+             Toast.makeText(this,Locale.getStringInLocale("enter_no_cows_own",this),Toast.LENGTH_LONG).show();
+             return false;
+@@ -530,7 +546,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
+             progressDialog.dismiss();
+ 
+             if(result == null){
+-                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("problem_connecting_to_server", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
++                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("unable_to_get_epersonnel", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
+             }
+             else{
+                 try{
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 8388709..fc7e747 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -302,4 +302,11 @@
+ 
+     <string name="enter_milk_status_of_cow_en">Please enter the status of cow</string>
+     <string name="enter_in_calf_status_en">Please enter the status of cow</string>
++    <string name="select_epersonnel_en">Please select an extension personnel</string>
++    <string name="unable_to_get_epersonnel_en">Unable to fetch extension Personnel</string>
++    <string name="unable_to_lock_gps_en">GPS location was not obtained. Will try to get it in next screen</string>
++    <string name="gps_recorded_en">GPS recorded</string>
++    <string name="epersonnel_tshoot_en">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
++    <string name="enter_two_names_en">Enter at least two names</string>
++    <string name="phone_number_not_valid_en">The phone number you entered is not valid</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kp.xml b/MistroFarmer/src/main/res/values/strings_kp.xml
+index b26b9be..28599e9 100644
+--- a/MistroFarmer/src/main/res/values/strings_kp.xml
++++ b/MistroFarmer/src/main/res/values/strings_kp.xml
+@@ -300,4 +300,11 @@
+     </string-array>
+     <string name="enter_milk_status_of_cow_kp">Please enter the status of cow</string>
+     <string name="enter_in_calf_status_kp">Please enter the status of cow</string>
++    <string name="select_epersonnel_kp">Please select an extension personnel</string>
++    <string name="unable_to_get_epersonnel_kp">Unable to fetch extension Personnel</string>
++    <string name="unable_to_lock_gps_kp">GPS location was not obtained. Will try to get it in next screen</string>
++    <string name="gps_recorded_kp">GPS recorded</string>
++    <string name="epersonnel_tshoot_kp">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
++    <string name="enter_two_names_kp">Enter at least two names</string>
++    <string name="phone_number_not_valid_kp">The phone number you entered is not valid</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kr.xml b/MistroFarmer/src/main/res/values/strings_kr.xml
+index 2fc7d0a..37f8532 100644
+--- a/MistroFarmer/src/main/res/values/strings_kr.xml
++++ b/MistroFarmer/src/main/res/values/strings_kr.xml
+@@ -299,4 +299,11 @@
+     </string-array>
+     <string name="enter_milk_status_of_cow_kr">Please enter the status of cow</string>
+     <string name="enter_in_calf_status_kr">Please enter the status of cow</string>
++    <string name="select_epersonnel_kr">Please select an extension personnel</string>
++    <string name="unable_to_get_epersonnel_kr">Unable to fetch extension Personnel</string>
++    <string name="unable_to_lock_gps_kr">GPS location was not obtained. Will try to get it in next screen</string>
++    <string name="gps_recorded_kr">GPS recorded</string>
++    <string name="epersonnel_tshoot_kr">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
++    <string name="enter_two_names_kr">Enter at least two names</string>
++    <string name="phone_number_not_valid_kr">The phone number you entered is not valid</string>
+ </resources>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_lu.xml b/MistroFarmer/src/main/res/values/strings_lu.xml
+index c52168f..b4ff1ed 100644
+--- a/MistroFarmer/src/main/res/values/strings_lu.xml
++++ b/MistroFarmer/src/main/res/values/strings_lu.xml
+@@ -302,4 +302,11 @@
+     </string-array>
+     <string name="enter_milk_status_of_cow_lu">Please enter the status of cow</string>
+     <string name="enter_in_calf_status_lu">Please enter the status of cow</string>
++    <string name="select_epersonnel_lu">Please select an extension personnel</string>
++    <string name="unable_to_get_epersonnel_lu">Unable to fetch extension Personnel</string>
++    <string name="unable_to_lock_gps_lu">GPS location was not obtained. Will try to get it in next screen</string>
++    <string name="gps_recorded_lu">GPS recorded</string>
++    <string name="epersonnel_tshoot_lu">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
++    <string name="enter_two_names_lu">Enter at least two names</string>
++    <string name="phone_number_not_valid_lu">The phone number you entered is not valid</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_nn.xml b/MistroFarmer/src/main/res/values/strings_nn.xml
+index 2902ef8..7f01879 100644
+--- a/MistroFarmer/src/main/res/values/strings_nn.xml
++++ b/MistroFarmer/src/main/res/values/strings_nn.xml
+@@ -300,4 +300,11 @@
+     </string-array>
+     <string name="enter_milk_status_of_cow_nn">Please enter the status of cow</string>
+     <string name="enter_in_calf_status_nn">Please enter the status of cow</string>
++    <string name="select_epersonnel_nn">Please select an extension personnel</string>
++    <string name="unable_to_get_epersonnel_nn">Unable to fetch extension Personnel</string>
++    <string name="unable_to_lock_gps_nn">GPS location was not obtained. Will try to get it in next screen</string>
++    <string name="gps_recorded_nn">GPS recorded</string>
++    <string name="epersonnel_tshoot_nn">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
++    <string name="enter_two_names_nn">Enter at least two names</string>
++    <string name="phone_number_not_valid_nn">The phone number you entered is not valid</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_sw.xml b/MistroFarmer/src/main/res/values/strings_sw.xml
+index 62a737a..dc5f102 100644
+--- a/MistroFarmer/src/main/res/values/strings_sw.xml
++++ b/MistroFarmer/src/main/res/values/strings_sw.xml
+@@ -300,4 +300,11 @@
+     </string-array>
+     <string name="enter_milk_status_of_cow_sw">Please enter the status of cow</string>
+     <string name="enter_in_calf_status_sw">Please enter the status of cow</string>
++    <string name="select_epersonnel_sw">Please select an extension personnel</string>
++    <string name="unable_to_get_epersonnel_sw">Unable to fetch extension Personnel</string>
++    <string name="unable_to_lock_gps_sw">GPS location was not obtained. Will try to get it in next screen</string>
++    <string name="gps_recorded_sw">GPS recorded</string>
++    <string name="epersonnel_tshoot_sw">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
++    <string name="enter_two_names_sw">Enter at least two names</string>
++    <string name="phone_number_not_valid_sw">The phone number you entered is not valid</string>
+ </resources>
+-- 
+2.7.1
+

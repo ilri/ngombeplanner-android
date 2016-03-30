@@ -1,0 +1,457 @@
+From 3c1d64e36bda2e6a962e421ccb1b1caa2acaf2aa Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Mon, 26 May 2014 17:19:24 +0300
+Subject: [PATCH 168/213] Version 0.9.3: GPS Behaviour during registration
+
+Users can now continue registering cows even if GPS has not locked
+on when farmer registration has been complete
+---
+ .../mistro/farmer/CowRegistrationActivity.java     | 64 +++++++++++++++++++++-
+ .../mistro/farmer/FarmerRegistrationActivity.java  | 12 ++--
+ .../cgiar/ilri/mistro/farmer/carrier/Farmer.java   | 12 ++++
+ MistroFarmer/src/main/res/values/countries.xml     |  4 +-
+ MistroFarmer/src/main/res/values/strings_kl.xml    | 24 ++++++++
+ MistroFarmer/src/main/res/values/strings_kr.xml    | 24 ++++++++
+ MistroFarmer/src/main/res/values/strings_lh.xml    | 64 +++++++++++++++-------
+ MistroFarmer/src/main/res/values/strings_sw.xml    | 24 ++++++++
+ 8 files changed, 201 insertions(+), 27 deletions(-)
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index fed2491..3035634 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -1,12 +1,19 @@
+ package org.cgiar.ilri.mistro.farmer;
+ 
++import android.app.AlertDialog;
+ import android.app.DatePickerDialog;
+ import android.app.Dialog;
+ import android.app.ProgressDialog;
+ import android.content.Context;
++import android.content.DialogInterface;
+ import android.content.Intent;
++import android.location.Criteria;
++import android.location.Location;
++import android.location.LocationListener;
++import android.location.LocationManager;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
++import android.provider.Settings;
+ import android.telephony.TelephonyManager;
+ import android.util.Log;
+ import android.util.SparseBooleanArray;
+@@ -46,7 +53,7 @@ import java.util.Date;
+ import java.util.GregorianCalendar;
+ import java.util.List;
+ 
+-public class CowRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener
++public class CowRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener, LocationListener
+ {
+     private boolean cacheData;
+ 
+@@ -109,6 +116,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     private Farmer farmer;
+     private List<Cow> validSires;
+     private List<Cow> validDams;
++    private LocationManager locationManager;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -267,6 +275,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         super.onPause();
+ 
+         cacheEditTextData();
++
++        if(locationManager!=null) {
++            locationManager.removeUpdates(this);
++        }
+     }
+ 
+     @Override
+@@ -336,6 +348,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                     deformityET.setText(deformity);
+ 
+                     if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
++                        if(farmer.isInFarm()){
++                            getGPSCoordinates();
++                        }
++
+                         List<Cow> allCows = farmer.getCows();
+                         validSires = new ArrayList<Cow>();
+                         validSires.add(new Cow(false));
+@@ -446,6 +462,21 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         }
+     }
+ 
++    private void getGPSCoordinates() {
++        locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
++        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
++            //Toast.makeText(this,"gps started",Toast.LENGTH_LONG).show();
++            Criteria criteria=new Criteria();
++            String provider=locationManager.getBestProvider(criteria,false);
++            Location location=locationManager.getLastKnownLocation(provider);
++            locationManager.requestLocationUpdates(provider, 18000, 1000, this);//If farmer  is moving at 200km/h, will still be able to update!
++            if(location!=null)
++            {
++                onLocationChanged(location);
++            }
++        }
++    }
++
+     @Override
+     public boolean onKeyDown(int keyCode, KeyEvent event) {
+         if(keyCode == KeyEvent.KEYCODE_BACK){
+@@ -1067,6 +1098,37 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         }
+     }
+ 
++    @Override
++    public void onLocationChanged(Location location) {
++        String latitude=String.valueOf(location.getLatitude());
++        String longitude=String.valueOf(location.getLongitude());
++        Log.d(TAG,"latitude : "+latitude);
++        Log.d(TAG,"longitude : "+longitude);
++
++        if(this.farmer.isInFarm() && (this.farmer.getLatitude() == null || this.farmer.getLatitude().length() == 0)){
++            this.farmer.setLatitude(latitude);
++        }
++
++        if(this.farmer.isInFarm() && (this.farmer.getLongitude() == null || this.farmer.getLongitude().length() == 0)){
++            this.farmer.setLongitude(longitude);
++        }
++    }
++
++    @Override
++    public void onStatusChanged(String provider, int status, Bundle extras) {
++
++    }
++
++    @Override
++    public void onProviderEnabled(String provider) {
++
++    }
++
++    @Override
++    public void onProviderDisabled(String provider) {
++
++    }
++
+     private class ServerRegistrationThread extends AsyncTask<JSONObject,Integer,String> {
+         private ProgressDialog progressDialog;
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+index bc7d5be..07cc552 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+@@ -9,6 +9,7 @@ import android.location.Criteria;
+ import android.location.Location;
+ import android.location.LocationListener;
+ import android.location.LocationManager;
++import android.nfc.Tag;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
+ import android.provider.Settings;
+@@ -57,6 +58,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
+     private String mobileNoETEmptyWarning;
+     private  LocationManager locationManager;
+     private String loadingPleaseWait;
++    private boolean isInFarm;
+ 
+     private Farmer farmer;
+     @Override
+@@ -68,6 +70,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
+ 
+         //init child views
+         cacheData = true;
++        isInFarm = false;
+ 
+         fullNameTV=(TextView)this.findViewById(R.id.full_name_tv);
+         fullNameET=(EditText)this.findViewById(R.id.full_name_et);
+@@ -255,8 +258,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
+         }
+     }
+ 
+-    private void getGPSCoordinates()
+-    {
++    private void getGPSCoordinates() {
+         locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
+         if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+         {
+@@ -299,7 +301,6 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
+                     });
+             AlertDialog alertDialog=alertDialogBuilder.create();
+             alertDialog.show();
+-
+         }
+     }
+ 
+@@ -328,8 +329,9 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
+             return  false;
+         }*/
+         if(isInFarm && (longitude == null || longitude.length() == 0 || latitude == null || latitude.length() == 0)) {
+-            Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
+-            return false;
++            //Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
++            //return false;
++            Log.w(TAG, "GPS location not obtained. Will try to get it in next screen");
+         }
+         if(numberOfCowsET.getText().toString().length()==0){
+             Toast.makeText(this,Locale.getStringInLocale("enter_no_cows_own",this),Toast.LENGTH_LONG).show();
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
+index 4e1b55d..fbdfaf3 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
+@@ -29,6 +29,7 @@ public class Farmer implements Parcelable, Serializable
+     private String latitude;
+     private String simCardSN;
+     private String mode;
++    private boolean isInFarm;
+ 
+     public Farmer()
+     {
+@@ -40,6 +41,7 @@ public class Farmer implements Parcelable, Serializable
+         latitude="";
+         simCardSN ="";
+         mode = "";
++        isInFarm = false;
+     }
+ 
+     public Farmer(Parcel source)
+@@ -137,6 +139,10 @@ public class Farmer implements Parcelable, Serializable
+         return cows;
+     }
+ 
++    public boolean isInFarm(){
++        return isInFarm;
++    }
++
+     public List<Cow> getCows(String sex){
+         List<Cow> newCowList = new ArrayList<Cow>();
+ 
+@@ -186,6 +192,8 @@ public class Farmer implements Parcelable, Serializable
+         dest.writeString(latitude);
+         dest.writeString(simCardSN);
+         dest.writeString(mode);
++        if(isInFarm) dest.writeInt(1);
++        else dest.writeInt(0);
+     }
+ 
+     public void readFromParcel(Parcel in)
+@@ -198,6 +206,10 @@ public class Farmer implements Parcelable, Serializable
+         this.latitude=in.readString();
+         this.simCardSN =in.readString();
+         this.mode = in.readString();
++
++        int isInFarm = in.readInt();
++        if(isInFarm == 1) this.isInFarm = true;
++        else this.isInFarm = false;
+     }
+ 
+     public static final Creator<Farmer> CREATOR=new Creator<Farmer>()
+diff --git a/MistroFarmer/src/main/res/values/countries.xml b/MistroFarmer/src/main/res/values/countries.xml
+index e3552c1..93a82a5 100644
+--- a/MistroFarmer/src/main/res/values/countries.xml
++++ b/MistroFarmer/src/main/res/values/countries.xml
+@@ -126,7 +126,7 @@
+         <item>Namibia</item>
+         <item>Nauru</item>
+         <item>Nepal</item>
+-        <item>Netherlands</item>
++        <item>Netherlands (Holland)</item>
+         <item>New Zealand</item>
+         <item>Nicaragua</item>
+         <item>Niger</item>
+@@ -203,6 +203,8 @@
+         <item>Tanzania</item>
+         <item>Uganda</item>
+         <item>Ethiopia</item>
++        <item>United States</item>
++        <item>Netherlands (Holland)</item>
+         <item>Other</item>
+     </string-array>
+ </resources>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_kl.xml b/MistroFarmer/src/main/res/values/strings_kl.xml
+index 9f4105f..7ad2f90 100644
+--- a/MistroFarmer/src/main/res/values/strings_kl.xml
++++ b/MistroFarmer/src/main/res/values/strings_kl.xml
+@@ -35,6 +35,30 @@
+         <item>araweek</item>
+         <item>kenyishek</item>
+     </string-array>
++    <string-array name="c_breeds_array_kl">
++        <item>Friesian</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Boran</item>
++        <item>Ayrshire</item>
++        <item>Zebu</item>
++        <item>Sahiwal</item>
++        <item>Guernsey</item>
++        <item>Aberdeen Angus</item>
++        <item>Hereford</item>
++        <item>Nganda</item>
++    </string-array>
++    <string-array name="uc_breeds_array_kl">
++        <item>Charolais</item>
++        <item>Simmental</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++    </string-array>
+     <string-array name="breeds_array_kl">
+         <item>Ayrshire</item>
+         <item>Boran</item>
+diff --git a/MistroFarmer/src/main/res/values/strings_kr.xml b/MistroFarmer/src/main/res/values/strings_kr.xml
+index 9d99509..ad3ab8c 100644
+--- a/MistroFarmer/src/main/res/values/strings_kr.xml
++++ b/MistroFarmer/src/main/res/values/strings_kr.xml
+@@ -35,6 +35,30 @@
+         <item>emiesi</item>
+         <item>emiaka</item>
+     </string-array>
++    <string-array name="c_breeds_array_kr">
++        <item>Friesian</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Boran</item>
++        <item>Ayrshire</item>
++        <item>Zebu</item>
++        <item>Sahiwal</item>
++        <item>Guernsey</item>
++        <item>Aberdeen Angus</item>
++        <item>Hereford</item>
++        <item>Nganda</item>
++    </string-array>
++    <string-array name="uc_breeds_array_kr">
++        <item>Charolais</item>
++        <item>Simmental</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++    </string-array>
+     <string-array name="breeds_array_kr">
+         <item>Ayrshire</item>
+         <item>Boran</item>
+diff --git a/MistroFarmer/src/main/res/values/strings_lh.xml b/MistroFarmer/src/main/res/values/strings_lh.xml
+index 95ed992..0ac1217 100644
+--- a/MistroFarmer/src/main/res/values/strings_lh.xml
++++ b/MistroFarmer/src/main/res/values/strings_lh.xml
+@@ -35,27 +35,51 @@
+         <item>emiesi</item>
+         <item>emiaka/emika</item>
+     </string-array>
++    <string-array name="c_breeds_array_lh">
++        <item>Friesian</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Boran</item>
++        <item>Ayrshire</item>
++        <item>Zebu</item>
++        <item>Sahiwal</item>
++        <item>Guernsey</item>
++        <item>Aberdeen Angus</item>
++        <item>Hereford</item>
++        <item>Nganda</item>
++    </string-array>
++    <string-array name="uc_breeds_array_lh">
++        <item>Charolais</item>
++        <item>Simmental</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++    </string-array>
+     <string-array name="breeds_array_lh">
+-        <item>ayrshire</item>
+-        <item>boran</item>
+-        <item>charolais</item>
+-        <item>aberdeen angus</item>
+-        <item>simmental</item>
+-        <item>friesian</item>
+-        <item>guernsey</item>
+-        <item>hereford</item>
+-        <item>jersey</item>
+-        <item>ankole</item>
+-        <item>limousine</item>
+-        <item>brahman</item>
+-        <item>santa getrude</item>
+-        <item>piemontese</item>
+-        <item>red poll</item>
+-        <item>sahiwal</item>
+-        <item>nganda</item>
+-        <item>fleckviah</item>
+-        <item>brown swiss</item>
+-        <item>zebu</item>
++        <item>Ayrshire</item>
++        <item>Boran</item>
++        <item>Charolais</item>
++        <item>Aberdeen Angus</item>
++        <item>Simmental</item>
++        <item>Friesian</item>
++        <item>Guernsey</item>
++        <item>Hereford</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Sahiwal</item>
++        <item>Nganda</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++        <item>Zebu</item>
+     </string-array>
+     <string-array name="deformities_array_lh">
+         <item>obubofu</item>
+diff --git a/MistroFarmer/src/main/res/values/strings_sw.xml b/MistroFarmer/src/main/res/values/strings_sw.xml
+index 6de6001..38a42f7 100644
+--- a/MistroFarmer/src/main/res/values/strings_sw.xml
++++ b/MistroFarmer/src/main/res/values/strings_sw.xml
+@@ -35,6 +35,30 @@
+         <item>Mwezi</item>
+         <item>Mwaka</item>
+     </string-array>
++    <string-array name="c_breeds_array_sw">
++        <item>Friesian</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Boran</item>
++        <item>Ayrshire</item>
++        <item>Zebu</item>
++        <item>Sahiwal</item>
++        <item>Guernsey</item>
++        <item>Aberdeen Angus</item>
++        <item>Hereford</item>
++        <item>Nganda</item>
++    </string-array>
++    <string-array name="uc_breeds_array_sw">
++        <item>Charolais</item>
++        <item>Simmental</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++    </string-array>
+     <string-array name="breeds_array_sw">
+         <item>Ayrshire</item>
+         <item>Boran</item>
+-- 
+2.7.1
+

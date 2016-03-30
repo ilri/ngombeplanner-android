@@ -1,0 +1,90 @@
+From fd7cb17b90f72f67ad343712afab355bd390ab46 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Mon, 2 Jun 2014 14:33:26 +0300
+Subject: [PATCH 180/213] Version 0.9.9: Device Type in login, milk validation
+
+The type of device (android) sent durind authentication of the
+user during login
+
+Fixed a potential bug in how milk data is validated in
+AddMilkProductionActivity
+---
+ MistroFarmer/src/main/AndroidManifest.xml                   |  4 ++--
+ .../cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java | 13 ++++++++-----
+ .../java/org/cgiar/ilri/mistro/farmer/LandingActivity.java  |  1 +
+ MistroFarmer/src/main/res/values/strings_en.xml             |  2 +-
+ 4 files changed, 12 insertions(+), 8 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index 77bda99..f6ef699 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+-    android:versionCode="9"
+-    android:versionName="0.9.8.2" >
++    android:versionCode="10"
++    android:versionName="0.9.9" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+index 0beb80c..3dabe4a 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+@@ -340,17 +340,20 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+             Cow selectedCow = farmer.getCows(Cow.SEX_FEMALE).get(cowS.getSelectedItemPosition());
+             if(selectedCow != null){
+ 
+-                for(int i = 0; i < eventConstraints.size(); i++){
++                for(int i = 0; i < eventConstraints.size(); i++) {
+                     EventConstraint currConstraint = eventConstraints.get(i);
+                     //enforce age constraint
+-                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILKING)){
+-                        if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
+-                            Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
++                    if (currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILKING)) {
++                        if (selectedCow.getAgeMilliseconds() < currConstraint.getTimeMilliseconds()) {
++                            Toast.makeText(this, Locale.getStringInLocale("cow_too_young", this), Toast.LENGTH_LONG).show();
+                             return false;
+                         }
+                     }
++                }
+ 
+-                    else if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_FLACTUATION) && !milkQuantityFine){
++                for(int i = 0; i < eventConstraints.size(); i++){
++                    EventConstraint currConstraint = eventConstraints.get(i);
++                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_FLACTUATION) && !milkQuantityFine){
+                         //TODO: convert units to whatever farmer uses to measure milk e.g cups
+                         int threshold = currConstraint.getValue();
+                         String thresholdUnits = currConstraint.getUnits();
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java
+index 2716a0f..d9c18f2 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java
+@@ -196,6 +196,7 @@ public class LandingActivity extends SherlockActivity implements MistroActivity,
+             try
+             {
+                 jsonObject.put("simCardSN",params[0]);
++                jsonObject.put("deviceType", "Android");
+                 //jsonObject.put("mobileNumber",params[1]);
+                 String result = DataHandler.sendDataToServer(LandingActivity.this, jsonObject.toString(),DataHandler.FARMER_AUTHENTICATION_URL, true);
+                 return result;
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 53401d7..5401855 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -271,7 +271,7 @@
+     <string name="enter_age_or_dob_en">Please enter either the cow\'s age or date of birth</string>
+     <string name="cow_too_young_en">The selected cow is too young</string>
+     <string name="enter_no_cows_own_en">Enter the number of cows you own</string>
+-    <string name="number_in_use_en">The number (or sim card) you are using has already been registered with another user</string>
++    <string name="number_in_use_en">The number you trying to register has already been registered by another user</string>
+     <string name="milk_inconsistent_en">The quantity of milk you have entered appears to be wrong. Press okay if you are certain this is the right amount</string>
+     <string name="press_add_again_en">Please press add again</string>
+     <string name="no_deformity_en">No deformity</string>
+-- 
+2.7.1
+

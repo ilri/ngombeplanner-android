@@ -1,0 +1,191 @@
+From fe5bfe4039daca4de1af3372b441c07bef0b0c20 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Tue, 22 Oct 2013 12:24:52 +0300
+Subject: [PATCH 093/213] Multiple select implemented for combobox on Java
+
+---
+ .../cgiar/ilri/mistro/farmer/ui/ComboBoxItem.java  | 38 +++++++++++++++++++++
+ .../mistro/farmer/ui/CowRegistrationScreen.java    | 12 +++++--
+ .../mistro/farmer/ui/FarmerRegistrationScreen.java |  4 +++
+ .../ilri/mistro/farmer/ui/MultiselectRenderer.java | 39 ++++++++++++++++------
+ 4 files changed, 81 insertions(+), 12 deletions(-)
+ create mode 100644 JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/ComboBoxItem.java
+
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/ComboBoxItem.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/ComboBoxItem.java
+new file mode 100644
+index 0000000..27b1de5
+--- /dev/null
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/ComboBoxItem.java
+@@ -0,0 +1,38 @@
++/*
++ * To change this license header, choose License Headers in Project Properties.
++ * To change this template file, choose Tools | Templates
++ * and open the template in the editor.
++ */
++
++package org.cgiar.ilri.mistro.farmer.ui;
++
++import com.sun.lwuit.CheckBox;
++import com.sun.lwuit.Component;
++import com.sun.lwuit.events.ActionEvent;
++import com.sun.lwuit.events.ActionListener;
++import com.sun.lwuit.events.FocusListener;
++
++/**
++ *
++ * @author jason
++ */
++public class ComboBoxItem extends CheckBox{
++    private boolean checked;
++    private final int index;
++
++    public ComboBoxItem(String name, int index) {
++        super(name);
++        this.index = index;
++        this.checked = false;
++    }
++    
++    public boolean isChecked(){
++        return checked;
++    }
++    
++    public void toggleChecked(){
++        this.checked = !checked;
++        this.setSelected(checked);
++    }
++}
++
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
+index 0bea967..9875d1d 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
+@@ -1,5 +1,6 @@
+ package org.cgiar.ilri.mistro.farmer.ui;
+ 
++import com.sun.lwuit.CheckBox;
+ import com.sun.lwuit.ComboBox;
+ import com.sun.lwuit.Command;
+ import com.sun.lwuit.Component;
+@@ -119,6 +120,8 @@ public class CowRegistrationScreen extends Form implements Screen{
+         
+         ageTF = new TextField();
+         setComponentStyle(ageTF, false);
++        ageTF.setConstraint(TextField.NUMERIC);
++        ageTF.setInputModeOrder(new String[] {"123"});
+         this.addComponent(ageTF);
+         
+         ageTypeL = new Label(Locale.getStringInLocale(locale, StringResources.age_type));
+@@ -144,7 +147,9 @@ public class CowRegistrationScreen extends Form implements Screen{
+         
+         breedCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
+         setComponentStyle(breedCB, true);
+-        breedCB.setRenderer(new MultiselectRenderer());
++        MultiselectRenderer breedMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
++        breedCB.setRenderer(breedMultiselectRenderer);
++        breedCB.addActionListener(breedMultiselectRenderer);
+         this.addComponent(breedCB);
+         
+         sexL = new Label(Locale.getStringInLocale(locale, StringResources.sex));
+@@ -161,8 +166,11 @@ public class CowRegistrationScreen extends Form implements Screen{
+         this.addComponent(deformityL);
+         
+         deformityCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
++        MultiselectRenderer deformityMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
++        deformityCB.setRenderer(deformityMultiselectRenderer);
++        deformityCB.addActionListener(deformityMultiselectRenderer);
+         setComponentStyle(deformityCB, true);
+-        deformityCB.setRenderer(new MultiselectRenderer());
++        //deformityCB.setRenderer(new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array)));
+         this.addComponent(deformityCB);
+         
+         serviceTypeL = new Label(Locale.getStringInLocale(locale, StringResources.service_type_used));
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java
+index f14ea59..8926bf2 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java
+@@ -90,6 +90,8 @@ public class FarmerRegistrationScreen extends Form implements Screen{
+         mobileNoTF = new TextField();
+         mobileNoTF.getStyle().setMargin(5, 0, 0, 0);
+         mobileNoTF.getSelectedStyle().setMargin(5, 0, 0, 0);
++        mobileNoTF.setConstraint(TextField.NUMERIC);
++        mobileNoTF.setInputModeOrder(new String[] {"123"});
+         this.addComponent(mobileNoTF);
+         
+         ePersonnelL = new Label(Locale.getStringInLocale(locale, StringResources.extension_p));
+@@ -110,6 +112,8 @@ public class FarmerRegistrationScreen extends Form implements Screen{
+         cowNumberTF = new TextField();
+         cowNumberTF.getStyle().setMargin(5, 0, 0, 0);
+         cowNumberTF.getSelectedStyle().setMargin(5, 0, 0, 0);
++        cowNumberTF.setConstraint(TextField.NUMERIC);
++        cowNumberTF.setInputModeOrder(new String[] {"123"});
+         this.addComponent(cowNumberTF);
+     }
+     
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/MultiselectRenderer.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/MultiselectRenderer.java
+index 211257a..74e6a7a 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/MultiselectRenderer.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/MultiselectRenderer.java
+@@ -1,30 +1,49 @@
+ package org.cgiar.ilri.mistro.farmer.ui;
+ 
+-import com.sun.lwuit.CheckBox;
+ import com.sun.lwuit.Component;
+-import com.sun.lwuit.Label;
+ import com.sun.lwuit.List;
++import com.sun.lwuit.events.ActionEvent;
++import com.sun.lwuit.events.ActionListener;
+ import com.sun.lwuit.list.ListCellRenderer;
++import java.util.Vector;
+ 
+ /**
+  *
+  * @author jason
+  */
+-public class MultiselectRenderer extends CheckBox implements ListCellRenderer{
++public class MultiselectRenderer implements ListCellRenderer, ActionListener{
+     
+-    public MultiselectRenderer() {
++    private Vector comboBoxItems;
++    
++    public MultiselectRenderer(String[] items) {
+         super();
++        comboBoxItems = new Vector(items.length);
++        for(int i = 0; i < items.length; i ++){
++            ComboBoxItem currentBoxItem = new ComboBoxItem(items[i],i);
++            //currentBoxItem.addActionListener(this);
++            comboBoxItems.addElement(currentBoxItem);
++            
++        }
+     }
+     
+     public Component getListCellRendererComponent(List list, Object value, int index, boolean isSelected) {
+-        this.setText(""+value);
+-        this.setFocus(isSelected);
+-        this.setSelected(isSelected);
+-        return this;
++        ComboBoxItem currentComboBoxItem = (ComboBoxItem) comboBoxItems.elementAt(index);
++        if(isSelected){
++            currentComboBoxItem.getStyle().setBgColor(0x2ecc71);
++        }
++        else {
++            currentComboBoxItem.getStyle().setBgColor(0xffffff);
++        }
++        return currentComboBoxItem;
+     }
+ 
+     public Component getListFocusComponent(List list) {
+-        return this;
++        return null;
++    }
++
++    public void actionPerformed(ActionEvent evt) {
++        List list = (List) evt.getComponent();
++        ComboBoxItem clickedBoxItem = (ComboBoxItem) comboBoxItems.elementAt(list.getSelectedIndex());
++        clickedBoxItem.toggleChecked();
+     }
+-    
+ }
+\ No newline at end of file
+-- 
+2.7.1
+

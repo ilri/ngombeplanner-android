@@ -1,0 +1,664 @@
+From 933451d3bd26e09129f0d2e6599b81645aa28dd7 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Tue, 1 Jul 2014 18:46:00 +0300
+Subject: [PATCH 207/213] Version 1.1.1: New translations added, New version of
+ Gradle
+
+New translations added for:
+-   Kikabrasi
+-   Lutsotso
+-   Nandi
+-   Kipsigis
+-   Swahili
+
+New version of Gradle (0.12) and new version of Android Studio(0.8.1)
+---
+ .gitignore                                       |  1 +
+ .idea/misc.xml                                   |  2 +-
+ Android.iml                                      |  8 ++-
+ NgombePlanner/NgombePlanner.iml                  | 32 +++++----
+ NgombePlanner/build.gradle                       |  4 +-
+ NgombePlanner/src/main/AndroidManifest.xml       |  4 +-
+ NgombePlanner/src/main/res/values/strings_kp.xml | 82 +++++++++++------------
+ NgombePlanner/src/main/res/values/strings_kr.xml | 83 ++++++++++++------------
+ NgombePlanner/src/main/res/values/strings_lu.xml | 83 ++++++++++++------------
+ NgombePlanner/src/main/res/values/strings_nn.xml | 83 ++++++++++++------------
+ NgombePlanner/src/main/res/values/strings_sw.xml | 83 ++++++++++++------------
+ gradle/wrapper/gradle-wrapper.properties         |  4 +-
+ 12 files changed, 244 insertions(+), 225 deletions(-)
+
+diff --git a/.gitignore b/.gitignore
+index 0762373..542add0 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -10,6 +10,7 @@
+ 
+ #Gradle files
+ .gradle/
++build/
+ NgombePlanner/build/
+ gradle/wrapper/gradle-wrapper.properties
+ NgombePlanner/build.gradle
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+index b153e48..2497215 100644
+--- a/.idea/misc.xml
++++ b/.idea/misc.xml
+@@ -3,7 +3,7 @@
+   <component name="EntryPointsManager">
+     <entry_points version="2.0" />
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+ </project>
+diff --git a/Android.iml b/Android.iml
+index 58a239a..135c0f9 100644
+--- a/Android.iml
++++ b/Android.iml
+@@ -1,10 +1,16 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <module external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
++  <component name="FacetManager">
++    <facet type="java-gradle" name="Java-Gradle">
++      <configuration>
++        <option name="BUILD_FOLDER_PATH" value="$MODULE_DIR$/build" />
++      </configuration>
++    </facet>
++  </component>
+   <component name="NewModuleRootManager" inherit-compiler-output="true">
+     <exclude-output />
+     <content url="file://$MODULE_DIR$">
+       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+-      <excludeFolder url="file://$MODULE_DIR$/build" />
+     </content>
+     <orderEntry type="jdk" jdkName="JDK" jdkType="JavaSDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+diff --git a/NgombePlanner/NgombePlanner.iml b/NgombePlanner/NgombePlanner.iml
+index 1fc2d41..4fefb98 100644
+--- a/NgombePlanner/NgombePlanner.iml
++++ b/NgombePlanner/NgombePlanner.iml
+@@ -22,19 +22,19 @@
+     </facet>
+   </component>
+   <component name="NewModuleRootManager" inherit-compiler-output="false">
+-    <output url="file://$MODULE_DIR$/build/classes/debug" />
++    <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
+     <exclude-output />
+     <content url="file://$MODULE_DIR$">
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/r/debug" isTestSource="false" generated="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/aidl/debug" isTestSource="false" generated="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/buildConfig/debug" isTestSource="false" generated="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/rs/debug" isTestSource="false" generated="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/res/rs/debug" type="java-resource" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/r/test/debug" isTestSource="true" generated="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/aidl/test/debug" isTestSource="true" generated="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/buildConfig/test/debug" isTestSource="true" generated="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/rs/test/debug" isTestSource="true" generated="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/res/rs/test/debug" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/debug" isTestSource="false" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/debug" isTestSource="false" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/debug" isTestSource="false" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/debug" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/test/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/test/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/test/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/test/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/test/debug" type="java-test-resource" />
+       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
+       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
+       <sourceFolder url="file://$MODULE_DIR$/src/debug/aidl" isTestSource="false" />
+@@ -58,15 +58,21 @@
+       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+       <excludeFolder url="file://$MODULE_DIR$/build/apk" />
+       <excludeFolder url="file://$MODULE_DIR$/build/assets" />
+-      <excludeFolder url="file://$MODULE_DIR$/build/bundles" />
+       <excludeFolder url="file://$MODULE_DIR$/build/classes" />
+       <excludeFolder url="file://$MODULE_DIR$/build/dependency-cache" />
++      <excludeFolder url="file://$MODULE_DIR$/build/dex" />
++      <excludeFolder url="file://$MODULE_DIR$/build/exploded-aar" />
+       <excludeFolder url="file://$MODULE_DIR$/build/incremental" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates" />
+       <excludeFolder url="file://$MODULE_DIR$/build/libs" />
+       <excludeFolder url="file://$MODULE_DIR$/build/manifests" />
++      <excludeFolder url="file://$MODULE_DIR$/build/ndk" />
++      <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
++      <excludeFolder url="file://$MODULE_DIR$/build/pre-dexed" />
+       <excludeFolder url="file://$MODULE_DIR$/build/res" />
++      <excludeFolder url="file://$MODULE_DIR$/build/rs" />
++      <excludeFolder url="file://$MODULE_DIR$/build/source" />
+       <excludeFolder url="file://$MODULE_DIR$/build/symbols" />
+-      <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
+     </content>
+     <orderEntry type="jdk" jdkName="Android API 18 Platform" jdkType="Android SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+diff --git a/NgombePlanner/build.gradle b/NgombePlanner/build.gradle
+index 8c8b0aa..2f75222 100644
+--- a/NgombePlanner/build.gradle
++++ b/NgombePlanner/build.gradle
+@@ -3,7 +3,7 @@ buildscript {
+         mavenCentral()
+     }
+     dependencies {
+-        classpath 'com.android.tools.build:gradle:0.9.+'
++        classpath 'com.android.tools.build:gradle:0.12.+'
+     }
+ }
+ apply plugin: 'android'
+@@ -24,7 +24,7 @@ dependencies {
+ 
+ android {
+     compileSdkVersion 18
+-    buildToolsVersion "19.0.3"
++    buildToolsVersion "20.0"
+ 
+     defaultConfig {
+         minSdkVersion 7
+diff --git a/NgombePlanner/src/main/AndroidManifest.xml b/NgombePlanner/src/main/AndroidManifest.xml
+index bb32dc6..2737bc8 100644
+--- a/NgombePlanner/src/main/AndroidManifest.xml
++++ b/NgombePlanner/src/main/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.np.farmer"
+-    android:versionCode="21"
+-    android:versionName="1.1.0" >
++    android:versionCode="22"
++    android:versionName="1.1.1" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/NgombePlanner/src/main/res/values/strings_kp.xml b/NgombePlanner/src/main/res/values/strings_kp.xml
+index a33a8cd..c45160c 100644
+--- a/NgombePlanner/src/main/res/values/strings_kp.xml
++++ b/NgombePlanner/src/main/res/values/strings_kp.xml
+@@ -298,48 +298,50 @@
+         <item>In calf</item>
+         <item>Not in calf</item>
+     </string-array>
+-    <string name="enter_milk_status_of_cow_kp">Please enter the status of cow</string>
+-    <string name="enter_in_calf_status_kp">Please enter the status of cow</string>
+-    <string name="select_epersonnel_kp">Please select an extension personnel</string>
+-    <string name="unable_to_get_epersonnel_kp">Unable to fetch extension Personnel</string>
+-    <string name="unable_to_lock_gps_kp">GPS location was not obtained. Will try to get it in next screen</string>
+-    <string name="gps_recorded_kp">GPS recorded</string>
+-    <string name="epersonnel_tshoot_kp">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
+-    <string name="enter_two_names_kp">Enter at least two names</string>
+-    <string name="phone_number_not_valid_kp">The phone number you entered is not valid</string>
+-    <string name="enter_old_phone_no_kp">Please enter your old phone number</string>
+-    <string name="enter_new_phone_no_kp">Please enter your new phone number</string>
+-    <string name="admin_functions_kp">Admin Functions</string>
+-    <string name="sim_card_not_admin_kp">The sim card you are using is not allowed to log in as Admin</string>
+-    <string name="edit_farmer_kp">Edit Farmer</string>
+-    <string name="edit_cow_kp">Edit Cow</string>
+-    <string name="admin_kp">Admin</string>
+-    <string name="edit_kp">Edit</string>
+-    <string name="select_farmer_kp">Select a farmer</string>
+-    <string name="select_kp">Select</string>
+-    <string name="phone_number_kp">Phone Number</string>
+-    <string name="farmer_profile_updated_kp">Farmer\'s profile successfully updated</string>
+-    <string name="enter_farmer_name_kp">Please enter farmer\'s name</string>
+-    <string name="enter_farmer_mobile_no_kp">Please enter farmer\'s phone number</string>
+-    <string name="farm_location_kp">Farm location</string>
+-    <string name="rec_farm_loc_kp">Record farm\'s GPS location</string>
+-    <string name="not_set_kp">Not set</string>
+-    <string name="are_you_in_farmers_farm_kp">Are you currently in the farmer\'s farm?</string>
+-    <string name="accuracy_kp">Accuracy</string>
+-    <string name="unknown_kp">unknown</string>
+-    <string name="filter_farmers_kp">Filter farmers</string>
+-    <string name="all_farmers_kp">All farmers</string>
+-    <string name="farmers_no_epersonnel_kp">Farmers with no extension personnel</string>
+-    <string name="farmers_tied_to_kp">Farmers tied to</string>
+-    <string name="super_admin_kp">Super Admin</string>
+-    <string name="select_cow_kp">Select a cow</string>
+-    <string name="site_kp">Site</string>
+-    <string name="is_active_kp">Is active</string>
++
++    <string name="enter_milk_status_of_cow_kp">Sir kot kekei teta</string>
++    <string name="enter_in_calf_status_kp">Sir kot kotupcher teta</string>
++    <string name="select_epersonnel_kp">Lewen kanetindet</string>
++    <string name="unable_to_get_epersonnel_kp">Makinyor kanetindet</string>
++    <string name="unable_to_lock_gps_kp">Makinyor gps. Tyemei kenyor en\'g tai</string>
++    <string name="gps_recorded_kp">Kakesir gps</string>
++    <string name="epersonnel_tshoot_kp">Makinyor kanetindet eng\' mashinit.tyem iweke leet ak itau siret</string>
++    <string name="enter_two_names_kp">Sir kainaikuk aeng</string>
++    <string name="phone_number_not_valid_kp">Nambaitab simiot nekesir komanyolu</string>
++    <string name="enter_old_phone_no_kp">Sir nambaitab simoitt nekiboishe eng\' tai</string>
++    <string name="enter_new_phone_no_kp">Sir nambaitab simoit nekeboishe ng\'uni</string>
++    <string name="admin_functions_kp">Boishen kanetindet kityoo.</string>
++    <string name="sim_card_not_admin_kp">Nambaitab simet nekeboishe ko makichamchin koboishe kanetindet</string>
++    <string name="edit_farmer_kp">Ilitit yekesirte temindet</string>
++    <string name="edit_cow_kp">Ilitit yekesirte teta</string>
++    <string name="admin_kp">Kanetindet </string>
++    <string name="edit_kp">Ilitit</string>
++    <string name="select_farmer_kp">Lewen temindet</string>
++    <string name="select_kp">Lewen temindet</string>
++    <string name="phone_number_kp">Nambait ab simoit</string>
++    <string name="farmer_profile_updated_kp">Kakilitit sirutikab temindet</string>
++    <string name="enter_farmer_name_kp">Sir kainetab temindet</string>
++    <string name="enter_farmer_mobile_no_kp">Sir nambaitab simoitab temindet</string>
++    <string name="farm_location_kp">Olemi mbaret.</string>
++    <string name="rec_farm_loc_kp">Sir gps nebo mbaret</string>
++    <string name="not_set_kp">Tomo kesir gps</string>
++    <string name="are_you_in_farmers_farm_kp">Imiten mbar</string>
++    <string name="accuracy_kp">Chulaat</string>
++    <string name="unknown_kp">Making\'en</string>
++    <string name="filter_farmers_kp">Pchei temiik</string>
++    <string name="all_farmers_kp">Temiik tugul</string>
++    <string name="farmers_no_epersonnel_kp">Temiik chemakisirchi kanetindet</string>
++    <string name="farmers_tied_to_kp">Kabatik chekokisirchi</string>
++    <string name="super_admin_kp">Kanetindet neoo</string>
++    <string name="select_cow_kp">Lewen teta</string>
++    <string name="site_kp">Oleimi</string>
++    <string name="is_active_kp">Kakobois</string>
+     <string-array name="yes_no_kp">
+-        <item>No</item>
+-        <item>Yes</item>
++        <item>Eshe</item>
++        <item>Iyan</item>
+     </string-array>
+-    <string name="specify_site_kp">Please select a site</string>
+ 
+     <string name="save_kp">Save</string>
++    <string name="specify_site_kp">Lewen oleiboishe</string>
++
+ </resources>
+diff --git a/NgombePlanner/src/main/res/values/strings_kr.xml b/NgombePlanner/src/main/res/values/strings_kr.xml
+index ffb182e..8da93d2 100644
+--- a/NgombePlanner/src/main/res/values/strings_kr.xml
++++ b/NgombePlanner/src/main/res/values/strings_kr.xml
+@@ -297,48 +297,49 @@
+         <item>In calf</item>
+         <item>Not in calf</item>
+     </string-array>
+-    <string name="enter_milk_status_of_cow_kr">Please enter the status of cow</string>
+-    <string name="enter_in_calf_status_kr">Please enter the status of cow</string>
+-    <string name="select_epersonnel_kr">Please select an extension personnel</string>
+-    <string name="unable_to_get_epersonnel_kr">Unable to fetch extension Personnel</string>
+-    <string name="unable_to_lock_gps_kr">GPS location was not obtained. Will try to get it in next screen</string>
+-    <string name="gps_recorded_kr">GPS recorded</string>
+-    <string name="epersonnel_tshoot_kr">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
+-    <string name="enter_two_names_kr">Enter at least two names</string>
+-    <string name="phone_number_not_valid_kr">The phone number you entered is not valid</string>
+-    <string name="enter_old_phone_no_kr">Please enter your old phone number</string>
+-    <string name="enter_new_phone_no_kr">Please enter your new phone number</string>
+-    <string name="admin_functions_kr">Admin Functions</string>
+-    <string name="sim_card_not_admin_kr">The sim card you are using is not allowed to log in as Admin</string>
+-    <string name="edit_farmer_kr">Edit Farmer</string>
+-    <string name="edit_cow_kr">Edit Cow</string>
+-    <string name="admin_kr">Admin</string>
+-    <string name="edit_kr">Edit</string>
+-    <string name="select_farmer_kr">Select a farmer</string>
+-    <string name="select_kr">Select</string>
+-    <string name="phone_number_kr">Phone Number</string>
+-    <string name="farmer_profile_updated_kr">Farmer\'s profile successfully updated</string>
+-    <string name="enter_farmer_name_kr">Please enter farmer\'s name</string>
+-    <string name="enter_farmer_mobile_no_kr">Please enter farmer\'s phone number</string>
+-    <string name="farm_location_kr">Farm location</string>
+-    <string name="rec_farm_loc_kr">Record farm\'s GPS location</string>
+-    <string name="not_set_kr">Not set</string>
+-    <string name="are_you_in_farmers_farm_kr">Are you currently in the farmer\'s farm?</string>
+-    <string name="accuracy_kr">Accuracy</string>
+-    <string name="unknown_kr">unknown</string>
+-    <string name="filter_farmers_kr">Filter farmers</string>
+-    <string name="all_farmers_kr">All farmers</string>
+-    <string name="farmers_no_epersonnel_kr">Farmers with no extension personnel</string>
+-    <string name="farmers_tied_to_kr">Farmers tied to</string>
+-    <string name="super_admin_kr">Super Admin</string>
+-    <string name="select_cow_kr">Select a cow</string>
+-    <string name="site_kr">Site</string>
+-    <string name="is_active_kr">Is active</string>
++
++    <string name="enter_milk_status_of_cow_kr">Noyanza injisia niva eing\'ombe yikhamwanga</string>
++    <string name="enter_in_calf_status_kr">Noyanza injisia niva eing\'ombe yatila</string>
++    <string name="select_epersonnel_kr">Noyanza chakula ofisa wukhuchendelelanga</string>
++    <string name="unable_to_get_epersonnel_kr">Shikhunyala okhunyola ofisa wokhuchendelelanga tawe.</string>
++    <string name="unable_to_lock_gps_kr">GPS shiyinyolekhanga tawe.Khulatema okhujinyola mushipindi shilondakho</string>
++    <string name="gps_recorded_kr">GPS yandichisivwe</string>
++    <string name="epersonnel_tshoot_kr">Shikhunyala okhunyola ofisa wukhuchendelelanga tawe.Finya \'anyuma\' alafu okalushile okhwandichisia khandi</string>
++    <string name="enter_two_names_kr">Injisia amera kavili</string>
++    <string name="phone_number_not_valid_kr">Enamba yo lusimu yiwinjisie shiyili awene tawe</string>
++    <string name="enter_old_phone_no_kr">Noyanza injisia enamba yiyo yolusimu eikhukhulu</string>
++    <string name="enter_new_phone_no_kr">Noyanza injisia enamba yiyo yolusimu eiyimbia</string>
++    <string name="admin_functions_kr">Admin functions\'</string>
++    <string name="sim_card_not_admin_kr">Esimkadi yolarumishilanga shiyinyala okhufungula \'Admin\' tawe</string>
++    <string name="edit_farmer_kr">Kalushila okhulenjelesia omulimi</string>
++    <string name="edit_cow_kr">Kalushila okhulenjelesia eing\'ombe</string>
++    <string name="admin_kr">Admin\'</string>
++    <string name="edit_kr">Kalushila okhulenjelesia</string>
++    <string name="select_farmer_kr">Chakula omulimi</string>
++    <string name="select_kr">Chakula</string>
++    <string name="phone_number_kr">Enamba yo lusimu</string>
++    <string name="farmer_profile_updated_kr">Amakhuba komulimi kavele awene</string>
++    <string name="enter_farmer_name_kr">Noyanza injisia elira lio omulimi</string>
++    <string name="enter_farmer_mobile_no_kr">Noyanza injisia elira lio omulimi</string>
++    <string name="farm_location_kr">Omukunda kuvele ena</string>
++    <string name="rec_farm_loc_kr">Andichisia e GPS</string>
++    <string name="not_set_kr">Yishili okhulombwa</string>
++    <string name="are_you_in_farmers_farm_kr">Wuvele khumukunda kwomulimi?</string>
++    <string name="accuracy_kr">Kave kamili</string>
++    <string name="unknown_kr">Shiyimanyishe tawe</string>
++    <string name="filter_farmers_kr">Chakula omulimi</string>
++    <string name="all_farmers_kr">Avalimi vosi</string>
++    <string name="farmers_no_epersonnel_kr">Avalimi vakhali nende ofisa wokhuvachendelelela</string>
++    <string name="farmers_tied_to_kr">Avalimi vali nende ofisa wokhuvachendelela</string>
++    <string name="super_admin_kr">Omusinjilisi wa amashini omukali</string>
++    <string name="select_cow_kr">Chakula ei ng\'ombe</string>
++    <string name="site_kr">Avundu womuradi kuli</string>
++    <string name="is_active_kr">Yilakholanga ekasi</string>
+     <string-array name="yes_no_kr">
+-        <item>No</item>
+-        <item>Yes</item>
++        <item>Tawe</item>
++        <item>kario</item>
+     </string-array>
+-    <string name="specify_site_kr">Please select a site</string>
+-
+     <string name="save_kr">Save</string>
++    <string name="specify_site_kr">Noyanza chakula avundu wo muradi kuli</string>
++
+ </resources>
+\ No newline at end of file
+diff --git a/NgombePlanner/src/main/res/values/strings_lu.xml b/NgombePlanner/src/main/res/values/strings_lu.xml
+index dbd93aa..86f16a4 100644
+--- a/NgombePlanner/src/main/res/values/strings_lu.xml
++++ b/NgombePlanner/src/main/res/values/strings_lu.xml
+@@ -300,48 +300,49 @@
+         <item>In calf</item>
+         <item>Not in calf</item>
+     </string-array>
+-    <string name="enter_milk_status_of_cow_lu">Please enter the status of cow</string>
+-    <string name="enter_in_calf_status_lu">Please enter the status of cow</string>
+-    <string name="select_epersonnel_lu">Please select an extension personnel</string>
+-    <string name="unable_to_get_epersonnel_lu">Unable to fetch extension Personnel</string>
+-    <string name="unable_to_lock_gps_lu">GPS location was not obtained. Will try to get it in next screen</string>
+-    <string name="gps_recorded_lu">GPS recorded</string>
+-    <string name="epersonnel_tshoot_lu">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
+-    <string name="enter_two_names_lu">Enter at least two names</string>
+-    <string name="phone_number_not_valid_lu">The phone number you entered is not valid</string>
+-    <string name="enter_old_phone_no_lu">Please enter your old phone number</string>
+-    <string name="enter_new_phone_no_lu">Please enter your new phone number</string>
+-    <string name="admin_functions_lu">Admin Functions</string>
+-    <string name="sim_card_not_admin_lu">The sim card you are using is not allowed to log in as Admin</string>
+-    <string name="edit_farmer_lu">Edit Farmer</string>
+-    <string name="edit_cow_lu">Edit Cow</string>
+-    <string name="admin_lu">Admin</string>
+-    <string name="edit_lu">Edit</string>
+-    <string name="select_farmer_lu">Select a farmer</string>
+-    <string name="select_lu">Select</string>
+-    <string name="phone_number_lu">Phone Number</string>
+-    <string name="farmer_profile_updated_lu">Farmer\'s profile successfully updated</string>
+-    <string name="enter_farmer_name_lu">Please enter farmer\'s name</string>
+-    <string name="enter_farmer_mobile_no_lu">Please enter farmer\'s phone number</string>
+-    <string name="farm_location_lu">Farm location</string>
+-    <string name="rec_farm_loc_lu">Record farm\'s GPS location</string>
+-    <string name="not_set_lu">Not set</string>
+-    <string name="are_you_in_farmers_farm_lu">Are you currently in the farmer\'s farm?</string>
+-    <string name="accuracy_lu">Accuracy</string>
+-    <string name="unknown_lu">unknown</string>
+-    <string name="filter_farmers_lu">Filter farmers</string>
+-    <string name="all_farmers_lu">All farmers</string>
+-    <string name="farmers_no_epersonnel_lu">Farmers with no extension personnel</string>
+-    <string name="farmers_tied_to_lu">Farmers tied to</string>
+-    <string name="super_admin_lu">Super Admin</string>
+-    <string name="select_cow_lu">Select a cow</string>
+-    <string name="site_lu">Site</string>
+-    <string name="is_active_lu">Is active</string>
++
++    <string name="enter_milk_status_of_cow_lu">Handichisia ing\'ombe niisherwangwa noho tawe.</string>
++    <string name="enter_in_calf_status_lu">Handichisia ing\'ombe niiyatila inda noho tawe</string>
++    <string name="select_epersonnel_lu">Yaula omusinjilili</string>
++    <string name="unable_to_get_epersonnel_lu">Yaule omusinjilili tawe</string>
++    <string name="unable_to_lock_gps_lu">GPS siibukulilwe tawe. Ilabukulwa mu-shise shilondakhwo.</string>
++    <string name="gps_recorded_lu">GPS ibukulwe</string>
++    <string name="epersonnel_tshoot_lu">Siinyalilwe khuyaula omusinjilili tawe. Mina \'kalukha inyuma\' khuchachia khwandichisia obuyakha.</string>
++    <string name="enter_two_names_lu">Handichisia amera kabili.</string>
++    <string name="phone_number_not_valid_lu">Inamba yolusimu yawinjisiye siili abwene tawe.</string>
++    <string name="enter_old_phone_no_lu">Handichisia inamba ikhulu yolusimu.</string>
++    <string name="enter_new_phone_no_lu">Handichisia inamba imbiakha yolusimu.</string>
++    <string name="admin_functions_lu">Efikhole fiomusinjilili</string>
++    <string name="sim_card_not_admin_lu">Ikadi ya isimu yorumishira siinyala khwinjila mubusinjilili tawe.</string>
++    <string name="edit_farmer_lu">kasia omulimi</string>
++    <string name="edit_cow_lu">kasia ing\'ombe</string>
++    <string name="admin_lu">Obusinjilili</string>
++    <string name="edit_lu">Okhukasia obuhandiche</string>
++    <string name="select_farmer_lu">Yaula omulimi</string>
++    <string name="select_lu">Yaula</string>
++    <string name="phone_number_lu">Inamba yolusimu.</string>
++    <string name="farmer_profile_updated_lu">Habari yomulimi ichenjibwe obulai</string>
++    <string name="enter_farmer_name_lu">Handichisia amera komulimi.</string>
++    <string name="enter_farmer_mobile_no_lu">Handichisia inamba yolusimu yomulimi.</string>
++    <string name="farm_location_lu">mukunda kwomulimi kunyolekha hena.</string>
++    <string name="rec_farm_loc_lu">Handichisia GPS yomukunda</string>
++    <string name="not_set_lu">ikasibwe tawe.</string>
++    <string name="are_you_in_farmers_farm_lu">Oli mumukunda kwomulimi mubise bino.</string>
++    <string name="accuracy_lu">Obwene</string>
++    <string name="unknown_lu">Siimanyishe tawe</string>
++    <string name="filter_farmers_lu">Yaula abalimi</string>
++    <string name="all_farmers_lu">Abalimi bosi</string>
++    <string name="farmers_no_epersonnel_lu">Abalimi bakhali nende abasinjilili tawe.</string>
++    <string name="farmers_tied_to_lu">Abalimi basinjililwa nende</string>
++    <string name="super_admin_lu">Omusinjilili mukhongo.</string>
++    <string name="select_cow_lu">Yaula ing\'ombe</string>
++    <string name="site_lu">Womuradi Kunyolekha</string>
++    <string name="is_active_lu">Yandichisianja.</string>
+     <string-array name="yes_no_lu">
+-        <item>No</item>
+-        <item>Yes</item>
++        <item>Tawe</item>
++        <item>Hee</item>
+     </string-array>
+-    <string name="specify_site_lu">Please select a site</string>
+-
+     <string name="save_lu">Save</string>
++    <string name="specify_site_lu">Yaula womuradi kunyolekha.</string>
++
+ </resources>
+diff --git a/NgombePlanner/src/main/res/values/strings_nn.xml b/NgombePlanner/src/main/res/values/strings_nn.xml
+index 96242b9..717a7f5 100644
+--- a/NgombePlanner/src/main/res/values/strings_nn.xml
++++ b/NgombePlanner/src/main/res/values/strings_nn.xml
+@@ -298,48 +298,49 @@
+         <item>In calf</item>
+         <item>Not in calf</item>
+     </string-array>
+-    <string name="enter_milk_status_of_cow_nn">Please enter the status of cow</string>
+-    <string name="enter_in_calf_status_nn">Please enter the status of cow</string>
+-    <string name="select_epersonnel_nn">Please select an extension personnel</string>
+-    <string name="unable_to_get_epersonnel_nn">Unable to fetch extension Personnel</string>
+-    <string name="unable_to_lock_gps_nn">GPS location was not obtained. Will try to get it in next screen</string>
+-    <string name="gps_recorded_nn">GPS recorded</string>
+-    <string name="epersonnel_tshoot_nn">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
+-    <string name="enter_two_names_nn">Enter at least two names</string>
+-    <string name="phone_number_not_valid_nn">The phone number you entered is not valid</string>
+-    <string name="enter_old_phone_no_nn">Please enter your old phone number</string>
+-    <string name="enter_new_phone_no_nn">Please enter your new phone number</string>
+-    <string name="admin_functions_nn">Admin Functions</string>
+-    <string name="sim_card_not_admin_nn">The sim card you are using is not allowed to log in as Admin</string>
+-    <string name="edit_farmer_nn">Edit Farmer</string>
+-    <string name="edit_cow_nn">Edit Cow</string>
+-    <string name="admin_nn">Admin</string>
+-    <string name="edit_nn">Edit</string>
+-    <string name="select_farmer_nn">Select a farmer</string>
+-    <string name="select_nn">Select</string>
+-    <string name="phone_number_nn">Phone Number</string>
+-    <string name="farmer_profile_updated_nn">Farmer\'s profile successfully updated</string>
+-    <string name="enter_farmer_name_nn">Please enter farmer\'s name</string>
+-    <string name="enter_farmer_mobile_no_nn">Please enter farmer\'s phone number</string>
+-    <string name="farm_location_nn">Farm location</string>
+-    <string name="rec_farm_loc_nn">Record farm\'s GPS location</string>
+-    <string name="not_set_nn">Not set</string>
+-    <string name="are_you_in_farmers_farm_nn">Are you currently in the farmer\'s farm?</string>
+-    <string name="accuracy_nn">Accuracy</string>
+-    <string name="unknown_nn">unknown</string>
+-    <string name="filter_farmers_nn">Filter farmers</string>
+-    <string name="all_farmers_nn">All farmers</string>
+-    <string name="farmers_no_epersonnel_nn">Farmers with no extension personnel</string>
+-    <string name="farmers_tied_to_nn">Farmers tied to</string>
+-    <string name="super_admin_nn">Super Admin</string>
+-    <string name="select_cow_nn">Select a cow</string>
+-    <string name="site_nn">Site</string>
+-    <string name="is_active_nn">Is active</string>
++
++    <string name="enter_milk_status_of_cow_nn">Sir kot kekei teta</string>
++    <string name="enter_in_calf_status_nn">Sir kot kotupcher teta</string>
++    <string name="select_epersonnel_nn">Lewen kanetindet</string>
++    <string name="unable_to_get_epersonnel_nn">Makinyor kanetindet</string>
++    <string name="unable_to_lock_gps_nn">Makinyor gps. Tyemei kenyor en\'g tai</string>
++    <string name="gps_recorded_nn">Kakesir gps</string>
++    <string name="epersonnel_tshoot_nn">Makinyor kanetindet eng\' mashinit.tyem iweke leet ak itau siret</string>
++    <string name="enter_two_names_nn">Sir kainaikuk aeng</string>
++    <string name="phone_number_not_valid_nn">Nambetab simet nekesir komo unot</string>
++    <string name="enter_old_phone_no_nn">Sir nambetab simet nekiboishe eng\' tai</string>
++    <string name="enter_new_phone_no_nn">Sir nambetab simet nekeboishe ng\'unon</string>
++    <string name="admin_functions_nn">Boishe kanetindet kityoo.</string>
++    <string name="sim_card_not_admin_nn">Nambetab simet nekeboishe ko makichamchin koboishe kanetindet</string>
++    <string name="edit_farmer_nn">Ilitit yekesirtei kabatindet</string>
++    <string name="edit_cow_nn">Ilitit yekesirtei teta</string>
++    <string name="admin_nn">Kanetindet </string>
++    <string name="edit_nn">Ilitit</string>
++    <string name="select_farmer_nn">Lewen kabatindet</string>
++    <string name="select_nn">Lewen kabatindet</string>
++    <string name="phone_number_nn">Nambetab simet</string>
++    <string name="farmer_profile_updated_nn">Kakilitit sirutikab kabatindet</string>
++    <string name="enter_farmer_name_nn">Sir kainetab kabatindet</string>
++    <string name="enter_farmer_mobile_no_nn">Sir nambetab simetab kabatindet</string>
++    <string name="farm_location_nn">Olemi mbaret.</string>
++    <string name="rec_farm_loc_nn">Sir gps nebo mbaret</string>
++    <string name="not_set_nn">Tomo kesir gps</string>
++    <string name="are_you_in_farmers_farm_nn">Imiten mbar</string>
++    <string name="accuracy_nn">Chulaat</string>
++    <string name="unknown_nn">Making\'en</string>
++    <string name="filter_farmers_nn">Pchei kabatik</string>
++    <string name="all_farmers_nn">Kabatik tugul</string>
++    <string name="farmers_no_epersonnel_nn">Kabatik chemakisirchi kanetindet</string>
++    <string name="farmers_tied_to_nn">Kabatik chekokisirchi</string>
++    <string name="super_admin_nn">Kanetindet neoo</string>
++    <string name="select_cow_nn">Lewen teta</string>
++    <string name="site_nn">Oleimi</string>
++    <string name="is_active_nn">Kakobois</string>
+     <string-array name="yes_no_nn">
+-        <item>No</item>
+-        <item>Yes</item>
++        <item>Eshe</item>
++        <item>Iyan</item>
+     </string-array>
+-    <string name="specify_site_nn">Please select a site</string>
+-
+     <string name="save_nn">Save</string>
++    <string name="specify_site_nn">Lewen oleiboishe</string>
++
+ </resources>
+diff --git a/NgombePlanner/src/main/res/values/strings_sw.xml b/NgombePlanner/src/main/res/values/strings_sw.xml
+index ee8e06d..50dae45 100644
+--- a/NgombePlanner/src/main/res/values/strings_sw.xml
++++ b/NgombePlanner/src/main/res/values/strings_sw.xml
+@@ -298,48 +298,49 @@
+         <item>In calf</item>
+         <item>Not in calf</item>
+     </string-array>
+-    <string name="enter_milk_status_of_cow_sw">Please enter the status of cow</string>
+-    <string name="enter_in_calf_status_sw">Please enter the status of cow</string>
+-    <string name="select_epersonnel_sw">Please select an extension personnel</string>
+-    <string name="unable_to_get_epersonnel_sw">Unable to fetch extension Personnel</string>
+-    <string name="unable_to_lock_gps_sw">GPS location was not obtained. Will try to get it in next screen</string>
+-    <string name="gps_recorded_sw">GPS recorded</string>
+-    <string name="epersonnel_tshoot_sw">Unable to fetch extension personnel from the server. Try pressing back and restarting the registration</string>
+-    <string name="enter_two_names_sw">Enter at least two names</string>
+-    <string name="phone_number_not_valid_sw">The phone number you entered is not valid</string>
+-    <string name="enter_old_phone_no_sw">Please enter your old phone number</string>
+-    <string name="enter_new_phone_no_sw">Please enter your new phone number</string>
+-    <string name="admin_functions_sw">Admin Functions</string>
+-    <string name="sim_card_not_admin_sw">The sim card you are using is not allowed to log in as Admin</string>
+-    <string name="edit_farmer_sw">Edit Farmer</string>
+-    <string name="edit_cow_sw">Edit Cow</string>
+-    <string name="admin_sw">Admin</string>
+-    <string name="edit_sw">Edit</string>
+-    <string name="select_farmer_sw">Select a farmer</string>
+-    <string name="select_sw">Select</string>
+-    <string name="phone_number_sw">Phone Number</string>
+-    <string name="farmer_profile_updated_sw">Farmer\'s profile successfully updated</string>
+-    <string name="enter_farmer_name_sw">Please enter farmer\'s name</string>
+-    <string name="enter_farmer_mobile_no_sw">Please enter farmer\'s phone number</string>
+-    <string name="farm_location_sw">Farm location</string>
+-    <string name="rec_farm_loc_sw">Record farm\'s GPS location</string>
+-    <string name="not_set_sw">Not set</string>
+-    <string name="are_you_in_farmers_farm_sw">Are you currently in the farmer\'s farm?</string>
+-    <string name="accuracy_sw">Accuracy</string>
+-    <string name="unknown_sw">unknown</string>
+-    <string name="filter_farmers_sw">Filter farmers</string>
+-    <string name="all_farmers_sw">All farmers</string>
+-    <string name="farmers_no_epersonnel_sw">Farmers with no extension personnel</string>
+-    <string name="farmers_tied_to_sw">Farmers tied to</string>
+-    <string name="super_admin_sw">Super Admin</string>
+-    <string name="select_cow_sw">Select a cow</string>
+-    <string name="site_sw">Site</string>
+-    <string name="is_active_sw">Is active</string>
++
++    <string name="enter_milk_status_of_cow_sw">Tafadhali ingiza hali ya maziwa ya ngombe</string>
++    <string name="enter_in_calf_status_sw">Tafadhali ingiza hali ya mimba ya ngombe</string>
++    <string name="select_epersonnel_sw">Tafadhali chagua afisa wa nyanjani</string>
++    <string name="unable_to_get_epersonnel_sw">Haiwezi kuleta afisa wa nyanjani.</string>
++    <string name="unable_to_lock_gps_sw">GPS ya eneo haipatikani.Utajaribu kuipata kwa ukurasa ufwatao.</string>
++    <string name="gps_recorded_sw">GPS imerekodiwa</string>
++    <string name="epersonnel_tshoot_sw">Haiwezi kuleta afisa wa nyanjani kutoka kwa mtandao.Jaribu kurudi nyuma na uanze uandikishaji.</string>
++    <string name="enter_two_names_sw">Jaza angalao majina mawili</string>
++    <string name="phone_number_not_valid_sw">Nambari ya simu uliyoingiza haitambuliki</string>
++    <string name="enter_old_phone_no_sw">Tafadhali ingiza nambari yako mzee ya simu.</string>
++    <string name="enter_new_phone_no_sw">Tafadhali ingiza nambari yako mpya ya simu</string>
++    <string name="admin_functions_sw">Kazi za msimamizi</string>
++    <string name="sim_card_not_admin_sw">Sim card unayotumia hairuhusiwi kutumika kama msimamizi</string>
++    <string name="edit_farmer_sw">Kurekebisha mkulima</string>
++    <string name="edit_cow_sw">Kurekebisha ng\'ombe</string>
++    <string name="admin_sw">Msimamizi</string>
++    <string name="edit_sw">Kurekebisha</string>
++    <string name="select_farmer_sw">Chagua mkulima</string>
++    <string name="select_sw">Chagua  </string>
++    <string name="phone_number_sw">Nambari ya simu</string>
++    <string name="farmer_profile_updated_sw">Ujumbe kuhusu mkulima umefanikiwa kuongezwa</string>
++    <string name="enter_farmer_name_sw">Tafadhali ingiza jina la mkulima</string>
++    <string name="enter_farmer_mobile_no_sw">Tafadhali ingiza nambari ya simu ya mkulima.</string>
++    <string name="farm_location_sw">Boma ya mkulima</string>
++    <string name="rec_farm_loc_sw">Rekodi  GPS ya shamba ya mkulima</string>
++    <string name="not_set_sw">Haijawekwa</string>
++    <string name="are_you_in_farmers_farm_sw">Uko katika boma ya mkulima?</string>
++    <string name="accuracy_sw">Usahihi au usawa</string>
++    <string name="unknown_sw">Haijulikani</string>
++    <string name="filter_farmers_sw">Chuja wakulima</string>
++    <string name="all_farmers_sw">Wakulima wote</string>
++    <string name="farmers_no_epersonnel_sw">Wakulima ambao hawana afisa wa nyanjani</string>
++    <string name="farmers_tied_to_sw">Wakulima wa</string>
++    <string name="super_admin_sw">Msimamizi mkuu</string>
++    <string name="select_cow_sw">Chagua ng\'ombe</string>
++    <string name="site_sw">Eneo</string>
++    <string name="is_active_sw">Inatenda kazi</string>
+     <string-array name="yes_no_sw">
+-        <item>No</item>
+-        <item>Yes</item>
++        <item>Hapana</item>
++        <item>Ndio</item>
+     </string-array>
+-    <string name="specify_site_sw">Please select a site</string>
+-
+     <string name="save_sw">Save</string>
++    <string name="specify_site_sw">Tafadhali chagua eneo</string>
++
+ </resources>
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+index ef54732..1fd542e 100644
+--- a/gradle/wrapper/gradle-wrapper.properties
++++ b/gradle/wrapper/gradle-wrapper.properties
+@@ -1,6 +1,6 @@
+-#Wed Apr 16 15:26:39 EAT 2014
++#Mon Jun 30 11:48:15 EAT 2014
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=http\://services.gradle.org/distributions/gradle-1.11-all.zip
++distributionUrl=http\://services.gradle.org/distributions/gradle-1.12-all.zip
+-- 
+2.7.1
+

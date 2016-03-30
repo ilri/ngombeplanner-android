@@ -1,0 +1,366 @@
+From 20969e825d388747043d3bb4ee1dc0d57560146b Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Wed, 28 May 2014 10:09:01 +0300
+Subject: [PATCH 172/213] Version 0.9.5: Sire specification in
+ CowRegistrationActivity
+
+Sire specification is now through the use of an AutoCompleteTextView
+instead fo a spinner. In the process of adding another field for
+specifying the sire's owner
+---
+ MistroFarmer/src/main/AndroidManifest.xml          |  2 +-
+ .../mistro/farmer/CowRegistrationActivity.java     | 82 ++++++++++++++++------
+ .../ilri/mistro/farmer/backend/DataHandler.java    |  1 +
+ .../org/cgiar/ilri/mistro/farmer/carrier/Sire.java | 29 +++++++-
+ .../main/res/layout/activity_cow_registration.xml  | 11 ++-
+ MistroFarmer/src/main/res/values/strings_en.xml    |  1 +
+ 6 files changed, 102 insertions(+), 24 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index 1976cf1..7e1177c 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -2,7 +2,7 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+     android:versionCode="4"
+-    android:versionName="0.9.4" >
++    android:versionName="0.9.5" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index 9218948..a537189 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -44,6 +44,7 @@ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+ import org.cgiar.ilri.mistro.farmer.carrier.Sire;
+ import org.json.JSONException;
+ import org.json.JSONObject;
++import org.w3c.dom.Text;
+ 
+ import java.text.ParseException;
+ import java.text.SimpleDateFormat;
+@@ -86,6 +87,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     private Spinner serviceTypeS;
+     private TextView sireTV;
+     private Spinner sireS;
++    private AutoCompleteTextView sireACTV;
+     private TextView strawNumberTV;
+     private EditText strawNumberET;
+     private TextView damTV;
+@@ -173,12 +175,12 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         serviceTypeS.setOnItemSelectedListener(this);
+         sireTV = (TextView)this.findViewById(R.id.sire_tv);
+         sireS = (Spinner)this.findViewById(R.id.sire_s);
++        sireACTV = (AutoCompleteTextView)this.findViewById(R.id.sire_actv);
+         strawNumberTV = (TextView)this.findViewById(R.id.straw_number_tv);
+         strawNumberET = (EditText)this.findViewById(R.id.straw_number_et);
+         damTV = (TextView)this.findViewById(R.id.dam_tv);
+         damS = (Spinner)this.findViewById(R.id.dam_s);
+         damACTV = (AutoCompleteTextView)this.findViewById(R.id.dam_actv);
+-        damACTV.setHint(Locale.getStringInLocale("enter_dam_etn",this));
+         embryoNumberTV = (TextView)this.findViewById(R.id.embryo_number_tv);
+         embryoNumberET = (EditText)this.findViewById(R.id.embryo_number_et);
+         countryOfOriginTV = (TextView)this.findViewById(R.id.country_of_origin_tv);
+@@ -249,6 +251,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, deformityET.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, strawNumberET.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, damACTV.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, sireACTV.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, embryoNumberET.getText().toString());
+             DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, countryOfOriginACTV.getText().toString());
+         }
+@@ -269,6 +272,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         deformityET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, ""));
+         strawNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, ""));
+         damACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, ""));
++        sireACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, ""));
+         embryoNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, ""));
+         countryOfOriginACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, ""));
+     }
+@@ -285,6 +289,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, "");
+         DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, "");
+ 
+@@ -428,6 +433,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                         if(damSelection != -1)
+                             damACTV.setText(validDamNames.get(damSelection));
+ 
++                        ArrayAdapter<String> siresACTVAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, validSireNames);
++                        sireACTV.setAdapter(siresACTVAdapter);
++                        if(sireSelection != -1)
++                            sireACTV.setText(validSireNames.get(sireSelection));
+ 
+                         for(int i = 0; i < serviceTypesInEN.length; i++) {
+                             if(serviceTypesInEN[i].equals("Bull") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_BULL)) {
+@@ -447,11 +456,12 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                         serviceTypeTV.setVisibility(TextView.GONE);
+                         serviceTypeS.setVisibility(Spinner.GONE);
+                         sireTV.setVisibility(TextView.GONE);
+-                        sireS.setVisibility(Spinner.GONE);
++//                        sireS.setVisibility(Spinner.GONE);
+                         strawNumberTV.setVisibility(TextView.GONE);
+                         strawNumberET.setVisibility(EditText.GONE);
+                         damTV.setVisibility(TextView.GONE);
+-                        damS.setVisibility(Spinner.GONE);
++//                        damS.setVisibility(Spinner.GONE);
++                        sireACTV.setVisibility(AutoCompleteTextView.GONE);
+                         damACTV.setVisibility(AutoCompleteTextView.GONE);
+                         embryoNumberTV.setVisibility(TextView.GONE);
+                         embryoNumberET.setVisibility(EditText.GONE);
+@@ -605,6 +615,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         specifyET.setHint(Locale.getStringInLocale("specify", this));
+         noDeformityCB.setText(Locale.getStringInLocale("no_deformity", this));
+         dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
++
++        sireACTV.setHint(Locale.getStringInLocale("enter_sire_etn", this));
++        damACTV.setHint(Locale.getStringInLocale("enter_dam_etn",this));
++
+         ArrayAdapter countryArrayAdapter = ArrayAdapter.createFromResource(this,R.array.countries,android.R.layout.select_dialog_item);
+         countryOfOriginACTV.setAdapter(countryArrayAdapter);
+         countryOfOriginACTV.setHint(Locale.getStringInLocale("specify_other_country", this));
+@@ -902,17 +916,21 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             changeServiceType();
+         }
+         else if(parent == commonCountriesS) {
+-            String[] commonCountries = getResources().getStringArray(R.array.common_countries);
+-            if(commonCountries[commonCountriesS.getSelectedItemPosition()].equals("Other")) {
+-                countryOfOriginACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+-                countryOfOriginTV.setVisibility(TextView.VISIBLE);
+-                countryOfOriginACTV.setText("");
+-            }
+-            else {
+-                countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
+-                countryOfOriginTV.setVisibility(TextView.GONE);
+-                countryOfOriginACTV.setText(commonCountries[commonCountriesS.getSelectedItemPosition()]);
+-            }
++            toggleCountryOfOriginVisibility();
++        }
++    }
++
++    private void toggleCountryOfOriginVisibility(){
++        String[] commonCountries = getResources().getStringArray(R.array.common_countries);
++        if(commonCountries[commonCountriesS.getSelectedItemPosition()].equals("Other")) {
++            countryOfOriginACTV.setVisibility(AutoCompleteTextView.VISIBLE);
++            countryOfOriginTV.setVisibility(TextView.VISIBLE);
++            countryOfOriginACTV.setText("");
++        }
++        else {
++            countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
++            countryOfOriginTV.setVisibility(TextView.GONE);
++            countryOfOriginACTV.setText(commonCountries[commonCountriesS.getSelectedItemPosition()]);
+         }
+     }
+ 
+@@ -920,38 +938,52 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         String[] serviceTypesInEN = Locale.getArrayInLocale("service_types", this, Locale.LOCALE_ENGLISH);
+         if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Bull")) {
+             sireTV.setVisibility(TextView.VISIBLE);
+-            sireS.setVisibility(Spinner.VISIBLE);
++//            sireS.setVisibility(Spinner.VISIBLE);
+             strawNumberTV.setVisibility(TextView.GONE);
+             strawNumberET.setVisibility(EditText.GONE);
+             damTV.setVisibility(TextView.VISIBLE);
+ //            damS.setVisibility(Spinner.VISIBLE);
+             damS.setVisibility(Spinner.GONE);
+             damACTV.setVisibility(AutoCompleteTextView.VISIBLE);
++            sireACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+             embryoNumberTV.setVisibility(TextView.GONE);
+             embryoNumberET.setVisibility(EditText.GONE);
++            commonCountriesTV.setVisibility(TextView.VISIBLE);
++            commonCountriesS.setVisibility(Spinner.VISIBLE);
++            toggleCountryOfOriginVisibility();
+         }
+         else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
+             sireTV.setVisibility(TextView.GONE);
+-            sireS.setVisibility(Spinner.GONE);
++//            sireS.setVisibility(Spinner.GONE);
+             strawNumberTV.setVisibility(TextView.VISIBLE);
+             strawNumberET.setVisibility(EditText.VISIBLE);
+             damTV.setVisibility(TextView.VISIBLE);
+ //            damS.setVisibility(Spinner.VISIBLE);
+             damS.setVisibility(Spinner.GONE);
+             damACTV.setVisibility(AutoCompleteTextView.VISIBLE);
++            sireACTV.setVisibility(AutoCompleteTextView.GONE);
+             embryoNumberTV.setVisibility(TextView.GONE);
+             embryoNumberET.setVisibility(EditText.GONE);
++            commonCountriesTV.setVisibility(TextView.GONE);
++            commonCountriesS.setVisibility(Spinner.GONE);
++            countryOfOriginTV.setVisibility(TextView.GONE);
++            countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
+         }
+         else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Embryo Transfer")) {
+             sireTV.setVisibility(TextView.GONE);
+-            sireS.setVisibility(Spinner.GONE);
++//            sireS.setVisibility(Spinner.GONE);
+             strawNumberTV.setVisibility(TextView.GONE);
+             strawNumberET.setVisibility(EditText.GONE);
+             damTV.setVisibility(TextView.GONE);
+             damS.setVisibility(Spinner.GONE);
+             damACTV.setVisibility(AutoCompleteTextView.GONE);
++            sireACTV.setVisibility(AutoCompleteTextView.GONE);
+             embryoNumberTV.setVisibility(TextView.VISIBLE);
+             embryoNumberET.setVisibility(EditText.VISIBLE);
++            commonCountriesTV.setVisibility(TextView.GONE);
++            commonCountriesS.setVisibility(Spinner.GONE);
++            countryOfOriginTV.setVisibility(TextView.GONE);
++            countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
+         }
+     }
+ 
+@@ -1084,8 +1116,18 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                 thisCow.setServiceType(Cow.SERVICE_TYPE_BULL);
+ 
+                 Sire sire = new Sire();
+-                sire.setName(validSires.get(sireS.getSelectedItemPosition()).getName());
+-                sire.setEarTagNumber(validSires.get(sireS.getSelectedItemPosition()).getEarTagNumber());
++//                sire.setName(validSires.get(sireS.getSelectedItemPosition()).getName());
++//                sire.setEarTagNumber(validSires.get(sireS.getSelectedItemPosition()).getEarTagNumber());
++
++                for(int i = 0; i < validSires.size(); i++){
++                    if(sireACTV.getText().toString().equals(validSires.get(i).getEarTagNumber()+" ("+validSires.get(i).getName()+")")){
++                        sire.setEarTagNumber(validSires.get(i).getEarTagNumber());
++                        sire.setName(validSires.get(i).getName());
++                    }
++                }
++                if(sire.getEarTagNumber().trim().equals("")){//if not yet set then assume the sire is not part of the herd
++                    sire.setEarTagNumber(sireACTV.getText().toString());
++                }
+                 thisCow.setSire(sire);
+ 
+                 Dam dam =new Dam();
+@@ -1098,7 +1140,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                         dam.setName(validDams.get(i).getName());
+                     }
+                 }
+-                if(dam.getEmbryoNumber().trim().equals("")){
++                if(dam.getEarTagNumber().trim().equals("")){//if not yet set then assume the dam is not part of the herd
+                     dam.setEarTagNumber(damACTV.getText().toString());
+                 }
+                 thisCow.setDam(dam);
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+index b8324dd..d462bb8 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+@@ -107,6 +107,7 @@ public class DataHandler
+     public static final String SP_KEY_CRA_DEFORMITY = "cowRegistrationActivityDeformity";
+     public static final String SP_KEY_CRA_STRAW_NUMBER = "cowRegistrationActivityStrawNumber";
+     public static final String SP_KEY_CRA_DAM = "cowRegistrationActivityDam";
++    public static final String SP_KEY_CRA_SIRE = "cowRegistrationActivitySire";
+     public static final String SP_KEY_CRA_EMBRYO_NUMBER = "cowRegistrationActivityEmbryoNumber";
+     public static final String SP_KEY_CRA_COUNTRY_OF_ORIGIN = "cowRegistrationActivityCountryOfOrigin";
+     public static final String SP_KEY_FRA_FULL_NAME = "farmerRegistrationActivityFullName";
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Sire.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Sire.java
+index 1f63a42..85f7d97 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Sire.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Sire.java
+@@ -13,16 +13,19 @@ import java.io.Serializable;
+ public class Sire extends Cow implements Serializable
+ {
+     private String strawNumber;
++    private String owner;
++    private String ownerType;
+ 
+     public Sire()
+     {
+         super(false);
+         setSex(SEX_MALE);
+         strawNumber="";
++        owner = "";
++        ownerType = "";
+     }
+ 
+-    public Sire(Parcel source)
+-    {
++    public Sire(Parcel source) {
+         this();
+         readFromParcel(source);
+     }
+@@ -36,11 +39,29 @@ public class Sire extends Cow implements Serializable
+         return strawNumber;
+     }
+ 
++    public void setOwner(String owner){
++        this.owner = owner;
++    }
++
++    public String getOwner(){
++        return this.owner;
++    }
++
++    public String getOwnerType() {
++        return ownerType;
++    }
++
++    public void setOwnerType(String ownerType) {
++        this.ownerType = ownerType;
++    }
++
+     @Override
+     public void writeToParcel(Parcel dest, int flags)
+     {
+         super.writeToParcel(dest, flags);
+         dest.writeString(strawNumber);
++        dest.writeString(owner);
++        dest.writeString(ownerType);
+     }
+ 
+     @Override
+@@ -48,6 +69,8 @@ public class Sire extends Cow implements Serializable
+     {
+         super.readFromParcel(in);
+         strawNumber=in.readString();
++        owner=in.readString();
++        ownerType=in.readString();
+     }
+ 
+     public static final Creator<Sire> CREATOR=new Creator<Sire>()
+@@ -73,6 +96,8 @@ public class Sire extends Cow implements Serializable
+         {
+             jsonObject.put("type","sire");
+             jsonObject.put("strawNumber",((strawNumber==null) ? "":strawNumber));
++            jsonObject.put("owner", owner);
++            jsonObject.put("ownerType", ownerType);
+         }
+         catch (JSONException e)
+         {
+diff --git a/MistroFarmer/src/main/res/layout/activity_cow_registration.xml b/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
+index 3024765..e1c7598 100644
+--- a/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
++++ b/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
+@@ -195,7 +195,16 @@
+             android:layout_height="wrap_content"
+             android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+             android:textColor="@color/text_input_color"
+-            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:visibility="gone"/>
++        <AutoCompleteTextView
++            android:id="@+id/sire_actv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"/>
+         <TextView
+             android:id="@+id/straw_number_tv"
+             android:layout_height="wrap_content"
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index d335d28..dff22d5 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -276,4 +276,5 @@
+     <string name="breed_unknown_en">The breed you entered is unknown</string>
+     <string name="extra_breed_en">Extra Breed</string>
+     <string name="specify_other_country_en">Specify other country here</string>
++    <string name="enter_sire_etn_en">Enter the sire\'s ear tag number</string>
+ </resources>
+-- 
+2.7.1
+

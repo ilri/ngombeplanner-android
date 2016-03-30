@@ -1,0 +1,199 @@
+From beaddfd0afac93db4040767cf478528e0e595395 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Mon, 9 Jun 2014 20:22:55 +0300
+Subject: [PATCH 184/213] Version 0.9.9.7: Converted Milk Quantity to Float
+
+Converted milk quantity systemwide to support floats instead of
+just integers
+---
+ .gitignore                                                        | 1 +
+ .idea/libraries/actionbarsherlock_4_4_0.xml                       | 2 +-
+ .idea/misc.xml                                                    | 2 +-
+ Android.iml                                                       | 2 +-
+ MistroFarmer/src/main/AndroidManifest.xml                         | 4 ++--
+ .../org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java   | 6 +++---
+ .../cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java    | 8 +++++---
+ .../java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java    | 2 +-
+ .../java/org/cgiar/ilri/mistro/farmer/carrier/MilkProduction.java | 6 +++---
+ MistroFarmer/src/main/res/layout/activity_add_milk_production.xml | 2 +-
+ 10 files changed, 19 insertions(+), 16 deletions(-)
+
+diff --git a/.gitignore b/.gitignore
+index c8b75ad..c98a12e 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -25,3 +25,4 @@ local.properties
+ .idea/datasrouces.xml
+ .idea/dataSources.ids
+ .idea/misc.xml
++.idea/libraries/
+diff --git a/.idea/libraries/actionbarsherlock_4_4_0.xml b/.idea/libraries/actionbarsherlock_4_4_0.xml
+index 2122c60..25be334 100644
+--- a/.idea/libraries/actionbarsherlock_4_4_0.xml
++++ b/.idea/libraries/actionbarsherlock_4_4_0.xml
+@@ -1,8 +1,8 @@
+ <component name="libraryTable">
+   <library name="actionbarsherlock-4.4.0">
+     <CLASSES>
+-      <root url="file://$PROJECT_DIR$/MistroFarmer/build/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res" />
+       <root url="jar://$PROJECT_DIR$/MistroFarmer/build/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/classes.jar!/" />
++      <root url="file://$PROJECT_DIR$/MistroFarmer/build/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res" />
+     </CLASSES>
+     <JAVADOC />
+     <SOURCES />
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+index f3b00d6..b153e48 100644
+--- a/.idea/misc.xml
++++ b/.idea/misc.xml
+@@ -3,7 +3,7 @@
+   <component name="EntryPointsManager">
+     <entry_points version="2.0" />
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+ </project>
+diff --git a/Android.iml b/Android.iml
+index 91c73fb..58a239a 100644
+--- a/Android.iml
++++ b/Android.iml
+@@ -6,7 +6,7 @@
+       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+       <excludeFolder url="file://$MODULE_DIR$/build" />
+     </content>
+-    <orderEntry type="jdk" jdkName="1.6" jdkType="JavaSDK" />
++    <orderEntry type="jdk" jdkName="JDK" jdkType="JavaSDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
+ </module>
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index 4ce77e4..88b908e 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+-    android:versionCode="15"
+-    android:versionName="0.9.9.6" >
++    android:versionCode="16"
++    android:versionName="0.9.9.7" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+index 2873a26..e40c0f0 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+@@ -340,7 +340,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+                 for(int i = 0; i < eventConstraints.size(); i++){
+                     EventConstraint currConstraint = eventConstraints.get(i);
+                     if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_MAX_SITTING)){
+-                        if(Integer.parseInt(quantityET.getText().toString()) > currConstraint.getValue()){
++                        if(Float.parseFloat(quantityET.getText().toString()) > currConstraint.getValue()){
+                             Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
+                             return false;
+                         }
+@@ -391,10 +391,10 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+                                 long currMilking = currMilkingDate.getTime();
+ 
+                                 int dayDiff = (int)Math.abs((currMilking - lastMilking)/86400000);
+-                                int yieldDiff = Math.abs(Integer.parseInt(quantityET.getText().toString()) - lastMP.getQuantity());
++                                float yieldDiff = Math.abs(Float.parseFloat(quantityET.getText().toString()) - lastMP.getQuantity());
+ 
+                                 if(dayDiff != 0) {
+-                                    int diff = yieldDiff / dayDiff;//spread the difference in yield among the days passed
++                                    float diff = yieldDiff / dayDiff;//spread the difference in yield among the days passed
+ 
+                                     if(diff  > threshold){
+                                         DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
+index 48e3c8f..fb4b627 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
+@@ -394,7 +394,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Mi
+                 tableRow.addView(rowSeparator3);
+ 
+                 String quantityType = jsonObject.getString("quantity_type");
+-                String quantityString = jsonObject.getString("quantity");
++                String quantityString = String.format("%.2f", Float.parseFloat(jsonObject.getString("quantity")));
+                 String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this, Locale.LOCALE_ENGLISH);
+                 String[] quantityTypes = Locale.getArrayInLocale("quantity_types", this);
+                 if(quantityTypes != null && quantityTypesInEN.length == quantityTypes.length) {
+@@ -479,7 +479,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Mi
+                 else{//Milk production from this cow already iterated through before i
+                     //3. Increment quantity and dates
+                     Log.d(TAG, "Updating data for "+cowKey);
+-                    currCowData[4] = String.valueOf(Integer.parseInt(currCowData[4])+Integer.parseInt(convertedQuantity));
++                    currCowData[4] = String.valueOf(Float.parseFloat(currCowData[4]) + Float.parseFloat(convertedQuantity));
+ 
+                     //4. Check if current milk reading is in the date extremes (first date or last date)
+                     Log.d(TAG, "start time string = "+currCowData[2]);
+@@ -576,7 +576,9 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Mi
+             final View rowSeparator2=generateRowSeparator(index + 2322, tableRowHeight);
+             tableRow.addView(rowSeparator2);
+ 
+-            final TextView quantity = generateTextView(currCowData[4]+" "+currCowData[5] ,922+index, tableRowHeight, tableTextSize);
++            String formattedQuantity = String.format("%.2f" ,Float.parseFloat(currCowData[4]));
++
++            final TextView quantity = generateTextView(formattedQuantity+" "+currCowData[5] ,922+index, tableRowHeight, tableTextSize);
+             tableRow.addView(quantity);
+ 
+             productionTotalTL.addView(tableRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,tableRowHeight));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+index 15fc5bf..8dfa57c 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+@@ -742,7 +742,7 @@ public class DataHandler
+ 
+                         currMP.setId(Integer.parseInt(mpResult[mpIndex][0]));
+                         currMP.setTime(mpResult[mpIndex][2]);
+-                        currMP.setQuantity(Integer.parseInt(mpResult[mpIndex][3]));
++                        currMP.setQuantity(Float.parseFloat(mpResult[mpIndex][3]));
+                         currMP.setDateAdded(mpResult[mpIndex][4]);
+                         currMP.setDate(mpResult[mpIndex][5]);
+                         currMP.setQuantityType(mpResult[mpIndex][6]);
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/MilkProduction.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/MilkProduction.java
+index 07d1514..c303aae 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/MilkProduction.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/MilkProduction.java
+@@ -16,7 +16,7 @@ public class MilkProduction {
+     private static final String DATE_FORMAT = "yyyy-MM-dd";
+     private int id;
+     private String time;
+-    private int quantity;
++    private float quantity;
+     private String dateAdded;
+     private String date;
+     private String quantityType;
+@@ -47,11 +47,11 @@ public class MilkProduction {
+         this.time = time;
+     }
+ 
+-    public int getQuantity() {
++    public float getQuantity() {
+         return quantity;
+     }
+ 
+-    public void setQuantity(int quantity) {
++    public void setQuantity(float quantity) {
+         this.quantity = quantity;
+     }
+ 
+diff --git a/MistroFarmer/src/main/res/layout/activity_add_milk_production.xml b/MistroFarmer/src/main/res/layout/activity_add_milk_production.xml
+index 776986b..14ac6c3 100644
+--- a/MistroFarmer/src/main/res/layout/activity_add_milk_production.xml
++++ b/MistroFarmer/src/main/res/layout/activity_add_milk_production.xml
+@@ -93,7 +93,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_width="0dp"
+                     android:gravity="center"
+-                    android:inputType="number"
++                    android:inputType="numberDecimal"
+                     android:paddingLeft="20dp"
+                     android:layout_weight="0.5"/>
+             </TableRow>
+-- 
+2.7.1
+

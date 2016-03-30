@@ -1,0 +1,455 @@
+From d501643ba43250449d41d84c71235c5c98379b90 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Mon, 17 Nov 2014 09:01:50 +0300
+Subject: [PATCH 210/213] 1.2.3: fix calving/birth ambiquity
+
+Fix for Calving/birth ambiguity in AddEventActivity
+
+Signed-off-by: Jason Rogena <j.rogena@cgiar.org>
+---
+ NgombePlanner/src/main/AndroidManifest.xml         |  4 +-
+ .../org/cgiar/ilri/np/farmer/AddEventActivity.java | 23 +++---
+ .../ilri/np/farmer/CowRegistrationActivity.java    | 90 +++++++++++++++++-----
+ NgombePlanner/src/main/res/values/colors.xml       |  1 +
+ NgombePlanner/src/main/res/values/strings_en.xml   | 12 ++-
+ NgombePlanner/src/main/res/values/strings_kp.xml   |  7 ++
+ NgombePlanner/src/main/res/values/strings_kr.xml   |  7 ++
+ NgombePlanner/src/main/res/values/strings_lu.xml   |  6 ++
+ NgombePlanner/src/main/res/values/strings_nn.xml   |  6 ++
+ NgombePlanner/src/main/res/values/strings_sw.xml   |  8 +-
+ 10 files changed, 128 insertions(+), 36 deletions(-)
+
+diff --git a/NgombePlanner/src/main/AndroidManifest.xml b/NgombePlanner/src/main/AndroidManifest.xml
+index f6eb866..d4a843d 100644
+--- a/NgombePlanner/src/main/AndroidManifest.xml
++++ b/NgombePlanner/src/main/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.np.farmer"
+-    android:versionCode="25"
+-    android:versionName="1.2" >
++    android:versionCode="28"
++    android:versionName="1.2.3" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/NgombePlanner/src/main/java/org/cgiar/ilri/np/farmer/AddEventActivity.java b/NgombePlanner/src/main/java/org/cgiar/ilri/np/farmer/AddEventActivity.java
+index f77a3ca..cb7ee55 100644
+--- a/NgombePlanner/src/main/java/org/cgiar/ilri/np/farmer/AddEventActivity.java
++++ b/NgombePlanner/src/main/java/org/cgiar/ilri/np/farmer/AddEventActivity.java
+@@ -52,7 +52,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
+ 
+     public static final String KEY_MODE="mode";
+     public static final String MODE_SERVICING="Servicing";
+-    public static final String MODE_CALVING="Birth";
++    public static final String MODE_CALVING="Calving";
+     public static final String KEY_SERVICING_TYPE="servicingType";
+ 
+     private EditText phantomET;
+@@ -261,7 +261,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
+         if(presetMode.equals(MODE_CALVING)){
+             String[] eventTypesInEN = Locale.getArrayInLocale("cow_event_types",this);
+             for(int i = 0; i < eventTypesInEN.length; i++){
+-                if(eventTypesInEN[i].equals("Birth")){
++                if(eventTypesInEN[i].equals("Calving")){//**
+                     eventTypeS.setSelection(i);
+                     break;
+                 }
+@@ -270,6 +270,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
+             eventTypeSelected();
+ 
+             this.setTitle(Locale.getStringInLocale("calving",this));
++            dateTV.setText(Locale.getStringInLocale("birth_date",this));
+             eventTypeTV.setVisibility(TextView.GONE);
+             eventTypeS.setVisibility(Spinner.GONE);
+             servicingTV.setVisibility(TextView.GONE);
+@@ -337,7 +338,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
+     public void initTextInViews() {
+         setTitle(Locale.getStringInLocale("add_an_event",this));
+         cowIdentifierTV.setText(Locale.getStringInLocale("cow",this));
+-        dateTV.setText(Locale.getStringInLocale("date",this));
++        dateTV.setText(Locale.getStringInLocale("event_date",this));
+         eventTypeTV.setText(Locale.getStringInLocale("event",this));
+ 
+         int eventTypeArrayID = Locale.getArrayIDInLocale("cow_event_types",this);
+@@ -439,7 +440,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
+ 
+     private void eventTypeSelected(){
+         okayB.setText(Locale.getStringInLocale("okay",this));
+-        dateTV.setText(Locale.getStringInLocale("date",this));
++        dateTV.setText(Locale.getStringInLocale("event_date",this));
+         eventSubtypeTV.setVisibility(TextView.GONE);
+         eventSubtypeS.setVisibility(Spinner.GONE);
+         strawNumberTV.setVisibility(TextView.GONE);
+@@ -467,8 +468,9 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
+         /*liveBirthsTV.setVisibility(TextView.GONE);
+         liveBirthsET.setVisibility(EditText.GONE);*/
+         String[] eventTypesEN = Locale.getArrayInLocale("cow_event_types", this, Locale.LOCALE_ENGLISH);
+-        if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {
++        if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Calving")) {//**
+             birthEventSelected();
++            dateTV.setText(Locale.getStringInLocale("birth_date", this));
+             eventSubtypeTV.setVisibility(TextView.VISIBLE);
+             eventSubtypeS.setVisibility(Spinner.VISIBLE);
+             servicingTV.setVisibility(TextView.VISIBLE);
+@@ -655,16 +657,16 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
+                 Toast.makeText(this,dateInFuture,Toast.LENGTH_LONG).show();
+                 return false;
+             }
+-            else if(days > 15 && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth") && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Dry Off")) {//more than 15 days for other events other than birth and dry off
++            else if(days > 15 && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Calving") && !eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Dry Off")) {//more than 15 days for other events other than birth and dry off
+                 Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
+                 return false;
+             }
+-            else if(days > 730 && eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {//more than 2 years for births
+-                Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
++            else if(days > 730 && eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Calving")) {//more than 2 years for births
++                Toast.makeText(this,Locale.getStringInLocale("birth_event_too_old",this),Toast.LENGTH_LONG).show();
+                 return false;
+             }
+             else if(days > 180 && eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Dry Off")) {//more than 6 months for dry offs
+-                Toast.makeText(this,Locale.getStringInLocale("event_too_old",this),Toast.LENGTH_LONG).show();
++                Toast.makeText(this,Locale.getStringInLocale("dry_off_event_too_old",this),Toast.LENGTH_LONG).show();
+                 return false;
+             }
+             else {
+@@ -692,7 +694,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
+             String[] eventTypes = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
+             String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
+             String[] eventSubtypes = Locale.getArrayInLocale("birth_types",this,Locale.LOCALE_ENGLISH);
+-            if(selectedEvent.equals("Birth") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
++            if(selectedEvent.equals("Calving") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
+                 AlertDialog cowRegistrationAlertDialog = constructCalfRegistrationDialog();
+                 cowRegistrationAlertDialog.show();
+             }
+@@ -791,6 +793,7 @@ public class AddEventActivity extends SherlockActivity implements NPActivity, Vi
+                             }
+                             //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
+ 
++                            jsonObject.put("eventDate", dateET.getText().toString());
+                             thisCalf.setPiggyBack(jsonObject.toString());
+                         } catch (JSONException e) {
+                             e.printStackTrace();
+diff --git a/NgombePlanner/src/main/java/org/cgiar/ilri/np/farmer/CowRegistrationActivity.java b/NgombePlanner/src/main/java/org/cgiar/ilri/np/farmer/CowRegistrationActivity.java
+index d822fd1..8b3a9b0 100644
+--- a/NgombePlanner/src/main/java/org/cgiar/ilri/np/farmer/CowRegistrationActivity.java
++++ b/NgombePlanner/src/main/java/org/cgiar/ilri/np/farmer/CowRegistrationActivity.java
+@@ -279,20 +279,35 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
+         }
+     }
+ 
++    /**
++     * This method restores text that was in edit text before the activity went to sleep
++     */
+     private void restoreEditTextData(){
+         Log.i(TAG, "Edit text data restored");
+         //incase the activity was hidden partially for a moment, restore what the user had already entered
++        if(nameET.getText().toString().length() == 0)
+         nameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, ""));
++        if(earTagNumberET.getText().toString().length() == 0)
+         earTagNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, ""));
++        if(ageET.getText().toString().length() == 0)
+         ageET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, ""));
++        if(dateOfBirthET.getText().toString().length() == 0)
+         dateOfBirthET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, ""));
++        if(breedET.getText().toString().length() == 0)
+         breedET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, ""));
++        if(breedACTV.getText().toString().length() == 0)
+         breedACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_BREED_OTHER, ""));
++        if(deformityET.getText().toString().length() == 0)
+         deformityET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, ""));
++        if(strawNumberET.getText().toString().length() == 0)
+         strawNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, ""));
++        if(damACTV.getText().toString().length() == 0)
+         damACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, ""));
++        if(sireACTV.getText().toString().length() == 0)
+         sireACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, ""));
++        if(embryoNumberET.getText().toString().length() == 0)
+         embryoNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, ""));
++        if(countryOfOriginACTV.getText().toString().length() == 0)
+         countryOfOriginACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, ""));
+     }
+ 
+@@ -378,24 +393,26 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
+                     for(int i = 0; i < sexInEN.length; i++) {
+                         if(sexInEN[i].equals("Female") && thisCow.getSex().equals(Cow.SEX_FEMALE)) {
+                             sexS.setSelection(i);
+-                            toggleFemaleCowViewsVisibility();
+-                            String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
+-                            String[] inCalfArrayInEN = Locale.getArrayInLocale("cow_in_calf_array", this, Locale.LOCALE_ENGLISH);
+-                            for(int j = 0; j < milkingStatusInEN.length; j++){
+-                                Log.d(TAG, " ********** Saved milking status = "+thisCow.getMilkingStatus());
+-                                if(milkingStatusInEN[j].equals(thisCow.getMilkingStatus())){
+-                                    milkingStatusS.setSelection(j);
+-                                }
+-                            }
+-                            for(int j = 0; j < inCalfArrayInEN.length; j++){
+-                                if(inCalfArrayInEN[j].equals(Cow.COW_IN_CALF) && thisCow.isInCalf()){
+-                                    inCalfStatusS.setSelection(j);
++                            toggleCowViewsVisibility();
++
++                            if(!thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){
++                                String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
++                                String[] inCalfArrayInEN = Locale.getArrayInLocale("cow_in_calf_array", this, Locale.LOCALE_ENGLISH);
++                                for(int j = 0; j < milkingStatusInEN.length; j++){
++                                    Log.d(TAG, " ********** Saved milking status = "+thisCow.getMilkingStatus());
++                                    if(milkingStatusInEN[j].equals(thisCow.getMilkingStatus())){
++                                        milkingStatusS.setSelection(j);
++                                    }
+                                 }
+-                                else if(inCalfArrayInEN[j].equals(Cow.COW_NOT_IN_CALF) && !thisCow.isInCalf()){
+-                                    inCalfStatusS.setSelection(j);
++                                for(int j = 0; j < inCalfArrayInEN.length; j++){
++                                    if(inCalfArrayInEN[j].equals(Cow.COW_IN_CALF) && thisCow.isInCalf()){
++                                        inCalfStatusS.setSelection(j);
++                                    }
++                                    else if(inCalfArrayInEN[j].equals(Cow.COW_NOT_IN_CALF) && !thisCow.isInCalf()){
++                                        inCalfStatusS.setSelection(j);
++                                    }
+                                 }
+                             }
+-
+                         }
+                         else if(sexInEN[i].equals("Male") && thisCow.getSex().equals(Cow.SEX_MALE)) {
+                             sexS.setSelection(i);
+@@ -934,6 +951,28 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
+         breedDialog.show();
+     }
+ 
++    /**
++     *This method updates views that need to be changed when it's a calf being registered
++     */
++    private void setCalfMode(){
++        nameTV.setText(Locale.getStringInLocale("calf_name", this));
++        earTagNumberTV.setText(Locale.getStringInLocale("calf_etn", this));
++
++        milkingStatusTV.setVisibility(TextView.GONE);
++        milkingStatusS.setVisibility(Spinner.GONE);
++        inCalfStatusTV.setVisibility(TextView.GONE);
++        inCalfStatusS.setVisibility(Spinner.GONE);
++
++        ageOrDOBHintTV.setVisibility(TextView.GONE);
++        ageTV.setVisibility(TextView.GONE);
++        ageET.setVisibility(EditText.GONE);
++        ageS.setVisibility(Spinner.GONE);
++
++        dateOfBirthET.setEnabled(false);
++        dateOfBirthTV.setTextColor(this.getResources().getColor(R.color.text_input_disabled_color));
++        dateOfBirthET.setTextColor(this.getResources().getColor(R.color.text_input_disabled_color));
++    }
++
+     @Override
+     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+     {
+@@ -1018,14 +1057,15 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
+             toggleSireOwnerVisibility();
+         }
+         else if(parent == sexS){
+-            toggleFemaleCowViewsVisibility();
++            toggleCowViewsVisibility();
+         }
+     }
+ 
+-    private void toggleFemaleCowViewsVisibility(){
+-        Log.d(TAG, "Toggling female views");
++    private void toggleCowViewsVisibility(){
++        Log.d(TAG, "Toggling cow views");
+         String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
+         if(sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){
++            Log.d(TAG, "Cow is female");
+             milkingStatusS.setVisibility(Spinner.VISIBLE);
+             milkingStatusTV.setVisibility(TextView.VISIBLE);
+ 
+@@ -1033,12 +1073,18 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
+             inCalfStatusTV.setVisibility(TextView.VISIBLE);
+         }
+         else{
++            Log.d(TAG, "Cow is male");
+             milkingStatusS.setVisibility(Spinner.GONE);
+             milkingStatusTV.setVisibility(TextView.GONE);
+ 
+             inCalfStatusS.setVisibility(Spinner.GONE);
+             inCalfStatusTV.setVisibility(TextView.GONE);
+         }
++
++        if(thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){
++            Log.d(TAG, "Animal is a calf");
++            setCalfMode();
++        }
+     }
+ 
+     private void toggleCountryOfOriginVisibility(){
+@@ -1132,7 +1178,7 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
+         }
+ 
+         String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
+-        if(sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){
++        if(!thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION) && sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){//only applies for female adults
+             String[] inCalfArray = Locale.getArrayInLocale("cow_in_calf_array",this);
+             String[] milkingStatusArray = Locale.getArrayInLocale("cow_status_array",this);
+             if(inCalfStatusS.getSelectedItemPosition() == -1 || inCalfArray[inCalfStatusS.getSelectedItemPosition()].length() == 0){
+@@ -1250,7 +1296,7 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
+         thisCow.setOtherDeformity(specifyET.getText().toString());
+         thisCow.setCountryOfOrigin(countryOfOriginACTV.getText().toString());
+         String[] sexInEN = Locale.getArrayInLocale("sex_array",this,Locale.LOCALE_ENGLISH);
+-        if(sexInEN[sexS.getSelectedItemPosition()].equals("Female")) {
++        if(sexInEN[sexS.getSelectedItemPosition()].equals("Female") && !thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)) {//adult females
+             thisCow.setSex(Cow.SEX_FEMALE);
+ 
+             String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
+@@ -1263,6 +1309,10 @@ public class CowRegistrationActivity extends SherlockActivity implements NPActiv
+                 thisCow.setInCalf(false);
+             }
+         }
++        else if(sexInEN[sexS.getSelectedItemPosition()].equals("Female") && thisCow.getMode().equals(Cow.MODE_BORN_CALF_REGISTRATION)){//female calves
++            thisCow.setInCalf(false);
++            thisCow.setMilkingStatus(Cow.MILKING_S_HEIFER);
++        }
+         else if(sexInEN[sexS.getSelectedItemPosition()].equals("Male")) {
+             thisCow.setSex(Cow.SEX_MALE);
+         }
+diff --git a/NgombePlanner/src/main/res/values/colors.xml b/NgombePlanner/src/main/res/values/colors.xml
+index 820b96f..330ed0e 100644
+--- a/NgombePlanner/src/main/res/values/colors.xml
++++ b/NgombePlanner/src/main/res/values/colors.xml
+@@ -4,5 +4,6 @@
+     <color name="pressed_mistro">#CC96AA39</color>
+     <color name="black_overlay">#66000000</color>
+     <color name="text_input_color">#527270</color>
++    <color name="text_input_disabled_color">#88c3c0</color>
+     <color name="dialog_bg_color">#ffffff</color>
+ </resources>
+\ No newline at end of file
+diff --git a/NgombePlanner/src/main/res/values/strings_en.xml b/NgombePlanner/src/main/res/values/strings_en.xml
+index ef88210..fe23609 100644
+--- a/NgombePlanner/src/main/res/values/strings_en.xml
++++ b/NgombePlanner/src/main/res/values/strings_en.xml
+@@ -174,7 +174,7 @@
+     <string name="event_en">Event</string>
+     <string-array name="cow_event_types_en">
+         <item></item>
+-        <item>Birth</item>
++        <item>Calving</item>
+         <item>Start of Lactation</item>
+         <item>Dry Off</item>
+         <item>Bloat</item>
+@@ -198,7 +198,7 @@
+     <string name="event_successfully_recorded_en">The event has been successfully recorded</string>
+     <string name="something_went_wrong_try_again_en">Something went wrong. Try resending the data</string>
+     <string name="loading_please_wait_en">Loading. Please wait...</string>
+-    <string name="type_of_birth_en">Type of birth</string>
++    <string name="type_of_birth_en">Type of calving</string>
+     <string-array name="birth_types_en">
+         <item>Normal</item>
+         <item>Still</item>
+@@ -266,7 +266,7 @@
+     <string name="you_do_not_have_cows_en">You do not seem to have cows</string>
+ 
+     <!-- Added after translation-->
+-    <string name="ear_tag_no_or_name_en">You can enter either the cow\'s name or ear tag number</string>
++    <string name="ear_tag_no_or_name_en">You can enter either the name or ear tag number</string>
+     <string name="age_or_dob_en">You can enter either the cow\'s age or date of birth</string>
+     <string name="enter_age_or_dob_en">Please enter either the cow\'s age or date of birth</string>
+     <string name="cow_too_young_en">The selected cow is too young</string>
+@@ -345,4 +345,10 @@
+ 
+     <string name="save_en">Save</string>
+ 
++    <string name="event_date_en">Event Date</string>
++    <string name="birth_date_en">Date of Calving</string>
++    <string name="calf_name_en">Calf\'s Name</string>
++    <string name="calf_etn_en">Calf\'s Ear Tag Number</string>
++    <string name="birth_event_too_old_en">You cannot register a calving that occurred more than 2 years ago</string>
++    <string name="dry_off_event_too_old_en">You cannot add a dry off event that occurred more than 6 months ago</string>
+ </resources>
+diff --git a/NgombePlanner/src/main/res/values/strings_kp.xml b/NgombePlanner/src/main/res/values/strings_kp.xml
+index c45160c..091f261 100644
+--- a/NgombePlanner/src/main/res/values/strings_kp.xml
++++ b/NgombePlanner/src/main/res/values/strings_kp.xml
+@@ -344,4 +344,11 @@
+     <string name="save_kp">Save</string>
+     <string name="specify_site_kp">Lewen oleiboishe</string>
+ 
++    <string name="event_date_kp">Event Date</string>
++    <string name="birth_date_kp">Date of Birth</string>
++    <string name="calf_nam_kp">Calf\'s Name</string>
++    <string name="calf_etn_kp">Calf\'s Ear Tag Number</string>
++    <string name="birth_event_too_old_kp">You cannot register a calving that occurred more than 2 years ago</string>
++    <string name="dry_off_event_too_old_kp">You cannot add a dry off event that occurred more than 6 months ago</string>
++
+ </resources>
+diff --git a/NgombePlanner/src/main/res/values/strings_kr.xml b/NgombePlanner/src/main/res/values/strings_kr.xml
+index 8da93d2..25b4026 100644
+--- a/NgombePlanner/src/main/res/values/strings_kr.xml
++++ b/NgombePlanner/src/main/res/values/strings_kr.xml
+@@ -342,4 +342,11 @@
+     <string name="save_kr">Save</string>
+     <string name="specify_site_kr">Noyanza chakula avundu wo muradi kuli</string>
+ 
++    <string name="event_date_kr">Event Date</string>
++    <string name="birth_date_kr">Date of Birth</string>
++    <string name="calf_name_kr">Calf\'s Name</string>
++    <string name="calf_etn_kr">Calf\'s Ear Tag Number</string>
++    <string name="birth_event_too_old_kr">You cannot register a calving that occurred more than 2 years ago</string>
++    <string name="dry_off_event_too_old_kr">You cannot add a dry off event that occurred more than 6 months ago</string>
++
+ </resources>
+\ No newline at end of file
+diff --git a/NgombePlanner/src/main/res/values/strings_lu.xml b/NgombePlanner/src/main/res/values/strings_lu.xml
+index 86f16a4..d9ea421 100644
+--- a/NgombePlanner/src/main/res/values/strings_lu.xml
++++ b/NgombePlanner/src/main/res/values/strings_lu.xml
+@@ -345,4 +345,10 @@
+     <string name="save_lu">Save</string>
+     <string name="specify_site_lu">Yaula womuradi kunyolekha.</string>
+ 
++    <string name="event_date_lu">Event Date</string>
++    <string name="birth_date_lu">Date of Birth</string>
++    <string name="calf_name_lu">Calf\'s Name</string>
++    <string name="calf_etn_lu">Calf\'s Ear Tag Number</string>
++    <string name="birth_event_too_old_lu">You cannot register a calving that occurred more than 2 years ago</string>
++    <string name="dry_off_event_too_old_lu">You cannot add a dry off event that occurred more than 6 months ago</string>
+ </resources>
+diff --git a/NgombePlanner/src/main/res/values/strings_nn.xml b/NgombePlanner/src/main/res/values/strings_nn.xml
+index 717a7f5..36a6f42 100644
+--- a/NgombePlanner/src/main/res/values/strings_nn.xml
++++ b/NgombePlanner/src/main/res/values/strings_nn.xml
+@@ -343,4 +343,10 @@
+     <string name="save_nn">Save</string>
+     <string name="specify_site_nn">Lewen oleiboishe</string>
+ 
++    <string name="event_date_nn">Event Date</string>
++    <string name="birth_date_nn">Date of Birth</string>
++    <string name="calf_name_nn">Calf\'s Name</string>
++    <string name="calf_etn_nn">Calf\'s Ear Tag Number</string>
++    <string name="birth_event_too_old_nn">You cannot register a calving that occurred more than 2 years ago</string>
++    <string name="dry_off_event_too_old_nn">You cannot add a dry off event that occurred more than 6 months ago</string>
+ </resources>
+diff --git a/NgombePlanner/src/main/res/values/strings_sw.xml b/NgombePlanner/src/main/res/values/strings_sw.xml
+index 50dae45..804167c 100644
+--- a/NgombePlanner/src/main/res/values/strings_sw.xml
++++ b/NgombePlanner/src/main/res/values/strings_sw.xml
+@@ -165,7 +165,7 @@
+     <string name="enter_your_mobile_no_sw">Tafadhali nigiza namba yako ya simu</string>
+     <string name="enter_extension_personnel_name_sw">Tafadhali ingiza jina kamili ya afisaa wa ukulima</string>
+     <string name="enter_ear_tag_number_sw">Tafadhali ingiza namba ya Sikio ya ngombe</string>
+-    <string name="enter_ear_tag_no_or_name_sw">Tafadhali ingiza jina au namba ya Sikio ya ngombe</string>
++    <string name="enter_ear_tag_no_or_name_sw">Tafadhali ingiza jina au namba ya Sikio</string>
+     <string name="enter_straw_number_sw">Ingiza namba ya mpira ya mbegu</string>
+     <string name="enter_embryo_number_sw">Tafadhali ingiza namba ya kiini tete</string>
+     <string name="add_an_event_sw">Ongeza tukio</string>
+@@ -343,4 +343,10 @@
+     <string name="save_sw">Save</string>
+     <string name="specify_site_sw">Tafadhali chagua eneo</string>
+ 
++    <string name="event_date_sw">Event Date</string>
++    <string name="birth_date_sw">Date of Birth</string>
++    <string name="calf_name_sw">Calf\'s Name</string>
++    <string name="calf_etn_sw">Calf\'s Ear Tag Number</string>
++    <string name="birth_event_too_old_sw">You cannot register a calving that occurred more than 2 years ago</string>
++    <string name="dry_off_event_too_old_sw">You cannot add a dry off event that occurred more than 6 months ago</string>
+ </resources>
+-- 
+2.7.1
+

@@ -1,0 +1,1111 @@
+From f8dface24c1d6194e9d6d2f2cce005f4b322f6eb Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Fri, 13 Sep 2013 13:03:02 +0300
+Subject: [PATCH 067/213] database changes made. registration.php changed to
+ handle the chages made in event, breed and deformity tables
+
+---
+ .idea/workspace.xml                                | 116 ++++++------
+ .../farmer/MilkProcutionHistoryActivity.java       |  12 +-
+ .../ilri/mistro/farmer/MilkProductionActivity.java |   7 +-
+ .../org/cgiar/ilri/mistro/farmer/carrier/Cow.java  |  17 ++
+ database/ilri_mistro_.sql                          | 206 +++++++++++++--------
+ web/log/debug.log                                  | 122 ++++++++++++
+ web/log/info.log                                   |  22 +++
+ web/log/warning.log                                |   2 +
+ web/php/farmer/add_milk_production.php             |   6 +-
+ web/php/farmer/general.php                         | 101 ++++++++++
+ web/php/farmer/registration.php                    |  30 ++-
+ 11 files changed, 488 insertions(+), 153 deletions(-)
+ create mode 100644 web/php/farmer/general.php
+
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+index 128d341..51ba1e8 100644
+--- a/.idea/workspace.xml
++++ b/.idea/workspace.xml
+@@ -469,17 +469,15 @@
+       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/theming.html" afterPath="" />
+       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/website/usage.html" afterPath="" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" afterPath="$PROJECT_DIR$/MistroFarmer/build/source/r/debug/org/cgiar/ilri/mistro/farmer/R.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/php/farmer/add_milk_production.php" afterPath="$PROJECT_DIR$/web/php/farmer/add_milk_production.php" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/debug.log" afterPath="$PROJECT_DIR$/web/log/debug.log" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/error.log" afterPath="$PROJECT_DIR$/web/log/error.log" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/info.log" afterPath="$PROJECT_DIR$/web/log/info.log" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/project.properties" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/php/farmer/registration.php" afterPath="$PROJECT_DIR$/web/php/farmer/registration.php" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" afterPath="$PROJECT_DIR$/MistroFarmer/build/res/all/debug/values/values.xml" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/warning.log" afterPath="$PROJECT_DIR$/web/log/warning.log" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+     </list>
+     <ignored path="MistroFarmer.iws" />
+     <ignored path=".idea/workspace.xml" />
+@@ -548,10 +546,10 @@
+   </component>
+   <component name="FileEditorManager">
+     <leaf>
+-      <file leaf-file-name="strings_en.xml" pinned="false" current="false" current-in-tab="false">
++      <file leaf-file-name="strings_en.xml" pinned="false" current="true" current-in-tab="true">
+         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state line="125" column="129" selection-start="6293" selection-end="6293" vertical-scroll-proportion="0.0" vertical-offset="2079" max-vertical-offset="3150">
++            <state line="57" column="25" selection-start="1676" selection-end="2272" vertical-scroll-proportion="0.83076924" vertical-offset="540" max-vertical-offset="3150">
+               <folding />
+             </state>
+           </provider>
+@@ -560,37 +558,27 @@
+       <file leaf-file-name="MilkProductionActivity.java" pinned="false" current="false" current-in-tab="false">
+         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state line="416" column="13" selection-start="17260" selection-end="17260" vertical-scroll-proportion="0.0" vertical-offset="7281" max-vertical-offset="7866">
++            <state line="310" column="204" selection-start="13339" selection-end="13339" vertical-scroll-proportion="0.0" vertical-offset="5157" max-vertical-offset="7956">
+               <folding />
+             </state>
+           </provider>
+         </entry>
+       </file>
+-      <file leaf-file-name="AddEventActivity.java" pinned="false" current="true" current-in-tab="true">
+-        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
+-          <provider selected="true" editor-type-id="text-editor">
+-            <state line="181" column="69" selection-start="7243" selection-end="7243" vertical-scroll-proportion="0.44273505" vertical-offset="2999" max-vertical-offset="9954">
+-              <folding />
+-            </state>
+-          </provider>
+-        </entry>
+-      </file>
+-      <file leaf-file-name="add_milk_production.php" pinned="false" current="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/web/php/farmer/add_milk_production.php">
++      <file leaf-file-name="MilkProcutionHistoryActivity.java" pinned="false" current="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state line="45" column="21" selection-start="1601" selection-end="1601" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="2106">
+-              <folding />
++            <state line="271" column="74" selection-start="10384" selection-end="10384" vertical-scroll-proportion="-36.88889" vertical-offset="3324" max-vertical-offset="5508">
++              <folding>
++                <element signature="imports" expanded="false" />
++              </folding>
+             </state>
+           </provider>
+         </entry>
+       </file>
+-      <file leaf-file-name="activity_add_event.xml" pinned="false" current="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_add_event.xml">
+-          <provider editor-type-id="android-designer">
+-            <state />
+-          </provider>
++      <file leaf-file-name="AddEventActivity.java" pinned="false" current="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state line="70" column="36" selection-start="3524" selection-end="3524" vertical-scroll-proportion="0.0" vertical-offset="800" max-vertical-offset="1908">
++            <state line="187" column="58" selection-start="7525" selection-end="7525" vertical-scroll-proportion="0.0" vertical-offset="2999" max-vertical-offset="9954">
+               <folding />
+             </state>
+           </provider>
+@@ -617,7 +605,19 @@
+       <file leaf-file-name="Cow.java" pinned="false" current="false" current-in-tab="false">
+         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state line="217" column="39" selection-start="5307" selection-end="5307" vertical-scroll-proportion="0.0" vertical-offset="3510" max-vertical-offset="4788">
++            <state line="271" column="58" selection-start="7183" selection-end="7183" vertical-scroll-proportion="0.0" vertical-offset="428" max-vertical-offset="5094">
++              <folding />
++            </state>
++          </provider>
++        </entry>
++      </file>
++      <file leaf-file-name="dialog_breed.xml" pinned="false" current="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_breed.xml">
++          <provider editor-type-id="android-designer">
++            <state />
++          </provider>
++          <provider selected="true" editor-type-id="text-editor">
++            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="504">
+               <folding />
+             </state>
+           </provider>
+@@ -1251,17 +1251,17 @@
+         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_landing.xml" />
+         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java" />
+         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java" />
+-        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java" />
+         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_add_milk_production.xml" />
+         <option value="$PROJECT_DIR$/web/php/farmer/add_milk_production.php" />
+         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_add_event.xml" />
+         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java" />
+         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java" />
+-        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java" />
+         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java" />
+-        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java" />
+         <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java" />
+         <option value="$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml" />
++        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java" />
++        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java" />
++        <option value="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java" />
+       </list>
+     </option>
+   </component>
+@@ -1798,16 +1798,6 @@
+     <breakpoint-manager />
+   </component>
+   <component name="editorHistoryManager">
+-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/activity_milk_production.xml">
+-      <provider editor-type-id="android-designer">
+-        <state />
+-      </provider>
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="566">
+-          <folding />
+-        </state>
+-      </provider>
+-    </entry>
+     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java">
+       <provider selected="true" editor-type-id="text-editor">
+         <state line="101" column="81" selection-start="3776" selection-end="3776" vertical-scroll-proportion="0.0" vertical-offset="1314" max-vertical-offset="1908" />
+@@ -1823,11 +1813,6 @@
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state line="300" column="34" selection-start="12169" selection-end="12169" vertical-scroll-proportion="0.0" vertical-offset="4576" max-vertical-offset="5328" />
+-      </provider>
+-    </entry>
+     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java">
+       <provider selected="true" editor-type-id="text-editor">
+         <state line="94" column="5" selection-start="4311" selection-end="4311" vertical-scroll-proportion="0.0" vertical-offset="1458" max-vertical-offset="3168" />
+@@ -1840,7 +1825,7 @@
+     </entry>
+     <entry file="file://$PROJECT_DIR$/web/php/farmer/add_milk_production.php">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state line="45" column="21" selection-start="1601" selection-end="1601" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="2106">
++        <state line="45" column="21" selection-start="1619" selection-end="1619" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="2106">
+           <folding />
+         </state>
+       </provider>
+@@ -1886,30 +1871,49 @@
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java">
++    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state line="217" column="39" selection-start="5307" selection-end="5307" vertical-scroll-proportion="0.0" vertical-offset="3510" max-vertical-offset="4788">
++        <state line="187" column="58" selection-start="7525" selection-end="7525" vertical-scroll-proportion="0.0" vertical-offset="2999" max-vertical-offset="9954">
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
++    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state line="125" column="129" selection-start="6293" selection-end="6293" vertical-scroll-proportion="0.0" vertical-offset="2079" max-vertical-offset="3150">
++        <state line="310" column="204" selection-start="13339" selection-end="13339" vertical-scroll-proportion="0.0" vertical-offset="7371" max-vertical-offset="7956">
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java">
++    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state line="416" column="13" selection-start="17260" selection-end="17260" vertical-scroll-proportion="0.0" vertical-offset="7283" max-vertical-offset="7866">
++        <state line="271" column="74" selection-start="10384" selection-end="10384" vertical-scroll-proportion="-36.88889" vertical-offset="3324" max-vertical-offset="5508">
++          <folding>
++            <element signature="imports" expanded="false" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state line="271" column="58" selection-start="7183" selection-end="7183" vertical-scroll-proportion="0.0" vertical-offset="428" max-vertical-offset="5094">
+           <folding />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java">
++    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/layout/dialog_breed.xml">
++      <provider editor-type-id="android-designer">
++        <state />
++      </provider>
++      <provider selected="true" editor-type-id="text-editor">
++        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
++          <folding />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/res/values/strings_en.xml">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state line="181" column="69" selection-start="7243" selection-end="7243" vertical-scroll-proportion="0.44273505" vertical-offset="2999" max-vertical-offset="9954">
++        <state line="57" column="25" selection-start="1676" selection-end="2272" vertical-scroll-proportion="0.83076924" vertical-offset="540" max-vertical-offset="3150">
+           <folding />
+         </state>
+       </provider>
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
+index 1450888..55416b0 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
+@@ -272,7 +272,17 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
+                 final View rowSeparator1=generateRowSeparator(3424+jsonObject.getInt("id")+3322,tableRowHeight);
+                 tableRow.addView(rowSeparator1);
+ 
+-                final  TextView time=generateTextView(times[jsonObject.getInt("time")],3424+jsonObject.getInt("id")+554,tableRowHeight,tableTextSize);
++                String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times",this,Locale.LOCALE_ENGLISH);
++                String milkingTime = "";
++                for(int i = 0; i < milkingTimesInEN.length; i++) {
++                    if(jsonObject.getString("time").equals(milkingTimesInEN[i])) {
++                        if(milkingTimesInEN.length == times.length){
++                            milkingTime = times[i];
++                        }
++                        break;
++                    }
++                }
++                final  TextView time=generateTextView(milkingTime,3424+jsonObject.getInt("id")+554,tableRowHeight,tableTextSize);
+                 tableRow.addView(time);
+ 
+                 final View rowSeparator2=generateRowSeparator(3424+jsonObject.getInt("id")+3432,tableRowHeight);
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java
+index 62e128e..f7926f7 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java
+@@ -298,12 +298,17 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
+                 TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+                 MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
+                 String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
++                String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times", this, Locale.LOCALE_ENGLISH);
+                 String quantityType = "";
+                 if(quantityTypesInEN.length == quantityTypes.length) {
+                     DataHandler.setSharedPreference(MilkProductionActivity.this, DataHandler.SP_KEY_MILK_QUANTITY_TYPE, String.valueOf(quantityTypeS.getSelectedItemPosition()));
+                     quantityType = quantityTypesInEN[quantityTypeS.getSelectedItemPosition()];
+                 }
+-                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],String.valueOf(timeS.getSelectedItemPosition()),quantityET.getText().toString(),quantityType,dateET.getText().toString());
++                String milkingTime = "";
++                if(milkingTimesInEN.length > 0){
++                    milkingTime = milkingTimesInEN[timeS.getSelectedItemPosition()];
++                }
++                milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString());
+             }
+         }
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+index 041f2d2..4a8e3cc 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+@@ -25,6 +25,9 @@ public class Cow implements Parcelable, Serializable {
+     public static final int AGE_TYPE_YEAR = 2;
+     public static final String MODE_ADULT_COW_REGISTRATION = "adultCowRegistration";
+     public static final String MODE_BORN_CALF_REGISTRATION = "bornCalfRegistration";
++    private static final String SERVICE_TYPE_BULL = "Bull";
++    private static final String SERVICE_TYPE_AI = "AI";
++    private static final String SERVICE_TYPE_ET = "ET";
+     private String name;
+     private String earTagNumber;
+     private String dateOfBirth;
+@@ -38,6 +41,8 @@ public class Cow implements Parcelable, Serializable {
+     private String countryOfOrigin;
+     private boolean isNotDamOrSire;
+     private String mode;
++    private String mode;
++    private String serviceType;
+ 
+     public Cow(boolean isNotDamOrSire) {
+         name = "";
+@@ -56,6 +61,7 @@ public class Cow implements Parcelable, Serializable {
+         }
+         mode = "";
+         countryOfOrigin = "";
++        serviceType = "";
+     }
+ 
+     public Cow(Parcel in) {
+@@ -94,6 +100,10 @@ public class Cow implements Parcelable, Serializable {
+         }
+     }
+ 
++    public void setServiceType(String serviceType) {
++        this.serviceType = serviceType;
++    }
++
+     public void addBreed(String breed) {
+         this.breeds.add(breed);
+     }
+@@ -149,6 +159,10 @@ public class Cow implements Parcelable, Serializable {
+         return ageType;
+     }
+ 
++    public String getServiceType() {
++        return serviceType;
++    }
++
+     public List<String> getBreeds() {
+         return breeds;
+     }
+@@ -201,6 +215,7 @@ public class Cow implements Parcelable, Serializable {
+ 
+         dest.writeString(countryOfOrigin);
+         dest.writeString(mode);
++        dest.writeString(serviceType);
+     }
+ 
+     public void readFromParcel(Parcel in) {
+@@ -224,6 +239,7 @@ public class Cow implements Parcelable, Serializable {
+ 
+         countryOfOrigin = in.readString();
+         mode = in.readString();
++        serviceType = in.readString();
+     }
+ 
+     public static final Creator<Cow> CREATOR = new Creator<Cow>() {
+@@ -258,6 +274,7 @@ public class Cow implements Parcelable, Serializable {
+             }
+             jsonObject.put("deformities", deformityJsonArray);
+             jsonObject.put("mode", ((mode == null) ? "" : mode));
++            jsonObject.put("serviceType", ((serviceType == null) ? "" : serviceType));
+             if (isNotDamOrSire) {
+                 jsonObject.put("type", "cow");
+                 jsonObject.put("sire", ((sire == null) ? "" : sire.getJsonObject()));
+diff --git a/database/ilri_mistro_.sql b/database/ilri_mistro_.sql
+index 4be6ebd..17ac41c 100644
+--- a/database/ilri_mistro_.sql
++++ b/database/ilri_mistro_.sql
+@@ -3,7 +3,7 @@
+ -- http://www.phpmyadmin.net
+ --
+ -- Host: localhost
+--- Generation Time: Sep 13, 2013 at 10:01 AM
++-- Generation Time: Sep 13, 2013 at 01:00 PM
+ -- Server version: 5.5.32-0ubuntu0.13.04.1
+ -- PHP Version: 5.4.9-4ubuntu2.3
+ 
+@@ -28,21 +28,36 @@ SET time_zone = "+00:00";
+ 
+ CREATE TABLE IF NOT EXISTS `breed` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+-  `cow_id` int(11) NOT NULL,
+-  `text` varchar(255) NOT NULL,
+-  `date_added` datetime NOT NULL,
++  `name` varchar(100) NOT NULL,
+   PRIMARY KEY (`id`),
+-  KEY `cow_id` (`cow_id`)
+-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
++  UNIQUE KEY `name` (`name`)
++) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+ 
+ --
+ -- Dumping data for table `breed`
+ --
+ 
+-INSERT INTO `breed` (`id`, `cow_id`, `text`, `date_added`) VALUES
+-(12, 35, 'Friesian', '2013-09-05 09:47:34'),
+-(13, 38, 'Boran', '2013-09-05 09:47:34'),
+-(19, 47, '', '2013-09-12 16:05:58');
++INSERT INTO `breed` (`id`, `name`) VALUES
++(4, 'Aberdeen Angus'),
++(10, 'Ankole'),
++(1, 'Ayrshire'),
++(2, 'Boran'),
++(12, 'Brahman'),
++(19, 'Brown Swiss'),
++(3, 'Charolais'),
++(18, 'Fleckviah'),
++(6, 'Friesian'),
++(7, 'Guernsey'),
++(8, 'Hereford'),
++(9, 'Jersey'),
++(11, 'Limousine'),
++(17, 'Nganda'),
++(14, 'Piemontese'),
++(15, 'Red Poll'),
++(16, 'Sahiwal'),
++(13, 'Santa Getrude'),
++(5, 'Simmental'),
++(20, 'Zebu');
+ 
+ -- --------------------------------------------------------
+ 
+@@ -62,28 +77,50 @@ CREATE TABLE IF NOT EXISTS `cow` (
+   `type` varchar(100) DEFAULT NULL,
+   `sire_id` int(11) DEFAULT NULL,
+   `dam_id` int(11) DEFAULT NULL,
+-  `service_type` int(11) DEFAULT NULL COMMENT '0=bull/cow, 1=AI/ET',
+-  `straw_number` varchar(100) DEFAULT NULL,
+-  `vet_used` varchar(255) DEFAULT NULL,
+-  `embryo_number` varchar(100) DEFAULT NULL,
++  `straw_id` int(11) DEFAULT NULL,
++  `embryo_id` int(11) DEFAULT NULL,
+   `date_added` datetime NOT NULL,
++  `service_type` enum('Bull','AI','ET') DEFAULT NULL,
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `farmer_id_2` (`farmer_id`,`name`),
+   KEY `farmer_id` (`farmer_id`),
+   KEY `sire_id` (`sire_id`),
+-  KEY `dam_id` (`dam_id`)
++  KEY `dam_id` (`dam_id`),
++  KEY `straw_id` (`straw_id`),
++  KEY `embryo_id` (`embryo_id`)
+ ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
+ 
++-- --------------------------------------------------------
++
+ --
+--- Dumping data for table `cow`
++-- Table structure for table `cow_breed`
+ --
+ 
+-INSERT INTO `cow` (`id`, `farmer_id`, `name`, `ear_tag_number`, `date_of_birth`, `age`, `age_type`, `sex`, `type`, `sire_id`, `dam_id`, `service_type`, `straw_number`, `vet_used`, `embryo_number`, `date_added`) VALUES
+-(35, 45, 'Rosy', 'nai-rog-0', '0000-00-00 00:00:00', 1, 2, 0, 'cow', 36, 37, NULL, NULL, NULL, NULL, '2013-09-05 09:47:34'),
+-(36, 45, '', '', '0000-00-00 00:00:00', -1, 0, 1, 'sire', NULL, NULL, 1, 'amfresh23', 'Grace Makau', NULL, '2013-09-05 09:47:34'),
+-(37, 45, 'Betty', '', '0000-00-00 00:00:00', 4, 2, 0, 'dam', NULL, NULL, 0, NULL, '', '', '2013-09-05 09:47:34'),
+-(38, 45, 'Chris', 'nai-rog-1', '0000-00-00 00:00:00', 3, 1, 1, 'cow', NULL, NULL, NULL, NULL, NULL, NULL, '2013-09-05 09:47:34'),
+-(47, 45, 'SonOfRosie', 'naijas2', '2013-09-12 00:00:00', 0, 0, 1, 'cow', NULL, 35, NULL, NULL, NULL, NULL, '2013-09-12 16:05:58');
++CREATE TABLE IF NOT EXISTS `cow_breed` (
++  `id` int(11) NOT NULL AUTO_INCREMENT,
++  `cow_id` int(11) NOT NULL,
++  `breed_id` int(11) NOT NULL,
++  `date_added` datetime NOT NULL,
++  PRIMARY KEY (`id`),
++  KEY `cow_id` (`cow_id`),
++  KEY `breed_id` (`breed_id`)
++) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
++
++-- --------------------------------------------------------
++
++--
++-- Table structure for table `cow_deformity`
++--
++
++CREATE TABLE IF NOT EXISTS `cow_deformity` (
++  `id` int(11) NOT NULL AUTO_INCREMENT,
++  `cow_id` int(11) NOT NULL,
++  `deformity_id` int(11) NOT NULL,
++  `date_added` datetime NOT NULL,
++  PRIMARY KEY (`id`),
++  KEY `cow_id` (`cow_id`),
++  KEY `deformity_id` (`deformity_id`)
++) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+ 
+ -- --------------------------------------------------------
+ 
+@@ -103,15 +140,6 @@ CREATE TABLE IF NOT EXISTS `cow_event` (
+   KEY `event_id` (`event_id`)
+ ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+ 
+---
+--- Dumping data for table `cow_event`
+---
+-
+-INSERT INTO `cow_event` (`id`, `cow_id`, `event_id`, `remarks`, `event_date`, `date_added`) VALUES
+-(10, 38, 5, 'The cow is coughing', '2013-09-05', '2013-09-05 12:16:35'),
+-(11, 35, 2, 'Ok', '2013-09-04', '2013-09-06 10:05:02'),
+-(16, 47, 2, '', '2013-09-12', '0000-00-00 00:00:00');
+-
+ -- --------------------------------------------------------
+ 
+ --
+@@ -120,22 +148,27 @@ INSERT INTO `cow_event` (`id`, `cow_id`, `event_id`, `remarks`, `event_date`, `d
+ 
+ CREATE TABLE IF NOT EXISTS `deformity` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+-  `cow_id` int(11) NOT NULL,
+-  `text` varchar(255) NOT NULL,
+-  `date_added` datetime NOT NULL,
++  `name` varchar(255) NOT NULL,
+   PRIMARY KEY (`id`),
+-  KEY `cow_id` (`cow_id`)
+-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
++  UNIQUE KEY `name` (`name`)
++) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
++
++-- --------------------------------------------------------
+ 
+ --
+--- Dumping data for table `deformity`
++-- Table structure for table `embryo`
+ --
+ 
+-INSERT INTO `deformity` (`id`, `cow_id`, `text`, `date_added`) VALUES
+-(6, 35, '', '2013-09-05 09:47:34'),
+-(7, 38, 'Abnormal teat number', '2013-09-05 09:47:34'),
+-(8, 38, 'Crooked feet', '2013-09-05 09:47:34'),
+-(14, 47, '', '2013-09-12 16:05:58');
++CREATE TABLE IF NOT EXISTS `embryo` (
++  `id` int(11) NOT NULL,
++  `embryo_no` varchar(100) NOT NULL,
++  `dam_id` int(11) DEFAULT NULL,
++  `sire_id` int(11) DEFAULT NULL,
++  PRIMARY KEY (`id`),
++  UNIQUE KEY `embryo_no` (`embryo_no`),
++  KEY `dam_id` (`dam_id`,`sire_id`),
++  KEY `sire_id` (`sire_id`)
++) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ 
+ -- --------------------------------------------------------
+ 
+@@ -146,7 +179,8 @@ INSERT INTO `deformity` (`id`, `cow_id`, `text`, `date_added`) VALUES
+ CREATE TABLE IF NOT EXISTS `event` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `name` varchar(255) NOT NULL,
+-  PRIMARY KEY (`id`)
++  PRIMARY KEY (`id`),
++  UNIQUE KEY `name` (`name`)
+ ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+ 
+ --
+@@ -155,14 +189,14 @@ CREATE TABLE IF NOT EXISTS `event` (
+ 
+ INSERT INTO `event` (`id`, `name`) VALUES
+ (1, 'Abortion'),
++(9, 'Acquisition'),
+ (2, 'Birth'),
+-(3, 'Start of Lactation'),
+ (4, 'Bloat'),
+-(5, 'Sickness'),
+ (6, 'Death'),
+ (7, 'Dry Off'),
+ (8, 'Sale'),
+-(9, 'Acquisition');
++(5, 'Sickness'),
++(3, 'Start of Lactation');
+ 
+ -- --------------------------------------------------------
+ 
+@@ -185,13 +219,6 @@ CREATE TABLE IF NOT EXISTS `farmer` (
+   UNIQUE KEY `mobile_no` (`mobile_no`,`sim_card_sn`)
+ ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=46 ;
+ 
+---
+--- Dumping data for table `farmer`
+---
+-
+-INSERT INTO `farmer` (`id`, `name`, `mobile_no`, `location_county`, `location_district`, `gps_longitude`, `gps_latitude`, `date_added`, `extension_personnel`, `sim_card_sn`) VALUES
+-(45, 'Jason Rogena', '0715023805', NULL, NULL, '36.722244573757', '-1.268513496033', '2013-09-05 09:47:34', 'Tom Muriranji', '89254029541005994303');
+-
+ -- --------------------------------------------------------
+ 
+ --
+@@ -201,47 +228,71 @@ INSERT INTO `farmer` (`id`, `name`, `mobile_no`, `location_county`, `location_di
+ CREATE TABLE IF NOT EXISTS `milk_production` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `cow_id` int(11) NOT NULL,
+-  `time` int(11) NOT NULL COMMENT '0 - morning, 1 - afternoot, 2 - evening, 3 - combined',
++  `time` enum('Morning','Afternoon','Evening','Combined') NOT NULL COMMENT '0 - morning, 1 - afternoot, 2 - evening, 3 - combined',
+   `quantity` int(11) NOT NULL,
+   `date_added` datetime NOT NULL,
+   `date` date NOT NULL,
+-  `quantity_type` varchar(100) NOT NULL,
++  `quantity_type` enum('Litres','KGs','Cups') NOT NULL,
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `cow_id_2` (`cow_id`,`time`,`date`),
+   KEY `cow_id` (`cow_id`)
+ ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
+ 
++-- --------------------------------------------------------
++
+ --
+--- Dumping data for table `milk_production`
++-- Table structure for table `straw`
+ --
+ 
+-INSERT INTO `milk_production` (`id`, `cow_id`, `time`, `quantity`, `date_added`, `date`, `quantity_type`) VALUES
+-(26, 35, 3, 2, '2013-09-07 13:42:13', '2013-09-07', 'KGs'),
+-(27, 35, 0, 1, '2013-09-09 08:45:13', '2012-08-14', 'KGs'),
+-(28, 35, 0, 1, '2013-09-09 08:57:33', '2013-09-04', 'KGs'),
+-(29, 35, 0, 164, '2013-09-12 15:11:52', '2013-08-31', 'Cups'),
+-(30, 35, 0, 50, '2013-09-12 16:05:03', '2013-09-12', 'KGs'),
+-(31, 35, 3, 2, '2013-09-12 16:07:59', '2013-09-08', 'Cups'),
+-(32, 35, 0, 151, '2013-09-12 16:11:42', '2013-09-10', 'Cups'),
+-(36, 35, 1, 151, '2013-09-12 16:12:43', '2013-09-10', 'Cups'),
+-(37, 35, 2, 151, '2013-09-12 16:13:13', '2013-09-10', 'Cups');
++CREATE TABLE IF NOT EXISTS `straw` (
++  `id` int(11) NOT NULL AUTO_INCREMENT,
++  `straw_number` varchar(100) NOT NULL,
++  `sire_id` int(11) DEFAULT NULL,
++  PRIMARY KEY (`id`),
++  UNIQUE KEY `straw_number` (`straw_number`),
++  KEY `sire_id` (`sire_id`)
++) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
++
++-- --------------------------------------------------------
+ 
+ --
+--- Constraints for dumped tables
++-- Table structure for table `vet`
+ --
+ 
++CREATE TABLE IF NOT EXISTS `vet` (
++  `id` int(11) NOT NULL AUTO_INCREMENT,
++  `surname` varchar(100) NOT NULL,
++  `other_names` varchar(200) NOT NULL,
++  PRIMARY KEY (`id`)
++) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
++
+ --
+--- Constraints for table `breed`
++-- Constraints for dumped tables
+ --
+-ALTER TABLE `breed`
+-  ADD CONSTRAINT `breed_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE;
+ 
+ --
+ -- Constraints for table `cow`
+ --
+ ALTER TABLE `cow`
++  ADD CONSTRAINT `cow_ibfk_5` FOREIGN KEY (`embryo_id`) REFERENCES `embryo` (`id`) ON UPDATE CASCADE,
+   ADD CONSTRAINT `cow_ibfk_1` FOREIGN KEY (`farmer_id`) REFERENCES `farmer` (`id`) ON UPDATE CASCADE,
+-  ADD CONSTRAINT `cow_ibfk_2` FOREIGN KEY (`sire_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE;
++  ADD CONSTRAINT `cow_ibfk_2` FOREIGN KEY (`sire_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE,
++  ADD CONSTRAINT `cow_ibfk_3` FOREIGN KEY (`dam_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE,
++  ADD CONSTRAINT `cow_ibfk_4` FOREIGN KEY (`straw_id`) REFERENCES `straw` (`id`) ON UPDATE CASCADE;
++
++--
++-- Constraints for table `cow_breed`
++--
++ALTER TABLE `cow_breed`
++  ADD CONSTRAINT `cow_breed_ibfk_2` FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`) ON UPDATE CASCADE,
++  ADD CONSTRAINT `cow_breed_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE;
++
++--
++-- Constraints for table `cow_deformity`
++--
++ALTER TABLE `cow_deformity`
++  ADD CONSTRAINT `cow_deformity_ibfk_2` FOREIGN KEY (`deformity_id`) REFERENCES `deformity` (`id`) ON UPDATE CASCADE,
++  ADD CONSTRAINT `cow_deformity_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE;
+ 
+ --
+ -- Constraints for table `cow_event`
+@@ -251,10 +302,11 @@ ALTER TABLE `cow_event`
+   ADD CONSTRAINT `cow_event_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON UPDATE CASCADE;
+ 
+ --
+--- Constraints for table `deformity`
++-- Constraints for table `embryo`
+ --
+-ALTER TABLE `deformity`
+-  ADD CONSTRAINT `deformity_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE;
++ALTER TABLE `embryo`
++  ADD CONSTRAINT `embryo_ibfk_2` FOREIGN KEY (`sire_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE,
++  ADD CONSTRAINT `embryo_ibfk_1` FOREIGN KEY (`dam_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE;
+ 
+ --
+ -- Constraints for table `milk_production`
+@@ -262,6 +314,12 @@ ALTER TABLE `deformity`
+ ALTER TABLE `milk_production`
+   ADD CONSTRAINT `milk_production_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE;
+ 
++--
++-- Constraints for table `straw`
++--
++ALTER TABLE `straw`
++  ADD CONSTRAINT `straw_ibfk_1` FOREIGN KEY (`sire_id`) REFERENCES `cow` (`id`) ON UPDATE CASCADE;
++
+ /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+ /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+ /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+diff --git a/web/log/debug.log b/web/log/debug.log
+index 62613a3..ea7f989 100644
+--- a/web/log/debug.log
++++ b/web/log/debug.log
+@@ -3528,3 +3528,125 @@
+ )
+ 
+ [Friday, 13th September 2013 09:03:42] [fetch_cow_identifiers.php]  cow identifiers encoded from an array and is '{"cowNames":["Rosy","Chris","SonOfRosie"],"earTagNumbers":["nai-rog-0","nai-rog-1","naijas2"]}'
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] json_decode returned: Array
++(
++    [simCardSN] => 89254029541005994303
++)
++
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] settings obtained: Array
++(
++    [db_name] => ilri_mistro
++    [mysql_creds] => Array
++        (
++            [username] => root
++            [password] => jason
++            [host] => localhost
++        )
++
++    [log_settings] => logs.ini
++    [response_codes] => response_codes.ini
++    [time_zone] => EAT
++)
++
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] response codes are: Array
++(
++    [db_error] => 32243
++    [user_not_authenticated] => 43322
++    [sim_card_registered] => 83242
++    [acknowledge_ok] => 533783
++    [data_error] => 934342
++    [no_data] => 77732
++)
++
++[Friday, 13th September 2013 10:57:37] [database.php] settings obtained: Array
++(
++    [db_name] => ilri_mistro
++    [mysql_creds] => Array
++        (
++            [username] => root
++            [password] => jason
++            [host] => localhost
++        )
++
++    [log_settings] => logs.ini
++    [response_codes] => response_codes.ini
++    [time_zone] => EAT
++)
++
++[Friday, 13th September 2013 10:57:37] [database.php] response codes are: Array
++(
++    [db_error] => 32243
++    [user_not_authenticated] => 43322
++    [sim_card_registered] => 83242
++    [acknowledge_ok] => 533783
++    [data_error] => 934342
++    [no_data] => 77732
++)
++
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] CowSex not specified
++[Friday, 13th September 2013 10:57:37] [database.php] results gotten from 'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'' are Array
++(
++)
++
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php]  cow identifiers encoded from an array and is '{"cowNames":[],"earTagNumbers":[]}'
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] json_decode returned: Array
++(
++    [simCardSN] => 89254029541005994303
++)
++
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] settings obtained: Array
++(
++    [db_name] => ilri_mistro
++    [mysql_creds] => Array
++        (
++            [username] => root
++            [password] => jason
++            [host] => localhost
++        )
++
++    [log_settings] => logs.ini
++    [response_codes] => response_codes.ini
++    [time_zone] => EAT
++)
++
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] response codes are: Array
++(
++    [db_error] => 32243
++    [user_not_authenticated] => 43322
++    [sim_card_registered] => 83242
++    [acknowledge_ok] => 533783
++    [data_error] => 934342
++    [no_data] => 77732
++)
++
++[Friday, 13th September 2013 10:57:47] [database.php] settings obtained: Array
++(
++    [db_name] => ilri_mistro
++    [mysql_creds] => Array
++        (
++            [username] => root
++            [password] => jason
++            [host] => localhost
++        )
++
++    [log_settings] => logs.ini
++    [response_codes] => response_codes.ini
++    [time_zone] => EAT
++)
++
++[Friday, 13th September 2013 10:57:47] [database.php] response codes are: Array
++(
++    [db_error] => 32243
++    [user_not_authenticated] => 43322
++    [sim_card_registered] => 83242
++    [acknowledge_ok] => 533783
++    [data_error] => 934342
++    [no_data] => 77732
++)
++
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] CowSex not specified
++[Friday, 13th September 2013 10:57:47] [database.php] results gotten from 'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'' are Array
++(
++)
++
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php]  cow identifiers encoded from an array and is '{"cowNames":[],"earTagNumbers":[]}'
+diff --git a/web/log/info.log b/web/log/info.log
+index 2076bf3..719b864 100644
+--- a/web/log/info.log
++++ b/web/log/info.log
+@@ -446,3 +446,25 @@
+ [Friday, 13th September 2013 09:03:42] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'
+ [Friday, 13th September 2013 09:03:42] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
+ [Friday, 13th September 2013 09:03:42] [fetch_cow_identifiers.php] gracefully exiting
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] obtaining POST request
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
++[Friday, 13th September 2013 10:57:37] [database.php] Starting DatabaseHandler
++[Friday, 13th September 2013 10:57:37] [database.php] getting settings from: ../../config/settings.ini
++[Friday, 13th September 2013 10:57:37] [database.php] getting response codes from: ../../config/response_codes.ini
++[Friday, 13th September 2013 10:57:37] [database.php] connecting to ilri_mistro on localhost using root as the username
++[Friday, 13th September 2013 10:57:37] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
++[Friday, 13th September 2013 10:57:37] [fetch_cow_identifiers.php] gracefully exiting
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] Starting CowIdentifierFetcher
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] obtaining POST request
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] getting settings from: ../../config/settings.ini
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] getting response codes from: ../../config/response_codes.ini
++[Friday, 13th September 2013 10:57:47] [database.php] Starting DatabaseHandler
++[Friday, 13th September 2013 10:57:47] [database.php] getting settings from: ../../config/settings.ini
++[Friday, 13th September 2013 10:57:47] [database.php] getting response codes from: ../../config/response_codes.ini
++[Friday, 13th September 2013 10:57:47] [database.php] connecting to ilri_mistro on localhost using root as the username
++[Friday, 13th September 2013 10:57:47] [database.php] running query SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow'
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] sending cow identifiers back to client as a json string
++[Friday, 13th September 2013 10:57:47] [fetch_cow_identifiers.php] gracefully exiting
+diff --git a/web/log/warning.log b/web/log/warning.log
+index 662d707..6c795ce 100644
+--- a/web/log/warning.log
++++ b/web/log/warning.log
+@@ -4,3 +4,5 @@
+ [Thursday, 12th September 2013 16:05:03] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('12/9/2013', '%d/%m/%Y')'
+ [Thursday, 12th September 2013 16:07:59] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('8/9/2013', '%d/%m/%Y')'
+ [Thursday, 12th September 2013 16:11:42] [database.php] no results gotten for  'SELECT `time` FROM `milk_production` WHERE `cow_id` = 35 AND `date` = STR_TO_DATE('10/9/2013', '%d/%m/%Y')'
++[Friday, 13th September 2013 10:57:37] [database.php] no results gotten for  'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow''
++[Friday, 13th September 2013 10:57:47] [database.php] no results gotten for  'SELECT `cow`.`name`,`cow`.`ear_tag_number` FROM `farmer` INNER JOIN `cow` ON `farmer`.`id`=`cow`.`farmer_id` WHERE `farmer`.`sim_card_sn`='89254029541005994303' AND `cow`.`type` ='cow''
+diff --git a/web/php/farmer/add_milk_production.php b/web/php/farmer/add_milk_production.php
+index 6fa6d75..3150d7b 100644
+--- a/web/php/farmer/add_milk_production.php
++++ b/web/php/farmer/add_milk_production.php
+@@ -36,19 +36,19 @@ class MilkProductionAdder {
+ 			$query = "SELECT `time` FROM `milk_production` WHERE `cow_id` = {$cowID} AND `date` = STR_TO_DATE('{$dateEAT}', '%d/%m/%Y')";
+ 			$result = $this->database->runMySQLQuery($query, true);
+ 			$dataThereFlag = false;
+-			if(sizeOf($result) > 0 && $this->jsonObject['time'] == 3) {
++			if(sizeOf($result) > 0 && $this->jsonObject['time'] == "Combined") {
+ 				$dataThereFlag = true;
+ 			}
+ 			else {
+ 				for($i = 0; $i < sizeOf($result) ; $i++){
+-					if($result[$i]["time"] == 3) {
++					if($result[$i]["time"] == "Combined") {
+ 						$dataThereFlag = true;
+ 					}
+ 				}
+ 			}
+ 			if($dataThereFlag == false) {
+ 				$timeEAT = $this->getTime('Y-m-d H:i:s');
+-				$query = "INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES({$cowID},{$this->jsonObject['time']},{$this->jsonObject['quantity']},'{$this->jsonObject['quantityType']}',STR_TO_DATE('{$dateEAT}', '%d/%m/%Y'),'$timeEAT')";
++				$query = "INSERT INTO `milk_production`(`cow_id`,`time`,`quantity`, `quantity_type`,`date`,`date_added`) VALUES({$cowID},'{$this->jsonObject['time']}',{$this->jsonObject['quantity']},'{$this->jsonObject['quantityType']}',STR_TO_DATE('{$dateEAT}', '%d/%m/%Y'),'$timeEAT')";
+ 				$this->database->runMySQLQuery($query, false, $this->codes['data_error']);
+ 				$this->logHandler->log(3, $this->TAG,"returning response code ".$this->codes['acknowledge_ok']);
+ 				echo $this->codes['acknowledge_ok'];
+diff --git a/web/php/farmer/general.php b/web/php/farmer/general.php
+new file mode 100644
+index 0000000..ce14023
+--- /dev/null
++++ b/web/php/farmer/general.php
+@@ -0,0 +1,101 @@
++<?php
++
++class General {
++
++   private $TAG = "general.php";
++   private $ROOT = "../../";
++   private $settingsDir;
++   private $settings;
++   private $codes;
++   private $logHandler;
++   private $database;
++
++   public function __construct() {
++      $this->settingsDir = $this->ROOT . "config/settings.ini";
++      $this->logHandler = new LogHandler;
++      $this->logHandler->log(3, $this->TAG, "Starting MilkProductionHistoryHandler");
++      $this->getSettings();
++      $this->getCodes();
++      $this->database = new DatabaseHandler;
++   }
++
++   private function getSettings() {
++      $this->logHandler->log(3, $this->TAG, "getting settings from: " . $this->settingsDir);
++      if (file_exists($this->settingsDir)) {
++         $settings = parse_ini_file($this->settingsDir);
++         $mysqlCreds = parse_ini_file($settings['mysql_creds']);
++         $settings['mysql_creds'] = $mysqlCreds;
++         $this->settings = $settings;
++         $this->logHandler->log(4, $this->TAG, "settings obtained: " . print_r($this->settings, true));
++      } else {
++         $this->logHandler->log(1, $this->TAG, "unable to get settings from " . $this->settingsDir . ", exiting");
++         die();
++      }
++   }
++
++   private function getCodes() {
++      $responseCodesLocation = $this->ROOT . "config/" . $this->settings['response_codes'];
++      $this->logHandler->log(3, $this->TAG, "getting response codes from: " . $responseCodesLocation);
++      if (file_exists($responseCodesLocation)) {
++         $this->codes = parse_ini_file($responseCodesLocation);
++         $this->logHandler->log(4, $this->TAG, "response codes are: " . print_r($this->codes, true));
++      } else {
++         $this->logHandler->log(1, $this->TAG, "unable to get response codes from " . $responseCodesLocation . ", exiting");
++         die();
++      }
++   }
++
++   public function getBreeds() {
++      $this->logHandler->log(3, $this->TAG, "Getting all breeds from database");
++      $query="SELECT * FROM `breed`";
++      $result = $this->database->runMySQLQuery($query, true);
++      return $result;
++   }
++   
++   public function getBreedID($breed) {
++      $this->logHandler->log(3, $this->TAG, "Getting id of breed with name as ".$breed);
++      $query = "SELECT `id` FROM `breed` WHERE `name` = '{$breed}'";
++      $result = $this->database->runMySQLQuery($query, true);
++      if(sizeof($result) == 1) {
++         $id = $result[0]['id'];
++         $this->logHandler->log(4, $this->TAG, "ID of Breed".$breed." gotten as ".$id);
++         return $id;
++      }
++      else {
++         $this->logHandler->log(2, $this->TAG, "Either more than one breed with the name '".$breed."' gotten or none at all, returning -1");
++         return -1;
++      }
++   }
++   
++   public function getEventID($event) {
++      $this->logHandler->log(3, $this->TAG, "Getting id of event with name as ".$event);
++      $query = "SELECT `id` FROM `event` WHERE `name` = '{$event}'";
++      $result = $this->database->runMySQLQuery($query, true);
++      if(sizeof($result) == 1) {
++         $id = $result[0]['id'];
++         $this->logHandler->log(4, $this->TAG, "ID of Event".$event." gotten as ".$id);
++         return $id;
++      }
++      else {
++         $this->logHandler->log(2, $this->TAG, "Either more than one event with the name '".$event."' gotten or none at all, returning -1");
++         return -1;
++      }
++   }
++   
++   public function getDeformityID($deformity) {
++      $this->logHandler->log(3, $this->TAG, "Getting id of deformity with name as ".$deformity);
++      $query = "SELECT `id` FROM `deformity` WHERE `name` = '{$deformity}'";
++      $result = $this->database->runMySQLQuery($query, true);
++      if(sizeof($result) == 1) {
++         $id = $result[0]['id'];
++         $this->logHandler->log(4, $this->TAG, "ID of Deformity".$deformity." gotten as ".$id);
++         return $id;
++      }
++      else {
++         $this->logHandler->log(2, $this->TAG, "Either more than one deformity with the name '".$deformity."' gotten or none at all, returning -1");
++         return -1;
++      }
++   }
++
++}
++?>
+\ No newline at end of file
+diff --git a/web/php/farmer/registration.php b/web/php/farmer/registration.php
+index 383f1ea..82112e3 100755
+--- a/web/php/farmer/registration.php
++++ b/web/php/farmer/registration.php
+@@ -2,6 +2,7 @@
+ 
+ include '../common/log.php';
+ include '../common/database.php';
++include 'general.php';
+ 
+ class RegistrationHandler {
+ 
+@@ -13,6 +14,7 @@ class RegistrationHandler {
+    private $jsonObject;
+    private $logHandler;
+    private $database;
++   private $general;
+ 
+    public function __construct() {
+       $this->settingsDir = $this->ROOT . "config/settings.ini";
+@@ -22,6 +24,7 @@ class RegistrationHandler {
+       $this->getSettings();
+       $this->getCodes();
+       $this->database = new DatabaseHandler;
++      $this->general = new General();
+ 
+       if ($this->jsonObject['mode'] === "initialRegistration") {
+          $this->logHandler->log(3, $this->TAG, "Initial registration for farmer");
+@@ -104,7 +107,7 @@ class RegistrationHandler {
+          //add an event and link it to the new cow
+          if ($currentCow['mode'] === "bornCalfRegistration") {
+             //add event to database
+-            $eventTypeID = $this->getEventTypeID("Birth");
++            $eventTypeID = $this->general->getEventID("Birth");
+             $eventDate = $currentCow['dateOfBirth'];
+             $remarks = "";
+             $time = $this->getTime("EAT");
+@@ -112,7 +115,7 @@ class RegistrationHandler {
+             $this->database->runMySQLQuery($query, false);
+          }
+          else if($currentCow['mode'] === "adultCowRegistration") {
+-            $eventTypeID = $this->getEventTypeID("Acquisition");
++            $eventTypeID = $this->general->getEventID("Acquisition");
+             $eventDate = $this->getTime("Y-m-d");
+             $remarks = "";
+             $time = $this->getTime("Y-m-d H:i:s");
+@@ -122,18 +125,6 @@ class RegistrationHandler {
+       }
+    }
+ 
+-   private function getEventTypeID($eventTypeName) {
+-      $query = "SELECT `id` FROM `event` WHERE `name` = '{$eventTypeName}'";
+-      $result = $this->database->runMySQLQuery($query, true);
+-      if (sizeOf($result) == 1) {
+-         $this->logHandler->log(4, $this->TAG, "fetched event type ID for " . $eventTypeName . " which is " . $result[0]['id']);
+-         return $result[0]['id'];
+-      } else {
+-         $this->logHandler->log(1, $this->TAG, "it appears like there is no event type by the name '" . $eventTypeName . "' or more than one event type goes by this name, exiting");
+-         die();
+-      }
+-   }
+-
+    private function registerCow($currentCow, $farmerID) {
+       $timeEAT = $this->getTime('Y-m-d H:i:s');
+       $this->logHandler->log(3, $this->TAG, "Registering the new cow (" . $currentCow['earTagNumber'] . ") in the database");
+@@ -146,16 +137,19 @@ class RegistrationHandler {
+       $breeds = $currentCow['breeds'];
+       for ($j = 0; $j < sizeof($breeds); $j++) {
+          $currentBreed = $breeds[$j];
+-         $query = "INSERT INTO `breed`(`cow_id`,`text`,`date_added`) VALUES($cowID,'$currentBreed','$timeEAT')";
++         $breedID = $this->general->getBreedID($currentBreed);
++         $query = "INSERT INTO `cow_breed`(`cow_id`,`breed_id`,`date_added`) VALUES($cowID,$breedID,'$timeEAT')";
+          $this->database->runMySQLQuery($query, false);
+       }
+       $deformities = $currentCow['deformities'];
+       for ($j = 0; $j < sizeof($deformities); $j++) {
+          $currentDeformity = $deformities[$j];
+-         $query = "INSERT INTO `deformity`(`cow_id`,`text`,`date_added`) VALUES($cowID,'$currentDeformity','$timeEAT')";
++         $deformityID = $this->general->getDeformityID($currentDeformity);
++         $query = "INSERT INTO `cow_deformity`(`cow_id`,`deformity_id`,`date_added`) VALUES($cowID,$deformityID,'$timeEAT')";
+          $this->database->runMySQLQuery($query, false);
+       }
+-      $sire = $currentCow['sire'];
++      /*$sire = $currentCow['sire'];
++      //TODO: implement using the new database scheme
+       if ($sire['earTagNumber'] != "" || $sire['strawNumber'] != "" || $sire['name'] != "") {
+          
+          if($sire['strawNumber']!= "") {
+@@ -200,7 +194,7 @@ class RegistrationHandler {
+          $this->logHandler->log(4, $this->TAG, "New dam's ID is " . $damID);
+          $query = "UPDATE `cow` SET `dam_id` = $damID WHERE `id` = $cowID";
+          $this->database->runMySQLQuery($query, false);
+-      }
++      }*/
+       return $cowID;
+    }
+ }
+-- 
+2.7.1
+

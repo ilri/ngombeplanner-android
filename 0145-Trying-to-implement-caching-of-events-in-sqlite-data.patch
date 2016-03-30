@@ -1,0 +1,743 @@
+From bed110b35840e80f78262a37f1d27b3cecd657e2 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Wed, 23 Apr 2014 18:08:08 +0300
+Subject: [PATCH 145/213] Trying to implement caching of events in sqlite
+ database
+
+---
+ .idea/copyright/profiles_settings.xml              |   4 +-
+ ...omActionbarsherlockActionbarsherlock440_aar.xml |  10 --
+ .../ComAndroidSupportAppcompatV71800_aar.xml       |  10 --
+ ...omActionbarsherlockActionbarsherlock440_aar.xml |  10 --
+ ...radle__ComAndroidSupportAppcompatV71800_aar.xml |  10 --
+ .idea/libraries/Gradle__support_v4_13_0_0.xml      |   9 --
+ .idea/libraries/Gradle__support_v4_18_0_0.xml      |   9 --
+ .idea/libraries/support_v4_13_0_0.xml              |   9 --
+ .idea/libraries/support_v4_18_0_0.xml              |   9 --
+ Android.iml                                        |   6 +-
+ MistroFarmer/MistroFarmer.iml                      |  32 +++----
+ MistroFarmer/build.gradle                          |   4 +-
+ MistroFarmer/src/main/AndroidManifest.xml          |   3 +-
+ .../cgiar/ilri/mistro/farmer/AddEventActivity.java |  28 ++----
+ .../ilri/mistro/farmer/EventsHistoryActivity.java  |  66 ++++++++++---
+ .../ilri/mistro/farmer/backend/DataHandler.java    | 105 ++++++++++++++++++++-
+ .../farmer/backend/database/DatabaseHelper.java    |   7 +-
+ .../cgiar/ilri/mistro/farmer/carrier/Event.java    |   9 ++
+ .../src/main/res/layout/activity_add_event.xml     |   2 +-
+ .../main/res/layout/activity_cow_registration.xml  |   6 +-
+ gradle/wrapper/gradle-wrapper.properties           |   4 +-
+ 21 files changed, 205 insertions(+), 147 deletions(-)
+ delete mode 100644 .idea/libraries/ComActionbarsherlockActionbarsherlock440_aar.xml
+ delete mode 100644 .idea/libraries/ComAndroidSupportAppcompatV71800_aar.xml
+ delete mode 100644 .idea/libraries/Gradle__ComActionbarsherlockActionbarsherlock440_aar.xml
+ delete mode 100644 .idea/libraries/Gradle__ComAndroidSupportAppcompatV71800_aar.xml
+ delete mode 100644 .idea/libraries/Gradle__support_v4_13_0_0.xml
+ delete mode 100644 .idea/libraries/Gradle__support_v4_18_0_0.xml
+ delete mode 100644 .idea/libraries/support_v4_13_0_0.xml
+ delete mode 100644 .idea/libraries/support_v4_18_0_0.xml
+
+diff --git a/.idea/copyright/profiles_settings.xml b/.idea/copyright/profiles_settings.xml
+index 3572571..e7bedf3 100644
+--- a/.idea/copyright/profiles_settings.xml
++++ b/.idea/copyright/profiles_settings.xml
+@@ -1,5 +1,3 @@
+ <component name="CopyrightManager">
+-  <settings default="">
+-    <module2copyright />
+-  </settings>
++  <settings default="" />
+ </component>
+\ No newline at end of file
+diff --git a/.idea/libraries/ComActionbarsherlockActionbarsherlock440_aar.xml b/.idea/libraries/ComActionbarsherlockActionbarsherlock440_aar.xml
+deleted file mode 100644
+index eb4eac0..0000000
+--- a/.idea/libraries/ComActionbarsherlockActionbarsherlock440_aar.xml
++++ /dev/null
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="ComActionbarsherlockActionbarsherlock440.aar">
+-    <CLASSES>
+-      <root url="jar://$PROJECT_DIR$/MistroFarmer/build/exploded-bundles/ComActionbarsherlockActionbarsherlock440.aar/classes.jar!/" />
+-      <root url="file://$PROJECT_DIR$/MistroFarmer/build/exploded-bundles/ComActionbarsherlockActionbarsherlock440.aar/res" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+diff --git a/.idea/libraries/ComAndroidSupportAppcompatV71800_aar.xml b/.idea/libraries/ComAndroidSupportAppcompatV71800_aar.xml
+deleted file mode 100644
+index d496a3f..0000000
+--- a/.idea/libraries/ComAndroidSupportAppcompatV71800_aar.xml
++++ /dev/null
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="ComAndroidSupportAppcompatV71800.aar">
+-    <CLASSES>
+-      <root url="jar://$PROJECT_DIR$/MistroFarmer/build/exploded-bundles/ComAndroidSupportAppcompatV71800.aar/classes.jar!/" />
+-      <root url="file://$PROJECT_DIR$/MistroFarmer/build/exploded-bundles/ComAndroidSupportAppcompatV71800.aar/res" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+diff --git a/.idea/libraries/Gradle__ComActionbarsherlockActionbarsherlock440_aar.xml b/.idea/libraries/Gradle__ComActionbarsherlockActionbarsherlock440_aar.xml
+deleted file mode 100644
+index 3c19395..0000000
+--- a/.idea/libraries/Gradle__ComActionbarsherlockActionbarsherlock440_aar.xml
++++ /dev/null
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: ComActionbarsherlockActionbarsherlock440.aar">
+-    <CLASSES>
+-      <root url="jar://$PROJECT_DIR$/MistroFarmer/build/exploded-bundles/ComActionbarsherlockActionbarsherlock440.aar/classes.jar!/" />
+-      <root url="file://$PROJECT_DIR$/MistroFarmer/build/exploded-bundles/ComActionbarsherlockActionbarsherlock440.aar/res" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+diff --git a/.idea/libraries/Gradle__ComAndroidSupportAppcompatV71800_aar.xml b/.idea/libraries/Gradle__ComAndroidSupportAppcompatV71800_aar.xml
+deleted file mode 100644
+index 02339e6..0000000
+--- a/.idea/libraries/Gradle__ComAndroidSupportAppcompatV71800_aar.xml
++++ /dev/null
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: ComAndroidSupportAppcompatV71800.aar">
+-    <CLASSES>
+-      <root url="jar://$PROJECT_DIR$/MistroFarmer/build/exploded-bundles/ComAndroidSupportAppcompatV71800.aar/classes.jar!/" />
+-      <root url="file://$PROJECT_DIR$/MistroFarmer/build/exploded-bundles/ComAndroidSupportAppcompatV71800.aar/res" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+diff --git a/.idea/libraries/Gradle__support_v4_13_0_0.xml b/.idea/libraries/Gradle__support_v4_13_0_0.xml
+deleted file mode 100644
+index 500bff1..0000000
+--- a/.idea/libraries/Gradle__support_v4_13_0_0.xml
++++ /dev/null
+@@ -1,9 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: support-v4-13.0.0">
+-    <CLASSES>
+-      <root url="jar://$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/13.0.0/support-v4-13.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+diff --git a/.idea/libraries/Gradle__support_v4_18_0_0.xml b/.idea/libraries/Gradle__support_v4_18_0_0.xml
+deleted file mode 100644
+index f94e133..0000000
+--- a/.idea/libraries/Gradle__support_v4_18_0_0.xml
++++ /dev/null
+@@ -1,9 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: support-v4-18.0.0">
+-    <CLASSES>
+-      <root url="jar://$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+diff --git a/.idea/libraries/support_v4_13_0_0.xml b/.idea/libraries/support_v4_13_0_0.xml
+deleted file mode 100644
+index 84b7008..0000000
+--- a/.idea/libraries/support_v4_13_0_0.xml
++++ /dev/null
+@@ -1,9 +0,0 @@
+-<component name="libraryTable">
+-  <library name="support-v4-13.0.0">
+-    <CLASSES>
+-      <root url="jar://$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/13.0.0/support-v4-13.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+diff --git a/.idea/libraries/support_v4_18_0_0.xml b/.idea/libraries/support_v4_18_0_0.xml
+deleted file mode 100644
+index 3669304..0000000
+--- a/.idea/libraries/support_v4_18_0_0.xml
++++ /dev/null
+@@ -1,9 +0,0 @@
+-<component name="libraryTable">
+-  <library name="support-v4-18.0.0">
+-    <CLASSES>
+-      <root url="jar://$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+diff --git a/Android.iml b/Android.iml
+index d61927c..58a239a 100644
+--- a/Android.iml
++++ b/Android.iml
+@@ -1,14 +1,12 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <module external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+-    <output url="file://$MODULE_DIR$/build/classes/main" />
+-    <output-test url="file://$MODULE_DIR$/build/classes/test" />
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
+     <exclude-output />
+     <content url="file://$MODULE_DIR$">
+       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+       <excludeFolder url="file://$MODULE_DIR$/build" />
+     </content>
+-    <orderEntry type="jdk" jdkName="Android 4.2.2" jdkType="Android SDK" />
++    <orderEntry type="jdk" jdkName="JDK" jdkType="JavaSDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
+ </module>
+diff --git a/MistroFarmer/MistroFarmer.iml b/MistroFarmer/MistroFarmer.iml
+index dfb77c8..ad5b01a 100644
+--- a/MistroFarmer/MistroFarmer.iml
++++ b/MistroFarmer/MistroFarmer.iml
+@@ -30,32 +30,32 @@
+       <sourceFolder url="file://$MODULE_DIR$/build/source/buildConfig/debug" isTestSource="false" generated="true" />
+       <sourceFolder url="file://$MODULE_DIR$/build/source/rs/debug" isTestSource="false" generated="true" />
+       <sourceFolder url="file://$MODULE_DIR$/build/res/rs/debug" type="java-resource" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/r/test/debug" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/aidl/test/debug" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/buildConfig/test/debug" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/build/source/rs/test/debug" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/source/r/test/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/source/aidl/test/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/source/buildConfig/test/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/source/rs/test/debug" isTestSource="true" generated="true" />
+       <sourceFolder url="file://$MODULE_DIR$/build/res/rs/test/debug" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
+       <sourceFolder url="file://$MODULE_DIR$/src/debug/aidl" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src/debug/jni" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+       <sourceFolder url="file://$MODULE_DIR$/src/main/aidl" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/instrumentTest/aidl" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/instrumentTest/assets" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/instrumentTest/java" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/instrumentTest/jni" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/instrumentTest/rs" isTestSource="true" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/instrumentTest/res" type="java-test-resource" />
+-      <sourceFolder url="file://$MODULE_DIR$/src/instrumentTest/resources" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/aidl" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+       <excludeFolder url="file://$MODULE_DIR$/build/apk" />
+       <excludeFolder url="file://$MODULE_DIR$/build/assets" />
+       <excludeFolder url="file://$MODULE_DIR$/build/bundles" />
+@@ -71,7 +71,7 @@
+     <orderEntry type="jdk" jdkName="Android API 18 Platform" jdkType="Android SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+     <orderEntry type="library" exported="" name="support-v4-13.0.0" level="project" />
+-    <orderEntry type="library" exported="" name="ComActionbarsherlockActionbarsherlock440.aar" level="project" />
++    <orderEntry type="library" exported="" name="actionbarsherlock-4.4.0" level="project" />
+   </component>
+ </module>
+ 
+diff --git a/MistroFarmer/build.gradle b/MistroFarmer/build.gradle
+index e63432c..cb65b8b 100644
+--- a/MistroFarmer/build.gradle
++++ b/MistroFarmer/build.gradle
+@@ -3,7 +3,7 @@ buildscript {
+         mavenCentral()
+     }
+     dependencies {
+-        classpath 'com.android.tools.build:gradle:0.7.+'
++        classpath 'com.android.tools.build:gradle:0.9.+'
+     }
+ }
+ apply plugin: 'android'
+@@ -24,7 +24,7 @@ dependencies {
+ 
+ android {
+     compileSdkVersion 18
+-    buildToolsVersion "17.0.0"
++    buildToolsVersion "19.0.3"
+ 
+     defaultConfig {
+         minSdkVersion 7
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index a2e56cd..4fe046f 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -66,7 +66,8 @@
+         </activity>
+         <activity
+             android:name="org.cgiar.ilri.mistro.farmer.AddEventActivity"
+-            android:label="@string/title_activity_add_event" >
++            android:label="@string/title_activity_add_event"
++            android:windowSoftInputMode="stateHidden" >
+         </activity>
+         <activity
+             android:name="org.cgiar.ilri.mistro.farmer.EventsHistoryActivity"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+index 7c7115d..e95ff37 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+@@ -784,7 +784,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+         return alertDialog;
+     }
+ 
+-    private class CowEventAdditionThread extends AsyncTask<JSONObject, Integer, String>
++    private class CowEventAdditionThread extends AsyncTask<JSONObject, Integer, Boolean>
+     {
+         private ProgressDialog progressDialog;
+ 
+@@ -795,32 +795,18 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+         }
+ 
+         @Override
+-        protected String doInBackground(JSONObject... params) {
+-            String result = DataHandler.sendDataToServer(AddEventActivity.this, params[0].toString(), DataHandler.FARMER_ADD_COW_EVENT_URL, true);
+-            return result;
++        protected Boolean doInBackground(JSONObject... params) {
++            //public static final void cacheRequest(Context context, String jsonString, String appendedURL){
++            boolean response = DataHandler.cacheRequest(AddEventActivity.this, params[0].toString(), DataHandler.FARMER_ADD_COW_EVENT_URL);
++            return response;
+         }
+ 
+         @Override
+-        protected void onPostExecute(String result)
++        protected void onPostExecute(Boolean result)
+         {
+             super.onPostExecute(result);
+             progressDialog.dismiss();
+-            if(result == null){
+-                Toast.makeText(AddEventActivity.this,Locale.getStringInLocale("problem_connecting_to_server",AddEventActivity.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+-                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("generic_sms_error", AddEventActivity.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+-                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("no_service", AddEventActivity.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+-                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("radio_off", AddEventActivity.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+-                Toast.makeText(AddEventActivity.this, Locale.getStringInLocale("server_not_receive_sms", AddEventActivity.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.ACKNOWLEDGE_OK))
++            if(result == true)
+             {
+                 Toast.makeText(AddEventActivity.this, eventRecorded, Toast.LENGTH_LONG).show();
+                 Intent intent;
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
+index b929149..a89e40a 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
+@@ -23,6 +23,9 @@ import com.actionbarsherlock.view.MenuItem;
+ 
+ import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+ import org.cgiar.ilri.mistro.farmer.backend.Locale;
++import org.cgiar.ilri.mistro.farmer.carrier.Cow;
++import org.cgiar.ilri.mistro.farmer.carrier.Event;
++import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+ import org.json.JSONArray;
+ import org.json.JSONException;
+ import org.json.JSONObject;
+@@ -150,7 +153,7 @@ public class EventsHistoryActivity extends SherlockActivity implements View.OnCl
+         }
+     }
+ 
+-    private class CowEventHistoryThread extends AsyncTask<String, Integer, String> {
++    private class CowEventHistoryThread extends AsyncTask<String, Integer, Farmer> {
+ 
+         ProgressDialog progressDialog;
+ 
+@@ -161,9 +164,8 @@ public class EventsHistoryActivity extends SherlockActivity implements View.OnCl
+         }
+ 
+         @Override
+-        protected String doInBackground(String... params) {
+-            String result = null;
+-            JSONObject jsonObject = new JSONObject();
++        protected Farmer doInBackground(String... params) {
++            /*JSONObject jsonObject = new JSONObject();
+             try {
+                 jsonObject.put("simCardSN",params[0]);
+                 jsonObject.put("fromID",params[1]);
+@@ -171,20 +173,29 @@ public class EventsHistoryActivity extends SherlockActivity implements View.OnCl
+             }
+             catch (JSONException e) {
+                 e.printStackTrace();
++            }*/
++            String result = DataHandler.sendCachedRequests(EventsHistoryActivity.this, true);//send cached data and receive updated farmer data
++            if(result != null && !result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)){//no data fetched for this farmer
++                try {//try converting the response into a jsonobject. It might not work if the DataHandler returns a response code
++                    Log.d(TAG, "response is "+result);
++                    DataHandler.saveFarmerData(EventsHistoryActivity.this, new JSONObject(result));
++                } catch (JSONException e) {
++                    e.printStackTrace();
++                }
+             }
+-
+-
+-            return result;
++            return DataHandler.getFarmerData(EventsHistoryActivity.this);
+         }
+ 
+         @Override
+-        protected void onPostExecute(String result) {
+-            super.onPostExecute(result);
++        protected void onPostExecute(Farmer farmer) {
++            super.onPostExecute(farmer);
+             progressDialog.dismiss();
+-            if(result == null) {
+-                Toast.makeText(EventsHistoryActivity.this, serverError, Toast.LENGTH_LONG).show();
++
++            if(farmer == null) {
++                Toast.makeText(EventsHistoryActivity.this, Locale.getStringInLocale("unable_to_fetch_cached_data", EventsHistoryActivity.this), Toast.LENGTH_LONG).show();
+             }
+-            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
++
++            /*else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+                 Toast.makeText(EventsHistoryActivity.this, Locale.getStringInLocale("generic_sms_error", EventsHistoryActivity.this), Toast.LENGTH_LONG).show();
+             }
+             else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+@@ -198,15 +209,42 @@ public class EventsHistoryActivity extends SherlockActivity implements View.OnCl
+             }
+             else if(result.equals(DataHandler.NO_DATA)) {
+                 Toast.makeText(EventsHistoryActivity.this, noDataReceived, Toast.LENGTH_LONG).show();
+-            }
++            }*/
+             else {
+-                try {
++                /*try {
+                     JSONObject jsonObject = new JSONObject(result);
+                     JSONArray historyArray = jsonObject.getJSONArray("history");
+                     addTableRows(historyArray);
+                 }
+                 catch (JSONException e) {
+                     e.printStackTrace();
++                }*/
++                try{
++                    List<Cow> allCows = farmer.getCows();
++                    JSONArray historyArray = new JSONArray();
++                    for(int cowIndex = 0; cowIndex < allCows.size(); cowIndex++){
++                        //append all events for this cow to the UI
++                        List<Event> cowEvents = allCows.get(cowIndex).getEvents();
++                        for(int eventIndex = 0; eventIndex < cowEvents.size(); eventIndex++){
++                            //cow_name, ear_tag_number, event.*,
++                            JSONObject currEventJSON = new JSONObject();
++                            currEventJSON.put("cow_name", allCows.get(cowIndex).getName());
++                            currEventJSON.put("ear_tag_number", allCows.get(cowIndex).getEarTagNumber());
++                            currEventJSON.put("id", cowEvents.get(eventIndex).getId());
++                            currEventJSON.put("remarks", cowEvents.get(eventIndex).getRemarks());
++                            currEventJSON.put("event_date", cowEvents.get(eventIndex).getEventDate());
++                            currEventJSON.put("event_name", cowEvents.get(eventIndex).getType());
++                            currEventJSON.put("birth_type", cowEvents.get(eventIndex).getBirthType());
++                            currEventJSON.put("parent_cow_event", cowEvents.get(eventIndex).getParentCowEventID());
++                            currEventJSON.put("servicing_days", cowEvents.get(eventIndex).getServicingDays());
++                            historyArray.put(currEventJSON);
++                        }
++                    }
++
++                    addTableRows(historyArray);
++                }
++                catch (Exception e){
++                    e.printStackTrace();
+                 }
+             }
+         }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+index b11530d..e699b0b 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+@@ -79,6 +79,7 @@ public class DataHandler
+     public static final String FARMER_FETCH_COW_EVENTS_HISTORY_URL="/php/farmer/fetch_cow_events_history.php";
+     public static final String FARMER_FETCH_COW_SERVICING_EVENTS_URL="/php/farmer/fetch_servicing_events.php";
+     public static final String FARMER_REGISTER_FARM_COORDS_URL="/php/farmer/register_farm_coords.php";
++    public static final String FARMER_ADD_CACHED_DATA_URL="/php/farmer/add_cached_data.php";
+     public static final String SP_KEY_LOCALE = "locale";
+     public static final String SP_KEY_MILK_QUANTITY_TYPE = "milkQuantityTYpe";
+     public static final String SP_KEY_USE_SMS_TO_SEND_DATA = "useSMSToSendData";
+@@ -526,7 +527,7 @@ public class DataHandler
+                     for(int j = 0; j < cowEvents.length(); j++){
+                         JSONObject currEvent = cowEvents.getJSONObject(j);
+ 
+-                        columns = new String[]{"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births"};
++                        columns = new String[]{"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server"};
+                         columnValues = new String[columns.length];
+ 
+                         columnValues[0] = currEvent.getString("id");
+@@ -540,6 +541,7 @@ public class DataHandler
+                         columnValues[8] = currEvent.getString("servicing_days");
+                         columnValues[9] = currEvent.getString("cause_of_death");
+                         columnValues[10] = currEvent.getString("no_of_live_births");
++                        columnValues[11] = "1";
+ 
+                         databaseHelper.runInsertQuery(databaseHelper.TABLE_EVENT, columns, columnValues, 0, writableDB);
+                     }
+@@ -646,7 +648,7 @@ public class DataHandler
+                     }
+ 
+                     //fetch cow events
+-                    columns = new String[] {"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births"};
++                    columns = new String[] {"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server"};
+                     selection = "cow_id="+cowID;
+                     String[][] eventResult = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_EVENT, columns, selection, null, null, null, null, null);
+                     for(int eventIndex = 0; eventIndex < eventResult.length; eventIndex++){
+@@ -666,6 +668,12 @@ public class DataHandler
+                         currEvent.setCod(eventResult[eventIndex][9]);
+                         if(eventResult[eventIndex][10].length() > 0)
+                             currEvent.setNoOfLiveBirths(Integer.parseInt(eventResult[eventIndex][10]));
++                        if(eventResult[eventIndex][11].equals("1")){
++                            currEvent.setSavedOnServer(true);
++                        }
++                        else{
++                            currEvent.setSavedOnServer(false);
++                        }
+ 
+                         currCow.addEvent(currEvent);
+                     }
+@@ -688,6 +696,99 @@ public class DataHandler
+     }
+ 
+     /**
++     * This method caches data that would have been sent to the server. Note that this method has an almost identical arguement
++     * signature similar to the sendDataToServer method.
++     *
++     * @param context   The activity/service from where you want to save cache the request
++     * @param jsonString    The valid json string containing data for the request as you would have sent it in a normal request
++     * @param appendedURL   The URI for the module on the server which you want the request to go to (eventually) e.g FARMER_ADD_COW_EVENT_URL
++     */
++    public static final boolean cacheRequest(Context context, String jsonString, String appendedURL){
++        //TODO: do stuff
++        DatabaseHelper databaseHelper = new DatabaseHelper(context);
++        SQLiteDatabase writableDB = databaseHelper.getWritableDatabase();
++        if(writableDB.isOpen()){
++            String[] columns = new String[]{"url", "json"};
++            String[] values = new String[columns.length];
++            values[0] = appendedURL;
++            values[1] = jsonString;
++
++            databaseHelper.runInsertQuery(databaseHelper.TABLE_CACHED_REQUESTS, columns, values, -1, writableDB);
++            return true;
++        }
++        else{
++            Log.e(TAG, "Writable database did not open. Was unable to cache request in the SQLite DB. Choosing to send the data to the server instead");
++            sendDataToServer(context, jsonString, appendedURL, false);
++        }
++        return false;
++    }
++
++    /**
++     * This method sends cached data to the server
++     *
++     * @param waitForResponse If set to true, this method will wait for the response from the server and returns it to the caller
++     * @param context   The activity/service from where you want to send the data to the server
++     */
++    public static final String sendCachedRequests(Context context, boolean waitForResponse){
++        Log.d(TAG, "Sending cached data to server");
++        //public static String sendDataToServer(Context context, String jsonString, String appendedURL, boolean waitForResponse) {
++        DatabaseHelper databaseHelper = new DatabaseHelper(context);
++        SQLiteDatabase writableDB = databaseHelper.getWritableDatabase();
++        if(writableDB.isOpen()){
++            String[] columns = new String[]{"id","url", "json"};
++            String[][] result = databaseHelper.runSelectQuery(writableDB, databaseHelper.TABLE_CACHED_REQUESTS, columns, null, null, null, null, null, null);
++            List<String> ids = new ArrayList<String>();
++            if(result != null){
++                try{
++                    JSONArray requests = new JSONArray();
++                    for(int requestIndex = 0; requestIndex < result.length; requestIndex++){
++                        JSONObject currRequest = new JSONObject();
++                        ids.add(result[requestIndex][0]);
++                        String currRequestURL = result[requestIndex][1];
++                        JSONObject currRequestData = new JSONObject(result[requestIndex][2]);
++                        currRequest.put("requestURL", currRequestURL);
++                        currRequest.put("requestData", currRequestData);
++                        requests.put(currRequest);
++                    }
++                    TelephonyManager telephonyManager=(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
++                    String simCardSN = telephonyManager.getSimSerialNumber();
++                    if(simCardSN!=null){
++                        JSONObject finalRequest = new JSONObject();
++                        finalRequest.put("simCardSN", simCardSN);
++                        finalRequest.put("pastRequests", requests);
++                        if(requests.length() > 0){
++                            Log.d(TAG, "Sending the following cached data "+finalRequest.toString());
++                            String response = sendDataToServer(context, finalRequest.toString(), FARMER_ADD_CACHED_DATA_URL, waitForResponse);
++                            if(response != null && !response.equals(CODE_USER_NOT_AUTHENTICATED)){
++                                //delete the saved data from cache
++                                String[] idsArray = new String[ids.size()];
++                                idsArray = ids.toArray(idsArray);
++                                databaseHelper.runDeleteQuery(writableDB, databaseHelper.TABLE_CACHED_REQUESTS, "id", idsArray);
++                                Log.d(TAG, "Deleted cached requests from SQLite database");
++                            }
++                            return response;
++                        }
++                        else {
++                            Log.d(TAG, "No Cached data in database");
++                            return  NO_DATA;
++                        }
++                    }
++                }
++                catch (Exception e){
++                    e.printStackTrace();
++                }
++            }
++            else{
++                Log.w(TAG, "Did not get any cached requests in the SQLite database, exiting");
++            }
++        }
++        else{
++            Log.e(TAG, "Readable database did not open. Was una");
++        }
++        return null;
++    }
++
++    /**
+      * This broadcast receiver is responsible for watching for SMSs coming for the server and concatenating SMS fragments in SMSs that are
+      * longer than the standard SMS length
+      */
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/database/DatabaseHelper.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/database/DatabaseHelper.java
+index 07da5a0..056d049 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/database/DatabaseHelper.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/database/DatabaseHelper.java
+@@ -18,10 +18,11 @@ import java.io.Serializable;
+ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
+ 
+     public static final String DB_NAME = "ngombe_planner";
+-    public static final int DB_VERSION = 4;
++    public static final int DB_VERSION = 5;
+     public static final String TABLE_FARMER = "farmer";
+     public static final String TABLE_COW = "cow";
+     public static final String TABLE_EVENT = "event";
++    public static final String TABLE_CACHED_REQUESTS = "cached_requests";
+     private static final String TAG = "DatabaseHelper";
+ 
+     /**
+@@ -43,7 +44,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
+     public void onCreate(SQLiteDatabase db) {
+         db.execSQL("CREATE TABLE "+TABLE_FARMER+" (id INTEGER PRIMARY KEY, name TEXT, mobile_no TEXT, location_county TEXT, location_district TEXT, gps_longitude TEXT, gps_latitude TEXT, date_added TEXT, sim_card_sn TEXT);");
+ 		db.execSQL("CREATE TABLE "+TABLE_COW+" (id INTEGER PRIMARY KEY, farmer_id INTEGER, name TEXT, ear_tag_number TEXT, date_of_birth TEXT, age INTEGER, age_type TEXT, sex TEXT, sire_id INTEGER, dam_id INTEGER, date_added TEXT, service_type TEXT, country_id INTEGER, bull_owner TEXT, owner_name TEXT);");
+-        db.execSQL("CREATE TABLE "+TABLE_EVENT+" (id INTEGER PRIMARY KEY, cow_id INTEGER, event_name TEXT, remarks TEXT, event_date TEXT, birth_type TEXT, parent_cow_event INTEGER, bull_id INTEGER, servicing_days INTEGER, cod TEXT, no_of_live_births INTEGER)");
++        db.execSQL("CREATE TABLE "+TABLE_EVENT+" (id INTEGER PRIMARY KEY, cow_id INTEGER, event_name TEXT, remarks TEXT, event_date TEXT, birth_type TEXT, parent_cow_event INTEGER, bull_id INTEGER, servicing_days INTEGER, cod TEXT, no_of_live_births INTEGER, saved_on_server INTEGER)");
++        db.execSQL("CREATE TABLE "+TABLE_CACHED_REQUESTS+" (id INTEGER PRIMARY KEY AUTOINCREMENT, url TEXT, json TEXT)");
+         //insert any static data to the db now
+     }
+ 
+@@ -61,6 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
+         db.execSQL("DROP TABLE IF EXISTS "+TABLE_COW);
+         db.execSQL("DROP TABLE IF EXISTS "+TABLE_FARMER);
+         db.execSQL("DROP TABLE IF EXISTS "+TABLE_EVENT);
++        db.execSQL("DROP TABLE IF EXISTS "+TABLE_CACHED_REQUESTS);
+ 
+         //recreate the database
+         onCreate(db);
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Event.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Event.java
+index 219c3b3..efed7da 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Event.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Event.java
+@@ -15,6 +15,7 @@ public class Event {
+     private int noOfLiveBirths;
+     private String type;
+     private String remarks;
++    private boolean savedOnServer;
+ 
+     public Event(){
+ 
+@@ -91,6 +92,14 @@ public class Event {
+         return false;
+     }
+ 
++    public void setSavedOnServer(boolean savedOnServer){
++        this.savedOnServer = savedOnServer;
++    }
++
++    public boolean getSavedOnServer(){
++        return savedOnServer;
++    }
++
+     public String getCod() {
+         return cod;
+     }
+diff --git a/MistroFarmer/src/main/res/layout/activity_add_event.xml b/MistroFarmer/src/main/res/layout/activity_add_event.xml
+index 5004e80..4681c67 100644
+--- a/MistroFarmer/src/main/res/layout/activity_add_event.xml
++++ b/MistroFarmer/src/main/res/layout/activity_add_event.xml
+@@ -68,7 +68,7 @@
+             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+             android:textSize="@dimen/normal_text_size"
+             android:textColor="@color/text_input_color"
+-            android:inputType="date"/>
++            android:inputType="none"/>
+         <TextView
+             android:id="@+id/servicing_tv"
+             android:layout_width="wrap_content"
+diff --git a/MistroFarmer/src/main/res/layout/activity_cow_registration.xml b/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
+index 0a7a841..6d291ec 100644
+--- a/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
++++ b/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
+@@ -89,7 +89,7 @@
+             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+             android:textSize="@dimen/normal_text_size"
+             android:textColor="@color/text_input_color"
+-            android:inputType="date"/>
++            android:inputType="none"/>
+         <TextView
+             android:id="@+id/breed_tv"
+             android:layout_width="wrap_content"
+@@ -104,7 +104,7 @@
+             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+             android:textSize="@dimen/normal_text_size"
+             android:textColor="@color/text_input_color"
+-            android:inputType="textCapWords|textNoSuggestions"/>
++            android:inputType="date|none"/>
+         <TextView
+             android:id="@+id/sex_tv"
+             android:layout_width="wrap_content"
+@@ -132,7 +132,7 @@
+                 android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+                 android:textSize="@dimen/normal_text_size"
+                 android:textColor="@color/text_input_color"
+-                android:inputType="text"/>
++                android:inputType="none"/>
+         <TextView
+             android:id="@+id/service_type_tv"
+             android:layout_width="wrap_content"
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+index 8088748..ef54732 100644
+--- a/gradle/wrapper/gradle-wrapper.properties
++++ b/gradle/wrapper/gradle-wrapper.properties
+@@ -1,6 +1,6 @@
+-#Sun Mar 23 16:57:37 EAT 2014
++#Wed Apr 16 15:26:39 EAT 2014
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=http\://services.gradle.org/distributions/gradle-1.9-all.zip
++distributionUrl=http\://services.gradle.org/distributions/gradle-1.11-all.zip
+-- 
+2.7.1
+

@@ -1,0 +1,469 @@
+From 963a8f7c1a746511ee9bfa666e31c774b258143f Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Sun, 20 Oct 2013 15:48:32 +0300
+Subject: [PATCH 091/213] Cow registration UI screen on javaME created
+
+---
+ .idea/workspace.xml                                |  15 +-
+ .../mistro/farmer/ui/CowRegistrationScreen.java    | 221 +++++++++++++++++++++
+ .../mistro/farmer/ui/FarmerRegistrationScreen.java |  20 ++
+ .../farmer/ui/localization/GeneralArrays.java      |  31 +++
+ .../farmer/ui/localization/GeneralStrings.java     |   9 +
+ .../farmer/ui/localization/StringResources.java    |   8 +
+ 6 files changed, 292 insertions(+), 12 deletions(-)
+ create mode 100644 JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
+ create mode 100644 JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/GeneralArrays.java
+ create mode 100644 JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/GeneralStrings.java
+
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+index 54f62af..55553e9 100755
+--- a/.idea/workspace.xml
++++ b/.idea/workspace.xml
+@@ -49,7 +49,6 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="225ed8cc-ff69-42a3-8530-e367063c6aef" name="Default" comment="">
+-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java" />
+       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-fest/pom.xml" afterPath="" />
+       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-fest/src/main/java/org/fest/assertions/api/ACTIONBARSHERLOCK.java" afterPath="" />
+       <change type="DELETED" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock-fest/src/main/java/org/fest/assertions/api/com/actionbarsherlock/app/ActionBarAssert.java" afterPath="" />
+@@ -761,7 +760,6 @@
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CapitalizingTextView.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CapitalizingTextView.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/CollapsibleActionView.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/CollapsibleActionView.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CollapsibleActionViewWrapper.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/CollapsibleActionViewWrapper.java" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java" afterPath="$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatEvaluator.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatEvaluator.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatKeyframeSet.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/FloatKeyframeSet.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsAbsSpinner.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/widget/IcsAbsSpinner.java" />
+@@ -779,7 +777,6 @@
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/KeyframeSet.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/animation/KeyframeSet.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/LICENSE.txt" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/LICENSE.txt" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ListMenuItemView.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/ListMenuItemView.java" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/LoginScreen.java" afterPath="$PROJECT_DIR$/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/LoginScreen.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/Menu.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/Menu.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuBuilder.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuBuilder.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/MenuInflater.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/MenuInflater.java" />
+@@ -790,7 +787,6 @@
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuPresenter.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuPresenter.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuView.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuView.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuWrapper.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/MenuWrapper.java" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/Midlet.java" afterPath="$PROJECT_DIR$/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/Midlet.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineFrameLayout.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineFrameLayout.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineHorizontalScrollView.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineHorizontalScrollView.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineLinearLayout.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/nineoldandroids/widget/NineLinearLayout.java" />
+@@ -813,7 +809,6 @@
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockListFragment.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockListFragment.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockPreferenceActivity.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/app/SherlockPreferenceActivity.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/StandaloneActionMode.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/StandaloneActionMode.java" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/StringResources.java" afterPath="$PROJECT_DIR$/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/StringResources.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/SubMenu.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/view/SubMenu.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/SubMenuBuilder.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/SubMenuBuilder.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/SubMenuWrapper.java" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/src/com/actionbarsherlock/internal/view/menu/SubMenuWrapper.java" />
+@@ -906,8 +901,6 @@
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/values-v11/abs__themes.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/values-v11/abs__themes.xml" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/values-v14/abs__themes.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/values-v14/abs__themes.xml" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/checkstyle.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/checkstyle.xml" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/debug.log" afterPath="$PROJECT_DIR$/web/log/debug.log" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/info.log" afterPath="$PROJECT_DIR$/web/log/info.log" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/lint.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/lint.xml" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/pom.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/pom.xml" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/pom.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/pom.xml" />
+@@ -916,8 +909,6 @@
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout-v14/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout-v14/sherlock_spinner_dropdown_item.xml" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout/sherlock_spinner_item.xml" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout-v14/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libraries/ActionBarSherlock/actionbarsherlock/res/layout-v14/sherlock_spinner_item.xml" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/log/warning.log" afterPath="$PROJECT_DIR$/web/log/warning.log" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+     </list>
+     <ignored path="MistroFarmer.iws" />
+     <ignored path=".idea/workspace.xml" />
+@@ -1057,7 +1048,7 @@
+       <file leaf-file-name="FarmerRegistrationActivity.java" pinned="false" current="true" current-in-tab="true">
+         <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state line="287" column="13" selection-start="12040" selection-end="12040" vertical-scroll-proportion="0.4428251" vertical-offset="4087" max-vertical-offset="5868">
++            <state line="297" column="42" selection-start="12322" selection-end="12322" vertical-scroll-proportion="0.6446188" vertical-offset="4087" max-vertical-offset="5868">
+               <folding />
+             </state>
+           </provider>
+@@ -2359,7 +2350,7 @@
+   </component>
+   <component name="ToolWindowManager">
+     <frame x="1365" y="-4" width="1922" height="1085" extended-state="6" />
+-    <editor active="true" />
++    <editor active="false" />
+     <layout>
+       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32905295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+@@ -2544,7 +2535,7 @@
+     </entry>
+     <entry file="file://$PROJECT_DIR$/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state line="287" column="13" selection-start="12040" selection-end="12040" vertical-scroll-proportion="0.4428251" vertical-offset="4087" max-vertical-offset="5868">
++        <state line="297" column="42" selection-start="12322" selection-end="12322" vertical-scroll-proportion="0.6446188" vertical-offset="4087" max-vertical-offset="5868">
+           <folding />
+         </state>
+       </provider>
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
+new file mode 100644
+index 0000000..59e24df
+--- /dev/null
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
+@@ -0,0 +1,221 @@
++package org.cgiar.ilri.mistro.farmer.ui;
++
++import com.sun.lwuit.ComboBox;
++import com.sun.lwuit.Command;
++import com.sun.lwuit.Component;
++import com.sun.lwuit.Form;
++import com.sun.lwuit.Label;
++import com.sun.lwuit.TextField;
++import com.sun.lwuit.events.ActionEvent;
++import com.sun.lwuit.events.ActionListener;
++import com.sun.lwuit.layouts.BoxLayout;
++import org.cgiar.ilri.mistro.farmer.Midlet;
++import org.cgiar.ilri.mistro.farmer.ui.localization.ArrayResources;
++import org.cgiar.ilri.mistro.farmer.ui.localization.GeneralArrays;
++import org.cgiar.ilri.mistro.farmer.ui.localization.Locale;
++import org.cgiar.ilri.mistro.farmer.ui.localization.StringResources;
++
++/**
++ *
++ * @author jason
++ */
++public class CowRegistrationScreen extends Form implements Screen{
++
++    private final Midlet midlet;
++    private final int locale;
++    private final int cowIndex;
++    private final int cowNumber;
++    
++    private Command previousCommand;
++    private Command nextCommand;
++    
++    private BoxLayout parentBoxLayout;
++    private Label cowNameL;
++    private TextField cowNameTF;
++    private Label earTagNumberL;
++    private TextField earTagNumberTF;
++    private Label ageL;
++    private TextField ageTF;
++    private Label ageTypeL;
++    private ComboBox ageTypeCB;
++    private Label dateOfBirthL;
++    private TextField dateOfBirthTF;
++    private Label breedL;
++    private ComboBox breedCB;
++    private Label sexL;
++    private ComboBox sexCB;
++    private Label deformityL;
++    private ComboBox deformityCB;
++    private Label serviceTypeL;
++    private ComboBox serviceTypeCB;
++    private Label sireL;
++    private ComboBox sireCB;
++    private Label damL;
++    private ComboBox damCB;
++    private Label countryL;
++    private ComboBox countryCB;
++    public CowRegistrationScreen(Midlet midlet, int locale, int cowIndex, int cowNumber) {
++        super(Locale.getStringInLocale(locale, StringResources.cow_registration_wth_indx)+String.valueOf(cowIndex+1));
++        
++        this.midlet = midlet;
++        this.locale = locale;
++        this.cowIndex = cowIndex;
++        this.cowNumber = cowNumber;
++        
++        parentBoxLayout = new BoxLayout(BoxLayout.Y_AXIS);
++        this.setLayout(parentBoxLayout);
++        
++        previousCommand = new Command(Locale.getStringInLocale(locale, StringResources.previous));
++        this.addCommand(previousCommand);
++        
++        if(cowIndex < (cowNumber-1))
++            nextCommand = new Command(Locale.getStringInLocale(locale, StringResources.next));
++        else
++            nextCommand = new Command(Locale.getStringInLocale(locale, StringResources.finish));
++        this.addCommand(nextCommand);
++        
++        this.addCommandListener(new ActionListener() {
++
++            public void actionPerformed(ActionEvent evt) {  
++                if(evt.getCommand().equals(previousCommand)) {
++                    if(CowRegistrationScreen.this.cowIndex>0){
++                        CowRegistrationScreen previousScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.cowIndex - 1, CowRegistrationScreen.this.cowNumber);
++                        previousScreen.start();
++                    }
++                    else {
++                        FarmerRegistrationScreen farmerRegistrationScreen = new FarmerRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale);
++                        farmerRegistrationScreen.start();
++                    }
++                }
++                else if(evt.getCommand().equals(nextCommand)) {
++                    if(CowRegistrationScreen.this.cowIndex < (CowRegistrationScreen.this.cowNumber -1)) {
++                        CowRegistrationScreen nextScreen = new CowRegistrationScreen(CowRegistrationScreen.this.midlet, CowRegistrationScreen.this.locale, CowRegistrationScreen.this.cowIndex + 1, CowRegistrationScreen.this.cowNumber);
++                        nextScreen.start();
++                    }
++                }
++            }
++        });
++        
++        cowNameL = new Label(Locale.getStringInLocale(locale, StringResources.name));
++        setLabelStyle(cowNameL);
++        this.addComponent(cowNameL);
++        
++        cowNameTF = new TextField();
++        setComponentStyle(cowNameTF, false);
++        this.addComponent(cowNameTF);
++        
++        earTagNumberL = new Label(Locale.getStringInLocale(locale, StringResources.ear_tag_number));
++        setLabelStyle(earTagNumberL);
++        this.addComponent(earTagNumberL);
++        
++        earTagNumberTF = new TextField();
++        setComponentStyle(earTagNumberTF, false);
++        this.addComponent(earTagNumberTF);
++        
++        ageL = new Label(Locale.getStringInLocale(locale, StringResources.age));
++        setLabelStyle(ageL);
++        this.addComponent(ageL);
++        
++        ageTF = new TextField();
++        setComponentStyle(ageTF, false);
++        this.addComponent(ageTF);
++        
++        ageTypeL = new Label(Locale.getStringInLocale(locale, StringResources.age_type));
++        setLabelStyle(ageTypeL);
++        this.addComponent(ageTypeL);
++        
++        ageTypeCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.age_type_array));
++        setComponentStyle(ageTypeCB, true);
++        this.addComponent(ageTypeCB);
++        
++        dateOfBirthL = new Label(Locale.getStringInLocale(locale, StringResources.date_of_birth));
++        setLabelStyle(dateOfBirthL);
++        this.addComponent(dateOfBirthL);
++        
++        dateOfBirthTF = new TextField();
++        setComponentStyle(dateOfBirthTF, false);
++        this.addComponent(dateOfBirthTF);
++        
++        breedL = new Label(Locale.getStringInLocale(locale, StringResources.breed));
++        setLabelStyle(breedL);
++        this.addComponent(breedL);
++        
++        breedCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
++        setComponentStyle(breedCB, true);
++        this.addComponent(breedCB);
++        
++        sexL = new Label(Locale.getStringInLocale(locale, StringResources.sex));
++        setLabelStyle(sexL);
++        this.addComponent(sexL);
++        
++        sexCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.sex_array));
++        setComponentStyle(sexCB, true);
++        this.addComponent(sexCB);
++        
++        deformityL = new Label(Locale.getStringInLocale(locale, StringResources.deformity));
++        setLabelStyle(deformityL);
++        this.addComponent(deformityL);
++        
++        deformityCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
++        setComponentStyle(deformityCB, true);
++        this.addComponent(deformityCB);
++        
++        serviceTypeL = new Label(Locale.getStringInLocale(locale, StringResources.service_type_used));
++        setLabelStyle(serviceTypeL);
++        this.addComponent(serviceTypeL);
++        
++        serviceTypeCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.service_types));
++        setComponentStyle(serviceTypeCB, true);
++        this.addComponent(serviceTypeCB);
++        
++        sireL = new Label(Locale.getStringInLocale(locale, StringResources.sire));
++        setLabelStyle(sireL);
++        this.addComponent(sireL);
++        
++        sireCB = new ComboBox(new String[]{" "});
++        setComponentStyle(sireCB, true);
++        this.addComponent(sireCB);
++        
++        damL = new Label(Locale.getStringInLocale(locale, StringResources.dam));
++        setLabelStyle(damL);
++        this.addComponent(damL);
++        
++        damCB = new ComboBox(new String[]{" "});
++        setComponentStyle(damCB, true);
++        this.addComponent(damCB);
++        
++        countryL = new Label(Locale.getStringInLocale(locale, StringResources.country_of_origin));
++        setLabelStyle(countryL);
++        this.addComponent(countryL);
++        
++        countryCB = new ComboBox(GeneralArrays.common_countries);
++        setComponentStyle(countryCB, true);
++        this.addComponent(countryCB);
++    }
++    
++    private void setLabelStyle(Label label){
++        label.getStyle().setMargin(10, 0, 10, 0);
++        label.getSelectedStyle().setMargin(10, 0, 10,0);
++    }
++    
++    private void setComponentStyle(Component component, boolean isFocusable){
++        component.getStyle().setMargin(5, 0, 0, 0);
++        component.getSelectedStyle().setMargin(5, 0, 0, 0);
++        if(isFocusable){
++            component.getSelectedStyle().setBgColor(0x2ecc71);
++        }
++    }
++    
++    public void start() {
++        this.show();
++    }
++
++    public void destroy() {
++        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
++    }
++
++    public void pause() {
++        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
++    }
++    
++}
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java
+index 1b099ab..f14ea59 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java
+@@ -37,6 +37,8 @@ public class FarmerRegistrationScreen extends Form implements Screen{
+     private Label mobileNoL;
+     private TextField ePersonnelTV;
+     private Label ePersonnelL;
++    private Label cowNumberL;
++    private TextField cowNumberTF;
+ 
+     public FarmerRegistrationScreen(Midlet midlet, int locale) {
+         super(Locale.getStringInLocale(locale, StringResources.register));
+@@ -45,11 +47,13 @@ public class FarmerRegistrationScreen extends Form implements Screen{
+         
+         this.parentBoxLayout = new BoxLayout(BoxLayout.Y_AXIS);
+         this.setLayout(parentBoxLayout);
++        
+         backCommand = new Command(Locale.getStringInLocale(locale, StringResources.back));
+         this.addCommand(backCommand);
+         
+         nextCommand = new Command(Locale.getStringInLocale(locale, StringResources.next));
+         this.addCommand(nextCommand);
++        
+         this.addCommandListener(new ActionListener() {
+ 
+             public void actionPerformed(ActionEvent evt) {
+@@ -58,6 +62,12 @@ public class FarmerRegistrationScreen extends Form implements Screen{
+                     loginScreen.start();
+                 }
+                 else if(evt.getCommand().equals(nextCommand)) {
++                    String noOfCowsString = cowNumberTF.getText();
++                    if(noOfCowsString!= null && !noOfCowsString.equals("")) {
++                        CowRegistrationScreen firstCowScreen = new CowRegistrationScreen(FarmerRegistrationScreen.this.midlet, FarmerRegistrationScreen.this.locale, 0, Integer.parseInt(noOfCowsString));
++                        firstCowScreen.start();
++                    }
++                    
+                 }
+             }
+         });
+@@ -91,6 +101,16 @@ public class FarmerRegistrationScreen extends Form implements Screen{
+         ePersonnelTV.getStyle().setMargin(5, 0, 0, 0);
+         ePersonnelTV.getSelectedStyle().setMargin(5, 0, 0, 0);
+         this.addComponent(ePersonnelTV);
++        
++        cowNumberL = new Label(Locale.getStringInLocale(locale, StringResources.number_of_cows));
++        cowNumberL.getStyle().setMargin(10, 0, 10, 0);
++        cowNumberL.getSelectedStyle().setMargin(10, 0, 10, 0);
++        this.addComponent(cowNumberL);
++        
++        cowNumberTF = new TextField();
++        cowNumberTF.getStyle().setMargin(5, 0, 0, 0);
++        cowNumberTF.getSelectedStyle().setMargin(5, 0, 0, 0);
++        this.addComponent(cowNumberTF);
+     }
+     
+     public void start() {
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/GeneralArrays.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/GeneralArrays.java
+new file mode 100644
+index 0000000..ff5b7e1
+--- /dev/null
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/GeneralArrays.java
+@@ -0,0 +1,31 @@
++package org.cgiar.ilri.mistro.farmer.ui.localization;
++
++/**
++ *
++ * @author jason
++ */
++public class GeneralArrays {
++    public static final String[] common_countries = {
++        "Ethiopia","Kenya","Tanzania","Uganda"
++    };
++    public static final String[] uncommon_countries = {
++        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Deps", "Argentina", "Armenia", "Australia", "Austria", 
++        "Azerbaijan","Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", 
++        "Bosnia Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", 
++        "Central African Rep", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Congo (Democratic Rep)", "Costa Rica", "Croatia", "Cuba", 
++        "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", 
++        "Equatorial Guinea", "Eritrea", "Estonia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", 
++        "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", 
++        "Ireland (Republic)", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kiribati", "Korea North", 
++        "Korea South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", 
++        "Luxembourg", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", 
++        "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", 
++        "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", 
++        "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russian Federation", "Rwanda", "St Kitts and Nevis", "St Lucia", 
++        "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", 
++        "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", 
++        "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", 
++        "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", 
++        "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"  
++    };
++}
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/GeneralStrings.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/GeneralStrings.java
+new file mode 100644
+index 0000000..66b4f71
+--- /dev/null
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/GeneralStrings.java
+@@ -0,0 +1,9 @@
++package org.cgiar.ilri.mistro.farmer.ui.localization;
++
++/**
++ *
++ * @author jason
++ */
++public class GeneralStrings {
++    
++}
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/StringResources.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/StringResources.java
+index 60bd58e..7351854 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/StringResources.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/localization/StringResources.java
+@@ -93,6 +93,10 @@ public class StringResources {
+         "Cow Registration",
+         ""
+     };
++    public static final String[] cow_registration_wth_indx = {
++        "Cow Registration, cow ",
++        ""
++    };
+     public static final String[] dam_registration = {
+         "Dam Registration",
+         ""
+@@ -393,4 +397,8 @@ public class StringResources {
+         "Back",
+         ""
+     };
++    public static final String[] age_type = {
++        "Age Type",
++        ""
++    };
+ }
+-- 
+2.7.1
+

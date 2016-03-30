@@ -1,0 +1,155 @@
+From a692dec027d348d677fe6e48678522c37752d633 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Tue, 20 May 2014 14:12:53 +0300
+Subject: [PATCH 158/213] Version 0.8.21 Solved the bug were the scrollviews
+ for breeds and deformities in some android versions were not scrolling
+
+---
+ MistroFarmer/src/main/AndroidManifest.xml          |  2 +-
+ .../mistro/farmer/CowRegistrationActivity.java     | 37 ++++++++++++++++++++++
+ MistroFarmer/src/main/res/layout/dialog_breed.xml  |  4 +--
+ .../src/main/res/layout/dialog_deformity.xml       |  7 ++--
+ 4 files changed, 44 insertions(+), 6 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index f121d47..346ff83 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -2,7 +2,7 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+     android:versionCode="2"
+-    android:versionName="0.8.19" >
++    android:versionName="0.8.21" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index 39a7109..2179a75 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -93,6 +93,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     private ListView breedLV;
+     private Button dialogBreedOkayB;
+     private Dialog deformityDialog;
++    private ScrollView deformitySV;
+     private ListView deformityLV;
+     private EditText specifyET;
+     private Button dialogDeformityOkayB;
+@@ -175,11 +176,19 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         dialogBreedOkayB=(Button)breedDialog.findViewById(R.id.dialog_breed_okay_b);
+         dialogBreedOkayB.setOnClickListener(this);
+         breedDialogSV=(ScrollView)breedDialog.findViewById(R.id.dialog_breed_sv);
++
++        int activityHeight = this.getResources().getDisplayMetrics().heightPixels;
++        breedDialogSV.getLayoutParams().height = (int)(activityHeight * 0.70);
++
+         breedLV=(ListView)breedDialog.findViewById(R.id.breed_lv);
+         breedLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+         breedLV.setOnItemClickListener(this);
+         deformityDialog =new Dialog(this);
+         deformityDialog.setContentView(R.layout.dialog_deformity);
++        deformitySV = (ScrollView)deformityDialog.findViewById(R.id.deformity_sv);
++
++        deformitySV.getLayoutParams().height = (int)(activityHeight * 0.70);
++
+         deformityLV =(ListView) deformityDialog.findViewById(R.id.deformity_lv);
+         deformityLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+         deformityLV.setOnItemClickListener(this);
+@@ -190,6 +199,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         initTextInViews();
+     }
+ 
++
++
+     public boolean onCreateOptionsMenu(Menu menu) {
+         MenuInflater inflater = getSupportMenuInflater();
+         inflater.inflate(R.menu.cow_registration, menu);
+@@ -500,6 +511,19 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         ArrayAdapter<String> breedArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,breeds);
+         breedLV.setAdapter(breedArrayAdapter);
+         dialogBreedOkayB.setText(Locale.getStringInLocale("okay",this));
++        int totalBreedSVHeight = 0;
++        for (int i = 0, len = breedArrayAdapter.getCount(); i < len; i++) {
++            View listItem = breedArrayAdapter.getView(i, null, breedLV);
++            //listItem.measure(0, 0);
++            int list_child_item_height = listItem.getLayoutParams().height + breedLV.getDividerHeight();//item height
++            totalBreedSVHeight += list_child_item_height; //
++        }
++        if(totalBreedSVHeight > 0){
++            breedLV.getLayoutParams().height = totalBreedSVHeight;
++            if(breedDialogSV.getLayoutParams().height > totalBreedSVHeight){
++                breedDialogSV.getLayoutParams().height = totalBreedSVHeight;
++            }
++        }
+ 
+         deformityDialog.setTitle(Locale.getStringInLocale("deformity",this));
+         deformities=Locale.getArrayInLocale("deformities_array",this);
+@@ -513,6 +537,19 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
+         ArrayAdapter countryArrayAdapter = ArrayAdapter.createFromResource(this,R.array.countries,android.R.layout.select_dialog_item);
+         countryOfOriginACTV.setAdapter(countryArrayAdapter);
++        int totalDeformitySVHeight = 0;
++        for (int i = 0, len = deformityArrayAdapter.getCount(); i < len; i++) {
++            View listItem = deformityArrayAdapter.getView(i, null, deformityLV);
++            //listItem.measure(0, 0);
++            int list_child_item_height = listItem.getLayoutParams().height + deformityLV.getDividerHeight();//item height
++            totalDeformitySVHeight += list_child_item_height; //
++        }
++        if(totalDeformitySVHeight > 0){
++            deformityLV.getLayoutParams().height = totalDeformitySVHeight;
++            if(deformitySV.getLayoutParams().height > (totalDeformitySVHeight + 30)){
++                deformitySV.getLayoutParams().height= totalDeformitySVHeight + 30;
++            }
++        }
+ 
+         ArrayAdapter<CharSequence> commonCountriesArrayAdapter = ArrayAdapter.createFromResource(this,R.array.common_countries,android.R.layout.simple_spinner_item);
+         commonCountriesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+diff --git a/MistroFarmer/src/main/res/layout/dialog_breed.xml b/MistroFarmer/src/main/res/layout/dialog_breed.xml
+index 596dab4..2547e4d 100644
+--- a/MistroFarmer/src/main/res/layout/dialog_breed.xml
++++ b/MistroFarmer/src/main/res/layout/dialog_breed.xml
+@@ -6,14 +6,14 @@
+     <ScrollView
+             android:id="@+id/dialog_breed_sv"
+             android:layout_width="match_parent"
+-            android:layout_height="wrap_content">
++            android:layout_height="250dp">
+         <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:orientation="vertical">
+             <ListView
+                     android:id="@+id/breed_lv"
+-                    android:layout_height="300dp"
++                    android:layout_height="2000dp"
+                     android:layout_width="match_parent"/>
+         </LinearLayout>
+     </ScrollView>
+diff --git a/MistroFarmer/src/main/res/layout/dialog_deformity.xml b/MistroFarmer/src/main/res/layout/dialog_deformity.xml
+index 1837348..381fbd0 100644
+--- a/MistroFarmer/src/main/res/layout/dialog_deformity.xml
++++ b/MistroFarmer/src/main/res/layout/dialog_deformity.xml
+@@ -4,15 +4,16 @@
+               android:orientation="vertical"
+               android:background="@color/dialog_bg_color">
+     <ScrollView
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content">
++        android:id="@+id/deformity_sv"
++        android:layout_width="match_parent"
++        android:layout_height="250dp">
+         <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:orientation="vertical">
+             <ListView
+                     android:id="@+id/deformity_lv"
+-                    android:layout_height="300dp"
++                    android:layout_height="1000dp"
+                     android:layout_width="match_parent"/>
+             <EditText
+                 android:id="@+id/specify_et"
+-- 
+2.7.1
+

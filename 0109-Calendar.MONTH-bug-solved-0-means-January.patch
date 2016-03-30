@@ -1,0 +1,1012 @@
+From 217f73a701b3d62c94beb2f82384cfe24eae848a Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Wed, 6 Nov 2013 14:42:00 +0300
+Subject: [PATCH 109/213] Calendar.MONTH bug solved (0 means January)
+
+---
+ .../org/cgiar/ilri/mistro/farmer/carrier/Cow.java  |   4 +-
+ .../mistro/farmer/ui/AddMilkProductionScreen.java  |   2 +-
+ .../ilri/mistro/farmer/EventsHistoryActivity.java  |   2 +-
+ .../farmer/MilkProcutionHistoryActivity.java       |   2 +-
+ web/log/debug.log                                  | 826 +++++++++++++++++++++
+ web/log/info.log                                   |  54 ++
+ web/log/warning.log                                |  31 +
+ 7 files changed, 916 insertions(+), 5 deletions(-)
+
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/carrier/Cow.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+index 571326a..a420ab6 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+@@ -131,7 +131,7 @@ public class Cow {
+         calendar.setTime(dateOfBirth);
+         StringBuffer dateStringBuffer = new StringBuffer();
+         dateStringBuffer.append(calendar.get(Calendar.DATE)).append("/");
+-        dateStringBuffer.append(calendar.get(Calendar.MONTH)).append("/");
++        dateStringBuffer.append(calendar.get(Calendar.MONTH)+1).append("/");
+         dateStringBuffer.append(calendar.get(Calendar.YEAR));
+         this.dateOfBirth = dateStringBuffer.toString();
+     }
+@@ -305,4 +305,4 @@ public class Cow {
+         }
+         return jsonObject;
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/AddMilkProductionScreen.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/AddMilkProductionScreen.java
+index a51889a..3edc307 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/AddMilkProductionScreen.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/AddMilkProductionScreen.java
+@@ -93,7 +93,7 @@ public class AddMilkProductionScreen extends Form implements Screen{
+                             Date date = (Date) dateS.getValue();
+                             Calendar calendar = Calendar.getInstance();
+                             calendar.setTime(date);
+-                            String dateString = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH))+"/"+String.valueOf(calendar.get(Calendar.YEAR));
++                            String dateString = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH)+1)+"/"+String.valueOf(calendar.get(Calendar.YEAR));
+                             jsonObject.put("date", dateString);
+                             
+                             Thread thread = new Thread(new MilkProductionHandler(jsonObject));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
+index e41c3dc..36fc61c 100755
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
+@@ -216,7 +216,7 @@ public class EventsHistoryActivity extends SherlockActivity {
+ 
+                 Calendar calendar=new GregorianCalendar();
+                 calendar.setTime(eventDate);
+-                String dateText=String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH))+"/"+calendar.get(Calendar.YEAR);
++                String dateText=String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.YEAR);
+                 if(dateDifference<1) {
+                     dateText=todayText;
+                 }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
+index e7ca393..c63f48a 100755
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
+@@ -256,7 +256,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity
+ 
+                 Calendar calendar=new GregorianCalendar();
+                 calendar.setTime(milkingDate);
+-                String dateText=String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH))+"/"+calendar.get(Calendar.YEAR);
++                String dateText=String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.YEAR);
+                 if(dateDifference<1)
+                 {
+                     dateText=todayText;
+diff --git a/web/log/debug.log b/web/log/debug.log
+index 6f68fb0..8960c2b 100755
+--- a/web/log/debug.log
++++ b/web/log/debug.log
+@@ -63310,3 +63310,829 @@
+ 
+ )
+ 
++[Wednesday, 6th November 2013 14:30:54] [authentication.php] json_decode returned: Array
++(
++    [mobileNumber] => 0722838686
++)
++
++[Wednesday, 6th November 2013 14:30:54] [authentication.php] settings obtained: Array
++(
++    [db_name] => ilri_mistro
++    [mysql_creds] => Array
++        (
++            [username] => root
++            [password] => jason
++            [host] => localhost
++        )
++
++    [log_settings] => logs.ini
++    [response_codes] => response_codes.ini
++    [time_zone] => EAT
++)
++
++[Wednesday, 6th November 2013 14:30:54] [authentication.php] response codes are: Array
++(
++    [db_error] => 32243
++    [user_not_authenticated] => 43322
++    [sim_card_registered] => 83242
++    [acknowledge_ok] => 533783
++    [data_error] => 934342
++    [no_data] => 77732
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] settings obtained: Array
++(
++    [db_name] => ilri_mistro
++    [mysql_creds] => Array
++        (
++            [username] => root
++            [password] => jason
++            [host] => localhost
++        )
++
++    [log_settings] => logs.ini
++    [response_codes] => response_codes.ini
++    [time_zone] => EAT
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] response codes are: Array
++(
++    [db_error] => 32243
++    [user_not_authenticated] => 43322
++    [sim_card_registered] => 83242
++    [acknowledge_ok] => 533783
++    [data_error] => 934342
++    [no_data] => 77732
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT * FROM farmer WHERE `mobile_no` = '0722838686'' are Array
++(
++    [0] => Array
++        (
++            [id] => 16
++            [name] => Jason Rogena
++            [mobile_no] => 0722838686
++            [location_county] => 
++            [location_district] => 
++            [gps_longitude] => 
++            [gps_latitude] => 
++            [date_added] => 2013-09-16 12:01:26
++            [extension_personnel_id] => 5
++            [sim_card_sn] => 89254028071000359956
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT * FROM cow WHERE farmer_id = 16' are Array
++(
++    [0] => Array
++        (
++            [id] => 22
++            [farmer_id] => 16
++            [name] => Rosy
++            [ear_tag_number] => nai-jas1
++            [date_of_birth] => 0000-00-00 00:00:00
++            [age] => 2
++            [age_type] => Years
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-09-16 12:01:26
++            [service_type] => Bull
++            [country_id] => 1
++        )
++
++    [1] => Array
++        (
++            [id] => 23
++            [farmer_id] => 16
++            [name] => Chris
++            [ear_tag_number] => nai-jas2
++            [date_of_birth] => 0000-00-00 00:00:00
++            [age] => 5
++            [age_type] => Weeks
++            [sex] => Male
++            [sire_id] => 
++            [dam_id] => 22
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-09-16 12:01:26
++            [service_type] => Bull
++            [country_id] => 1
++        )
++
++    [2] => Array
++        (
++            [id] => 24
++            [farmer_id] => 16
++            [name] => Betty
++            [ear_tag_number] => nai-jas3
++            [date_of_birth] => 2013-03-16 00:00:00
++            [age] => 26
++            [age_type] => Weeks
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 23
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-09-16 14:33:26
++            [service_type] => AI
++            [country_id] => 60
++        )
++
++    [3] => Array
++        (
++            [id] => 25
++            [farmer_id] => 16
++            [name] => Calf3
++            [ear_tag_number] => nai-jas5
++            [date_of_birth] => 2013-09-16 00:00:00
++            [age] => 0
++            [age_type] => Days
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 24
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-09-16 15:52:50
++            [service_type] => AI
++            [country_id] => 3
++        )
++
++    [4] => Array
++        (
++            [id] => 26
++            [farmer_id] => 16
++            [name] => Tesr
++            [ear_tag_number] => etd2
++            [date_of_birth] => 2013-09-16 00:00:00
++            [age] => 258
++            [age_type] => Days
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 24
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-09-16 17:03:12
++            [service_type] => AI
++            [country_id] => 195
++        )
++
++    [5] => Array
++        (
++            [id] => 32
++            [farmer_id] => 16
++            [name] => Magama
++            [ear_tag_number] => Matm
++            [date_of_birth] => 
++            [age] => -1
++            [age_type] => 
++            [sex] => Male
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 0000-00-00 00:00:00
++            [service_type] => 
++            [country_id] => 
++        )
++
++    [6] => Array
++        (
++            [id] => 33
++            [farmer_id] => 16
++            [name] => Magamd
++            [ear_tag_number] => Matn
++            [date_of_birth] => 
++            [age] => -1
++            [age_type] => 
++            [sex] => Male
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 0000-00-00 00:00:00
++            [service_type] => 
++            [country_id] => 
++        )
++
++    [7] => Array
++        (
++            [id] => 34
++            [farmer_id] => 16
++            [name] => Maga
++            [ear_tag_number] => Mat
++            [date_of_birth] => 
++            [age] => -1
++            [age_type] => 
++            [sex] => Male
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 0000-00-00 00:00:00
++            [service_type] => 
++            [country_id] => 
++        )
++
++    [8] => Array
++        (
++            [id] => 39
++            [farmer_id] => 16
++            [name] => 
++            [ear_tag_number] => Tamu
++            [date_of_birth] => 
++            [age] => -1
++            [age_type] => 
++            [sex] => Male
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 0000-00-00 00:00:00
++            [service_type] => 
++            [country_id] => 
++        )
++
++    [9] => Array
++        (
++            [id] => 41
++            [farmer_id] => 16
++            [name] => J
++            [ear_tag_number] => Testim
++            [date_of_birth] => 
++            [age] => -1
++            [age_type] => 
++            [sex] => Male
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 0000-00-00 00:00:00
++            [service_type] => 
++            [country_id] => 
++        )
++
++    [10] => Array
++        (
++            [id] => 42
++            [farmer_id] => 16
++            [name] => 
++            [ear_tag_number] => Da
++            [date_of_birth] => 
++            [age] => -1
++            [age_type] => 
++            [sex] => Male
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 0000-00-00 00:00:00
++            [service_type] => 
++            [country_id] => 
++        )
++
++    [11] => Array
++        (
++            [id] => 43
++            [farmer_id] => 16
++            [name] => 
++            [ear_tag_number] => Daj
++            [date_of_birth] => 
++            [age] => -1
++            [age_type] => 
++            [sex] => Male
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 0000-00-00 00:00:00
++            [service_type] => 
++            [country_id] => 
++        )
++
++    [12] => Array
++        (
++            [id] => 44
++            [farmer_id] => 16
++            [name] => 
++            [ear_tag_number] => Dajtgj
++            [date_of_birth] => 
++            [age] => -1
++            [age_type] => 
++            [sex] => Male
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 0000-00-00 00:00:00
++            [service_type] => 
++            [country_id] => 
++        )
++
++    [13] => Array
++        (
++            [id] => 45
++            [farmer_id] => 16
++            [name] => Java
++            [ear_tag_number] => Java
++            [date_of_birth] => 2013-10-04 00:00:00
++            [age] => 1
++            [age_type] => Days
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-11-05 14:02:32
++            [service_type] => Bull
++            [country_id] => 
++        )
++
++    [14] => Array
++        (
++            [id] => 46
++            [farmer_id] => 16
++            [name] => Tictoc
++            [ear_tag_number] => Tic
++            [date_of_birth] => 2013-10-04 00:00:00
++            [age] => 1
++            [age_type] => Days
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-11-05 15:01:36
++            [service_type] => Bull
++            [country_id] => 
++        )
++
++    [15] => Array
++        (
++            [id] => 47
++            [farmer_id] => 16
++            [name] => Toto
++            [ear_tag_number] => Toto
++            [date_of_birth] => 2013-10-04 00:00:00
++            [age] => 1
++            [age_type] => Days
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-11-05 15:27:32
++            [service_type] => Bull
++            [country_id] => 
++        )
++
++    [16] => Array
++        (
++            [id] => 48
++            [farmer_id] => 16
++            [name] => Tomi
++            [ear_tag_number] => Tomi
++            [date_of_birth] => 2013-10-04 00:00:00
++            [age] => 1
++            [age_type] => Days
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-11-05 15:29:30
++            [service_type] => Bull
++            [country_id] => 
++        )
++
++    [17] => Array
++        (
++            [id] => 49
++            [farmer_id] => 16
++            [name] => Khta
++            [ear_tag_number] => Kta
++            [date_of_birth] => 2013-10-04 00:00:00
++            [age] => 1
++            [age_type] => Days
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-11-05 15:31:46
++            [service_type] => Bull
++            [country_id] => 
++        )
++
++    [18] => Array
++        (
++            [id] => 50
++            [farmer_id] => 16
++            [name] => Wit
++            [ear_tag_number] => W4
++            [date_of_birth] => 2013-10-04 00:00:00
++            [age] => 1
++            [age_type] => Days
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-11-05 15:35:15
++            [service_type] => Bull
++            [country_id] => 
++        )
++
++    [19] => Array
++        (
++            [id] => 51
++            [farmer_id] => 16
++            [name] => Finali
++            [ear_tag_number] => Finali
++            [date_of_birth] => 2013-10-02 00:00:00
++            [age] => 3
++            [age_type] => Days
++            [sex] => Female
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-11-05 16:13:42
++            [service_type] => 
++            [country_id] => 
++        )
++
++    [20] => Array
++        (
++            [id] => 52
++            [farmer_id] => 16
++            [name] => Boti tot
++            [ear_tag_number] => Bot
++            [date_of_birth] => 0000-00-00 00:00:00
++            [age] => 2
++            [age_type] => Years
++            [sex] => Male
++            [sire_id] => 
++            [dam_id] => 
++            [straw_id] => 
++            [embryo_id] => 
++            [date_added] => 2013-11-06 11:28:47
++            [service_type] => Bull
++            [country_id] => 
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 10
++            [time] => Morning
++            [quantity] => 10
++            [quantity_type] => Litres
++            [date] => 30/12/2013
++        )
++
++    [1] => Array
++        (
++            [id] => 5
++            [time] => Combined
++            [quantity] => 2
++            [quantity_type] => Litres
++            [date] => 23/12/2013
++        )
++
++    [2] => Array
++        (
++            [id] => 4
++            [time] => Morning
++            [quantity] => 50
++            [quantity_type] => Litres
++            [date] => 14/12/2013
++        )
++
++    [3] => Array
++        (
++            [id] => 3
++            [time] => Morning
++            [quantity] => 23
++            [quantity_type] => KGs
++            [date] => 03/12/2013
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 22 ORDER BY a.id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 50
++            [event_date] => 05/12/2013
++            [event_type] => Death
++        )
++
++    [1] => Array
++        (
++            [id] => 49
++            [event_date] => 04/12/2013
++            [event_type] => Start of Lactation
++        )
++
++    [2] => Array
++        (
++            [id] => 48
++            [event_date] => 04/12/2013
++            [event_type] => Birth
++        )
++
++    [3] => Array
++        (
++            [id] => 13
++            [event_date] => 16/12/2013
++            [event_type] => Abortion
++        )
++
++    [4] => Array
++        (
++            [id] => 12
++            [event_date] => 16/12/2013
++            [event_type] => Artificial Insemination
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 23 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 9
++            [time] => Evening
++            [quantity] => 20
++            [quantity_type] => Litres
++            [date] => 30/12/2013
++        )
++
++    [1] => Array
++        (
++            [id] => 8
++            [time] => Afternoon
++            [quantity] => 20
++            [quantity_type] => Litres
++            [date] => 30/12/2013
++        )
++
++    [2] => Array
++        (
++            [id] => 6
++            [time] => Morning
++            [quantity] => 20
++            [quantity_type] => Litres
++            [date] => 30/12/2013
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 24 ORDER BY a.id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 40
++            [event_date] => 03/12/2013
++            [event_type] => Artificial Insemination
++        )
++
++    [1] => Array
++        (
++            [id] => 39
++            [event_date] => 03/12/2013
++            [event_type] => Artificial Insemination
++        )
++
++    [2] => Array
++        (
++            [id] => 38
++            [event_date] => 03/12/2013
++            [event_type] => Artificial Insemination
++        )
++
++    [3] => Array
++        (
++            [id] => 37
++            [event_date] => 03/12/2013
++            [event_type] => Artificial Insemination
++        )
++
++    [4] => Array
++        (
++            [id] => 36
++            [event_date] => 03/12/2013
++            [event_type] => Artificial Insemination
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 25 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 26 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 32 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 33 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 34 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 39 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 41 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 42 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 43 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 44 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 45 ORDER BY a.id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 41
++            [event_date] => 05/12/2013
++            [event_type] => Acquisition
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 46 ORDER BY a.id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 42
++            [event_date] => 05/12/2013
++            [event_type] => Acquisition
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 47 ORDER BY a.id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 43
++            [event_date] => 05/12/2013
++            [event_type] => Acquisition
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 48 ORDER BY a.id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 44
++            [event_date] => 05/12/2013
++            [event_type] => Acquisition
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 49 ORDER BY a.id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 45
++            [event_date] => 05/12/2013
++            [event_type] => Acquisition
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 50 ORDER BY a.id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 51 ORDER BY a.id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 47
++            [event_date] => 02/12/2013
++            [event_type] => Birth
++        )
++
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC' are Array
++(
++)
++
++[Wednesday, 6th November 2013 14:30:54] [database.php] results gotten from 'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 52 ORDER BY a.id DESC' are Array
++(
++    [0] => Array
++        (
++            [id] => 51
++            [event_date] => 06/12/2013
++            [event_type] => Acquisition
++        )
++
++)
++
+diff --git a/web/log/info.log b/web/log/info.log
+index a510947..b9d3f6a 100755
+--- a/web/log/info.log
++++ b/web/log/info.log
+@@ -491,3 +491,57 @@
+ [Wednesday, 6th November 2013 12:45:32] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC
+ [Wednesday, 6th November 2013 12:45:32] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 52 ORDER BY a.id DESC
+ [Wednesday, 6th November 2013 12:45:32] [authentication.php] gracefully exiting
++[Wednesday, 6th November 2013 14:30:54] [authentication.php] Starting Authenticator
++[Wednesday, 6th November 2013 14:30:54] [authentication.php] obtaining POST request
++[Wednesday, 6th November 2013 14:30:54] [authentication.php] getting settings from: ../../config/settings.ini
++[Wednesday, 6th November 2013 14:30:54] [authentication.php] getting response codes from: ../../config/response_codes.ini
++[Wednesday, 6th November 2013 14:30:54] [database.php] Starting DatabaseHandler
++[Wednesday, 6th November 2013 14:30:54] [database.php] getting settings from: ../../config/settings.ini
++[Wednesday, 6th November 2013 14:30:54] [database.php] getting response codes from: ../../config/response_codes.ini
++[Wednesday, 6th November 2013 14:30:54] [database.php] connecting to ilri_mistro on localhost using root as the username
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT * FROM farmer WHERE `mobile_no` = '0722838686'
++[Wednesday, 6th November 2013 14:30:54] [authentication.php] the mobile number being used (0722838686) is authenticated for 'Jason Rogena'. Sending farmer's name back to client
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT * FROM cow WHERE farmer_id = 16
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 22 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 22 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 23 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 24 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 24 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 25 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 26 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 32 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 33 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 34 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 39 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 41 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 42 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 43 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 44 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 45 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 46 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 47 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 48 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 49 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 50 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 51 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC
++[Wednesday, 6th November 2013 14:30:54] [database.php] running query SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 52 ORDER BY a.id DESC
++[Wednesday, 6th November 2013 14:30:54] [authentication.php] gracefully exiting
+diff --git a/web/log/warning.log b/web/log/warning.log
+index 226fb6c..6d42b0f 100755
+--- a/web/log/warning.log
++++ b/web/log/warning.log
+@@ -1139,3 +1139,34 @@
+ [Wednesday, 6th November 2013 12:45:32] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 50 ORDER BY a.id DESC'
+ [Wednesday, 6th November 2013 12:45:32] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC'
+ [Wednesday, 6th November 2013 12:45:32] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 23 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 23 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 25 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 25 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 26 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 26 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 32 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 32 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 33 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 33 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 34 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 34 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 39 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 39 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 41 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 41 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 42 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 42 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 43 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 43 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 44 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 44 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 45 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 46 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 47 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 48 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 49 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 50 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT a.id, DATE_FORMAT(a.event_date, "%d/%l/%Y") AS event_date, b.name  AS `event_type` FROM `cow_event` AS a INNER JOIN `event` AS b ON a.`event_id` = b.id WHERE a.`cow_id` = 50 ORDER BY a.id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 51 ORDER BY id DESC'
++[Wednesday, 6th November 2013 14:30:54] [database.php] no results gotten for  'SELECT id, time, quantity, quantity_type, DATE_FORMAT(date, "%d/%l/%Y") AS date FROM `milk_production` WHERE `cow_id` = 52 ORDER BY id DESC'
+-- 
+2.7.1
+

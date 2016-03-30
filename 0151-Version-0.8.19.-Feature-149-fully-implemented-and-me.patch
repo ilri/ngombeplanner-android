@@ -1,0 +1,62 @@
+From 09657a0f4fb7342b1136d989473168d2433baa98 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Mon, 28 Apr 2014 10:23:25 +0300
+Subject: [PATCH 151/213] Version 0.8.19. Feature #149 fully implemented and
+ merged to master. Poiting the app back to the live server
+
+---
+ .idea/libraries/actionbarsherlock_4_4_0.xml                    | 10 ++++++++++
+ MistroFarmer/src/main/AndroidManifest.xml                      |  2 +-
+ .../java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java |  4 ++--
+ 3 files changed, 13 insertions(+), 3 deletions(-)
+ create mode 100644 .idea/libraries/actionbarsherlock_4_4_0.xml
+
+diff --git a/.idea/libraries/actionbarsherlock_4_4_0.xml b/.idea/libraries/actionbarsherlock_4_4_0.xml
+new file mode 100644
+index 0000000..b6aab73
+--- /dev/null
++++ b/.idea/libraries/actionbarsherlock_4_4_0.xml
+@@ -0,0 +1,10 @@
++<component name="libraryTable">
++  <library name="actionbarsherlock-4.4.0">
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/MistroFarmer/build/exploded-bundles/ComActionbarsherlockActionbarsherlock440.aar/classes.jar!/" />
++      <root url="file://$PROJECT_DIR$/MistroFarmer/build/exploded-bundles/ComActionbarsherlockActionbarsherlock440.aar/res" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index 4fe046f..f121d47 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -2,7 +2,7 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+     android:versionCode="2"
+-    android:versionName="0.8.17" >
++    android:versionName="0.8.19" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+index f769e10..8edcfe9 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+@@ -66,9 +66,9 @@ public class DataHandler
+     private static final int HTTP_POST_TIMEOUT =20000;
+     private static final int HTTP_RESPONSE_TIMEOUT =20000;
+     public static final String SMS_SERVER_ADDRESS = "+254708944137";
+-    //private static final String BASE_URL="http://azizi.ilri.cgiar.org/ngombe_planner";
++    private static final String BASE_URL="http://azizi.ilri.cgiar.org/ngombe_planner";
+     //private static final String BASE_URL="http://192.168.14.102/~jason/ngombe_planner/WebServer";
+-    private static final String BASE_URL="http://172.26.23.48/~jason/ngombe_planner/WebServer";
++    //private static final String BASE_URL="http://172.26.23.48/~jason/ngombe_planner/WebServer";
+     public static final String FARMER_REGISTRATION_URL="/php/farmer/registration.php";
+     public static final String FARMER_AUTHENTICATION_URL="/php/farmer/authentication.php";
+     public static final String FARMER_SIM_CARD_REGISTRATION_URL="/php/farmer/sim_card_registration.php";
+-- 
+2.7.1
+

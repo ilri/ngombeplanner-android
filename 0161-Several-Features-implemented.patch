@@ -1,0 +1,666 @@
+From da74f5e2c6ec3c9167ebb005e800e61390537583 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Wed, 21 May 2014 19:01:44 +0300
+Subject: [PATCH 161/213] Several Features implemented    - Constraints on
+ events based on age of the cow implemented    - Number of cows owned by
+ farmer checked during farmer reg    - SQLite database updated to cater for
+ the event constraints      table Bug fixes    - Issue of okay button not
+ showing up in breed and deformity      dialogs in some devices fixed. The ok
+ button now part of the      breed/deformity scrollview
+
+---
+ .../cgiar/ilri/mistro/farmer/AddEventActivity.java | 42 ++++++++++++
+ .../mistro/farmer/AddMilkProductionActivity.java   | 19 ++++++
+ .../mistro/farmer/CowRegistrationActivity.java     |  8 +--
+ .../mistro/farmer/FarmerRegistrationActivity.java  |  4 ++
+ .../ilri/mistro/farmer/backend/DataHandler.java    | 43 +++++++++++-
+ .../farmer/backend/database/DatabaseHelper.java    |  7 +-
+ .../org/cgiar/ilri/mistro/farmer/carrier/Cow.java  | 70 +++++++++++++++++++
+ .../cgiar/ilri/mistro/farmer/carrier/Event.java    | 33 +++++++++
+ .../mistro/farmer/carrier/EventConstraint.java     | 79 ++++++++++++++++++++++
+ MistroFarmer/src/main/res/layout/dialog_breed.xml  |  8 +--
+ .../src/main/res/layout/dialog_deformity.xml       |  8 +--
+ MistroFarmer/src/main/res/values/strings_en.xml    |  2 +
+ 12 files changed, 307 insertions(+), 16 deletions(-)
+ create mode 100644 MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+index b682ade..9076111 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+@@ -32,6 +32,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+ import org.cgiar.ilri.mistro.farmer.carrier.Dam;
+ import org.cgiar.ilri.mistro.farmer.carrier.Event;
++import org.cgiar.ilri.mistro.farmer.carrier.EventConstraint;
+ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+ import org.json.JSONArray;
+ import org.json.JSONException;
+@@ -103,6 +104,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
+     private String loadingPleaseWait;
+     private List<Integer> servicingIDs;
+     private List<String> servicingTypes;
++    private List<EventConstraint> eventConstraints;
+     private Farmer farmer;
+ 
+     private String presetMode;
+@@ -590,6 +592,45 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
+                 return false;
+             }*/
+         }
++
++        Cow selectedCow = farmer.getCows().get(cowIdentifierS.getSelectedItemPosition());
++        if(selectedCow != null){
++            if(selectedEvent.equals("Birth")){
++                for(int i = 0; i < eventConstraints.size(); i++){
++                    EventConstraint currConstraint = eventConstraints.get(i);
++                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_CALVING)){
++                        if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
++                            Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
++                            return false;
++                        }
++                    }
++                }
++            }
++            else if(selectedEvent.equals("Start of Lactation")){
++                for(int i = 0; i < eventConstraints.size(); i++){
++                    EventConstraint currConstraint = eventConstraints.get(i);
++                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILKING)){
++                        if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
++                            Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
++                            return false;
++                        }
++                    }
++                }
++            }
++            else if(selectedEvent.equals("Artificial Insemination") || selectedEvent.equals("Bull Servicing") || selectedEvent.equals("Signs of Heat")){
++                for(int i = 0; i < eventConstraints.size(); i++){
++                    EventConstraint currConstraint = eventConstraints.get(i);
++                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MATURITY)){
++                        if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
++                            Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
++                            return false;
++                        }
++                    }
++                }
++            }
++
++        }
++
+         return true;
+     }
+ 
+@@ -922,6 +963,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
+         @Override
+         protected Farmer doInBackground(String... params) {
+             Farmer farmer = DataHandler.getFarmerData(AddEventActivity.this);
++            eventConstraints = DataHandler.getEventConstraints(AddEventActivity.this);
+             return farmer;
+         }
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+index ff66381..17bd535 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+@@ -30,6 +30,7 @@ import com.actionbarsherlock.view.MenuItem;
+ import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+ import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
++import org.cgiar.ilri.mistro.farmer.carrier.EventConstraint;
+ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+ import org.json.JSONArray;
+ import org.json.JSONException;
+@@ -73,6 +74,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+     private String[] cowEarTagNumberArray;
+     private String[] quantityTypes;
+     private String[] calfSucklingTypes;
++    private List<EventConstraint> eventConstraints;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -328,6 +330,22 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+                 return false;
+             }
+         }
++
++        if(cowS.getSelectedItemPosition() != -1){
++            Cow selectedCow = farmer.getCows(Cow.SEX_FEMALE).get(cowS.getSelectedItemPosition());
++            if(selectedCow != null){
++                for(int i = 0; i < eventConstraints.size(); i++){
++                    EventConstraint currConstraint = eventConstraints.get(i);
++                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILKING)){
++                        if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
++                            Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
++                            return false;
++                        }
++                    }
++                }
++            }
++        }
++
+        /* if(noMilkingET.getText().toString()==null || noMilkingET.getText().toString().trim().length()==0) {
+             Toast.makeText(this, Locale.getStringInLocale("enter_number_times_cow_milked",this),Toast.LENGTH_LONG).show();
+             return false;
+@@ -452,6 +470,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+         protected Farmer doInBackground(String... params)
+         {
+             Farmer farmer = DataHandler.getFarmerData(AddMilkProductionActivity.this);
++            eventConstraints = DataHandler.getEventConstraints(AddMilkProductionActivity.this);
+             return farmer;
+         }
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index 2179a75..c6ca2c4 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -520,8 +520,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         }
+         if(totalBreedSVHeight > 0){
+             breedLV.getLayoutParams().height = totalBreedSVHeight;
+-            if(breedDialogSV.getLayoutParams().height > totalBreedSVHeight){
+-                breedDialogSV.getLayoutParams().height = totalBreedSVHeight;
++            if(breedDialogSV.getLayoutParams().height > (totalBreedSVHeight + dialogBreedOkayB.getLayoutParams().height)){
++                breedDialogSV.getLayoutParams().height = totalBreedSVHeight + dialogBreedOkayB.getLayoutParams().height;
+             }
+         }
+ 
+@@ -546,8 +546,8 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         }
+         if(totalDeformitySVHeight > 0){
+             deformityLV.getLayoutParams().height = totalDeformitySVHeight;
+-            if(deformitySV.getLayoutParams().height > (totalDeformitySVHeight + 30)){
+-                deformitySV.getLayoutParams().height= totalDeformitySVHeight + 30;
++            if(deformitySV.getLayoutParams().height > (totalDeformitySVHeight + specifyET.getLayoutParams().height + dialogDeformityOkayB.getLayoutParams().height)){
++                deformitySV.getLayoutParams().height= totalDeformitySVHeight + specifyET.getLayoutParams().height + dialogDeformityOkayB.getLayoutParams().height;
+             }
+         }
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+index 078b5ad..d34176f 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+@@ -331,6 +331,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
+             Toast.makeText(this,Locale.getStringInLocale("gps_narrowing_down_on_loc",this),Toast.LENGTH_LONG).show();
+             return false;
+         }
++        if(numberOfCowsET.getText().toString().length()==0){
++            Toast.makeText(this,Locale.getStringInLocale("enter_no_cows_own",this),Toast.LENGTH_LONG).show();
++            return false;
++        }
+         return true;
+     }
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+index 8e8e174..443b81a 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+@@ -36,6 +36,7 @@ import org.cgiar.ilri.mistro.farmer.backend.database.DatabaseHelper;
+ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+ import org.cgiar.ilri.mistro.farmer.carrier.Dam;
+ import org.cgiar.ilri.mistro.farmer.carrier.Event;
++import org.cgiar.ilri.mistro.farmer.carrier.EventConstraint;
+ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+ import org.cgiar.ilri.mistro.farmer.carrier.MilkProduction;
+ import org.cgiar.ilri.mistro.farmer.carrier.Sire;
+@@ -533,7 +534,7 @@ public class DataHandler
+                     for(int j = 0; j < cowEvents.length(); j++){
+                         JSONObject currEvent = cowEvents.getJSONObject(j);
+ 
+-                        columns = new String[]{"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server"};
++                        columns = new String[]{"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server", "date_added"};
+                         columnValues = new String[columns.length];
+ 
+                         columnValues[0] = currEvent.getString("id");
+@@ -548,6 +549,7 @@ public class DataHandler
+                         columnValues[9] = currEvent.getString("cause_of_death");
+                         columnValues[10] = currEvent.getString("no_of_live_births");
+                         columnValues[11] = "1";
++                        columnValues[12] = currEvent.getString("date_added");
+ 
+                         databaseHelper.runInsertQuery(databaseHelper.TABLE_EVENT, columns, columnValues, 0, writableDB);
+                     }
+@@ -572,6 +574,22 @@ public class DataHandler
+ 
+                     }
+                 }
++
++                JSONArray eventsConstraints = farmerData.getJSONArray("event_constraints");
++                for(int i = 0; i < eventsConstraints.length(); i++){
++                    JSONObject currConstraint = eventsConstraints.getJSONObject(i);
++
++                    //id INTEGER PRIMARY KEY, event TEXT, time INTEGER, time_units TEXT
++                    columns = new String[]{"id", "event", "time", "time_units"};
++                    columnValues = new String[columns.length];
++
++                    columnValues[0] = currConstraint.getString("id");
++                    columnValues[1] = currConstraint.getString("event");
++                    columnValues[2] = currConstraint.getString("time");
++                    columnValues[3] = currConstraint.getString("time_units");
++
++                    databaseHelper.runInsertQuery(databaseHelper.TABLE_EVENTS_CONSTRAINTS, columns, columnValues, 0, writableDB);
++                }
+             }
+             catch (Exception e){
+                 e.printStackTrace();
+@@ -631,6 +649,7 @@ public class DataHandler
+                     if(cowResult[cowIndex][4].length() > 0){
+                         currCow.setAge(Integer.parseInt(cowResult[cowIndex][4]));
+                     }
++                    currCow.setDateAdded(cowResult[cowIndex][9]);
+                     currCow.setAgeType(cowResult[cowIndex][5]);
+                     currCow.setSex(cowResult[cowIndex][6]);
+                     currCow.setServiceType(cowResult[cowIndex][10]);
+@@ -644,6 +663,7 @@ public class DataHandler
+                             Sire sire = new Sire();
+                             sire.setName(sireRes[cowIndex][1]);
+                             sire.setEarTagNumber(sireRes[cowIndex][2]);
++                            sire.setDateAdded(sireRes[cowIndex][9]);
+ 
+                             currCow.setSire(sire);
+                         }
+@@ -663,6 +683,7 @@ public class DataHandler
+                             Dam dam = new Dam();
+                             dam.setName(damRes[cowIndex][1]);
+                             dam.setEarTagNumber(damRes[cowIndex][2]);
++                            dam.setDateAdded(damRes[cowIndex][9]);
+ 
+                             currCow.setDam(dam);
+                         }
+@@ -674,7 +695,7 @@ public class DataHandler
+                     }
+ 
+                     //fetch cow events
+-                    columns = new String[] {"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server"};
++                    columns = new String[] {"id", "cow_id", "event_name", "remarks", "event_date", "birth_type", "parent_cow_event", "bull_id", "servicing_days", "cod", "no_of_live_births", "saved_on_server", "date_added"};
+                     selection = "cow_id="+cowID;
+                     String[][] eventResult = databaseHelper.runSelectQuery(readableDB, databaseHelper.TABLE_EVENT, columns, selection, null, null, null, null, null);
+                     for(int eventIndex = 0; eventIndex < eventResult.length; eventIndex++){
+@@ -700,6 +721,7 @@ public class DataHandler
+                         else{
+                             currEvent.setSavedOnServer(false);
+                         }
++                        currEvent.setDateAdded(eventResult[eventIndex][12]);
+ 
+                         currCow.addEvent(currEvent);
+                     }
+@@ -738,6 +760,23 @@ public class DataHandler
+         return farmer;
+     }
+ 
++    public static List<EventConstraint> getEventConstraints(Context context){
++        List<EventConstraint> result = new ArrayList<EventConstraint>();
++        DatabaseHelper databaseHelper = new DatabaseHelper(context);
++        SQLiteDatabase readableDB = databaseHelper.getReadableDatabase();
++
++        String[] columns = new String[]{"id", "event", "time", "time_units"};
++        String[][] constraintResult = databaseHelper.runSelectQuery(readableDB,databaseHelper.TABLE_EVENTS_CONSTRAINTS, columns, null, null, null, null, null, null);
++        if(constraintResult.length > 0){
++            for(int i = 0; i < constraintResult.length; i++){
++                String[] currConstraint = constraintResult[i];
++                result.add(new EventConstraint(Integer.parseInt(currConstraint[0]), currConstraint[1], Integer.parseInt(currConstraint[2]), currConstraint[3]));
++            }
++        }
++
++        return result;
++    }
++
+     /**
+      * This method caches data that would have been sent to the server. Note that this method has an almost identical arguement
+      * signature similar to the sendDataToServer method.
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/database/DatabaseHelper.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/database/DatabaseHelper.java
+index 4a40920..265232e 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/database/DatabaseHelper.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/database/DatabaseHelper.java
+@@ -18,12 +18,13 @@ import java.io.Serializable;
+ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
+ 
+     public static final String DB_NAME = "ngombe_planner";
+-    public static final int DB_VERSION = 6;
++    public static final int DB_VERSION = 9;
+     public static final String TABLE_FARMER = "farmer";
+     public static final String TABLE_COW = "cow";
+     public static final String TABLE_EVENT = "event";
+     public static final String TABLE_CACHED_REQUESTS = "cached_requests";
+     public static final String TABLE_MILK_PRODUCTION = "milk_production";
++    public static final String TABLE_EVENTS_CONSTRAINTS = "events_constraints";
+ 
+     private static final String TAG = "DatabaseHelper";
+ 
+@@ -46,9 +47,10 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
+     public void onCreate(SQLiteDatabase db) {
+         db.execSQL("CREATE TABLE " + TABLE_FARMER + " (id INTEGER PRIMARY KEY, name TEXT, mobile_no TEXT, location_county TEXT, location_district TEXT, gps_longitude TEXT, gps_latitude TEXT, date_added TEXT, sim_card_sn TEXT);");
+ 		db.execSQL("CREATE TABLE " + TABLE_COW + " (id INTEGER PRIMARY KEY, farmer_id INTEGER, name TEXT, ear_tag_number TEXT, date_of_birth TEXT, age INTEGER, age_type TEXT, sex TEXT, sire_id INTEGER, dam_id INTEGER, date_added TEXT, service_type TEXT, country_id INTEGER, bull_owner TEXT, owner_name TEXT);");
+-        db.execSQL("CREATE TABLE "+TABLE_EVENT+" (id INTEGER PRIMARY KEY, cow_id INTEGER, event_name TEXT, remarks TEXT, event_date TEXT, birth_type TEXT, parent_cow_event INTEGER, bull_id INTEGER, servicing_days INTEGER, cod TEXT, no_of_live_births INTEGER, saved_on_server INTEGER)");
++        db.execSQL("CREATE TABLE "+TABLE_EVENT+" (id INTEGER PRIMARY KEY, cow_id INTEGER, event_name TEXT, remarks TEXT, event_date TEXT, birth_type TEXT, parent_cow_event INTEGER, bull_id INTEGER, servicing_days INTEGER, cod TEXT, no_of_live_births INTEGER, saved_on_server INTEGER, date_added TEXT)");
+         db.execSQL("CREATE TABLE "+TABLE_CACHED_REQUESTS+" (id INTEGER PRIMARY KEY AUTOINCREMENT, url TEXT, json TEXT)");
+         db.execSQL("CREATE TABLE "+TABLE_MILK_PRODUCTION+" (id INTEGER PRIMARY KEY, cow_id INTEGER, time TEXT, quantity INTEGER, date_added TEXT, date TEXT, quantity_type TEXT)");
++        db.execSQL("CREATE TABLE "+TABLE_EVENTS_CONSTRAINTS+" (id INTEGER PRIMARY KEY, event TEXT, time INTEGER, time_units TEXT)");
+         //insert any static data to the db now
+     }
+ 
+@@ -68,6 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable{
+         db.execSQL("DROP TABLE IF EXISTS "+TABLE_EVENT);
+         db.execSQL("DROP TABLE IF EXISTS "+TABLE_CACHED_REQUESTS);
+         db.execSQL("DROP TABLE IF EXISTS "+TABLE_MILK_PRODUCTION);
++        db.execSQL("DROP TABLE IF EXISTS "+TABLE_EVENTS_CONSTRAINTS);
+ 
+         //recreate the database
+         onCreate(db);
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+index 5313223..bd55014 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+@@ -9,7 +9,10 @@ import org.json.JSONException;
+ import org.json.JSONObject;
+ 
+ import java.io.Serializable;
++import java.text.ParseException;
++import java.text.SimpleDateFormat;
+ import java.util.ArrayList;
++import java.util.Date;
+ import java.util.List;
+ import java.util.jar.JarInputStream;
+ 
+@@ -17,6 +20,8 @@ import java.util.jar.JarInputStream;
+  * Created by jason on 8/5/13.
+  */
+ public class Cow implements Parcelable, Serializable {
++    private static final String DEFAULT_DOB = "0000-00-00 00:00:00";
++    private static final String DOB_FORMAT = "yyyy-MM-dd HH:mm:ss";
+     public static final String TAG = "Cow";
+     public static final String SEX_MALE = "Male";
+     public static final String SEX_FEMALE = "Female";
+@@ -31,6 +36,7 @@ public class Cow implements Parcelable, Serializable {
+     private String name;
+     private String earTagNumber;
+     private String dateOfBirth;
++    private String dateAdded;
+     private int age;
+     private String ageType;
+     private List<String> breeds;
+@@ -51,6 +57,7 @@ public class Cow implements Parcelable, Serializable {
+         name = "";
+         earTagNumber = "";
+         dateOfBirth = "";
++        dateAdded = "";
+         age = -1;
+         ageType = "";
+         this.breeds = new ArrayList<String>();
+@@ -92,6 +99,14 @@ public class Cow implements Parcelable, Serializable {
+         this.dateOfBirth = dateOfBirth;
+     }
+ 
++    public void setDateAdded(String dateAdded){
++        this.dateAdded = dateAdded;
++    }
++
++    public String getDateAdded(){
++        return dateAdded;
++    }
++
+     public void setAge(int age) {
+         this.age = age;
+     }
+@@ -239,6 +254,61 @@ public class Cow implements Parcelable, Serializable {
+         return this.events;
+     }
+ 
++    public long getAgeMilliseconds(){
++        SimpleDateFormat dateFormat = new SimpleDateFormat(DOB_FORMAT);
++
++        long ageFromDOB = 0l;
++        if(!dateOfBirth.equals(DEFAULT_DOB)){
++            try {
++
++                Date dob=dateFormat.parse(this.dateOfBirth);
++                long dobMilliseconds = dob.getTime();
++
++                Date today = new Date();
++                ageFromDOB = today.getTime() - dobMilliseconds;
++            }
++            catch (ParseException e) {
++                e.printStackTrace();
++            }
++        }
++
++        long ageFromAge = 0l;
++        long ageUnits = 0l;
++        if(ageType.equals(AGE_TYPE_DAY)) ageUnits = 86400000l;
++        else if(ageType.equals(AGE_TYPE_MONTH)) ageUnits = 86400000l * 30;
++        else if(ageType.equals(AGE_TYPE_YEAR)) ageUnits = 86400000l * 365;
++
++        ageFromAge = ageUnits * this.age;
++        try {
++            Date dateAdded = dateFormat.parse(this.dateAdded);
++            long dateAddedMill = dateAdded.getTime();
++
++            Date today = new Date();
++
++            ageFromAge = ageFromAge + (today.getTime() - dateAddedMill);
++        }
++        catch (ParseException e) {
++            e.printStackTrace();
++        }
++
++
++
++        if(ageFromAge>ageFromDOB) {
++            Log.d(TAG, "We might want to use the cows age instead of date of birth");
++            Log.d(TAG, "Cows age "+this.ageType+" = "+String.valueOf(this.age));
++            Log.d(TAG, "Cows date of birth = "+this.dateOfBirth);
++            Log.d(TAG, "Age in milliseconds = "+String.valueOf(ageFromAge));
++            return ageFromAge;
++        }
++        else {
++            Log.d(TAG, "We might want to use the cows date of birth instead of age");
++            Log.d(TAG, "Cows age "+this.ageType+" = "+String.valueOf(this.age));
++            Log.d(TAG, "Cows date of birth = "+this.dateOfBirth);
++            Log.d(TAG, "Age in milliseconds = "+String.valueOf(ageFromDOB));
++            return ageFromDOB;
++        }
++    }
++
+     @Override
+     public int describeContents() {
+         return 0;
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Event.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Event.java
+index efed7da..86779d7 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Event.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Event.java
+@@ -1,10 +1,17 @@
+ package org.cgiar.ilri.mistro.farmer.carrier;
+ 
++import android.util.Log;
++
++import java.text.ParseException;
++import java.text.SimpleDateFormat;
++import java.util.Date;
++
+ /**
+  * Created by jrogena on 09/04/14.
+  */
+ public class Event {
+     private static final String TAG = "Event";
++    private static final String DATE_FORMAT = "YYYY-MM-dd HH:mm:ss";
+     private int id;
+     private String eventDate;
+     private String birthType;
+@@ -16,6 +23,7 @@ public class Event {
+     private String type;
+     private String remarks;
+     private boolean savedOnServer;
++    private String dateAdded;
+ 
+     public Event(){
+ 
+@@ -49,6 +57,31 @@ public class Event {
+         return eventDate;
+     }
+ 
++    public void setDateAdded(String dateAdded){
++        this.dateAdded = dateAdded;
++    }
++
++    public String getDateAdded(){
++        return  dateAdded;
++    }
++
++    public long getDateAddedMillisecods(){
++        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
++
++        long result = 0;
++
++        try {
++            Date dateAdded = dateFormat.parse(this.dateAdded);
++            result = dateAdded.getTime();
++        } catch (ParseException e) {
++            e.printStackTrace();
++        }
++
++        Log.d(TAG, "Event date added in milliseconds = "+String.valueOf(result));
++
++        return result;
++    }
++
+     public void setEventDate(String eventDate) {
+         this.eventDate = eventDate;
+     }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java
+new file mode 100644
+index 0000000..1681dc7
+--- /dev/null
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java
+@@ -0,0 +1,79 @@
++package org.cgiar.ilri.mistro.farmer.carrier;
++
++import android.util.Log;
++
++import java.util.Date;
++
++/**
++ * Created by jrogena on 21/05/14.
++ */
++public class EventConstraint {
++    private final String TAG = "EventConstraint";
++    private final String UNIT_DAY = "Days";
++    private final String UNIT_MONTH = "Months";
++    private final String UNIT_YEAR = "Years";
++
++    public static final String CONSTRAINT_MATURITY = "Maturity";
++    public static final String CONSTRAINT_BIRTH_TO_LACTATION = "MaxTimeBirthLactation";
++    public static final String CONSTRAINT_MILKING = "Milking";
++    public static final String CONSTRAINT_CALVING = "Calving";
++
++    private int id;
++    private String event;
++    private int time;
++    private String timeUnits;
++
++    public EventConstraint(int id, String event, int time, String timeUnits) {
++        this.id = id;
++        this.event = event;
++        this.time = time;
++        this.timeUnits = timeUnits;
++    }
++
++    public int getId() {
++        return id;
++    }
++
++    public void setId(int id) {
++        this.id = id;
++    }
++
++    public String getEvent() {
++        return event;
++    }
++
++    public void setEvent(String event) {
++        this.event = event;
++    }
++
++    public int getTime() {
++        return time;
++    }
++
++    public void setTime(int time) {
++        this.time = time;
++    }
++
++    public String getTimeUnits() {
++        return timeUnits;
++    }
++
++    public void setTimeUnits(String timeUnits) {
++        this.timeUnits = timeUnits;
++    }
++
++    public long getTimeMilliseconds(){
++        long result = 0l;
++
++        long timeUnits = 0l;
++        if(this.timeUnits.equals(UNIT_DAY)) timeUnits = 86400000l;
++        else if(this.timeUnits.equals(UNIT_MONTH)) timeUnits = 86400000l * 30;//get number of milliseconds in a month
++        else if(this.timeUnits.equals(UNIT_YEAR)) timeUnits = 86400000l * 365;//get number of milliseconds in a year
++
++        result = timeUnits * this.time;
++
++        Log.d(TAG, "Event constraint Time milliseconds = "+String.valueOf(result));
++
++        return result;
++    }
++}
+diff --git a/MistroFarmer/src/main/res/layout/dialog_breed.xml b/MistroFarmer/src/main/res/layout/dialog_breed.xml
+index 2547e4d..57a41f3 100644
+--- a/MistroFarmer/src/main/res/layout/dialog_breed.xml
++++ b/MistroFarmer/src/main/res/layout/dialog_breed.xml
+@@ -15,10 +15,10 @@
+                     android:id="@+id/breed_lv"
+                     android:layout_height="2000dp"
+                     android:layout_width="match_parent"/>
++            <Button
++                android:id="@+id/dialog_breed_okay_b"
++                android:layout_width="match_parent"
++                android:layout_height="@dimen/normal_button_layout_height"/>
+         </LinearLayout>
+     </ScrollView>
+-    <Button
+-            android:id="@+id/dialog_breed_okay_b"
+-            android:layout_width="match_parent"
+-            android:layout_height="@dimen/normal_button_layout_height"/>
+ </LinearLayout>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/layout/dialog_deformity.xml b/MistroFarmer/src/main/res/layout/dialog_deformity.xml
+index 381fbd0..7744e23 100644
+--- a/MistroFarmer/src/main/res/layout/dialog_deformity.xml
++++ b/MistroFarmer/src/main/res/layout/dialog_deformity.xml
+@@ -23,10 +23,10 @@
+                 android:visibility="gone"
+                 android:textColor="@color/text_input_color"
+                 android:inputType="textCapSentences"/>
++            <Button
++                android:id="@+id/dialog_deformity_okay_b"
++                android:layout_width="match_parent"
++                android:layout_height="@dimen/normal_button_layout_height"/>
+         </LinearLayout>
+     </ScrollView>
+-    <Button
+-            android:id="@+id/dialog_deformity_okay_b"
+-            android:layout_width="match_parent"
+-            android:layout_height="@dimen/normal_button_layout_height"/>
+ </LinearLayout>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 4ac7e8d..86a1629 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -239,4 +239,6 @@
+     <!-- Added after translation-->
+     <string name="age_or_dob_en">You can enter either the cow\'s age or date of birth</string>
+     <string name="enter_age_or_dob_en">Please enter either the cow\'s age or date of birth</string>
++    <string name="cow_too_young_en">The selected cow is too young</string>
++    <string name="enter_no_cows_own_en">Enter the number of cows you own</string>
+ </resources>
+-- 
+2.7.1
+

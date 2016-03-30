@@ -1,0 +1,160 @@
+From 17b4eb7b0ecfa864a45a8c5387fa0a7e0bd1eb8c Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Wed, 25 Jun 2014 13:59:12 +0300
+Subject: [PATCH 204/213] Version 1.0.5: Changed button text to Save
+
+Changed the button text in EditCowActivity and EditFarmerActivity
+from 'Edit' to 'Save'
+---
+ MistroFarmer/src/main/AndroidManifest.xml                     |  4 ++--
+ .../java/org/cgiar/ilri/mistro/farmer/EditCowActivity.java    |  2 +-
+ .../java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java |  2 +-
+ MistroFarmer/src/main/res/values/strings_en.xml               | 11 +++++++----
+ MistroFarmer/src/main/res/values/strings_kp.xml               |  2 ++
+ MistroFarmer/src/main/res/values/strings_kr.xml               |  2 ++
+ MistroFarmer/src/main/res/values/strings_lu.xml               |  2 ++
+ MistroFarmer/src/main/res/values/strings_nn.xml               |  2 ++
+ MistroFarmer/src/main/res/values/strings_sw.xml               |  2 ++
+ 9 files changed, 21 insertions(+), 8 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index 966fd13..78af944 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+-    android:versionCode="19"
+-    android:versionName="1.0.4" >
++    android:versionCode="20"
++    android:versionName="1.0.5" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditCowActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditCowActivity.java
+index c4de847..03dfc58 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditCowActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditCowActivity.java
+@@ -599,7 +599,7 @@ public class EditCowActivity extends SherlockActivity implements MistroActivity,
+         countryOfOriginTV.setText(Locale.getStringInLocale("other_countries",this));
+         commonCountriesTV.setText(Locale.getStringInLocale("country_of_origin",this));
+         cancelB.setText(Locale.getStringInLocale("cancel",this));
+-        editB.setText(Locale.getStringInLocale("edit", this));
++        editB.setText(Locale.getStringInLocale("save", this));
+ 
+         breedDialog.setTitle(Locale.getStringInLocale("breed",this));
+         breeds=Locale.getArrayInLocale("breeds_array",this);
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java
+index 98683f0..ed6a964 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java
+@@ -177,7 +177,7 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
+         isActiveArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+         isActiveS.setAdapter(isActiveArrayAdapter);
+ 
+-        editB.setText(Locale.getStringInLocale("edit", this));
++        editB.setText(Locale.getStringInLocale("save", this));
+         cancelB.setText(Locale.getStringInLocale("cancel", this));
+     }
+ 
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index a6e0580..ef88210 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -300,8 +300,8 @@
+         <item>Not in calf</item>
+     </string-array>
+ 
+-    <string name="enter_milk_status_of_cow_en">Please enter the status of cow</string>
+-    <string name="enter_in_calf_status_en">Please enter the status of cow</string>
++    <string name="enter_milk_status_of_cow_en">Please enter the milking status of cow</string>
++    <string name="enter_in_calf_status_en">Please enter the in calf status of cow</string>
+     <string name="select_epersonnel_en">Please select an extension personnel</string>
+     <string name="unable_to_get_epersonnel_en">Unable to fetch extension Personnel</string>
+     <string name="unable_to_lock_gps_en">GPS location was not obtained. Will try to get it in next screen</string>
+@@ -314,7 +314,7 @@
+     <string name="admin_functions_en">Admin Functions</string>
+     <string name="sim_card_not_admin_en">The sim card you are using is not allowed to log in as Admin</string>
+     <string name="edit_farmer_en">Edit Farmer</string>
+-    <string name="edit_cow_en">Edit Cow</string>
++    <string name="edit_cow_en">Edit Animal</string>
+     <string name="admin_en">Admin</string>
+     <string name="edit_en">Edit</string>
+     <string name="select_farmer_en">Select a farmer</string>
+@@ -334,7 +334,7 @@
+     <string name="farmers_no_epersonnel_en">Farmers with no extension personnel</string>
+     <string name="farmers_tied_to_en">Farmers tied to</string>
+     <string name="super_admin_en">Super Admin</string>
+-    <string name="select_cow_en">Select a cow</string>
++    <string name="select_cow_en">Select an Animal</string>
+     <string name="site_en">Site</string>
+     <string name="is_active_en">Is active</string>
+     <string-array name="yes_no_en">
+@@ -342,4 +342,7 @@
+         <item>Yes</item>
+     </string-array>
+     <string name="specify_site_en">Please select a site</string>
++
++    <string name="save_en">Save</string>
++
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kp.xml b/MistroFarmer/src/main/res/values/strings_kp.xml
+index b95642d..a33a8cd 100644
+--- a/MistroFarmer/src/main/res/values/strings_kp.xml
++++ b/MistroFarmer/src/main/res/values/strings_kp.xml
+@@ -340,4 +340,6 @@
+         <item>Yes</item>
+     </string-array>
+     <string name="specify_site_kp">Please select a site</string>
++
++    <string name="save_kp">Save</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kr.xml b/MistroFarmer/src/main/res/values/strings_kr.xml
+index 18b2459..ffb182e 100644
+--- a/MistroFarmer/src/main/res/values/strings_kr.xml
++++ b/MistroFarmer/src/main/res/values/strings_kr.xml
+@@ -339,4 +339,6 @@
+         <item>Yes</item>
+     </string-array>
+     <string name="specify_site_kr">Please select a site</string>
++
++    <string name="save_kr">Save</string>
+ </resources>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_lu.xml b/MistroFarmer/src/main/res/values/strings_lu.xml
+index cf5332f..dbd93aa 100644
+--- a/MistroFarmer/src/main/res/values/strings_lu.xml
++++ b/MistroFarmer/src/main/res/values/strings_lu.xml
+@@ -342,4 +342,6 @@
+         <item>Yes</item>
+     </string-array>
+     <string name="specify_site_lu">Please select a site</string>
++
++    <string name="save_lu">Save</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_nn.xml b/MistroFarmer/src/main/res/values/strings_nn.xml
+index 47033a6..96242b9 100644
+--- a/MistroFarmer/src/main/res/values/strings_nn.xml
++++ b/MistroFarmer/src/main/res/values/strings_nn.xml
+@@ -340,4 +340,6 @@
+         <item>Yes</item>
+     </string-array>
+     <string name="specify_site_nn">Please select a site</string>
++
++    <string name="save_nn">Save</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_sw.xml b/MistroFarmer/src/main/res/values/strings_sw.xml
+index d4a3768..ee8e06d 100644
+--- a/MistroFarmer/src/main/res/values/strings_sw.xml
++++ b/MistroFarmer/src/main/res/values/strings_sw.xml
+@@ -340,4 +340,6 @@
+         <item>Yes</item>
+     </string-array>
+     <string name="specify_site_sw">Please select a site</string>
++
++    <string name="save_sw">Save</string>
+ </resources>
+-- 
+2.7.1
+

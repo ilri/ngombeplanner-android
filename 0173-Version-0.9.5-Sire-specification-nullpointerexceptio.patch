@@ -1,0 +1,456 @@
+From 9d60910cc8536ed71a054e976ba50dea55a03b38 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Wed, 28 May 2014 15:12:55 +0300
+Subject: [PATCH 173/213] Version 0.9.5: Sire specification,
+ nullpointerexception with cow breeds and deformities, new events
+
+Sire specification in CowRegistrationActivity now fully changed to
+AutoCompleteTextView
+
+NullPointerException when no deformity or breed entered in
+CowRegistrationActivity squashed
+
+New events added. These include:
+   - deworming
+   - dipping or spraying
+   - vaccination
+---
+ MistroFarmer/src/main/AndroidManifest.xml          |  2 +-
+ .../mistro/farmer/CowRegistrationActivity.java     | 77 +++++++++++++++++++++-
+ .../cgiar/ilri/mistro/farmer/backend/Locale.java   |  8 +++
+ .../org/cgiar/ilri/mistro/farmer/carrier/Cow.java  | 17 ++++-
+ .../org/cgiar/ilri/mistro/farmer/carrier/Sire.java |  1 +
+ .../main/res/layout/activity_cow_registration.xml  | 28 ++++++++
+ MistroFarmer/src/main/res/values/strings_en.xml    |  9 ++-
+ MistroFarmer/src/main/res/values/strings_kl.xml    |  3 +
+ MistroFarmer/src/main/res/values/strings_kr.xml    |  3 +
+ MistroFarmer/src/main/res/values/strings_lh.xml    |  3 +
+ MistroFarmer/src/main/res/values/strings_sw.xml    |  3 +
+ 11 files changed, 148 insertions(+), 6 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index 7e1177c..1e3ef49 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+-    android:versionCode="4"
++    android:versionCode="5"
+     android:versionName="0.9.5" >
+ 
+     <uses-sdk
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index a537189..3d23263 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -42,9 +42,9 @@ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+ import org.cgiar.ilri.mistro.farmer.carrier.Dam;
+ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+ import org.cgiar.ilri.mistro.farmer.carrier.Sire;
++
+ import org.json.JSONException;
+ import org.json.JSONObject;
+-import org.w3c.dom.Text;
+ 
+ import java.text.ParseException;
+ import java.text.SimpleDateFormat;
+@@ -88,6 +88,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     private TextView sireTV;
+     private Spinner sireS;
+     private AutoCompleteTextView sireACTV;
++    private TextView sireOwnerTV;
++    private Spinner sireOwnerS;
++    private TextView sireOwnerNameTV;
++    private EditText sireOwnerNameET;
+     private TextView strawNumberTV;
+     private EditText strawNumberET;
+     private TextView damTV;
+@@ -125,6 +129,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     private List<Cow> validSires;
+     private List<Cow> validDams;
+     private LocationManager locationManager;
++    private int selectedSireOwner;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -176,6 +181,11 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         sireTV = (TextView)this.findViewById(R.id.sire_tv);
+         sireS = (Spinner)this.findViewById(R.id.sire_s);
+         sireACTV = (AutoCompleteTextView)this.findViewById(R.id.sire_actv);
++        sireOwnerTV = (TextView)this.findViewById(R.id.sire_owner_tv);
++        sireOwnerS = (Spinner)this.findViewById(R.id.sire_owner_s);
++        sireOwnerS.setOnItemSelectedListener(this);
++        sireOwnerNameTV = (TextView)this.findViewById(R.id.sire_owner_name_tv);
++        sireOwnerNameET = (EditText)this.findViewById(R.id.sire_owner_name_et);
+         strawNumberTV = (TextView)this.findViewById(R.id.straw_number_tv);
+         strawNumberET = (EditText)this.findViewById(R.id.straw_number_et);
+         damTV = (TextView)this.findViewById(R.id.dam_tv);
+@@ -337,6 +347,7 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                         }
+                     }
+                     List<String> savedBreeds=thisCow.getBreeds(this);//returns breeds in current locale
++                    Log.d(TAG, "Cow breeds are "+savedBreeds);
+                     String breed="";
+                     for (int i=0;i<savedBreeds.size();i++) {
+                         if(i==0) {
+@@ -345,9 +356,12 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                         else {
+                             breed=breed+", "+savedBreeds.get(i);
+                         }
+-
++                        Log.d(TAG, "current breed index =  "+String.valueOf(i));
++                        Log.d(TAG, "saved breeds length =  "+String.valueOf(savedBreeds.size()));
+                         if(savedBreeds.get(i).equals(breeds[breeds.length-1])){
+                             breedACTV.setText(thisCow.getOtherBreed(this));//returns other breed in current locale
++                            anotherBreedTV.setVisibility(TextView.VISIBLE);
++                            breedACTV.setVisibility(AutoCompleteTextView.VISIBLE);
+                         }
+                     }
+                     breedET.setText(breed);
+@@ -415,6 +429,15 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                             }
+                         }
+ 
++                        selectedSireOwner = -1;
++                        String[] sireOwners = Locale.getArrayInLocale("bull_owners", this, Locale.LOCALE_ENGLISH);
++                        for(int i = 0; i < sireOwners.length; i++){
++                            if(sireOwners[i].equals(thisCow.getSire().getOwnerType())){
++                                selectedSireOwner = i;
++                            }
++                        }
++                        sireOwnerNameET.setText(thisCow.getSire().getOwner());
++
+                         String[] serviceTypesInEN = Locale.getArrayInLocale("service_types",this,Locale.LOCALE_ENGLISH);
+ 
+                         ArrayAdapter<String> siresArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,validSireNames);
+@@ -462,6 +485,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                         damTV.setVisibility(TextView.GONE);
+ //                        damS.setVisibility(Spinner.GONE);
+                         sireACTV.setVisibility(AutoCompleteTextView.GONE);
++                        sireOwnerTV.setVisibility(TextView.GONE);
++                        sireOwnerS.setVisibility(Spinner.GONE);
++                        sireOwnerNameTV.setVisibility(TextView.GONE);
++                        sireOwnerNameET.setVisibility(EditText.GONE);
+                         damACTV.setVisibility(AutoCompleteTextView.GONE);
+                         embryoNumberTV.setVisibility(TextView.GONE);
+                         embryoNumberET.setVisibility(EditText.GONE);
+@@ -563,7 +590,23 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             serviceTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+             serviceTypeS.setAdapter(serviceTypesAdapter);
+         }
++
+         sireTV.setText(Locale.getStringInLocale("sire",this));
++        sireOwnerTV.setText(Locale.getStringInLocale("sire_owner", this));
++
++        int sireOwnersID = Locale.getArrayIDInLocale("bull_owners", this);
++        if(sireOwnersID != 0){
++            ArrayAdapter<CharSequence> sireOwnersAdapter = ArrayAdapter.createFromResource(this,sireOwnersID,android.R.layout.simple_spinner_item);
++            sireOwnersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++            sireOwnerS.setAdapter(sireOwnersAdapter);
++
++            if(selectedSireOwner != -1){
++                sireOwnerS.setSelection(selectedSireOwner);
++            }
++        }
++
++        sireOwnerNameTV.setText(Locale.getStringInLocale("name_sire_owner", this));
++        sireOwnerNameET.setHint(Locale.getStringInLocale("name_of_other_farmer_or_group", this));
+         damTV.setText(Locale.getStringInLocale("dam",this));
+         strawNumberTV.setText(Locale.getStringInLocale("straw_number",this));
+         embryoNumberTV.setText(Locale.getStringInLocale("embryo_number",this));
+@@ -918,6 +961,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         else if(parent == commonCountriesS) {
+             toggleCountryOfOriginVisibility();
+         }
++        else if(parent == sireOwnerS){
++            toggleSireOwnerVisibility();
++        }
+     }
+ 
+     private void toggleCountryOfOriginVisibility(){
+@@ -938,6 +984,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         String[] serviceTypesInEN = Locale.getArrayInLocale("service_types", this, Locale.LOCALE_ENGLISH);
+         if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Bull")) {
+             sireTV.setVisibility(TextView.VISIBLE);
++            sireOwnerTV.setVisibility(TextView.VISIBLE);
++            sireOwnerS.setVisibility(Spinner.VISIBLE);
++            toggleSireOwnerVisibility();
+ //            sireS.setVisibility(Spinner.VISIBLE);
+             strawNumberTV.setVisibility(TextView.GONE);
+             strawNumberET.setVisibility(EditText.GONE);
+@@ -954,6 +1003,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         }
+         else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
+             sireTV.setVisibility(TextView.GONE);
++            sireOwnerTV.setVisibility(TextView.GONE);
++            sireOwnerS.setVisibility(Spinner.GONE);
++            sireOwnerNameTV.setVisibility(TextView.GONE);
++            sireOwnerNameET.setVisibility(EditText.GONE);
+ //            sireS.setVisibility(Spinner.GONE);
+             strawNumberTV.setVisibility(TextView.VISIBLE);
+             strawNumberET.setVisibility(EditText.VISIBLE);
+@@ -971,6 +1024,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         }
+         else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Embryo Transfer")) {
+             sireTV.setVisibility(TextView.GONE);
++            sireOwnerTV.setVisibility(TextView.GONE);
++            sireOwnerS.setVisibility(Spinner.GONE);
++            sireOwnerNameTV.setVisibility(TextView.GONE);
++            sireOwnerNameET.setVisibility(EditText.GONE);
+ //            sireS.setVisibility(Spinner.GONE);
+             strawNumberTV.setVisibility(TextView.GONE);
+             strawNumberET.setVisibility(EditText.GONE);
+@@ -1128,6 +1185,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                 if(sire.getEarTagNumber().trim().equals("")){//if not yet set then assume the sire is not part of the herd
+                     sire.setEarTagNumber(sireACTV.getText().toString());
+                 }
++
++                String[] sireOwnersInEN = Locale.getArrayInLocale("bull_owners", this, Locale.LOCALE_ENGLISH);
++                sire.setOwnerType(sireOwnersInEN[sireOwnerS.getSelectedItemPosition()]);
++                sire.setOwner(sireOwnerNameET.getText().toString());
+                 thisCow.setSire(sire);
+ 
+                 Dam dam =new Dam();
+@@ -1214,6 +1275,18 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         }
+     }
+ 
++    private void toggleSireOwnerVisibility(){
++        String[] sireOwnersInEN = Locale.getArrayInLocale("bull_owners", this, Locale.LOCALE_ENGLISH);
++        if(sireOwnersInEN[sireOwnerS.getSelectedItemPosition()].equals("Own bull")){
++            sireOwnerNameTV.setVisibility(TextView.GONE);
++            sireOwnerNameET.setVisibility(EditText.GONE);
++        }
++        else{
++            sireOwnerNameTV.setVisibility(TextView.VISIBLE);
++            sireOwnerNameET.setVisibility(EditText.VISIBLE);
++        }
++    }
++
+     @Override
+     public void onLocationChanged(Location location) {
+         String latitude=String.valueOf(location.getLatitude());
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
+index 616f767..0e21a23 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
+@@ -95,12 +95,16 @@ public class Locale {
+ 
+     public static String[] translateArrayToEnglish(Context context, String arrayName, String[] arrayInLocale){
+         if(arrayInLocale != null){
++            Log.d(TAG, "Trying to translate array to english");
+             String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, Locale.LOCALE_ENGLISH);
+             String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
+ 
+             String[] translatedArray = new String[arrayInLocale.length];
+             for(int i = 0; i < arrayInLocale.length; i++){
+                 for(int j = 0; j < allStringsInLocale.length; j++){
++                    Log.d(TAG, "Current actual string = "+arrayInLocale[i]);
++                    Log.d(TAG, "Current string in english =  "+allStringsInEN[j]);
++                    Log.d(TAG, "Current string in locale = "+allStringsInLocale[j]);
+                     if(arrayInLocale[i].equals(allStringsInLocale[j])){
+                         translatedArray[i] = allStringsInEN[j];
+                     }
+@@ -114,12 +118,16 @@ public class Locale {
+ 
+     public static String[] translateArrayToLocale(Context context, String arrayName, String[] arrayInEN){
+         if(arrayInEN != null){
++            Log.d(TAG, "Trying to translate array to current locale");
+             String[] allStringsInEN = Locale.getArrayInLocale(arrayName, context, Locale.LOCALE_ENGLISH);
+             String[] allStringsInLocale = Locale.getArrayInLocale(arrayName, context);
+ 
+             String[] translatedArray = new String[arrayInEN.length];
+             for(int i = 0; i < arrayInEN.length; i++){
+                 for(int j = 0; j < allStringsInEN.length; j++){
++                    Log.d(TAG, "Current actual string = "+arrayInEN[i]);
++                    Log.d(TAG, "Current string in english =  "+allStringsInEN[j]);
++                    Log.d(TAG, "Current string in locale = "+allStringsInLocale[j]);
+                     if(arrayInEN[i].equals(allStringsInEN[j])){
+                         translatedArray[i] = allStringsInLocale[j];
+                     }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+index 444ffe4..0d921b5 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+@@ -122,6 +122,14 @@ public class Cow implements Parcelable, Serializable {
+     }
+ 
+     public void setBreeds(String[] breeds, Context context) {
++        if(breeds.length == 1){//might mean that there were no breeds
++            if(breeds[0].length() == 0){
++                Log.w(TAG, "Appears like the user did not specify any breed, Setting size of breed array to 0");
++                breeds = new String[0];
++            }
++        }
++
++        Log.d(TAG, "***** size of breeds = "+String.valueOf(breeds.length));
+         //translate breeds to english
+         String[] translatedBreeds =  Locale.translateArrayToEnglish(context, "c_breeds_array", breeds);//assuming that the breeds array is a member of c_breeds_array
+ 
+@@ -169,6 +177,13 @@ public class Cow implements Parcelable, Serializable {
+     }
+ 
+     public void setDeformities(String[] deformities, Context context) {
++        if(deformities.length == 1){//might mean that there were no breeds
++            if(deformities[0].length() == 0){
++                Log.w(TAG, "Appears like user did not specify any deformity, setting size of deformity array to 0");
++                deformities = new String[0];
++            }
++        }
++
+         //translate to english
+         String[] translatedDeformities = Locale.translateArrayToEnglish(context, "deformities_array", deformities);
+ 
+@@ -256,7 +271,7 @@ public class Cow implements Parcelable, Serializable {
+ 
+     public List<String> getBreeds(Context context) {
+         //breeds stored in this object are in english, translate them to current locale
+-        String[] stringArray = Locale.translateArrayToLocale(context, "breeds_array", breeds.toArray(new String[breeds.size()]));
++        String[] stringArray = Locale.translateArrayToLocale(context, "c_breeds_array", breeds.toArray(new String[breeds.size()]));
+ 
+         List<String> translatedBreeds = new ArrayList<String>(Arrays.asList(stringArray));
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Sire.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Sire.java
+index 85f7d97..d5aa4c2 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Sire.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Sire.java
+@@ -12,6 +12,7 @@ import java.io.Serializable;
+  */
+ public class Sire extends Cow implements Serializable
+ {
++    public static final String SIRE_OWNER_OWN_BULL = "";
+     private String strawNumber;
+     private String owner;
+     private String ownerType;
+diff --git a/MistroFarmer/src/main/res/layout/activity_cow_registration.xml b/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
+index e1c7598..5d98f35 100644
+--- a/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
++++ b/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
+@@ -206,6 +206,34 @@
+             android:textSize="@dimen/normal_text_size"
+             android:textColor="@color/text_input_color"/>
+         <TextView
++            android:id="@+id/sire_owner_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <Spinner
++            android:id="@+id/sire_owner_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
++        <TextView
++            android:id="@+id/sire_owner_name_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <EditText
++            android:id="@+id/sire_owner_name_et"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:inputType="text"/>
++        <TextView
+             android:id="@+id/straw_number_tv"
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index dff22d5..6dcb6ae 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -26,8 +26,8 @@
+     <string name="finish_en">Finish</string>
+     <string name="okay_en">Okay</string>
+     <string name="farmer_registration_en">Farmer Registration</string>
+-    <string name="cow_registration_en">Cow Registration, Cow</string>
+-    <string name="cow_registration_proper_en">Cow Registration</string>
++    <string name="cow_registration_en">Animal Registration, Animal</string>
++    <string name="cow_registration_proper_en">Animal Registration</string>
+     <string name="dam_registration_en">Dam Registration</string>
+     <string name="sire_registration_en">Sire Registration</string>
+     <string-array name="age_type_array_en">
+@@ -184,6 +184,9 @@
+         <item>Artificial Insemination</item>
+         <item>Bull Servicing</item>
+         <item>Signs of Heat</item>
++        <item>Deworming</item>
++        <item>Dipping or Spraying</item>
++        <item>Vaccination</item>
+     </string-array>
+     <string-array name="cow_servicing_types_en">
+         <item>Artificial Insemination</item>
+@@ -277,4 +280,6 @@
+     <string name="extra_breed_en">Extra Breed</string>
+     <string name="specify_other_country_en">Specify other country here</string>
+     <string name="enter_sire_etn_en">Enter the sire\'s ear tag number</string>
++    <string name="sire_owner_en">Sire\'s Owner</string>
++    <string name="name_sire_owner_en">Name of Sire\'s Owner</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kl.xml b/MistroFarmer/src/main/res/values/strings_kl.xml
+index 3472e35..9bf5736 100644
+--- a/MistroFarmer/src/main/res/values/strings_kl.xml
++++ b/MistroFarmer/src/main/res/values/strings_kl.xml
+@@ -184,6 +184,9 @@
+         <item>boishet ab mbiret</item>
+         <item>boishet ab kirgit</item>
+         <item>kaborunoshek ab maget ab kirgit</item>
++        <item>Deworming</item>
++        <item>Dipping or Spraying</item>
++        <item>Vaccination</item>
+     </string-array>
+     <string-array name="cow_servicing_types_kl">
+         <item>boishet ab mbiret</item>
+diff --git a/MistroFarmer/src/main/res/values/strings_kr.xml b/MistroFarmer/src/main/res/values/strings_kr.xml
+index 684d006..ff519d5 100644
+--- a/MistroFarmer/src/main/res/values/strings_kr.xml
++++ b/MistroFarmer/src/main/res/values/strings_kr.xml
+@@ -184,6 +184,9 @@
+         <item>Okhurumia nende omupira</item>
+         <item>okhurumia nende esulusi</item>
+         <item>etsidalili tsiokhwenya esulusi</item>
++        <item>Deworming</item>
++        <item>Dipping or Spraying</item>
++        <item>Vaccination</item>
+     </string-array>
+     <string-array name="cow_servicing_types_kr">
+         <item>Okhurumia nende omupira</item>
+diff --git a/MistroFarmer/src/main/res/values/strings_lh.xml b/MistroFarmer/src/main/res/values/strings_lh.xml
+index 914c805..2fb00b3 100644
+--- a/MistroFarmer/src/main/res/values/strings_lh.xml
++++ b/MistroFarmer/src/main/res/values/strings_lh.xml
+@@ -184,6 +184,9 @@
+         <item>khwilusia nende omupira</item>
+         <item>khwilusia nende echirushi</item>
+         <item>ebilolero bio khwirukha</item>
++        <item>Deworming</item>
++        <item>Dipping or Spraying</item>
++        <item>Vaccination</item>
+     </string-array>
+     <string-array name="cow_servicing_types_lh">
+         <item>okhwirusia nende omupira</item>
+diff --git a/MistroFarmer/src/main/res/values/strings_sw.xml b/MistroFarmer/src/main/res/values/strings_sw.xml
+index d3ff4a2..9647b4b 100644
+--- a/MistroFarmer/src/main/res/values/strings_sw.xml
++++ b/MistroFarmer/src/main/res/values/strings_sw.xml
+@@ -184,6 +184,9 @@
+         <item>Upandikizaji</item>
+         <item>Bull Servicing</item>
+         <item>Signs of Heat</item>
++        <item>Deworming</item>
++        <item>Dipping or Spraying</item>
++        <item>Vaccination</item>
+     </string-array>
+     <string-array name="cow_servicing_types_sw">
+         <item>Upandikizaji</item>
+-- 
+2.7.1
+

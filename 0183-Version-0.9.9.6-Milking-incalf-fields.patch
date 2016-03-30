@@ -1,0 +1,517 @@
+From d13ae950be2ba4300c1089de600ca995a32825b8 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Fri, 6 Jun 2014 21:02:44 +0300
+Subject: [PATCH 183/213] Version 0.9.9.6: Milking & incalf fields
+
+Added Milking and incalf fields to CowRegistrationActivity
+---
+ MistroFarmer/src/main/AndroidManifest.xml          |  4 +-
+ .../mistro/farmer/CowRegistrationActivity.java     | 85 ++++++++++++++++++++
+ .../org/cgiar/ilri/mistro/farmer/carrier/Cow.java  | 90 ++++++++++++++++++++++
+ .../main/res/layout/activity_cow_registration.xml  | 32 ++++++++
+ MistroFarmer/src/main/res/values/strings_en.xml    | 17 ++++
+ MistroFarmer/src/main/res/values/strings_kp.xml    | 15 ++++
+ MistroFarmer/src/main/res/values/strings_kr.xml    | 16 ++++
+ MistroFarmer/src/main/res/values/strings_lu.xml    | 15 ++++
+ MistroFarmer/src/main/res/values/strings_nn.xml    | 15 ++++
+ MistroFarmer/src/main/res/values/strings_sw.xml    | 16 ++++
+ 10 files changed, 303 insertions(+), 2 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index ec07958..4ce77e4 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+-    android:versionCode="13"
+-    android:versionName="0.9.9.4" >
++    android:versionCode="15"
++    android:versionName="0.9.9.6" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index 9fb9230..b85894f 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -9,6 +9,7 @@ import android.location.Criteria;
+ import android.location.Location;
+ import android.location.LocationListener;
+ import android.location.LocationManager;
++import android.nfc.Tag;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
+ import android.telephony.TelephonyManager;
+@@ -81,6 +82,10 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+     private AutoCompleteTextView breedACTV;
+     private TextView sexTV;
+     private Spinner sexS;
++    private TextView milkingStatusTV;
++    private Spinner milkingStatusS;
++    private TextView inCalfStatusTV;
++    private Spinner inCalfStatusS;
+     private TextView deformityTV;
+     private EditText deformityET;
+     private TextView serviceTypeTV;
+@@ -171,6 +176,11 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         breedACTV = (AutoCompleteTextView)this.findViewById(R.id.breed_actv);
+         sexTV=(TextView)this.findViewById(R.id.sex_tv);
+         sexS=(Spinner)this.findViewById(R.id.sex_s);
++        sexS.setOnItemSelectedListener(this);
++        milkingStatusTV = (TextView)this.findViewById(R.id.milking_status_tv);
++        milkingStatusS = (Spinner)this.findViewById(R.id.milking_status_s);
++        inCalfStatusTV = (TextView)this.findViewById(R.id.in_calf_status_tv);
++        inCalfStatusS = (Spinner)this.findViewById(R.id.in_calf_status_s);
+         deformityTV=(TextView)this.findViewById(R.id.deformity_tv);
+         deformityET=(EditText)this.findViewById(R.id.deformity_et);
+         deformityET.setOnFocusChangeListener(this);
+@@ -369,6 +379,24 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                     for(int i = 0; i < sexInEN.length; i++) {
+                         if(sexInEN[i].equals("Female") && thisCow.getSex().equals(Cow.SEX_FEMALE)) {
+                             sexS.setSelection(i);
++                            toggleFemaleCowViewsVisibility();
++                            String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
++                            String[] inCalfArrayInEN = Locale.getArrayInLocale("cow_in_calf_array", this, Locale.LOCALE_ENGLISH);
++                            for(int j = 0; j < milkingStatusInEN.length; j++){
++                                Log.d(TAG, " ********** Saved milking status = "+thisCow.getMilkingStatus());
++                                if(milkingStatusInEN[j].equals(thisCow.getMilkingStatus())){
++                                    milkingStatusS.setSelection(j);
++                                }
++                            }
++                            for(int j = 0; j < inCalfArrayInEN.length; j++){
++                                if(inCalfArrayInEN[j].equals(Cow.COW_IN_CALF) && thisCow.isInCalf()){
++                                    inCalfStatusS.setSelection(j);
++                                }
++                                else if(inCalfArrayInEN[j].equals(Cow.COW_NOT_IN_CALF) && !thisCow.isInCalf()){
++                                    inCalfStatusS.setSelection(j);
++                                }
++                            }
++
+                         }
+                         else if(sexInEN[i].equals("Male") && thisCow.getSex().equals(Cow.SEX_MALE)) {
+                             sexS.setSelection(i);
+@@ -582,6 +610,17 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             sexArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+             sexS.setAdapter(sexArrayAdapter);
+         }
++
++        milkingStatusTV.setText(" * " + Locale.getStringInLocale("cow_status", this));
++        inCalfStatusTV.setText(" * " + Locale.getStringInLocale("cow_in_calf", this));
++        ArrayAdapter<CharSequence> milkingStatusAdapter = ArrayAdapter.createFromResource(this, Locale.getArrayIDInLocale("cow_status_array", this), android.R.layout.simple_spinner_item);
++        milkingStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        milkingStatusS.setAdapter(milkingStatusAdapter);
++
++        ArrayAdapter<CharSequence> inCalfAdapter = ArrayAdapter.createFromResource(this, Locale.getArrayIDInLocale("cow_in_calf_array", this), android.R.layout.simple_spinner_item);
++        inCalfAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        inCalfStatusS.setAdapter(inCalfAdapter);
++
+         deformityTV.setText(Locale.getStringInLocale("deformity",this));
+         serviceTypeTV.setText(Locale.getStringInLocale("service_type_used",this));
+         int serviceTypesSireArrayID = Locale.getArrayIDInLocale("service_types",this);
+@@ -964,6 +1003,28 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         else if(parent == sireOwnerS){
+             toggleSireOwnerVisibility();
+         }
++        else if(parent == sexS){
++            toggleFemaleCowViewsVisibility();
++        }
++    }
++
++    private void toggleFemaleCowViewsVisibility(){
++        Log.d(TAG, "Toggling female views");
++        String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
++        if(sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){
++            milkingStatusS.setVisibility(Spinner.VISIBLE);
++            milkingStatusTV.setVisibility(TextView.VISIBLE);
++
++            inCalfStatusS.setVisibility(Spinner.VISIBLE);
++            inCalfStatusTV.setVisibility(TextView.VISIBLE);
++        }
++        else{
++            milkingStatusS.setVisibility(Spinner.GONE);
++            milkingStatusTV.setVisibility(TextView.GONE);
++
++            inCalfStatusS.setVisibility(Spinner.GONE);
++            inCalfStatusTV.setVisibility(TextView.GONE);
++        }
+     }
+ 
+     private void toggleCountryOfOriginVisibility(){
+@@ -1056,6 +1117,20 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             return false;
+         }
+ 
++        String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
++        if(sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){
++            String[] inCalfArray = Locale.getArrayInLocale("cow_in_calf_array",this);
++            String[] milkingStatusArray = Locale.getArrayInLocale("cow_status_array",this);
++            if(inCalfStatusS.getSelectedItemPosition() == -1 || inCalfArray[inCalfStatusS.getSelectedItemPosition()].length() == 0){
++                Toast.makeText(this, Locale.getStringInLocale("enter_in_calf_status", this), Toast.LENGTH_LONG).show();
++                return false;
++            }
++            if(milkingStatusS.getSelectedItemPosition() == -1 || milkingStatusArray[milkingStatusS.getSelectedItemPosition()].length() == 0){
++                Toast.makeText(this, Locale.getStringInLocale("enter_milk_status_of_cow", this), Toast.LENGTH_LONG).show();
++                return false;
++            }
++        }
++
+         if(dateOfBirthET.getText().toString().trim().equals("") && ageET.getText().toString().trim().equals("")){
+             Toast.makeText(this, Locale.getStringInLocale("enter_age_or_dob", this), Toast.LENGTH_LONG).show();
+             return false;
+@@ -1163,6 +1238,16 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+         String[] sexInEN = Locale.getArrayInLocale("sex_array",this,Locale.LOCALE_ENGLISH);
+         if(sexInEN[sexS.getSelectedItemPosition()].equals("Female")) {
+             thisCow.setSex(Cow.SEX_FEMALE);
++
++            String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
++            thisCow.setMilkingStatus(milkingStatusInEN[milkingStatusS.getSelectedItemPosition()], this);
++            String[] inCalfArrayInEN = Locale.getArrayInLocale("cow_in_calf_array", this, Locale.LOCALE_ENGLISH);
++            if(inCalfArrayInEN[inCalfStatusS.getSelectedItemPosition()].equals(Cow.COW_IN_CALF)){
++                thisCow.setInCalf(true);
++            }
++            else{
++                thisCow.setInCalf(false);
++            }
+         }
+         else if(sexInEN[sexS.getSelectedItemPosition()].equals("Male")) {
+             thisCow.setSex(Cow.SEX_MALE);
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+index 0d921b5..e2022ba 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+@@ -37,6 +37,14 @@ public class Cow implements Parcelable, Serializable {
+     public static final String SERVICE_TYPE_BULL = "Bull";
+     public static final String SERVICE_TYPE_AI = "AI";
+     public static final String SERVICE_TYPE_ET = "ET";
++
++    public static final String MILKING_S_HEIFER = "heifer";
++    public static final String MILKING_S_ADULT_MILKING = "adult_milking";
++    public static final String MILKING_S_ADULT_NOT_MILKING = "adult_not_milking";
++
++    public static final String COW_IN_CALF = "In calf";
++    public static final String COW_NOT_IN_CALF = "Not in calf";
++
+     private String name;
+     private String earTagNumber;
+     private String dateOfBirth;
+@@ -57,6 +65,8 @@ public class Cow implements Parcelable, Serializable {
+     private String piggyBack;
+     private List<Event> events;
+     private List<MilkProduction> milkProduction;
++    private String milkingStatus;
++    private boolean inCalf;
+ 
+     public Cow(boolean isNotDamOrSire) {
+         name = "";
+@@ -82,6 +92,8 @@ public class Cow implements Parcelable, Serializable {
+         piggyBack = "";
+         this.events = new ArrayList<Event>();
+         this.milkProduction = new ArrayList<MilkProduction>();
++        milkingStatus = "";
++        inCalf = false;
+     }
+ 
+     public Cow(Parcel in) {
+@@ -89,6 +101,63 @@ public class Cow implements Parcelable, Serializable {
+         readFromParcel(in);
+     }
+ 
++    /**
++     * This method returns the milking status of cow in english
++     *
++     * @return Milking status in English or a blank string if unable to
++     *          convert milking status to english text
++     */
++    public String getMilkingStatus() {
++        if(milkingStatus.equals(MILKING_S_HEIFER)){
++            return "Heifer";
++        }
++        else if(milkingStatus.equals(MILKING_S_ADULT_MILKING)){
++            return "Cow being milked";
++        }
++        else if(milkingStatus.equals(MILKING_S_ADULT_NOT_MILKING)){
++            return "Cow not being milked";
++        }
++        return "";
++    }
++
++    /**
++     * This method sets the milking status for the cow
++     *
++     * @param milkingStatus The milking status text (not code) in english
++     * @param context The activity/service you are calling this method from
++     */
++    public void setMilkingStatus(String milkingStatus, Context context) {
++        if(milkingStatus.equals("Heifer")){
++            this.milkingStatus = MILKING_S_HEIFER;
++        }
++        else if(milkingStatus.equals("Cow being milked")){
++            this.milkingStatus = MILKING_S_ADULT_MILKING;
++        }
++        else if(milkingStatus.equals("Cow not being milked")){
++            this.milkingStatus = MILKING_S_ADULT_NOT_MILKING;
++        }
++
++        Log.d(TAG, " ****************** Milking status now is  "+this.milkingStatus);
++    }
++
++    /**
++     * This method returns the milking status code for the cow
++     * Compare with Cow.MILKING_S_HEIFER etc
++     *
++     * @return
++     */
++    public String getMilkingStatusCode() {
++        return this.milkingStatus;
++    }
++
++    public boolean isInCalf() {
++        return inCalf;
++    }
++
++    public void setInCalf(boolean inCalf) {
++        this.inCalf = inCalf;
++    }
++
+     public void setMode(String mode) {
+         this.mode = mode;
+     }
+@@ -416,6 +485,13 @@ public class Cow implements Parcelable, Serializable {
+         dest.writeString(otherDeformity);
+         dest.writeString(otherBreed);
+         dest.writeString(piggyBack);
++        dest.writeString(milkingStatus);
++        if(isInCalf()){
++            dest.writeInt(1);
++        }
++        else{
++            dest.writeInt(0);
++        }
+     }
+ 
+     public void readFromParcel(Parcel in) {
+@@ -443,6 +519,14 @@ public class Cow implements Parcelable, Serializable {
+         otherDeformity = in.readString();
+         otherBreed = in.readString();
+         piggyBack = in.readString();
++        milkingStatus = in.readString();
++        int inCalf = in.readInt();
++        if(inCalf == 1){
++            this.inCalf = true;
++        }
++        else{
++            this.inCalf = false;
++        }
+     }
+ 
+     public static final Creator<Cow> CREATOR = new Creator<Cow>() {
+@@ -494,6 +578,12 @@ public class Cow implements Parcelable, Serializable {
+             if(piggyBack!=null && piggyBack.length()>0) {
+                 jsonObject.put("piggyBack",piggyBack);
+             }
++            int inCalf = 0;
++            if(this.inCalf){
++                inCalf = 1;
++            }
++            jsonObject.put("inCalf", inCalf);
++            jsonObject.put("milkingStatus", milkingStatus);
+         } catch (JSONException e) {
+             e.printStackTrace();
+         }
+diff --git a/MistroFarmer/src/main/res/layout/activity_cow_registration.xml b/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
+index 82af928..d5c9553 100644
+--- a/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
++++ b/MistroFarmer/src/main/res/layout/activity_cow_registration.xml
+@@ -67,6 +67,38 @@
+             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
+ 
+         <TextView
++            android:id="@+id/milking_status_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"
++            android:visibility="gone"/>
++        <Spinner
++            android:id="@+id/milking_status_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:visibility="gone"/>
++
++        <TextView
++            android:id="@+id/in_calf_status_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"
++            android:visibility="gone"/>
++        <Spinner
++            android:id="@+id/in_calf_status_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:visibility="gone"/>
++
++        <TextView
+             android:id="@+id/age_or_dob_hint_tv"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 7fd8cd8..8388709 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -285,4 +285,21 @@
+     <string name="name_sire_owner_en">Name of Sire\'s Owner</string>
+     <string name="preferred_language_en">Preferred language</string>
+     <string name="select_an_event_en">Please select an event</string>
++
++    <string name="cow_status_en">Status of the cow</string>
++    <string-array name="cow_status_array_en">
++        <item></item>
++        <item>Heifer</item>
++        <item>Cow being milked</item>
++        <item>Cow not being milked</item>
++    </string-array>
++    <string name="cow_in_calf_en">Is the cow in calf?</string>
++    <string-array name="cow_in_calf_array_en">
++        <item></item>
++        <item>In calf</item>
++        <item>Not in calf</item>
++    </string-array>
++
++    <string name="enter_milk_status_of_cow_en">Please enter the status of cow</string>
++    <string name="enter_in_calf_status_en">Please enter the status of cow</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kp.xml b/MistroFarmer/src/main/res/values/strings_kp.xml
+index b4a62c0..b26b9be 100644
+--- a/MistroFarmer/src/main/res/values/strings_kp.xml
++++ b/MistroFarmer/src/main/res/values/strings_kp.xml
+@@ -285,4 +285,19 @@
+     <string name="preferred_language_kp">Sir kutit nechome iboishe.</string>
+     <string name="select_an_event_kp">Lewen yautiet</string>
+ 
++    <string name="cow_status_kp">Status of the cow</string>
++    <string-array name="cow_status_array_kp">
++        <item></item>
++        <item>Heifer</item>
++        <item>Cow being milked</item>
++        <item>Cow not being milked</item>
++    </string-array>
++    <string name="cow_in_calf_kp">Is the cow in calf?</string>
++    <string-array name="cow_in_calf_array_kp">
++        <item></item>
++        <item>In calf</item>
++        <item>Not in calf</item>
++    </string-array>
++    <string name="enter_milk_status_of_cow_kp">Please enter the status of cow</string>
++    <string name="enter_in_calf_status_kp">Please enter the status of cow</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kr.xml b/MistroFarmer/src/main/res/values/strings_kr.xml
+index 6e949ef..2fc7d0a 100644
+--- a/MistroFarmer/src/main/res/values/strings_kr.xml
++++ b/MistroFarmer/src/main/res/values/strings_kr.xml
+@@ -283,4 +283,20 @@
+     <string name="name_sire_owner_kr">Elira lia mwene samwana</string>
+     <string name="preferred_language_kr">Olubolo lwa wayanza okhurumishila</string>
+     <string name="select_an_event_kr">Noyanza chakula eshikhole</string>
++
++    <string name="cow_status_kr">Status of the cow</string>
++    <string-array name="cow_status_array_kr">
++        <item></item>
++        <item>Heifer</item>
++        <item>Cow being milked</item>
++        <item>Cow not being milked</item>
++    </string-array>
++    <string name="cow_in_calf_kr">Is the cow in calf?</string>
++    <string-array name="cow_in_calf_array_kr">
++        <item></item>
++        <item>In calf</item>
++        <item>Not in calf</item>
++    </string-array>
++    <string name="enter_milk_status_of_cow_kr">Please enter the status of cow</string>
++    <string name="enter_in_calf_status_kr">Please enter the status of cow</string>
+ </resources>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_lu.xml b/MistroFarmer/src/main/res/values/strings_lu.xml
+index 69ef91d..c52168f 100644
+--- a/MistroFarmer/src/main/res/values/strings_lu.xml
++++ b/MistroFarmer/src/main/res/values/strings_lu.xml
+@@ -287,4 +287,19 @@
+     <string name="preferred_language_lu">Olubolo lwawachama</string>
+     <string name="select_an_event_lu">yaula eshikhole</string>
+ 
++    <string name="cow_status_lu">Status of the cow</string>
++    <string-array name="cow_status_array_lu">
++        <item></item>
++        <item>Heifer</item>
++        <item>Cow being milked</item>
++        <item>Cow not being milked</item>
++    </string-array>
++    <string name="cow_in_calf_lu">Is the cow in calf?</string>
++    <string-array name="cow_in_calf_array_lu">
++        <item></item>
++        <item>In calf</item>
++        <item>Not in calf</item>
++    </string-array>
++    <string name="enter_milk_status_of_cow_lu">Please enter the status of cow</string>
++    <string name="enter_in_calf_status_lu">Please enter the status of cow</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_nn.xml b/MistroFarmer/src/main/res/values/strings_nn.xml
+index 53f144e..2902ef8 100644
+--- a/MistroFarmer/src/main/res/values/strings_nn.xml
++++ b/MistroFarmer/src/main/res/values/strings_nn.xml
+@@ -285,4 +285,19 @@
+     <string name="preferred_language_nn">Sir kutit nechome iboishe.</string>
+     <string name="select_an_event_nn">Lewen yautiet</string>
+ 
++    <string name="cow_status_nn">Status of the cow</string>
++    <string-array name="cow_status_array_nn">
++        <item></item>
++        <item>Heifer</item>
++        <item>Cow being milked</item>
++        <item>Cow not being milked</item>
++    </string-array>
++    <string name="cow_in_calf_nn">Is the cow in calf?</string>
++    <string-array name="cow_in_calf_array_nn">
++        <item></item>
++        <item>In calf</item>
++        <item>Not in calf</item>
++    </string-array>
++    <string name="enter_milk_status_of_cow_nn">Please enter the status of cow</string>
++    <string name="enter_in_calf_status_nn">Please enter the status of cow</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_sw.xml b/MistroFarmer/src/main/res/values/strings_sw.xml
+index 57fccb0..62a737a 100644
+--- a/MistroFarmer/src/main/res/values/strings_sw.xml
++++ b/MistroFarmer/src/main/res/values/strings_sw.xml
+@@ -284,4 +284,20 @@
+     <string name="name_sire_owner_sw">Jina la mmiliki</string>
+     <string name="preferred_language_sw">Lugha unayotumia</string>
+     <string name="select_an_event_sw">Tafadhali chagua tukio</string>
++
++    <string name="cow_status_sw">Status of the cow</string>
++    <string-array name="cow_status_array_sw">
++        <item></item>
++        <item>Heifer</item>
++        <item>Cow being milked</item>
++        <item>Cow not being milked</item>
++    </string-array>
++    <string name="cow_in_calf_sw">Is the cow in calf?</string>
++    <string-array name="cow_in_calf_array_sw">
++        <item></item>
++        <item>In calf</item>
++        <item>Not in calf</item>
++    </string-array>
++    <string name="enter_milk_status_of_cow_sw">Please enter the status of cow</string>
++    <string name="enter_in_calf_status_sw">Please enter the status of cow</string>
+ </resources>
+-- 
+2.7.1
+

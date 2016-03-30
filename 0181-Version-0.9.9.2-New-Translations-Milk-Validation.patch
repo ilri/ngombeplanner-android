@@ -1,0 +1,2538 @@
+From 9b79fe1429706243a54f17f416c91c8a8fa241d9 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Wed, 4 Jun 2014 04:19:53 +0300
+Subject: [PATCH 181/213] Version 0.9.9.2: New Translations, Milk Validation
+
+New translations for all languages except for english and swahili
+added
+
+Milk validation for maximum possible amount of milk a cow can produce
+now stored in the database
+---
+ .idea/libraries/actionbarsherlock_4_4_0.xml        |  10 +
+ .idea/libraries/support_v4_13_0_0.xml              |  11 +
+ .idea/misc.xml                                     |   2 +-
+ Android.iml                                        |   2 +-
+ MistroFarmer/src/main/AndroidManifest.xml          |   4 +-
+ .../mistro/farmer/AddMilkProductionActivity.java   |  32 +-
+ .../cgiar/ilri/mistro/farmer/MistroActivity.java   |  13 +-
+ .../cgiar/ilri/mistro/farmer/backend/Locale.java   |  20 +-
+ .../mistro/farmer/carrier/EventConstraint.java     |   2 +
+ MistroFarmer/src/main/res/menu/add_event.xml       |  15 +-
+ .../src/main/res/menu/add_milk_production.xml      |  14 +-
+ .../src/main/res/menu/cow_registration.xml         |  12 +-
+ MistroFarmer/src/main/res/menu/events.xml          |  14 +-
+ MistroFarmer/src/main/res/menu/events_history.xml  |  14 +-
+ .../src/main/res/menu/farmer_registration.xml      |  12 +-
+ MistroFarmer/src/main/res/menu/fertility.xml       |  15 +-
+ .../src/main/res/menu/landing_activity.xml         |  12 +-
+ MistroFarmer/src/main/res/menu/main_menu.xml       |  12 +-
+ .../src/main/res/menu/milk_procution_history.xml   |  14 +-
+ MistroFarmer/src/main/res/menu/milk_production.xml |  14 +-
+ MistroFarmer/src/main/res/values/strings.xml       |   5 +-
+ MistroFarmer/src/main/res/values/strings_kl.xml    | 267 --------------
+ MistroFarmer/src/main/res/values/strings_kp.xml    | 288 +++++++++++++++
+ MistroFarmer/src/main/res/values/strings_kr.xml    | 391 +++++++++++----------
+ MistroFarmer/src/main/res/values/strings_lh.xml    | 268 --------------
+ MistroFarmer/src/main/res/values/strings_lu.xml    | 290 +++++++++++++++
+ MistroFarmer/src/main/res/values/strings_nn.xml    | 288 +++++++++++++++
+ 27 files changed, 1246 insertions(+), 795 deletions(-)
+ create mode 100644 .idea/libraries/actionbarsherlock_4_4_0.xml
+ create mode 100644 .idea/libraries/support_v4_13_0_0.xml
+ delete mode 100644 MistroFarmer/src/main/res/values/strings_kl.xml
+ create mode 100644 MistroFarmer/src/main/res/values/strings_kp.xml
+ delete mode 100644 MistroFarmer/src/main/res/values/strings_lh.xml
+ create mode 100644 MistroFarmer/src/main/res/values/strings_lu.xml
+ create mode 100644 MistroFarmer/src/main/res/values/strings_nn.xml
+
+diff --git a/.idea/libraries/actionbarsherlock_4_4_0.xml b/.idea/libraries/actionbarsherlock_4_4_0.xml
+new file mode 100644
+index 0000000..2122c60
+--- /dev/null
++++ b/.idea/libraries/actionbarsherlock_4_4_0.xml
+@@ -0,0 +1,10 @@
++<component name="libraryTable">
++  <library name="actionbarsherlock-4.4.0">
++    <CLASSES>
++      <root url="file://$PROJECT_DIR$/MistroFarmer/build/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res" />
++      <root url="jar://$PROJECT_DIR$/MistroFarmer/build/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/classes.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+diff --git a/.idea/libraries/support_v4_13_0_0.xml b/.idea/libraries/support_v4_13_0_0.xml
+new file mode 100644
+index 0000000..1a79c30
+--- /dev/null
++++ b/.idea/libraries/support_v4_13_0_0.xml
+@@ -0,0 +1,11 @@
++<component name="libraryTable">
++  <library name="support-v4-13.0.0">
++    <CLASSES>
++      <root url="jar://$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/13.0.0/support-v4-13.0.0.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/13.0.0/support-v4-13.0.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+index b153e48..f3b00d6 100644
+--- a/.idea/misc.xml
++++ b/.idea/misc.xml
+@@ -3,7 +3,7 @@
+   <component name="EntryPointsManager">
+     <entry_points version="2.0" />
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+ </project>
+diff --git a/Android.iml b/Android.iml
+index 58a239a..91c73fb 100644
+--- a/Android.iml
++++ b/Android.iml
+@@ -6,7 +6,7 @@
+       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+       <excludeFolder url="file://$MODULE_DIR$/build" />
+     </content>
+-    <orderEntry type="jdk" jdkName="JDK" jdkType="JavaSDK" />
++    <orderEntry type="jdk" jdkName="1.6" jdkType="JavaSDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
+ </module>
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index f6ef699..b01ac06 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+-    android:versionCode="10"
+-    android:versionName="0.9.9" >
++    android:versionCode="11"
++    android:versionName="0.9.9.2" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+index 3dabe4a..2873a26 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+@@ -324,17 +324,41 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+             return false;
+         }
+         else if(quantityType.equals("Litres") || quantityType.equals("KGs")) {
+-            if(Integer.parseInt(quantityET.getText().toString()) > 30) {
++            String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times", this, Locale.LOCALE_ENGLISH);
++            if(milkingTimesInEN[timeS.getSelectedItemPosition()].equals("Combined")){
++                for(int i = 0; i < eventConstraints.size(); i++){
++                    EventConstraint currConstraint = eventConstraints.get(i);
++                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_MAX_COMBINED)){
++                        if(Integer.parseInt(quantityET.getText().toString()) > currConstraint.getValue()){
++                            Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
++                            return false;
++                        }
++                    }
++                }
++            }
++            else{
++                for(int i = 0; i < eventConstraints.size(); i++){
++                    EventConstraint currConstraint = eventConstraints.get(i);
++                    if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_MAX_SITTING)){
++                        if(Integer.parseInt(quantityET.getText().toString()) > currConstraint.getValue()){
++                            Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
++                            return false;
++                        }
++                    }
++                }
++            }
++
++            /*if(Integer.parseInt(quantityET.getText().toString()) > 30) {
+                 Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
+                 return false;
+-            }
++            }*/
+         }
+-        else if(quantityType.equals("Cups")) {
++        /*else if(quantityType.equals("Cups")) {
+             if(Integer.parseInt(quantityET.getText().toString()) > (30*3.3)) {
+                 Toast.makeText(this, Locale.getStringInLocale("milk_too_much",this),Toast.LENGTH_LONG).show();
+                 return false;
+             }
+-        }
++        }*/
+ 
+         if(cowS.getSelectedItemPosition() != -1){
+             Cow selectedCow = farmer.getCows(Cow.SEX_FEMALE).get(cowS.getSelectedItemPosition());
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MistroActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MistroActivity.java
+index 5a19ee6..f8b5dee 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MistroActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MistroActivity.java
+@@ -23,13 +23,13 @@ public interface MistroActivity {
+                 mistroActivity.initTextInViews();
+                 return true;
+             }
+-            else if(item.getItemId() == R.id.action_luhya) {
+-                Locale.switchLocale(Locale.LOCALE_LUHYA, context);
++            else if(item.getItemId() == R.id.action_lutsotso) {
++                Locale.switchLocale(Locale.LOCALE_LUTSOTSO, context);
+                 mistroActivity.initTextInViews();
+                 return true;
+             }
+-            else if(item.getItemId() == R.id.action_kalenjin) {
+-                Locale.switchLocale(Locale.LOCALE_KALENJIN, context);
++            else if(item.getItemId() == R.id.action_nandi) {
++                Locale.switchLocale(Locale.LOCALE_NANDI, context);
+                 mistroActivity.initTextInViews();
+                 return true;
+             }
+@@ -38,6 +38,11 @@ public interface MistroActivity {
+                 mistroActivity.initTextInViews();
+                 return true;
+             }
++            else if(item.getItemId() == R.id.action_kipsigis) {
++                Locale.switchLocale(Locale.LOCALE_KIPSIGIS, context);
++                mistroActivity.initTextInViews();
++                return true;
++            }
+             return false;
+         }
+     }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
+index 0d16b7e..e62f8c5 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
+@@ -15,9 +15,10 @@ public class Locale {
+     private static final String TAG = "Locale";
+     public static final String LOCALE_ENGLISH="en";
+     public static final String LOCALE_SWAHILI="sw";
+-    public static final String LOCALE_LUHYA="lh";
+-    public static final String LOCALE_KALENJIN="kl";
++    public static final String LOCALE_LUTSOTSO="lu";
++    public static final String LOCALE_NANDI="nn";
+     public static final String LOCALE_KIKABRAS="kr";
++    public static final String LOCALE_KIPSIGIS="kp";
+ 
+     //public static final String SHARED_PREFERENCES_KEY = "locale";
+     public static String getStringInLocale(String stringName, Context context) {
+@@ -186,9 +187,10 @@ public class Locale {
+         String code = "";
+         if(language.equals(context.getString(R.string.english))) code = LOCALE_ENGLISH;
+         else if(language.equals(context.getString(R.string.swahili))) code = LOCALE_SWAHILI;
+-        else if(language.equals(context.getString(R.string.kalenjin))) code = LOCALE_KALENJIN;
++        else if(language.equals(context.getString(R.string.nandi))) code = LOCALE_NANDI;
++        else if(language.equals(context.getString(R.string.kipsigis))) code = LOCALE_KIPSIGIS;
+         else if(language.equals(context.getString(R.string.kikabrasi))) code = LOCALE_KIKABRAS;
+-        else if(language.equals(context.getString(R.string.luhya))) code = LOCALE_LUHYA;
++        else if(language.equals(context.getString(R.string.lutsotso))) code = LOCALE_LUTSOTSO;
+ 
+         return code;
+     }
+@@ -198,9 +200,10 @@ public class Locale {
+ 
+         if(localeCode.equals(LOCALE_ENGLISH)) language = context.getString(R.string.english);
+         if(localeCode.equals(LOCALE_SWAHILI)) language = context.getString(R.string.swahili);
+-        if(localeCode.equals(LOCALE_KALENJIN)) language = context.getString(R.string.kalenjin);
++        if(localeCode.equals(LOCALE_NANDI)) language = context.getString(R.string.nandi);
++        if(localeCode.equals(LOCALE_KIPSIGIS)) language = context.getString(R.string.kipsigis);
+         if(localeCode.equals(LOCALE_KIKABRAS)) language = context.getString(R.string.kikabrasi);
+-        if(localeCode.equals(LOCALE_LUHYA)) language = context.getString(R.string.luhya);
++        if(localeCode.equals(LOCALE_LUTSOTSO)) language = context.getString(R.string.lutsotso);
+ 
+         return language;
+     }
+@@ -209,9 +212,10 @@ public class Locale {
+         List<String> languages = new ArrayList<String>();
+         languages.add(context.getString(R.string.english));
+         languages.add(context.getString(R.string.swahili));
+-        languages.add(context.getString(R.string.luhya));
++        languages.add(context.getString(R.string.lutsotso));
+         languages.add(context.getString(R.string.kikabrasi));
+-        languages.add(context.getString(R.string.kalenjin));
++        languages.add(context.getString(R.string.nandi));
++        languages.add(context.getString(R.string.kipsigis));
+ 
+         return languages;
+     }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java
+index 2ef0b27..ea262c4 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java
+@@ -18,6 +18,8 @@ public class EventConstraint {
+     public static final String CONSTRAINT_MILKING = "Milking";
+     public static final String CONSTRAINT_CALVING = "Calving";
+     public static final String CONSTRAINT_MILK_FLACTUATION = "DeltaMilk";
++    public static final String CONSTRAINT_MILK_MAX_SITTING = "MaxMilkSitting";
++    public static final String CONSTRAINT_MILK_MAX_COMBINED = "MaxMilkCombined";
+ 
+     private int id;
+     private String event;
+diff --git a/MistroFarmer/src/main/res/menu/add_event.xml b/MistroFarmer/src/main/res/menu/add_event.xml
+index b50c451..a575a9b 100644
+--- a/MistroFarmer/src/main/res/menu/add_event.xml
++++ b/MistroFarmer/src/main/res/menu/add_event.xml
+@@ -7,19 +7,24 @@
+           android:title="@string/swahili"
+           android:orderInCategory="5"
+           android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
++
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="5"
++        android:orderInCategory="7"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/add_milk_production.xml b/MistroFarmer/src/main/res/menu/add_milk_production.xml
+index 8d85a3d..eb247c8 100644
+--- a/MistroFarmer/src/main/res/menu/add_milk_production.xml
++++ b/MistroFarmer/src/main/res/menu/add_milk_production.xml
+@@ -7,21 +7,25 @@
+         android:title="@string/swahili"
+         android:orderInCategory="5"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
+ 
+ 
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="6"
++        android:orderInCategory="7"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/cow_registration.xml b/MistroFarmer/src/main/res/menu/cow_registration.xml
+index 577baec..1849812 100644
+--- a/MistroFarmer/src/main/res/menu/cow_registration.xml
++++ b/MistroFarmer/src/main/res/menu/cow_registration.xml
+@@ -7,16 +7,20 @@
+         android:title="@string/swahili"
+         android:orderInCategory="5"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/events.xml b/MistroFarmer/src/main/res/menu/events.xml
+index 7d0f93c..b3828af 100644
+--- a/MistroFarmer/src/main/res/menu/events.xml
++++ b/MistroFarmer/src/main/res/menu/events.xml
+@@ -7,22 +7,26 @@
+         android:title="@string/swahili"
+         android:orderInCategory="5"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
+ 
+ 
+ 
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="6"
++        android:orderInCategory="7"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/events_history.xml b/MistroFarmer/src/main/res/menu/events_history.xml
+index 7d0f93c..b3828af 100644
+--- a/MistroFarmer/src/main/res/menu/events_history.xml
++++ b/MistroFarmer/src/main/res/menu/events_history.xml
+@@ -7,22 +7,26 @@
+         android:title="@string/swahili"
+         android:orderInCategory="5"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
+ 
+ 
+ 
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="6"
++        android:orderInCategory="7"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/farmer_registration.xml b/MistroFarmer/src/main/res/menu/farmer_registration.xml
+index 577baec..1849812 100644
+--- a/MistroFarmer/src/main/res/menu/farmer_registration.xml
++++ b/MistroFarmer/src/main/res/menu/farmer_registration.xml
+@@ -7,16 +7,20 @@
+         android:title="@string/swahili"
+         android:orderInCategory="5"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/fertility.xml b/MistroFarmer/src/main/res/menu/fertility.xml
+index 7d0f93c..eb247c8 100644
+--- a/MistroFarmer/src/main/res/menu/fertility.xml
++++ b/MistroFarmer/src/main/res/menu/fertility.xml
+@@ -7,22 +7,25 @@
+         android:title="@string/swahili"
+         android:orderInCategory="5"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
+-
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
+ 
+ 
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="6"
++        android:orderInCategory="7"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/landing_activity.xml b/MistroFarmer/src/main/res/menu/landing_activity.xml
+index 577baec..1849812 100644
+--- a/MistroFarmer/src/main/res/menu/landing_activity.xml
++++ b/MistroFarmer/src/main/res/menu/landing_activity.xml
+@@ -7,16 +7,20 @@
+         android:title="@string/swahili"
+         android:orderInCategory="5"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/main_menu.xml b/MistroFarmer/src/main/res/menu/main_menu.xml
+index fbbd0ef..30f828f 100644
+--- a/MistroFarmer/src/main/res/menu/main_menu.xml
++++ b/MistroFarmer/src/main/res/menu/main_menu.xml
+@@ -7,16 +7,20 @@
+         android:title="@string/swahili"
+         android:orderInCategory="5"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
+ </menu>
+diff --git a/MistroFarmer/src/main/res/menu/milk_procution_history.xml b/MistroFarmer/src/main/res/menu/milk_procution_history.xml
+index 05319b1..35e1721 100644
+--- a/MistroFarmer/src/main/res/menu/milk_procution_history.xml
++++ b/MistroFarmer/src/main/res/menu/milk_procution_history.xml
+@@ -7,23 +7,27 @@
+         android:title="@string/swahili"
+         android:orderInCategory="5"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
+ 
+ 
+ 
+ 
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="6"
++        android:orderInCategory="7"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/milk_production.xml b/MistroFarmer/src/main/res/menu/milk_production.xml
+index 7d0f93c..b3828af 100644
+--- a/MistroFarmer/src/main/res/menu/milk_production.xml
++++ b/MistroFarmer/src/main/res/menu/milk_production.xml
+@@ -7,22 +7,26 @@
+         android:title="@string/swahili"
+         android:orderInCategory="5"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_kalenjin"
+-        android:title="@string/kalenjin"
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kikabras"
+         android:title="@string/kikabrasi"
+         android:orderInCategory="3"
+         android:showAsAction="never" />
+-    <item android:id="@+id/action_luhya"
+-        android:title="@string/luhya"
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
+         android:orderInCategory="4"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
+ 
+ 
+ 
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="6"
++        android:orderInCategory="7"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings.xml b/MistroFarmer/src/main/res/values/strings.xml
+index ef842af..8c21602 100644
+--- a/MistroFarmer/src/main/res/values/strings.xml
++++ b/MistroFarmer/src/main/res/values/strings.xml
+@@ -14,8 +14,9 @@
+     <string name="title_activity_events_history">Past Events</string>
+     <string name="english">English</string>
+     <string name="swahili">Kiswahili</string>
+-    <string name="kalenjin">Kalenjin</string>
+-    <string name="luhya">Luhya</string>
++    <string name="nandi">Nandi</string>
++    <string name="kipsigis">Kipsigis</string>
++    <string name="lutsotso">Lutsotso</string>
+     <string name="kikabrasi">Kikabrasi</string>
+     <string name="title_activity_fertility">Fertility</string>
+     <string name="title_activity_add_milk_production">Add Milk Production</string>
+diff --git a/MistroFarmer/src/main/res/values/strings_kl.xml b/MistroFarmer/src/main/res/values/strings_kl.xml
+deleted file mode 100644
+index ba92c92..0000000
+--- a/MistroFarmer/src/main/res/values/strings_kl.xml
++++ /dev/null
+@@ -1,267 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<resources>
+-    <!-- Kalenjin -->
+-    <string name="login_kl">yaat</string>
+-    <string name="login_anyway_kl">yaat inyeei</string>
+-    <string name="register_kl">siret</string>
+-    <string name="full_name_kl">kainaik tugul</string>
+-    <string name="mobile_number_kl">simet</string>
+-    <string name="extension_p_kl">kanetindet</string>
+-    <string name="number_of_cows_kl">tuka ata</string>
+-    <string-array name="sex_array_kl">
+-        <item>chepyoso</item>
+-        <item>muren</item>
+-    </string-array>
+-    <string name="name_kl">kainet</string>
+-    <string name="ear_tag_number_kl">siret ab iitit</string>
+-    <string name="age_kl">kenyishek</string>
+-    <string name="date_of_birth_kl">betut ab siget</string>
+-    <string name="breed_kl">keswot</string>
+-    <string name="sex_kl">kirgit anan roriat</string>
+-    <string name="deformity_kl">Deformity</string>
+-    <string name="sire_kl">kirgit</string>
+-    <string name="dam_kl">gamet</string>
+-    <string name="previous_kl">chekikopata</string>
+-    <string name="next_kl">cherubei</string>
+-    <string name="finish_kl">kobek</string>
+-    <string name="okay_kl">unot</string>
+-    <string name="farmer_registration_kl">siretab kabotik</string>
+-    <string name="cow_registration_kl">siretab tuga</string>
+-    <string name="cow_registration_proper_kl">siretab tuga</string>
+-    <string name="dam_registration_kl">siretab kametwokik</string>
+-    <string name="sire_registration_kl">siretab kirgit</string>
+-    <string-array name="age_type_array_kl">
+-        <item>betushek</item>
+-        <item>araweek</item>
+-        <item>kenyishek</item>
+-    </string-array>
+-    <string-array name="c_breeds_array_kl">
+-        <item>Friesian</item>
+-        <item>Jersey</item>
+-        <item>Ankole</item>
+-        <item>Boran</item>
+-        <item>Ayrshire</item>
+-        <item>Zebu</item>
+-        <item>Sahiwal</item>
+-        <item>Guernsey</item>
+-        <item>Aberdeen Angus</item>
+-        <item>Hereford</item>
+-        <item>Nganda</item>
+-        <item>Another Breed</item>
+-    </string-array>
+-    <string-array name="uc_breeds_array_kl">
+-        <item>Charolais</item>
+-        <item>Simmental</item>
+-        <item>Limousine</item>
+-        <item>Brahman</item>
+-        <item>Santa Getrude</item>
+-        <item>Piemontese</item>
+-        <item>Red Poll</item>
+-        <item>Fleckviah</item>
+-        <item>Brown Swiss</item>
+-    </string-array>
+-    <string-array name="breeds_array_kl">
+-        <item>Ayrshire</item>
+-        <item>Boran</item>
+-        <item>Charolais</item>
+-        <item>Aberdeen Angus</item>
+-        <item>Simmental</item>
+-        <item>Friesian</item>
+-        <item>Guernsey</item>
+-        <item>Hereford</item>
+-        <item>Jersey</item>
+-        <item>Ankole</item>
+-        <item>Limousine</item>
+-        <item>Brahman</item>
+-        <item>Santa Getrude</item>
+-        <item>Piemontese</item>
+-        <item>Red Poll</item>
+-        <item>Sahiwal</item>
+-        <item>Nganda</item>
+-        <item>Fleckviah</item>
+-        <item>Brown Swiss</item>
+-        <item>Zebu</item>
+-    </string-array>
+-    <string-array name="deformities_array_kl">
+-        <item>koraat</item>
+-        <item>ing\'wolii</item>
+-        <item>Abnormal teat number</item>
+-        <item>Crooked feet</item>
+-        <item>Clef palate</item>
+-        <item>agee</item>
+-    </string-array>
+-    <string name="service_type_used_kl">kirgit/keswotab mbiret</string>
+-    <string-array name="service_types_kl">
+-        <item>kirgit</item>
+-        <item>keswotab mbiret</item>
+-        <item>Embryo Transfer</item>
+-    </string-array>
+-    <string name="maximum_of_four_breeds_kl">A maximum of four breeds</string>
+-    <string name="country_of_origin_kl">emet nebunu kirgit</string>
+-    <string name="specify_kl">ibesyei</string>
+-    <string name="straw_number_kl">nambarit ab mbiret</string>
+-    <string name="vet_used_kl">kanyoindet nekeboishe</string>
+-    <string name="servicing_bull_name_kl">kirgit nikiboishe</string>
+-    <string name="servicing_bull_identifier_hint_kl">siir kainet anan ko nambarit ab statiat nebo kirgit</string>
+-    <string name="servicing_bull_ear_tag_number_kl">nambarit ab statiat nebo kirgit nekeboishe</string>
+-    <string name="bull_owner_kl">bo ng\'o kirgit</string>
+-    <string name="name_bull_owner_kl">kainet ab nebo kirgit</string>
+-    <string-array name="bull_owners_kl">
+-        <item>nenyun kirgit</item>
+-        <item>kabotindet agee</item>
+-        <item>grupit</item>
+-    </string-array>
+-    <string name="name_of_other_farmer_or_group_kl">kainet ab grupit anan ko kabatindet</string>
+-    <string name="embryo_number_kl">Embryo Number</string>
+-    <string name="enable_gps_kl">yaat GPS</string>
+-    <string name="reason_for_klabling_gps_kl">nyolu iyaat GPS sitestai</string>
+-    <string name="cancel_kl">itonon</string>
+-    <string name="enable_network_kl">yaat internet</string>
+-    <string name="reason_for_klabling_network_kl">maagat internet asikobois simet</string>
+-    <string name="successful_registration_kl">kakiyan siret</string>
+-    <string name="successful_registration_instructions_kl">kakosulnda sirisiet ng\'ung.inyoru sirutiet ne ibarun ole kiyatitoi mashinit</string>
+-    <string name="your_mistro_id_kl">Your Mistro ID</string>
+-    <string name="enter_your_mistro_id_kl">Please enter your Mistro ID</string>
+-    <string name="failed_to_authenticate_kl">yee maimuch kosuulnda siret iketyi kora</string>
+-    <string name="logging_in_from_different_device_kl">tagu kuyo iyatee mashinit nemo chomiboishe</string>
+-    <string name="yes_kl">iyan</string>
+-    <string name="no_kl">eshe</string>
+-    <string name="milk_production_kl">kesutik ab jego</string>
+-    <string name="events_kl">yautiet</string>
+-    <string name="main_menu_kl">yee ke taune</string>
+-    <string name="sim_card_not_registered_kl">ngu ibaishe lainda ne tomo ibaishe eng simet nito</string>
+-    <string name="sim_card_registration_kl">siret ab lainda nebo simet</string>
+-    <string name="new_mobile_number_kl">nambarit ab simet ne lel</string>
+-    <string name="old_mobile_number_kl">nambarit ab simet ne gi tai</string>
+-    <string name="old_number_not_in_system_kl">tagu kuyo nambarit neiboishe ko masirat eng mashinit. Birchi kanetindet si kobaarun eng nambarit nyi \(phone number\)</string>
+-    <string name="welcome_kl">itagaat</string>
+-    <string name="add_production_kl">tes kesutik ab jego</string>
+-    <string name="production_history_kl">kesutik   ab jego</string>
+-    <string name="cow_kl">teta</string>
+-    <string name="time_kl">sait</string>
+-    <string name="quantity_kl">jetya</string>
+-    <string name="measurement_type_kl">yei pimondoi jego</string>
+-    <string name="add_kl">tesyi</string>
+-    <string-array name="milking_times_kl">
+-        <item>karoon</item>
+-        <item>peet</item>
+-        <item>koskoliny</item>
+-        <item>kituiyo</item>
+-    </string-array>
+-    <string-array name="quantity_types_kl">
+-        <item>litaishek</item>
+-        <item>kiloishek</item>
+-    </string-array>
+-    <string name="enter_quantity_of_milk_produced_kl">siret jego oletee eng kiloishek</string>
+-    <string name="information_successfully_sent_to_server_kl">kakiyaan eng mashinit</string>
+-    <string name="problem_in_data_sent_kl">tagu kuyo manamegei sirutik kuk chekeyokte. Nyalu iketyi koraa</string>
+-    <string name="production_for_time_already_exists_kl">keketyi isir tukuk chebo tanyi ak kaisir</string>
+-    <string name="problem_connecting_to_server_kl">kabit makoset yee katyemei kwo internet eng mashinit</string>
+-    <string name="date_kl">tarikit</string>
+-    <string name="no_data_received_kl">manyoor mashinit tukuk che yokte</string>
+-    <string name="today_kl">raini</string>
+-    <string name="yesterday_kl">amut</string>
+-    <string name="enter_your_name_kl">sir kaineng\'ung</string>
+-    <string name="enter_your_mobile_no_kl">sir nambarit ab simet</string>
+-    <string name="enter_extension_personnel_name_kl">siir kainaik chebo kanetindet</string>
+-    <string name="enter_ear_tag_number_kl">sir nambarit ab statiat netinye teta</string>
+-    <string name="enter_ear_tag_no_or_name_kl">sir nambarit ab statiat ana ko kainet ab teta</string>
+-    <string name="enter_straw_number_kl">sir namberit ab keswot ne bo kirgit</string>
+-    <string name="enter_embryo_number_kl">Please enter the Dam\'s embryo number</string>
+-    <string name="add_an_event_kl">tesyi yautiet</string>
+-    <string name="past_events_kl">yautik che kokobata</string>
+-    <string name="remarks_kl">tesyi ki nekoaak ana nekoikeer</string>
+-    <string name="event_kl">yautiet</string>
+-    <string-array name="cow_event_types_kl">
+-        <item></item>
+-        <item>siget</item>
+-        <item>taunet ab keiysyet</item>
+-        <item>kolug</item>
+-        <item>wireneet</item>
+-        <item>miondo</item>
+-        <item>meet</item>
+-        <item>kenyoor</item>
+-        <item>kealda</item>
+-        <item>boishet ab mbiret</item>
+-        <item>boishet ab kirgit</item>
+-        <item>kaborunoshek ab maget ab kirgit</item>
+-        <item>Deworming</item>
+-        <item>Dipping or Spraying</item>
+-        <item>Vaccination</item>
+-    </string-array>
+-    <string-array name="cow_servicing_types_kl">
+-        <item>boishet ab mbiret</item>
+-        <item>boishet ab kirgit</item>
+-    </string-array>
+-    <string name="enter_date_kl">sir tarigit</string>
+-    <string name="date_in_future_kl">taku kuyo kesir tarigit ne mi tai</string>
+-    <string name="event_successfully_recorded_kl">kachobok siranatok</string>
+-    <string name="something_went_wrong_try_again_kl">kayaat kii. Tiem koraa</string>
+-    <string name="loading_please_wait_kl">iyoktoi… igeny…..</string>
+-    <string name="type_of_birth_kl">siget neune</string>
+-    <string-array name="birth_types_kl">
+-        <item>ne kararan</item>
+-        <item>kakii moita nemo sabe \(meat moita\)</item>
+-        <item>Kakii amait betushek</item>
+-        <item>keoos</item>
+-    </string-array>
+-    <string name="calf_registration_kl">siretab moek</string>
+-    <string name="next_screen_is_calf_registration_kl">yerubei magaat isir moita ne kayiey</string>
+-    <string name="next_screen_is_cow_registration_kl">nyolu isir kora teta ne toot</string>
+-    <string name="event_too_old_kl">me yaanat itesyi ki nekapit kogakopata betushek tamanu ak mut</string>
+-    <string name="milk_data_too_old_kl">meyaanat kesiir jego che kakopata betushek taman ak mutu</string>
+-    <string name="milk_too_much_kl">kachang\'a jego che kesir</string>
+-    <string name="start_date_kl">betutab taunet</string>
+-    <string name="date_served_kl">Date Served</string>
+-    <string name="date_of_insemination_kl">betut ne kikilonyi teta mbiret</string>
+-    <string name="no_of_days_in_servicing_kl">No. of Days in Servicing</string>
+-    <string name="associated_servicing_kl">Bull Services</string>
+-    <string name="country_not_found_kl">emet ne kesir ko mabitunat</string>
+-    <string name="cause_of_death_kl">kabun nee meet</string>
+-    <string-array name="causes_of_death_kl">
+-        <item>kamee buch</item>
+-        <item>myondo</item>
+-        <item>kaumian</item>
+-    </string-array>
+-    <string name="gps_narrowing_down_on_loc_kl">igeny yotok kocheng\'e GPS yee imi</string>
+-    <string name="event_only_for_female_cattle_kl">yeokse kii eng tuga/rorwek kityo</string>
+-    <string name="other_countries_kl">emotunweek alak</string>
+-    <string name="no_times_milked_in_a_day_kl">nambarinik che ityokyini eng betut</string>
+-    <string name="calf_suckling_kl">rerie moita</string>
+-    <string-array name="calf_suckling_types_kl">
+-        <item>aacha</item>
+-        <item>wooi</item>
+-    </string-array>
+-    <string name="enter_number_times_cow_milked_kl">ityokyini teta ata eng betut</string>
+-    <string name="milking_times_too_much_kl">manyolu ityokyi teta kosir taman eng betut</string>
+-    <string name="fertility_kl">akwoiyet</string>
+-    <string name="servicing_kl">boishet ab kirgit</string>
+-    <string name="calving_kl">iyotet</string>
+-    <string name="select_service_type_kl">AI\/I anan kirgit</string>
+-    <string name="artificial_inseminamtion_kl">boishet ab mbiret</string>
+-    <string name="bull_servicing_kl">boishet ab kirgit</string>
+-    <string name="no_sim_card_kl">mami lainda eng simet</string>
+-    <string name="previous_live_births_kl">kikoyie konyil ata</string>
+-    <string name="enter_previous_live_births_kl">Please enter the number of previous births by this cow</string>
+-    <string name="enter_dam_etn_kl">nambarit ab statiat nebo teta</string>
+-    <string name="age_diff_from_dob_kl">kenyit ab teta kotagu kuyo makargei ak betut ab siget nebo teta</string>
+-    <string name="action_not_allowed_kl">meyaanat tukuk che kessir</string>
+-    <string name="are_you_in_farm_kl">tos imi mbar</string>
+-    <string name="farm_coords_successfully_reg_kl">kakosirak sirutik ab mbaren\'gung</string>
+-    <string name="sms_charges_kl">lipanet ab sirutiet</string>
+-    <string name="incur_network_sms_charges_kl">memitei internet koboruu komaiyotook sirutik che kesiir</string>
+-    <string name="data_not_sent_to_server_kl">maiyoktook sirutik kuk</string>
+-    <string name="generic_sms_error_kl">mayooktookj sirutiet eng mashinit. Ketyi koraa</string>
+-    <string name="no_service_kl">myooktook cheng yeemi network ne kararan</string>
+-    <string name="radio_off_kl">Your device is currently unable to send SMSs. Make sure it has a SIM card inserted and that it is not on Airplane mode</string>
+-    <string name="server_not_receive_sms_kl">An SMS was sent to the server but it did not receive it</string>
+-    <string name="logout_kl">keer</string>
+-    <string name="back_kl">leet</string>
+-    <string name="back_to_main_menu_kl">wekee yee ketoune</string>
+-    <string name="warning_kl">kerkongiet</string>
+-    <string name="action_will_be_canceled_kl">ngot ti wekei leet kobetos tukul che kaisir</string>
+-    <string name="total_kl">kotugul</string>
+-    <string name="unable_to_fetch_cached_data_kl">mitei tukuk che kesir che makinyor eng simet </string>
+-    <string name="you_do_not_have_female_cows_kl">uyo metinyei  rorwek anan ko tuga che kigei</string>
+-    <string name="you_do_not_have_cows_kl">uyo metinyei tuga</string>
+-</resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kp.xml b/MistroFarmer/src/main/res/values/strings_kp.xml
+new file mode 100644
+index 0000000..b4a62c0
+--- /dev/null
++++ b/MistroFarmer/src/main/res/values/strings_kp.xml
+@@ -0,0 +1,288 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <!-- Kipsigis -->
++    <string name="login_kp">Yaat</string>
++    <string name="login_anyway_kp">Yaat inyeei</string>
++    <string name="register_kp">Siret</string>
++    <string name="full_name_kp">Kainaik tugul</string>
++    <string name="mobile_number_kp">Simet</string>
++    <string name="extension_p_kp">Kanetindet</string>
++    <string name="number_of_cows_kp">Tuka ata</string>
++    <string-array name="sex_array_kp">
++        <item>Chepyoso</item>
++        <item>Muren</item>
++    </string-array>
++    <string name="name_kp">Kainet</string>
++    <string name="ear_tag_number_kp">Siret ab iitit</string>
++    <string name="age_kp">Kenyishek</string>
++    <string name="date_of_birth_kp">Betut ab siget</string>
++    <string name="breed_kp">Keswot</string>
++    <string name="sex_kp">Kirgit anan roriat</string>
++    <string name="deformity_kp">Deformity</string>
++    <string name="sire_kp">Kirgit</string>
++    <string name="dam_kp">Gamet</string>
++    <string name="previous_kp">Chekikopata</string>
++    <string name="next_kp">Cherubei</string>
++    <string name="finish_kp">Kobek</string>
++    <string name="okay_kp">Unot</string>
++    <string name="farmer_registration_kp">Siretab kabotik</string>
++    <string name="cow_registration_kp">Siretab tuga</string>
++    <string name="cow_registration_proper_kp">Siretab tuga</string>
++    <string name="dam_registration_kp">Siretab kametwokik</string>
++    <string name="sire_registration_kp">Siretab kirgit</string>
++    <string-array name="age_type_array_kp">
++        <item>Betushek</item>
++        <item>Araweek</item>
++        <item>Kenyishek</item>
++    </string-array>
++    <string-array name="c_breeds_array_kp">
++        <item>Friesian</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Boran</item>
++        <item>Ayrshire</item>
++        <item>Zebu</item>
++        <item>Sahiwal</item>
++        <item>Guernsey</item>
++        <item>Aberdeen Angus</item>
++        <item>Hereford</item>
++        <item>Nganda</item>
++        <item>Another Breed</item>
++    </string-array>
++    <string-array name="uc_breeds_array_kp">
++        <item>Charolais</item>
++        <item>Simmental</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++    </string-array>
++    <string-array name="breeds_array_kp">
++        <item>Ayrshire</item>
++        <item>Boran</item>
++        <item>Charolais</item>
++        <item>Aberdeen Angus</item>
++        <item>Simmental</item>
++        <item>Friesian</item>
++        <item>Guernsey</item>
++        <item>Hereford</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Sahiwal</item>
++        <item>Nganda</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++        <item>Zebu</item>
++    </string-array>
++    <string-array name="deformities_array_kp">
++        <item>Koraat</item>
++        <item>Ing\'wolii</item>
++        <item>Abnormal teat number</item>
++        <item>Crooked feet</item>
++        <item>Clef palate</item>
++        <item>Agee</item>
++    </string-array>
++    <string name="service_type_used_kp">Kirgit/keswotab mbiret</string>
++    <string-array name="service_types_kp">
++        <item>Kirgit</item>
++        <item>Keswotab mbiret</item>
++        <item>Embryo Transfer</item>
++    </string-array>
++    <string name="maximum_of_four_breeds_kp">A maximum of four breeds</string>
++    <string name="country_of_origin_kp">Emet nebunu kirgit</string>
++    <string name="specify_kp">Ibesyei</string>
++    <string name="straw_number_kp">Nambarit ab mbiret</string>
++    <string name="vet_used_kp">Kanyoindet nekeboishe</string>
++    <string name="servicing_bull_name_kp">Kirgit nikiboishe</string>
++    <string name="servicing_bull_identifier_hint_kp">Siir kainet anan ko nambarit ab statiat nebo kirgit</string>
++    <string name="servicing_bull_ear_tag_number_kp">Nambarit ab statiat nebo kirgit nekeboishe</string>
++    <string name="bull_owner_kp">Bo ng\'o kirgit</string>
++    <string name="name_bull_owner_kp">Kainet ab nebo kirgit</string>
++    <string-array name="bull_owners_kp">
++        <item>Nenyun kirgit</item>
++        <item>Kabotindet agee</item>
++        <item>Grupit</item>
++    </string-array>
++    <string name="name_of_other_farmer_or_group_kp">Kainet ab grupit anan ko kabatindet</string>
++    <string name="embryo_number_kp">Embryo Number</string>
++    <string name="enable_gps_kp">Yaat GPS</string>
++    <string name="reason_for_kpabling_gps_kp">Nyolu iyaat GPS sitestai</string>
++    <string name="cancel_kp">Itonon</string>
++    <string name="enable_network_kp">Yaat internet</string>
++    <string name="reason_for_kpabling_network_kp">Maagat internet asikobois simet</string>
++    <string name="successful_registration_kp">Kakiyan siret</string>
++    <string name="successful_registration_instructions_kp">Kakosulnda sirisiet ng\'ung.inyoru sirutiet ne ibarun ole kiyatitoi mashinit</string>
++    <string name="your_mistro_id_kp">Your Mistro ID</string>
++    <string name="enter_your_mistro_id_kp">Please enter your Mistro ID</string>
++    <string name="failed_to_authenticate_kp">Yee maimuch kosuulnda siret iketyi kora</string>
++    <string name="logging_in_from_different_device_kp">Tagu kuyo iyatee mashinit nemo chomiboishe</string>
++    <string name="yes_kp">Iyan</string>
++    <string name="no_kp">Eshe</string>
++    <string name="milk_production_kp">Kesutik ab jego</string>
++    <string name="events_kp">Yautiet</string>
++    <string name="main_menu_kp">Yee ke taune</string>
++    <string name="sim_card_not_registered_kp">Ngu ibaishe lainda ne tomo ibaishe eng simet nito</string>
++    <string name="sim_card_registration_kp">Siret ab lainda nebo simet</string>
++    <string name="new_mobile_number_kp">Nambarit ab simet ne lel</string>
++    <string name="old_mobile_number_kp">Nambarit ab simet ne gi tai</string>
++    <string name="old_number_not_in_system_kp">Tagu kuyo nambarit neiboishe ko masirat eng mashinit. Birchi kanetindet si kobaarun eng nambarit nyi \(phone number\)</string>
++    <string name="welcome_kp">Itagaat</string>
++    <string name="add_production_kp">Tes kesutik ab jego</string>
++    <string name="production_history_kp">Kesutik   ab jego</string>
++    <string name="cow_kp">Teta</string>
++    <string name="time_kp">Sait</string>
++    <string name="quantity_kp">Jetya</string>
++    <string name="measurement_type_kp">Yei pimondoi jego</string>
++    <string name="add_kp">Tesyi</string>
++    <string-array name="milking_times_kp">
++        <item>Karoon</item>
++        <item>Peet</item>
++        <item>Koskoliny</item>
++        <item>Kituiyo</item>
++    </string-array>
++    <string-array name="quantity_types_kp">
++        <item>Litaishek</item>
++        <item>Kiloishek</item>
++    </string-array>
++    <string name="enter_quantity_of_milk_produced_kp">Siret jego oletee eng kiloishek</string>
++    <string name="information_successfully_sent_to_server_kp">Kakiyaan eng mashinit</string>
++    <string name="problem_in_data_sent_kp">Tagu kuyo manamegei sirutik kuk chekeyokte. Nyalu iketyi koraa</string>
++    <string name="production_for_time_already_exists_kp">Keketyi isir tukuk chebo tanyi ak kaisir</string>
++    <string name="problem_connecting_to_server_kp">Kabit makoset yee katyemei kwo internet eng mashinit</string>
++    <string name="date_kp">Tarikit</string>
++    <string name="no_data_received_kp">Manyoor mashinit tukuk che yokte</string>
++    <string name="today_kp">Raini</string>
++    <string name="yesterday_kp">Amut</string>
++    <string name="enter_your_name_kp">Sir kaineng\'ung</string>
++    <string name="enter_your_mobile_no_kp">Sir nambarit ab simet</string>
++    <string name="enter_extension_personnel_name_kp">Siir kainaik chebo kanetindet</string>
++    <string name="enter_ear_tag_number_kp">Sir nambarit ab statiat netinye teta</string>
++    <string name="enter_ear_tag_no_or_name_kp">Sir nambarit ab statiat ana ko kainet ab teta</string>
++    <string name="enter_straw_number_kp">Sir namberit ab keswot ne bo kirgit</string>
++    <string name="enter_embryo_number_kp">Please enter the Dam\'s embryo number</string>
++    <string name="add_an_event_kp">Tesyi yautiet</string>
++    <string name="past_events_kp">Yautik che kokobata</string>
++    <string name="remarks_kp">Tesyi ki nekoaak ana nekoikeer</string>
++    <string name="event_kp">Yautiet</string>
++    <string-array name="cow_event_types_kp">
++        <item></item>
++        <item>Siget</item>
++        <item>Taunet ab keiysyet</item>
++        <item>Kolug</item>
++        <item>Wireneet</item>
++        <item>Miondo</item>
++        <item>Meet</item>
++        <item>Kenyoor</item>
++        <item>Kealda</item>
++        <item>Boishet ab mbiret</item>
++        <item>Boishet ab kirgit</item>
++        <item>Kaborunoshek ab maget ab kirgit</item>
++        <item>Kokoret</item>
++        <item>Dip</item>
++        <item>Chanjo</item>
++    </string-array>
++    <string-array name="cow_servicing_types_kp">
++        <item>Boishet ab mbiret</item>
++        <item>Boishet ab kirgit</item>
++    </string-array>
++    <string name="enter_date_kp">Sir tarigit</string>
++    <string name="date_in_future_kp">Taku kuyo kesir tarigit ne mi tai</string>
++    <string name="event_successfully_recorded_kp">Kachobok siranatok</string>
++    <string name="something_went_wrong_try_again_kp">Kayaat kii. Tiem koraa</string>
++    <string name="loading_please_wait_kp">Iyoktoi… igeny…..</string>
++    <string name="type_of_birth_kp">Siget neune</string>
++    <string-array name="birth_types_kp">
++        <item>Ne kararan</item>
++        <item>Kakii moita nemo sabe \(meat moita\)</item>
++        <item>Kakii amait betushek</item>
++        <item>Keoos</item>
++    </string-array>
++    <string name="calf_registration_kp">Siretab moek</string>
++    <string name="next_screen_is_calf_registration_kp">Yerubei magaat isir moita ne kayiey</string>
++    <string name="next_screen_is_cow_registration_kp">Nyolu isir kora teta ne toot</string>
++    <string name="event_too_old_kp">Me yaanat itesyi ki nekapit kogakopata betushek tamanu ak mut</string>
++    <string name="milk_data_too_old_kp">Meyaanat kesiir jego che kakopata betushek taman ak mutu</string>
++    <string name="milk_too_much_kp">Kachang\'a jego che kesir</string>
++    <string name="start_date_kp">Betutab taunet</string>
++    <string name="date_served_kp">Date Served</string>
++    <string name="date_of_insemination_kp">Betut ne kikilonyi teta mbiret</string>
++    <string name="no_of_days_in_servicing_kp">No. of Days in Servicing</string>
++    <string name="associated_servicing_kp">Bull Services</string>
++    <string name="country_not_found_kp">Emet ne kesir ko mabitunat</string>
++    <string name="cause_of_death_kp">Kabun nee meet</string>
++    <string-array name="causes_of_death_kp">
++        <item>Kamee buch</item>
++        <item>Myondo</item>
++        <item>Kaumian</item>
++    </string-array>
++    <string name="gps_narrowing_down_on_loc_kp">Igeny yotok kocheng\'e GPS yee imi</string>
++    <string name="event_only_for_female_cattle_kp">Yeokse kii eng tuga/rorwek kityo</string>
++    <string name="other_countries_kp">Emotunweek alak</string>
++    <string name="no_times_milked_in_a_day_kp">Nambarinik che ityokyini eng betut</string>
++    <string name="calf_suckling_kp">Rerie moita</string>
++    <string-array name="calf_suckling_types_kp">
++        <item>Aacha</item>
++        <item>Wooi</item>
++    </string-array>
++    <string name="enter_number_times_cow_milked_kp">Ityokyini teta ata eng betut</string>
++    <string name="milking_times_too_much_kp">Manyolu ityokyi teta kosir taman eng betut</string>
++    <string name="fertility_kp">Akwoiyet</string>
++    <string name="servicing_kp">Boishet ab kirgit</string>
++    <string name="calving_kp">Iyotet</string>
++    <string name="select_service_type_kp">AI\/I anan kirgit</string>
++    <string name="artificial_inseminamtion_kp">Boishet ab mbiret</string>
++    <string name="bull_servicing_kp">Boishet ab kirgit</string>
++    <string name="no_sim_card_kp">Mami lainda eng simet</string>
++    <string name="previous_live_births_kp">Kikoyie konyil ata</string>
++    <string name="enter_previous_live_births_kp">Please enter the number of previous births by this cow</string>
++    <string name="enter_dam_etn_kp">Nambarit ab statiat nebo teta</string>
++    <string name="age_diff_from_dob_kp">Kenyit ab teta kotagu kuyo makargei ak betut ab siget nebo teta</string>
++    <string name="action_not_allowed_kp">Meyaanat tukuk che kessir</string>
++    <string name="are_you_in_farm_kp">Tos imi mbar</string>
++    <string name="farm_coords_successfully_reg_kp">Kakosirak sirutik ab mbaren\'gung</string>
++    <string name="sms_charges_kp">Lipanet ab sirutiet</string>
++    <string name="incur_network_sms_charges_kp">Memitei internet koboruu komaiyotook sirutik che kesiir</string>
++    <string name="data_not_sent_to_server_kp">Maiyoktook sirutik kuk</string>
++    <string name="generic_sms_error_kp">Mayooktookj sirutiet eng mashinit. Ketyi koraa</string>
++    <string name="no_service_kp">Myooktook cheng yeemi network ne kararan</string>
++    <string name="radio_off_kp">Your device is currently unable to send SMSs. Make sure it has a SIM card inserted and that it is not on Airplane mode</string>
++    <string name="server_not_receive_sms_kp">An SMS was sent to the server but it did not receive it</string>
++    <string name="logout_kp">Keer</string>
++    <string name="back_kp">Leet</string>
++    <string name="back_to_main_menu_kp">Wekee yee ketoune</string>
++    <string name="warning_kp">Kerkongiet</string>
++    <string name="action_will_be_canceled_kp">Ngot ti wekei leet kobetos tukul che kaisir</string>
++    <string name="total_kp">Kotugul</string>
++    <string name="unable_to_fetch_cached_data_kp">Mitei tukuk che kesir che makinyor eng simet </string>
++    <string name="you_do_not_have_female_cows_kp">Uyo metinyei  rorwek anan ko tuga che kigei</string>
++    <string name="you_do_not_have_cows_kp">Uyo metinyei tuga</string>
++
++    <string name="ear_tag_no_or_name_kp">Sir kainetab teta anan ko nambaritab statiat</string>
++    <string name="age_or_dob_kp">Imuchi isir kenyishekab teta ana ko tarikitab siget</string>
++    <string name="enter_age_or_dob_kp">Sir kenyishekab teta ana ko tarikitab siget. </string>
++    <string name="cow_too_young_kp">Teta nekelewen kotoku mining</string>
++    <string name="enter_no_cows_own_kp">Sir tuga cheitinye</string>
++    <string name="number_in_use_kp">Laindab simet neiboishie kokikesirchi temindet age</string>
++    <string name="milk_inconsistent_kp">Uwon chego chekesir kou ma unot.ketyi iker ak iyoonchi kot ko unot</string>
++    <string name="press_add_again_kp">Ketyi ichil tesyinet</string>
++    <string name="no_deformity_kp">Ma solomwo</string>
++    <string name="specify_breed_here_kp">Sir ile keswot ngi\'ro eng\' u</string>
++    <string name="enter_breed_kp">Sir keswotab teta </string>
++    <string name="breed_unknown_kp">Keswotab teta ne kaisir komokingen.</string>
++    <string name="extra_breed_kp">Keswot age neter</string>
++    <string name="specify_other_country_kp">Sir emet eng\' u</string>
++    <string name="enter_sire_etn_kp">Sir nambaritab statiat nebo kirgit</string>
++    <string name="sire_owner_kp">Bo ngo kirgit.</string>
++    <string name="name_sire_owner_kp">Sir kainetab nebo kirgit</string>
++    <string name="preferred_language_kp">Sir kutit nechome iboishe.</string>
++    <string name="select_an_event_kp">Lewen yautiet</string>
++
++</resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kr.xml b/MistroFarmer/src/main/res/values/strings_kr.xml
+index 98f0e71..6e949ef 100644
+--- a/MistroFarmer/src/main/res/values/strings_kr.xml
++++ b/MistroFarmer/src/main/res/values/strings_kr.xml
+@@ -1,39 +1,39 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
+     <!-- Kikabrasi -->
+-    <string name="login_kr">injisia/fungula</string>
+-    <string name="login_anyway_kr">fungula tu</string>
+-    <string name="register_kr">andichisia</string>
+-    <string name="full_name_kr">mera kosi</string>
+-    <string name="mobile_number_kr">inamba yolusimu</string>
+-    <string name="extension_p_kr">mofisa ko bukarakacha/kokhuchendera omukunda  </string>
+-    <string name="number_of_cows_kr">tsingombe tsianga</string>
++    <string name="login_kr">Fungula</string>
++    <string name="login_anyway_kr">Fungula</string>
++    <string name="register_kr">Andichisia</string>
++    <string name="full_name_kr">Amera kosi</string>
++    <string name="mobile_number_kr">Enamba yolusimu</string>
++    <string name="extension_p_kr">Ofisa wobukarakacha</string>
++    <string name="number_of_cows_kr">Tsingombe tsianga</string>
+     <string-array name="sex_array_kr">
+-        <item>ikhasi</item>
+-        <item>isatsa</item>
++        <item>Eikhasi</item>
++        <item>Eisatsa</item>
+     </string-array>
+-    <string name="name_kr">lira</string>
+-    <string name="ear_tag_number_kr">lira lili khushirwi</string>
+-    <string name="age_kr">emiaka</string>
+-    <string name="date_of_birth_kr">mwaka kwo khwivulwa</string>
+-    <string name="breed_kr">oluya</string>
+-    <string name="sex_kr">ikhasi nomba isatsa</string>
+-    <string name="deformity_kr">obulema</string>
+-    <string name="sire_kr">samwana</string>
+-    <string name="dam_kr">nyina</string>
+-    <string name="previous_kr">sha anyamu</string>
+-    <string name="next_kr">shilondakho</string>
+-    <string name="finish_kr">mala/malilisia</string>
+-    <string name="okay_kr">obulai</string>
+-    <string name="farmer_registration_kr">obwandichishi bwo mulimi</string>
+-    <string name="cow_registration_kr">obwandichishi bwe ingombe</string>
+-    <string name="cow_registration_proper_kr">obwandichishi bwe dwasi</string>
+-    <string name="dam_registration_kr">obwandichisi bwa nyina</string>
+-    <string name="sire_registration_kr">obwandichisi bwa samwana</string>
++    <string name="name_kr">Elira</string>
++    <string name="ear_tag_number_kr">Enamba yilikhushirwi she sulusi</string>
++    <string name="age_kr">Emiaka</string>
++    <string name="date_of_birth_kr">Omwaka kwo khwibulwa</string>
++    <string name="breed_kr">Oluya</string>
++    <string name="sex_kr">Eikhasi nomba eisatsa</string>
++    <string name="deformity_kr">Obulema</string>
++    <string name="sire_kr">Samwana</string>
++    <string name="dam_kr">Nyina</string>
++    <string name="previous_kr">Anyuma</string>
++    <string name="next_kr">Kalontakho</string>
++    <string name="finish_kr">Malila</string>
++    <string name="okay_kr">Obulayi</string>
++    <string name="farmer_registration_kr">Obwandichisi bwo mulimi</string>
++    <string name="cow_registration_kr">Obwandichisi bwe ing\'ombe</string>
++    <string name="cow_registration_proper_kr">Obwandichisi bwe ing\'ombe</string>
++    <string name="dam_registration_kr">Obwandichisi bwa nyina</string>
++    <string name="sire_registration_kr">Obwandichisi bwa samwana</string>
+     <string-array name="age_type_array_kr">
+-        <item>tsisiku</item>
+-        <item>emiesi</item>
+-        <item>emiaka</item>
++        <item>Tsisiku</item>
++        <item>Emiesi</item>
++        <item>Emiaka</item>
+     </string-array>
+     <string-array name="c_breeds_array_kr">
+         <item>Friesian</item>
+@@ -83,185 +83,204 @@
+         <item>Zebu</item>
+     </string-array>
+     <string-array name="deformities_array_kr">
+-        <item>Imbofu</item>
+-        <item>yalema</item>
+-        <item>Tsimbele tsiavura tsinne</item>
+-        <item>Makatswa</item>
+-        <item>molu kakavukhana</item>
+-        <item>eshindi</item>
++        <item>Yabofula</item>
++        <item>Yalema</item>
++        <item>Yibele nende tsimbele tsinyishi</item>
++        <item>Yibele nende amakatswa</item>
++        <item>Yakhalikha omunwa</item>
++        <item>Obulema bundi</item>
+     </string-array>
+-    <string name="service_type_used_kr">Obukhonyi bwarumikha</string>
++    <string name="service_type_used_kr">Yarumibwa yiriena</string>
+     <string-array name="service_types_kr">
+         <item>Esulusi</item>
+-        <item>Okhurumia nende omupira</item>
+-        <item>Embryo Transfer</item>
++        <item>Omupira</item>
++        <item>Omupira kulinende eshimosi</item>
+     </string-array>
+-    <string name="maximum_of_four_breeds_kr">etsi bridi/oluya tsiula tsine</string>
+-    <string name="country_of_origin_kr">eshivala shia samwana arulamwo</string>
+-    <string name="specify_kr">kololosia</string>
+-    <string name="straw_number_kr">enamba yili khu mpira</string>
+-    <string name="vet_used_kr">vetnari wetsa</string>
+-    <string name="servicing_bull_name_kr">esulusi yarumikha</string>
+-    <string name="servicing_bull_identifier_hint_kr">injisia elira/enamba yili khushirwi/eslusi</string>
+-    <string name="servicing_bull_ear_tag_number_kr">enamba yili khu shirwi she sulusi</string>
+-    <string name="bull_owner_kr">wina mwene esulusi?</string>
+-    <string name="name_bull_owner_kr">elira lia mwene esulusi</string>
++    <string name="maximum_of_four_breeds_kr">Etsibridi tsiula tsine</string>
++    <string name="country_of_origin_kr">Eshibala sha samwana arulamo</string>
++    <string name="specify_kr">Thibitisha</string>
++    <string name="straw_number_kr">Enamba yili khu mpira</string>
++    <string name="vet_used_kr">Vetnari wetsa</string>
++    <string name="servicing_bull_name_kr">Esulusi yarumikha</string>
++    <string name="servicing_bull_identifier_hint_kr">Injisia elira,enamba yokhushirwi she sulusi</string>
++    <string name="servicing_bull_ear_tag_number_kr">Enamba yilikhushirwi she sulusi</string>
++    <string name="bull_owner_kr">Winamwene esulusi</string>
++    <string name="name_bull_owner_kr">Elira lia mwene esulusi</string>
+     <string-array name="bull_owners_kr">
+-        <item>esulusi ya hango</item>
+-        <item>omulimi wundi</item>
+-        <item>eshikundi</item>
++        <item>Esulusi yanje</item>
++        <item>Esulusi yomulimi wundi</item>
++        <item>Esulusi ye shikundi</item>
+     </string-array>
+-    <string name="name_of_other_farmer_or_group_kr">injisia elira lio mulimi nomba eshikundi</string>
+-    <string name="embryo_number_kr">Embryo Number</string>
+-    <string name="enable_gps_kr">fungula e GPS</string>
+-    <string name="reason_for_krabling_gps_kr">kenyanga ofungule e GPS  noshili okhutsilila</string>
+-    <string name="cancel_kr">futa</string>
+-    <string name="enable_network_kr">fungula intanet</string>
+-    <string name="reason_for_krabling_network_kr">eshipindi shino shenyanga intanet khoikhole.finya ok okhufungula intanet.</string>
+-    <string name="successful_registration_kr">yandichisie obulayi</string>
+-    <string name="successful_registration_instructions_kr">wandichiswe obulayi.olanyola sms okhumanyia khuli ofungula</string>
++    <string name="name_of_other_farmer_or_group_kr">Injisia elira lie shikunda</string>
++    <string name="embryo_number_kr">Enamba yo mpira kulinende eshimosi</string>
++    <string name="enable_gps_kr">Fungula egps</string>
++    <string name="reason_for_krabling_gps_kr">Kenyanga ofungule egps noshili okhutsilila.finya ok okhufungula egps.</string>
++    <string name="cancel_kr">Futa</string>
++    <string name="enable_network_kr">Fungula egps</string>
++    <string name="reason_for_krabling_network_kr">Finya ok  ofungule intanet</string>
++    <string name="successful_registration_kr">Yandichisie Obulayi</string>
++    <string name="successful_registration_instructions_kr">Wumalile okhwandichisiwa obulayi olanyola sms yokhubolela khuli ofungula</string>
+     <string name="your_mistro_id_kr">Your Mistro ID</string>
+     <string name="enter_your_mistro_id_kr">Please enter your Mistro ID</string>
+-    <string name="failed_to_authenticate_kr">sholaonyolekhanga murekodi tawe.tema okhufungula khandi</string>
+-    <string name="logging_in_from_different_device_kr">kafwananga otemamamanga okhurumishila amashini amacheni.Oshenyanga okhufungula?</string>
+-    <string name="yes_kr">kario</string>
+-    <string name="no_kr">tawe</string>
+-    <string name="milk_production_kr">esabu ya mabele</string>
+-    <string name="events_kr">efikhole</string>
+-    <string name="main_menu_kr">Main Menu</string>
+-    <string name="sim_card_not_registered_kr">olarumishilanga esimkadi yishili okhurumikha mumashini kano.</string>
+-    <string name="sim_card_registration_kr">okwandichisia esimkadi</string>
+-    <string name="new_mobile_number_kr">enamba ye mobaili yimbia</string>
+-    <string name="old_mobile_number_kr">enamba ye mobaili ikhulu</string>
+-    <string name="old_number_not_in_system_kr">kalafwananga enamba ikhulu shiayandichiswa mumashini tawe.reva wusinjilile amashini akhulombele</string>
+-    <string name="welcome_kr">karibu</string>
+-    <string name="add_production_kr">tesakho okhurusia khwa mabele</string>
+-    <string name="production_history_kr">yarusinja yiriena amabele khale</string>
+-    <string name="cow_kr">edwasi</string>
+-    <string name="time_kr">eisaa</string>
+-    <string name="quantity_kr">eshikhashina</string>
+-    <string name="measurement_type_kr">opimanga oriena</string>
+-    <string name="add_kr">tesakho okhurusia khwa mabele</string>
++    <string name="failed_to_authenticate_kr">Shomanyishe tawe.Tema Okhufungula khandi</string>
++    <string name="logging_in_from_different_device_kr">Kafwananga olafungulanga okhurula khulusimu lukhamanyishe tawe.Oshenyanga Okhwinjisia?</string>
++    <string name="yes_kr">Kario</string>
++    <string name="no_kr">Tawe</string>
++    <string name="milk_production_kr">Esabu yamabele</string>
++    <string name="events_kr">Efikhole</string>
++    <string name="main_menu_kr">Kalukha khu main menu</string>
++    <string name="sim_card_not_registered_kr">Olarumishilanga esimcadi yishili okhurumikha mu mashini kano tawe.</string>
++    <string name="sim_card_registration_kr">Andichisia esimkadi</string>
++    <string name="new_mobile_number_kr">Enamba ye mobaili</string>
++    <string name="old_mobile_number_kr">Einamba eikhulu</string>
++    <string name="old_number_not_in_system_kr">Kafwananga enamba yiyo ikhulu shiyaandichiswa mumashini tawe. Reva wusinjilile amashini akhukhonye.</string>
++    <string name="welcome_kr">Karibu</string>
++    <string name="add_production_kr">Tesa oburusi bwa amabele</string>
++    <string name="production_history_kr">Tesa oburusi bwosi bwa amabele</string>
++    <string name="cow_kr">Edwasi</string>
++    <string name="time_kr">Isaa</string>
++    <string name="quantity_kr">Eshijero</string>
++    <string name="measurement_type_kr">Opimila khulishina</string>
++    <string name="add_kr">Tesa</string>
+     <string-array name="milking_times_kr">
+-        <item>mabwibwi</item>
+-        <item>mushitere</item>
+-        <item>angalove</item>
+-        <item>ambasia/tsukasia alala</item>
++        <item>Asubuhi</item>
++        <item>Mushitere</item>
++        <item>Angolove</item>
++        <item>Tesa alala</item>
+     </string-array>
+     <string-array name="quantity_types_kr">
+-        <item>etsilita</item>
+-        <item>etsikilo</item>
++        <item>Mutsilita</item>
++        <item>Mutsikilo</item>
+     </string-array>
+-    <string name="enter_quantity_of_milk_produced_kr">injisia esabu ya mabele mutsikilo</string>
+-    <string name="information_successfully_sent_to_server_kr">makhuba karumilwe obulayi mustesheni</string>
+-    <string name="problem_in_data_sent_kr">kafwana khuli nende eshida nende amakhuba kotema okhuruma</string>
+-    <string name="production_for_time_already_exists_kr">winjisie khale esabu yiwanyolile okhurula mungome yino</string>
+-    <string name="problem_connecting_to_server_kr">eshida yarulile notemanga okhuconecta nenda mustesheni</string>
+-    <string name="date_kr">etare</string>
+-    <string name="no_data_received_kr">amakhuba shikanyoleshe tawe</string>
+-    <string name="today_kr">bulano</string>
+-    <string name="yesterday_kr">mungolove</string>
+-    <string name="enter_your_name_kr">injisia elira</string>
+-    <string name="enter_your_mobile_no_kr">injisia enamba yoyo yolusimu</string>
+-    <string name="enter_extension_personnel_name_kr">injisia enamba ye simu yomukarakacha/amra kosi</string>
+-    <string name="enter_ear_tag_number_kr">injisia enamba yo khushirwi sheingombe</string>
+-    <string name="enter_ear_tag_no_or_name_kr">injsia enamba yo khushirwi sheingombe/elira</string>
+-    <string name="enter_straw_number_kr">injisia enamba ya samwana yompira</string>
+-    <string name="enter_embryo_number_kr">injisia enamba ya nyina yompira</string>
+-    <string name="add_an_event_kr">tesa eshikhole</string>
+-    <string name="past_events_kr">efikhole fia khale</string>
+-    <string name="remarks_kr">obuloli</string>
+-    <string name="event_kr">efikhole </string>
++    <string name="enter_quantity_of_milk_produced_kr">Noyanza injisia esabu ya amabele mutsikilo</string>
++    <string name="information_successfully_sent_to_server_kr">Amakhuba karumilwe mustesheni obulai</string>
++    <string name="problem_in_data_sent_kr">Kafwananga khubele nende eshida nende amakhuba kolatemanga okhuruma</string>
++    <string name="production_for_time_already_exists_kr">Winjisie khale esabu ya amabele karulanga mungombe yino</string>
++    <string name="problem_connecting_to_server_kr">Eshida yirulile nojaripangaokhuconecta mustesheni</string>
++    <string name="date_kr">Etare</string>
++    <string name="no_data_received_kr">Amakhuba shikolile tawe</string>
++    <string name="today_kr">Bulano</string>
++    <string name="yesterday_kr">Mungolove</string>
++    <string name="enter_your_name_kr">Noyanza injisia elira lilyo</string>
++    <string name="enter_your_mobile_no_kr">Noyanza injisia enamba yiyo yolusimu</string>
++    <string name="enter_extension_personnel_name_kr">Noyanza injisia amera kosi lyomukarakacha/ofisa</string>
++    <string name="enter_ear_tag_number_kr">Noyanza injisia enamba yilikhushirwi sheingombe</string>
++    <string name="enter_ear_tag_no_or_name_kr">Noyanza injisia enamba yakhushirwi nomba elira lyeing\'ombe</string>
++    <string name="enter_straw_number_kr">Noyanza enamba yomupira ya samwana</string>
++    <string name="enter_embryo_number_kr">Noyanza yinjisia emba yeshimosi sha nyina</string>
++    <string name="add_an_event_kr">Tesakho eshikhole</string>
++    <string name="past_events_kr">Efikhole fia khale</string>
++    <string name="remarks_kr">Obuloli</string>
++    <string name="event_kr">Eshikhole</string>
+     <string-array name="cow_event_types_kr">
+         <item></item>
+-        <item>khwibulwa</item>
+-        <item>okhuchaka okhushela</item>
+-        <item>okhumila</item>
+-        <item>inda okhufimba</item>
+-        <item>obulwale</item>
+-        <item>lifwa</item>
+-        <item>okhulera</item>
+-        <item>okhukusia</item>
++        <item>Okhwibula</item>
++        <item>Okhuchaka okhukhama</item>
++        <item>Okhumila</item>
++        <item>Okhufimba eyinda</item>
++        <item>Obulwale</item>
++        <item>Lifwa</item>
++        <item>Okhunyola</item>
++        <item>Okhukusia</item>
+         <item>Okhurumia nende omupira</item>
+-        <item>okhurumia nende esulusi</item>
+-        <item>etsidalili tsiokhwenya esulusi</item>
+-        <item>Deworming</item>
+-        <item>Dipping or Spraying</item>
+-        <item>Vaccination</item>
++        <item>Okhurumia nende esulusi</item>
++        <item>Etsidalili tsiokhwenya esulusi</item>
++        <item>Okhurusia minyo</item>
++        <item>Okhufura edipi nomba okhukwisia mudipi</item>
++        <item>Okhucanja</item>
+     </string-array>
+     <string-array name="cow_servicing_types_kr">
+         <item>Okhurumia nende omupira</item>
+-        <item>okhurumia nende esulusi</item>
++        <item>Okhurumia nende esulusi</item>
+     </string-array>
+-    <string name="enter_date_kr">injisia etare</string>
+-    <string name="date_in_future_kr">etare yiwinjisie ifwananga ni ya imbeli</string>
+-    <string name="event_successfully_recorded_kr">eshikhole shandichisibwe obulayi</string>
+-    <string name="something_went_wrong_try_again_kr">eshindu shibiyile.tema okhuruma khandi amakhuba</string>
+-    <string name="loading_please_wait_kr">khwirejekhanga.linda atiti</string>
+-    <string name="type_of_birth_kr">yebulwa iriena</string>
++    <string name="enter_date_kr">Noyanza injisia etare</string>
++    <string name="date_in_future_kr">Kafwana etare yiwinjisie ni ya imbeli sana</string>
++    <string name="event_successfully_recorded_kr">Eshikhole shandichisibwe obulayi</string>
++    <string name="something_went_wrong_try_again_kr">Kafwananga eshindu shibiyile.tema okhuruma khandi</string>
++    <string name="loading_please_wait_kr">Khulakasianga.linda atiti……</string>
++    <string name="type_of_birth_kr">Yebula yiriena</string>
+     <string-array name="birth_types_kr">
+-        <item>yebulwa  eyinamu</item>
+-        <item>yebulwa yifwile</item>
+-        <item>yebulwa tsisuku tsishili</item>
+-        <item>yawululwa</item>
++        <item>Eshimosi eshilamu</item>
++        <item>Eshimosi shifwile</item>
++        <item>Eshomosi shishili okhutukha</item>
++        <item>Yawulula eshimosi</item>
+     </string-array>
+-    <string name="calf_registration_kr">andichisia eshimosi</string>
+-    <string name="next_screen_is_calf_registration_kr">mupicha yilondakho kenya wandichisieeshimosi shebulwa.finya khu ilondakho okhwandichisia eshimosi</string>
+-    <string name="next_screen_is_cow_registration_kr">mupicha yilondakho kenyanga wandichisie edwasi yakulwa.shebulwa.finya khu ilondakho okhwandichisia eshimosi</string>
+-    <string name="event_too_old_kr">shonyala okhutesakho eshikhole shavura etsisuku kumi nende tsirano tawe</string>
+-    <string name="milk_data_too_old_kr">shonyala okhutesakho esabu ya mabele yavura etsisuku kumi nende tsirano tawe</string>
+-    <string name="milk_too_much_kr">esabu ya mabele yiwandichisie neyinyingi sana</string>
+-    <string name="start_date_kr">etare yokhuchaka</string>
+-    <string name="date_served_kr">eisiku yo khurumia/okhwirusia</string>
+-    <string name="date_of_insemination_kr">eisiku yo khurumianende omupira</string>
+-    <string name="no_of_days_in_servicing_kr">tsisukutsianga okhurula niyiruma/irukha</string>
+-    <string name="associated_servicing_kr">okhwirusia nende esulusi</string>
+-    <string name="country_not_found_kr">eshibala shiwinjisie shinyolekhanaga tawe</string>
+-    <string name="cause_of_death_kr">shina sharela lifwa</string>
++    <string name="calf_registration_kr">Yandichisia eshimosi</string>
++    <string name="next_screen_is_calf_registration_kr">Mushipindi shilondakho kenyanga wandichisie eshimosi.Finya Khu \'next\' okwandichisia eshimosi.</string>
++    <string name="next_screen_is_cow_registration_kr">Mupicha yilondakho kenyanga wandichisie edwasi yakulwa.shebulwa.finya khu ilondakho okhwandichisia eshimosi</string>
++    <string name="event_too_old_kr">Shonyala okhwinjisia eshikhole shabura tsisuku kumi nende tsirano tawe</string>
++    <string name="milk_data_too_old_kr">Shonyala okhwinjisia esabu ya amabele kaburile tsisiku kumi nende tsirano tawe</string>
++    <string name="milk_too_much_kr">Esabu ya amabele yiwinjisie neiinyishi sana</string>
++    <string name="start_date_kr">Etare yokhuchaka</string>
++    <string name="date_served_kr">Etare yokhwirusia</string>
++    <string name="date_of_insemination_kr">Etare yo khwirusia nende omupira</string>
++    <string name="no_of_days_in_servicing_kr">Etsisiku tsiyakalushila okhwirukha</string>
++    <string name="associated_servicing_kr">Okhwirusia nende esulusi</string>
++    <string name="country_not_found_kr">Eshivala shiwinjisie shishinyolekhanga tawe</string>
++    <string name="cause_of_death_kr">Shasabisha elifwa</string>
+     <string-array name="causes_of_death_kr">
+-        <item>khufwa kwa kawaida</item>
+-        <item>khufwa khwobulwale</item>
+-        <item>khufwa khwo khuwumia</item>
++        <item>Okhufwa khwa kawaida</item>
++        <item>Okhufwa khwobulwale</item>
++        <item>Okhufwa khwo khuwumiya</item>
+     </string-array>
+-    <string name="gps_narrowing_down_on_loc_kr">linda GPS ikhave avundu womenyile</string>
+-    <string name="event_only_for_female_cattle_kr">eshikhole shovukule shinyolekhanga mutsingombe tsikhasi tsionyene</string>
+-    <string name="other_countries_kr">mufivala findi</string>
+-    <string name="no_times_milked_in_a_day_kr">okhamanga/oshelanga khanga khusuku</string>
+-    <string name="calf_suckling_kr">eshimosi okhununa</string>
++    <string name="gps_narrowing_down_on_loc_kr">Noyanza linda egps yinyole woli</string>
++    <string name="event_only_for_female_cattle_kr">Eshikhole shiwandichisie shivetsanga mutsing\'ombe etsisatsa tsionyene</string>
++    <string name="other_countries_kr">Efivala findi</string>
++    <string name="no_times_milked_in_a_day_kr">Yishelwanga khanga khuisuku</string>
++    <string name="calf_suckling_kr">Eshimosi shinunanga</string>
+     <string-array name="calf_suckling_types_kr">
+-        <item>tawe</item>
+-        <item>kario</item>
++        <item>Tawe</item>
++        <item>Kario</item>
+     </string-array>
+-    <string name="enter_number_times_cow_milked_kr">injisia ingombe yishelungwa khanga khusuku</string>
+-    <string name="milking_times_too_much_kr">esabu yokhushela/okhukhama kenyanga ileshe okhubura kumi tawe</string>
+-    <string name="fertility_kr">yanera</string>
+-    <string name="servicing_kr">okhurumia</string>
+-    <string name="calving_kr">okhwibula</string>
+-    <string name="select_service_type_kr">cakula aina yokhwirusia</string>
+-    <string name="artificial_inseminamtion_kr">okhwirusia nende omupira</string>
+-    <string name="bull_servicing_kr">okhwirusia nende esulusi</string>
+-    <string name="no_sim_card_kr">esimkadi shilimo tawe</string>
+-    <string name="previous_live_births_kr">injsia efimosi fia yebula fiosi</string>
+-    <string name="enter_previous_live_births_kr">injisi amebulo ke ingombe ino kosi</string>
+-    <string name="enter_dam_etn_kr">injisia enamba ya nyina ya khushirwi</string>
+-    <string name="age_diff_from_dob_kr">emiaka che ingombe ino chaburana nende eisuku yokhwibulwa</string>
+-    <string name="action_not_allowed_kr">eshikhole shino shienyakhanga ano tawe</string>
+-    <string name="are_you_in_farm_kr">wuvele mukunda kukwo?</string>
+-    <string name="farm_coords_successfully_reg_kr"> obulayi tsio mukunda tsiandichisw</string>
+-    <string name="sms_charges_kr">oburunji bwa sms</string>
+-    <string name="incur_network_sms_charges_kr">sholi ambi nende intanet tawe.olarunjivwa kama sms okhuruma amakhuba kano mustesheni</string>
+-    <string name="data_not_sent_to_server_kr">amakhuba karumilwe mustesheni</string>
+-    <string name="generic_sms_error_kr">eshindu shabiyile norumanga sms mustesheni.cheka niva esimu yao inyala okhuruma amakhuba kano </string>
+-    <string name="no_service_kr">shikhunyala okhuruma amakhuba kano mustesheni tawe shijila amashini kakao kabula enetwak</string>
+-    <string name="radio_off_kr">amashini kakao shikanyala okhuruma sms tawe.cheka niva amashini kako kafunjile enetwaka</string>
+-    <string name="server_not_receive_sms_kr">sms yarumilwe mustesheni lakini shibanyolile tawe</string>
+-    <string name="logout_kr">simia</string>
+-    <string name="back_kr">kalukha anyuma</string>
+-    <string name="back_to_main_menu_kr">kalukha anyuma mu \'main menu\'</string>
+-    <string name="warning_kr">hatari</string>
+-    <string name="action_will_be_canceled_kr">nokalukha anyuma mu \'main menu\' amakhuba kosi kalatiba mumashini.finya \'okay\' nivombu nobulayi</string>
+-    <string name="total_kr">tesa kosi alala</string>
+-    <string name="unable_to_fetch_cached_data_kr">shikhunyala okhubukula amakhuba kosi kali mumashini kako tawe</string>
+-    <string name="you_do_not_have_female_cows_kr">ofwanaga sholinende tsingombe tsikhasi tawe</string>
+-    <string name="you_do_not_have_cows_kr">ofwanaga sholinende etsingombe tsidwasi tawe</string>
++    <string name="enter_number_times_cow_milked_kr">Noyanza yinjisia efikha fie ing\'ombe yikhamwanga khuisuku</string>
++    <string name="milking_times_too_much_kr">Efikha fie ing\'ombe yikhamwanga yileshe okhuvira kumi</string>
++    <string name="fertility_kr">Obwirushi</string>
++    <string name="servicing_kr">Okwirusia</string>
++    <string name="calving_kr">Amebulo</string>
++    <string name="select_service_type_kr">Yirusibwanga yiriena</string>
++    <string name="artificial_inseminamtion_kr">Nomupira</string>
++    <string name="bull_servicing_kr">Nende esulusi</string>
++    <string name="no_sim_card_kr">Esimkadi shiyili musimu tawe</string>
++    <string name="previous_live_births_kr">Amebulo kosi</string>
++    <string name="enter_previous_live_births_kr">Noyanza injisia amebulo kosi keing\'ombe yino</string>
++    <string name="enter_dam_etn_kr">Yinjisia enamba yokhushirwi sha nyina</string>
++    <string name="age_diff_from_dob_kr">Emiaka cheing\'ombe shichfwanananga nende etare yokhwibulwa tawe</string>
++    <string name="action_not_allowed_kr">Eshikhole shino shienyekhanga ano tawe</string>
++    <string name="are_you_in_farm_kr">Ngombe planner yilachelitsa okhwandichisia etsinamba tsia gps.wubele khumukunda kukwo?</string>
++    <string name="farm_coords_successfully_reg_kr">Etsinamba tsia gps tsiandichiswe obulayi</string>
++    <string name="sms_charges_kr">Oburunji bwa sms</string>
++    <string name="incur_network_sms_charges_kr">Sholikhu intanet tawe.Olarunjibwa Khuliorunjibwanga okhuruma sms ya kawaida okhuruma amakhuba mustesheni.</string>
++    <string name="data_not_sent_to_server_kr">Amakhuba karumilwe mustesheni obulayi</string>
++    <string name="generic_sms_error_kr">Esindu shibiyile norumanga amakhuba mustesheni.Cheka Niva olusimu lulwo lurumanga sms.</string>
++    <string name="no_service_kr">Shikhunyala okhuruma etsisms tawe shijila enetwak shiyili indai tawe.</string>
++    <string name="radio_off_kr">Olusimu lulwo lukhayilwe okhuruma sms.Cheka Niva esimkadi yibelemo nomba yifunjilwe.</string>
++    <string name="server_not_receive_sms_kr">Sms yirumilwe mustesheni lakini shiyulile tawe.</string>
++    <string name="logout_kr">Funga</string>
++    <string name="back_kr">Kalukha anyuma</string>
++    <string name="back_to_main_menu_kr">Kalukha mu main menu</string>
++    <string name="warning_kr">Onyo</string>
++    <string name="action_will_be_canceled_kr">Nobukul okhukalukha khu </string>
++    <string name="total_kr">Tesa ala</string>
++    <string name="unable_to_fetch_cached_data_kr">Shikhunyala okhunyola edata yilikhushifaa shisho tawe</string>
++    <string name="you_do_not_have_female_cows_kr">Ofwana sholinende tsingobe tsikhasi tawe</string>
++    <string name="you_do_not_have_cows_kr">Ofwana sholinende tsing\'ombe tawe</string>
++    <string name="ear_tag_no_or_name_kr">Onyala okhwinjisia elira lie ing\'ombe nomba enamba yilikhushirwi</string>
++    <string name="age_or_dob_kr">Onyala okhwinjisia emiaka che ing\'ombe nomba etare yokhwibulwa</string>
++    <string name="enter_age_or_dob_kr">Noyanza injisia emiaka che ing\'ombe nomba etare yokhwibulwa</string>
++    <string name="cow_too_young_kr">Ing\'ombe yobukule neintoro sana</string>
++    <string name="enter_no_cows_own_kr">Injisia esabu yetsing\'ombe tsioli nintsio</string>
++    <string name="number_in_use_kr">Enamba yolusimu(nomba esimkadi) yolarumishilanga yamala okhwandichiswa nende omundu wundi.</string>
++    <string name="milk_inconsistent_kr">Esabu ya amabele kawinjisie shiliyakatoto tawe.Finya \'okay\'niva wubele nende obwakika.</string>
++    <string name="press_add_again_kr">Noyanza finya \'tesa khandi\'</string>
++    <string name="no_deformity_kr">Yibula obulema</string>
++    <string name="specify_breed_here_kr">Bola ebridi yindi</string>
++    <string name="enter_breed_kr">Noyanza bola ebridi yindi</string>
++    <string name="breed_unknown_kr">Ebridi yiwinjisie shiyimanyishe tawe</string>
++    <string name="extra_breed_kr">Ebridi yindi</string>
++    <string name="specify_other_country_kr">Bola eshivala shindi</string>
++    <string name="enter_sire_etn_kr">Injisia elira lia samwana nomba enamba yilikhushirwi sha samwana</string>
++    <string name="sire_owner_kr">Mwene samwana</string>
++    <string name="name_sire_owner_kr">Elira lia mwene samwana</string>
++    <string name="preferred_language_kr">Olubolo lwa wayanza okhurumishila</string>
++    <string name="select_an_event_kr">Noyanza chakula eshikhole</string>
+ </resources>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_lh.xml b/MistroFarmer/src/main/res/values/strings_lh.xml
+deleted file mode 100644
+index aba4491..0000000
+--- a/MistroFarmer/src/main/res/values/strings_lh.xml
++++ /dev/null
+@@ -1,268 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<resources>
+-    <!-- Luhya -->
+-    <string name="login_lh">fungula/ injira</string>
+-    <string name="login_anyway_lh">injira yosi yosi</string>
+-    <string name="register_lh">handichisia</string>
+-    <string name="full_name_lh">amera</string>
+-    <string name="mobile_number_lh">enamba ya isimu</string>
+-    <string name="extension_p_lh">omusinjilili</string>
+-    <string name="number_of_cows_lh">tsing\'ombe tsinga</string>
+-    <string-array name="sex_array_lh">
+-        <item>ikhasi</item>
+-        <item>isatsa</item>
+-    </string-array>
+-    <string name="name_lh">elira</string>
+-    <string name="ear_tag_number_lh">enamba ya khushirwi</string>
+-    <string name="age_lh">emiaka</string>
+-    <string name="date_of_birth_lh">indalo yo khwibulwa</string>
+-    <string name="breed_lh">imwo</string>
+-    <string name="sex_lh">iisatsa/ikhasi</string>
+-    <string name="deformity_lh">obulema</string>
+-    <string name="sire_lh">echurushi</string>
+-    <string name="dam_lh">etwasi/emoli</string>
+-    <string name="previous_lh">yali</string>
+-    <string name="next_lh">ilondeshera</string>
+-    <string name="finish_lh">khumala</string>
+-    <string name="okay_lh">habwene</string>
+-    <string name="farmer_registration_lh">khwandichisia omulimi</string>
+-    <string name="cow_registration_lh">khwandichisia ing\'ombe</string>
+-    <string name="cow_registration_proper_lh">cow registration</string>
+-    <string name="dam_registration_lh">khwandichisia emoli</string>
+-    <string name="sire_registration_lh">khwandichisia echurushi</string>
+-    <string-array name="age_type_array_lh">
+-        <item>etsisiku/tsinyanga/tsindalo</item>
+-        <item>emiesi</item>
+-        <item>emiaka/emika</item>
+-    </string-array>
+-    <string-array name="c_breeds_array_lh">
+-        <item>Friesian</item>
+-        <item>Jersey</item>
+-        <item>Ankole</item>
+-        <item>Boran</item>
+-        <item>Ayrshire</item>
+-        <item>Zebu</item>
+-        <item>Sahiwal</item>
+-        <item>Guernsey</item>
+-        <item>Aberdeen Angus</item>
+-        <item>Hereford</item>
+-        <item>Nganda</item>
+-        <item>Another Breed</item>
+-    </string-array>
+-    <string-array name="uc_breeds_array_lh">
+-        <item>Charolais</item>
+-        <item>Simmental</item>
+-        <item>Limousine</item>
+-        <item>Brahman</item>
+-        <item>Santa Getrude</item>
+-        <item>Piemontese</item>
+-        <item>Red Poll</item>
+-        <item>Fleckviah</item>
+-        <item>Brown Swiss</item>
+-    </string-array>
+-    <string-array name="breeds_array_lh">
+-        <item>Ayrshire</item>
+-        <item>Boran</item>
+-        <item>Charolais</item>
+-        <item>Aberdeen Angus</item>
+-        <item>Simmental</item>
+-        <item>Friesian</item>
+-        <item>Guernsey</item>
+-        <item>Hereford</item>
+-        <item>Jersey</item>
+-        <item>Ankole</item>
+-        <item>Limousine</item>
+-        <item>Brahman</item>
+-        <item>Santa Getrude</item>
+-        <item>Piemontese</item>
+-        <item>Red Poll</item>
+-        <item>Sahiwal</item>
+-        <item>Nganda</item>
+-        <item>Fleckviah</item>
+-        <item>Brown Swiss</item>
+-        <item>Zebu</item>
+-    </string-array>
+-    <string-array name="deformities_array_lh">
+-        <item>obubofu</item>
+-        <item>obulema</item>
+-        <item>tsimbere tsilakhoyere</item>
+-        <item>ebilenje bilema</item>
+-        <item>omunwa omulema</item>
+-        <item>akandi</item>
+-    </string-array>
+-    <string name="service_type_used_lh">service type used</string>
+-    <string-array name="service_types_lh">
+-        <item>echurushi</item>
+-        <item>khwirusia nende omupira</item>
+-        <item>okhuwilasia amatsai</item>
+-    </string-array>
+-    <string name="maximum_of_four_breeds_lh">obunji bwa tsimwo tsine</string>
+-    <string name="country_of_origin_lh">shibala shia echurushi yarula</string>
+-    <string name="specify_lh">subisia</string>
+-    <string name="straw_number_lh">enamba yolutseshe</string>
+-    <string name="vet_used_lh">omusilishi warumikha</string>
+-    <string name="servicing_bull_name_lh">echurushi yarumikha </string>
+-    <string name="servicing_bull_identifier_hint_lh">elira lie echurushi/eshilolero shio khumarwi</string>
+-    <string name="servicing_bull_ear_tag_number_lh">eshilolero shio khumarwi</string>
+-    <string name="bull_owner_lh">wina mwene echurushi?</string>
+-    <string name="name_bull_owner_lh">lira lia mwene echurushi</string>
+-    <string-array name="bull_owners_lh">
+-        <item>echurushi ne yanje</item>
+-        <item>ni yo mulimi undi</item>
+-        <item>ni yo omukanda/shikundi</item>
+-    </string-array>
+-    <string name="name_of_other_farmer_or_group_lh">andika elira lio omulimi/omukanda</string>
+-    <string name="embryo_number_lh">enamba ya matsai</string>
+-    <string name="enable_gps_lh">fungula gps/chachia gps/chachia imapu</string>
+-    <string name="reason_for_lhabling_gps_lh">chachia emapu noshili okhutsililila. finya ok okhuchachia</string>
+-    <string name="cancel_lh">okhufuta/khukensula/sinjisia</string>
+-    <string name="enable_network_lh">chachia mtandao/internet</string>
+-    <string name="reason_for_lhabling_network_lh">finya ok khuchachia internet</string>
+-    <string name="successful_registration_lh">omalile obulai khwiyandichisia</string>
+-    <string name="successful_registration_instructions_lh">wiyandichisiye obulai. olanyola oburume obutiti shinga lwo khuchachia.</string>
+-    <string name="your_mistro_id_lh">your mistro id</string>
+-    <string name="enter_your_mistro_id_lh">please enter your mistro id</string>
+-    <string name="failed_to_authenticate_lh">shonyala okhulolekha tawe. chachia khandi/obuyakha</string>
+-    <string name="logging_in_from_different_device_lh">kalolekhanga ochachinjia khu lusimu lukhamanyishe tawe. olenya khuchachia khandi?</string>
+-    <string name="yes_lh">hee</string>
+-    <string name="no_lh">tawe</string>
+-    <string name="milk_production_lh">amabere kasherungwa</string>
+-    <string name="events_lh">efikhole</string>
+-    <string name="main_menu_lh">omurechekekho khusimu.</string>
+-    <string name="sim_card_not_registered_lh">orumishira ikadi ilarumikhangakhwo khase</string>
+-    <string name="sim_card_registration_lh">khwandichisia ekadi</string>
+-    <string name="new_mobile_number_lh">inamba imbiya ya isimu</string>
+-    <string name="old_mobile_number_lh">inamba ikhulu ya isimu</string>
+-    <string name="old_number_not_in_system_lh">kalolekhanga inamba ikhulu ya isimu si yayandichisibwa tawe</string>
+-    <string name="welcome_lh">karibu</string>
+-    <string name="add_production_lh">meta oburusi bwa amabere</string>
+-    <string name="production_history_lh">wanyolanga orie khale amabere</string>
+-    <string name="cow_lh">ing\'ombe.</string>
+-    <string name="time_lh">efise</string>
+-    <string name="quantity_lh">obunji</string>
+-    <string name="measurement_type_lh">shipimo</string>
+-    <string name="add_lh">meta.</string>
+-    <string-array name="milking_times_lh">
+-        <item>asubuhi</item>
+-        <item>eshitere</item>
+-        <item>amukoloba</item>
+-        <item>khutsukasia</item>
+-    </string-array>
+-    <string-array name="quantity_types_lh">
+-        <item>etsilitre</item>
+-        <item>etsikilo</item>
+-    </string-array>
+-    <string name="enter_quantity_of_milk_produced_lh">injisia obunji bwe tsikilo tsia amabere</string>
+-    <string name="information_successfully_sent_to_server_lh">oburume buulire</string>
+-    <string name="problem_in_data_sent_lh">burume bworumanga buli nende munyakhano</string>
+-    <string name="production_for_time_already_exists_lh">winjisiye khale obunji bwa mabele bwo lwalero</string>
+-    <string name="problem_connecting_to_server_lh">obutinyu bunyoleshe lwobele nochachinjia</string>
+-    <string name="date_lh">tarehe ye inyanga</string>
+-    <string name="no_data_received_lh">oburume shibunyoleshe tawe</string>
+-    <string name="today_lh">inyanga ino</string>
+-    <string name="yesterday_lh">mungolobe/mukoloba</string>
+-    <string name="enter_your_name_lh">injisia elira lilio</string>
+-    <string name="enter_your_mobile_no_lh">injisia inamba ya isimu yo</string>
+-    <string name="enter_extension_personnel_name_lh">injisi elira lio omukholi ulio</string>
+-    <string name="enter_ear_tag_number_lh">injisia inamba ya khumarwi</string>
+-    <string name="enter_ear_tag_no_or_name_lh">injisia inamba ya khumarwi nende elira</string>
+-    <string name="enter_straw_number_lh">injisia inamba yo lutseshe lwe ichurushi</string>
+-    <string name="enter_embryo_number_lh">injisia inamba ya matsai</string>
+-    <string name="add_an_event_lh">meta eshikhole</string>
+-    <string name="past_events_lh">ebikhole biabira</string>
+-    <string name="remarks_lh">akandi khwo</string>
+-    <string name="event_lh">shikhole</string>
+-    <string-array name="cow_event_types_lh">
+-        <item></item>
+-        <item>khurula/khwibula</item>
+-        <item>khuchaka okhununia</item>
+-        <item>dry off</item>
+-        <item>khumala okhununia</item>
+-        <item>obulwale</item>
+-        <item>okhufwa</item>
+-        <item>okhukula/okhunyola</item>
+-        <item>okhukusia</item>
+-        <item>khwilusia nende omupira</item>
+-        <item>khwilusia nende echirushi</item>
+-        <item>ebilolero bio khwirukha</item>
+-        <item>Deworming</item>
+-        <item>Dipping or Spraying</item>
+-        <item>Vaccination</item>
+-    </string-array>
+-    <string-array name="cow_servicing_types_lh">
+-        <item>okhwirusia nende omupira</item>
+-        <item>okhwirusia nende esurushi</item>
+-    </string-array>
+-    <string name="enter_date_lh">yandika  etarehe/inyanga</string>
+-    <string name="date_in_future_lh">wandiche inyanga ikhenyeshe</string>
+-    <string name="event_successfully_recorded_lh">wandichisie shikhole obulai. </string>
+-    <string name="something_went_wrong_try_again_lh">kalushira okhuruma</string>
+-    <string name="loading_please_wait_lh">lindirira</string>
+-    <string name="type_of_birth_lh">injira yo khwibula/khurula</string>
+-    <string-array name="birth_types_lh">
+-        <item>kawaida</item>
+-        <item>khuhusa</item>
+-        <item>khwibula olulashiaba</item>
+-        <item>okhwirulutsa</item>
+-    </string-array>
+-    <string name="calf_registration_lh">khwandichisia eshimosi</string>
+-    <string name="next_screen_is_calf_registration_lh">finya \'next\' okhuhandichisia eshimosi</string>
+-    <string name="next_screen_is_cow_registration_lh">finya \'next\' okhuhandichisia ing\'ombe injeni</string>
+-    <string name="event_too_old_lh">shonyala okhumeta eshikhole shiyombire etsinyanga ekhumi na tsirano tawe</string>
+-    <string name="milk_data_too_old_lh">shonyala okhuhandichisia amabele ka;i ne tsinyanga tsiyombire ekhumi na tsirano tawe</string>
+-    <string name="milk_too_much_lh">ebunji bwa mabere ko wandichisiye bubirire eshichero</string>
+-    <string name="start_date_lh">inyanga yo khuchaka</string>
+-    <string name="date_served_lh">inyanga yo khwirusia</string>
+-    <string name="date_of_insemination_lh">inyanga yo khwirusia no omupira</string>
+-    <string name="no_of_days_in_servicing_lh">tsinyanga tsio khwirusia</string>
+-    <string name="associated_servicing_lh">echirushi yerusia khanga</string>
+-    <string name="country_not_found_lh">eshibala shia wenjisia sishinyolekha tawe</string>
+-    <string name="cause_of_death_lh">eshifune shiokhufwa</string>
+-    <string-array name="causes_of_death_lh">
+-        <item>ebifune bikhoyere</item>
+-        <item>amalwale</item>
+-        <item>okhuhumiya</item>
+-    </string-array>
+-    <string name="gps_narrowing_down_on_loc_lh">linga gps imanyie woli</string>
+-    <string name="event_only_for_female_cattle_lh">shikhole shobukule shikholekha mu ing\'ombe ikhasi</string>
+-    <string name="other_countries_lh">ebibala bindi</string>
+-    <string name="no_times_milked_in_a_day_lh">isherwa khanga khunyanga</string>
+-    <string name="calf_suckling_lh">eshimosi khununa</string>
+-    <string-array name="calf_suckling_types_lh">
+-        <item>tawe</item>
+-        <item>hee</item>
+-    </string-array>
+-    <string name="enter_number_times_cow_milked_lh">injisia ing\'ombe ishelwa khanga khunyanga</string>
+-    <string name="milking_times_too_much_lh">ing\'ombe shi ilasherwa okhuyomba ebikha ekhumi khunyanga tawe</string>
+-    <string name="fertility_lh">obwibusi</string>
+-    <string name="servicing_lh">khwirusia</string>
+-    <string name="calving_lh">okhurula/khwibula</string>
+-    <string name="select_service_type_lh">yaula injila yo khwirusia</string>
+-    <string name="artificial_inseminamtion_lh">khwirusia nende omupira</string>
+-    <string name="bull_servicing_lh">khwirisia nende chirushi</string>
+-    <string name="no_sim_card_lh">ekadi ibula musimu</string>
+-    <string name="previous_live_births_lh">yebula khanga</string>
+-    <string name="enter_previous_live_births_lh">injisia  ebikha bia tsinzibula</string>
+-    <string name="enter_dam_etn_lh">injisia enamba ya khumarwi</string>
+-    <string name="age_diff_from_dob_lh">emiaka che ing\'ombe ciabukhana nende inyanga ye ing\'ombe yebulwa</string>
+-    <string name="action_not_allowed_lh">shonyala khwinjisia shikhole hano tawe.</string>
+-    <string name="are_you_in_farm_lh">oli mumulime kwo?</string>
+-    <string name="farm_coords_successfully_reg_lh">gps yandichisiwe obulahi</string>
+-    <string name="sms_charges_lh">omurungo kwa oburume obutiti</string>
+-    <string name="incur_network_sms_charges_lh">sholi khumuyeka tawe. omurungo kwo oburume butiti kulaba kama buli nyanga.</string>
+-    <string name="data_not_sent_to_server_lh">oburume shibulile tawe</string>
+-    <string name="generic_sms_error_lh">efindu fikoyanire norumanga oburume obutiti. henga isimu yo niinyala okhuruma.</string>
+-    <string name="no_service_lh">isimu yo shiinyala khuruma tawe shichira mtandao kubulaho.</string>
+-    <string name="radio_off_lh">isimu yo shiinyala okhuruma oburume tawe. hakikisha ekadi irerwemwo obulahi khandi simu shiili khu airplane mode tawe.</string>
+-    <string name="server_not_receive_sms_lh">oburume burumirwe khu server lakini shibulile tawe.</string>
+-    <string name="logout_lh">funga/khurula</string>
+-    <string name="back_lh">kalukha</string>
+-    <string name="back_to_main_menu_lh"> kalukha khubuchachiro</string>
+-    <string name="warning_lh">ionyo</string>
+-    <string name="action_will_be_canceled_lh">nokalukha khu buchachiro kosi kawinjisiye kalakora. finya ok nosanjire nende kano.</string>
+-    <string name="total_lh">tsiosi/kosi/biosi</string>
+-    <string name="unable_to_fetch_cached_data_lh">kakhayikhane khunyola omurumo kwifisire mu isimu yo.</string>
+-    <string name="you_do_not_have_female_cows_lh">kalolekhana sholi ne tsing\'ombe tsikhasi tawe</string>
+-    <string name="you_do_not_have_cows_lh">kalolekhana sholi ne tsing\'ombe tawe.</string>
+-
+-</resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_lu.xml b/MistroFarmer/src/main/res/values/strings_lu.xml
+new file mode 100644
+index 0000000..69ef91d
+--- /dev/null
++++ b/MistroFarmer/src/main/res/values/strings_lu.xml
+@@ -0,0 +1,290 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <!-- Lutsotso -->
++    <string name="login_lu">Fungula</string>
++    <string name="login_anyway_lu">Injira yosi yosi</string>
++    <string name="register_lu">Handichisia</string>
++    <string name="full_name_lu">Amera</string>
++    <string name="mobile_number_lu">Enamba ya isimu</string>
++    <string name="extension_p_lu">Omusinjilili</string>
++    <string name="number_of_cows_lu">Tsing\'ombe tsinga</string>
++    <string-array name="sex_array_lu">
++        <item>Ikhasi</item>
++        <item>Isatsa</item>
++    </string-array>
++    <string name="name_lu">Elira</string>
++    <string name="ear_tag_number_lu">Enamba ya khushirwi</string>
++    <string name="age_lu">Emiaka</string>
++    <string name="date_of_birth_lu">Indalo yo khwibulwa</string>
++    <string name="breed_lu">Imwo</string>
++    <string name="sex_lu">Iisatsa</string>
++    <string name="deformity_lu">Obulema</string>
++    <string name="sire_lu">Echurushi</string>
++    <string name="dam_lu">Etwasi</string>
++    <string name="previous_lu">Yali</string>
++    <string name="next_lu">Ilondeshera</string>
++    <string name="finish_lu">Khumala</string>
++    <string name="okay_lu">Habwene</string>
++    <string name="farmer_registration_lu">Khwandichisia omulimi</string>
++    <string name="cow_registration_lu">Khwandichisia ing\'ombe</string>
++    <string name="cow_registration_proper_lu">Khwandichisia ing\'ombe. Ing\'ombe</string>
++    <string name="dam_registration_lu">Khwandichisia emoli</string>
++    <string name="sire_registration_lu">Khwandichisia echurushi</string>
++    <string-array name="age_type_array_lu">
++        <item>Etsisiku</item>
++        <item>Emiesi</item>
++        <item>Emiaka</item>
++    </string-array>
++    <string-array name="c_breeds_array_lu">
++        <item>Friesian</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Boran</item>
++        <item>Ayrshire</item>
++        <item>Zebu</item>
++        <item>Sahiwal</item>
++        <item>Guernsey</item>
++        <item>Aberdeen Angus</item>
++        <item>Hereford</item>
++        <item>Nganda</item>
++        <item>Another Breed</item>
++    </string-array>
++    <string-array name="uc_breeds_array_lu">
++        <item>Charolais</item>
++        <item>Simmental</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++    </string-array>
++    <string-array name="breeds_array_lu">
++        <item>Ayrshire</item>
++        <item>Boran</item>
++        <item>Charolais</item>
++        <item>Aberdeen Angus</item>
++        <item>Simmental</item>
++        <item>Friesian</item>
++        <item>Guernsey</item>
++        <item>Hereford</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Sahiwal</item>
++        <item>Nganda</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++        <item>Zebu</item>
++    </string-array>
++    <string-array name="deformities_array_lu">
++        <item>Obubofu</item>
++        <item>Obulema</item>
++        <item>Tsimbere tsilakhoyere</item>
++        <item>Ebilenje bilema</item>
++        <item>Omunwa omulema</item>
++        <item>Akandi</item>
++    </string-array>
++    <string name="service_type_used_lu">Injira yo khwirusia</string>
++    <string-array name="service_types_lu">
++        <item>Echurushi</item>
++        <item>Khwirusia nende omupira</item>
++        <item>Okhuwilasia amatsai</item>
++    </string-array>
++    <string name="maximum_of_four_breeds_lu">Obunji bwa tsimwo tsine</string>
++    <string name="country_of_origin_lu">Shibala shia echurushi yarula</string>
++    <string name="specify_lu">Subisia</string>
++    <string name="straw_number_lu">Enamba yolutseshe</string>
++    <string name="vet_used_lu">Omusilishi warumikha</string>
++    <string name="servicing_bull_name_lu">Echurushi yarumikha</string>
++    <string name="servicing_bull_identifier_hint_lu">Elira lie echurushi shio khumarwi</string>
++    <string name="servicing_bull_ear_tag_number_lu">Eshilolero shio khumarwi</string>
++    <string name="bull_owner_lu">Wina mwene echurushi?</string>
++    <string name="name_bull_owner_lu">Lira lia mwene echurushi</string>
++    <string-array name="bull_owners_lu">
++        <item>Echurushi ne yanje</item>
++        <item>Ni yo mulimi undi</item>
++        <item>Ni yo omukanda</item>
++    </string-array>
++    <string name="name_of_other_farmer_or_group_lu">Andika elira lio omulimi</string>
++    <string name="embryo_number_lu">Enamba ya matsai</string>
++    <string name="enable_gps_lu">Fungula GPS</string>
++    <string name="reason_for_luabling_gps_lu">Chachia emapu noshili okhutsililila. Finya ok okhuchachia</string>
++    <string name="cancel_lu">Okhufuta</string>
++    <string name="enable_network_lu">Chachia mtandao</string>
++    <string name="reason_for_luabling_network_lu">Finya ok khuchachia internet</string>
++    <string name="successful_registration_lu">Omalile obulai khwiyandichisia</string>
++    <string name="successful_registration_instructions_lu">Wiyandichisiye obulai. Olanyola oburume obutiti shinga lwo khuchachia.</string>
++    <string name="your_mistro_id_lu">your mistro id</string>
++    <string name="enter_your_mistro_id_lu">please enter your mistro id</string>
++    <string name="failed_to_authenticate_lu">Shonyala okhulolekha tawe. Chachia khandi</string>
++    <string name="logging_in_from_different_device_lu">Kalolekhanga ochachinjia khu lusimu lukhamanyishe tawe. Olenya khuchachia khandi?</string>
++    <string name="yes_lu">Hee</string>
++    <string name="no_lu">Tawe</string>
++    <string name="milk_production_lu">Amabere kasherungwa</string>
++    <string name="events_lu">Efikhole</string>
++    <string name="main_menu_lu">Omurechekekho khusimu.</string>
++    <string name="sim_card_not_registered_lu">Orumishira ikadi ilarumikhangakhwo khase</string>
++    <string name="sim_card_registration_lu">Khwandichisia ekadi</string>
++    <string name="new_mobile_number_lu">Inamba imbiya ya isimu</string>
++    <string name="old_mobile_number_lu">Inamba ikhulu ya isimu</string>
++    <string name="old_number_not_in_system_lu">Kalolekhanga inamba ikhulu ya isimu si yayandichisibwa tawe</string>
++    <string name="welcome_lu">Karibu</string>
++    <string name="add_production_lu">Meta oburusi bwa amabere</string>
++    <string name="production_history_lu">Wanyolanga orie khale amabere</string>
++    <string name="cow_lu">Ing\'ombe.</string>
++    <string name="time_lu">Efise</string>
++    <string name="quantity_lu">Obunji</string>
++    <string name="measurement_type_lu">Shipimo</string>
++    <string name="add_lu">Meta.</string>
++    <string-array name="milking_times_lu">
++        <item>Asubuhi</item>
++        <item>Eshitere</item>
++        <item>Amukoloba</item>
++        <item>Khutsukasia</item>
++    </string-array>
++    <string-array name="quantity_types_lu">
++        <item>Etsilitre</item>
++        <item>Etsikilo</item>
++    </string-array>
++    <string name="enter_quantity_of_milk_produced_lu">Injisia obunji bwe tsikilo tsia amabere</string>
++    <string name="information_successfully_sent_to_server_lu">Oburume buulire</string>
++    <string name="problem_in_data_sent_lu">Burume bworumanga buli nende munyakhano</string>
++    <string name="production_for_time_already_exists_lu">Winjisiye khale obunji bwa mabele bwo lwalero</string>
++    <string name="problem_connecting_to_server_lu">Obutinyu bunyoleshe lwobele nochachinjia</string>
++    <string name="date_lu">Tarehe ye inyanga</string>
++    <string name="no_data_received_lu">Oburume shibunyoleshe tawe</string>
++    <string name="today_lu">Inyanga ino</string>
++    <string name="yesterday_lu">Mungolobe</string>
++    <string name="enter_your_name_lu">Injisia elira lilio</string>
++    <string name="enter_your_mobile_no_lu">Injisia inamba ya isimu yo</string>
++    <string name="enter_extension_personnel_name_lu">Injisi elira lio omukholi ulio</string>
++    <string name="enter_ear_tag_number_lu">Injisia inamba ya khumarwi</string>
++    <string name="enter_ear_tag_no_or_name_lu">Injisia inamba ya khumarwi nende elira</string>
++    <string name="enter_straw_number_lu">Injisia inamba yo lutseshe lwe ichurushi</string>
++    <string name="enter_embryo_number_lu">Injisia inamba ya matsai</string>
++    <string name="add_an_event_lu">Meta eshikhole</string>
++    <string name="past_events_lu">Ebikhole biabira</string>
++    <string name="remarks_lu">Akandi khwo</string>
++    <string name="event_lu">Shikhole</string>
++    <string-array name="cow_event_types_lu">
++        <item></item>
++        <item>Khurula</item>
++        <item>Khuchaka okhununia</item>
++        <item>Khumala okhununia</item>
++        <item>Khufimba inda</item>
++        <item>Obulwale</item>
++        <item>Okhufwa</item>
++        <item>Okhukula</item>
++        <item>Okhukusia</item>
++        <item>Khwilusia nende omupira</item>
++        <item>Khwilusia nende echirushi</item>
++        <item>Ebilolero bio khwirukha</item>
++        <item>khurusia etsinsukha</item>
++        <item>khufura edipu</item>
++        <item>khuchanja</item>
++    </string-array>
++    <string-array name="cow_servicing_types_lu">
++        <item>Okhwirusia nende omupira</item>
++        <item>Okhwirusia nende esurushi</item>
++    </string-array>
++    <string name="enter_date_lu">Yandika  etarehe</string>
++    <string name="date_in_future_lu">Wandiche inyanga ikhenyeshe</string>
++    <string name="event_successfully_recorded_lu">Wandichisie shikhole obulai.</string>
++    <string name="something_went_wrong_try_again_lu">Kalushira okhuruma</string>
++    <string name="loading_please_wait_lu">Lindirira</string>
++    <string name="type_of_birth_lu">Injira yo khwibula</string>
++    <string-array name="birth_types_lu">
++        <item>Kawaida</item>
++        <item>Khuhusa</item>
++        <item>Khwibula olulashiaba</item>
++        <item>Okhwirulutsa</item>
++    </string-array>
++    <string name="calf_registration_lu">Khwandichisia eshimosi</string>
++    <string name="next_screen_is_calf_registration_lu">Finya \'next\' okhuhandichisia eshimosi</string>
++    <string name="next_screen_is_cow_registration_lu">Finya \'next\' okhuhandichisia ing\'ombe injeni</string>
++    <string name="event_too_old_lu">Shonyala okhumeta eshikhole shiyombire etsinyanga ekhumi na tsirano tawe</string>
++    <string name="milk_data_too_old_lu">Shonyala okhuhandichisia amabele ka,i ne tsinyanga tsiyombire ekhumi na tsirano tawe</string>
++    <string name="milk_too_much_lu">Ebunji bwa mabere ko wandichisiye bubirire eshichero</string>
++    <string name="start_date_lu">Inyanga yo khuchaka</string>
++    <string name="date_served_lu">Inyanga yo khwirusia</string>
++    <string name="date_of_insemination_lu">Inyanga yo khwirusia no omupira</string>
++    <string name="no_of_days_in_servicing_lu">Tsinyanga tsio khwirusia</string>
++    <string name="associated_servicing_lu">Echirushi yerusia khanga</string>
++    <string name="country_not_found_lu">Eshibala shia wenjisia sishinyolekha tawe</string>
++    <string name="cause_of_death_lu">Eshifune shiokhufwa</string>
++    <string-array name="causes_of_death_lu">
++        <item>Ebifune bikhoyere</item>
++        <item>Amalwale</item>
++        <item>Okhuhumiya</item>
++    </string-array>
++    <string name="gps_narrowing_down_on_loc_lu">Linga gps imanyie woli</string>
++    <string name="event_only_for_female_cattle_lu">Shikhole shobukule shikholekha mu ing\'ombe ikhasi</string>
++    <string name="other_countries_lu">Ebibala bindi</string>
++    <string name="no_times_milked_in_a_day_lu">Isherwa khanga khunyanga</string>
++    <string name="calf_suckling_lu">Eshimosi khununa</string>
++    <string-array name="calf_suckling_types_lu">
++        <item>Tawe</item>
++        <item>Hee</item>
++    </string-array>
++    <string name="enter_number_times_cow_milked_lu">Injisia ing\'ombe ishelwa khanga khunyanga</string>
++    <string name="milking_times_too_much_lu">Ing\'ombe shi ilasherwa okhuyomba ebikha ekhumi khunyanga tawe</string>
++    <string name="fertility_lu">Obwibusi</string>
++    <string name="servicing_lu">Khwirusia</string>
++    <string name="calving_lu">Okhurula</string>
++    <string name="select_service_type_lu">Yaula injila yo khwirusia</string>
++    <string name="artificial_inseminamtion_lu">Khwirusia nende omupira</string>
++    <string name="bull_servicing_lu">Khwirisia nende chirushi</string>
++    <string name="no_sim_card_lu">Ekadi ibula musimu</string>
++    <string name="previous_live_births_lu">Yebula khanga</string>
++    <string name="enter_previous_live_births_lu">Injisia  ebikha bia tsinzibula</string>
++    <string name="enter_dam_etn_lu">Injisia enamba ya khumarwi</string>
++    <string name="age_diff_from_dob_lu">Emiaka che ing\'ombe ciabukhana nende inyanga ye ing\'ombe yebulwa</string>
++    <string name="action_not_allowed_lu">Shonyala khwinjisia shikhole hano tawe</string>
++    <string name="are_you_in_farm_lu">Oli mumulime kwo?</string>
++    <string name="farm_coords_successfully_reg_lu">Gps yandichisiwe obulahi</string>
++    <string name="sms_charges_lu">Omurungo kwa oburume obutiti</string>
++    <string name="incur_network_sms_charges_lu">Sholi khumuyeka tawe. Omurungo kwo oburume butiti kulaba kama buli nyanga</string>
++    <string name="data_not_sent_to_server_lu">Oburume shibulile tawe</string>
++    <string name="generic_sms_error_lu">Efindu fikoyanire norumanga oburume obutiti. Henga isimu yo niinyala okhuruma</string>
++    <string name="no_service_lu">Isimu yo shiinyala khuruma tawe shichira mtandao kubulaho</string>
++    <string name="radio_off_lu">Isimu yo shiinyala okhuruma oburume tawe. Hakikisha ekadi irerwemwo obulahi khandi simu shiili khu airplane mode tawe</string>
++    <string name="server_not_receive_sms_lu">Oburume burumirwe khu server lakini shibulile tawe</string>
++    <string name="logout_lu">Funga</string>
++    <string name="back_lu">Kalukha</string>
++    <string name="back_to_main_menu_lu">Kalukha khubuchachiro</string>
++    <string name="warning_lu">Ionyo</string>
++    <string name="action_will_be_canceled_lu">Nokalukha khu buchachiro kosi kawinjisiye kalakora. Finya ok nosanjire nende kano</string>
++    <string name="total_lu">Tsiosi</string>
++    <string name="unable_to_fetch_cached_data_lu">Kakhayikhane khunyola omurumo kwifisire mu isimu yo</string>
++    <string name="you_do_not_have_female_cows_lu">Kalolekhana sholi ne tsing\'ombe tsikhasi tawe</string>
++    <string name="you_do_not_have_cows_lu">Kalolekhana sholi ne tsing\'ombe tawe</string>
++
++
++    <!-- added after translation-->
++    <string name="ear_tag_no_or_name_lu">Yandichisia elira lie ing\'ombe noho shilolero shia khumarwi</string>
++    <string name="age_or_dob_lu">Yandichisia emika che ing\'ombe noho inyanga yokhwibulwa</string>
++    <string name="enter_age_or_dob_lu">Nochama handichisia emika noho inyanga ye ing\'ombe yebulwa</string>
++    <string name="cow_too_young_lu">Ing\'ombe ichakulwe siyatukha tawe.</string>
++    <string name="enter_no_cows_own_lu">Handichisia inamba ye tsing\'ombe tsio.</string>
++    <string name="number_in_use_lu">Inamba yolusimu lworumishira yayandichibwa</string>
++    <string name="milk_inconsistent_lu">Amabere kawandichisiye sikali habwene tawe. Mina \'okay\' noli nobusubili kali habwene.</string>
++    <string name="press_add_again_lu">Nochama mina \'meta khandi\'</string>
++    <string name="no_deformity_lu">Ibula obulema</string>
++    <string name="specify_breed_here_lu">Handichisia imwo indi hano</string>
++    <string name="enter_breed_lu">Nochama handichisia imwo indi</string>
++    <string name="breed_unknown_lu">Imwo yawandichisiye yamanyikha tawe</string>
++    <string name="extra_breed_lu">Imwo indi.</string>
++    <string name="specify_other_country_lu">Shibala shindi</string>
++    <string name="enter_sire_etn_lu">Handichisia eshilolero shio khumarwi shie echirushi</string>
++    <string name="sire_owner_lu">Mwene echirushi</string>
++    <string name="name_sire_owner_lu">Elira lie echirushi</string>
++    <string name="preferred_language_lu">Olubolo lwawachama</string>
++    <string name="select_an_event_lu">yaula eshikhole</string>
++
++</resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_nn.xml b/MistroFarmer/src/main/res/values/strings_nn.xml
+new file mode 100644
+index 0000000..53f144e
+--- /dev/null
++++ b/MistroFarmer/src/main/res/values/strings_nn.xml
+@@ -0,0 +1,288 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <!-- Nandi -->
++    <string name="login_nn">Yaat</string>
++    <string name="login_anyway_nn">Yaat inyeei</string>
++    <string name="register_nn">Siret</string>
++    <string name="full_name_nn">Kainaik tugul</string>
++    <string name="mobile_number_nn">Simet</string>
++    <string name="extension_p_nn">Kanetindet</string>
++    <string name="number_of_cows_nn">Tuka ata</string>
++    <string-array name="sex_array_nn">
++        <item>Chepyoso</item>
++        <item>Muren</item>
++    </string-array>
++    <string name="name_nn">Kainet</string>
++    <string name="ear_tag_number_nn">Siret ab iitit</string>
++    <string name="age_nn">Kenyishek</string>
++    <string name="date_of_birth_nn">Betut ab siget</string>
++    <string name="breed_nn">Keswot</string>
++    <string name="sex_nn">Kirgit anan roriat</string>
++    <string name="deformity_nn">Deformity</string>
++    <string name="sire_nn">Kirgit</string>
++    <string name="dam_nn">Gamet</string>
++    <string name="previous_nn">Chekikopata</string>
++    <string name="next_nn">Cherubei</string>
++    <string name="finish_nn">Kobek</string>
++    <string name="okay_nn">Unot</string>
++    <string name="farmer_registration_nn">Siretab kabotik</string>
++    <string name="cow_registration_nn">Siretab tuga</string>
++    <string name="cow_registration_proper_nn">Siretab tuga</string>
++    <string name="dam_registration_nn">Siretab kametwokik</string>
++    <string name="sire_registration_nn">Siretab kirgit</string>
++    <string-array name="age_type_array_nn">
++        <item>Betushek</item>
++        <item>Araweek</item>
++        <item>Kenyishek</item>
++    </string-array>
++    <string-array name="c_breeds_array_nn">
++        <item>Friesian</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Boran</item>
++        <item>Ayrshire</item>
++        <item>Zebu</item>
++        <item>Sahiwal</item>
++        <item>Guernsey</item>
++        <item>Aberdeen Angus</item>
++        <item>Hereford</item>
++        <item>Nganda</item>
++        <item>Another Breed</item>
++    </string-array>
++    <string-array name="uc_breeds_array_nn">
++        <item>Charolais</item>
++        <item>Simmental</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++    </string-array>
++    <string-array name="breeds_array_nn">
++        <item>Ayrshire</item>
++        <item>Boran</item>
++        <item>Charolais</item>
++        <item>Aberdeen Angus</item>
++        <item>Simmental</item>
++        <item>Friesian</item>
++        <item>Guernsey</item>
++        <item>Hereford</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Sahiwal</item>
++        <item>Nganda</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++        <item>Zebu</item>
++    </string-array>
++    <string-array name="deformities_array_nn">
++        <item>Koraat</item>
++        <item>Ing\'wolii</item>
++        <item>Abnormal teat number</item>
++        <item>Crooked feet</item>
++        <item>Clef palate</item>
++        <item>Agee</item>
++    </string-array>
++    <string name="service_type_used_nn">Kirgit/keswotab mbiret</string>
++    <string-array name="service_types_nn">
++        <item>Kirgit</item>
++        <item>Keswotab mbiret</item>
++        <item>Embryo Transfer</item>
++    </string-array>
++    <string name="maximum_of_four_breeds_nn">A maximum of four breeds</string>
++    <string name="country_of_origin_nn">Emet nebunu kirgit</string>
++    <string name="specify_nn">Ibesyei</string>
++    <string name="straw_number_nn">Nambarit ab mbiret</string>
++    <string name="vet_used_nn">Kanyoindet nekeboishe</string>
++    <string name="servicing_bull_name_nn">Kirgit nikiboishe</string>
++    <string name="servicing_bull_identifier_hint_nn">Siir kainet anan ko nambarit ab statiat nebo kirgit</string>
++    <string name="servicing_bull_ear_tag_number_nn">Nambarit ab statiat nebo kirgit nekeboishe</string>
++    <string name="bull_owner_nn">Bo ng\'o kirgit</string>
++    <string name="name_bull_owner_nn">Kainet ab nebo kirgit</string>
++    <string-array name="bull_owners_nn">
++        <item>Nenyun kirgit</item>
++        <item>Kabotindet agee</item>
++        <item>Grupit</item>
++    </string-array>
++    <string name="name_of_other_farmer_or_group_nn">Kainet ab grupit anan ko kabatindet</string>
++    <string name="embryo_number_nn">Embryo Number</string>
++    <string name="enable_gps_nn">Yaat GPS</string>
++    <string name="reason_for_nnabling_gps_nn">Nyolu iyaat GPS sitestai</string>
++    <string name="cancel_nn">Itonon</string>
++    <string name="enable_network_nn">Yaat internet</string>
++    <string name="reason_for_nnabling_network_nn">Maagat internet asikobois simet</string>
++    <string name="successful_registration_nn">Kakiyan siret</string>
++    <string name="successful_registration_instructions_nn">Kakosulnda sirisiet ng\'ung.inyoru sirutiet ne ibarun ole kiyatitoi mashinit</string>
++    <string name="your_mistro_id_nn">Your Mistro ID</string>
++    <string name="enter_your_mistro_id_nn">Please enter your Mistro ID</string>
++    <string name="failed_to_authenticate_nn">Yee maimuch kosuulnda siret iketyi kora</string>
++    <string name="logging_in_from_different_device_nn">Tagu kuyo iyatee mashinit nemo chomiboishe</string>
++    <string name="yes_nn">Iyan</string>
++    <string name="no_nn">Eshe</string>
++    <string name="milk_production_nn">Kesutik ab jego</string>
++    <string name="events_nn">Yautiet</string>
++    <string name="main_menu_nn">Yee ke taune</string>
++    <string name="sim_card_not_registered_nn">Ngu ibaishe lainda ne tomo ibaishe eng simet nito</string>
++    <string name="sim_card_registration_nn">Siret ab lainda nebo simet</string>
++    <string name="new_mobile_number_nn">Nambarit ab simet ne lel</string>
++    <string name="old_mobile_number_nn">Nambarit ab simet ne gi tai</string>
++    <string name="old_number_not_in_system_nn">Tagu kuyo nambarit neiboishe ko masirat eng mashinit. Birchi kanetindet si kobaarun eng nambarit nyi \(phone number\)</string>
++    <string name="welcome_nn">Itagaat</string>
++    <string name="add_production_nn">Tes kesutik ab jego</string>
++    <string name="production_history_nn">Kesutik   ab jego</string>
++    <string name="cow_nn">Teta</string>
++    <string name="time_nn">Sait</string>
++    <string name="quantity_nn">Jetya</string>
++    <string name="measurement_type_nn">Yei pimondoi jego</string>
++    <string name="add_nn">Tesyi</string>
++    <string-array name="milking_times_nn">
++        <item>Karoon</item>
++        <item>Peet</item>
++        <item>Koskoliny</item>
++        <item>Kituiyo</item>
++    </string-array>
++    <string-array name="quantity_types_nn">
++        <item>Litaishek</item>
++        <item>Kiloishek</item>
++    </string-array>
++    <string name="enter_quantity_of_milk_produced_nn">Siret jego oletee eng kiloishek</string>
++    <string name="information_successfully_sent_to_server_nn">Kakiyaan eng mashinit</string>
++    <string name="problem_in_data_sent_nn">Tagu kuyo manamegei sirutik kuk chekeyokte. Nyalu iketyi koraa</string>
++    <string name="production_for_time_already_exists_nn">Keketyi isir tukuk chebo tanyi ak kaisir</string>
++    <string name="problem_connecting_to_server_nn">Kabit makoset yee katyemei kwo internet eng mashinit</string>
++    <string name="date_nn">Tarikit</string>
++    <string name="no_data_received_nn">Manyoor mashinit tukuk che yokte</string>
++    <string name="today_nn">Raini</string>
++    <string name="yesterday_nn">Amut</string>
++    <string name="enter_your_name_nn">Sir kaineng\'ung</string>
++    <string name="enter_your_mobile_no_nn">Sir nambarit ab simet</string>
++    <string name="enter_extension_personnel_name_nn">Siir kainaik chebo kanetindet</string>
++    <string name="enter_ear_tag_number_nn">Sir nambarit ab statiat netinye teta</string>
++    <string name="enter_ear_tag_no_or_name_nn">Sir nambarit ab statiat ana ko kainet ab teta</string>
++    <string name="enter_straw_number_nn">Sir namberit ab keswot ne bo kirgit</string>
++    <string name="enter_embryo_number_nn">Please enter the Dam\'s embryo number</string>
++    <string name="add_an_event_nn">Tesyi yautiet</string>
++    <string name="past_events_nn">Yautik che kokobata</string>
++    <string name="remarks_nn">Tesyi ki nekoaak ana nekoikeer</string>
++    <string name="event_nn">Yautiet</string>
++    <string-array name="cow_event_types_nn">
++        <item></item>
++        <item>Siget</item>
++        <item>Taunet ab keiysyet</item>
++        <item>Kolug</item>
++        <item>Wireneet</item>
++        <item>Miondo</item>
++        <item>Meet</item>
++        <item>Kenyoor</item>
++        <item>Kealda</item>
++        <item>Boishet ab mbiret</item>
++        <item>Boishet ab kirgit</item>
++        <item>Kaborunoshek ab maget ab kirgit</item>
++        <item>Kokoret</item>
++        <item>Dip</item>
++        <item>Chanjo</item>
++    </string-array>
++    <string-array name="cow_servicing_types_nn">
++        <item>Boishet ab mbiret</item>
++        <item>Boishet ab kirgit</item>
++    </string-array>
++    <string name="enter_date_nn">Sir tarigit</string>
++    <string name="date_in_future_nn">Taku kuyo kesir tarigit ne mi tai</string>
++    <string name="event_successfully_recorded_nn">Kachobok siranatok</string>
++    <string name="something_went_wrong_try_again_nn">Kayaat kii. Tiem koraa</string>
++    <string name="loading_please_wait_nn">Iyoktoi… igeny…..</string>
++    <string name="type_of_birth_nn">Siget neune</string>
++    <string-array name="birth_types_nn">
++        <item>Ne kararan</item>
++        <item>Kakii moita nemo sabe \(meat moita\)</item>
++        <item>Kakii amait betushek</item>
++        <item>Keoos</item>
++    </string-array>
++    <string name="calf_registration_nn">Siretab moek</string>
++    <string name="next_screen_is_calf_registration_nn">Yerubei magaat isir moita ne kayiey</string>
++    <string name="next_screen_is_cow_registration_nn">Nyolu isir kora teta ne toot</string>
++    <string name="event_too_old_nn">Me yaanat itesyi ki nekapit kogakopata betushek tamanu ak mut</string>
++    <string name="milk_data_too_old_nn">Meyaanat kesiir jego che kakopata betushek taman ak mutu</string>
++    <string name="milk_too_much_nn">Kachang\'a jego che kesir</string>
++    <string name="start_date_nn">Betutab taunet</string>
++    <string name="date_served_nn">Date Served</string>
++    <string name="date_of_insemination_nn">Betut ne kikilonyi teta mbiret</string>
++    <string name="no_of_days_in_servicing_nn">No. of Days in Servicing</string>
++    <string name="associated_servicing_nn">Bull Services</string>
++    <string name="country_not_found_nn">Emet ne kesir ko mabitunat</string>
++    <string name="cause_of_death_nn">Kabun nee meet</string>
++    <string-array name="causes_of_death_nn">
++        <item>Kamee buch</item>
++        <item>Myondo</item>
++        <item>Kaumian</item>
++    </string-array>
++    <string name="gps_narrowing_down_on_loc_nn">Igeny yotok kocheng\'e GPS yee imi</string>
++    <string name="event_only_for_female_cattle_nn">Yeokse kii eng tuga/rorwek kityo</string>
++    <string name="other_countries_nn">Emotunweek alak</string>
++    <string name="no_times_milked_in_a_day_nn">Nambarinik che ityokyini eng betut</string>
++    <string name="calf_suckling_nn">Rerie moita</string>
++    <string-array name="calf_suckling_types_nn">
++        <item>Aacha</item>
++        <item>Wooi</item>
++    </string-array>
++    <string name="enter_number_times_cow_milked_nn">Ityokyini teta ata eng betut</string>
++    <string name="milking_times_too_much_nn">Manyolu ityokyi teta kosir taman eng betut</string>
++    <string name="fertility_nn">Akwoiyet</string>
++    <string name="servicing_nn">Boishet ab kirgit</string>
++    <string name="calving_nn">Iyotet</string>
++    <string name="select_service_type_nn">AI\/I anan kirgit</string>
++    <string name="artificial_inseminamtion_nn">Boishet ab mbiret</string>
++    <string name="bull_servicing_nn">Boishet ab kirgit</string>
++    <string name="no_sim_card_nn">Mami lainda eng simet</string>
++    <string name="previous_live_births_nn">Kikoyie konyil ata</string>
++    <string name="enter_previous_live_births_nn">Please enter the number of previous births by this cow</string>
++    <string name="enter_dam_etn_nn">Nambarit ab statiat nebo teta</string>
++    <string name="age_diff_from_dob_nn">Kenyit ab teta kotagu kuyo makargei ak betut ab siget nebo teta</string>
++    <string name="action_not_allowed_nn">Meyaanat tukuk che kessir</string>
++    <string name="are_you_in_farm_nn">Tos imi mbar</string>
++    <string name="farm_coords_successfully_reg_nn">Kakosirak sirutik ab mbaren\'gung</string>
++    <string name="sms_charges_nn">Lipanet ab sirutiet</string>
++    <string name="incur_network_sms_charges_nn">Memitei internet koboruu komaiyotook sirutik che kesiir</string>
++    <string name="data_not_sent_to_server_nn">Maiyoktook sirutik kuk</string>
++    <string name="generic_sms_error_nn">Mayooktookj sirutiet eng mashinit. Ketyi koraa</string>
++    <string name="no_service_nn">Myooktook cheng yeemi network ne kararan</string>
++    <string name="radio_off_nn">Your device is currently unable to send SMSs. Make sure it has a SIM card inserted and that it is not on Airplane mode</string>
++    <string name="server_not_receive_sms_nn">An SMS was sent to the server but it did not receive it</string>
++    <string name="logout_nn">Keer</string>
++    <string name="back_nn">Leet</string>
++    <string name="back_to_main_menu_nn">Wekee yee ketoune</string>
++    <string name="warning_nn">Kerkongiet</string>
++    <string name="action_will_be_canceled_nn">Ngot ti wekei leet kobetos tukul che kaisir</string>
++    <string name="total_nn">Kotugul</string>
++    <string name="unable_to_fetch_cached_data_nn">Mitei tukuk che kesir che makinyor eng simet </string>
++    <string name="you_do_not_have_female_cows_nn">Uyo metinyei  rorwek anan ko tuga che kigei</string>
++    <string name="you_do_not_have_cows_nn">Uyo metinyei tuga</string>
++
++    <string name="ear_tag_no_or_name_nn">Sir kainetab teta anan ko nambaritab statiat</string>
++    <string name="age_or_dob_nn">Imuchi isir kenyishekab teta ana ko tarikitab siget</string>
++    <string name="enter_age_or_dob_nn">Sir kenyishekab teta ana ko tarikitab siget. </string>
++    <string name="cow_too_young_nn">Teta nekelewen kotoku mining</string>
++    <string name="enter_no_cows_own_nn">Sir tuga cheitinye</string>
++    <string name="number_in_use_nn">Laindab simet neiboishie kokikesirchi temindet age</string>
++    <string name="milk_inconsistent_nn">Uwon chego chekesir kou ma unot.ketyi iker ak iyoonchi kot ko unot</string>
++    <string name="press_add_again_nn">Ketyi ichil tesyinet</string>
++    <string name="no_deformity_nn">Ma solomwo</string>
++    <string name="specify_breed_here_nn">Sir ile keswot ngi\'ro eng\' u</string>
++    <string name="enter_breed_nn">Sir keswotab teta </string>
++    <string name="breed_unknown_nn">Keswotab teta ne kaisir komokingen.</string>
++    <string name="extra_breed_nn">Keswot age neter</string>
++    <string name="specify_other_country_nn">Sir emet eng\' u</string>
++    <string name="enter_sire_etn_nn">Sir nambaritab statiat nebo kirgit</string>
++    <string name="sire_owner_nn">Bo ngo kirgit.</string>
++    <string name="name_sire_owner_nn">Sir kainetab nebo kirgit</string>
++    <string name="preferred_language_nn">Sir kutit nechome iboishe.</string>
++    <string name="select_an_event_nn">Lewen yautiet</string>
++
++</resources>
+-- 
+2.7.1
+

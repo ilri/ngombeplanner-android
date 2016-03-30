@@ -1,0 +1,80 @@
+From feef795132f48fe9ec75cbcea22be207c1c6e81a Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Tue, 22 Oct 2013 12:46:55 +0300
+Subject: [PATCH 094/213] maximum number of selection for combobox set for
+ multiple select combobox in javaME
+
+---
+ .../mistro/farmer/ui/CowRegistrationScreen.java    |  4 ++--
+ .../ilri/mistro/farmer/ui/MultiselectRenderer.java | 24 ++++++++++++++++++++--
+ 2 files changed, 24 insertions(+), 4 deletions(-)
+
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
+index 9875d1d..cb4ff82 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
+@@ -147,7 +147,7 @@ public class CowRegistrationScreen extends Form implements Screen{
+         
+         breedCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
+         setComponentStyle(breedCB, true);
+-        MultiselectRenderer breedMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array));
++        MultiselectRenderer breedMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.breeds_array),4);
+         breedCB.setRenderer(breedMultiselectRenderer);
+         breedCB.addActionListener(breedMultiselectRenderer);
+         this.addComponent(breedCB);
+@@ -166,7 +166,7 @@ public class CowRegistrationScreen extends Form implements Screen{
+         this.addComponent(deformityL);
+         
+         deformityCB = new ComboBox(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
+-        MultiselectRenderer deformityMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array));
++        MultiselectRenderer deformityMultiselectRenderer = new MultiselectRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.deformities_array),0);
+         deformityCB.setRenderer(deformityMultiselectRenderer);
+         deformityCB.addActionListener(deformityMultiselectRenderer);
+         setComponentStyle(deformityCB, true);
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/MultiselectRenderer.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/MultiselectRenderer.java
+index 74e6a7a..ed89f77 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/MultiselectRenderer.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/MultiselectRenderer.java
+@@ -14,9 +14,11 @@ import java.util.Vector;
+ public class MultiselectRenderer implements ListCellRenderer, ActionListener{
+     
+     private Vector comboBoxItems;
++    private final int maximumSelection;
+     
+-    public MultiselectRenderer(String[] items) {
++    public MultiselectRenderer(String[] items, int maximumSelection) {
+         super();
++        this.maximumSelection = maximumSelection;
+         comboBoxItems = new Vector(items.length);
+         for(int i = 0; i < items.length; i ++){
+             ComboBoxItem currentBoxItem = new ComboBoxItem(items[i],i);
+@@ -44,6 +46,24 @@ public class MultiselectRenderer implements ListCellRenderer, ActionListener{
+     public void actionPerformed(ActionEvent evt) {
+         List list = (List) evt.getComponent();
+         ComboBoxItem clickedBoxItem = (ComboBoxItem) comboBoxItems.elementAt(list.getSelectedIndex());
+-        clickedBoxItem.toggleChecked();
++        
++        if(clickedBoxItem.isChecked()){
++            //we want to uncheck the item, no need for checking for constraints
++            clickedBoxItem.toggleChecked();
++        }
++        else{
++            System.out.println("checkbox was not previously checked");
++            //get the number of selected items on list
++            int selectedNumber=0;
++            for(int i = 0; i < comboBoxItems.size(); i++){
++                ComboBoxItem currentBoxItem= (ComboBoxItem) comboBoxItems.elementAt(i);
++                if(currentBoxItem.isChecked()){
++                    selectedNumber++;
++                }
++            }
++            if(maximumSelection == 0 || selectedNumber <maximumSelection){
++                clickedBoxItem.toggleChecked();
++            }
++        }
+     }
+ }
+\ No newline at end of file
+-- 
+2.7.1
+

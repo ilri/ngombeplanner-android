@@ -1,0 +1,600 @@
+From aebf5e2766517f7244aa23321e92d2da351c2d35 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Mon, 16 Jun 2014 18:16:35 +0300
+Subject: [PATCH 201/213] Version 1.0.3: Farmer site and activity
+
+Admins can now set farmer's site and can also edit the is_active
+flag for the farmer
+---
+ MistroFarmer/src/main/AndroidManifest.xml          |   4 +-
+ .../ilri/mistro/farmer/CowSelectionActivity.java   | 109 +++++++++++++++++++--
+ .../ilri/mistro/farmer/EditFarmerActivity.java     |  56 +++++++++++
+ .../cgiar/ilri/mistro/farmer/carrier/Farmer.java   |  38 +++++++
+ .../src/main/res/layout/activity_cow_selection.xml |  14 +++
+ .../src/main/res/layout/activity_edit_farmer.xml   |  28 ++++++
+ MistroFarmer/src/main/res/values/strings.xml       |   8 ++
+ MistroFarmer/src/main/res/values/strings_en.xml    |   7 ++
+ MistroFarmer/src/main/res/values/strings_kp.xml    |   8 ++
+ MistroFarmer/src/main/res/values/strings_kr.xml    |   8 ++
+ MistroFarmer/src/main/res/values/strings_lu.xml    |   8 ++
+ MistroFarmer/src/main/res/values/strings_nn.xml    |   8 ++
+ MistroFarmer/src/main/res/values/strings_sw.xml    |   8 ++
+ 13 files changed, 292 insertions(+), 12 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index 0c5eecd..6caaf0e 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+-    android:versionCode="17"
+-    android:versionName="1.0.2" >
++    android:versionCode="18"
++    android:versionName="1.0.3" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowSelectionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowSelectionActivity.java
+index 0c17709..5174d11 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowSelectionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowSelectionActivity.java
+@@ -36,6 +36,8 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
+ 
+     private Menu menu;
+ 
++    private TextView filterFarmersTV;
++    private Spinner filterFarmersS;
+     private TextView selectFarmerTV;
+     private Spinner selectFarmerS;
+     private TextView selectCowTV;
+@@ -44,13 +46,18 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
+     private Button backB;
+ 
+     private JSONObject adminData;
+-    private List<Farmer> farmers;
++    private List<Farmer> allFarmers;
++    private List<Farmer> filteredFarmers;
++    private List<String> filters;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_cow_selection);
+ 
++        filterFarmersTV = (TextView)findViewById(R.id.filter_farmers_tv);
++        filterFarmersS = (Spinner)findViewById(R.id.filter_farmers_s);
++        filterFarmersS.setOnItemSelectedListener(this);
+         selectFarmerTV = (TextView)findViewById(R.id.select_farmer_tv);
+         selectFarmerS = (Spinner)findViewById(R.id.select_farmer_s);
+         selectFarmerS.setOnItemSelectedListener(this);
+@@ -109,6 +116,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
+     public void initTextInViews() {
+         this.setTitle(Locale.getStringInLocale("select_cow", this));
+ 
++        filterFarmersTV.setText(Locale.getStringInLocale("filter_farmers", this));
+         selectFarmerTV.setText(Locale.getStringInLocale("select_farmer", this));
+         selectCowTV.setText(Locale.getStringInLocale("select_cow", this));
+ 
+@@ -119,17 +127,37 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
+     private void loadAdminData(String adminJSONString){
+         try {
+             adminData = new JSONObject(adminJSONString);
++
++            filters = new ArrayList<String>();
++            filters.add(Locale.getStringInLocale("all_farmers", this));
++            filters.add(Locale.getStringInLocale("farmers_no_epersonnel", this));
++            if(adminData.getInt("is_super") == 1){//admin is super
++                JSONArray allEPersonnel = adminData.getJSONArray("extension_personnel");
++                for(int i = 0; i < allEPersonnel.length(); i++){
++                    JSONObject currEPersonnel = allEPersonnel.getJSONObject(i);
++                    filters.add(Locale.getStringInLocale("farmers_tied_to", this) + " " + currEPersonnel.getString("name"));
++                }
++            }
++            else{
++                filters.add(Locale.getStringInLocale("farmers_tied_to", this) +" "+ adminData.getString("name"));
++            }
++            ArrayAdapter<String> filterArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, filters);
++            filterArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++            filterFarmersS.setAdapter(filterArrayAdapter);
++
+             JSONArray farmerData = adminData.getJSONArray("farmers");
+ 
+-            farmers = new ArrayList<Farmer>(farmerData.length());
++            allFarmers = new ArrayList<Farmer>(farmerData.length());
++            filteredFarmers = new ArrayList<Farmer>(farmerData.length());
+             for (int i = 0; i < farmerData.length(); i++) {
+                 Farmer currFarmer = new Farmer(farmerData.getJSONObject(i));
+-                farmers.add(currFarmer);
++                allFarmers.add(currFarmer);
++                filteredFarmers.add(currFarmer);
+             }
+ 
+-            List<String> farmerNames = new ArrayList<String>(farmers.size());
+-            for (int i = 0; i < farmers.size(); i++) {
+-                Farmer currFarmer = farmers.get(i);
++            List<String> farmerNames = new ArrayList<String>(filteredFarmers.size());
++            for (int i = 0; i < filteredFarmers.size(); i++) {
++                Farmer currFarmer = filteredFarmers.get(i);
+                 farmerNames.add(currFarmer.getFullName());
+             }
+ 
+@@ -151,7 +179,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
+             selectCowS.setAdapter(cowArrayAdapter);
+ 
+             if(selectFarmerS.getSelectedItemPosition() != -1){
+-                Farmer selectedFarmer = farmers.get(selectFarmerS.getSelectedItemPosition());
++                Farmer selectedFarmer = filteredFarmers.get(selectFarmerS.getSelectedItemPosition());
+                 List<Cow> cows = selectedFarmer.getCows();
+                 if(cows == null){
+                     GetCowDataThread getCowDataThread = new GetCowDataThread(selectFarmerS.getSelectedItemPosition());
+@@ -162,6 +190,60 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
+                 }
+             }
+         }
++
++        if(parent == filterFarmersS){
++            if(filterFarmersS.getSelectedItemPosition() == 0){//all farmers
++                List<Farmer> newlyFilteredFarmers = this.allFarmers;
++                setFilteredFarmerList(newlyFilteredFarmers);
++            }
++            else if(filterFarmersS.getSelectedItemPosition() == 1){//farmers without extension personnel
++                List<Farmer> newlyFilteredFarmers = new ArrayList<Farmer>();
++                for(int i =0; i<allFarmers.size(); i++){
++                    Farmer currFarmer = allFarmers.get(i);
++                    if(DataHandler.isNull(currFarmer.getExtensionPersonnel()) || currFarmer.getExtensionPersonnel().length() == 0){
++                        newlyFilteredFarmers.add(currFarmer);
++                    }
++                    else{
++                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not qualify to be null");
++                    }
++                }
++
++                setFilteredFarmerList(newlyFilteredFarmers);
++            }
++            else if(filterFarmersS.getSelectedItemPosition() != -1){
++                String selection = filters.get(filterFarmersS.getSelectedItemPosition());
++
++                List<Farmer> newlyFilteredFarmers = new ArrayList<Farmer>();
++                for(int i = 0; i < allFarmers.size(); i++){
++                    Farmer currFarmer = allFarmers.get(i);
++                    if(currFarmer.getExtensionPersonnel() != null && currFarmer.getExtensionPersonnel().length() > 0 &&
++                            selection.contains(currFarmer.getExtensionPersonnel())){
++                        newlyFilteredFarmers.add(currFarmer);
++                    }
++                    else{
++                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not match "+selection);
++                    }
++                }
++
++                setFilteredFarmerList(newlyFilteredFarmers);
++            }
++        }
++    }
++
++    private void setFilteredFarmerList(List<Farmer> filteredFarmers){
++        List<String> farmerNames = new ArrayList<String>(filteredFarmers.size());
++        for (int i = 0; i < filteredFarmers.size(); i++) {
++            Farmer currFarmer = filteredFarmers.get(i);
++            farmerNames.add(currFarmer.getFullName());
++        }
++
++        ArrayAdapter<String> farmerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, farmerNames);
++        farmerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        selectFarmerS.setAdapter(farmerArrayAdapter);
++
++        if(this.filteredFarmers != filteredFarmers) {
++            this.filteredFarmers = filteredFarmers;
++        }
+     }
+ 
+     private void loadCowData(List<Cow> cows){
+@@ -197,7 +279,7 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
+     public void onClick(View v) {
+         if(v == selectB){
+             if(selectFarmerS.getSelectedItemPosition() != -1){
+-                Farmer selectedFarmer = farmers.get(selectFarmerS.getSelectedItemPosition());
++                Farmer selectedFarmer = filteredFarmers.get(selectFarmerS.getSelectedItemPosition());
+                 if(selectedFarmer != null){
+                     if(selectCowS.getSelectedItemPosition() != -1){
+                         List<Cow> cows = selectedFarmer.getCows();
+@@ -280,8 +362,15 @@ public class CowSelectionActivity extends SherlockActivity implements MistroActi
+                 try{
+                     Log.d(TAG, "fetched cows  = "+result);
+                     JSONArray cowJsonArray = new JSONArray(result);
+-                    farmers.get(farmerIndex).setCows(cowJsonArray);
+-                    loadCowData(farmers.get(farmerIndex).getCows());
++                    filteredFarmers.get(farmerIndex).setCows(cowJsonArray);
++                    loadCowData(filteredFarmers.get(farmerIndex).getCows());
++
++                    //add the cow list to the copy of the farmer object in the allFarmers list
++                    for(int i = 0; i < allFarmers.size(); i++){
++                        if(allFarmers.get(i).getId() == filteredFarmers.get(farmerIndex).getId()){
++                            allFarmers.get(i).setCows(cowJsonArray);
++                        }
++                    }
+                 }
+                 catch (Exception e){
+                     e.printStackTrace();
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java
+index 108a8dc..8e053d5 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java
+@@ -52,6 +52,10 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
+     private EditText mobileNumberET;
+     private TextView farmLocTV;
+     private Button recordLocB;
++    private TextView siteTV;
++    private Spinner siteS;
++    private TextView isActiveTV;
++    private Spinner isActiveS;
+     private Button editB;
+     private Button cancelB;
+ 
+@@ -88,6 +92,10 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
+         farmLocTV = (TextView)findViewById(R.id.farm_loc_tv);
+         recordLocB = (Button)findViewById(R.id.record_loc_b);
+         recordLocB.setOnClickListener(this);
++        siteTV = (TextView)findViewById(R.id.site_tv);
++        siteS = (Spinner)findViewById(R.id.site_s);
++        isActiveTV = (TextView)findViewById(R.id.is_active_tv);
++        isActiveS = (Spinner)findViewById(R.id.is_active_s);
+         editB=(Button)this.findViewById(R.id.edit_b);
+         editB.setOnClickListener(this);
+         cancelB =(Button)this.findViewById(R.id.cancel_b);
+@@ -157,6 +165,18 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
+ 
+         recordLocB.setText(Locale.getStringInLocale("rec_farm_loc", this));
+ 
++        siteTV.setText(Locale.getStringInLocale("site", this));
++
++        ArrayAdapter<String> siteArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.sites));
++        siteArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        siteS.setAdapter(siteArrayAdapter);
++
++        isActiveTV.setText(Locale.getStringInLocale("is_active", this));
++
++        ArrayAdapter<String> isActiveArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, Locale.getArrayInLocale("yes_no", this));
++        isActiveArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        isActiveS.setAdapter(isActiveArrayAdapter);
++
+         editB.setText(Locale.getStringInLocale("edit", this));
+         cancelB.setText(Locale.getStringInLocale("cancel", this));
+     }
+@@ -187,6 +207,23 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
+                     }
+                 }
+ 
++                String[] yesNoInEN = Locale.getArrayInLocale("yes_no", this, Locale.LOCALE_ENGLISH);
++                for(int i = 0; i < yesNoInEN.length; i++){
++                    if(yesNoInEN[i].equals("Yes") && farmer.isActive()){
++                        isActiveS.setSelection(i);
++                    }
++                    else if(yesNoInEN[i].equals("No") && !farmer.isActive()){
++                        isActiveS.setSelection(i);
++                    }
++                }
++
++                String[] sites = getResources().getStringArray(R.array.sites);
++                for(int i = 0; i < sites.length; i++){
++                    if(sites[i].equals(farmer.getSite())){
++                        siteS.setSelection(i);
++                    }
++                }
++
+                 updateFarmLocation(farmer.getLongitude(), farmer.getLatitude());
+ 
+                 //fetch extension personnel names from server. Do this after farmer object is initialized since the thread is going to use this object
+@@ -260,6 +297,19 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
+             farmer.setPreferredLocale(Locale.getLocaleCode(this, languages.get(preferredLanguageS.getSelectedItemPosition())));
+         }
+ 
++        String[] yesNoInEN = Locale.getArrayInLocale("yes_no", this, Locale.LOCALE_ENGLISH);
++        if(isActiveS.getSelectedItemPosition() != -1){
++            if(yesNoInEN[isActiveS.getSelectedItemPosition()].equals("Yes")){
++                farmer.setActive(true);
++            }
++            else if(yesNoInEN[isActiveS.getSelectedItemPosition()].equals("No")){
++                farmer.setActive(false);
++            }
++        }
++
++        String[] sites = getResources().getStringArray(R.array.sites);
++        farmer.setSite(sites[siteS.getSelectedItemPosition()]);
++
+         farmer.setMobileNumber(mobileNumberET.getText().toString());
+ 
+         farmer.setMode(Farmer.MODE_EDIT_FARMER);
+@@ -445,6 +495,12 @@ public class EditFarmerActivity extends SherlockActivity implements MistroActivi
+             Toast.makeText(this, Locale.getStringInLocale("select_epersonnel", this), Toast.LENGTH_LONG).show();
+             return  false;
+         }
++
++        String[] sites = getResources().getStringArray(R.array.sites);
++        if(sites[siteS.getSelectedItemPosition()].length() == 0){
++            Toast.makeText(this, Locale.getStringInLocale("specify_site", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
+         return true;
+     }
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
+index 8c1060c..10aa15e 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
+@@ -35,6 +35,8 @@ public class Farmer implements Parcelable, Serializable
+     private String mode;
+     private String preferredLocale;
+     private boolean isInFarm;
++    private String site;
++    private boolean isActive;
+ 
+     public Farmer()
+     {
+@@ -49,6 +51,8 @@ public class Farmer implements Parcelable, Serializable
+         preferredLocale = "";
+         isInFarm = false;
+         id = -1;
++        site = "";
++        isActive = true;
+     }
+ 
+     public Farmer(Parcel source)
+@@ -68,6 +72,13 @@ public class Farmer implements Parcelable, Serializable
+             latitude = farmerJsonObject.getString("gps_latitude");
+             simCardSN = farmerJsonObject.getString("sim_card_sn");
+             preferredLocale = farmerJsonObject.getString("pref_locale");
++            site = (DataHandler.isNull(farmerJsonObject.getString("location_district"))) ? "" : farmerJsonObject.getString("location_district");
++            if(farmerJsonObject.getInt("is_active") == 1){
++                isActive = true;
++            }
++            else{
++                isActive = false;
++            }
+             isInFarm = false;
+         }
+         catch (Exception e){
+@@ -195,6 +206,22 @@ public class Farmer implements Parcelable, Serializable
+         return isInFarm;
+     }
+ 
++    public String getSite() {
++        return site;
++    }
++
++    public void setSite(String site) {
++        this.site = site;
++    }
++
++    public boolean isActive() {
++        return isActive;
++    }
++
++    public void setActive(boolean isActive) {
++        this.isActive = isActive;
++    }
++
+     public List<Cow> getCows(String sex){
+         List<Cow> newCowList = new ArrayList<Cow>();
+ 
+@@ -248,6 +275,9 @@ public class Farmer implements Parcelable, Serializable
+         if(isInFarm) dest.writeInt(1);
+         else dest.writeInt(0);
+         dest.writeString(preferredLocale);
++        dest.writeString(site);
++        if(isActive) dest.writeInt(1);
++        else dest.writeInt(0);
+     }
+ 
+     public void readFromParcel(Parcel in)
+@@ -266,6 +296,10 @@ public class Farmer implements Parcelable, Serializable
+         if(isInFarm == 1) this.isInFarm = true;
+         else this.isInFarm = false;
+         this.preferredLocale = in.readString();
++        this.site = in.readString();
++        int isActive = in.readInt();
++        if(isActive == 1 ) this.isActive = true;
++        else this.isActive = false;
+     }
+ 
+     public static final Creator<Farmer> CREATOR=new Creator<Farmer>()
+@@ -303,6 +337,10 @@ public class Farmer implements Parcelable, Serializable
+             jsonObject.put("simCardSN",((simCardSN ==null) ? "": simCardSN));
+             jsonObject.put("mode",((mode ==null) ? "": mode));
+             jsonObject.put("preferredLocale", preferredLocale);
++            jsonObject.put("site", site);
++            int isActive = 1;
++            if(this.isActive == false) isActive = 0;
++            jsonObject.put("isActive", isActive);
+         }
+         catch (JSONException e)
+         {
+diff --git a/MistroFarmer/src/main/res/layout/activity_cow_selection.xml b/MistroFarmer/src/main/res/layout/activity_cow_selection.xml
+index f64d21b..e99f924 100644
+--- a/MistroFarmer/src/main/res/layout/activity_cow_selection.xml
++++ b/MistroFarmer/src/main/res/layout/activity_cow_selection.xml
+@@ -12,6 +12,20 @@
+         android:paddingBottom="@dimen/activity_vertical_margin"
+         tools:context=".FarmerSelection">
+         <TextView
++            android:id="@+id/filter_farmers_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <Spinner
++            android:id="@+id/filter_farmers_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color" />
++        <TextView
+             android:id="@+id/select_farmer_tv"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+diff --git a/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml b/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml
+index 5c6e452..d30f02e 100644
+--- a/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml
++++ b/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml
+@@ -83,6 +83,34 @@
+             android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
+             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+             android:layout_marginRight="@dimen/activity_f_r_edit_text_margin_left"/>
++        <TextView
++            android:id="@+id/site_tv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:textSize="@dimen/normal_text_size"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"/>
++        <Spinner
++            android:id="@+id/site_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color" />
++        <TextView
++            android:id="@+id/is_active_tv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:textSize="@dimen/normal_text_size"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"/>
++        <Spinner
++            android:id="@+id/is_active_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color" />
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+diff --git a/MistroFarmer/src/main/res/values/strings.xml b/MistroFarmer/src/main/res/values/strings.xml
+index 9f3e360..a9d6d9c 100644
+--- a/MistroFarmer/src/main/res/values/strings.xml
++++ b/MistroFarmer/src/main/res/values/strings.xml
+@@ -24,5 +24,13 @@
+     <string name="title_activity_edit_farmer_selection">EditFarmerSelection</string>
+     <string name="title_activity_edit_cow">Edit Cow</string>
+     <string name="title_activity_cow_selection">CowSelectionActivity</string>
++    <string-array name="sites">
++        <item></item>
++        <item>Butere</item>
++        <item>Kabrasi</item>
++        <item>Kaptumo</item>
++        <item>Meteitei</item>
++        <item>Siongiroi</item>
++    </string-array>
+ 
+ </resources>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 7173f55..a6e0580 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -335,4 +335,11 @@
+     <string name="farmers_tied_to_en">Farmers tied to</string>
+     <string name="super_admin_en">Super Admin</string>
+     <string name="select_cow_en">Select a cow</string>
++    <string name="site_en">Site</string>
++    <string name="is_active_en">Is active</string>
++    <string-array name="yes_no_en">
++        <item>No</item>
++        <item>Yes</item>
++    </string-array>
++    <string name="specify_site_en">Please select a site</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kp.xml b/MistroFarmer/src/main/res/values/strings_kp.xml
+index 0c0a5c1..b95642d 100644
+--- a/MistroFarmer/src/main/res/values/strings_kp.xml
++++ b/MistroFarmer/src/main/res/values/strings_kp.xml
+@@ -332,4 +332,12 @@
+     <string name="farmers_no_epersonnel_kp">Farmers with no extension personnel</string>
+     <string name="farmers_tied_to_kp">Farmers tied to</string>
+     <string name="super_admin_kp">Super Admin</string>
++    <string name="select_cow_kp">Select a cow</string>
++    <string name="site_kp">Site</string>
++    <string name="is_active_kp">Is active</string>
++    <string-array name="yes_no_kp">
++        <item>No</item>
++        <item>Yes</item>
++    </string-array>
++    <string name="specify_site_kp">Please select a site</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kr.xml b/MistroFarmer/src/main/res/values/strings_kr.xml
+index 3537fb8..18b2459 100644
+--- a/MistroFarmer/src/main/res/values/strings_kr.xml
++++ b/MistroFarmer/src/main/res/values/strings_kr.xml
+@@ -331,4 +331,12 @@
+     <string name="farmers_no_epersonnel_kr">Farmers with no extension personnel</string>
+     <string name="farmers_tied_to_kr">Farmers tied to</string>
+     <string name="super_admin_kr">Super Admin</string>
++    <string name="select_cow_kr">Select a cow</string>
++    <string name="site_kr">Site</string>
++    <string name="is_active_kr">Is active</string>
++    <string-array name="yes_no_kr">
++        <item>No</item>
++        <item>Yes</item>
++    </string-array>
++    <string name="specify_site_kr">Please select a site</string>
+ </resources>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_lu.xml b/MistroFarmer/src/main/res/values/strings_lu.xml
+index 65959c1..cf5332f 100644
+--- a/MistroFarmer/src/main/res/values/strings_lu.xml
++++ b/MistroFarmer/src/main/res/values/strings_lu.xml
+@@ -334,4 +334,12 @@
+     <string name="farmers_no_epersonnel_lu">Farmers with no extension personnel</string>
+     <string name="farmers_tied_to_lu">Farmers tied to</string>
+     <string name="super_admin_lu">Super Admin</string>
++    <string name="select_cow_lu">Select a cow</string>
++    <string name="site_lu">Site</string>
++    <string name="is_active_lu">Is active</string>
++    <string-array name="yes_no_lu">
++        <item>No</item>
++        <item>Yes</item>
++    </string-array>
++    <string name="specify_site_lu">Please select a site</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_nn.xml b/MistroFarmer/src/main/res/values/strings_nn.xml
+index dbc3840..47033a6 100644
+--- a/MistroFarmer/src/main/res/values/strings_nn.xml
++++ b/MistroFarmer/src/main/res/values/strings_nn.xml
+@@ -332,4 +332,12 @@
+     <string name="farmers_no_epersonnel_nn">Farmers with no extension personnel</string>
+     <string name="farmers_tied_to_nn">Farmers tied to</string>
+     <string name="super_admin_nn">Super Admin</string>
++    <string name="select_cow_nn">Select a cow</string>
++    <string name="site_nn">Site</string>
++    <string name="is_active_nn">Is active</string>
++    <string-array name="yes_no_nn">
++        <item>No</item>
++        <item>Yes</item>
++    </string-array>
++    <string name="specify_site_nn">Please select a site</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_sw.xml b/MistroFarmer/src/main/res/values/strings_sw.xml
+index 0b3c5ae..d4a3768 100644
+--- a/MistroFarmer/src/main/res/values/strings_sw.xml
++++ b/MistroFarmer/src/main/res/values/strings_sw.xml
+@@ -332,4 +332,12 @@
+     <string name="farmers_no_epersonnel_sw">Farmers with no extension personnel</string>
+     <string name="farmers_tied_to_sw">Farmers tied to</string>
+     <string name="super_admin_sw">Super Admin</string>
++    <string name="select_cow_sw">Select a cow</string>
++    <string name="site_sw">Site</string>
++    <string name="is_active_sw">Is active</string>
++    <string-array name="yes_no_sw">
++        <item>No</item>
++        <item>Yes</item>
++    </string-array>
++    <string name="specify_site_sw">Please select a site</string>
+ </resources>
+-- 
+2.7.1
+

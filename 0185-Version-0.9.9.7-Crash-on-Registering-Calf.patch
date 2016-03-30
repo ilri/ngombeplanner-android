@@ -1,0 +1,35 @@
+From 8045351407bf31a23dd42dbc8ec0e1e10d3b7138 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Tue, 10 Jun 2014 08:45:40 +0300
+Subject: [PATCH 185/213] Version 0.9.9.7: Crash on Registering Calf
+
+Solved bug where app crashes when trying to register a calf
+---
+ .../src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+index 37ce870..406e29c 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+@@ -777,7 +777,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
+                             jsonObject.put("motherETN", selectedCowETN);
+                             jsonObject.put("motherName", selectedCowName);
+                             jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
+-                            if(servicingIDs != null) {
++                            if(servicingIDs != null && servicingS.getSelectedItemPosition() != -1) {
+                                 jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
+                             }
+                             //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
+@@ -786,7 +786,7 @@ public class AddEventActivity extends SherlockActivity implements MistroActivity
+                         } catch (JSONException e) {
+                             e.printStackTrace();
+                         }
+-                        if(servicingTypes != null) {
++                        if(servicingTypes != null && servicingS.getSelectedItemPosition() != -1) {
+                             if (servicingTypes.get(servicingS.getSelectedItemPosition()).equals("Artificial Insemination")) {
+                                 thisCalf.setServiceType(Cow.SERVICE_TYPE_AI);
+                             } else if (servicingTypes.get(servicingS.getSelectedItemPosition()).equals("Bull Servicing")) {
+-- 
+2.7.1
+

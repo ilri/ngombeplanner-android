@@ -1,0 +1,45 @@
+From b053708e54c81fa0e0972655c2244a665f982200 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Tue, 20 May 2014 12:39:43 +0300
+Subject: [PATCH 157/213] Several bugs solved:        - Cow age and date of
+ birth not compared during cow registration        - During cow registration,
+ validation done such that either age          or date of birth has to be
+ entered        - Data from edit texts now only chached if the activity is
+ paused          by mistake/not by the user
+
+---
+ .../java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java   | 5 +++++
+ MistroFarmer/src/main/res/values/strings_en.xml                      | 3 ++-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index 6999f5a..39a7109 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -878,6 +878,11 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+                     e.printStackTrace();
+                 }
+             }*/
++
++            if(dateOfBirthET.getText().toString().trim().equals("") && ageET.getText().toString().trim().equals("")){
++                Toast.makeText(this, Locale.getStringInLocale("enter_age_or_dob", this), Toast.LENGTH_LONG).show(); 
++                return false;
++            }
+         }
+         return true;
+     }
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index be0965a..4ac7e8d 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -237,5 +237,6 @@
+     <string name="you_do_not_have_cows_en">You do not seem to have cows</string>
+ 
+     <!-- Added after translation-->
+-    <string name="age_or_dob_en">You can enter either the cow\'s age or the date of birth</string>
++    <string name="age_or_dob_en">You can enter either the cow\'s age or date of birth</string>
++    <string name="enter_age_or_dob_en">Please enter either the cow\'s age or date of birth</string>
+ </resources>
+-- 
+2.7.1
+

@@ -1,0 +1,3661 @@
+From 1e0d9f48b6c42dbe7aea737deb383d0af5690b4f Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Fri, 13 Jun 2014 19:17:46 +0300
+Subject: [PATCH 198/213] Version 1.0.2: Editing of cow
+
+Still implementing editing of cows. Checkpoint needed
+---
+ MistroFarmer/src/main/AndroidManifest.xml          |   16 +-
+ .../ilri/mistro/farmer/CowSelectionActivity.java   |   59 ++
+ .../cgiar/ilri/mistro/farmer/EditCowActivity.java  | 1097 ++++++++++++++++++++
+ .../org/cgiar/ilri/mistro/farmer/EditFarmer.java   |  556 ----------
+ .../ilri/mistro/farmer/EditFarmerActivity.java     |  555 ++++++++++
+ .../cgiar/ilri/mistro/farmer/FarmerSelection.java  |  313 ------
+ .../mistro/farmer/FarmerSelectionActivity.java     |  309 ++++++
+ .../org/cgiar/ilri/mistro/farmer/MainMenu.java     |    7 +-
+ .../org/cgiar/ilri/mistro/farmer/carrier/Cow.java  |    7 +
+ .../cgiar/ilri/mistro/farmer/carrier/Farmer.java   |   15 +-
+ .../src/main/res/layout/activity_cow_selection.xml |   62 ++
+ .../src/main/res/layout/activity_edit_cow.xml      |  363 +++++++
+ .../src/main/res/layout/activity_edit_farmer.xml   |    2 +-
+ MistroFarmer/src/main/res/menu/cow_selection.xml   |   32 +
+ MistroFarmer/src/main/res/menu/edit_cow.xml        |   30 +
+ MistroFarmer/src/main/res/values/strings.xml       |    2 +
+ 16 files changed, 2540 insertions(+), 885 deletions(-)
+ create mode 100644 MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowSelectionActivity.java
+ create mode 100644 MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditCowActivity.java
+ delete mode 100644 MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmer.java
+ create mode 100644 MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java
+ delete mode 100644 MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerSelection.java
+ create mode 100644 MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerSelectionActivity.java
+ create mode 100644 MistroFarmer/src/main/res/layout/activity_cow_selection.xml
+ create mode 100644 MistroFarmer/src/main/res/layout/activity_edit_cow.xml
+ create mode 100644 MistroFarmer/src/main/res/menu/cow_selection.xml
+ create mode 100644 MistroFarmer/src/main/res/menu/edit_cow.xml
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index 92fc87c..0c5eecd 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -2,7 +2,7 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+     android:versionCode="17"
+-    android:versionName="1.0.1" >
++    android:versionName="1.0.2" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+@@ -79,12 +79,22 @@
+             android:windowSoftInputMode="stateHidden" >
+         </activity>
+         <activity
+-            android:name="org.cgiar.ilri.mistro.farmer.EditFarmer"
++            android:name="org.cgiar.ilri.mistro.farmer.EditFarmerActivity"
+             android:screenOrientation="portrait"
+             android:windowSoftInputMode="stateHidden" >
+         </activity>
+         <activity
+-            android:name="org.cgiar.ilri.mistro.farmer.FarmerSelection"
++            android:name="org.cgiar.ilri.mistro.farmer.FarmerSelectionActivity"
++            android:screenOrientation="portrait"
++            android:windowSoftInputMode="stateHidden" >
++        </activity>
++        <activity
++            android:name="org.cgiar.ilri.mistro.farmer.EditCowActivity"
++            android:screenOrientation="portrait"
++            android:windowSoftInputMode="stateHidden" >
++        </activity>
++        <activity
++            android:name="org.cgiar.ilri.mistro.farmer.CowSelectionActivity"
+             android:screenOrientation="portrait"
+             android:windowSoftInputMode="stateHidden" >
+         </activity>
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowSelectionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowSelectionActivity.java
+new file mode 100644
+index 0000000..43cece2
+--- /dev/null
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowSelectionActivity.java
+@@ -0,0 +1,59 @@
++package org.cgiar.ilri.mistro.farmer;
++
++
++import android.content.Intent;
++import android.os.Bundle;
++
++import com.actionbarsherlock.app.SherlockActivity;
++import com.actionbarsherlock.view.Menu;
++import com.actionbarsherlock.view.MenuInflater;
++import com.actionbarsherlock.view.MenuItem;
++
++import org.cgiar.ilri.mistro.farmer.backend.Locale;
++
++
++public class CowSelectionActivity extends SherlockActivity implements MistroActivity {
++
++    private Menu menu;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_cow_selection);
++    }
++
++
++    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
++        MenuInflater inflater = getSupportMenuInflater();
++        inflater.inflate(R.menu.farmer_selection, menu);
++        this.menu = menu;
++        initMenuText();
++        return true;
++    }
++
++    public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
++        // Handle item selection
++        if(MistroActivity.Language.processLanguageMenuItemSelected(this, this, item)){
++            return true;
++        }
++        else if(item.getItemId() == R.id.action_back_main_menu) {
++            Intent intent = new Intent(this, MainMenu.class);
++            intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
++            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
++            startActivity(intent);
++        }
++        return false;
++    }
++
++    private void initMenuText(){
++        if(this.menu != null){
++            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
++            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
++        }
++    }
++
++    @Override
++    public void initTextInViews() {
++
++    }
++}
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditCowActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditCowActivity.java
+new file mode 100644
+index 0000000..1d92658
+--- /dev/null
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditCowActivity.java
+@@ -0,0 +1,1097 @@
++package org.cgiar.ilri.mistro.farmer;
++
++import android.app.AlertDialog;
++import android.app.DatePickerDialog;
++import android.app.Dialog;
++import android.content.DialogInterface;
++import android.content.Intent;
++import android.os.Bundle;
++import android.util.Log;
++import android.util.SparseBooleanArray;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.AdapterView;
++import android.widget.ArrayAdapter;
++import android.widget.AutoCompleteTextView;
++import android.widget.Button;
++import android.widget.CheckBox;
++import android.widget.CompoundButton;
++import android.widget.DatePicker;
++import android.widget.EditText;
++import android.widget.ListView;
++import android.widget.ScrollView;
++import android.widget.Spinner;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import com.actionbarsherlock.app.SherlockActivity;
++import com.actionbarsherlock.view.Menu;
++import com.actionbarsherlock.view.MenuInflater;
++import com.actionbarsherlock.view.MenuItem;
++
++import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
++import org.cgiar.ilri.mistro.farmer.backend.Locale;
++import org.cgiar.ilri.mistro.farmer.carrier.Cow;
++import org.cgiar.ilri.mistro.farmer.carrier.Dam;
++import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
++import org.cgiar.ilri.mistro.farmer.carrier.Sire;
++
++import java.text.ParseException;
++import java.text.SimpleDateFormat;
++import java.util.ArrayList;
++import java.util.Calendar;
++import java.util.Date;
++import java.util.GregorianCalendar;
++import java.util.List;
++
++
++public class EditCowActivity extends SherlockActivity implements MistroActivity,
++        View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,
++        Spinner.OnItemSelectedListener, View.OnFocusChangeListener, CheckBox.OnCheckedChangeListener, View.OnLongClickListener{
++
++    private static final String TAG = "EditCowActivity";
++    public static final String KEY_INDEX = "cowIndex";
++    public static final String KEY_NUMBER_OF_COWS = "numberOfCows";
++
++    private Menu menu;
++
++    private final String dateFormat="dd/MM/yyyy";
++    private TextView nameETNHintTV;
++    private TextView nameTV;
++    private EditText nameET;
++    private TextView earTagNumberTV;
++    private EditText earTagNumberET;
++    private TextView ageOrDOBHintTV;
++    private TextView ageTV;
++    private Spinner ageS;
++    private EditText ageET;
++    private TextView dateOfBirthTV;
++    private EditText dateOfBirthET;
++    private TextView breedTV;
++    private EditText breedET;
++    private TextView sexTV;
++    private Spinner sexS;
++    private TextView milkingStatusTV;
++    private Spinner milkingStatusS;
++    private TextView inCalfStatusTV;
++    private Spinner inCalfStatusS;
++    private TextView deformityTV;
++    private EditText deformityET;
++    private TextView serviceTypeTV;
++    private Spinner serviceTypeS;
++    private TextView sireTV;
++    private Spinner sireS;
++    private AutoCompleteTextView sireACTV;
++    private TextView sireOwnerTV;
++    private Spinner sireOwnerS;
++    private TextView sireOwnerNameTV;
++    private EditText sireOwnerNameET;
++    private TextView strawNumberTV;
++    private EditText strawNumberET;
++    private TextView damTV;
++    private Spinner damS;
++    private AutoCompleteTextView damACTV;
++    private TextView embryoNumberTV;
++    private EditText embryoNumberET;
++    private TextView countryOfOriginTV;
++    private AutoCompleteTextView countryOfOriginACTV;
++    private TextView commonCountriesTV;
++    private Spinner commonCountriesS;
++    private Button cancelB;
++    private Button editB;
++    private DatePickerDialog datePickerDialog;
++    private Dialog breedDialog;
++    private ScrollView breedDialogSV;
++    private ListView breedLV;
++    private Button dialogBreedOkayB;
++    private Dialog deformityDialog;
++    private ScrollView deformitySV;
++    private ListView deformityLV;
++    private CheckBox noDeformityCB;
++    private EditText specifyET;
++    private Button dialogDeformityOkayB;
++
++    private boolean cacheData;
++    private String[] breeds;
++    private String[] deformities;
++    private String deformityOSpecifyText;
++    private int selectedBreeds;
++    private Farmer farmer;
++    private Cow thisCow;
++    private int index;
++    private int numberOfCows;
++    private List<Cow> validSires;
++    private List<Cow> validDams;
++    private int selectedSireOwner;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_edit_cow);
++
++        cacheData = true;
++        selectedBreeds = 0;
++        Bundle bundle = this.getIntent().getExtras();
++        if(bundle!=null) {
++            index=bundle.getInt(KEY_INDEX);
++            numberOfCows=bundle.getInt(KEY_NUMBER_OF_COWS);
++        }
++
++        nameETNHintTV = (TextView) this.findViewById(R.id.name_eta_hint_tv);
++        nameTV=(TextView)this.findViewById(R.id.name_tv);
++        nameET=(EditText)this.findViewById(R.id.name_et);
++        earTagNumberTV=(TextView)this.findViewById(R.id.ear_tag_number_tv);
++        earTagNumberET=(EditText)this.findViewById(R.id.ear_tag_number_et);
++        ageOrDOBHintTV = (TextView) this.findViewById(R.id.age_or_dob_hint_tv);
++        ageTV=(TextView)this.findViewById(R.id.age_tv);
++        ageS=(Spinner)this.findViewById(R.id.age_s);
++        ageET=(EditText)this.findViewById(R.id.age_et);
++        dateOfBirthTV=(TextView)this.findViewById(R.id.date_of_birth_tv);
++        //dateOfBirthTV.setVisibility(TextView.GONE); //date of birth appears not to be necessary
++        dateOfBirthET=(EditText)this.findViewById(R.id.date_of_birth_et);
++        dateOfBirthET.setOnFocusChangeListener(this);
++        dateOfBirthET.setOnClickListener(this);
++        dateOfBirthET.setOnLongClickListener(this);
++        //dateOfBirthET.setVisibility(TextView.GONE); //date of birth appears not to be necessary
++        breedTV=(TextView)this.findViewById(R.id.breed_tv);
++        breedET=(EditText)this.findViewById(R.id.breed_et);
++        breedET.setOnFocusChangeListener(this);
++        breedET.setOnClickListener(this);
++        sexTV=(TextView)this.findViewById(R.id.sex_tv);
++        sexS=(Spinner)this.findViewById(R.id.sex_s);
++        sexS.setOnItemSelectedListener(this);
++        milkingStatusTV = (TextView)this.findViewById(R.id.milking_status_tv);
++        milkingStatusS = (Spinner)this.findViewById(R.id.milking_status_s);
++        inCalfStatusTV = (TextView)this.findViewById(R.id.in_calf_status_tv);
++        inCalfStatusS = (Spinner)this.findViewById(R.id.in_calf_status_s);
++        deformityTV=(TextView)this.findViewById(R.id.deformity_tv);
++        deformityET=(EditText)this.findViewById(R.id.deformity_et);
++        deformityET.setOnFocusChangeListener(this);
++        deformityET.setOnClickListener(this);
++        serviceTypeTV = (TextView)this.findViewById(R.id.service_type_tv);
++        serviceTypeS = (Spinner)this.findViewById(R.id.service_type_s);
++        serviceTypeS.setOnItemSelectedListener(this);
++        sireTV = (TextView)this.findViewById(R.id.sire_tv);
++        sireS = (Spinner)this.findViewById(R.id.sire_s);
++        sireACTV = (AutoCompleteTextView)this.findViewById(R.id.sire_actv);
++        sireOwnerTV = (TextView)this.findViewById(R.id.sire_owner_tv);
++        sireOwnerS = (Spinner)this.findViewById(R.id.sire_owner_s);
++        sireOwnerS.setOnItemSelectedListener(this);
++        sireOwnerNameTV = (TextView)this.findViewById(R.id.sire_owner_name_tv);
++        sireOwnerNameET = (EditText)this.findViewById(R.id.sire_owner_name_et);
++        strawNumberTV = (TextView)this.findViewById(R.id.straw_number_tv);
++        strawNumberET = (EditText)this.findViewById(R.id.straw_number_et);
++        damTV = (TextView)this.findViewById(R.id.dam_tv);
++        damS = (Spinner)this.findViewById(R.id.dam_s);
++        damACTV = (AutoCompleteTextView)this.findViewById(R.id.dam_actv);
++        embryoNumberTV = (TextView)this.findViewById(R.id.embryo_number_tv);
++        embryoNumberET = (EditText)this.findViewById(R.id.embryo_number_et);
++        countryOfOriginTV = (TextView)this.findViewById(R.id.country_of_origin_tv);
++        countryOfOriginACTV = (AutoCompleteTextView)this.findViewById(R.id.country_of_origin_actv);
++        commonCountriesTV = (TextView)this.findViewById(R.id.common_countries_tv);
++        commonCountriesS = (Spinner)this.findViewById(R.id.common_countries_s);
++        commonCountriesS.setOnItemSelectedListener(this);
++        cancelB = (Button)this.findViewById(R.id.cancel_b);
++        cancelB.setOnClickListener(this);
++        editB = (Button)this.findViewById(R.id.edit_b);
++        editB.setOnClickListener(this);
++        breedDialog=new Dialog(this);
++        breedDialog.setContentView(R.layout.dialog_breed);
++        dialogBreedOkayB=(Button)breedDialog.findViewById(R.id.dialog_breed_okay_b);
++        dialogBreedOkayB.setOnClickListener(this);
++        breedDialogSV=(ScrollView)breedDialog.findViewById(R.id.dialog_breed_sv);
++
++        int activityHeight = this.getResources().getDisplayMetrics().heightPixels;
++        breedDialogSV.getLayoutParams().height = (int)(activityHeight * 0.70);
++
++        breedLV=(ListView)breedDialog.findViewById(R.id.breed_lv);
++        breedLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
++        breedLV.setOnItemClickListener(this);
++        deformityDialog =new Dialog(this);
++        deformityDialog.setContentView(R.layout.dialog_deformity);
++        deformitySV = (ScrollView)deformityDialog.findViewById(R.id.deformity_sv);
++
++        deformitySV.getLayoutParams().height = (int)(activityHeight * 0.70);
++
++        deformityLV =(ListView) deformityDialog.findViewById(R.id.deformity_lv);
++        deformityLV.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
++        deformityLV.setOnItemClickListener(this);
++        specifyET=(EditText)deformityDialog.findViewById(R.id.specify_et);
++        noDeformityCB = (CheckBox)deformityDialog.findViewById(R.id.no_deformity_cb);
++        noDeformityCB.setOnCheckedChangeListener(this);
++        dialogDeformityOkayB =(Button) deformityDialog.findViewById(R.id.dialog_deformity_okay_b);
++        dialogDeformityOkayB.setOnClickListener(this);
++
++        initTextInViews();
++    }
++
++    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
++        MenuInflater inflater = getSupportMenuInflater();
++        inflater.inflate(R.menu.edit_cow, menu);
++        this.menu = menu;
++        initMenuText();
++        return true;
++    }
++
++    public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
++        // Handle item selection
++        if(MistroActivity.Language.processLanguageMenuItemSelected(this, this, item)){
++            return true;
++        }
++        else if(item.getItemId() == R.id.action_back_main_menu) {
++            DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
++                @Override
++                public void onClick(DialogInterface dialog, int which) {
++                    if(which==DialogInterface.BUTTON_POSITIVE){
++                        dialog.dismiss();
++
++                        clearEditTextDataCache();
++
++                        Intent intent = new Intent(EditCowActivity.this, MainMenu.class);
++                        intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
++                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
++                        startActivity(intent);
++                    }
++                    else{
++                        dialog.cancel();
++                    }
++                }
++            };
++            AlertDialog mainMenuDialog = Utils.createMainMenuDialog(this, onClickListener);
++            mainMenuDialog.show();
++        }
++        return false;
++    }
++
++    private void cacheEditTextData(){
++        if(cacheData) {
++            Log.i(TAG, "Edit text data cached");
++            //Incase the activity is hidden partially/fully save the data in edittexts
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, nameET.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, earTagNumberET.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, ageET.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, dateOfBirthET.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, breedET.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, deformityET.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, strawNumberET.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, damACTV.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, sireACTV.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, embryoNumberET.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, countryOfOriginACTV.getText().toString());
++        }
++        else{
++            Log.i(TAG, "Edit text data NOT cached");
++        }
++    }
++
++    private void restoreEditTextData(){
++        Log.i(TAG, "Edit text data restored");
++        //incase the activity was hidden partially for a moment, restore what the user had already entered
++        nameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, ""));
++        earTagNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, ""));
++        ageET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, ""));
++        dateOfBirthET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, ""));
++        breedET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, ""));
++        deformityET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, ""));
++        strawNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, ""));
++        damACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, ""));
++        sireACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, ""));
++        embryoNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, ""));
++        countryOfOriginACTV.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, ""));
++    }
++
++    @Override
++    protected void onResume() {
++        super.onResume();
++
++        Bundle bundle=this.getIntent().getExtras();
++        if(bundle != null) {
++            farmer=bundle.getParcelable(Farmer.PARCELABLE_KEY);
++            if(farmer!=null){
++                thisCow = farmer.getCow(index);
++                if(thisCow != null) {
++                    nameET.setText(thisCow.getName());
++                    earTagNumberET.setText(thisCow.getEarTagNumber());
++                    dateOfBirthET.setText(thisCow.getDateOfBirth());
++                    ageET.setText((thisCow.getAge()==-1) ? "":String.valueOf(thisCow.getAge()));
++                    String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array",this,Locale.LOCALE_ENGLISH);
++                    for(int i = 0; i < ageTypesInEN.length; i++) {
++                        if(ageTypesInEN[i].equals("Days") && thisCow.getAgeType().equals(Cow.AGE_TYPE_DAY)) {
++                            ageS.setSelection(i);
++                        }
++                        else if(ageTypesInEN[i].equals("Months") && thisCow.getAgeType().equals(Cow.AGE_TYPE_MONTH)) {
++                            ageS.setSelection(i);
++                        }
++                        else if(ageTypesInEN[i].equals("Years") && thisCow.getAgeType().equals(Cow.AGE_TYPE_YEAR)) {
++                            ageS.setSelection(i);
++                        }
++                    }
++                    List<String> savedBreeds=thisCow.getBreeds(this);//returns breeds in current locale
++                    Log.d(TAG, "Cow breeds are "+savedBreeds);
++                    String breed="";
++                    for (int i=0;i<savedBreeds.size();i++) {
++                        if(i==0) {
++                            breed=savedBreeds.get(i);
++                        }
++                        else {
++                            breed=breed+", "+savedBreeds.get(i);
++                        }
++                        Log.d(TAG, "current breed index =  "+String.valueOf(i));
++                        Log.d(TAG, "saved breeds length =  "+String.valueOf(savedBreeds.size()));
++                    }
++                    breedET.setText(breed);
++                    String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
++                    for(int i = 0; i < sexInEN.length; i++) {
++                        if(sexInEN[i].equals("Female") && thisCow.getSex().equals(Cow.SEX_FEMALE)) {
++                            sexS.setSelection(i);
++                            toggleFemaleCowViewsVisibility();
++                            String[] milkingStatusInEN = Locale.getArrayInLocale("cow_status_array", this, Locale.LOCALE_ENGLISH);
++                            String[] inCalfArrayInEN = Locale.getArrayInLocale("cow_in_calf_array", this, Locale.LOCALE_ENGLISH);
++                            for(int j = 0; j < milkingStatusInEN.length; j++){
++                                Log.d(TAG, " ********** Saved milking status = "+thisCow.getMilkingStatus());
++                                if(milkingStatusInEN[j].equals(thisCow.getMilkingStatus())){
++                                    milkingStatusS.setSelection(j);
++                                }
++                            }
++                            for(int j = 0; j < inCalfArrayInEN.length; j++){
++                                if(inCalfArrayInEN[j].equals(Cow.COW_IN_CALF) && thisCow.isInCalf()){
++                                    inCalfStatusS.setSelection(j);
++                                }
++                                else if(inCalfArrayInEN[j].equals(Cow.COW_NOT_IN_CALF) && !thisCow.isInCalf()){
++                                    inCalfStatusS.setSelection(j);
++                                }
++                            }
++
++                        }
++                        else if(sexInEN[i].equals("Male") && thisCow.getSex().equals(Cow.SEX_MALE)) {
++                            sexS.setSelection(i);
++                        }
++                    }
++                    List<String> savedDeformities=thisCow.getDeformities(this);//returns deformities in current locale
++                    String deformity="";
++                    for (int i=0;i<savedDeformities.size();i++) {
++                        if(i==0) {
++                            deformity=savedDeformities.get(i);
++                        }
++                        else {
++                            deformity=deformity+", "+savedDeformities.get(i);
++                        }
++                        if(savedDeformities.get(i).equals(deformities[deformities.length-1])) {
++                            deformityOSpecifyText = thisCow.getOtherDeformity();
++                        }
++                    }
++                    deformityET.setText(deformity);
++
++                    if(farmer.getMode().equals(Farmer.MODE_INITIAL_REGISTRATION)) {
++
++                        List<Cow> allCows = farmer.getCows();
++                        validSires = new ArrayList<Cow>();
++                        validSires.add(new Cow(false));
++                        List<String> validSireNames = new ArrayList<String>();
++                        validSireNames.add("");
++                        int sireSelection = 0;
++
++                        validDams = new ArrayList<Cow>();
++                        validDams.add(new Cow(false));
++                        List<String> validDamNames = new ArrayList<String>();
++                        int damSelection = -1;
++                        validDamNames.add("");
++                        for(int i = 0; i < allCows.size(); i++) {
++                            if(i != index) {
++                                if(allCows.get(i).getEarTagNumber() != null && allCows.get(i).getEarTagNumber().length() > 0 && allCows.get(i).getSex().equals(Cow.SEX_MALE)) {
++                                    validSires.add(allCows.get(i));
++                                    validSireNames.add(allCows.get(i).getEarTagNumber()+" ("+allCows.get(i).getName()+")");
++                                    if(thisCow.getServiceType().equals(Cow.SERVICE_TYPE_BULL)) {
++                                        if(thisCow.getSire().getEarTagNumber().equals(allCows.get(i).getEarTagNumber())) {
++                                            sireSelection = validSires.size() - 1;
++                                        }
++                                    }
++                                }
++                                else if(allCows.get(i).getEarTagNumber() != null && allCows.get(i).getEarTagNumber().length() > 0 && allCows.get(i).getSex().equals(Cow.SEX_FEMALE)) {
++                                    validDams.add(allCows.get(i));
++                                    validDamNames.add(allCows.get(i).getEarTagNumber()+" ("+allCows.get(i).getName()+")");
++                                    if(thisCow.getServiceType().equals(Cow.SERVICE_TYPE_BULL) || thisCow.getServiceType().equals(Cow.SERVICE_TYPE_AI)) {
++                                        if(thisCow.getDam().getEarTagNumber().equals(allCows.get(i).getEarTagNumber())) {
++                                            damSelection = validDams.size() - 1;
++                                        }
++                                    }
++                                }
++                            }
++                        }
++
++                        selectedSireOwner = -1;
++                        String[] sireOwners = Locale.getArrayInLocale("bull_owners", this, Locale.LOCALE_ENGLISH);
++                        for(int i = 0; i < sireOwners.length; i++){
++                            if(sireOwners[i].equals(thisCow.getSire().getOwnerType())){
++                                selectedSireOwner = i;
++                            }
++                        }
++                        sireOwnerNameET.setText(thisCow.getSire().getOwner());
++
++                        String[] serviceTypesInEN = Locale.getArrayInLocale("service_types",this,Locale.LOCALE_ENGLISH);
++
++                        ArrayAdapter<String> siresArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,validSireNames);
++                        siresArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++                        sireS.setAdapter(siresArrayAdapter);
++                        sireS.setSelection(sireSelection);
++
++                        ArrayAdapter<String> damsArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,validDamNames);
++                        damsArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++                        damS.setAdapter(damsArrayAdapter);
++                        if(damSelection != -1)
++                            damS.setSelection(damSelection);
++
++                        ArrayAdapter<String> damsACTVAdapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item,validDamNames);
++                        damACTV.setAdapter(damsACTVAdapter);
++                        if(damSelection != -1)
++                            damACTV.setText(validDamNames.get(damSelection));
++
++                        ArrayAdapter<String> siresACTVAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, validSireNames);
++                        sireACTV.setAdapter(siresACTVAdapter);
++                        if(sireSelection != -1)
++                            sireACTV.setText(validSireNames.get(sireSelection));
++
++                        for(int i = 0; i < serviceTypesInEN.length; i++) {
++                            if(serviceTypesInEN[i].equals("Bull") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_BULL)) {
++                                serviceTypeS.setSelection(i);
++                            }
++                            else if(serviceTypesInEN[i].equals("Artificial Insemination") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_AI)) {
++                                serviceTypeS.setSelection(i);
++                                strawNumberET.setText(thisCow.getSire().getStrawNumber());
++                            }
++                            else if(serviceTypesInEN[i].equals("Embryo Transfer") && thisCow.getServiceType().equals(Cow.SERVICE_TYPE_ET)) {
++                                serviceTypeS.setSelection(i);
++                                embryoNumberET.setText(thisCow.getDam().getEmbryoNumber());
++                            }
++                        }
++                    }
++                    else {
++                        serviceTypeTV.setVisibility(TextView.GONE);
++                        serviceTypeS.setVisibility(Spinner.GONE);
++                        sireTV.setVisibility(TextView.GONE);
++//                        sireS.setVisibility(Spinner.GONE);
++                        strawNumberTV.setVisibility(TextView.GONE);
++                        strawNumberET.setVisibility(EditText.GONE);
++                        damTV.setVisibility(TextView.GONE);
++//                        damS.setVisibility(Spinner.GONE);
++                        sireACTV.setVisibility(AutoCompleteTextView.GONE);
++                        sireOwnerTV.setVisibility(TextView.GONE);
++                        sireOwnerS.setVisibility(Spinner.GONE);
++                        sireOwnerNameTV.setVisibility(TextView.GONE);
++                        sireOwnerNameET.setVisibility(EditText.GONE);
++                        damACTV.setVisibility(AutoCompleteTextView.GONE);
++                        embryoNumberTV.setVisibility(TextView.GONE);
++                        embryoNumberET.setVisibility(EditText.GONE);
++                    }
++
++                    countryOfOriginACTV.setText(thisCow.getCountryOfOrigin());
++                }
++                else {
++                    Log.d(TAG,"Cow object is null");
++                }
++            }
++            else {
++                Log.d(TAG,"Farmer object is null");
++            }
++
++        }
++
++        if(nameET.getText().toString().trim().length() == 0 && earTagNumberET.getText().toString().trim().length() == 0){
++            //means that when the activity paused the last time it did not save data to the cow object. Try to get data from shared preferences
++            restoreEditTextData();
++        }
++    }
++
++    private void clearEditTextDataCache(){
++        Log.i(TAG, "Edit text cache cleared");
++
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_SIRE, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, "");
++
++        cacheData = false;
++    }
++
++    @Override
++    public void initTextInViews() {
++        String title = Locale.getStringInLocale("edit_cow",this);
++        this.setTitle(title);
++
++        nameETNHintTV.setText(" * " + Locale.getStringInLocale("ear_tag_no_or_name", this));
++        nameTV.setText(Locale.getStringInLocale("name",this));
++        earTagNumberTV.setText(Locale.getStringInLocale("ear_tag_number",this));
++
++        ageOrDOBHintTV.setText(" * " + Locale.getStringInLocale("age_or_dob", this));
++
++        ageTV.setText(Locale.getStringInLocale("age",this));
++        int ageTypeArrayID = Locale.getArrayIDInLocale("age_type_array",this);
++        if(ageTypeArrayID!=0){
++            ArrayAdapter<CharSequence> ageTypeArrayAdapter=ArrayAdapter.createFromResource(this, ageTypeArrayID, android.R.layout.simple_spinner_item);
++            ageTypeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++            ageS.setAdapter(ageTypeArrayAdapter);
++        }
++        dateOfBirthTV.setText(Locale.getStringInLocale("date_of_birth",this));
++        breedTV.setText(Locale.getStringInLocale("breed",this));
++        sexTV.setText(" * "+Locale.getStringInLocale("sex",this));
++        int sexArrayID = Locale.getArrayIDInLocale("sex_array",this);
++        if(sexArrayID!=0) {
++            ArrayAdapter<CharSequence> sexArrayAdapter=ArrayAdapter.createFromResource(this, sexArrayID, android.R.layout.simple_spinner_item);
++            sexArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++            sexS.setAdapter(sexArrayAdapter);
++        }
++
++        milkingStatusTV.setText(" * " + Locale.getStringInLocale("cow_status", this));
++        inCalfStatusTV.setText(" * " + Locale.getStringInLocale("cow_in_calf", this));
++        ArrayAdapter<CharSequence> milkingStatusAdapter = ArrayAdapter.createFromResource(this, Locale.getArrayIDInLocale("cow_status_array", this), android.R.layout.simple_spinner_item);
++        milkingStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        milkingStatusS.setAdapter(milkingStatusAdapter);
++
++        ArrayAdapter<CharSequence> inCalfAdapter = ArrayAdapter.createFromResource(this, Locale.getArrayIDInLocale("cow_in_calf_array", this), android.R.layout.simple_spinner_item);
++        inCalfAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        inCalfStatusS.setAdapter(inCalfAdapter);
++
++        deformityTV.setText(Locale.getStringInLocale("deformity",this));
++        serviceTypeTV.setText(Locale.getStringInLocale("service_type_used",this));
++        int serviceTypesSireArrayID = Locale.getArrayIDInLocale("service_types",this);
++        if(serviceTypesSireArrayID!=0){
++            ArrayAdapter<CharSequence> serviceTypesAdapter = ArrayAdapter.createFromResource(this,serviceTypesSireArrayID,android.R.layout.simple_spinner_item);
++            serviceTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++            serviceTypeS.setAdapter(serviceTypesAdapter);
++        }
++
++        sireTV.setText(Locale.getStringInLocale("sire",this));
++        sireOwnerTV.setText(Locale.getStringInLocale("sire_owner", this));
++
++        int sireOwnersID = Locale.getArrayIDInLocale("bull_owners", this);
++        if(sireOwnersID != 0){
++            ArrayAdapter<CharSequence> sireOwnersAdapter = ArrayAdapter.createFromResource(this,sireOwnersID,android.R.layout.simple_spinner_item);
++            sireOwnersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++            sireOwnerS.setAdapter(sireOwnersAdapter);
++
++            if(selectedSireOwner != -1){
++                sireOwnerS.setSelection(selectedSireOwner);
++            }
++        }
++
++        sireOwnerNameTV.setText(Locale.getStringInLocale("name_sire_owner", this));
++        sireOwnerNameET.setHint(Locale.getStringInLocale("name_of_other_farmer_or_group", this));
++        damTV.setText(Locale.getStringInLocale("dam",this));
++        strawNumberTV.setText(Locale.getStringInLocale("straw_number",this));
++        embryoNumberTV.setText(Locale.getStringInLocale("embryo_number",this));
++        countryOfOriginTV.setText(Locale.getStringInLocale("other_countries",this));
++        commonCountriesTV.setText(Locale.getStringInLocale("country_of_origin",this));
++        cancelB.setText(Locale.getStringInLocale("cancel",this));
++        editB.setText(Locale.getStringInLocale("edit", this));
++
++        breedDialog.setTitle(Locale.getStringInLocale("breed",this));
++        breeds=Locale.getArrayInLocale("breeds_array",this);
++        if(breeds==null) {
++            breeds = new String[1];
++            breeds[0] = "";
++        }
++        ArrayAdapter<String> breedArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,breeds);
++        breedLV.setAdapter(breedArrayAdapter);
++        dialogBreedOkayB.setText(Locale.getStringInLocale("okay",this));
++        int totalBreedSVHeight = 0;
++        for (int i = 0, len = breedArrayAdapter.getCount(); i < len; i++) {
++            View listItem = breedArrayAdapter.getView(i, null, breedLV);
++            //listItem.measure(0, 0);
++            int list_child_item_height = listItem.getLayoutParams().height + breedLV.getDividerHeight();//item height
++            totalBreedSVHeight += list_child_item_height; //
++        }
++        if(totalBreedSVHeight > 0){
++            breedLV.getLayoutParams().height = totalBreedSVHeight;
++            if(breedDialogSV.getLayoutParams().height > (totalBreedSVHeight + dialogBreedOkayB.getLayoutParams().height)){
++                breedDialogSV.getLayoutParams().height = totalBreedSVHeight + dialogBreedOkayB.getLayoutParams().height;
++            }
++        }
++
++        deformityDialog.setTitle(Locale.getStringInLocale("deformity",this));
++        deformities=Locale.getArrayInLocale("deformities_array",this);
++        if(deformities==null) {
++            deformities = new String[1];
++            deformities[0] = "";
++        }
++        ArrayAdapter<String> deformityArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,deformities);
++        deformityLV.setAdapter(deformityArrayAdapter);
++        specifyET.setHint(Locale.getStringInLocale("specify", this));
++        noDeformityCB.setText(Locale.getStringInLocale("no_deformity", this));
++        dialogDeformityOkayB.setText(Locale.getStringInLocale("okay",this));
++
++        sireACTV.setHint(Locale.getStringInLocale("enter_sire_etn", this));
++        damACTV.setHint(Locale.getStringInLocale("enter_dam_etn",this));
++
++        ArrayAdapter countryArrayAdapter = ArrayAdapter.createFromResource(this,R.array.countries,android.R.layout.select_dialog_item);
++        countryOfOriginACTV.setAdapter(countryArrayAdapter);
++        countryOfOriginACTV.setHint(Locale.getStringInLocale("specify_other_country", this));
++
++        int totalDeformitySVHeight = 0;
++        for (int i = 0, len = deformityArrayAdapter.getCount(); i < len; i++) {
++            View listItem = deformityArrayAdapter.getView(i, null, deformityLV);
++            //listItem.measure(0, 0);
++            int list_child_item_height = listItem.getLayoutParams().height + deformityLV.getDividerHeight();//item height
++            totalDeformitySVHeight += list_child_item_height; //
++        }
++
++        Log.d(TAG, "Height of no deformity checkbox = "+String.valueOf(noDeformityCB.getLayoutParams().height));
++        Log.d(TAG, "Margin top of deformity checkbox = "+String.valueOf(((ViewGroup.MarginLayoutParams)noDeformityCB.getLayoutParams()).topMargin));
++
++        if(totalDeformitySVHeight > 0){
++            deformityLV.getLayoutParams().height = totalDeformitySVHeight;
++            int svChildrenHeight = totalDeformitySVHeight +
++                    specifyET.getLayoutParams().height +
++                    noDeformityCB.getLayoutParams().height +
++                    ((ViewGroup.MarginLayoutParams)noDeformityCB.getLayoutParams()).topMargin +
++                    dialogDeformityOkayB.getLayoutParams().height +
++                    ((ViewGroup.MarginLayoutParams)dialogDeformityOkayB.getLayoutParams()).topMargin;
++
++            if(deformitySV.getLayoutParams().height > svChildrenHeight){
++                deformitySV.getLayoutParams().height= svChildrenHeight;
++            }
++        }
++
++        ArrayAdapter<CharSequence> commonCountriesArrayAdapter = ArrayAdapter.createFromResource(this,R.array.common_countries,android.R.layout.simple_spinner_item);
++        commonCountriesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        commonCountriesS.setAdapter(commonCountriesArrayAdapter);
++    }
++
++    private void initMenuText(){
++        if(this.menu != null){
++            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
++            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
++        }
++    }
++
++    @Override
++    public void onClick(View view) {
++        if(view==cancelB) {
++           //TODO: go back to cow selection page
++        }
++        else if(view==editB) {
++            if(validateInput()) {
++                //cacheThisCow();//TODO: cache this cow
++                /*Bundle bundle=new Bundle();
++                bundle.putParcelable(Farmer.PARCELABLE_KEY,farmer);*/
++
++                clearEditTextDataCache();
++
++                //TODO: send edited data to server
++            }
++        }
++        else if(view==dateOfBirthET) {
++            dateOfBirthETClicked();
++        }
++        else if(view==breedET) {
++            breedETClicked();
++        }
++        else if(view==deformityET) {
++            deformityETClicked();
++        }
++        else if(view==dialogBreedOkayB) {
++            String selectedBreeds="";
++            SparseBooleanArray checkedBreeds=breedLV.getCheckedItemPositions();
++            for (int i=0; i<breedLV.getCount();i++)
++            {
++                if(checkedBreeds.get(i))
++                {
++                    if(!selectedBreeds.equals(""))
++                    {
++                        selectedBreeds=selectedBreeds+", "+breeds[i];
++                    }
++                    else
++                    {
++                        selectedBreeds=breeds[i];
++                    }
++                }
++            }
++            breedET.setText(selectedBreeds);
++            breedDialog.dismiss();
++        }
++        else if(view==dialogDeformityOkayB) {
++            String selectedDeformities="";
++            SparseBooleanArray checkedDeformities=deformityLV.getCheckedItemPositions();
++            for (int i=0; i<deformityLV.getCount();i++) {
++                if(checkedDeformities.get(i)) {
++                    if(!selectedDeformities.equals("")) {
++                        selectedDeformities=selectedDeformities+", "+deformities[i];
++                    }
++                    else {
++                        selectedDeformities=deformities[i];
++                    }
++                }
++            }
++            deformityET.setText(selectedDeformities);
++            deformityDialog.dismiss();
++            deformityOSpecifyText=specifyET.getText().toString();
++        }
++    }
++
++    @Override
++    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
++        String dateString=String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear+1)+"/"+String.valueOf(year);//TODO: this might be a bug
++        dateOfBirthET.setText(dateString);
++        //setAgeFromDate(dateString);
++    }
++
++    @Override
++    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
++    {
++        if(parent==breedLV) {
++            if(breedLV.isItemChecked(position)) {
++                selectedBreeds++;
++            }
++            else {
++                selectedBreeds--;
++            }
++            if(selectedBreeds>4) {
++                breedLV.setItemChecked(position,false);
++                selectedBreeds--;
++                Toast.makeText(this, Locale.getStringInLocale("maximum_of_four_breeds", this), Toast.LENGTH_LONG).show();
++            }
++        }
++        else if(parent==deformityLV) {
++            if(position==deformities.length-1){ //last deformity. should be other
++                if(deformityLV.isItemChecked(position)) {
++                    specifyET.setVisibility(EditText.VISIBLE);
++                }
++                else {
++                    specifyET.setVisibility(EditText.GONE);
++                    specifyET.setText("");
++                }
++            }
++
++            noDeformityCB.setChecked(false);
++        }
++    }
++
++    @Override
++    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
++        if(parent == serviceTypeS) {
++            changeServiceType();
++        }
++        else if(parent == commonCountriesS) {
++            toggleCountryOfOriginVisibility();
++        }
++        else if(parent == sireOwnerS){
++            toggleSireOwnerVisibility();
++        }
++        else if(parent == sexS){
++            toggleFemaleCowViewsVisibility();
++        }
++    }
++
++    @Override
++    public void onNothingSelected(AdapterView<?> parent) {
++
++    }
++
++    @Override
++    public void onFocusChange(View view, boolean hasFocus) {
++        if(view == dateOfBirthET && hasFocus){
++            if(dateOfBirthET.getText().toString().length() ==0 ){
++                dateOfBirthETClicked();
++            }
++        }
++        else if(view == breedET && hasFocus){
++            if(breedET.getText().toString().length() == 0){
++                breedETClicked();
++            }
++        }
++        else if(view == deformityET && hasFocus){
++            if(deformityET.getText().toString().length() == 0){
++                deformityETClicked();
++            }
++        }
++    }
++
++    @Override
++    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
++        if(buttonView.equals(noDeformityCB)){
++            if(isChecked){
++                deformityLV.clearChoices();
++                ArrayAdapter<String> deformityArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,deformities);
++                deformityLV.setAdapter(deformityArrayAdapter);
++                specifyET.setVisibility(EditText.GONE);
++                specifyET.setText("");
++
++                deformityET.setHint(Locale.getStringInLocale("no_deformity", this));
++            }
++            else{
++                deformityET.setHint("");
++            }
++        }
++    }
++
++    @Override
++    public boolean onLongClick(View v) {
++        if(v.equals(dateOfBirthET)){
++            Log.w(TAG, "About to delete date in dateOfBirthET");
++            dateOfBirthET.setText("");
++        }
++        return false;
++    }
++
++    private void dateOfBirthETClicked() {
++        Date date=null;
++        if(dateOfBirthET.getText().toString().length()>0) {
++            try {
++                date=new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateOfBirthET.getText().toString());
++            }
++            catch (ParseException e) {
++                e.printStackTrace();
++            }
++        }
++        if(date==null) {
++            date=new Date();
++        }
++        Calendar calendar=new GregorianCalendar();
++        calendar.setTime(date);
++        datePickerDialog=new DatePickerDialog(this,this,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
++        //datePickerDialog=createDialogWithoutDateField(this,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
++        datePickerDialog.show();
++    }
++
++    private void breedETClicked() {
++        //uncheck everything in listview
++        for (int i=0; i<breedLV.getCount();i++) {
++            breedLV.setItemChecked(i,false);
++        }
++
++        String breedETString=breedET.getText().toString();
++        if(!breedETString.equals(null)||!breedETString.equals(""))
++        {
++            String[] selectedBreeds=breedETString.split(", ");
++            //for all of the breeds check if breed is in selected breeds
++            for(int i=0; i<breeds.length;i++)
++            {
++                String currentBreed=breeds[i];
++                for(int j=0; j<selectedBreeds.length;j++) {
++                    if(currentBreed.equals(selectedBreeds[j])) {
++                        breedLV.setItemChecked(i,true);
++                        break;
++                    }
++                }
++            }
++        }
++        breedDialog.show();
++    }
++
++    private void deformityETClicked() {
++        //uncheck everything in listview
++        for (int i=0;i<deformityLV.getCount();i++) {
++            deformityLV.setItemChecked(i,false);
++        }
++        String deformityETString=deformityET.getText().toString();
++        if(!deformityETString.equals(null)||!deformityETString.equals("")) {
++            String[] selectedDeformities=deformityETString.split(", ");
++            for (int i=0;i<deformities.length;i++)
++            {
++                String currentDeformity=deformities[i];
++                for (int j=0;j<selectedDeformities.length;j++)
++                {
++                    if(currentDeformity.equals(selectedDeformities[j]))
++                    {
++                        deformityLV.setItemChecked(i,true);
++                        if (i==deformities.length-1)
++                        {
++                            specifyET.setVisibility(EditText.VISIBLE);
++                            specifyET.setText(deformityOSpecifyText);
++                        }
++                        break;
++                    }
++                }
++            }
++        }
++        deformityDialog.show();
++    }
++
++    private void changeServiceType() {
++        String[] serviceTypesInEN = Locale.getArrayInLocale("service_types", this, Locale.LOCALE_ENGLISH);
++        if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Bull")) {
++            sireTV.setVisibility(TextView.VISIBLE);
++            sireOwnerTV.setVisibility(TextView.VISIBLE);
++            sireOwnerS.setVisibility(Spinner.VISIBLE);
++            toggleSireOwnerVisibility();
++//            sireS.setVisibility(Spinner.VISIBLE);
++            strawNumberTV.setVisibility(TextView.GONE);
++            strawNumberET.setVisibility(EditText.GONE);
++            damTV.setVisibility(TextView.VISIBLE);
++//            damS.setVisibility(Spinner.VISIBLE);
++            damS.setVisibility(Spinner.GONE);
++            damACTV.setVisibility(AutoCompleteTextView.VISIBLE);
++            sireACTV.setVisibility(AutoCompleteTextView.VISIBLE);
++            embryoNumberTV.setVisibility(TextView.GONE);
++            embryoNumberET.setVisibility(EditText.GONE);
++            commonCountriesTV.setVisibility(TextView.VISIBLE);
++            commonCountriesS.setVisibility(Spinner.VISIBLE);
++            toggleCountryOfOriginVisibility();
++        }
++        else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Artificial Insemination")) {
++            sireTV.setVisibility(TextView.GONE);
++            sireOwnerTV.setVisibility(TextView.GONE);
++            sireOwnerS.setVisibility(Spinner.GONE);
++            sireOwnerNameTV.setVisibility(TextView.GONE);
++            sireOwnerNameET.setVisibility(EditText.GONE);
++//            sireS.setVisibility(Spinner.GONE);
++            strawNumberTV.setVisibility(TextView.VISIBLE);
++            strawNumberET.setVisibility(EditText.VISIBLE);
++            damTV.setVisibility(TextView.VISIBLE);
++//            damS.setVisibility(Spinner.VISIBLE);
++            damS.setVisibility(Spinner.GONE);
++            damACTV.setVisibility(AutoCompleteTextView.VISIBLE);
++            sireACTV.setVisibility(AutoCompleteTextView.GONE);
++            embryoNumberTV.setVisibility(TextView.GONE);
++            embryoNumberET.setVisibility(EditText.GONE);
++            commonCountriesTV.setVisibility(TextView.GONE);
++            commonCountriesS.setVisibility(Spinner.GONE);
++            countryOfOriginTV.setVisibility(TextView.GONE);
++            countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
++        }
++        else if(serviceTypesInEN[serviceTypeS.getSelectedItemPosition()].equals("Embryo Transfer")) {
++            sireTV.setVisibility(TextView.GONE);
++            sireOwnerTV.setVisibility(TextView.GONE);
++            sireOwnerS.setVisibility(Spinner.GONE);
++            sireOwnerNameTV.setVisibility(TextView.GONE);
++            sireOwnerNameET.setVisibility(EditText.GONE);
++//            sireS.setVisibility(Spinner.GONE);
++            strawNumberTV.setVisibility(TextView.GONE);
++            strawNumberET.setVisibility(EditText.GONE);
++            damTV.setVisibility(TextView.GONE);
++            damS.setVisibility(Spinner.GONE);
++            damACTV.setVisibility(AutoCompleteTextView.GONE);
++            sireACTV.setVisibility(AutoCompleteTextView.GONE);
++            embryoNumberTV.setVisibility(TextView.VISIBLE);
++            embryoNumberET.setVisibility(EditText.VISIBLE);
++            commonCountriesTV.setVisibility(TextView.GONE);
++            commonCountriesS.setVisibility(Spinner.GONE);
++            countryOfOriginTV.setVisibility(TextView.GONE);
++            countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
++        }
++    }
++
++    private void toggleSireOwnerVisibility(){
++        String[] sireOwnersInEN = Locale.getArrayInLocale("bull_owners", this, Locale.LOCALE_ENGLISH);
++        if(sireOwnersInEN[sireOwnerS.getSelectedItemPosition()].equals("Own bull")){
++            sireOwnerNameTV.setVisibility(TextView.GONE);
++            sireOwnerNameET.setVisibility(EditText.GONE);
++        }
++        else{
++            sireOwnerNameTV.setVisibility(TextView.VISIBLE);
++            sireOwnerNameET.setVisibility(EditText.VISIBLE);
++        }
++    }
++
++    private void toggleCountryOfOriginVisibility(){
++        String[] commonCountries = getResources().getStringArray(R.array.common_countries);
++        if(commonCountries[commonCountriesS.getSelectedItemPosition()].equals("Other")) {
++            countryOfOriginACTV.setVisibility(AutoCompleteTextView.VISIBLE);
++            countryOfOriginTV.setVisibility(TextView.VISIBLE);
++            countryOfOriginACTV.setText("");
++        }
++        else {
++            countryOfOriginACTV.setVisibility(AutoCompleteTextView.GONE);
++            countryOfOriginTV.setVisibility(TextView.GONE);
++            countryOfOriginACTV.setText(commonCountries[commonCountriesS.getSelectedItemPosition()]);
++        }
++    }
++
++    private void toggleFemaleCowViewsVisibility(){
++        Log.d(TAG, "Toggling female views");
++        String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
++        if(sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){
++            milkingStatusS.setVisibility(Spinner.VISIBLE);
++            milkingStatusTV.setVisibility(TextView.VISIBLE);
++
++            inCalfStatusS.setVisibility(Spinner.VISIBLE);
++            inCalfStatusTV.setVisibility(TextView.VISIBLE);
++        }
++        else{
++            milkingStatusS.setVisibility(Spinner.GONE);
++            milkingStatusTV.setVisibility(TextView.GONE);
++
++            inCalfStatusS.setVisibility(Spinner.GONE);
++            inCalfStatusTV.setVisibility(TextView.GONE);
++        }
++    }
++
++    private boolean validateInput() {
++        String earTagNumberText=earTagNumberET.getText().toString();
++        String nameText=nameET.getText().toString();
++        if((earTagNumberText==null||earTagNumberText.equals("")) && (nameText==null||nameText.equals(""))) {
++            Toast.makeText(this,Locale.getStringInLocale("enter_ear_tag_no_or_name",this),Toast.LENGTH_LONG).show();
++            return false;
++        }
++
++        String[] sexInEN = Locale.getArrayInLocale("sex_array", this, Locale.LOCALE_ENGLISH);
++        if(sexInEN[sexS.getSelectedItemPosition()].equals(Cow.SEX_FEMALE)){
++            String[] inCalfArray = Locale.getArrayInLocale("cow_in_calf_array",this);
++            String[] milkingStatusArray = Locale.getArrayInLocale("cow_status_array",this);
++            if(inCalfStatusS.getSelectedItemPosition() == -1 || inCalfArray[inCalfStatusS.getSelectedItemPosition()].length() == 0){
++                Toast.makeText(this, Locale.getStringInLocale("enter_in_calf_status", this), Toast.LENGTH_LONG).show();
++                return false;
++            }
++            if(milkingStatusS.getSelectedItemPosition() == -1 || milkingStatusArray[milkingStatusS.getSelectedItemPosition()].length() == 0){
++                Toast.makeText(this, Locale.getStringInLocale("enter_milk_status_of_cow", this), Toast.LENGTH_LONG).show();
++                return false;
++            }
++        }
++
++        if(dateOfBirthET.getText().toString().trim().equals("") && ageET.getText().toString().trim().equals("")){
++            Toast.makeText(this, Locale.getStringInLocale("enter_age_or_dob", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++        else if (!dateOfBirthET.getText().toString().trim().equals("") && !ageET.getText().toString().trim().equals("")) {//both dob and age are set
++            String[] ageTypesInEN = Locale.getArrayInLocale("age_type_array", this, Locale.LOCALE_ENGLISH);
++            String ageType = ageTypesInEN[ageS.getSelectedItemPosition()];
++            float unitAge = 0;
++            if (ageType.equals("Years")) {
++                unitAge = 31557600000L;
++            } else if (ageType.equals("Months")) {
++                unitAge = 2628000000L;
++            } else if (ageType.equals("Days")) {
++                unitAge = 86400000L;
++            }
++
++            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
++
++            try {
++                Date enteredDate = simpleDateFormat.parse(dateOfBirthET.getText().toString());
++                long enteredDateMs = enteredDate.getTime();
++                long ageMs = (long) (new Date().getTime() - (Integer.parseInt(ageET.getText().toString()) * unitAge));
++                long msDiff = Math.abs(ageMs - enteredDateMs);
++                float unitDiff = msDiff / unitAge;
++                if (unitDiff > 1) {
++                    Toast.makeText(this, Locale.getStringInLocale("age_diff_from_dob", this), Toast.LENGTH_LONG).show();
++                    return false;
++                }
++            } catch (ParseException e) {
++                e.printStackTrace();
++            }
++        }
++
++        if(countryOfOriginACTV.getText().toString().length() > 0) {
++            String[] countries = this.getResources().getStringArray(R.array.countries);
++            boolean countryFound = false;
++            for(int i = 0; i < countries.length; i++) {
++                if(countries[i].equals(countryOfOriginACTV.getText().toString())) {
++                    countryFound = true;
++                    break;
++                }
++            }
++            if(!countryFound) {
++                Toast.makeText(this,Locale.getStringInLocale("country_not_found",this),Toast.LENGTH_LONG).show();
++                return false;
++            }
++        }
++
++        return true;
++    }
++}
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmer.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmer.java
+deleted file mode 100644
+index d38673c..0000000
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmer.java
++++ /dev/null
+@@ -1,556 +0,0 @@
+-package org.cgiar.ilri.mistro.farmer;
+-
+-import android.app.ActionBar;
+-import android.app.AlertDialog;
+-import android.app.ProgressDialog;
+-import android.content.Context;
+-import android.content.DialogInterface;
+-import android.content.Intent;
+-import android.location.Criteria;
+-import android.location.Location;
+-import android.location.LocationListener;
+-import android.location.LocationManager;
+-import android.os.AsyncTask;
+-import android.os.Bundle;
+-import android.provider.Settings;
+-import android.telephony.TelephonyManager;
+-import android.util.Log;
+-import android.view.View;
+-import android.widget.ArrayAdapter;
+-import android.widget.Button;
+-import android.widget.EditText;
+-import android.widget.Spinner;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-import com.actionbarsherlock.app.SherlockActivity;
+-import com.actionbarsherlock.view.Menu;
+-import com.actionbarsherlock.view.MenuInflater;
+-import com.actionbarsherlock.view.MenuItem;
+-
+-import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+-import org.cgiar.ilri.mistro.farmer.backend.Locale;
+-import org.cgiar.ilri.mistro.farmer.backend.database.DatabaseHelper;
+-import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+-import org.json.JSONArray;
+-
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-
+-public class EditFarmer extends SherlockActivity implements MistroActivity, View.OnClickListener, LocationListener {
+-    private static final String TAG = "EditFarmer";
+-
+-
+-    private Menu menu;
+-    private TextView fullNameTV;
+-    private EditText fullNameET;
+-    private TextView preferredLanguageTV;
+-    private Spinner preferredLanguageS;
+-    private TextView extensionPersonnelTV;
+-    private Spinner extensionPersonnelS;
+-    private TextView mobileNumberTV;
+-    private EditText mobileNumberET;
+-    private TextView farmLocTV;
+-    private Button recordLocB;
+-    private Button editB;
+-    private Button cancelB;
+-
+-    private String adminData;
+-    private Farmer farmer;
+-    private List<String> languages;
+-    private boolean cacheData;
+-    private List<String> vetNames;
+-    private String longitude;
+-    private String latitude;
+-    private LocationManager locationManager;
+-    private ProgressDialog gpsProgressDialog;
+-    private boolean locationGotten;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_edit_farmer);
+-
+-        languages = Locale.getAllLanguages(this);
+-        cacheData = true;
+-
+-        fullNameTV=(TextView)this.findViewById(R.id.full_name_tv);
+-        fullNameET=(EditText)this.findViewById(R.id.full_name_et);
+-        preferredLanguageTV = (TextView)this.findViewById(R.id.preferred_language_tv);
+-        preferredLanguageS = (Spinner)this.findViewById(R.id.preferred_language_s);
+-        extensionPersonnelTV=(TextView)this.findViewById(R.id.extension_personnel_tv);
+-        extensionPersonnelS=(Spinner)this.findViewById(R.id.extension_personnel_s);
+-        mobileNumberTV=(TextView)this.findViewById(R.id.mobile_number_tv);
+-        mobileNumberET=(EditText)this.findViewById(R.id.mobile_number_et);
+-        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+-        //Toast.makeText(this,telephonyManager.getSimSerialNumber(),Toast.LENGTH_LONG).show();
+-        mobileNumberET.setText(telephonyManager.getLine1Number());
+-        farmLocTV = (TextView)findViewById(R.id.farm_loc_tv);
+-        recordLocB = (Button)findViewById(R.id.record_loc_b);
+-        recordLocB.setOnClickListener(this);
+-        editB=(Button)this.findViewById(R.id.edit_b);
+-        editB.setOnClickListener(this);
+-        cancelB =(Button)this.findViewById(R.id.cancel_b);
+-        cancelB.setOnClickListener(this);
+-
+-        //init text according to locale
+-        initTextInViews();
+-    }
+-
+-    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+-        MenuInflater inflater = getSupportMenuInflater();
+-        inflater.inflate(R.menu.edit_farmer, menu);
+-        this.menu = menu;
+-        initMenuText();
+-        return true;
+-    }
+-
+-    public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+-        // Handle item selection
+-        if(Language.processLanguageMenuItemSelected(this, this, item)){
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_back_main_menu) {
+-            DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+-                @Override
+-                public void onClick(DialogInterface dialog, int which) {
+-                    if(which==DialogInterface.BUTTON_POSITIVE){
+-                        dialog.dismiss();
+-
+-                        clearEditTextDataCache();
+-
+-                        Intent intent = new Intent(EditFarmer.this, MainMenu.class);
+-                        intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
+-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+-                        startActivity(intent);
+-                    }
+-                    else{
+-                        dialog.cancel();
+-                    }
+-                }
+-            };
+-            AlertDialog mainMenuDialog = Utils.createMainMenuDialog(this, onClickListener);
+-            mainMenuDialog.show();
+-        }
+-        return false;
+-    }
+-
+-    @Override
+-    public void initTextInViews() {
+-        setTitle(Locale.getStringInLocale("edit_farmer", this));
+-        fullNameTV.setText(" * " + Locale.getStringInLocale("full_name", this));
+-        extensionPersonnelTV.setText(Locale.getStringInLocale("extension_p", this));
+-
+-        List<String> tmpVetNames = new ArrayList<String>();
+-        tmpVetNames.add("");
+-        ArrayAdapter<String> epArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,tmpVetNames);
+-        epArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+-        extensionPersonnelS.setAdapter(epArrayAdapter);
+-
+-        mobileNumberTV.setText(" * " + Locale.getStringInLocale("phone_number", this));
+-        preferredLanguageTV.setText(" * "+Locale.getStringInLocale("preferred_language", this));
+-
+-        ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, languages);
+-        languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+-        preferredLanguageS.setAdapter(languageAdapter);
+-
+-        recordLocB.setText(Locale.getStringInLocale("rec_farm_loc", this));
+-
+-        editB.setText(Locale.getStringInLocale("edit", this));
+-        cancelB.setText(Locale.getStringInLocale("cancel", this));
+-    }
+-
+-    private void initMenuText(){
+-        if(this.menu != null){
+-            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
+-            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
+-        }
+-    }
+-
+-    @Override
+-    protected void onResume() {
+-        super.onResume();
+-        Bundle bundle = this.getIntent().getExtras();
+-        if(bundle != null){
+-            adminData = bundle.getString(FarmerSelection.KEY_ADMIN_DATA);
+-            farmer = bundle.getParcelable(Farmer.PARCELABLE_KEY);
+-            if(farmer != null){
+-                fullNameET.setText(farmer.getFullName());
+-                mobileNumberET.setText(farmer.getMobileNumber());
+-
+-                String prefLanguage = Locale.getLanguage(this, farmer.getPreferredLocale());
+-
+-                for(int i = 0; i < languages.size(); i++){
+-                    if(languages.get(i).equals(prefLanguage)){
+-                        preferredLanguageS.setSelection(i);
+-                    }
+-                }
+-
+-                updateFarmLocation(farmer.getLongitude(), farmer.getLatitude());
+-
+-                //fetch extension personnel names from server. Do this after farmer object is initialized since the thread is going to use this object
+-                FetchVetsThread fetchVetsThread = new FetchVetsThread();
+-                fetchVetsThread.execute(0);
+-            }
+-            else{
+-                Log.e(TAG, "Parcelable farmer object from previous activity is null");
+-            }
+-        }
+-        else{
+-            Log.e(TAG, "Unable to get data from previous activity");
+-        }
+-    }
+-
+-    private void cacheEditTextData(){
+-        if(cacheData) {
+-            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, fullNameET.getText().toString());
+-            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, mobileNumberET.getText().toString());
+-        }
+-    }
+-
+-    private void restoreEditTextData(){
+-        fullNameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, ""));
+-        mobileNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, ""));
+-    }
+-
+-    private void clearEditTextDataCache(){
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, "");
+-
+-        cacheData = false;
+-    }
+-
+-
+-    @Override
+-    public void onClick(View v) {
+-        if(v.equals(cancelB)){
+-            Intent intent = new Intent(this, FarmerSelection.class);
+-            intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData);
+-            startActivity(intent);
+-        }
+-        else if(v.equals(recordLocB)){
+-            buildGPSAlert();
+-        }
+-        else if(v.equals(editB)){
+-            if(validateInput()){
+-                cacheFarmer();
+-
+-                EditFarmerThread editFarmerThread = new EditFarmerThread();
+-                editFarmerThread.execute(farmer.getJsonObject().toString());
+-            }
+-        }
+-    }
+-
+-    private void cacheFarmer()
+-    {
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, "");
+-        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, "");
+-
+-        farmer.setFullName(fullNameET.getText().toString());
+-        if(vetNames != null && extensionPersonnelS.getSelectedItemPosition() != -1){
+-            farmer.setExtensionPersonnel(vetNames.get(extensionPersonnelS.getSelectedItemPosition()));
+-        }
+-        else{
+-            farmer.setExtensionPersonnel("");
+-        }
+-
+-        if(languages != null && preferredLanguageS.getSelectedItemPosition() != -1){
+-            farmer.setPreferredLocale(Locale.getLocaleCode(this, languages.get(preferredLanguageS.getSelectedItemPosition())));
+-        }
+-
+-        farmer.setMobileNumber(mobileNumberET.getText().toString());
+-
+-        farmer.setMode(Farmer.MODE_EDIT_FARMER);
+-    }
+-
+-    private void buildGPSAlert(){
+-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+-        builder.setMessage(Locale.getStringInLocale("are_you_in_farmers_farm",this));
+-        builder.setPositiveButton(Locale.getStringInLocale("yes",this), new DialogInterface.OnClickListener(){
+-
+-            @Override
+-            public void onClick(DialogInterface dialog, int which) {
+-                dialog.dismiss();
+-                getGPSCoordinates();
+-            }
+-        });
+-        builder.setNegativeButton(Locale.getStringInLocale("no",this), new DialogInterface.OnClickListener(){
+-            @Override
+-            public void onClick(DialogInterface dialog, int which) {
+-                dialog.dismiss();
+-            }
+-        });
+-
+-        AlertDialog alertDialog = builder.create();
+-        alertDialog.show();
+-    }
+-
+-    private void getGPSCoordinates() {
+-        locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
+-        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+-            //Toast.makeText(this,"gps started",Toast.LENGTH_LONG).show();
+-            locationGotten = false;
+-            gpsProgressDialog = ProgressDialog.show(EditFarmer.this, "", Locale.getStringInLocale("accuracy", EditFarmer.this) + " : " +Locale.getStringInLocale("unknown", EditFarmer.this), true);
+-            gpsProgressDialog.setCancelable(true);
+-            gpsProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+-                @Override
+-                public void onCancel(DialogInterface dialog) {
+-                    locationGotten = true;
+-                }
+-            });
+-
+-            Criteria criteria=new Criteria();
+-            String provider=locationManager.getBestProvider(criteria,false);
+-            Location location=locationManager.getLastKnownLocation(provider);
+-            locationManager.requestLocationUpdates(provider,18000,1000,this);//If farmer  is moving at 200km/h, will still be able to update!
+-            if(location!=null)
+-            {
+-                onLocationChanged(location);
+-            }
+-        }
+-        else {
+-            AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
+-            alertDialogBuilder.setTitle(Locale.getStringInLocale("enable_gps",this));
+-            alertDialogBuilder
+-                    .setMessage(Locale.getStringInLocale("reason_for_enabling_gps", this))
+-                    .setCancelable(false)
+-                    .setPositiveButton(Locale.getStringInLocale("okay",this), new DialogInterface.OnClickListener()
+-                    {
+-                        @Override
+-                        public void onClick(DialogInterface dialog, int which)
+-                        {
+-                            Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+-                            startActivity(intent);
+-                        }
+-                    })
+-                    .setNegativeButton(Locale.getStringInLocale("cancel",this), new DialogInterface.OnClickListener()
+-                    {
+-                        @Override
+-                        public void onClick(DialogInterface dialog, int which)
+-                        {
+-                            dialog.cancel();
+-                        }
+-                    });
+-            AlertDialog alertDialog=alertDialogBuilder.create();
+-            alertDialog.show();
+-
+-        }
+-    }
+-
+-    @Override
+-    public void onLocationChanged(Location location) {
+-        if(!locationGotten){
+-            latitude=String.valueOf(location.getLatitude());
+-            longitude=String.valueOf(location.getLongitude());
+-
+-            farmer.setLatitude(latitude);
+-            farmer.setLongitude(longitude);
+-
+-            updateFarmLocation(longitude, latitude);
+-
+-            Log.d(TAG, "latitude : " + latitude);
+-            Log.d(TAG, "longitude : " + longitude);
+-            if(latitude !=null && longitude != null){
+-                String lastDigitInLong = longitude.substring(longitude.length() - 1, longitude.length());
+-                String longCompare = longitude.substring(0, longitude.length() - 1) + String.valueOf(Integer.parseInt(lastDigitInLong) + 1);
+-
+-                String lastDigitInLat = latitude.substring(latitude.length() - 1, latitude.length());
+-                String latCompare = latitude.substring(0, latitude.length() - 1) + String.valueOf(Integer.parseInt(lastDigitInLat) + 1);
+-
+-                float[] accuracy = new float[1];
+-                double lat1 = Double.parseDouble(latitude);
+-                double lon1 = Double.parseDouble(longitude);
+-                double lat2 = Double.parseDouble(latCompare);
+-                double lon2 = Double.parseDouble(longCompare);
+-                Location.distanceBetween(lat1, lon1, lat2, lon2, accuracy);
+-
+-                int accuracyInM =(int) (accuracy[0] * 0.000621371192f);
+-                Log.d(TAG, "Accuracy at "+String.valueOf(accuracyInM));
+-
+-                gpsProgressDialog.setMessage(Locale.getStringInLocale("accuracy", this) + " : " + String.valueOf(accuracyInM) + " M");
+-
+-                if(accuracyInM < 4){
+-                    locationGotten = true;
+-                    locationManager.removeUpdates(this);
+-                    gpsProgressDialog.dismiss();
+-                }
+-            }
+-        }
+-    }
+-
+-    @Override
+-    public void onStatusChanged(String provider, int status, Bundle extras) {
+-
+-    }
+-
+-    @Override
+-    public void onProviderEnabled(String provider) {
+-
+-    }
+-
+-    @Override
+-    public void onProviderDisabled(String provider) {
+-
+-    }
+-
+-    public void updateFarmLocation(String longitude, String latitude){
+-        String farmLoc = Locale.getStringInLocale("farm_location", this);
+-        if(DataHandler.isNull(farmer.getLongitude()) || farmer.getLongitude().length() == 0){
+-            farmLoc = farmLoc + "\n \t Longitude: " + Locale.getStringInLocale("not_set", this);
+-        }
+-        else{
+-            farmLoc = farmLoc + "\n \t Longitude: " + longitude;
+-        }
+-
+-        if(DataHandler.isNull(farmer.getLatitude()) || farmer.getLatitude().length() == 0){
+-            farmLoc = farmLoc + "\n \t Latitude: " + Locale.getStringInLocale("not_set", this);
+-        }
+-        else{
+-            farmLoc = farmLoc + "\n \t Latitude: " + latitude;
+-        }
+-        farmLocTV.setText(farmLoc);
+-    }
+-
+-    private boolean validateInput()
+-    {
+-        String nameText=fullNameET.getText().toString();
+-        if(nameText==null || nameText.equals(""))
+-        {
+-            Toast.makeText(this,Locale.getStringInLocale("enter_farmer_name", this),Toast.LENGTH_LONG).show();
+-            return false;
+-        }
+-        else if(nameText.split(" ").length < 2){
+-            Toast.makeText(this, Locale.getStringInLocale("enter_two_names", this), Toast.LENGTH_LONG).show();
+-            return false;
+-        }
+-
+-        String mobileNumberText=mobileNumberET.getText().toString();
+-        if(mobileNumberText==null||mobileNumberText.equals(""))
+-        {
+-            Toast.makeText(this,Locale.getStringInLocale("enter_farmer_mobile_no", this),Toast.LENGTH_LONG).show();
+-            return false;
+-        }
+-        else if(mobileNumberText.length() != 10){
+-            Toast.makeText(this, Locale.getStringInLocale("phone_number_not_valid", this), Toast.LENGTH_LONG).show();
+-            return false;
+-        }
+-
+-        if(vetNames == null){
+-            Toast.makeText(this, Locale.getStringInLocale("epersonnel_tshoot", this), Toast.LENGTH_LONG).show();
+-            return false;
+-        }
+-        else if(extensionPersonnelS.getSelectedItemPosition() == -1 || vetNames.get(extensionPersonnelS.getSelectedItemPosition()).length() == 0){
+-            Toast.makeText(this, Locale.getStringInLocale("select_epersonnel", this), Toast.LENGTH_LONG).show();
+-            return  false;
+-        }
+-        return true;
+-    }
+-
+-    private class FetchVetsThread extends AsyncTask<Integer, Integer, String> {
+-        private ProgressDialog progressDialog;
+-
+-        @Override
+-        protected void onPreExecute() {
+-            super.onPreExecute();
+-            progressDialog = ProgressDialog.show(EditFarmer.this, "", Locale.getStringInLocale("loading_please_wait", EditFarmer.this), true);
+-        }
+-
+-        @Override
+-        protected String doInBackground(Integer... params) {
+-            Log.d(TAG, "Fetching extension personnel from server");
+-
+-            return DataHandler.sendDataToServer(EditFarmer.this, "", DataHandler.FARMER_FETCH_VETS_URL, true, DatabaseHelper.TABLE_EXTENSION_PERSONNEL);
+-        }
+-
+-        @Override
+-        protected void onPostExecute(String result) {
+-            super.onPostExecute(result);
+-            progressDialog.dismiss();
+-
+-            if(result == null){
+-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("unable_to_get_epersonnel", EditFarmer.this), Toast.LENGTH_LONG).show();
+-            }
+-            else{
+-                try{
+-                    Log.d(TAG, "result is "+result);
+-                    JSONArray vetJsonArray = new JSONArray(result);
+-                    vetNames = new ArrayList<String>();
+-                    vetNames.add("");
+-                    for(int i = 0; i < vetJsonArray.length(); i++){
+-                        vetNames.add(vetJsonArray.getJSONObject(i).getString("name"));
+-                    }
+-
+-                    int selection = 0;//default selection is the blank one
+-                    if(farmer != null){
+-                        String selectedEP = farmer.getExtensionPersonnel();
+-                        if(selectedEP != null && selectedEP.length() > 0){
+-                            for(int i =0; i < vetNames.size(); i++){
+-                                if(vetNames.get(i).equals(selectedEP)){
+-                                    selection = i;
+-                                }
+-                            }
+-                        }
+-                    }
+-
+-                    ArrayAdapter<String> epArrayAdapter = new ArrayAdapter<String>(EditFarmer.this, android.R.layout.simple_spinner_item, vetNames);
+-                    epArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+-                    extensionPersonnelS.setAdapter(epArrayAdapter);
+-                    extensionPersonnelS.setSelection(selection);
+-                }
+-                catch (Exception e){
+-                    e.printStackTrace();
+-                }
+-            }
+-        }
+-    }
+-
+-    private class EditFarmerThread extends AsyncTask<String, Integer, String>{
+-        private ProgressDialog progressDialog;
+-
+-        @Override
+-        protected void onPreExecute() {
+-            super.onPreExecute();
+-            progressDialog = ProgressDialog.show(EditFarmer.this, "", Locale.getStringInLocale("loading_please_wait", EditFarmer.this), true);
+-        }
+-
+-        @Override
+-        protected String doInBackground(String... params) {
+-            return DataHandler.sendDataToServer(EditFarmer.this, params[0], DataHandler.ADMIN_EDIT_FARMER_URL, true);
+-        }
+-
+-        @Override
+-        protected void onPostExecute(String result) {
+-            super.onPostExecute(result);
+-            progressDialog.dismiss();
+-
+-            if(result == null) {
+-                String httpError = DataHandler.getSharedPreference(EditFarmer.this, "http_error", "No Error thrown to application. Something must be really wrong");
+-                Toast.makeText(EditFarmer.this,httpError,Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("generic_sms_error", EditFarmer.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("no_service", EditFarmer.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("radio_off", EditFarmer.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("server_not_receive_sms", EditFarmer.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.CODE_NUMBER_IN_USE)){
+-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("number_in_use", EditFarmer.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
+-                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("farmer_profile_updated", EditFarmer.this), Toast.LENGTH_LONG).show();
+-
+-                Intent intent = new Intent(EditFarmer.this, FarmerSelection.class);
+-                //intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData);
+-                startActivity(intent);
+-            }
+-        }
+-    }
+-}
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java
+new file mode 100644
+index 0000000..adecabe
+--- /dev/null
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmerActivity.java
+@@ -0,0 +1,555 @@
++package org.cgiar.ilri.mistro.farmer;
++
++import android.app.AlertDialog;
++import android.app.ProgressDialog;
++import android.content.Context;
++import android.content.DialogInterface;
++import android.content.Intent;
++import android.location.Criteria;
++import android.location.Location;
++import android.location.LocationListener;
++import android.location.LocationManager;
++import android.os.AsyncTask;
++import android.os.Bundle;
++import android.provider.Settings;
++import android.telephony.TelephonyManager;
++import android.util.Log;
++import android.view.View;
++import android.widget.ArrayAdapter;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.Spinner;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import com.actionbarsherlock.app.SherlockActivity;
++import com.actionbarsherlock.view.Menu;
++import com.actionbarsherlock.view.MenuInflater;
++import com.actionbarsherlock.view.MenuItem;
++
++import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
++import org.cgiar.ilri.mistro.farmer.backend.Locale;
++import org.cgiar.ilri.mistro.farmer.backend.database.DatabaseHelper;
++import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
++import org.json.JSONArray;
++
++import java.util.ArrayList;
++import java.util.List;
++
++
++public class EditFarmerActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, LocationListener {
++    private static final String TAG = "EditFarmerActivity";
++
++
++    private Menu menu;
++    private TextView fullNameTV;
++    private EditText fullNameET;
++    private TextView preferredLanguageTV;
++    private Spinner preferredLanguageS;
++    private TextView extensionPersonnelTV;
++    private Spinner extensionPersonnelS;
++    private TextView mobileNumberTV;
++    private EditText mobileNumberET;
++    private TextView farmLocTV;
++    private Button recordLocB;
++    private Button editB;
++    private Button cancelB;
++
++    private String adminData;
++    private Farmer farmer;
++    private List<String> languages;
++    private boolean cacheData;
++    private List<String> vetNames;
++    private String longitude;
++    private String latitude;
++    private LocationManager locationManager;
++    private ProgressDialog gpsProgressDialog;
++    private boolean locationGotten;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_edit_farmer);
++
++        languages = Locale.getAllLanguages(this);
++        cacheData = true;
++
++        fullNameTV=(TextView)this.findViewById(R.id.full_name_tv);
++        fullNameET=(EditText)this.findViewById(R.id.full_name_et);
++        preferredLanguageTV = (TextView)this.findViewById(R.id.preferred_language_tv);
++        preferredLanguageS = (Spinner)this.findViewById(R.id.preferred_language_s);
++        extensionPersonnelTV=(TextView)this.findViewById(R.id.extension_personnel_tv);
++        extensionPersonnelS=(Spinner)this.findViewById(R.id.extension_personnel_s);
++        mobileNumberTV=(TextView)this.findViewById(R.id.mobile_number_tv);
++        mobileNumberET=(EditText)this.findViewById(R.id.mobile_number_et);
++        TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
++        //Toast.makeText(this,telephonyManager.getSimSerialNumber(),Toast.LENGTH_LONG).show();
++        mobileNumberET.setText(telephonyManager.getLine1Number());
++        farmLocTV = (TextView)findViewById(R.id.farm_loc_tv);
++        recordLocB = (Button)findViewById(R.id.record_loc_b);
++        recordLocB.setOnClickListener(this);
++        editB=(Button)this.findViewById(R.id.edit_b);
++        editB.setOnClickListener(this);
++        cancelB =(Button)this.findViewById(R.id.cancel_b);
++        cancelB.setOnClickListener(this);
++
++        //init text according to locale
++        initTextInViews();
++    }
++
++    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
++        MenuInflater inflater = getSupportMenuInflater();
++        inflater.inflate(R.menu.edit_farmer, menu);
++        this.menu = menu;
++        initMenuText();
++        return true;
++    }
++
++    public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
++        // Handle item selection
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
++            return true;
++        }
++        else if(item.getItemId() == R.id.action_back_main_menu) {
++            DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
++                @Override
++                public void onClick(DialogInterface dialog, int which) {
++                    if(which==DialogInterface.BUTTON_POSITIVE){
++                        dialog.dismiss();
++
++                        clearEditTextDataCache();
++
++                        Intent intent = new Intent(EditFarmerActivity.this, MainMenu.class);
++                        intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
++                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
++                        startActivity(intent);
++                    }
++                    else{
++                        dialog.cancel();
++                    }
++                }
++            };
++            AlertDialog mainMenuDialog = Utils.createMainMenuDialog(this, onClickListener);
++            mainMenuDialog.show();
++        }
++        return false;
++    }
++
++    @Override
++    public void initTextInViews() {
++        setTitle(Locale.getStringInLocale("edit_farmer", this));
++        fullNameTV.setText(" * " + Locale.getStringInLocale("full_name", this));
++        extensionPersonnelTV.setText(Locale.getStringInLocale("extension_p", this));
++
++        List<String> tmpVetNames = new ArrayList<String>();
++        tmpVetNames.add("");
++        ArrayAdapter<String> epArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,tmpVetNames);
++        epArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        extensionPersonnelS.setAdapter(epArrayAdapter);
++
++        mobileNumberTV.setText(" * " + Locale.getStringInLocale("phone_number", this));
++        preferredLanguageTV.setText(" * "+Locale.getStringInLocale("preferred_language", this));
++
++        ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, languages);
++        languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        preferredLanguageS.setAdapter(languageAdapter);
++
++        recordLocB.setText(Locale.getStringInLocale("rec_farm_loc", this));
++
++        editB.setText(Locale.getStringInLocale("edit", this));
++        cancelB.setText(Locale.getStringInLocale("cancel", this));
++    }
++
++    private void initMenuText(){
++        if(this.menu != null){
++            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
++            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
++        }
++    }
++
++    @Override
++    protected void onResume() {
++        super.onResume();
++        Bundle bundle = this.getIntent().getExtras();
++        if(bundle != null){
++            adminData = bundle.getString(FarmerSelectionActivity.KEY_ADMIN_DATA);
++            farmer = bundle.getParcelable(Farmer.PARCELABLE_KEY);
++            if(farmer != null){
++                fullNameET.setText(farmer.getFullName());
++                mobileNumberET.setText(farmer.getMobileNumber());
++
++                String prefLanguage = Locale.getLanguage(this, farmer.getPreferredLocale());
++
++                for(int i = 0; i < languages.size(); i++){
++                    if(languages.get(i).equals(prefLanguage)){
++                        preferredLanguageS.setSelection(i);
++                    }
++                }
++
++                updateFarmLocation(farmer.getLongitude(), farmer.getLatitude());
++
++                //fetch extension personnel names from server. Do this after farmer object is initialized since the thread is going to use this object
++                FetchVetsThread fetchVetsThread = new FetchVetsThread();
++                fetchVetsThread.execute(0);
++            }
++            else{
++                Log.e(TAG, "Parcelable farmer object from previous activity is null");
++            }
++        }
++        else{
++            Log.e(TAG, "Unable to get data from previous activity");
++        }
++    }
++
++    private void cacheEditTextData(){
++        if(cacheData) {
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, fullNameET.getText().toString());
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, mobileNumberET.getText().toString());
++        }
++    }
++
++    private void restoreEditTextData(){
++        fullNameET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, ""));
++        mobileNumberET.setText(DataHandler.getSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, ""));
++    }
++
++    private void clearEditTextDataCache(){
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, "");
++
++        cacheData = false;
++    }
++
++
++    @Override
++    public void onClick(View v) {
++        if(v.equals(cancelB)){
++            Intent intent = new Intent(this, FarmerSelectionActivity.class);
++            intent.putExtra(FarmerSelectionActivity.KEY_ADMIN_DATA, adminData);
++            startActivity(intent);
++        }
++        else if(v.equals(recordLocB)){
++            buildGPSAlert();
++        }
++        else if(v.equals(editB)){
++            if(validateInput()){
++                cacheFarmer();
++
++                EditFarmerThread editFarmerThread = new EditFarmerThread();
++                editFarmerThread.execute(farmer.getJsonObject().toString());
++            }
++        }
++    }
++
++    private void cacheFarmer()
++    {
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, "");
++
++        farmer.setFullName(fullNameET.getText().toString());
++        if(vetNames != null && extensionPersonnelS.getSelectedItemPosition() != -1){
++            farmer.setExtensionPersonnel(vetNames.get(extensionPersonnelS.getSelectedItemPosition()));
++        }
++        else{
++            farmer.setExtensionPersonnel("");
++        }
++
++        if(languages != null && preferredLanguageS.getSelectedItemPosition() != -1){
++            farmer.setPreferredLocale(Locale.getLocaleCode(this, languages.get(preferredLanguageS.getSelectedItemPosition())));
++        }
++
++        farmer.setMobileNumber(mobileNumberET.getText().toString());
++
++        farmer.setMode(Farmer.MODE_EDIT_FARMER);
++    }
++
++    private void buildGPSAlert(){
++        AlertDialog.Builder builder = new AlertDialog.Builder(this);
++        builder.setMessage(Locale.getStringInLocale("are_you_in_farmers_farm",this));
++        builder.setPositiveButton(Locale.getStringInLocale("yes",this), new DialogInterface.OnClickListener(){
++
++            @Override
++            public void onClick(DialogInterface dialog, int which) {
++                dialog.dismiss();
++                getGPSCoordinates();
++            }
++        });
++        builder.setNegativeButton(Locale.getStringInLocale("no",this), new DialogInterface.OnClickListener(){
++            @Override
++            public void onClick(DialogInterface dialog, int which) {
++                dialog.dismiss();
++            }
++        });
++
++        AlertDialog alertDialog = builder.create();
++        alertDialog.show();
++    }
++
++    private void getGPSCoordinates() {
++        locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
++        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
++            //Toast.makeText(this,"gps started",Toast.LENGTH_LONG).show();
++            locationGotten = false;
++            gpsProgressDialog = ProgressDialog.show(EditFarmerActivity.this, "", Locale.getStringInLocale("accuracy", EditFarmerActivity.this) + " : " +Locale.getStringInLocale("unknown", EditFarmerActivity.this), true);
++            gpsProgressDialog.setCancelable(true);
++            gpsProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
++                @Override
++                public void onCancel(DialogInterface dialog) {
++                    locationGotten = true;
++                }
++            });
++
++            Criteria criteria=new Criteria();
++            String provider=locationManager.getBestProvider(criteria,false);
++            Location location=locationManager.getLastKnownLocation(provider);
++            locationManager.requestLocationUpdates(provider,18000,1000,this);//If farmer  is moving at 200km/h, will still be able to update!
++            if(location!=null)
++            {
++                onLocationChanged(location);
++            }
++        }
++        else {
++            AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
++            alertDialogBuilder.setTitle(Locale.getStringInLocale("enable_gps",this));
++            alertDialogBuilder
++                    .setMessage(Locale.getStringInLocale("reason_for_enabling_gps", this))
++                    .setCancelable(false)
++                    .setPositiveButton(Locale.getStringInLocale("okay",this), new DialogInterface.OnClickListener()
++                    {
++                        @Override
++                        public void onClick(DialogInterface dialog, int which)
++                        {
++                            Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
++                            startActivity(intent);
++                        }
++                    })
++                    .setNegativeButton(Locale.getStringInLocale("cancel",this), new DialogInterface.OnClickListener()
++                    {
++                        @Override
++                        public void onClick(DialogInterface dialog, int which)
++                        {
++                            dialog.cancel();
++                        }
++                    });
++            AlertDialog alertDialog=alertDialogBuilder.create();
++            alertDialog.show();
++
++        }
++    }
++
++    @Override
++    public void onLocationChanged(Location location) {
++        if(!locationGotten){
++            latitude=String.valueOf(location.getLatitude());
++            longitude=String.valueOf(location.getLongitude());
++
++            farmer.setLatitude(latitude);
++            farmer.setLongitude(longitude);
++
++            updateFarmLocation(longitude, latitude);
++
++            Log.d(TAG, "latitude : " + latitude);
++            Log.d(TAG, "longitude : " + longitude);
++            if(latitude !=null && longitude != null){
++                String lastDigitInLong = longitude.substring(longitude.length() - 1, longitude.length());
++                String longCompare = longitude.substring(0, longitude.length() - 1) + String.valueOf(Integer.parseInt(lastDigitInLong) + 1);
++
++                String lastDigitInLat = latitude.substring(latitude.length() - 1, latitude.length());
++                String latCompare = latitude.substring(0, latitude.length() - 1) + String.valueOf(Integer.parseInt(lastDigitInLat) + 1);
++
++                float[] accuracy = new float[1];
++                double lat1 = Double.parseDouble(latitude);
++                double lon1 = Double.parseDouble(longitude);
++                double lat2 = Double.parseDouble(latCompare);
++                double lon2 = Double.parseDouble(longCompare);
++                Location.distanceBetween(lat1, lon1, lat2, lon2, accuracy);
++
++                int accuracyInM =(int) (accuracy[0] * 0.000621371192f);
++                Log.d(TAG, "Accuracy at "+String.valueOf(accuracyInM));
++
++                gpsProgressDialog.setMessage(Locale.getStringInLocale("accuracy", this) + " : " + String.valueOf(accuracyInM) + " M");
++
++                if(accuracyInM < 4){
++                    locationGotten = true;
++                    locationManager.removeUpdates(this);
++                    gpsProgressDialog.dismiss();
++                }
++            }
++        }
++    }
++
++    @Override
++    public void onStatusChanged(String provider, int status, Bundle extras) {
++
++    }
++
++    @Override
++    public void onProviderEnabled(String provider) {
++
++    }
++
++    @Override
++    public void onProviderDisabled(String provider) {
++
++    }
++
++    public void updateFarmLocation(String longitude, String latitude){
++        String farmLoc = Locale.getStringInLocale("farm_location", this);
++        if(DataHandler.isNull(farmer.getLongitude()) || farmer.getLongitude().length() == 0){
++            farmLoc = farmLoc + "\n \t Longitude: " + Locale.getStringInLocale("not_set", this);
++        }
++        else{
++            farmLoc = farmLoc + "\n \t Longitude: " + longitude;
++        }
++
++        if(DataHandler.isNull(farmer.getLatitude()) || farmer.getLatitude().length() == 0){
++            farmLoc = farmLoc + "\n \t Latitude: " + Locale.getStringInLocale("not_set", this);
++        }
++        else{
++            farmLoc = farmLoc + "\n \t Latitude: " + latitude;
++        }
++        farmLocTV.setText(farmLoc);
++    }
++
++    private boolean validateInput()
++    {
++        String nameText=fullNameET.getText().toString();
++        if(nameText==null || nameText.equals(""))
++        {
++            Toast.makeText(this,Locale.getStringInLocale("enter_farmer_name", this),Toast.LENGTH_LONG).show();
++            return false;
++        }
++        else if(nameText.split(" ").length < 2){
++            Toast.makeText(this, Locale.getStringInLocale("enter_two_names", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++
++        String mobileNumberText=mobileNumberET.getText().toString();
++        if(mobileNumberText==null||mobileNumberText.equals(""))
++        {
++            Toast.makeText(this,Locale.getStringInLocale("enter_farmer_mobile_no", this),Toast.LENGTH_LONG).show();
++            return false;
++        }
++        else if(mobileNumberText.length() != 10){
++            Toast.makeText(this, Locale.getStringInLocale("phone_number_not_valid", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++
++        if(vetNames == null){
++            Toast.makeText(this, Locale.getStringInLocale("epersonnel_tshoot", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++        else if(extensionPersonnelS.getSelectedItemPosition() == -1 || vetNames.get(extensionPersonnelS.getSelectedItemPosition()).length() == 0){
++            Toast.makeText(this, Locale.getStringInLocale("select_epersonnel", this), Toast.LENGTH_LONG).show();
++            return  false;
++        }
++        return true;
++    }
++
++    private class FetchVetsThread extends AsyncTask<Integer, Integer, String> {
++        private ProgressDialog progressDialog;
++
++        @Override
++        protected void onPreExecute() {
++            super.onPreExecute();
++            progressDialog = ProgressDialog.show(EditFarmerActivity.this, "", Locale.getStringInLocale("loading_please_wait", EditFarmerActivity.this), true);
++        }
++
++        @Override
++        protected String doInBackground(Integer... params) {
++            Log.d(TAG, "Fetching extension personnel from server");
++
++            return DataHandler.sendDataToServer(EditFarmerActivity.this, "", DataHandler.FARMER_FETCH_VETS_URL, true, DatabaseHelper.TABLE_EXTENSION_PERSONNEL);
++        }
++
++        @Override
++        protected void onPostExecute(String result) {
++            super.onPostExecute(result);
++            progressDialog.dismiss();
++
++            if(result == null){
++                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("unable_to_get_epersonnel", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else{
++                try{
++                    Log.d(TAG, "result is "+result);
++                    JSONArray vetJsonArray = new JSONArray(result);
++                    vetNames = new ArrayList<String>();
++                    vetNames.add("");
++                    for(int i = 0; i < vetJsonArray.length(); i++){
++                        vetNames.add(vetJsonArray.getJSONObject(i).getString("name"));
++                    }
++
++                    int selection = 0;//default selection is the blank one
++                    if(farmer != null){
++                        String selectedEP = farmer.getExtensionPersonnel();
++                        if(selectedEP != null && selectedEP.length() > 0){
++                            for(int i =0; i < vetNames.size(); i++){
++                                if(vetNames.get(i).equals(selectedEP)){
++                                    selection = i;
++                                }
++                            }
++                        }
++                    }
++
++                    ArrayAdapter<String> epArrayAdapter = new ArrayAdapter<String>(EditFarmerActivity.this, android.R.layout.simple_spinner_item, vetNames);
++                    epArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++                    extensionPersonnelS.setAdapter(epArrayAdapter);
++                    extensionPersonnelS.setSelection(selection);
++                }
++                catch (Exception e){
++                    e.printStackTrace();
++                }
++            }
++        }
++    }
++
++    private class EditFarmerThread extends AsyncTask<String, Integer, String>{
++        private ProgressDialog progressDialog;
++
++        @Override
++        protected void onPreExecute() {
++            super.onPreExecute();
++            progressDialog = ProgressDialog.show(EditFarmerActivity.this, "", Locale.getStringInLocale("loading_please_wait", EditFarmerActivity.this), true);
++        }
++
++        @Override
++        protected String doInBackground(String... params) {
++            return DataHandler.sendDataToServer(EditFarmerActivity.this, params[0], DataHandler.ADMIN_EDIT_FARMER_URL, true);
++        }
++
++        @Override
++        protected void onPostExecute(String result) {
++            super.onPostExecute(result);
++            progressDialog.dismiss();
++
++            if(result == null) {
++                String httpError = DataHandler.getSharedPreference(EditFarmerActivity.this, "http_error", "No Error thrown to application. Something must be really wrong");
++                Toast.makeText(EditFarmerActivity.this,httpError,Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
++                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("generic_sms_error", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
++                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("no_service", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
++                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("radio_off", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
++                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("server_not_receive_sms", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.CODE_NUMBER_IN_USE)){
++                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("number_in_use", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
++                Toast.makeText(EditFarmerActivity.this, Locale.getStringInLocale("farmer_profile_updated", EditFarmerActivity.this), Toast.LENGTH_LONG).show();
++
++                Intent intent = new Intent(EditFarmerActivity.this, FarmerSelectionActivity.class);
++                //intent.putExtra(FarmerSelectionActivity.KEY_ADMIN_DATA, adminData);
++                startActivity(intent);
++            }
++        }
++    }
++}
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerSelection.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerSelection.java
+deleted file mode 100644
+index 5ff0fbc..0000000
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerSelection.java
++++ /dev/null
+@@ -1,313 +0,0 @@
+-package org.cgiar.ilri.mistro.farmer;
+-
+-import android.app.ProgressDialog;
+-import android.content.Context;
+-import android.content.Intent;
+-import android.os.AsyncTask;
+-import android.os.Bundle;
+-import android.telephony.TelephonyManager;
+-import android.util.Log;
+-import android.view.View;
+-import android.widget.AdapterView;
+-import android.widget.ArrayAdapter;
+-import android.widget.Button;
+-import android.widget.Spinner;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-import com.actionbarsherlock.app.SherlockActivity;
+-import com.actionbarsherlock.view.Menu;
+-import com.actionbarsherlock.view.MenuInflater;
+-import com.actionbarsherlock.view.MenuItem;
+-
+-import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+-import org.cgiar.ilri.mistro.farmer.backend.Locale;
+-import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+-import org.json.JSONArray;
+-import org.json.JSONException;
+-import org.json.JSONObject;
+-
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-
+-public class FarmerSelection extends SherlockActivity implements MistroActivity, View.OnClickListener, AdapterView.OnItemSelectedListener {
+-
+-    private static final String TAG = "FarmerSelection";
+-    public static final String KEY_ADMIN_DATA= "adminData";
+-
+-    private Menu menu;
+-
+-    private TextView filterFarmersTV;
+-    private Spinner filterFarmersS;
+-    private TextView selectFarmerTV;
+-    private Spinner selectFarmerS;
+-    private Button selectB;
+-    private Button backB;
+-
+-    private List<Farmer> allFarmers;
+-    private List<Farmer> filteredFarmers;
+-    private JSONObject adminData;
+-    private List<String> filters;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_farmer_selection);
+-
+-        filterFarmersTV = (TextView)findViewById(R.id.filter_farmers_tv);
+-        filterFarmersS = (Spinner)findViewById(R.id.filter_farmers_s);
+-        filterFarmersS.setOnItemSelectedListener(this);
+-        selectFarmerTV = (TextView)findViewById(R.id.select_farmer_tv);
+-        selectFarmerS = (Spinner)findViewById(R.id.select_farmer_s);
+-
+-        selectB = (Button)findViewById(R.id.select_b);
+-        selectB.setOnClickListener(this);
+-        backB = (Button)findViewById(R.id.back_b);
+-        backB.setOnClickListener(this);
+-
+-        initTextInViews();
+-    }
+-
+-    @Override
+-    protected void onResume() {
+-        super.onResume();
+-
+-        Bundle bundle=this.getIntent().getExtras();
+-        if(bundle != null){
+-            String adminJSONString = bundle.getString(KEY_ADMIN_DATA);
+-            loadAdminData(adminJSONString);
+-        }
+-        else{
+-            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+-            if(telephonyManager != null){
+-                GetFarmerDataThread getFarmerDataThread = new GetFarmerDataThread();
+-                getFarmerDataThread.execute(telephonyManager.getSimSerialNumber());
+-            }
+-            else{
+-                Toast.makeText(this,Locale.getStringInLocale("no_sim_card",this),Toast.LENGTH_LONG).show();
+-            }
+-        }
+-    }
+-
+-    private void loadAdminData(String adminJSONString){
+-        try {
+-            adminData = new JSONObject(adminJSONString);
+-            JSONArray farmerData = adminData.getJSONArray("farmers");
+-
+-            filters = new ArrayList<String>();
+-            filters.add(Locale.getStringInLocale("all_farmers", this));
+-            filters.add(Locale.getStringInLocale("farmers_no_epersonnel", this));
+-            if(adminData.getInt("is_super") == 1){//admin is super
+-                JSONArray allEPersonnel = adminData.getJSONArray("extension_personnel");
+-                for(int i = 0; i < allEPersonnel.length(); i++){
+-                    JSONObject currEPersonnel = allEPersonnel.getJSONObject(i);
+-                    filters.add(Locale.getStringInLocale("farmers_tied_to", this) + " " + currEPersonnel.getString("name"));
+-                }
+-            }
+-            else{
+-                filters.add(Locale.getStringInLocale("farmers_tied_to", this) +" "+ adminData.getString("name"));
+-            }
+-            ArrayAdapter<String> filterArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, filters);
+-            filterArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+-            filterFarmersS.setAdapter(filterArrayAdapter);
+-
+-            allFarmers = new ArrayList<Farmer>(farmerData.length());
+-            filteredFarmers = new ArrayList<Farmer>(farmerData.length());
+-            for (int i = 0; i < farmerData.length(); i++) {
+-                String ePersonnel = "";
+-                if (!farmerData.getJSONObject(i).getString("extension_personnel_id").equals("NULL")) {
+-                    ePersonnel = adminData.getString("name");
+-                }
+-                Farmer currFarmer = new Farmer(farmerData.getJSONObject(i));
+-                allFarmers.add(currFarmer);
+-                filteredFarmers.add(currFarmer);
+-            }
+-
+-            setFilteredFarmerList(filteredFarmers);
+-        } catch (Exception e) {
+-            e.printStackTrace();
+-        }
+-    }
+-
+-    private void setFilteredFarmerList(List<Farmer> filteredFarmers){
+-        List<String> farmerNames = new ArrayList<String>(filteredFarmers.size());
+-        for (int i = 0; i < filteredFarmers.size(); i++) {
+-            Farmer currFarmer = filteredFarmers.get(i);
+-            farmerNames.add(currFarmer.getFullName());
+-        }
+-
+-        ArrayAdapter<String> farmerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, farmerNames);
+-        farmerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+-        selectFarmerS.setAdapter(farmerArrayAdapter);
+-
+-        if(this.filteredFarmers != filteredFarmers) {
+-            this.filteredFarmers = filteredFarmers;
+-        }
+-    }
+-
+-    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+-        MenuInflater inflater = getSupportMenuInflater();
+-        inflater.inflate(R.menu.farmer_selection, menu);
+-        this.menu = menu;
+-        initMenuText();
+-        return true;
+-    }
+-
+-    public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+-        // Handle item selection
+-        if(Language.processLanguageMenuItemSelected(this, this, item)){
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_back_main_menu) {
+-            Intent intent = new Intent(this, MainMenu.class);
+-            intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
+-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+-            startActivity(intent);
+-        }
+-        return false;
+-    }
+-
+-    @Override
+-    public void initTextInViews() {
+-        setTitle(Locale.getStringInLocale("select_farmer", this));
+-
+-        filterFarmersTV.setText(Locale.getStringInLocale("filter_farmers", this));
+-        selectFarmerTV.setText(Locale.getStringInLocale("select_farmer", this));
+-        selectB.setText(Locale.getStringInLocale("select", this));
+-        backB.setText(Locale.getStringInLocale("back", this));
+-    }
+-
+-    private void initMenuText(){
+-        if(this.menu != null){
+-            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
+-            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
+-        }
+-    }
+-
+-    @Override
+-    public void onClick(View v) {
+-        if(v.equals(selectB)){
+-            if(selectFarmerS.getSelectedItemPosition() != -1 && filteredFarmers.size() > selectFarmerS.getSelectedItemPosition()){
+-                Log.d(TAG, "Selected farmer index = "+String.valueOf(selectFarmerS.getSelectedItemPosition()));
+-                Farmer selectedFarmer = filteredFarmers.get(selectFarmerS.getSelectedItemPosition());
+-                Intent intent = new Intent(this, EditFarmer.class);
+-                Bundle bundle = new Bundle();
+-                bundle.putParcelable(Farmer.PARCELABLE_KEY, selectedFarmer);
+-                intent.putExtras(bundle);
+-                intent.putExtra(KEY_ADMIN_DATA, adminData.toString());
+-                startActivity(intent);
+-            }
+-        }
+-        else if(v.equals(backB)){
+-            Intent intent = new Intent(this, MainMenu.class);
+-            intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
+-            intent.putExtra(MainMenu.KEY_ADMIN_DATA, adminData.toString());
+-            startActivity(intent);
+-        }
+-    }
+-
+-    @Override
+-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+-        if(parent == filterFarmersS){
+-            if(filterFarmersS.getSelectedItemPosition() == 0){//all farmers
+-                List<Farmer> newlyFilteredFarmers = this.allFarmers;
+-                setFilteredFarmerList(newlyFilteredFarmers);
+-            }
+-            else if(filterFarmersS.getSelectedItemPosition() == 1){//farmers without extension personnel
+-                List<Farmer> newlyFilteredFarmers = new ArrayList<Farmer>();
+-                for(int i =0; i<allFarmers.size(); i++){
+-                    Farmer currFarmer = allFarmers.get(i);
+-                    if(DataHandler.isNull(currFarmer.getExtensionPersonnel()) || currFarmer.getExtensionPersonnel().length() == 0){
+-                        newlyFilteredFarmers.add(currFarmer);
+-                    }
+-                    else{
+-                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not qualify to be null");
+-                    }
+-                }
+-
+-                setFilteredFarmerList(newlyFilteredFarmers);
+-            }
+-            else if(filterFarmersS.getSelectedItemPosition() != -1){
+-                String selection = filters.get(filterFarmersS.getSelectedItemPosition());
+-
+-                List<Farmer> newlyFilteredFarmers = new ArrayList<Farmer>();
+-                for(int i = 0; i < allFarmers.size(); i++){
+-                    Farmer currFarmer = allFarmers.get(i);
+-                    if(currFarmer.getExtensionPersonnel() != null && currFarmer.getExtensionPersonnel().length() > 0 &&
+-                            selection.contains(currFarmer.getExtensionPersonnel())){
+-                        newlyFilteredFarmers.add(currFarmer);
+-                    }
+-                    else{
+-                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not match "+selection);
+-                    }
+-                }
+-
+-                setFilteredFarmerList(newlyFilteredFarmers);
+-            }
+-        }
+-    }
+-
+-    @Override
+-    public void onNothingSelected(AdapterView<?> parent) {
+-
+-    }
+-
+-    private class GetFarmerDataThread extends AsyncTask<String, Integer, String>{
+-
+-        private ProgressDialog progressDialog;
+-
+-        @Override
+-        protected void onPreExecute() {
+-            super.onPreExecute();
+-            progressDialog = ProgressDialog.show(FarmerSelection.this, "", Locale.getStringInLocale("loading_please_wait", FarmerSelection.this), true);
+-        }
+-
+-        @Override
+-        protected String doInBackground(String... params) {
+-            JSONObject jsonObject=new JSONObject();
+-            try
+-            {
+-                jsonObject.put("simCardSN",params[0]);
+-                jsonObject.put("deviceType", "Android");
+-                //jsonObject.put("mobileNumber",params[1]);
+-                String result = DataHandler.sendDataToServer(FarmerSelection.this, jsonObject.toString(), DataHandler.ADMIN_AUTHENTICATION_URL, true);
+-                return result;
+-            }
+-            catch (JSONException e)
+-            {
+-                e.printStackTrace();
+-            }
+-            return null;
+-        }
+-
+-        @Override
+-        protected void onPostExecute(String result) {
+-            super.onPostExecute(result);
+-            progressDialog.dismiss();
+-            if(result==null){
+-                String httpError = DataHandler.getSharedPreference(FarmerSelection.this, "http_error", "No Error thrown to application. Something must be really wrong");
+-                Toast.makeText(FarmerSelection.this, httpError, Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
+-                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("generic_sms_error", FarmerSelection.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
+-                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("no_service", FarmerSelection.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
+-                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("radio_off", FarmerSelection.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+-                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("server_not_receive_sms", FarmerSelection.this), Toast.LENGTH_LONG).show();
+-            }
+-            else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)){
+-                Log.w(TAG, "Admin not authenticated. May mean he/she changed sim cards after logging in");
+-                Toast.makeText(FarmerSelection.this, Locale.getStringInLocale("sim_card_not_admin", FarmerSelection.this), Toast.LENGTH_LONG).show();
+-            }
+-            else{
+-                loadAdminData(result);
+-            }
+-        }
+-    }
+-}
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerSelectionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerSelectionActivity.java
+new file mode 100644
+index 0000000..7619d76
+--- /dev/null
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerSelectionActivity.java
+@@ -0,0 +1,309 @@
++package org.cgiar.ilri.mistro.farmer;
++
++import android.app.ProgressDialog;
++import android.content.Context;
++import android.content.Intent;
++import android.os.AsyncTask;
++import android.os.Bundle;
++import android.telephony.TelephonyManager;
++import android.util.Log;
++import android.view.View;
++import android.widget.AdapterView;
++import android.widget.ArrayAdapter;
++import android.widget.Button;
++import android.widget.Spinner;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import com.actionbarsherlock.app.SherlockActivity;
++import com.actionbarsherlock.view.Menu;
++import com.actionbarsherlock.view.MenuInflater;
++import com.actionbarsherlock.view.MenuItem;
++
++import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
++import org.cgiar.ilri.mistro.farmer.backend.Locale;
++import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
++import org.json.JSONArray;
++import org.json.JSONException;
++import org.json.JSONObject;
++
++import java.util.ArrayList;
++import java.util.List;
++
++
++public class FarmerSelectionActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, AdapterView.OnItemSelectedListener {
++
++    private static final String TAG = "FarmerSelectionActivity";
++    public static final String KEY_ADMIN_DATA= "adminData";
++
++    private Menu menu;
++
++    private TextView filterFarmersTV;
++    private Spinner filterFarmersS;
++    private TextView selectFarmerTV;
++    private Spinner selectFarmerS;
++    private Button selectB;
++    private Button backB;
++
++    private List<Farmer> allFarmers;
++    private List<Farmer> filteredFarmers;
++    private JSONObject adminData;
++    private List<String> filters;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_farmer_selection);
++
++        filterFarmersTV = (TextView)findViewById(R.id.filter_farmers_tv);
++        filterFarmersS = (Spinner)findViewById(R.id.filter_farmers_s);
++        filterFarmersS.setOnItemSelectedListener(this);
++        selectFarmerTV = (TextView)findViewById(R.id.select_farmer_tv);
++        selectFarmerS = (Spinner)findViewById(R.id.select_farmer_s);
++
++        selectB = (Button)findViewById(R.id.select_b);
++        selectB.setOnClickListener(this);
++        backB = (Button)findViewById(R.id.back_b);
++        backB.setOnClickListener(this);
++
++        initTextInViews();
++    }
++
++    @Override
++    protected void onResume() {
++        super.onResume();
++
++        Bundle bundle=this.getIntent().getExtras();
++        if(bundle != null){
++            String adminJSONString = bundle.getString(KEY_ADMIN_DATA);
++            loadAdminData(adminJSONString);
++        }
++        else{
++            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
++            if(telephonyManager != null){
++                GetFarmerDataThread getFarmerDataThread = new GetFarmerDataThread();
++                getFarmerDataThread.execute(telephonyManager.getSimSerialNumber());
++            }
++            else{
++                Toast.makeText(this,Locale.getStringInLocale("no_sim_card",this),Toast.LENGTH_LONG).show();
++            }
++        }
++    }
++
++    private void loadAdminData(String adminJSONString){
++        try {
++            adminData = new JSONObject(adminJSONString);
++            JSONArray farmerData = adminData.getJSONArray("farmers");
++
++            filters = new ArrayList<String>();
++            filters.add(Locale.getStringInLocale("all_farmers", this));
++            filters.add(Locale.getStringInLocale("farmers_no_epersonnel", this));
++            if(adminData.getInt("is_super") == 1){//admin is super
++                JSONArray allEPersonnel = adminData.getJSONArray("extension_personnel");
++                for(int i = 0; i < allEPersonnel.length(); i++){
++                    JSONObject currEPersonnel = allEPersonnel.getJSONObject(i);
++                    filters.add(Locale.getStringInLocale("farmers_tied_to", this) + " " + currEPersonnel.getString("name"));
++                }
++            }
++            else{
++                filters.add(Locale.getStringInLocale("farmers_tied_to", this) +" "+ adminData.getString("name"));
++            }
++            ArrayAdapter<String> filterArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, filters);
++            filterArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++            filterFarmersS.setAdapter(filterArrayAdapter);
++
++            allFarmers = new ArrayList<Farmer>(farmerData.length());
++            filteredFarmers = new ArrayList<Farmer>(farmerData.length());
++            for (int i = 0; i < farmerData.length(); i++) {
++                Farmer currFarmer = new Farmer(farmerData.getJSONObject(i));
++                allFarmers.add(currFarmer);
++                filteredFarmers.add(currFarmer);
++            }
++
++            setFilteredFarmerList(filteredFarmers);
++        } catch (Exception e) {
++            e.printStackTrace();
++        }
++    }
++
++    private void setFilteredFarmerList(List<Farmer> filteredFarmers){
++        List<String> farmerNames = new ArrayList<String>(filteredFarmers.size());
++        for (int i = 0; i < filteredFarmers.size(); i++) {
++            Farmer currFarmer = filteredFarmers.get(i);
++            farmerNames.add(currFarmer.getFullName());
++        }
++
++        ArrayAdapter<String> farmerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, farmerNames);
++        farmerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        selectFarmerS.setAdapter(farmerArrayAdapter);
++
++        if(this.filteredFarmers != filteredFarmers) {
++            this.filteredFarmers = filteredFarmers;
++        }
++    }
++
++    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
++        MenuInflater inflater = getSupportMenuInflater();
++        inflater.inflate(R.menu.farmer_selection, menu);
++        this.menu = menu;
++        initMenuText();
++        return true;
++    }
++
++    public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
++        // Handle item selection
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
++            return true;
++        }
++        else if(item.getItemId() == R.id.action_back_main_menu) {
++            Intent intent = new Intent(this, MainMenu.class);
++            intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
++            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
++            startActivity(intent);
++        }
++        return false;
++    }
++
++    @Override
++    public void initTextInViews() {
++        setTitle(Locale.getStringInLocale("select_farmer", this));
++
++        filterFarmersTV.setText(Locale.getStringInLocale("filter_farmers", this));
++        selectFarmerTV.setText(Locale.getStringInLocale("select_farmer", this));
++        selectB.setText(Locale.getStringInLocale("select", this));
++        backB.setText(Locale.getStringInLocale("back", this));
++    }
++
++    private void initMenuText(){
++        if(this.menu != null){
++            MenuItem mainMenuMI = menu.findItem(R.id.action_back_main_menu);
++            mainMenuMI.setTitle(Locale.getStringInLocale("back_to_main_menu", this));
++        }
++    }
++
++    @Override
++    public void onClick(View v) {
++        if(v.equals(selectB)){
++            if(selectFarmerS.getSelectedItemPosition() != -1 && filteredFarmers.size() > selectFarmerS.getSelectedItemPosition()){
++                Log.d(TAG, "Selected farmer index = "+String.valueOf(selectFarmerS.getSelectedItemPosition()));
++                Farmer selectedFarmer = filteredFarmers.get(selectFarmerS.getSelectedItemPosition());
++                Intent intent = new Intent(this, EditFarmerActivity.class);
++                Bundle bundle = new Bundle();
++                bundle.putParcelable(Farmer.PARCELABLE_KEY, selectedFarmer);
++                intent.putExtras(bundle);
++                intent.putExtra(KEY_ADMIN_DATA, adminData.toString());
++                startActivity(intent);
++            }
++        }
++        else if(v.equals(backB)){
++            Intent intent = new Intent(this, MainMenu.class);
++            intent.putExtra(MainMenu.KEY_MODE, MainMenu.MODE_ADMIN);
++            intent.putExtra(MainMenu.KEY_ADMIN_DATA, adminData.toString());
++            startActivity(intent);
++        }
++    }
++
++    @Override
++    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
++        if(parent == filterFarmersS){
++            if(filterFarmersS.getSelectedItemPosition() == 0){//all farmers
++                List<Farmer> newlyFilteredFarmers = this.allFarmers;
++                setFilteredFarmerList(newlyFilteredFarmers);
++            }
++            else if(filterFarmersS.getSelectedItemPosition() == 1){//farmers without extension personnel
++                List<Farmer> newlyFilteredFarmers = new ArrayList<Farmer>();
++                for(int i =0; i<allFarmers.size(); i++){
++                    Farmer currFarmer = allFarmers.get(i);
++                    if(DataHandler.isNull(currFarmer.getExtensionPersonnel()) || currFarmer.getExtensionPersonnel().length() == 0){
++                        newlyFilteredFarmers.add(currFarmer);
++                    }
++                    else{
++                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not qualify to be null");
++                    }
++                }
++
++                setFilteredFarmerList(newlyFilteredFarmers);
++            }
++            else if(filterFarmersS.getSelectedItemPosition() != -1){
++                String selection = filters.get(filterFarmersS.getSelectedItemPosition());
++
++                List<Farmer> newlyFilteredFarmers = new ArrayList<Farmer>();
++                for(int i = 0; i < allFarmers.size(); i++){
++                    Farmer currFarmer = allFarmers.get(i);
++                    if(currFarmer.getExtensionPersonnel() != null && currFarmer.getExtensionPersonnel().length() > 0 &&
++                            selection.contains(currFarmer.getExtensionPersonnel())){
++                        newlyFilteredFarmers.add(currFarmer);
++                    }
++                    else{
++                        Log.d(TAG, currFarmer.getExtensionPersonnel()+" does not match "+selection);
++                    }
++                }
++
++                setFilteredFarmerList(newlyFilteredFarmers);
++            }
++        }
++    }
++
++    @Override
++    public void onNothingSelected(AdapterView<?> parent) {
++
++    }
++
++    private class GetFarmerDataThread extends AsyncTask<String, Integer, String>{
++
++        private ProgressDialog progressDialog;
++
++        @Override
++        protected void onPreExecute() {
++            super.onPreExecute();
++            progressDialog = ProgressDialog.show(FarmerSelectionActivity.this, "", Locale.getStringInLocale("loading_please_wait", FarmerSelectionActivity.this), true);
++        }
++
++        @Override
++        protected String doInBackground(String... params) {
++            JSONObject jsonObject=new JSONObject();
++            try
++            {
++                jsonObject.put("simCardSN",params[0]);
++                jsonObject.put("deviceType", "Android");
++                //jsonObject.put("mobileNumber",params[1]);
++                String result = DataHandler.sendDataToServer(FarmerSelectionActivity.this, jsonObject.toString(), DataHandler.ADMIN_AUTHENTICATION_URL, true);
++                return result;
++            }
++            catch (JSONException e)
++            {
++                e.printStackTrace();
++            }
++            return null;
++        }
++
++        @Override
++        protected void onPostExecute(String result) {
++            super.onPostExecute(result);
++            progressDialog.dismiss();
++            if(result==null){
++                String httpError = DataHandler.getSharedPreference(FarmerSelectionActivity.this, "http_error", "No Error thrown to application. Something must be really wrong");
++                Toast.makeText(FarmerSelectionActivity.this, httpError, Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
++                Toast.makeText(FarmerSelectionActivity.this, Locale.getStringInLocale("generic_sms_error", FarmerSelectionActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
++                Toast.makeText(FarmerSelectionActivity.this, Locale.getStringInLocale("no_service", FarmerSelectionActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
++                Toast.makeText(FarmerSelectionActivity.this, Locale.getStringInLocale("radio_off", FarmerSelectionActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
++                Toast.makeText(FarmerSelectionActivity.this, Locale.getStringInLocale("server_not_receive_sms", FarmerSelectionActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.CODE_USER_NOT_AUTHENTICATED)){
++                Log.w(TAG, "Admin not authenticated. May mean he/she changed sim cards after logging in");
++                Toast.makeText(FarmerSelectionActivity.this, Locale.getStringInLocale("sim_card_not_admin", FarmerSelectionActivity.this), Toast.LENGTH_LONG).show();
++            }
++            else{
++                loadAdminData(result);
++            }
++        }
++    }
++}
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MainMenu.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MainMenu.java
+index 3788215..cf7efbd 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MainMenu.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MainMenu.java
+@@ -25,13 +25,10 @@ import com.actionbarsherlock.view.MenuItem;
+ import org.cgiar.ilri.mistro.farmer.backend.DataHandler;
+ import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+-import org.json.JSONArray;
+ import org.json.JSONException;
+ import org.json.JSONObject;
+ 
+-import java.util.ArrayList;
+ import java.util.List;
+-import java.util.concurrent.ExecutionException;
+ 
+ public class MainMenu extends SherlockActivity implements MistroActivity, View.OnClickListener, LocationListener
+ {
+@@ -186,8 +183,8 @@ public class MainMenu extends SherlockActivity implements MistroActivity, View.O
+         }
+         else if(view==editFarmerB){
+             if(adminData != null){
+-                Intent intent = new Intent(this, FarmerSelection.class);
+-                intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData.toString());
++                Intent intent = new Intent(this, FarmerSelectionActivity.class);
++                intent.putExtra(FarmerSelectionActivity.KEY_ADMIN_DATA, adminData.toString());
+                 startActivity(intent);
+             }
+             else {
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+index 9ded465..25648dc 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+@@ -24,6 +24,7 @@ import java.util.jar.JarInputStream;
+  * Created by jason on 8/5/13.
+  */
+ public class Cow implements Parcelable, Serializable {
++    public static final String PARCELABLE_KEY = "thisCow";
+     private static final String DEFAULT_DOB = "0000-00-00 00:00:00";
+     private static final String DOB_FORMAT = "yyyy-MM-dd HH:mm:ss";
+     private static final String OTHER_BREED = "Another Breed";
+@@ -46,6 +47,7 @@ public class Cow implements Parcelable, Serializable {
+     public static final String COW_IN_CALF = "In calf";
+     public static final String COW_NOT_IN_CALF = "Not in calf";
+ 
++    private int id;
+     private String name;
+     private String earTagNumber;
+     private String dateOfBirth;
+@@ -96,6 +98,7 @@ public class Cow implements Parcelable, Serializable {
+         this.milkProduction = new ArrayList<MilkProduction>();
+         milkingStatus = "";
+         inCalf = false;
++        id = -1;
+     }
+ 
+     public Cow(Parcel in) {
+@@ -148,6 +151,7 @@ public class Cow implements Parcelable, Serializable {
+ 
+     private void initFromJSON(JSONObject jsonObject){
+         try {
++            id = jsonObject.getInt("id");
+             name = jsonObject.getString("name");
+             earTagNumber = jsonObject.getString("ear_tag_number");
+             dateOfBirth = (DataHandler.isNull(jsonObject.getString("date_of_birth"))) ? "" : jsonObject.getString("date_of_birth");
+@@ -565,6 +569,7 @@ public class Cow implements Parcelable, Serializable {
+ 
+     @Override
+     public void writeToParcel(Parcel dest, int flags) {
++        dest.writeInt(id);
+         dest.writeString(name);
+         dest.writeString(earTagNumber);
+         dest.writeString(dateOfBirth);
+@@ -597,6 +602,7 @@ public class Cow implements Parcelable, Serializable {
+     }
+ 
+     public void readFromParcel(Parcel in) {
++        id = in.readInt();
+         name = in.readString();
+         earTagNumber = in.readString();
+         dateOfBirth = in.readString();
+@@ -646,6 +652,7 @@ public class Cow implements Parcelable, Serializable {
+     public JSONObject getJsonObject() {
+         JSONObject jsonObject = new JSONObject();
+         try {
++            jsonObject.put("id", id);
+             jsonObject.put("name", ((name == null) ? "" : name));
+             jsonObject.put("earTagNumber", ((earTagNumber == null) ? "" : earTagNumber));
+             jsonObject.put("dateOfBirth", ((dateOfBirth == null) ? "" : dateOfBirth));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
+index ca67df6..c095043 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
+@@ -69,19 +69,20 @@ public class Farmer implements Parcelable, Serializable
+             simCardSN = farmerJsonObject.getString("sim_card_sn");
+             preferredLocale = farmerJsonObject.getString("pref_locale");
+             isInFarm = false;
+-
+-            JSONArray cowArray = farmerJsonObject.getJSONArray("cows");
+-            cows = new ArrayList<Cow>(cowArray.length());
+-            for(int i = 0; i < cowArray.length(); i++){
+-                Cow currCow = new Cow(cowArray, i);
+-                cows.add(currCow);
+-            }
+         }
+         catch (Exception e){
+             e.printStackTrace();
+         }
+     }
+ 
++    public void setCows(JSONArray cowArray){
++        cows = new ArrayList<Cow>(cowArray.length());
++        for(int i = 0; i < cowArray.length(); i++){
++            Cow currCow = new Cow(cowArray, i);
++            cows.add(currCow);
++        }
++    }
++
+     public void setFullName(String fullName)
+     {
+         this.fullName = fullName;
+diff --git a/MistroFarmer/src/main/res/layout/activity_cow_selection.xml b/MistroFarmer/src/main/res/layout/activity_cow_selection.xml
+new file mode 100644
+index 0000000..f64d21b
+--- /dev/null
++++ b/MistroFarmer/src/main/res/layout/activity_cow_selection.xml
+@@ -0,0 +1,62 @@
++<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++    <LinearLayout
++        android:orientation="vertical"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:paddingLeft="@dimen/activity_horizontal_margin"
++        android:paddingRight="@dimen/activity_horizontal_margin"
++        android:paddingTop="@dimen/activity_vertical_margin"
++        android:paddingBottom="@dimen/activity_vertical_margin"
++        tools:context=".FarmerSelection">
++        <TextView
++            android:id="@+id/select_farmer_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <Spinner
++            android:id="@+id/select_farmer_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color" />
++
++        <TextView
++            android:id="@+id/select_cow_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <Spinner
++            android:id="@+id/select_cow_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color" />
++
++        <Button
++            android:id="@+id/select_b"
++            android:layout_width="wrap_content"
++            android:layout_height="@dimen/normal_button_layout_height"
++            android:layout_marginTop="15dp"
++            android:layout_gravity="bottom|right"
++            android:paddingLeft="@dimen/normal_button_padding_side"
++            android:paddingRight="@dimen/normal_button_padding_side"
++            android:textSize="@dimen/normal_text_size"/>
++        <Button
++            android:id="@+id/back_b"
++            android:layout_width="@dimen/back_button_width"
++            android:layout_height="50dp"
++            android:layout_marginTop="90dp"
++            android:paddingLeft="15dp"
++            android:paddingRight="15dp"/>
++    </LinearLayout>
++
++</ScrollView>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/layout/activity_edit_cow.xml b/MistroFarmer/src/main/res/layout/activity_edit_cow.xml
+new file mode 100644
+index 0000000..d8b6df7
+--- /dev/null
++++ b/MistroFarmer/src/main/res/layout/activity_edit_cow.xml
+@@ -0,0 +1,363 @@
++<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".EditCowActivity">
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:paddingTop="@dimen/activity_padding_top"
++        android:paddingBottom="@dimen/activity_padding_bottom"
++        android:paddingLeft="@dimen/activity_padding_side"
++        android:paddingRight="@dimen/activity_padding_side"
++        android:orientation="vertical">
++
++        <TextView
++            android:id="@+id/name_eta_hint_tv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/small_text_size"
++            android:textStyle="italic" />
++
++        <TextView
++            android:id="@+id/name_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <EditText
++            android:id="@+id/name_et"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:inputType="textCapWords|textPersonName"/>
++        <TextView
++            android:id="@+id/ear_tag_number_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <EditText
++            android:id="@+id/ear_tag_number_et"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:inputType="text"/>
++
++        <TextView
++            android:id="@+id/sex_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <Spinner
++            android:id="@+id/sex_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
++
++        <TextView
++            android:id="@+id/milking_status_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"
++            android:visibility="gone"/>
++        <Spinner
++            android:id="@+id/milking_status_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:visibility="gone"/>
++
++        <TextView
++            android:id="@+id/in_calf_status_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"
++            android:visibility="gone"/>
++        <Spinner
++            android:id="@+id/in_calf_status_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:visibility="gone"/>
++
++        <TextView
++            android:id="@+id/age_or_dob_hint_tv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/small_text_size"
++            android:textStyle="italic" />
++
++        <TextView
++            android:id="@+id/age_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:orientation="horizontal">
++            <EditText
++                android:id="@+id/age_et"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginRight="10dp"
++                android:minWidth="80dp"
++                android:layout_weight="1"
++                android:textSize="@dimen/normal_text_size"
++                android:gravity="center"
++                android:textColor="@color/text_input_color"
++                android:inputType="number"/>
++            <Spinner
++                android:id="@+id/age_s"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginLeft="10dp"
++                android:layout_weight="1"
++                android:textColor="@color/text_input_color"
++                android:gravity="center"/>
++        </LinearLayout>
++        <TextView
++            android:id="@+id/date_of_birth_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <EditText
++            android:id="@+id/date_of_birth_et"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:inputType="none"/>
++        <TextView
++            android:id="@+id/breed_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <EditText
++            android:id="@+id/breed_et"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:inputType="date|none"/>
++
++        <TextView
++            android:id="@+id/deformity_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <EditText
++            android:id="@+id/deformity_et"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:inputType="none"/>
++        <TextView
++            android:id="@+id/service_type_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <Spinner
++            android:id="@+id/service_type_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
++        <TextView
++            android:id="@+id/sire_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <Spinner
++            android:id="@+id/sire_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:visibility="gone"/>
++        <AutoCompleteTextView
++            android:id="@+id/sire_actv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"/>
++        <TextView
++            android:id="@+id/sire_owner_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <Spinner
++            android:id="@+id/sire_owner_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
++        <TextView
++            android:id="@+id/sire_owner_name_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <EditText
++            android:id="@+id/sire_owner_name_et"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:inputType="textCapWords|textPersonName"/>
++        <TextView
++            android:id="@+id/straw_number_tv"
++            android:layout_height="wrap_content"
++            android:layout_width="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <EditText
++            android:id="@+id/straw_number_et"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:inputType="text"/>
++        <TextView
++            android:id="@+id/common_countries_tv"
++            android:layout_height="wrap_content"
++            android:layout_width="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <Spinner
++            android:id="@+id/common_countries_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"/>
++        <TextView
++            android:id="@+id/country_of_origin_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:visibility="gone"
++            android:textSize="@dimen/normal_text_size"/>
++        <AutoCompleteTextView
++            android:id="@+id/country_of_origin_actv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:visibility="gone"
++            android:inputType="textCapWords|textPersonName"/>
++        <TextView
++            android:id="@+id/dam_tv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <Spinner
++            android:id="@+id/dam_s"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:textColor="@color/text_input_color"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:visibility="gone"/>
++        <AutoCompleteTextView
++            android:id="@+id/dam_actv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"/>
++        <TextView
++            android:id="@+id/embryo_number_tv"
++            android:layout_height="wrap_content"
++            android:layout_width="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"
++            android:textSize="@dimen/normal_text_size"/>
++        <EditText
++            android:id="@+id/embryo_number_et"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="@color/text_input_color"
++            android:inputType="text"/>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="15dp"
++            android:orientation="horizontal">
++            <Button
++                android:id="@+id/cancel_b"
++                android:layout_width="match_parent"
++                android:layout_height="@dimen/normal_button_layout_height"
++                android:layout_weight="1"
++                android:layout_marginRight="10dp"
++                android:gravity="center"
++                android:paddingLeft="@dimen/normal_button_padding_side"
++                android:paddingRight="@dimen/normal_button_padding_side"
++                android:textSize="@dimen/normal_text_size"/>
++            <Button
++                android:id="@+id/edit_b"
++                android:layout_width="match_parent"
++                android:layout_height="@dimen/normal_button_layout_height"
++                android:layout_marginLeft="10dp"
++                android:layout_weight="1"
++                android:gravity="center"
++                android:paddingLeft="@dimen/normal_button_padding_side"
++                android:paddingRight="@dimen/normal_button_padding_side"
++                android:textSize="@dimen/normal_text_size"/>
++        </LinearLayout>
++
++    </LinearLayout>
++
++</ScrollView>
+diff --git a/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml b/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml
+index afc16f7..5c6e452 100644
+--- a/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml
++++ b/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml
+@@ -2,7 +2,7 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".FarmerRegistrationActivity">
++    tools:context=".EditFarmerActivity">
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+diff --git a/MistroFarmer/src/main/res/menu/cow_selection.xml b/MistroFarmer/src/main/res/menu/cow_selection.xml
+new file mode 100644
+index 0000000..b3828af
+--- /dev/null
++++ b/MistroFarmer/src/main/res/menu/cow_selection.xml
+@@ -0,0 +1,32 @@
++<menu xmlns:android="http://schemas.android.com/apk/res/android">
++    <item android:id="@+id/action_english"
++        android:title="@string/english"
++        android:orderInCategory="1"
++        android:showAsAction="never" />
++    <item android:id="@+id/action_swahili"
++        android:title="@string/swahili"
++        android:orderInCategory="5"
++        android:showAsAction="never" />
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
++        android:orderInCategory="2"
++        android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
++        android:orderInCategory="4"
++        android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
++
++
++
++    <item android:id="@+id/action_back_main_menu"
++        android:orderInCategory="7"
++        android:showAsAction="never" />
++</menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/edit_cow.xml b/MistroFarmer/src/main/res/menu/edit_cow.xml
+new file mode 100644
+index 0000000..06f9367
+--- /dev/null
++++ b/MistroFarmer/src/main/res/menu/edit_cow.xml
+@@ -0,0 +1,30 @@
++<menu xmlns:android="http://schemas.android.com/apk/res/android">
++    <item android:id="@+id/action_english"
++        android:title="@string/english"
++        android:orderInCategory="1"
++        android:showAsAction="never" />
++    <item android:id="@+id/action_swahili"
++        android:title="@string/swahili"
++        android:orderInCategory="5"
++        android:showAsAction="never" />
++    <item android:id="@+id/action_nandi"
++        android:title="@string/nandi"
++        android:orderInCategory="2"
++        android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
++    <item android:id="@+id/action_lutsotso"
++        android:title="@string/lutsotso"
++        android:orderInCategory="4"
++        android:showAsAction="never" />
++    <item android:id="@+id/action_kipsigis"
++        android:title="@string/kipsigis"
++        android:orderInCategory="6"
++        android:showAsAction="never" />
++
++    <item android:id="@+id/action_back_main_menu"
++        android:orderInCategory="7"
++        android:showAsAction="never" />
++</menu>
+diff --git a/MistroFarmer/src/main/res/values/strings.xml b/MistroFarmer/src/main/res/values/strings.xml
+index 95eb15d..9f3e360 100644
+--- a/MistroFarmer/src/main/res/values/strings.xml
++++ b/MistroFarmer/src/main/res/values/strings.xml
+@@ -22,5 +22,7 @@
+     <string name="title_activity_add_milk_production">Add Milk Production</string>
+     <string name="title_activity_edit_farmer">Edit Farmer</string>
+     <string name="title_activity_edit_farmer_selection">EditFarmerSelection</string>
++    <string name="title_activity_edit_cow">Edit Cow</string>
++    <string name="title_activity_cow_selection">CowSelectionActivity</string>
+ 
+ </resources>
+\ No newline at end of file
+-- 
+2.7.1
+

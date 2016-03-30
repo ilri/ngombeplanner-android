@@ -1,0 +1,251 @@
+From 27e05b1d76f20b1db25ccf35fbeb6a1acae8e5b2 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Fri, 23 May 2014 11:30:30 +0300
+Subject: [PATCH 164/213] Checking fluctuation in milk data
+
+App now checking for fluctuation in milk data before submitting
+the data
+---
+ .../mistro/farmer/AddMilkProductionActivity.java   | 52 ++++++++++++++++++++++
+ .../java/org/cgiar/ilri/mistro/farmer/Utils.java   | 11 +++++
+ .../org/cgiar/ilri/mistro/farmer/carrier/Cow.java  | 22 +++++++++
+ .../mistro/farmer/carrier/EventConstraint.java     |  9 ++++
+ .../ilri/mistro/farmer/carrier/MilkProduction.java | 17 +++++++
+ MistroFarmer/src/main/res/values/strings_en.xml    |  1 +
+ 6 files changed, 112 insertions(+)
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+index 17bd535..8264e80 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+@@ -32,6 +32,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+ import org.cgiar.ilri.mistro.farmer.carrier.EventConstraint;
+ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
++import org.cgiar.ilri.mistro.farmer.carrier.MilkProduction;
+ import org.json.JSONArray;
+ import org.json.JSONException;
+ import org.json.JSONObject;
+@@ -75,6 +76,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+     private String[] quantityTypes;
+     private String[] calfSucklingTypes;
+     private List<EventConstraint> eventConstraints;
++    private boolean milkQuantityFine;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -83,6 +85,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+         DataHandler.requestPermissionToUseSMS(this);
+ 
+         cacheData = true;
++        milkQuantityFine = false;
+ 
+         cowTV=(TextView)this.findViewById(R.id.cow_tv);
+         cowS=(Spinner)this.findViewById(R.id.cow_s);
+@@ -334,14 +337,63 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+         if(cowS.getSelectedItemPosition() != -1){
+             Cow selectedCow = farmer.getCows(Cow.SEX_FEMALE).get(cowS.getSelectedItemPosition());
+             if(selectedCow != null){
++
+                 for(int i = 0; i < eventConstraints.size(); i++){
+                     EventConstraint currConstraint = eventConstraints.get(i);
++                    //enforce age constraint
+                     if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILKING)){
+                         if(selectedCow.getAgeMilliseconds()<currConstraint.getTimeMilliseconds()){
+                             Toast.makeText(this,Locale.getStringInLocale("cow_too_young", this),Toast.LENGTH_LONG).show();
+                             return false;
+                         }
+                     }
++
++                    else if(currConstraint.getEvent().equals(EventConstraint.CONSTRAINT_MILK_FLACTUATION) && !milkQuantityFine){
++                        //TODO: convert units to whatever farmer uses to measure milk e.g cups
++                        int threshold = currConstraint.getValue();
++                        String thresholdUnits = currConstraint.getUnits();
++
++                        String[] milkingTimesInEN = Locale.getArrayInLocale("milking_times", this, Locale.LOCALE_ENGLISH);
++                        MilkProduction lastMP = selectedCow.getLastMilking(milkingTimesInEN[timeS.getSelectedItemPosition()]);
++                        if(lastMP.getDate().length()>0){//date set. means this object is not an empty object
++                            try {
++                                long lastMilking = lastMP.getDateMilliseconds();
++                                Date currMilkingDate = new SimpleDateFormat(dateFormat, java.util.Locale.ENGLISH).parse(dateET.getText().toString());
++                                long currMilking = currMilkingDate.getTime();
++
++                                int dayDiff = (int)((currMilking - lastMilking)/86400000);
++                                int yieldDiff = Math.abs(Integer.parseInt(quantityET.getText().toString()) - lastMP.getQuantity());
++
++                                if(dayDiff != 0) {
++                                    int diff = yieldDiff / dayDiff;//spread the difference in yield among the days passed
++
++                                    if(diff  > threshold){
++                                        DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
++                                            @Override
++                                            public void onClick(DialogInterface dialog, int which) {
++                                                if(which==DialogInterface.BUTTON_POSITIVE){
++                                                    dialog.dismiss();
++                                                    milkQuantityFine = true;
++                                                }
++                                                else{
++                                                    dialog.cancel();
++                                                    milkQuantityFine = false;
++                                                }
++                                            }
++                                        };
++                                        AlertDialog milkFluctuationDialog = Utils.createMilkFluctuationDialog(this, onClickListener);
++                                        milkFluctuationDialog.show();
++                                        return false;
++                                    }
++                                }
++                            }
++                            catch (Exception e){
++                                e.printStackTrace();
++                            }
++                        }
++                        milkQuantityFine = true;
++                    }
++                    //check for drastic flactuation in milk production
+                 }
+             }
+         }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/Utils.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/Utils.java
+index 4fcc37e..e5faba7 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/Utils.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/Utils.java
+@@ -107,4 +107,15 @@ public class Utils
+                 .setNegativeButton(Locale.getStringInLocale("cancel",context), onClickListener);
+         return alertDialogBuilder.create();
+     }
++
++    public static AlertDialog createMilkFluctuationDialog(Context context, DialogInterface.OnClickListener onClickListener){
++        AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(context);
++        alertDialogBuilder.setTitle(Locale.getStringInLocale("warning", context));
++        alertDialogBuilder
++                .setMessage(Locale.getStringInLocale("milk_inconsistent", context))
++                .setCancelable(false)
++                .setPositiveButton(Locale.getStringInLocale("okay",context), onClickListener)
++                .setNegativeButton(Locale.getStringInLocale("cancel",context), onClickListener);
++        return alertDialogBuilder.create();
++    }
+ }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+index bd55014..bf032bd 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+@@ -298,6 +298,7 @@ public class Cow implements Parcelable, Serializable {
+             Log.d(TAG, "Cows age "+this.ageType+" = "+String.valueOf(this.age));
+             Log.d(TAG, "Cows date of birth = "+this.dateOfBirth);
+             Log.d(TAG, "Age in milliseconds = "+String.valueOf(ageFromAge));
++            Log.d(TAG, "Alternate age = "+String.valueOf(ageFromDOB));
+             return ageFromAge;
+         }
+         else {
+@@ -305,10 +306,31 @@ public class Cow implements Parcelable, Serializable {
+             Log.d(TAG, "Cows age "+this.ageType+" = "+String.valueOf(this.age));
+             Log.d(TAG, "Cows date of birth = "+this.dateOfBirth);
+             Log.d(TAG, "Age in milliseconds = "+String.valueOf(ageFromDOB));
++            Log.d(TAG, "Alternate age = "+String.valueOf(ageFromAge));
+             return ageFromDOB;
+         }
+     }
+ 
++    public MilkProduction getLastMilking(String milkingTime){
++        MilkProduction lastMP = new MilkProduction();
++
++        long latestTime = 0;
++        int latestMPIndex = -1;
++        for(int i = 0; i < milkProduction.size(); i++){
++            MilkProduction currMP = milkProduction.get(i);
++            if(currMP.getTime().equals(milkingTime) && currMP.getDateMilliseconds() > latestTime){
++                latestTime = currMP.getDateMilliseconds();
++                latestMPIndex = i;
++            }
++        }
++
++        if(latestMPIndex != -1){
++            lastMP = milkProduction.get(latestMPIndex);
++        }
++
++        return lastMP;
++    }
++
+     @Override
+     public int describeContents() {
+         return 0;
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java
+index 1681dc7..2ef0b27 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/EventConstraint.java
+@@ -17,6 +17,7 @@ public class EventConstraint {
+     public static final String CONSTRAINT_BIRTH_TO_LACTATION = "MaxTimeBirthLactation";
+     public static final String CONSTRAINT_MILKING = "Milking";
+     public static final String CONSTRAINT_CALVING = "Calving";
++    public static final String CONSTRAINT_MILK_FLACTUATION = "DeltaMilk";
+ 
+     private int id;
+     private String event;
+@@ -76,4 +77,12 @@ public class EventConstraint {
+ 
+         return result;
+     }
++
++    public int getValue(){
++        return this.time;
++    }
++
++    public String getUnits(){
++        return this.timeUnits;
++    }
+ }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/MilkProduction.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/MilkProduction.java
+index 9ea17fe..07d1514 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/MilkProduction.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/MilkProduction.java
+@@ -1,5 +1,7 @@
+ package org.cgiar.ilri.mistro.farmer.carrier;
+ 
++import java.text.SimpleDateFormat;
++
+ /**
+  * Created by jason on 4/28/14.
+  */
+@@ -11,6 +13,7 @@ public class MilkProduction {
+     public static final String TIME_COMBINED = "Combined";
+     public static final String QUANTITY_TYPE_LITRES = "Litres";
+     public static final String QUANTITY_TYPE_KGS = "KGs";
++    private static final String DATE_FORMAT = "yyyy-MM-dd";
+     private int id;
+     private String time;
+     private int quantity;
+@@ -68,6 +71,20 @@ public class MilkProduction {
+         this.date = date;
+     }
+ 
++    public long getDateMilliseconds(){
++        long result = 0;
++
++        try{
++            SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
++            result = dateFormat.parse(this.date).getTime();
++        }
++        catch (Exception e){
++            e.printStackTrace();
++        }
++
++        return result;
++    }
++
+     public String getQuantityType() {
+         return quantityType;
+     }
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index a27f803..80b866f 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -242,4 +242,5 @@
+     <string name="cow_too_young_en">The selected cow is too young</string>
+     <string name="enter_no_cows_own_en">Enter the number of cows you own</string>
+     <string name="number_in_use_en">The number (or sim card) you are using has already been registered with another user</string>
++    <string name="milk_inconsistent_en">The quantity of milk you have entered appears to be wrong. Press okay if you are certain this is the right amount</string>
+ </resources>
+-- 
+2.7.1
+

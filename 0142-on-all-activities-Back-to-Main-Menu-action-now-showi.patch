@@ -1,0 +1,243 @@
+From c73f4802aec57d71d4fa092e0a9c2520848a42d7 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Thu, 3 Apr 2014 12:24:29 +0300
+Subject: [PATCH 142/213] on all activities Back to Main Menu action now
+ showing on actionbar if space is available
+
+---
+ MistroFarmer/src/main/AndroidManifest.xml                |  2 +-
+ .../cgiar/ilri/mistro/farmer/EventsHistoryActivity.java  | 16 +++++++++++++++-
+ .../ilri/mistro/farmer/MilkProcutionHistoryActivity.java |  2 +-
+ .../src/main/res/layout/activity_events_history.xml      | 11 +++++++++--
+ .../main/res/layout/activity_milk_production_history.xml |  4 ++--
+ MistroFarmer/src/main/res/menu/add_event.xml             |  2 +-
+ MistroFarmer/src/main/res/menu/add_milk_production.xml   |  2 +-
+ MistroFarmer/src/main/res/menu/events.xml                |  2 +-
+ MistroFarmer/src/main/res/menu/fertility.xml             |  2 +-
+ .../src/main/res/menu/milk_procution_history.xml         |  2 +-
+ MistroFarmer/src/main/res/menu/milk_production.xml       |  2 +-
+ MistroFarmer/src/main/res/values/strings_en.xml          |  2 +-
+ 12 files changed, 35 insertions(+), 14 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index ef02a03..a2e56cd 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -2,7 +2,7 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+     android:versionCode="2"
+-    android:versionName="0.8.16" >
++    android:versionName="0.8.17" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
+index 73c6e1e..b929149 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
+@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
+ import android.util.Log;
+ import android.view.Gravity;
+ import android.view.View;
++import android.widget.Button;
+ import android.widget.TableLayout;
+ import android.widget.TableRow;
+ import android.widget.TextView;
+@@ -34,7 +35,7 @@ import java.util.Date;
+ import java.util.GregorianCalendar;
+ import java.util.List;
+ 
+-public class EventsHistoryActivity extends SherlockActivity {
++public class EventsHistoryActivity extends SherlockActivity implements View.OnClickListener {
+     private static final String TAG="EventsHistoryActivity";
+ 
+     private Menu menu;
+@@ -43,6 +44,7 @@ public class EventsHistoryActivity extends SherlockActivity {
+     private TextView cowNameTV;
+     private TextView eventTV;
+     private DisplayMetrics metrics;
++    private Button backB;
+ 
+     private String noDataReceived;
+     private String serverError;
+@@ -65,6 +67,8 @@ public class EventsHistoryActivity extends SherlockActivity {
+         dateTV = (TextView)findViewById(R.id.date_tv);
+         cowNameTV = (TextView)findViewById(R.id.cow_name_tv);
+         eventTV = (TextView)findViewById(R.id.event_tv);
++        backB = (Button)findViewById(R.id.back_b);
++        backB.setOnClickListener(this);
+ 
+         initTextInViews();
+         fetchEventsHistory();
+@@ -114,6 +118,7 @@ public class EventsHistoryActivity extends SherlockActivity {
+             eventTypes = new String[1];
+             eventTypes[0] = "";
+         }
++        backB.setText(Locale.getStringInLocale("back", this));
+ 
+         initMenuText();
+     }
+@@ -136,6 +141,15 @@ public class EventsHistoryActivity extends SherlockActivity {
+         }
+     }
+ 
++    @Override
++    public void onClick(View view) {
++        if(view == backB){
++            Intent intent = new Intent(this, EventsActivity.class);
++            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
++            startActivity(intent);
++        }
++    }
++
+     private class CowEventHistoryThread extends AsyncTask<String, Integer, String> {
+ 
+         ProgressDialog progressDialog;
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
+index 09deaeb..4ca604d 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
+@@ -366,7 +366,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Vi
+                 if(quantityTypes != null && quantityTypesInEN.length == quantityTypes.length) {
+                     for(int j = 0; j < quantityTypesInEN.length; j++) {
+                         if(quantityType.equals(quantityTypesInEN[j])) {
+-                            quantityString = quantityString +" ("+quantityTypes[j]+")";
++                            quantityString = quantityString +" "+quantityTypes[j];
+                             break;
+                         }
+                     }
+diff --git a/MistroFarmer/src/main/res/layout/activity_events_history.xml b/MistroFarmer/src/main/res/layout/activity_events_history.xml
+index 957cffd..673dbdc 100644
+--- a/MistroFarmer/src/main/res/layout/activity_events_history.xml
++++ b/MistroFarmer/src/main/res/layout/activity_events_history.xml
+@@ -8,7 +8,8 @@
+ 
+     <ScrollView
+             android:layout_height="match_parent"
+-            android:layout_width="match_parent">
++            android:layout_width="match_parent"
++            android:layout_weight="95">
+         <TableLayout
+                 android:id="@+id/events_history_tl"
+                 android:layout_height="wrap_content"
+@@ -55,5 +56,11 @@
+             </TableRow>
+         </TableLayout>
+     </ScrollView>
+-
++    <Button
++        android:id="@+id/back_b"
++        android:layout_width="@dimen/back_button_width"
++        android:layout_height="50dp"
++        android:paddingLeft="15dp"
++        android:paddingRight="15dp"
++        android:layout_weight="5"/>
+ </LinearLayout>
+diff --git a/MistroFarmer/src/main/res/layout/activity_milk_production_history.xml b/MistroFarmer/src/main/res/layout/activity_milk_production_history.xml
+index ede52c6..38cdd26 100644
+--- a/MistroFarmer/src/main/res/layout/activity_milk_production_history.xml
++++ b/MistroFarmer/src/main/res/layout/activity_milk_production_history.xml
+@@ -9,7 +9,7 @@
+     <ScrollView
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
+-        android:layout_weight="90">
++        android:layout_weight="95">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+@@ -128,5 +128,5 @@
+         android:layout_height="50dp"
+         android:paddingLeft="15dp"
+         android:paddingRight="15dp"
+-        android:layout_weight="10"/>
++        android:layout_weight="5"/>
+ </LinearLayout>
+diff --git a/MistroFarmer/src/main/res/menu/add_event.xml b/MistroFarmer/src/main/res/menu/add_event.xml
+index 0dc2157..42c64a9 100644
+--- a/MistroFarmer/src/main/res/menu/add_event.xml
++++ b/MistroFarmer/src/main/res/menu/add_event.xml
+@@ -9,5 +9,5 @@
+           android:showAsAction="never" />
+     <item android:id="@+id/action_back_main_menu"
+         android:orderInCategory="3"
+-        android:showAsAction="never" />
++        android:showAsAction="ifRoom" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/add_milk_production.xml b/MistroFarmer/src/main/res/menu/add_milk_production.xml
+index 07afa94..605e551 100644
+--- a/MistroFarmer/src/main/res/menu/add_milk_production.xml
++++ b/MistroFarmer/src/main/res/menu/add_milk_production.xml
+@@ -9,5 +9,5 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_back_main_menu"
+         android:orderInCategory="3"
+-        android:showAsAction="never" />
++        android:showAsAction="ifRoom" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/events.xml b/MistroFarmer/src/main/res/menu/events.xml
+index 0dc2157..42c64a9 100644
+--- a/MistroFarmer/src/main/res/menu/events.xml
++++ b/MistroFarmer/src/main/res/menu/events.xml
+@@ -9,5 +9,5 @@
+           android:showAsAction="never" />
+     <item android:id="@+id/action_back_main_menu"
+         android:orderInCategory="3"
+-        android:showAsAction="never" />
++        android:showAsAction="ifRoom" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/fertility.xml b/MistroFarmer/src/main/res/menu/fertility.xml
+index 07afa94..605e551 100644
+--- a/MistroFarmer/src/main/res/menu/fertility.xml
++++ b/MistroFarmer/src/main/res/menu/fertility.xml
+@@ -9,5 +9,5 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_back_main_menu"
+         android:orderInCategory="3"
+-        android:showAsAction="never" />
++        android:showAsAction="ifRoom" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/milk_procution_history.xml b/MistroFarmer/src/main/res/menu/milk_procution_history.xml
+index 0dc2157..42c64a9 100644
+--- a/MistroFarmer/src/main/res/menu/milk_procution_history.xml
++++ b/MistroFarmer/src/main/res/menu/milk_procution_history.xml
+@@ -9,5 +9,5 @@
+           android:showAsAction="never" />
+     <item android:id="@+id/action_back_main_menu"
+         android:orderInCategory="3"
+-        android:showAsAction="never" />
++        android:showAsAction="ifRoom" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/milk_production.xml b/MistroFarmer/src/main/res/menu/milk_production.xml
+index 0dc2157..42c64a9 100644
+--- a/MistroFarmer/src/main/res/menu/milk_production.xml
++++ b/MistroFarmer/src/main/res/menu/milk_production.xml
+@@ -9,5 +9,5 @@
+           android:showAsAction="never" />
+     <item android:id="@+id/action_back_main_menu"
+         android:orderInCategory="3"
+-        android:showAsAction="never" />
++        android:showAsAction="ifRoom" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 1b93116..0392748 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -230,6 +230,6 @@
+     <string name="back_en">Back</string>
+     <string name="back_to_main_menu_en">Back to Main Menu</string>
+     <string name="warning_en">Warning</string>
+-    <string name="action_will_be_canceled_en">If you choose to go back to the Main Menu the data you have entered in this screen will be lost. Press \'Okay\' if this is fine.</string>
++    <string name="action_will_be_canceled_en">If you choose to go back to the Main Menu data you have entered in this screen will be lost. Press \'Okay\' if this is okay with you.</string>
+     <string name="total_en">Total</string>
+ </resources>
+-- 
+2.7.1
+

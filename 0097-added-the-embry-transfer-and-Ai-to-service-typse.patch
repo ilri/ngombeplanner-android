@@ -1,0 +1,343 @@
+From f123bf3729e3eb95c09e63496c7eae951138011f Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Wed, 30 Oct 2013 12:27:42 +0300
+Subject: [PATCH 097/213] added the embry transfer and Ai to service typse
+
+---
+ .../org/cgiar/ilri/mistro/farmer/carrier/Cow.java  |   4 +-
+ .../mistro/farmer/ui/CowRegistrationScreen.java    | 222 +++++++++++++++++----
+ .../mistro/farmer/ui/FarmerRegistrationScreen.java |   2 +-
+ 3 files changed, 186 insertions(+), 42 deletions(-)
+
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/carrier/Cow.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+index 3571619..affc7d4 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/carrier/Cow.java
+@@ -18,8 +18,8 @@ public class Cow {
+     public static final String MODE_ADULT_COW_REGISTRATION = "adultCowRegistration";
+     public static final String MODE_BORN_CALF_REGISTRATION = "bornCalfRegistration";
+     public static final String SERVICE_TYPE_BULL = "Bull";
+-    public static final String SERVICE_TYPE_AI = "AI";
+-    public static final String SERVICE_TYPE_ET = "ET";
++    public static final String SERVICE_TYPE_AI = "Artificial Insemination";
++    public static final String SERVICE_TYPE_ET = "Embryo Transfer";
+     private String name;
+     private String earTagNumber;
+     private String dateOfBirth;
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
+index ae4f7a7..83d7aef 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/CowRegistrationScreen.java
+@@ -29,7 +29,7 @@ import org.cgiar.ilri.mistro.farmer.ui.localization.StringResources;
+  *
+  * @author jason
+  */
+-public class CowRegistrationScreen extends Form implements Screen{
++public class CowRegistrationScreen extends Form implements Screen, ActionListener{
+ 
+     private final Midlet midlet;
+     private final int locale;
+@@ -71,6 +71,10 @@ public class CowRegistrationScreen extends Form implements Screen{
+     private ComboBox damCB;
+     private Label countryL;
+     private ComboBox countryCB;
++    private Label strawNumberL;
++    private TextField strawNumberTF;
++    private Label embryoNumberL;
++    private TextField embryoNumberTF;
+     public CowRegistrationScreen(Midlet midlet, int locale, Farmer farmer, int cowIndex, int cowNumber) {
+         super(Locale.getStringInLocale(locale, StringResources.cow_registration_wth_indx)+String.valueOf(cowIndex+1));
+         
+@@ -202,6 +206,7 @@ public class CowRegistrationScreen extends Form implements Screen{
+         setComponentStyle(serviceTypeCB, true);
+         serviceTypeCB.setRenderer(new MistroListCellRenderer(Locale.getStringArrayInLocale(locale, ArrayResources.service_types)));
+         this.addComponent(serviceTypeCB);
++        serviceTypeCB.addActionListener(this);
+         
+         sireL = new Label(Locale.getStringInLocale(locale, StringResources.sire));
+         setLabelStyle(sireL);
+@@ -213,6 +218,14 @@ public class CowRegistrationScreen extends Form implements Screen{
+         sireCB.setRenderer(new MistroListCellRenderer(sireNames));
+         this.addComponent(sireCB);
+         
++        strawNumberL = new Label(Locale.getStringInLocale(locale, StringResources.straw_number));
++        setLabelStyle(strawNumberL);
++        this.addComponent(strawNumberL);
++        
++        strawNumberTF = new TextField();
++        setComponentStyle(strawNumberTF, false);
++        this.addComponent(strawNumberTF);
++        
+         damL = new Label(Locale.getStringInLocale(locale, StringResources.dam));
+         setLabelStyle(damL);
+         this.addComponent(damL);
+@@ -223,6 +236,14 @@ public class CowRegistrationScreen extends Form implements Screen{
+         damCB.setRenderer(new MistroListCellRenderer(damNames));
+         this.addComponent(damCB);
+         
++        embryoNumberL = new Label(Locale.getStringInLocale(locale, StringResources.embryo_number));
++        setLabelStyle(embryoNumberL);
++        this.addComponent(embryoNumberL);
++        
++        embryoNumberTF = new TextField();
++        setComponentStyle(embryoNumberTF, false);
++        this.addComponent(embryoNumberTF);
++        
+         countryL = new Label(Locale.getStringInLocale(locale, StringResources.sire_country_of_origin));
+         setLabelStyle(countryL);
+         this.addComponent(countryL);
+@@ -292,21 +313,37 @@ public class CowRegistrationScreen extends Form implements Screen{
+         String[] serviceTypesInEN = Locale.getStringArrayInLocale(Locale.LOCALE_EN, ArrayResources.service_types);
+         thisCow.setServiceType(serviceTypesInEN[serviceTypeCB.getSelectedIndex()]);
+         
+-        Sire sire = new Sire();
+-        Cow selectedSire = (Cow)validSires.elementAt(sireCB.getSelectedIndex());
+-        sire.setName(selectedSire.getName());
+-        sire.setEarTagNumber(selectedSire.getEarTagNumber());
+-        
+-        Dam dam = new Dam();
+-        Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
+-        dam.setName(selectedDam.getName());
+-        dam.setEarTagNumber(selectedDam.getEarTagNumber());
+-        thisCow.setDam(dam);
+-        
+-        //set country of origin to sire not this cow
+-        String[] countries = GeneralArrays.all_countries;
+-        sire.setCountryOfOrigin(countries[countryCB.getSelectedIndex()]);
+-        thisCow.setSire(sire);
++        if(serviceTypesInEN[serviceTypeCB.getSelectedIndex()].equals(Cow.SERVICE_TYPE_BULL)) {
++            Sire sire = new Sire();
++            Cow selectedSire = (Cow)validSires.elementAt(sireCB.getSelectedIndex());
++            sire.setName(selectedSire.getName());
++            sire.setEarTagNumber(selectedSire.getEarTagNumber());
++
++            Dam dam = new Dam();
++            Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
++            dam.setName(selectedDam.getName());
++            dam.setEarTagNumber(selectedDam.getEarTagNumber());
++            thisCow.setDam(dam);
++            String[] countries = GeneralArrays.all_countries;
++            sire.setCountryOfOrigin(countries[countryCB.getSelectedIndex()]);
++            thisCow.setSire(sire);
++        }
++        else if(serviceTypesInEN[serviceTypeCB.getSelectedIndex()].equals(Cow.SERVICE_TYPE_AI)){
++            Sire sire = new Sire();
++            sire.setStrawNumber(strawNumberTF.getText());
++            thisCow.setSire(sire);
++            
++            Dam dam = new Dam();
++            Cow selectedDam = (Cow)validDams.elementAt(damCB.getSelectedIndex());
++            dam.setName(selectedDam.getName());
++            dam.setEarTagNumber(selectedDam.getEarTagNumber());
++            thisCow.setDam(dam);
++        }
++        else if(serviceTypesInEN[serviceTypeCB.getSelectedIndex()].equals(Cow.SERVICE_TYPE_ET)){
++            Dam dam = new Dam();
++            dam.setEmbryoNumber(embryoNumberTF.getText());
++            thisCow.setDam(dam);
++        }
+     }
+     
+     private void restoreCowDetails() {
+@@ -391,41 +428,72 @@ public class CowRegistrationScreen extends Form implements Screen{
+         }
+         
+         String[] serviceTypesInEN = Locale.getStringArrayInLocale(locale, ArrayResources.service_types);
++        String serviceType = null;
+         for(int i =0; i < serviceTypesInEN.length; i++){
+             if(serviceTypesInEN[i].equals(thisCow.getServiceType())){
+                 serviceTypeCB.setSelectedIndex(i);
++                serviceType = serviceTypesInEN[i];
+             }
+         }
+-        
+-        Sire cowSire = thisCow.getSire();
+-        if(cowSire != null) {
+-            for(int i = 0; i < validSires.size(); i++){
+-                Cow currentSire = (Cow)validSires.elementAt(i);
+-                if(currentSire.getName().equals(cowSire.getName()) && currentSire.getEarTagNumber().equals(cowSire.getEarTagNumber())){
+-                    sireCB.setSelectedIndex(i);
++        serviceTypeSelected();
++        
++        if(serviceType!=null){
++            if(serviceType.equals(Cow.SERVICE_TYPE_BULL)){
++                Sire cowSire = thisCow.getSire();
++                if(cowSire != null) {
++                    for(int i = 0; i < validSires.size(); i++){
++                        Cow currentSire = (Cow)validSires.elementAt(i);
++                        if(currentSire.getName().equals(cowSire.getName()) && currentSire.getEarTagNumber().equals(cowSire.getEarTagNumber())){
++                            sireCB.setSelectedIndex(i);
++                        }
++                    }
++                }
++                
++                if(cowSire!=null){
++                    String[] countries = GeneralArrays.all_countries;
++                    for(int i = 0; i<countries.length;i++){
++                        if(countries[i].equals(cowSire.getCountryOfOrigin())){
++                            countryCB.setSelectedIndex(i);
++                        }
++                    }
++                }
++                
++                Dam cowDam = thisCow.getDam();
++                if(cowDam != null) {
++                    for(int i = 0; i < validDams.size(); i++){
++                        Cow currentDam = (Cow)validDams.elementAt(i);
++                        if(currentDam.getName().equals(cowDam.getName()) && currentDam.getEarTagNumber().equals(cowDam.getEarTagNumber())){
++                            sireCB.setSelectedIndex(i);
++                        }
++                    }
+                 }
+             }
+-        }
+-        
+-        Dam cowDam = thisCow.getDam();
+-        if(cowDam != null) {
+-            for(int i = 0; i < validDams.size(); i++){
+-                Cow currentDam = (Cow)validDams.elementAt(i);
+-                if(currentDam.getName().equals(cowDam.getName()) && currentDam.getEarTagNumber().equals(cowDam.getEarTagNumber())){
+-                    sireCB.setSelectedIndex(i);
++            
++            else if(serviceType.equals(Cow.SERVICE_TYPE_AI)){
++                Sire cowSire = thisCow.getSire();
++                if(cowSire!=null){
++                    strawNumberTF.setText(cowSire.getStrawNumber());
++                }
++                
++                Dam cowDam = thisCow.getDam();
++                if(cowDam != null) {
++                    for(int i = 0; i < validDams.size(); i++){
++                        Cow currentDam = (Cow)validDams.elementAt(i);
++                        if(currentDam.getName().equals(cowDam.getName()) && currentDam.getEarTagNumber().equals(cowDam.getEarTagNumber())){
++                            sireCB.setSelectedIndex(i);
++                        }
++                    }
+                 }
+             }
+-        }
+-        
+-        //set countryCB to sire's country of origin
+-        if(cowSire!=null){
+-            String[] countries = GeneralArrays.all_countries;
+-            for(int i = 0; i<countries.length;i++){
+-                if(countries[i].equals(cowSire.getCountryOfOrigin())){
+-                    countryCB.setSelectedIndex(i);
++            
++            else if(serviceType.equals(Cow.SERVICE_TYPE_ET)){
++                Dam cowDam = thisCow.getDam();
++                if(cowDam!=null){
++                    embryoNumberTF.setText(cowDam.getEmbryoNumber());
+                 }
+             }
+         }
++        
+     }
+     
+     private String[] getValidSires() {
+@@ -484,6 +552,75 @@ public class CowRegistrationScreen extends Form implements Screen{
+         return damNames;
+     }
+     
++    private void serviceTypeSelected(){
++        String[] serviceTypesInEN = Locale.getStringArrayInLocale(locale, ArrayResources.service_types);
++        int selectedIndex = serviceTypeCB.getSelectedIndex();
++        System.out.println(serviceTypesInEN[selectedIndex]);
++        if(serviceTypesInEN[selectedIndex].equals(Cow.SERVICE_TYPE_BULL)){
++            sireL.getStyle().setFgColor(0x000000);
++            sireCB.setFocusable(true);
++            sireCB.getStyle().setBgColor(0xFFFFFF);
++            
++            damL.getStyle().setFgColor(0x000000);
++            damCB.setFocusable(true);
++            damCB.getStyle().setBgColor(0xFFFFFF);
++            
++            countryL.getStyle().setFgColor(0x000000);
++            countryCB.setFocusable(true);
++            countryCB.getStyle().setBgColor(0xFFFFFF);
++            
++            strawNumberL.getStyle().setFgColor(0xC0C0C0);
++            strawNumberTF.setFocusable(false);
++            strawNumberTF.getStyle().setBgColor(0xC0C0C0);
++            
++            embryoNumberL.getStyle().setFgColor(0xC0C0C0);
++            embryoNumberTF.setFocusable(false);
++            embryoNumberTF.getStyle().setBgColor(0xC0C0C0);
++        }
++        else if(serviceTypesInEN[selectedIndex].equals(Cow.SERVICE_TYPE_AI)){
++            sireL.getStyle().setFgColor(0xC0C0C0);
++            sireCB.setFocusable(false);
++            sireCB.getStyle().setBgColor(0xC0C0C0);
++            
++            damL.getStyle().setFgColor(0x000000);
++            damCB.setFocusable(true);
++            damCB.getStyle().setBgColor(0xFFFFFF);
++            
++            countryL.getStyle().setFgColor(0xC0C0C0);
++            countryCB.setFocusable(false);
++            countryCB.getStyle().setBgColor(0xC0C0C0);
++            
++            strawNumberL.getStyle().setFgColor(0x000000);
++            strawNumberTF.setFocusable(true);
++            strawNumberTF.getStyle().setBgColor(0xFFFFFF);
++            
++            embryoNumberL.getStyle().setFgColor(0xC0C0C0);
++            embryoNumberTF.setFocusable(false);
++            embryoNumberTF.getStyle().setBgColor(0xC0C0C0);
++        }
++        else if(serviceTypesInEN[selectedIndex].equals(Cow.SERVICE_TYPE_ET)){
++            sireL.getStyle().setFgColor(0xC0C0C0);
++            sireCB.setFocusable(false);
++            sireCB.getStyle().setBgColor(0xC0C0C0);
++            
++            damL.getStyle().setFgColor(0xC0C0C0);
++            damCB.setFocusable(false);
++            damCB.getStyle().setBgColor(0xC0C0C0);
++            
++            countryL.getStyle().setFgColor(0xC0C0C0);
++            countryCB.setFocusable(false);
++            countryCB.getStyle().setBgColor(0xC0C0C0);
++            
++            strawNumberL.getStyle().setFgColor(0xC0C0C0);
++            strawNumberTF.setFocusable(false);
++            strawNumberTF.getStyle().setBgColor(0xC0C0C0);
++            
++            embryoNumberL.getStyle().setFgColor(0x000000);
++            embryoNumberTF.setFocusable(true);
++            embryoNumberTF.getStyle().setBgColor(0xFFFFFF);
++        }
++    }
++    
+     public void start() {
+         this.show();
+     }
+@@ -495,5 +632,12 @@ public class CowRegistrationScreen extends Form implements Screen{
+     public void pause() {
+         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     }
++
++    public void actionPerformed(ActionEvent evt) {
++        if(evt.getComponent().equals(serviceTypeCB)){
++            serviceTypeSelected();
++            System.out.println("called");
++        }
++    }
+     
+ }
+\ No newline at end of file
+diff --git a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java
+index e16257a..ae9d6ad 100644
+--- a/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java
++++ b/JavaME/MistroFarmer/MistroFarmer/src/org/cgiar/ilri/mistro/farmer/ui/FarmerRegistrationScreen.java
+@@ -74,7 +74,7 @@ public class FarmerRegistrationScreen extends Form implements Screen{
+                     String noOfCowsString = cowNumberTF.getText();
+                     if(validateInput()){
+                         saveFarmerDetails();
+-                        if(noOfCowsString!= null && !noOfCowsString.equals("")) {
++                        if(noOfCowsString!= null && !noOfCowsString.equals("") && Integer.parseInt(noOfCowsString) > 0) {
+                             CowRegistrationScreen firstCowScreen = new CowRegistrationScreen(FarmerRegistrationScreen.this.midlet, FarmerRegistrationScreen.this.locale, FarmerRegistrationScreen.this.farmer, 0, Integer.parseInt(noOfCowsString));
+                             firstCowScreen.start();
+                         }
+-- 
+2.7.1
+

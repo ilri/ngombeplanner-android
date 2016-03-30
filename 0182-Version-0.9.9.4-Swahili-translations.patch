@@ -1,0 +1,265 @@
+From c4c2f74611d4a237f20dc60f660a140aa12d9af2 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Thu, 5 Jun 2014 23:09:46 +0300
+Subject: [PATCH 182/213] Version 0.9.9.4: Swahili translations
+
+Swahili translations complete
+---
+ MistroFarmer/src/main/AndroidManifest.xml          |   4 +-
+ .../mistro/farmer/CowRegistrationActivity.java     |   2 +-
+ MistroFarmer/src/main/res/values/strings_en.xml    |   2 +-
+ MistroFarmer/src/main/res/values/strings_sw.xml    | 100 ++++++++++++---------
+ 4 files changed, 64 insertions(+), 44 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index b01ac06..ec07958 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+-    android:versionCode="11"
+-    android:versionName="0.9.9.2" >
++    android:versionCode="13"
++    android:versionName="0.9.9.4" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index 1bc9866..9fb9230 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -1434,4 +1434,4 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             return null;
+         }
+     }
+-}
++}
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 5401855..7fd8cd8 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -5,7 +5,7 @@
+     <string name="login_anyway_en">Login Anyway</string>
+     <string name="register_en">Register</string>
+     <string name="full_name_en">Full Name</string>
+-    <string name="mobile_number_en">Mobile Number</string>
++    <string name="mobile_number_en">Modem\'s Number</string>
+     <string name="extension_p_en">Extension Personnel</string>
+     <string name="number_of_cows_en">Number of Cows</string>
+     <string-array name="sex_array_en">
+diff --git a/MistroFarmer/src/main/res/values/strings_sw.xml b/MistroFarmer/src/main/res/values/strings_sw.xml
+index eda26a8..57fccb0 100644
+--- a/MistroFarmer/src/main/res/values/strings_sw.xml
++++ b/MistroFarmer/src/main/res/values/strings_sw.xml
+@@ -17,10 +17,10 @@
+     <string name="age_sw">Umri</string>
+     <string name="date_of_birth_sw">Tarehe ya kuzaliwa</string>
+     <string name="breed_sw">Aina ya mifugo</string>
+-    <string name="sex_sw">Sex</string>
+-    <string name="deformity_sw">Deformity</string>
+-    <string name="sire_sw">Sire</string>
+-    <string name="dam_sw">Dam</string>
++    <string name="sex_sw">Jinsia</string>
++    <string name="deformity_sw">Ulemavu</string>
++    <string name="sire_sw">Mzazi wa kiume</string>
++    <string name="dam_sw">Mzazi wa kike</string>
+     <string name="previous_sw">Iliopita</string>
+     <string name="next_sw">Ijayo</string>
+     <string name="finish_sw">Maliza</string>
+@@ -29,7 +29,7 @@
+     <string name="cow_registration_sw">Sajili ngombe, Ngombe namba </string>
+     <string name="cow_registration_proper_sw">Sajili Ngombe</string>
+     <string name="dam_registration_sw">Dam Registration</string>
+-    <string name="sire_registration_sw">Sire Registration</string>
++    <string name="sire_registration_sw">Sajili Mzazi wa Kiume</string>
+     <string-array name="age_type_array_sw">
+         <item>Siku</item>
+         <item>Mwezi</item>
+@@ -83,23 +83,23 @@
+         <item>Zebu</item>
+     </string-array>
+     <string-array name="deformities_array_sw">
+-        <item>Blind</item>
+-        <item>Lame</item>
+-        <item>Abnormal teat number</item>
+-        <item>Crooked feet</item>
++        <item>Kipofu</item>
++        <item>Kilema</item>
++        <item>Idadi ya chuchu isiokuwa ya kawaida</item>
++        <item>Miguu iliyopotosha</item>
+         <item>Clef palate</item>
+         <item>Nyingine</item>
+     </string-array>
+     <string name="service_type_used_sw">Service Type Used</string>
+     <string-array name="service_types_sw">
+-        <item>Bull</item>
+-        <item>Artificial Insemination</item>
++        <item>Ndume</item>
++        <item>Mbegu ya mpira</item>
+         <item>Embryo Transfer</item>
+     </string-array>
+     <string name="maximum_of_four_breeds_sw">Upeo wa mifugo nne</string>
+-    <string name="country_of_origin_sw">Sire\'s country of Origin</string>
++    <string name="country_of_origin_sw">Nchi ya mzazi wa kiume</string>
+     <string name="specify_sw">Bainisha</string>
+-    <string name="straw_number_sw">Straw Number</string>
++    <string name="straw_number_sw">Namba ya mpira ya mbegu</string>
+     <string name="vet_used_sw">Daktari aliyetumiwa</string>
+     <string name="servicing_bull_name_sw">Ndume aliyetumiwa</string>
+     <string name="servicing_bull_identifier_hint_sw">Ingiza jina, namba ya sikio au kitambulisho (ID) ya ndume</string>
+@@ -114,19 +114,19 @@
+     <string name="name_of_other_farmer_or_group_sw">Ingiza jina ya mkulima au kundi</string>
+     <string name="embryo_number_sw">Embryo Number</string>
+     <string name="enable_gps_sw">Wezesha GPS</string>
+-    <string name="reason_for_enabling_gps_sw">Unahitaji kuwezesha GPS kabla ya kuendelea. Bonyeza \'Sawa\' ili kuwawezesha GPS</string>
+-    <string name="cancel_sw">Cancel</string>
+-    <string name="enable_network_sw">Enable Internet</string>
+-    <string name="reason_for_enabling_network_sw">This application requires an internet connection for it to work/. Press Okay to enable the internet</string>
+-    <string name="successful_registration_sw">Successful Registration</string>
+-    <string name="successful_registration_instructions_sw">You have been successfully registered. You will receive an SMS instructing you on how to login</string>
++    <string name="reason_for_swabling_gps_sw">Unahitaji kuwezesha GPS kabla ya kuendelea. Bonyeza \'Sawa\' ili kuwawezesha GPS</string>
++    <string name="cancel_sw">Futa</string>
++    <string name="enable_network_sw">Wezesha mtandao</string>
++    <string name="reason_for_swabling_network_sw">Unahitaji mtandao wa intanet ili kutumia kifaa hii. Bonyeza sawa ili kuwezesha mtandao</string>
++    <string name="successful_registration_sw">Umesajiliwa</string>
++    <string name="successful_registration_instructions_sw">Umesajiliwa kikamili. Utapokea SMS iliyo na maelezo ya kutumia hii kifaa</string>
+     <string name="your_mistro_id_sw">Your Mistro ID</string>
+     <string name="enter_your_mistro_id_sw">Ingiza kitambulisho yako ya Mistro</string>
+     <string name="failed_to_authenticate_sw">Tumeshindwa kuthibitisha simu yako. Tafadhali jaribu tena</string>
+     <string name="logging_in_from_different_device_sw">Unatumia simu ambayo haijatumiwa tena. Bado unataka kuingia?</string>
+     <string name="yes_sw">Ndio</string>
+     <string name="no_sw">Hapana</string>
+-    <string name="milk_production_sw">Milk Production</string>
++    <string name="milk_production_sw">Uzalisaji wa Maziwa</string>
+     <string name="events_sw">Matukio</string>
+     <string name="main_menu_sw">Menu Kuu</string>
+     <string name="sim_card_not_registered_sw">Unatumia kadi ya simu ambayo haijasajiliwa katika mtandao huu.</string>
+@@ -135,12 +135,12 @@
+     <string name="old_mobile_number_sw">Namba ya simu ya kitambo</string>
+     <string name="old_number_not_in_system_sw">Inaonekana kama namba yako ya simu ya kitambo haijasajiliwa katika mtandao huu. Wasiliana na msimamizi wa mtandao huu ili akusaidie.</string>
+     <string name="welcome_sw">Karibu</string>
+-    <string name="add_production_sw">Add Production</string>
+-    <string name="production_history_sw">Production History</string>
++    <string name="add_production_sw">Ongeza Maziwa</string>
++    <string name="production_history_sw">Historia ya Uzalishaji</string>
+     <string name="cow_sw">Ngombe</string>
+     <string name="time_sw">Wakati</string>
+     <string name="quantity_sw">Kiasi</string>
+-    <string name="measurement_type_sw">Measurement type</string>
++    <string name="measurement_type_sw">Kipimo</string>
+     <string name="add_sw">Ongeza</string>
+     <string-array name="milking_times_sw">
+         <item>Asubuhi</item>
+@@ -155,10 +155,10 @@
+     <string name="enter_quantity_of_milk_produced_sw">Tafadhali ingiza kiasi ya maziwa yaliyokamuliwa</string>
+     <string name="information_successfully_sent_to_server_sw">Habari imepachikwa mtanaoni</string>
+     <string name="problem_in_data_sent_sw">Kunashida na habari unayotaka kutuma</string>
+-    <string name="production_for_time_already_exists_sw">You have already entered the amount you got from this cow from this date</string>
+-    <string name="problem_connecting_to_server_sw">A problem occurred while trying to connect to the Server</string>
++    <string name="production_for_time_already_exists_sw">Tayari imerekodi kiasi ya maziwa kutoka kwa ngo\'ombe huyu siku hii</string>
++    <string name="problem_connecting_to_server_sw">Kumekuwa na shida kufikia mtandao</string>
+     <string name="date_sw">Tarehe</string>
+-    <string name="no_data_received_sw">No data received</string>
++    <string name="no_data_received_sw">Hakuna habari iliyopatikana</string>
+     <string name="today_sw">Leo</string>
+     <string name="yesterday_sw">Jana</string>
+     <string name="enter_your_name_sw">Tafadhali ingiza jina lako</string>
+@@ -166,7 +166,7 @@
+     <string name="enter_extension_personnel_name_sw">Tafadhali ingiza jina kamili ya afisaa wa ukulima</string>
+     <string name="enter_ear_tag_number_sw">Tafadhali ingiza namba ya Sikio ya ngombe</string>
+     <string name="enter_ear_tag_no_or_name_sw">Tafadhali ingiza jina au namba ya Sikio ya ngombe</string>
+-    <string name="enter_straw_number_sw">Please enter the Sire\'s straw number</string>
++    <string name="enter_straw_number_sw">Ingiza namba ya mpira ya mbegu</string>
+     <string name="enter_embryo_number_sw">Tafadhali ingiza namba ya kiini tete</string>
+     <string name="add_an_event_sw">Ongeza tukio</string>
+     <string name="past_events_sw">Historia ya matukio</string>
+@@ -176,18 +176,18 @@
+         <item></item>
+         <item>Kuzaliwa</item>
+         <item>Kuanza kwa utoaji wa maziwa</item>
+-        <item>Dry Off</item>
++        <item>Ng\'ombe Imekauka</item>
+         <item>Bloat</item>
+         <item>Ugonjwa</item>
+         <item>Kifo</item>
+         <item>Kununua</item>
+         <item>Kuuza</item>
+         <item>Upandikizaji</item>
+-        <item>Bull Servicing</item>
+-        <item>Signs of Heat</item>
+-        <item>Deworming</item>
+-        <item>Dipping or Spraying</item>
+-        <item>Vaccination</item>
++        <item>Kupandwa</item>
++        <item>Dalili za joto</item>
++        <item>Kutoa wadudu wa tumbo</item>
++        <item>Kutumbukiza (Dip)</item>
++        <item>Kuchanjwa</item>
+     </string-array>
+     <string-array name="cow_servicing_types_sw">
+         <item>Upandikizaji</item>
+@@ -201,9 +201,9 @@
+     <string name="type_of_birth_sw">Aina ya uzazi</string>
+     <string-array name="birth_types_sw">
+         <item>Kawaida</item>
+-        <item>Still</item>
+-        <item>Premature</item>
+-        <item>Utoaji mimba</item>
++        <item>Kuzaliwa kama amekufa (Still)</item>
++        <item>Kuzaliwa kabla ya wakati</item>
++        <item>Utoaji mimba (Abortion)</item>
+     </string-array>
+     <string name="calf_registration_sw">Sajili ndama</string>
+     <string name="next_screen_is_calf_registration_sw">Unahitajika kusajili ndama aliyezaliwa. Bonyeza \'Ijayo\' ili kumsajili</string>
+@@ -235,16 +235,16 @@
+     <string name="enter_number_times_cow_milked_sw">Please enter the number of times the cow is normally milked per day</string>
+     <string name="milking_times_too_much_sw">No. of times cow is milked should not be more than 10</string>
+     <string name="fertility_sw">Uzazi</string>
+-    <string name="servicing_sw">Servicing</string>
++    <string name="servicing_sw">Kupandwa</string>
+     <string name="calving_sw">Kuzaa</string>
+-    <string name="select_service_type_sw">Select servicing type</string>
++    <string name="select_service_type_sw">Chagua iaina ya kupandwa</string>
+     <string name="artificial_inseminamtion_sw">Upandikizaji</string>
+     <string name="bull_servicing_sw">Kukwewa na ndume</string>
+     <string name="no_sim_card_sw">Kadi ya simu haipo</string>
+     <string name="previous_live_births_sw">Number of previous births</string>
+     <string name="enter_previous_live_births_sw">Please enter the number of previous births by this cow</string>
+-    <string name="enter_dam_etn_sw">Enter dam\'s ear tag number</string>
+-    <string name="age_diff_from_dob_sw">Cow\'s age appears to conflict with the cow\'s Date of birth</string>
++    <string name="enter_dam_etn_sw">Ingiza namba ya sikio ya mzazi wa kike</string>
++    <string name="age_diff_from_dob_sw">Umri na siku ya kuzaliwa ya ng\'ombe hazilingani</string>
+     <string name="action_not_allowed_sw">Hatua haikubaliki hapa</string>
+     <string name="are_you_in_farm_sw">Uko kwa shamba yako?</string>
+     <string name="farm_coords_successfully_reg_sw">Eneo la shamba lako imepachikwa kwenye kumbukumbu</string>
+@@ -264,4 +264,24 @@
+     <string name="unable_to_fetch_cached_data_sw">Data iliyohifadhiwa kwa simu yako hipatikani</string>
+     <string name="you_do_not_have_female_cows_sw">Hauna ng\'ombe wa kike</string>
+     <string name="you_do_not_have_cows_sw">Hauna ng\'ombe</string>
++
++    <string name="ear_tag_no_or_name_sw">Unaweza ingiza jina au nambari ya sikio ya ng\'ombe</string>
++    <string name="age_or_dob_sw">Unaweka ingiza umri au tarehe ya kuzaliwa ya ng\'ombe</string>
++    <string name="enter_age_or_dob_sw">Tafadhail ingiza umri au siku ya kuzaliwa</string>
++    <string name="cow_too_young_sw">Ng\'ombe uliyemchagua ni mchanga sana</string>
++    <string name="enter_no_cows_own_sw">Ingiza namba ya ng\'ombe unaomiliki</string>
++    <string name="number_in_use_sw">Nambari ya simu unayosajili tayari imesajiliwa na mkulima mwingine</string>
++    <string name="milk_inconsistent_sw">Kiasi ya maziwa uliyoingiza haiendani. Bonyeza Sawa kama uko na uhakika</string>
++    <string name="press_add_again_sw">Bonyeza Ongeza tena</string>
++    <string name="no_deformity_sw">Hana ulemavu</string>
++    <string name="specify_breed_here_sw">Andika aina ya mifugo hapa</string>
++    <string name="enter_breed_sw">Tafadhali ingiza aina ya mifugo</string>
++    <string name="breed_unknown_sw">Aina ya mifugo uliyoingiza haijulikani</string>
++    <string name="extra_breed_sw">Aina ya mifugo nyingine</string>
++    <string name="specify_other_country_sw">Andika nchi hapa</string>
++    <string name="enter_sire_etn_sw">Ingiza namba ya sikio ya mzazi wa kiume</string>
++    <string name="sire_owner_sw">Mmiliki wa mzazi wa kiume</string>
++    <string name="name_sire_owner_sw">Jina la mmiliki</string>
++    <string name="preferred_language_sw">Lugha unayotumia</string>
++    <string name="select_an_event_sw">Tafadhali chagua tukio</string>
+ </resources>
+-- 
+2.7.1
+

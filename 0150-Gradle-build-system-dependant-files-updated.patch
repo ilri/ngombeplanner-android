@@ -1,0 +1,31 @@
+From f916354dc50bb19f1c5544188a4d363b4ecf764d Mon Sep 17 00:00:00 2001
+From: Jason Rogena <jasonrogena@gmail.com>
+Date: Mon, 28 Apr 2014 10:04:25 +0300
+Subject: [PATCH 150/213] Gradle build system dependant files updated
+
+---
+ .idea/libraries/support_v4_13_0_0.xml | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 .idea/libraries/support_v4_13_0_0.xml
+
+diff --git a/.idea/libraries/support_v4_13_0_0.xml b/.idea/libraries/support_v4_13_0_0.xml
+new file mode 100644
+index 0000000..1a79c30
+--- /dev/null
++++ b/.idea/libraries/support_v4_13_0_0.xml
+@@ -0,0 +1,11 @@
++<component name="libraryTable">
++  <library name="support-v4-13.0.0">
++    <CLASSES>
++      <root url="jar://$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/13.0.0/support-v4-13.0.0.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/13.0.0/support-v4-13.0.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+-- 
+2.7.1
+

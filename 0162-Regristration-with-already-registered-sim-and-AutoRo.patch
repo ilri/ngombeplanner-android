@@ -1,0 +1,127 @@
+From 55ccb5fa72d9c13b11a9b270df151b540aada779 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Wed, 21 May 2014 19:58:46 +0300
+Subject: [PATCH 162/213] Regristration with already registered sim and
+ AutoRotate
+
+During farmer registration, on submit user is told if sim card
+already registered under another farmer (instead of just keeping
+quiet)
+
+AutoRotate disabled for all activities except:
+   - MilkProductionHistory activity
+   - EventHistory activity
+---
+ MistroFarmer/src/main/AndroidManifest.xml              | 18 ++++++++----------
+ .../ilri/mistro/farmer/CowRegistrationActivity.java    |  3 +++
+ .../ilri/mistro/farmer/FarmerRegistrationActivity.java |  3 +++
+ .../cgiar/ilri/mistro/farmer/backend/DataHandler.java  |  4 +++-
+ MistroFarmer/src/main/res/values/strings_en.xml        |  1 +
+ 5 files changed, 18 insertions(+), 11 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index 346ff83..0d5787b 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -57,30 +57,28 @@
+             android:screenOrientation="portrait" >
+         </activity>
+         <activity
+-            android:name="org.cgiar.ilri.mistro.farmer.MilkProcutionHistoryActivity"
+-            android:label="@string/title_activity_milk_procution_history" >
++            android:name="org.cgiar.ilri.mistro.farmer.MilkProcutionHistoryActivity" >
+         </activity>
+         <activity
+             android:name="org.cgiar.ilri.mistro.farmer.EventsActivity"
+-            android:label="@string/title_activity_events" >
++            android:screenOrientation="portrait" >
+         </activity>
+         <activity
+             android:name="org.cgiar.ilri.mistro.farmer.AddEventActivity"
+-            android:label="@string/title_activity_add_event"
+-            android:windowSoftInputMode="stateHidden" >
++            android:windowSoftInputMode="stateHidden"
++            android:screenOrientation="portrait" >
+         </activity>
+         <activity
+-            android:name="org.cgiar.ilri.mistro.farmer.EventsHistoryActivity"
+-            android:label="@string/title_activity_events_history" >
++            android:name="org.cgiar.ilri.mistro.farmer.EventsHistoryActivity" >
+         </activity>
+         <activity
+             android:name="org.cgiar.ilri.mistro.farmer.FertilityActivity"
+-            android:label="@string/title_activity_fertility" >
++            android:screenOrientation="portrait" >
+         </activity>
+         <activity
+             android:name="org.cgiar.ilri.mistro.farmer.AddMilkProductionActivity"
+-            android:label="@string/title_activity_add_milk_production"
+-            android:windowSoftInputMode="stateHidden" >
++            android:windowSoftInputMode="stateHidden"
++            android:screenOrientation="portrait" >
+         </activity>
+     </application>
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index c6ca2c4..9988fcf 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -1101,6 +1101,9 @@ public class CowRegistrationActivity extends SherlockActivity implements MistroA
+             else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                 Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("server_not_receive_sms", CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
+             }
++            else if(result.equals(DataHandler.CODE_NUMBER_IN_USE)){
++                Toast.makeText(CowRegistrationActivity.this, Locale.getStringInLocale("number_in_use", CowRegistrationActivity.this), Toast.LENGTH_LONG).show();
++            }
+             else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
+ 
+                 clearEditTextDataCache();
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+index d34176f..bc7d5be 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+@@ -426,6 +426,9 @@ public class FarmerRegistrationActivity extends SherlockActivity implements Mist
+             else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
+                 Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("server_not_receive_sms", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
+             }
++            else if(result.equals(DataHandler.CODE_NUMBER_IN_USE)){
++                Toast.makeText(FarmerRegistrationActivity.this, Locale.getStringInLocale("number_in_use", FarmerRegistrationActivity.this), Toast.LENGTH_LONG).show();
++            }
+             else if(result.equals(DataHandler.ACKNOWLEDGE_OK))
+             {
+                 Log.d(TAG,"data successfully sent to server");
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+index 443b81a..269bd34 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+@@ -62,6 +62,8 @@ public class DataHandler
+     public static final String DATA_ERROR="934342";
+     public static final String CODE_USER_NOT_AUTHENTICATED="43322";
+     public static final String CODE_SIM_CARD_REGISTERED="83242";
++    public static final String CODE_NUMBER_IN_USE="032443";
++
+     private static final String TAG="DataHandler";
+     private static final long SMS_RESPONSE_TIMEOUT = 300000;
+     private static final int HTTP_POST_TIMEOUT =20000;
+@@ -955,7 +957,7 @@ public class DataHandler
+                 else if(test.equals(DATA_ERROR)) valid = true;
+                 else if(test.equals(NO_DATA)) valid = true;
+                 else if(test.equals(CODE_SIM_CARD_REGISTERED)) valid = true;
+-                else if(test.equals(CODE_SIM_CARD_REGISTERED)) valid = true;
++                else if(test.equals(CODE_NUMBER_IN_USE)) valid = true;
+             }
+ 
+             return valid;
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 86a1629..a27f803 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -241,4 +241,5 @@
+     <string name="enter_age_or_dob_en">Please enter either the cow\'s age or date of birth</string>
+     <string name="cow_too_young_en">The selected cow is too young</string>
+     <string name="enter_no_cows_own_en">Enter the number of cows you own</string>
++    <string name="number_in_use_en">The number (or sim card) you are using has already been registered with another user</string>
+ </resources>
+-- 
+2.7.1
+

@@ -1,0 +1,66 @@
+From f8e9872379efc9aa9b75d08b498bda65be3482ae Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Fri, 23 May 2014 12:16:30 +0300
+Subject: [PATCH 166/213] Milk data JSON object
+
+Milk data json object being sent from app now has a new field
+   - fluctuation (boolean)
+To indicate wheter milk quantity is abnormal (true if milk data
+is abnormal)
+---
+ .../org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java    | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+index 298c494..7e5216b 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+@@ -77,6 +77,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+     private String[] calfSucklingTypes;
+     private List<EventConstraint> eventConstraints;
+     private boolean milkQuantityFine;
++    private boolean milkFluctuation;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -86,6 +87,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+ 
+         cacheData = true;
+         milkQuantityFine = false;
++        milkFluctuation = false;
+ 
+         cowTV=(TextView)this.findViewById(R.id.cow_tv);
+         cowS=(Spinner)this.findViewById(R.id.cow_s);
+@@ -298,7 +300,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+             /*String[] calfSucklingTypesInEN = Locale.getArrayInLocale("calf_suckling_types",this,Locale.LOCALE_ENGLISH);
+             String calfSucklingType = calfSucklingTypesInEN[calfSucklingS.getSelectedItemPosition()];*/
+             //milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(),noMilkingET.getText().toString(),calfSucklingType);
+-            milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString());
++            milkProductionDataAdditionThread.execute(telephonyManager.getSimSerialNumber(),cowNameArray[cowS.getSelectedItemPosition()],cowEarTagNumberArray[cowS.getSelectedItemPosition()],milkingTime,quantityET.getText().toString(),quantityType,dateET.getText().toString(), Boolean.toString(milkFluctuation));
+         }
+     }
+ 
+@@ -374,10 +376,12 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+                                                 if(which==DialogInterface.BUTTON_POSITIVE){
+                                                     dialog.dismiss();
+                                                     milkQuantityFine = true;
++                                                    milkFluctuation = true;
+                                                     Toast.makeText(AddMilkProductionActivity.this, Locale.getStringInLocale("press_add_again", AddMilkProductionActivity.this), Toast.LENGTH_LONG).show();
+                                                 }
+                                                 else{
+                                                     dialog.cancel();
++                                                    milkFluctuation = false;
+                                                     milkQuantityFine = false;
+                                                 }
+                                             }
+@@ -472,6 +476,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements Mistr
+                 jsonObject.put("quantity",params[4]);
+                 jsonObject.put("quantityType",params[5]);
+                 jsonObject.put("date", params[6]);
++                jsonObject.put("fluctuation", params[7]);
+                 /*jsonObject.put("noMilkingTimes",params[7]);
+                 jsonObject.put("calfSuckling",params[8]);*/
+                 //String result=DataHandler.sendDataToServer(AddMilkProductionActivity.this, jsonObject.toString(),DataHandler.FARMER_ADD_MILK_PRODUCTION_URL, true);
+-- 
+2.7.1
+

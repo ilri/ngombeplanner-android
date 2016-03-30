@@ -1,0 +1,138 @@
+From c7798f087d22e556151a2624a3b761b882270538 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Thu, 27 Mar 2014 12:07:49 +0300
+Subject: [PATCH 132/213] Version 0.8 Revision 7: No of previous births
+ EditText removed from AddCowEvent activity. Server updated
+
+---
+ MistroFarmer/src/main/AndroidManifest.xml          |  2 +-
+ .../cgiar/ilri/mistro/farmer/AddEventActivity.java | 26 +++++++++++-----------
+ .../src/main/res/layout/activity_add_event.xml     |  4 ++--
+ 3 files changed, 16 insertions(+), 16 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index 1a9d9b3..8881ff4 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -2,7 +2,7 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+     android:versionCode="2"
+-    android:versionName="Version 0.8 Revision 6" >
++    android:versionName="Version 0.8 Revision 7" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+index 6cd5af4..f1b374b 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+@@ -80,8 +80,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+     private Spinner servicingS;
+     private TextView causeOfDeathTV;
+     private Spinner causeOfDeathS;
+-    private TextView liveBirthsTV;
+-    private EditText liveBirthsET;
++    /*private TextView liveBirthsTV;
++    private EditText liveBirthsET;*/
+ 
+     private String[] cowNameArray;
+     private String[] cowEarTagNumberArray;
+@@ -130,8 +130,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+         noOfServicingDaysET = (EditText)findViewById(R.id.no_of_servicing_days_et);
+         remarksTV=(TextView)findViewById(R.id.remarks_tv);
+         remarksET=(EditText)findViewById(R.id.remarks_et);
+-        liveBirthsTV = (TextView)findViewById(R.id.live_births_tv);
+-        liveBirthsET = (EditText)findViewById(R.id.live_births_et);
++        /*liveBirthsTV = (TextView)findViewById(R.id.live_births_tv);
++        liveBirthsET = (EditText)findViewById(R.id.live_births_et);*/
+         okayB=(Button)findViewById(R.id.okay_b);
+         okayB.setOnClickListener(this);
+ 
+@@ -273,7 +273,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+         sendUnsuccessfulWarning=Locale.getStringInLocale("something_went_wrong_try_again",this);
+         loadingPleaseWait = Locale.getStringInLocale("loading_please_wait",this);
+         servicingTV.setText(Locale.getStringInLocale("associated_servicing",this));
+-        liveBirthsTV.setText(Locale.getStringInLocale("previous_live_births",this));
++        //liveBirthsTV.setText(Locale.getStringInLocale("previous_live_births",this));
+     }
+ 
+     private void fetchCowIdentifiers()
+@@ -329,8 +329,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+         servicingS.setVisibility(Spinner.GONE);
+         causeOfDeathTV.setVisibility(TextView.GONE);
+         causeOfDeathS.setVisibility(Spinner.GONE);
+-        liveBirthsTV.setVisibility(TextView.GONE);
+-        liveBirthsET.setVisibility(EditText.GONE);
++        /*liveBirthsTV.setVisibility(TextView.GONE);
++        liveBirthsET.setVisibility(EditText.GONE);*/
+         String[] eventTypesEN = Locale.getArrayInLocale("cow_event_types", this, Locale.LOCALE_ENGLISH);
+         if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Birth")) {
+             birthEventSelected();
+@@ -341,8 +341,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+             cowIdentifierS.setVisibility(Spinner.VISIBLE);
+             cowIdentifierTV.setVisibility(TextView.VISIBLE);
+             okayB.setText(Locale.getStringInLocale("next",this));
+-            liveBirthsTV.setVisibility(TextView.VISIBLE);
+-            liveBirthsET.setVisibility(EditText.VISIBLE);
++            /*liveBirthsTV.setVisibility(TextView.VISIBLE);
++            liveBirthsET.setVisibility(EditText.VISIBLE);*/
+         }
+         else if(eventTypesEN[eventTypeS.getSelectedItemPosition()].equals("Abortion")) {
+             servicingTV.setVisibility(TextView.VISIBLE);
+@@ -440,10 +440,10 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+             }
+         }
+         if(selectedEvent.equals("Birth")){
+-            if(liveBirthsET.getText().toString()==null || liveBirthsET.getText().toString().trim().length()==0){
++            /*if(liveBirthsET.getText().toString()==null || liveBirthsET.getText().toString().trim().length()==0){
+                 Toast.makeText(this,Locale.getStringInLocale("enter_previous_live_births",this),Toast.LENGTH_LONG).show();
+                 return false;
+-            }
++            }*/
+         }
+         return true;
+     }
+@@ -515,7 +515,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+                 if(selectedEvent.equals("Birth")){
+                     String[] birthTypesInEN = Locale.getArrayInLocale("birth_types", AddEventActivity.this, Locale.LOCALE_ENGLISH);
+                     jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
+-                    jsonObject.put("liveBirths", liveBirthsET.getText().toString());
++                    //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
+                 }
+                 jsonObject.put("causeOfDeath", causesOfDeathInEN[causeOfDeathS.getSelectedItemPosition()]);
+                 CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
+@@ -555,7 +555,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+                             if(servicingIDs != null) {
+                                 jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
+                             }
+-                            jsonObject.put("liveBirths", liveBirthsET.getText().toString());
++                            //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
+ 
+                             thisCalf.setPiggyBack(jsonObject.toString());
+                         } catch (JSONException e) {
+diff --git a/MistroFarmer/src/main/res/layout/activity_add_event.xml b/MistroFarmer/src/main/res/layout/activity_add_event.xml
+index bebe4c1..378f649 100644
+--- a/MistroFarmer/src/main/res/layout/activity_add_event.xml
++++ b/MistroFarmer/src/main/res/layout/activity_add_event.xml
+@@ -182,7 +182,7 @@
+             android:textColor="@color/text_input_color"
+             android:gravity="center_horizontal"
+             android:inputType="number"/>
+-        <TextView
++        <!--<TextView
+             android:id="@+id/live_births_tv"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+@@ -199,7 +199,7 @@
+             android:visibility="gone"
+             android:textColor="@color/text_input_color"
+             android:gravity="center_horizontal"
+-            android:inputType="number"/>
++            android:inputType="number"/>-->
+         <TextView
+             android:id="@+id/remarks_tv"
+             android:layout_height="wrap_content"
+-- 
+2.7.1
+

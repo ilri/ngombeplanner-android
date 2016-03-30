@@ -1,0 +1,1273 @@
+From 5a058c191430ea38e2d1725728afdf4a06210075 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Wed, 14 May 2014 09:38:50 +0300
+Subject: [PATCH 155/213] Processing of language menu items now handled in one
+ place. Kikabras added to the list of supported languages
+
+---
+ .../cgiar/ilri/mistro/farmer/AddEventActivity.java |  25 +--
+ .../mistro/farmer/AddMilkProductionActivity.java   |  22 +-
+ .../mistro/farmer/CowRegistrationActivity.java     |  24 +--
+ .../cgiar/ilri/mistro/farmer/EventsActivity.java   |  24 +--
+ .../ilri/mistro/farmer/EventsHistoryActivity.java  |  24 +--
+ .../mistro/farmer/FarmerRegistrationActivity.java  |  25 +--
+ .../ilri/mistro/farmer/FertilityActivity.java      |  24 +--
+ .../cgiar/ilri/mistro/farmer/LandingActivity.java  |  24 +--
+ .../org/cgiar/ilri/mistro/farmer/MainMenu.java     |  24 +--
+ .../farmer/MilkProcutionHistoryActivity.java       |  24 +--
+ .../ilri/mistro/farmer/MilkProductionActivity.java |  22 +-
+ .../cgiar/ilri/mistro/farmer/MistroActivity.java   |  44 ++++
+ .../java/org/cgiar/ilri/mistro/farmer/Utils.java   |   2 +
+ .../cgiar/ilri/mistro/farmer/backend/Locale.java   |   1 +
+ MistroFarmer/src/main/res/menu/add_event.xml       |   8 +-
+ .../src/main/res/menu/add_milk_production.xml      |  12 +-
+ .../src/main/res/menu/cow_registration.xml         |   8 +-
+ MistroFarmer/src/main/res/menu/events.xml          |  13 +-
+ MistroFarmer/src/main/res/menu/events_history.xml  |  13 +-
+ .../src/main/res/menu/farmer_registration.xml      |   8 +-
+ MistroFarmer/src/main/res/menu/fertility.xml       |  13 +-
+ .../src/main/res/menu/landing_activity.xml         |   8 +-
+ MistroFarmer/src/main/res/menu/main_menu.xml       |   8 +-
+ .../src/main/res/menu/milk_procution_history.xml   |  14 +-
+ MistroFarmer/src/main/res/menu/milk_production.xml |  13 +-
+ MistroFarmer/src/main/res/values/strings.xml       |   1 +
+ MistroFarmer/src/main/res/values/strings_en.xml    |   2 +-
+ MistroFarmer/src/main/res/values/strings_kl.xml    |   1 +
+ MistroFarmer/src/main/res/values/strings_kr.xml    | 238 +++++++++++++++++++++
+ MistroFarmer/src/main/res/values/strings_lh.xml    |   2 +-
+ 30 files changed, 421 insertions(+), 250 deletions(-)
+ create mode 100644 MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MistroActivity.java
+ create mode 100644 MistroFarmer/src/main/res/values/strings_kr.xml
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+index da2af21..394c5ee 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+@@ -45,7 +45,7 @@ import java.util.Date;
+ import java.util.GregorianCalendar;
+ import java.util.List;
+ 
+-public class AddEventActivity extends SherlockActivity implements View.OnClickListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener, Spinner.OnItemSelectedListener
++public class AddEventActivity extends SherlockActivity implements MistroActivity, View.OnClickListener,View.OnFocusChangeListener,DatePickerDialog.OnDateSetListener, Spinner.OnItemSelectedListener
+ {
+     public static final String TAG="AddEventActivity";
+     private final String dateFormat="dd/MM/yyyy";
+@@ -199,24 +199,7 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         else if(item.getItemId() == R.id.action_back_main_menu) {
+@@ -316,8 +299,8 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+         }
+     }
+ 
+-    private void initTextInViews()
+-    {
++    @Override
++    public void initTextInViews() {
+         setTitle(Locale.getStringInLocale("add_an_event",this));
+         cowIdentifierTV.setText(Locale.getStringInLocale("cow",this));
+         dateTV.setText(Locale.getStringInLocale("date",this));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+index 850bde0..8d7c949 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+@@ -42,7 +42,7 @@ import java.util.Date;
+ import java.util.GregorianCalendar;
+ import java.util.List;
+ 
+-public class AddMilkProductionActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
++public class AddMilkProductionActivity extends SherlockActivity implements MistroActivity , View.OnClickListener, DatePickerDialog.OnDateSetListener {
+ 
+     private final String dateFormat="dd/MM/yyyy";
+     private static final String TAG="AddMilkProductionActivity";
+@@ -130,24 +130,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         else if(item.getItemId() == R.id.action_back_main_menu) {
+@@ -171,6 +154,7 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
+         return false;
+     }
+ 
++    @Override
+     public void initTextInViews() {
+         this.setTitle(Locale.getStringInLocale("add_production",this));
+ 
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index 302b068..b80acba 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -47,7 +47,7 @@ import java.util.Date;
+ import java.util.GregorianCalendar;
+ import java.util.List;
+ 
+-public class CowRegistrationActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener
++public class CowRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, DatePickerDialog.OnDateSetListener, ListView.OnItemClickListener,  Spinner.OnItemSelectedListener, View.OnFocusChangeListener
+ {
+     public static final String TAG="CowRegistrationActivity";
+     public static final String KEY_INDEX="index";
+@@ -193,24 +193,7 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         return false;
+@@ -431,7 +414,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
+         return super.onKeyDown(keyCode, event);
+     }
+ 
+-    private void initTextInViews() {
++    @Override
++    public void initTextInViews() {
+         String title = Locale.getStringInLocale("cow_registration",this)+" "+String.valueOf(index+1);
+         this.setTitle(title);
+         nameTV.setText(Locale.getStringInLocale("name",this));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsActivity.java
+index cb00b81..7ae875c 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsActivity.java
+@@ -20,7 +20,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ import org.json.JSONException;
+ import org.json.JSONObject;
+ 
+-public class EventsActivity extends SherlockActivity implements View.OnClickListener
++public class EventsActivity extends SherlockActivity implements MistroActivity, View.OnClickListener
+ {
+     private String TAG = "EventsActivity";
+ 
+@@ -54,24 +54,7 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         else if(item.getItemId() == R.id.action_back_main_menu) {
+@@ -83,7 +66,8 @@ public class EventsActivity extends SherlockActivity implements View.OnClickList
+         return false;
+     }
+ 
+-    private void initTextInViews()
++    @Override
++    public void initTextInViews()
+     {
+         setTitle(Locale.getStringInLocale("events",this));
+         addEventB.setText(Locale.getStringInLocale("add_an_event",this));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
+index 6d6fff1..0e3850f 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EventsHistoryActivity.java
+@@ -38,7 +38,7 @@ import java.util.Date;
+ import java.util.GregorianCalendar;
+ import java.util.List;
+ 
+-public class EventsHistoryActivity extends SherlockActivity implements View.OnClickListener {
++public class EventsHistoryActivity extends SherlockActivity implements MistroActivity, View.OnClickListener {
+     private static final String TAG="EventsHistoryActivity";
+ 
+     private Menu menu;
+@@ -87,24 +87,7 @@ public class EventsHistoryActivity extends SherlockActivity implements View.OnCl
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         else if(item.getItemId() == R.id.action_back_main_menu) {
+@@ -115,7 +98,8 @@ public class EventsHistoryActivity extends SherlockActivity implements View.OnCl
+         return false;
+     }
+ 
+-    private void initTextInViews() {
++    @Override
++    public void initTextInViews() {
+         setTitle(Locale.getStringInLocale("past_events",this));
+         dateTV.setText(Locale.getStringInLocale("date",this));
+         cowNameTV.setText(Locale.getStringInLocale("cow",this));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+index bffa21b..42a32a5 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+@@ -30,7 +30,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ import org.cgiar.ilri.mistro.farmer.carrier.Farmer;
+ import org.json.JSONObject;
+ 
+-public class FarmerRegistrationActivity extends SherlockActivity implements View.OnClickListener,LocationListener
++public class FarmerRegistrationActivity extends SherlockActivity implements MistroActivity, View.OnClickListener,LocationListener
+ {
+     public static final String TAG="FarmerRegistrationActivity";
+ 
+@@ -91,25 +91,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            Toast.makeText(this, "kazi katika maendeleo", Toast.LENGTH_LONG).show();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         return false;
+@@ -167,7 +149,8 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
+         }
+     }
+ 
+-    private void initTextInViews()
++    @Override
++    public void initTextInViews()
+     {
+         setTitle(Locale.getStringInLocale("farmer_registration",this));
+         fullNameTV.setText(" * "+Locale.getStringInLocale("full_name",this));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FertilityActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FertilityActivity.java
+index 0df1e93..2e71e52 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FertilityActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FertilityActivity.java
+@@ -15,7 +15,7 @@ import com.actionbarsherlock.view.MenuItem;
+ import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ import org.cgiar.ilri.mistro.farmer.carrier.Cow;
+ 
+-public class FertilityActivity extends SherlockActivity implements View.OnClickListener{
++public class FertilityActivity extends SherlockActivity implements MistroActivity, View.OnClickListener{
+ 
+     private Menu menu;
+     private Button servicingB;
+@@ -60,24 +60,7 @@ public class FertilityActivity extends SherlockActivity implements View.OnClickL
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         else if(item.getItemId() == R.id.action_back_main_menu) {
+@@ -88,7 +71,8 @@ public class FertilityActivity extends SherlockActivity implements View.OnClickL
+         return false;
+     }
+ 
+-    private void initTextInViews(){
++    @Override
++    public void initTextInViews(){
+         this.setTitle(Locale.getStringInLocale("fertility",this));
+         servicingB.setText(Locale.getStringInLocale("servicing",this));
+         calvingB.setText(Locale.getStringInLocale("calving",this));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java
+index c50f62c..a9b063c 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java
+@@ -28,7 +28,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ import org.json.JSONException;
+ import org.json.JSONObject;
+ 
+-public class LandingActivity extends SherlockActivity implements View.OnClickListener
++public class LandingActivity extends SherlockActivity implements MistroActivity, View.OnClickListener
+ {
+     private static final String TAG="LandingActivity";
+     private Button loginButton;
+@@ -97,24 +97,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         return false;
+@@ -126,7 +109,8 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
+         super.onResume();
+     }
+ 
+-    private void initTextInViews()
++    @Override
++    public void initTextInViews()
+     {
+         loginButton.setText(Locale.getStringInLocale("login", this));
+         registerButton.setText(Locale.getStringInLocale("register", this));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MainMenu.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MainMenu.java
+index 5b23ebc..509d718 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MainMenu.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MainMenu.java
+@@ -27,7 +27,7 @@ import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ import org.json.JSONException;
+ import org.json.JSONObject;
+ 
+-public class MainMenu extends SherlockActivity implements View.OnClickListener, LocationListener
++public class MainMenu extends SherlockActivity implements MistroActivity, View.OnClickListener, LocationListener
+ {
+     private static final String TAG="MainMenu";
+     public static final String KEY_LONGITUDE = "longitude";
+@@ -83,30 +83,14 @@ public class MainMenu extends SherlockActivity implements View.OnClickListener,
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         return false;
+     }
+ 
+-    private void initTextInViews()
++    @Override
++    public void initTextInViews()
+     {
+         this.setTitle(Locale.getStringInLocale("main_menu",this));
+         milkProductionB.setText(Locale.getStringInLocale("milk_production", this));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
+index b7ce986..9fb3581 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProcutionHistoryActivity.java
+@@ -41,7 +41,7 @@ import java.util.Iterator;
+ import java.util.List;
+ import java.util.Map;
+ 
+-public class MilkProcutionHistoryActivity extends SherlockActivity implements View.OnClickListener
++public class MilkProcutionHistoryActivity extends SherlockActivity implements MistroActivity, View.OnClickListener
+ {
+     private static final String TAG="MIlkProductionHistoryActivity";
+     private Menu menu;
+@@ -100,24 +100,7 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Vi
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         else if(item.getItemId() == R.id.action_back_main_menu) {
+@@ -128,7 +111,8 @@ public class MilkProcutionHistoryActivity extends SherlockActivity implements Vi
+         return false;
+     }
+ 
+-    private void initTextInViews()
++    @Override
++    public void initTextInViews()
+     {
+         dateTV.setText(Locale.getStringInLocale("date",this));
+         cowNameTV.setText(Locale.getStringInLocale("cow",this));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java
+index 8b177b2..8a69068 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java
+@@ -37,7 +37,7 @@ import java.util.Calendar;
+ import java.util.Date;
+ import java.util.GregorianCalendar;
+ 
+-public class MilkProductionActivity extends SherlockActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener
++public class MilkProductionActivity extends SherlockActivity implements MistroActivity, View.OnClickListener, DatePickerDialog.OnDateSetListener
+ {
+     private final String dateFormat="dd/MM/yyyy";
+ 
+@@ -119,24 +119,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
+ 
+     public boolean onOptionsItemSelected(MenuItem item) {
+         // Handle item selection
+-        if(item.getItemId() == R.id.action_english) {
+-            Locale.switchLocale(Locale.LOCALE_ENGLISH, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_swahili) {
+-            Locale.switchLocale(Locale.LOCALE_SWAHILI, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_luhya) {
+-            Locale.switchLocale(Locale.LOCALE_LUHYA, this);
+-            initTextInViews();
+-            return true;
+-        }
+-        else if(item.getItemId() == R.id.action_kalenjin) {
+-            Locale.switchLocale(Locale.LOCALE_KALENJIN, this);
+-            initTextInViews();
++        if(Language.processLanguageMenuItemSelected(this, this, item)){
+             return true;
+         }
+         else if(item.getItemId() == R.id.action_back_main_menu) {
+@@ -147,6 +130,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
+         return false;
+     }
+ 
++    @Override
+     public void initTextInViews()
+     {
+         this.setTitle(Locale.getStringInLocale("milk_production",this));
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MistroActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MistroActivity.java
+new file mode 100644
+index 0000000..5a19ee6
+--- /dev/null
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MistroActivity.java
+@@ -0,0 +1,44 @@
++package org.cgiar.ilri.mistro.farmer;
++
++import android.content.Context;
++
++import com.actionbarsherlock.view.MenuItem;
++
++import org.cgiar.ilri.mistro.farmer.backend.Locale;
++
++/**
++ * Created by jrogena on 14/05/14.
++ */
++public interface MistroActivity {
++    public void initTextInViews();
++    public class Language{
++        public static boolean processLanguageMenuItemSelected(MistroActivity mistroActivity, Context context, MenuItem item){
++            if(item.getItemId() == R.id.action_english) {
++                Locale.switchLocale(Locale.LOCALE_ENGLISH, context);
++                mistroActivity.initTextInViews();
++                return true;
++            }
++            else if(item.getItemId() == R.id.action_swahili) {
++                Locale.switchLocale(Locale.LOCALE_SWAHILI, context);
++                mistroActivity.initTextInViews();
++                return true;
++            }
++            else if(item.getItemId() == R.id.action_luhya) {
++                Locale.switchLocale(Locale.LOCALE_LUHYA, context);
++                mistroActivity.initTextInViews();
++                return true;
++            }
++            else if(item.getItemId() == R.id.action_kalenjin) {
++                Locale.switchLocale(Locale.LOCALE_KALENJIN, context);
++                mistroActivity.initTextInViews();
++                return true;
++            }
++            else if(item.getItemId() == R.id.action_kikabras) {
++                Locale.switchLocale(Locale.LOCALE_KIKABRAS, context);
++                mistroActivity.initTextInViews();
++                return true;
++            }
++            return false;
++        }
++    }
++}
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/Utils.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/Utils.java
+index e370dca..4fcc37e 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/Utils.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/Utils.java
+@@ -6,6 +6,8 @@ import android.content.DialogInterface;
+ import android.content.Intent;
+ import android.provider.Settings;
+ 
++import com.actionbarsherlock.view.MenuItem;
++
+ import org.cgiar.ilri.mistro.farmer.backend.Locale;
+ 
+ /**
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
+index 8ea0bd1..14e659c 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/Locale.java
+@@ -15,6 +15,7 @@ public class Locale {
+     public static final String LOCALE_SWAHILI="sw";
+     public static final String LOCALE_LUHYA="lh";
+     public static final String LOCALE_KALENJIN="kl";
++    public static final String LOCALE_KIKABRAS="kr";
+ 
+     //public static final String SHARED_PREFERENCES_KEY = "locale";
+     public static String getStringInLocale(String stringName, Context context) {
+diff --git a/MistroFarmer/src/main/res/menu/add_event.xml b/MistroFarmer/src/main/res/menu/add_event.xml
+index ee7129a..b50c451 100644
+--- a/MistroFarmer/src/main/res/menu/add_event.xml
++++ b/MistroFarmer/src/main/res/menu/add_event.xml
+@@ -5,15 +5,19 @@
+           android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+           android:title="@string/swahili"
+-          android:orderInCategory="4"
++          android:orderInCategory="5"
+           android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_back_main_menu"
+         android:orderInCategory="5"
+diff --git a/MistroFarmer/src/main/res/menu/add_milk_production.xml b/MistroFarmer/src/main/res/menu/add_milk_production.xml
+index 0261dfb..8d85a3d 100644
+--- a/MistroFarmer/src/main/res/menu/add_milk_production.xml
++++ b/MistroFarmer/src/main/res/menu/add_milk_production.xml
+@@ -5,17 +5,23 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+         android:title="@string/swahili"
+-        android:orderInCategory="4"
++        android:orderInCategory="5"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
++
++
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="5"
++        android:orderInCategory="6"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/cow_registration.xml b/MistroFarmer/src/main/res/menu/cow_registration.xml
+index d2eb3c5..577baec 100644
+--- a/MistroFarmer/src/main/res/menu/cow_registration.xml
++++ b/MistroFarmer/src/main/res/menu/cow_registration.xml
+@@ -5,14 +5,18 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+         android:title="@string/swahili"
+-        android:orderInCategory="4"
++        android:orderInCategory="5"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/events.xml b/MistroFarmer/src/main/res/menu/events.xml
+index 0261dfb..7d0f93c 100644
+--- a/MistroFarmer/src/main/res/menu/events.xml
++++ b/MistroFarmer/src/main/res/menu/events.xml
+@@ -5,17 +5,24 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+         android:title="@string/swahili"
+-        android:orderInCategory="4"
++        android:orderInCategory="5"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
++
++
++
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="5"
++        android:orderInCategory="6"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/events_history.xml b/MistroFarmer/src/main/res/menu/events_history.xml
+index 0261dfb..7d0f93c 100644
+--- a/MistroFarmer/src/main/res/menu/events_history.xml
++++ b/MistroFarmer/src/main/res/menu/events_history.xml
+@@ -5,17 +5,24 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+         android:title="@string/swahili"
+-        android:orderInCategory="4"
++        android:orderInCategory="5"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
++
++
++
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="5"
++        android:orderInCategory="6"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/farmer_registration.xml b/MistroFarmer/src/main/res/menu/farmer_registration.xml
+index d2eb3c5..577baec 100644
+--- a/MistroFarmer/src/main/res/menu/farmer_registration.xml
++++ b/MistroFarmer/src/main/res/menu/farmer_registration.xml
+@@ -5,14 +5,18 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+         android:title="@string/swahili"
+-        android:orderInCategory="4"
++        android:orderInCategory="5"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/fertility.xml b/MistroFarmer/src/main/res/menu/fertility.xml
+index 0261dfb..7d0f93c 100644
+--- a/MistroFarmer/src/main/res/menu/fertility.xml
++++ b/MistroFarmer/src/main/res/menu/fertility.xml
+@@ -5,17 +5,24 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+         android:title="@string/swahili"
+-        android:orderInCategory="4"
++        android:orderInCategory="5"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
++
++
++
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="5"
++        android:orderInCategory="6"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/landing_activity.xml b/MistroFarmer/src/main/res/menu/landing_activity.xml
+index d2eb3c5..577baec 100644
+--- a/MistroFarmer/src/main/res/menu/landing_activity.xml
++++ b/MistroFarmer/src/main/res/menu/landing_activity.xml
+@@ -5,14 +5,18 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+         android:title="@string/swahili"
+-        android:orderInCategory="4"
++        android:orderInCategory="5"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/main_menu.xml b/MistroFarmer/src/main/res/menu/main_menu.xml
+index 4e7dbf6..fbbd0ef 100644
+--- a/MistroFarmer/src/main/res/menu/main_menu.xml
++++ b/MistroFarmer/src/main/res/menu/main_menu.xml
+@@ -5,14 +5,18 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+         android:title="@string/swahili"
+-        android:orderInCategory="4"
++        android:orderInCategory="5"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
+ </menu>
+diff --git a/MistroFarmer/src/main/res/menu/milk_procution_history.xml b/MistroFarmer/src/main/res/menu/milk_procution_history.xml
+index 0261dfb..05319b1 100644
+--- a/MistroFarmer/src/main/res/menu/milk_procution_history.xml
++++ b/MistroFarmer/src/main/res/menu/milk_procution_history.xml
+@@ -5,17 +5,25 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+         android:title="@string/swahili"
+-        android:orderInCategory="4"
++        android:orderInCategory="5"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
++
++
++
++
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="5"
++        android:orderInCategory="6"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/menu/milk_production.xml b/MistroFarmer/src/main/res/menu/milk_production.xml
+index 0261dfb..7d0f93c 100644
+--- a/MistroFarmer/src/main/res/menu/milk_production.xml
++++ b/MistroFarmer/src/main/res/menu/milk_production.xml
+@@ -5,17 +5,24 @@
+         android:showAsAction="never" />
+     <item android:id="@+id/action_swahili"
+         android:title="@string/swahili"
+-        android:orderInCategory="4"
++        android:orderInCategory="5"
+         android:showAsAction="never" />
+     <item android:id="@+id/action_kalenjin"
+         android:title="@string/kalenjin"
+         android:orderInCategory="2"
+         android:showAsAction="never" />
++    <item android:id="@+id/action_kikabras"
++        android:title="@string/kikabrasi"
++        android:orderInCategory="3"
++        android:showAsAction="never" />
+     <item android:id="@+id/action_luhya"
+         android:title="@string/luhya"
+-        android:orderInCategory="3"
++        android:orderInCategory="4"
+         android:showAsAction="never" />
++
++
++
+     <item android:id="@+id/action_back_main_menu"
+-        android:orderInCategory="5"
++        android:orderInCategory="6"
+         android:showAsAction="never" />
+ </menu>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings.xml b/MistroFarmer/src/main/res/values/strings.xml
+index 8cdf48f..ef842af 100644
+--- a/MistroFarmer/src/main/res/values/strings.xml
++++ b/MistroFarmer/src/main/res/values/strings.xml
+@@ -16,6 +16,7 @@
+     <string name="swahili">Kiswahili</string>
+     <string name="kalenjin">Kalenjin</string>
+     <string name="luhya">Luhya</string>
++    <string name="kikabrasi">Kikabrasi</string>
+     <string name="title_activity_fertility">Fertility</string>
+     <string name="title_activity_add_milk_production">Add Milk Production</string>
+ 
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 038b2d6..8bdc496 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
+-
++    <!-- English -->
+     <string name="login_en">Login</string>
+     <string name="login_anyway_en">Login Anyway</string>
+     <string name="register_en">Register</string>
+diff --git a/MistroFarmer/src/main/res/values/strings_kl.xml b/MistroFarmer/src/main/res/values/strings_kl.xml
+index e68e25b..9f4105f 100644
+--- a/MistroFarmer/src/main/res/values/strings_kl.xml
++++ b/MistroFarmer/src/main/res/values/strings_kl.xml
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
++    <!-- Kalenjin -->
+     <string name="login_kl">yaat</string>
+     <string name="login_anyway_kl">yaat inyeei</string>
+     <string name="register_kl">siret</string>
+diff --git a/MistroFarmer/src/main/res/values/strings_kr.xml b/MistroFarmer/src/main/res/values/strings_kr.xml
+new file mode 100644
+index 0000000..9d99509
+--- /dev/null
++++ b/MistroFarmer/src/main/res/values/strings_kr.xml
+@@ -0,0 +1,238 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <!-- Kikabrasi -->
++    <string name="login_kr">injisia/fungula</string>
++    <string name="login_anyway_kr">fungula tu</string>
++    <string name="register_kr">andichisia</string>
++    <string name="full_name_kr">mera kosi</string>
++    <string name="mobile_number_kr">inamba yolusimu</string>
++    <string name="extension_p_kr">mofisa ko bukarakacha/kokhuchendera omukunda  </string>
++    <string name="number_of_cows_kr">tsingombe tsianga</string>
++    <string-array name="sex_array_kr">
++        <item>ikhasi</item>
++        <item>isatsa</item>
++    </string-array>
++    <string name="name_kr">lira</string>
++    <string name="ear_tag_number_kr">lira lili khushirwi</string>
++    <string name="age_kr">emiaka</string>
++    <string name="date_of_birth_kr">mwaka kwo khwivulwa</string>
++    <string name="breed_kr">oluya</string>
++    <string name="sex_kr">ikhasi nomba isatsa</string>
++    <string name="deformity_kr">obulema</string>
++    <string name="sire_kr">samwana</string>
++    <string name="dam_kr">nyina</string>
++    <string name="previous_kr">sha anyamu</string>
++    <string name="next_kr">shilondakho</string>
++    <string name="finish_kr">mala/malilisia</string>
++    <string name="okay_kr">obulai</string>
++    <string name="farmer_registration_kr">obwandichishi bwo mulimi</string>
++    <string name="cow_registration_kr">obwandichishi bwe ingombe</string>
++    <string name="cow_registration_proper_kr">obwandichishi bwe dwasi</string>
++    <string name="dam_registration_kr">obwandichisi bwa nyina</string>
++    <string name="sire_registration_kr">obwandichisi bwa samwana</string>
++    <string-array name="age_type_array_kr">
++        <item>tsisiku</item>
++        <item>emiesi</item>
++        <item>emiaka</item>
++    </string-array>
++    <string-array name="breeds_array_kr">
++        <item>Ayrshire</item>
++        <item>Boran</item>
++        <item>Charolais</item>
++        <item>Aberdeen Angus</item>
++        <item>Simmental</item>
++        <item>Friesian</item>
++        <item>Guernsey</item>
++        <item>Hereford</item>
++        <item>Jersey</item>
++        <item>Ankole</item>
++        <item>Limousine</item>
++        <item>Brahman</item>
++        <item>Santa Getrude</item>
++        <item>Piemontese</item>
++        <item>Red Poll</item>
++        <item>Sahiwal</item>
++        <item>Nganda</item>
++        <item>Fleckviah</item>
++        <item>Brown Swiss</item>
++        <item>Zebu</item>
++    </string-array>
++    <string-array name="deformities_array_kr">
++        <item>Imbofu</item>
++        <item>yalema</item>
++        <item>Tsimbele tsiavura tsinne</item>
++        <item>Makatswa</item>
++        <item>molu kakavukhana</item>
++        <item>eshindi</item>
++    </string-array>
++    <string name="service_type_used_kr">Obukhonyi bwarumikha</string>
++    <string-array name="service_types_kr">
++        <item>Esulusi</item>
++        <item>Okhurumia nende omupira</item>
++        <item>Embryo Transfer</item>
++    </string-array>
++    <string name="maximum_of_four_breeds_kr">etsi bridi/oluya tsiula tsine</string>
++    <string name="country_of_origin_kr">eshivala shia samwana arulamwo</string>
++    <string name="specify_kr">kololosia</string>
++    <string name="straw_number_kr">enamba yili khu mpira</string>
++    <string name="vet_used_kr">vetnari wetsa</string>
++    <string name="servicing_bull_name_kr">esulusi yarumikha</string>
++    <string name="servicing_bull_identifier_hint_kr">injisia elira/enamba yili khushirwi/eslusi</string>
++    <string name="servicing_bull_ear_tag_number_kr">enamba yili khu shirwi she sulusi</string>
++    <string name="bull_owner_kr">wina mwene esulusi?</string>
++    <string name="name_bull_owner_kr">elira lia mwene esulusi</string>
++    <string-array name="bull_owners_kr">
++        <item>esulusi ya hango</item>
++        <item>omulimi wundi</item>
++        <item>eshikundi</item>
++    </string-array>
++    <string name="name_of_other_farmer_or_group_kr">injisia elira lio mulimi nomba eshikundi</string>
++    <string name="embryo_number_kr">Embryo Number</string>
++    <string name="enable_gps_kr">fungula e GPS</string>
++    <string name="reason_for_krabling_gps_kr">kenyanga ofungule e GPS  noshili okhutsilila</string>
++    <string name="cancel_kr">futa</string>
++    <string name="enable_network_kr">fungula intanet</string>
++    <string name="reason_for_krabling_network_kr">eshipindi shino shenyanga intanet khoikhole.finya ok okhufungula intanet.</string>
++    <string name="successful_registration_kr">yandichisie obulayi</string>
++    <string name="successful_registration_instructions_kr">wandichiswe obulayi.olanyola sms okhumanyia khuli ofungula</string>
++    <string name="your_mistro_id_kr">Your Mistro ID</string>
++    <string name="enter_your_mistro_id_kr">Please enter your Mistro ID</string>
++    <string name="failed_to_authenticate_kr">sholaonyolekhanga murekodi tawe.tema okhufungula khandi</string>
++    <string name="logging_in_from_different_device_kr">kafwananga otemamamanga okhurumishila amashini amacheni.Oshenyanga okhufungula?</string>
++    <string name="yes_kr">kario</string>
++    <string name="no_kr">tawe</string>
++    <string name="milk_production_kr">esabu ya mabele</string>
++    <string name="events_kr">efikhole</string>
++    <string name="main_menu_kr">Main Menu</string>
++    <string name="sim_card_not_registered_kr">olarumishilanga esimkadi yishili okhurumikha mumashini kano.</string>
++    <string name="sim_card_registration_kr">okwandichisia esimkadi</string>
++    <string name="new_mobile_number_kr">enamba ye mobaili yimbia</string>
++    <string name="old_mobile_number_kr">enamba ye mobaili ikhulu</string>
++    <string name="old_number_not_in_system_kr">kalafwananga enamba ikhulu shiayandichiswa mumashini tawe.reva wusinjilile amashini akhulombele</string>
++    <string name="welcome_kr">karibu</string>
++    <string name="add_production_kr">tesakho okhurusia khwa mabele</string>
++    <string name="production_history_kr">yarusinja yiriena amabele khale</string>
++    <string name="cow_kr">edwasi</string>
++    <string name="time_kr">eisaa</string>
++    <string name="quantity_kr">eshikhashina</string>
++    <string name="measurement_type_kr">opimanga oriena</string>
++    <string name="add_kr">tesakho okhurusia khwa mabele</string>
++    <string-array name="milking_times_kr">
++        <item>mabwibwi</item>
++        <item>mushitere</item>
++        <item>angalove</item>
++        <item>ambasia/tsukasia alala</item>
++    </string-array>
++    <string-array name="quantity_types_kr">
++        <item>etsilita</item>
++        <item>etsikilo</item>
++    </string-array>
++    <string name="enter_quantity_of_milk_produced_kr">injisia esabu ya mabele mutsikilo</string>
++    <string name="information_successfully_sent_to_server_kr">makhuba karumilwe obulayi mustesheni</string>
++    <string name="problem_in_data_sent_kr">kafwana khuli nende eshida nende amakhuba kotema okhuruma</string>
++    <string name="production_for_time_already_exists_kr">winjisie khale esabu yiwanyolile okhurula mungome yino</string>
++    <string name="problem_connecting_to_server_kr">eshida yarulile notemanga okhuconecta nenda mustesheni</string>
++    <string name="date_kr">etare</string>
++    <string name="no_data_received_kr">amakhuba shikanyoleshe tawe</string>
++    <string name="today_kr">bulano</string>
++    <string name="yesterday_kr">mungolove</string>
++    <string name="enter_your_name_kr">injisia elira</string>
++    <string name="enter_your_mobile_no_kr">injisia enamba yoyo yolusimu</string>
++    <string name="enter_extension_personnel_name_kr">injisia enamba ye simu yomukarakacha/amra kosi</string>
++    <string name="enter_ear_tag_number_kr">injisia enamba yo khushirwi sheingombe</string>
++    <string name="enter_ear_tag_no_or_name_kr">injsia enamba yo khushirwi sheingombe/elira</string>
++    <string name="enter_straw_number_kr">injisia enamba ya samwana yompira</string>
++    <string name="enter_embryo_number_kr">injisia enamba ya nyina yompira</string>
++    <string name="add_an_event_kr">tesa eshikhole</string>
++    <string name="past_events_kr">efikhole fia khale</string>
++    <string name="remarks_kr">obuloli</string>
++    <string name="event_kr">efikhole </string>
++    <string-array name="cow_event_types_kr">
++        <item>khwibulwa</item>
++        <item>okhuchaka okhushela</item>
++        <item>okhumila</item>
++        <item>inda okhufimba</item>
++        <item>obulwale</item>
++        <item>lifwa</item>
++        <item>okhulera</item>
++        <item>okhukusia</item>
++        <item>Okhurumia nende omupira</item>
++        <item>okhurumia nende esulusi</item>
++        <item>etsidalili tsiokhwenya esulusi</item>
++    </string-array>
++    <string-array name="cow_servicing_types_kr">
++        <item>Okhurumia nende omupira</item>
++        <item>okhurumia nende esulusi</item>
++    </string-array>
++    <string name="enter_date_kr">injisia etare</string>
++    <string name="date_in_future_kr">etare yiwinjisie ifwananga ni ya imbeli</string>
++    <string name="event_successfully_recorded_kr">eshikhole shandichisibwe obulayi</string>
++    <string name="something_went_wrong_try_again_kr">eshindu shibiyile.tema okhuruma khandi amakhuba</string>
++    <string name="loading_please_wait_kr">khwirejekhanga.linda atiti</string>
++    <string name="type_of_birth_kr">yebulwa iriena</string>
++    <string-array name="birth_types_kr">
++        <item>yebulwa  eyinamu</item>
++        <item>yebulwa yifwile</item>
++        <item>yebulwa tsisuku tsishili</item>
++        <item>yawululwa</item>
++    </string-array>
++    <string name="calf_registration_kr">andichisia eshimosi</string>
++    <string name="next_screen_is_calf_registration_kr">mupicha yilondakho kenya wandichisieeshimosi shebulwa.finya khu ilondakho okhwandichisia eshimosi</string>
++    <string name="next_screen_is_cow_registration_kr">mupicha yilondakho kenyanga wandichisie edwasi yakulwa.shebulwa.finya khu ilondakho okhwandichisia eshimosi</string>
++    <string name="event_too_old_kr">shonyala okhutesakho eshikhole shavura etsisuku kumi nende tsirano tawe</string>
++    <string name="milk_data_too_old_kr">shonyala okhutesakho esabu ya mabele yavura etsisuku kumi nende tsirano tawe</string>
++    <string name="milk_too_much_kr">esabu ya mabele yiwandichisie neyinyingi sana</string>
++    <string name="start_date_kr">etare yokhuchaka</string>
++    <string name="date_served_kr">eisiku yo khurumia/okhwirusia</string>
++    <string name="date_of_insemination_kr">eisiku yo khurumianende omupira</string>
++    <string name="no_of_days_in_servicing_kr">tsisukutsianga okhurula niyiruma/irukha</string>
++    <string name="associated_servicing_kr">okhwirusia nende esulusi</string>
++    <string name="country_not_found_kr">eshibala shiwinjisie shinyolekhanaga tawe</string>
++    <string name="cause_of_death_kr">shina sharela lifwa</string>
++    <string-array name="causes_of_death_kr">
++        <item>khufwa kwa kawaida</item>
++        <item>khufwa khwobulwale</item>
++        <item>khufwa khwo khuwumia</item>
++    </string-array>
++    <string name="gps_narrowing_down_on_loc_kr">linda GPS ikhave avundu womenyile</string>
++    <string name="event_only_for_female_cattle_kr">eshikhole shovukule shinyolekhanga mutsingombe tsikhasi tsionyene</string>
++    <string name="other_countries_kr">mufivala findi</string>
++    <string name="no_times_milked_in_a_day_kr">okhamanga/oshelanga khanga khusuku</string>
++    <string name="calf_suckling_kr">eshimosi okhununa</string>
++    <string-array name="calf_suckling_types_kr">
++        <item>tawe</item>
++        <item>kario</item>
++    </string-array>
++    <string name="enter_number_times_cow_milked_kr">injisia ingombe yishelungwa khanga khusuku</string>
++    <string name="milking_times_too_much_kr">esabu yokhushela/okhukhama kenyanga ileshe okhubura kumi tawe</string>
++    <string name="fertility_kr">yanera</string>
++    <string name="servicing_kr">okhurumia</string>
++    <string name="calving_kr">okhwibula</string>
++    <string name="select_service_type_kr">cakula aina yokhwirusia</string>
++    <string name="artificial_inseminamtion_kr">okhwirusia nende omupira</string>
++    <string name="bull_servicing_kr">okhwirusia nende esulusi</string>
++    <string name="no_sim_card_kr">esimkadi shilimo tawe</string>
++    <string name="previous_live_births_kr">injsia efimosi fia yebula fiosi</string>
++    <string name="enter_previous_live_births_kr">injisi amebulo ke ingombe ino kosi</string>
++    <string name="enter_dam_etn_kr">injisia enamba ya nyina ya khushirwi</string>
++    <string name="age_diff_from_dob_kr">emiaka che ingombe ino chaburana nende eisuku yokhwibulwa</string>
++    <string name="action_not_allowed_kr">eshikhole shino shienyakhanga ano tawe</string>
++    <string name="are_you_in_farm_kr">wuvele mukunda kukwo?</string>
++    <string name="farm_coords_successfully_reg_kr"> obulayi tsio mukunda tsiandichisw</string>
++    <string name="sms_charges_kr">oburunji bwa sms</string>
++    <string name="incur_network_sms_charges_kr">sholi ambi nende intanet tawe.olarunjivwa kama sms okhuruma amakhuba kano mustesheni</string>
++    <string name="data_not_sent_to_server_kr">amakhuba karumilwe mustesheni</string>
++    <string name="generic_sms_error_kr">eshindu shabiyile norumanga sms mustesheni.cheka niva esimu yao inyala okhuruma amakhuba kano </string>
++    <string name="no_service_kr">shikhunyala okhuruma amakhuba kano mustesheni tawe shijila amashini kakao kabula enetwak</string>
++    <string name="radio_off_kr">amashini kakao shikanyala okhuruma sms tawe.cheka niva amashini kako kafunjile enetwaka</string>
++    <string name="server_not_receive_sms_kr">sms yarumilwe mustesheni lakini shibanyolile tawe</string>
++    <string name="logout_kr">simia</string>
++    <string name="back_kr">kalukha anyuma</string>
++    <string name="back_to_main_menu_kr">kalukha anyuma mu \'main menu\'</string>
++    <string name="warning_kr">hatari</string>
++    <string name="action_will_be_canceled_kr">nokalukha anyuma mu \'main menu\' amakhuba kosi kalatiba mumashini.finya \'okay\' nivombu nobulayi</string>
++    <string name="total_kr">tesa kosi alala</string>
++    <string name="unable_to_fetch_cached_data_kr">shikhunyala okhubukula amakhuba kosi kali mumashini kako tawe</string>
++    <string name="you_do_not_have_female_cows_kr">ofwanaga sholinende tsingombe tsikhasi tawe</string>
++    <string name="you_do_not_have_cows_kr">ofwanaga sholinende etsingombe tsidwasi tawe</string>
++</resources>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_lh.xml b/MistroFarmer/src/main/res/values/strings_lh.xml
+index 602296a..95ed992 100644
+--- a/MistroFarmer/src/main/res/values/strings_lh.xml
++++ b/MistroFarmer/src/main/res/values/strings_lh.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
+-
++    <!-- Luhya -->
+     <string name="login_lh">fungula/ injira</string>
+     <string name="login_anyway_lh">injira yosi yosi</string>
+     <string name="register_lh">handichisia</string>
+-- 
+2.7.1
+

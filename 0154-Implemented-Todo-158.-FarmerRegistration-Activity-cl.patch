@@ -1,0 +1,25 @@
+From c45038213e533d9b62848f3640659177d8339288 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Mon, 12 May 2014 17:58:39 +0300
+Subject: [PATCH 154/213] Implemented Todo #158. FarmerRegistration Activity
+ cleared from activity stack when user presses cancel in enable gps dialog
+
+---
+ .../java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java    | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+index 0d71cd1..bffa21b 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+@@ -285,6 +285,7 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
+                         {
+                             dialog.cancel();
+                             Intent intent=new Intent(FarmerRegistrationActivity.this,LandingActivity.class);
++                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                             startActivity(intent);
+                         }
+                     });
+-- 
+2.7.1
+

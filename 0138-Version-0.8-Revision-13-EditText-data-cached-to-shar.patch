@@ -1,0 +1,281 @@
+From 2357a40cc9ad17040e503049c8beda62c6765bf5 Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Tue, 1 Apr 2014 11:34:18 +0300
+Subject: [PATCH 138/213] Version 0.8 Revision 13: EditText data cached to
+ shared preferences now deleted just before data sent to the server
+
+---
+ MistroFarmer/src/main/AndroidManifest.xml          |   2 +-
+ .../cgiar/ilri/mistro/farmer/AddEventActivity.java | 138 +++++++++++----------
+ .../mistro/farmer/AddMilkProductionActivity.java   |   3 +
+ .../mistro/farmer/CowRegistrationActivity.java     |  15 ++-
+ .../mistro/farmer/FarmerRegistrationActivity.java  |   4 +
+ .../cgiar/ilri/mistro/farmer/LandingActivity.java  |   2 +-
+ .../ilri/mistro/farmer/MilkProductionActivity.java |   2 +-
+ 7 files changed, 96 insertions(+), 70 deletions(-)
+
+diff --git a/MistroFarmer/src/main/AndroidManifest.xml b/MistroFarmer/src/main/AndroidManifest.xml
+index da163f2..6c99b82 100644
+--- a/MistroFarmer/src/main/AndroidManifest.xml
++++ b/MistroFarmer/src/main/AndroidManifest.xml
+@@ -2,7 +2,7 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="org.cgiar.ilri.mistro.farmer"
+     android:versionCode="2"
+-    android:versionName="0.8.12" >
++    android:versionName="0.8.13" >
+ 
+     <uses-sdk
+         android:minSdkVersion="7"
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+index a7d7ea2..8300077 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddEventActivity.java
+@@ -539,13 +539,11 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+ 
+     private boolean validateInput()
+     {
+-        if(dateET.getText().toString()==null||dateET.getText().toString().length()==0)
+-        {
++        if(dateET.getText().toString()==null||dateET.getText().toString().length()==0) {
+             Toast.makeText(this,enterDate,Toast.LENGTH_LONG).show();
+             return false;
+         }
+-        else
+-        {
++        else {
+             if(!validateDate()){
+                 return false;
+             }
+@@ -596,69 +594,79 @@ public class AddEventActivity extends SherlockActivity implements View.OnClickLi
+ 
+     private void sendEvent()
+     {
+-        String[] eventTypes = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
+-        String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
+-        String[] eventSubtypes = Locale.getArrayInLocale("birth_types",this,Locale.LOCALE_ENGLISH);
+-        if(selectedEvent.equals("Birth") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
+-            AlertDialog cowRegistrationAlertDialog = constructCalfRegistrationDialog();
+-            cowRegistrationAlertDialog.show();
+-        }
+-        else if(selectedEvent.equals("Acquisition")) {
+-            AlertDialog cowRegistrationAlertDialog = constructCowRegistrationDialog();
+-            cowRegistrationAlertDialog.show();
+-        }
+-        else {
+-            String selectedCowETN = cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()];
+-            String selectedCowName = cowNameArray[cowIdentifierS.getSelectedItemPosition()];
+-            TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+-            String serialNumber = telephonyManager.getSimSerialNumber();
+-            JSONObject jsonObject = new JSONObject();
+-            try
+-            {
+-                String[] causesOfDeathInEN = Locale.getArrayInLocale("causes_of_death",AddEventActivity.this,Locale.LOCALE_ENGLISH);
+-                jsonObject.put("simCardSN", serialNumber);
+-                jsonObject.put("cowEarTagNumber", selectedCowETN);
+-                jsonObject.put("cowName", selectedCowName);
+-                jsonObject.put("date", dateET.getText().toString());
+-                jsonObject.put("eventType", selectedEvent);
+-                jsonObject.put("remarks", remarksET.getText().toString());
+-                jsonObject.put("strawNumber", strawNumberET.getText().toString());
+-                jsonObject.put("vetUsed", vetUsedET.getText().toString());
+-                //jsonObject.put("bullName", bullNameACTV.getText().toString());
+-
+-                //check if hint put as value of bullNameACTV
+-                String bullEarTagNo = bullNameACTV.getText().toString();
+-                if(bullEarTagNo.equals(Locale.getStringInLocale("servicing_bull_identifier_hint", AddEventActivity.this)))
+-                    bullEarTagNo = "";
+-                jsonObject.put("bullEarTagNo", bullEarTagNo);
+-
+-                if(selectedEvent.equals("Bull Servicing")){
+-                    String[] bullOwnersInEN = Locale.getArrayInLocale("bull_owners", AddEventActivity.this, Locale.LOCALE_ENGLISH);
+-                    jsonObject.put("bullOwner", bullOwnersInEN[bullOwnerS.getSelectedItemPosition()]);
+-
+-                    //check if hint put as value of EditText
+-                    String bullOwnerName = specBullOwnerET.getText().toString();
+-                    if(bullOwnerName.equals(Locale.getStringInLocale("name_of_other_farmer_or_group", AddEventActivity.this)))
+-                        bullOwnerName = "";
+-                    jsonObject.put("bullOwnerName", bullOwnerName);
+-                }
+-                //jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
+-                jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
+-                if(servicingIDs != null) {
+-                    jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
++        if(validateInput()){
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_DATE, "");
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_REMARKS, "");
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_STRAW_NUMBER, "");
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_VET_USED, "");
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_NAME, "");
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_BULL_OWNER, "");
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AEA_NO_SERVICING_DAYS, "");
++
++            String[] eventTypes = Locale.getArrayInLocale("cow_event_types",this,Locale.LOCALE_ENGLISH);
++            String selectedEvent = eventTypes[eventTypeS.getSelectedItemPosition()];
++            String[] eventSubtypes = Locale.getArrayInLocale("birth_types",this,Locale.LOCALE_ENGLISH);
++            if(selectedEvent.equals("Birth") && (eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Normal") || eventSubtypes[eventSubtypeS.getSelectedItemPosition()].equals("Premature"))) {
++                AlertDialog cowRegistrationAlertDialog = constructCalfRegistrationDialog();
++                cowRegistrationAlertDialog.show();
++            }
++            else if(selectedEvent.equals("Acquisition")) {
++                AlertDialog cowRegistrationAlertDialog = constructCowRegistrationDialog();
++                cowRegistrationAlertDialog.show();
++            }
++            else {
++                String selectedCowETN = cowEarTagNumberArray[cowIdentifierS.getSelectedItemPosition()];
++                String selectedCowName = cowNameArray[cowIdentifierS.getSelectedItemPosition()];
++                TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
++                String serialNumber = telephonyManager.getSimSerialNumber();
++                JSONObject jsonObject = new JSONObject();
++                try
++                {
++                    String[] causesOfDeathInEN = Locale.getArrayInLocale("causes_of_death",AddEventActivity.this,Locale.LOCALE_ENGLISH);
++                    jsonObject.put("simCardSN", serialNumber);
++                    jsonObject.put("cowEarTagNumber", selectedCowETN);
++                    jsonObject.put("cowName", selectedCowName);
++                    jsonObject.put("date", dateET.getText().toString());
++                    jsonObject.put("eventType", selectedEvent);
++                    jsonObject.put("remarks", remarksET.getText().toString());
++                    jsonObject.put("strawNumber", strawNumberET.getText().toString());
++                    jsonObject.put("vetUsed", vetUsedET.getText().toString());
++                    //jsonObject.put("bullName", bullNameACTV.getText().toString());
++
++                    //check if hint put as value of bullNameACTV
++                    String bullEarTagNo = bullNameACTV.getText().toString();
++                    if(bullEarTagNo.equals(Locale.getStringInLocale("servicing_bull_identifier_hint", AddEventActivity.this)))
++                        bullEarTagNo = "";
++                    jsonObject.put("bullEarTagNo", bullEarTagNo);
++
++                    if(selectedEvent.equals("Bull Servicing")){
++                        String[] bullOwnersInEN = Locale.getArrayInLocale("bull_owners", AddEventActivity.this, Locale.LOCALE_ENGLISH);
++                        jsonObject.put("bullOwner", bullOwnersInEN[bullOwnerS.getSelectedItemPosition()]);
++
++                        //check if hint put as value of EditText
++                        String bullOwnerName = specBullOwnerET.getText().toString();
++                        if(bullOwnerName.equals(Locale.getStringInLocale("name_of_other_farmer_or_group", AddEventActivity.this)))
++                            bullOwnerName = "";
++                        jsonObject.put("bullOwnerName", bullOwnerName);
++                    }
++                    //jsonObject.put("bullEarTagNo", bullETNACTV.getText().toString());
++                    jsonObject.put("noOfServicingDays", noOfServicingDaysET.getText().toString());
++                    if(servicingIDs != null) {
++                        jsonObject.put("parentEvent", servicingIDs.get(servicingS.getSelectedItemPosition()));
++                    }
++                    if(selectedEvent.equals("Birth")){
++                        String[] birthTypesInEN = Locale.getArrayInLocale("birth_types", AddEventActivity.this, Locale.LOCALE_ENGLISH);
++                        jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
++                        //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
++                    }
++                    jsonObject.put("causeOfDeath", causesOfDeathInEN[causeOfDeathS.getSelectedItemPosition()]);
++                    CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
++                    cowEventAdditionThread.execute(jsonObject);
+                 }
+-                if(selectedEvent.equals("Birth")){
+-                    String[] birthTypesInEN = Locale.getArrayInLocale("birth_types", AddEventActivity.this, Locale.LOCALE_ENGLISH);
+-                    jsonObject.put("birthType", birthTypesInEN[eventSubtypeS.getSelectedItemPosition()]);
+-                    //jsonObject.put("liveBirths", liveBirthsET.getText().toString());
++                catch (JSONException e)
++                {
++                    e.printStackTrace();
+                 }
+-                jsonObject.put("causeOfDeath", causesOfDeathInEN[causeOfDeathS.getSelectedItemPosition()]);
+-                CowEventAdditionThread cowEventAdditionThread=new CowEventAdditionThread();
+-                cowEventAdditionThread.execute(jsonObject);
+-            }
+-            catch (JSONException e)
+-            {
+-                e.printStackTrace();
+             }
+         }
+     }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+index c09d511..b4b64bb 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/AddMilkProductionActivity.java
+@@ -243,6 +243,9 @@ public class AddMilkProductionActivity extends SherlockActivity implements View.
+     {
+         if(validateInput())
+         {
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_DATE, "");
++            DataHandler.setSharedPreference(this, DataHandler.SP_KEY_AMPA_QUANTITY, "");
++
+             TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+             MilkProductionDataAdditionThread milkProductionDataAdditionThread=new MilkProductionDataAdditionThread();
+             String[] quantityTypesInEN = Locale.getArrayInLocale("quantity_types",this,Locale.LOCALE_ENGLISH);
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+index 978e679..d936d89 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/CowRegistrationActivity.java
+@@ -798,8 +798,8 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
+     private boolean validateInput() {
+         String earTagNumberText=earTagNumberET.getText().toString();
+         String nameText=nameET.getText().toString();
+-        if(earTagNumberText==null||earTagNumberText.equals("")) {
+-            Toast.makeText(this,Locale.getStringInLocale("enter_ear_tag_number",this),Toast.LENGTH_LONG).show();
++        if((earTagNumberText==null||earTagNumberText.equals("")) && (nameText==null||nameText.equals(""))) {
++            Toast.makeText(this,Locale.getStringInLocale("enter_ear_tag_no_or_name",this),Toast.LENGTH_LONG).show();
+             return false;
+         }
+         if(countryOfOriginACTV.getText().toString().length() > 0) {
+@@ -853,6 +853,17 @@ public class CowRegistrationActivity extends SherlockActivity implements View.On
+     }
+ 
+     private void cacheThisCow() {
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_NAME, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EAR_TAG_NUMBER, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_AGE, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DATE_OF_BIRTH, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_BREED, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DEFORMITY, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_STRAW_NUMBER, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_DAM, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_EMBRYO_NUMBER, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_CRA_COUNTRY_OF_ORIGIN, "");
++
+         if(thisCow==null) {
+             thisCow=new Cow(true);
+         }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+index 622d35f..80d27d0 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/FarmerRegistrationActivity.java
+@@ -178,6 +178,10 @@ public class FarmerRegistrationActivity extends SherlockActivity implements View
+ 
+     private void cacheFarmer(boolean isInFarm)
+     {
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, "");
++
+         if(farmer==null)
+         {
+             farmer=new Farmer();
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java
+index 252b95a..0950ca6 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/LandingActivity.java
+@@ -77,7 +77,7 @@ public class LandingActivity extends SherlockActivity implements View.OnClickLis
+ 
+         //init text according to locale
+         initTextInViews();
+-        Toast.makeText(this, "Version 0.8 Revision 12", Toast.LENGTH_LONG).show();
++        Toast.makeText(this, "Version 0.8 Revision 13", Toast.LENGTH_LONG).show();
+     }
+ 
+     public boolean onCreateOptionsMenu(Menu menu) {
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java
+index a1f089e..387a17f 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/MilkProductionActivity.java
+@@ -105,7 +105,7 @@ public class MilkProductionActivity extends SherlockActivity implements View.OnC
+         addMilkProductionAddB.setOnClickListener(this);
+ 
+         initTextInViews();
+-        fetchCowIdentifiers();
++        //fetchCowIdentifiers();
+     }
+ 
+     public boolean onCreateOptionsMenu(Menu menu) {
+-- 
+2.7.1
+

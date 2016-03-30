@@ -1,0 +1,597 @@
+From 0ca37719ac756d545ec42d94354a10851360d96a Mon Sep 17 00:00:00 2001
+From: Jason Rogena <j.rogena@cgiar.org>
+Date: Thu, 12 Jun 2014 22:09:30 +0300
+Subject: [PATCH 195/213] Version 1.0.1: Editing Farmer Details
+
+Admins can now edit farmer details
+---
+ .../org/cgiar/ilri/mistro/farmer/EditFarmer.java   | 287 ++++++++++++++++++++-
+ .../ilri/mistro/farmer/backend/DataHandler.java    |   1 +
+ .../cgiar/ilri/mistro/farmer/carrier/Farmer.java   |   8 +
+ .../src/main/res/layout/activity_edit_farmer.xml   |  16 +-
+ MistroFarmer/src/main/res/values/strings_en.xml    |   9 +
+ MistroFarmer/src/main/res/values/strings_kp.xml    |   9 +
+ MistroFarmer/src/main/res/values/strings_kr.xml    |   9 +
+ MistroFarmer/src/main/res/values/strings_lu.xml    |   9 +
+ MistroFarmer/src/main/res/values/strings_nn.xml    |   9 +
+ MistroFarmer/src/main/res/values/strings_sw.xml    |   9 +
+ 10 files changed, 363 insertions(+), 3 deletions(-)
+
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmer.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmer.java
+index be50322..83f4256 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmer.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/EditFarmer.java
+@@ -1,12 +1,18 @@
+ package org.cgiar.ilri.mistro.farmer;
+ 
++import android.app.ActionBar;
+ import android.app.AlertDialog;
+ import android.app.ProgressDialog;
+ import android.content.Context;
+ import android.content.DialogInterface;
+ import android.content.Intent;
++import android.location.Criteria;
++import android.location.Location;
++import android.location.LocationListener;
++import android.location.LocationManager;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
++import android.provider.Settings;
+ import android.telephony.TelephonyManager;
+ import android.util.Log;
+ import android.view.View;
+@@ -32,7 +38,7 @@ import java.util.ArrayList;
+ import java.util.List;
+ 
+ 
+-public class EditFarmer extends SherlockActivity implements MistroActivity, View.OnClickListener {
++public class EditFarmer extends SherlockActivity implements MistroActivity, View.OnClickListener, LocationListener {
+     private static final String TAG = "EditFarmer";
+ 
+ 
+@@ -45,6 +51,8 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
+     private Spinner extensionPersonnelS;
+     private TextView mobileNumberTV;
+     private EditText mobileNumberET;
++    private TextView farmLocTV;
++    private Button recordLocB;
+     private Button editB;
+     private Button cancelB;
+ 
+@@ -53,6 +61,11 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
+     private List<String> languages;
+     private boolean cacheData;
+     private List<String> vetNames;
++    private String longitude;
++    private String latitude;
++    private LocationManager locationManager;
++    private ProgressDialog gpsProgressDialog;
++    private boolean locationGotten;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -73,6 +86,9 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
+         TelephonyManager telephonyManager=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+         //Toast.makeText(this,telephonyManager.getSimSerialNumber(),Toast.LENGTH_LONG).show();
+         mobileNumberET.setText(telephonyManager.getLine1Number());
++        farmLocTV = (TextView)findViewById(R.id.farm_loc_tv);
++        recordLocB = (Button)findViewById(R.id.record_loc_b);
++        recordLocB.setOnClickListener(this);
+         editB=(Button)this.findViewById(R.id.edit_b);
+         editB.setOnClickListener(this);
+         cancelB =(Button)this.findViewById(R.id.cancel_b);
+@@ -139,6 +155,8 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
+         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+         preferredLanguageS.setAdapter(languageAdapter);
+ 
++        recordLocB.setText(Locale.getStringInLocale("rec_farm_loc", this));
++
+         editB.setText(Locale.getStringInLocale("edit", this));
+         cancelB.setText(Locale.getStringInLocale("cancel", this));
+     }
+@@ -169,6 +187,8 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
+                     }
+                 }
+ 
++                updateFarmLocation(farmer.getLongitude(), farmer.getLatitude());
++
+                 //fetch extension personnel names from server. Do this after farmer object is initialized since the thread is going to use this object
+                 FetchVetsThread fetchVetsThread = new FetchVetsThread();
+                 fetchVetsThread.execute(0);
+@@ -209,6 +229,223 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
+             intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData);
+             startActivity(intent);
+         }
++        else if(v.equals(recordLocB)){
++            buildGPSAlert();
++        }
++        else if(v.equals(editB)){
++            if(validateInput()){
++                cacheFarmer();
++
++                EditFarmerThread editFarmerThread = new EditFarmerThread();
++                editFarmerThread.execute(farmer.getJsonObject().toString());
++            }
++        }
++    }
++
++    private void cacheFarmer()
++    {
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_FULL_NAME, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_EXTENSION_PERSONNEL, "");
++        DataHandler.setSharedPreference(this, DataHandler.SP_KEY_FRA_MOBILE_NUMBER, "");
++
++        farmer.setFullName(fullNameET.getText().toString());
++        if(vetNames != null && extensionPersonnelS.getSelectedItemPosition() != -1){
++            farmer.setExtensionPersonnel(vetNames.get(extensionPersonnelS.getSelectedItemPosition()));
++        }
++        else{
++            farmer.setExtensionPersonnel("");
++        }
++
++        if(languages != null && preferredLanguageS.getSelectedItemPosition() != -1){
++            farmer.setPreferredLocale(Locale.getLocaleCode(this, languages.get(preferredLanguageS.getSelectedItemPosition())));
++        }
++
++        farmer.setMobileNumber(mobileNumberET.getText().toString());
++
++        farmer.setMode(Farmer.MODE_EDIT_FARMER);
++    }
++
++    private void buildGPSAlert(){
++        AlertDialog.Builder builder = new AlertDialog.Builder(this);
++        builder.setMessage(Locale.getStringInLocale("are_you_in_farmers_farm",this));
++        builder.setPositiveButton(Locale.getStringInLocale("yes",this), new DialogInterface.OnClickListener(){
++
++            @Override
++            public void onClick(DialogInterface dialog, int which) {
++                dialog.dismiss();
++                getGPSCoordinates();
++            }
++        });
++        builder.setNegativeButton(Locale.getStringInLocale("no",this), new DialogInterface.OnClickListener(){
++            @Override
++            public void onClick(DialogInterface dialog, int which) {
++                dialog.dismiss();
++            }
++        });
++
++        AlertDialog alertDialog = builder.create();
++        alertDialog.show();
++    }
++
++    private void getGPSCoordinates() {
++        locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
++        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
++            //Toast.makeText(this,"gps started",Toast.LENGTH_LONG).show();
++            locationGotten = false;
++            gpsProgressDialog = ProgressDialog.show(EditFarmer.this, "", Locale.getStringInLocale("accuracy", EditFarmer.this) + " : " +Locale.getStringInLocale("unknown", EditFarmer.this), true);
++            gpsProgressDialog.setCancelable(true);
++            gpsProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
++                @Override
++                public void onCancel(DialogInterface dialog) {
++                    locationGotten = true;
++                }
++            });
++
++            Criteria criteria=new Criteria();
++            String provider=locationManager.getBestProvider(criteria,false);
++            Location location=locationManager.getLastKnownLocation(provider);
++            locationManager.requestLocationUpdates(provider,18000,1000,this);//If farmer  is moving at 200km/h, will still be able to update!
++            if(location!=null)
++            {
++                onLocationChanged(location);
++            }
++        }
++        else {
++            AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
++            alertDialogBuilder.setTitle(Locale.getStringInLocale("enable_gps",this));
++            alertDialogBuilder
++                    .setMessage(Locale.getStringInLocale("reason_for_enabling_gps", this))
++                    .setCancelable(false)
++                    .setPositiveButton(Locale.getStringInLocale("okay",this), new DialogInterface.OnClickListener()
++                    {
++                        @Override
++                        public void onClick(DialogInterface dialog, int which)
++                        {
++                            Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
++                            startActivity(intent);
++                        }
++                    })
++                    .setNegativeButton(Locale.getStringInLocale("cancel",this), new DialogInterface.OnClickListener()
++                    {
++                        @Override
++                        public void onClick(DialogInterface dialog, int which)
++                        {
++                            dialog.cancel();
++                        }
++                    });
++            AlertDialog alertDialog=alertDialogBuilder.create();
++            alertDialog.show();
++
++        }
++    }
++
++    @Override
++    public void onLocationChanged(Location location) {
++        if(!locationGotten){
++            latitude=String.valueOf(location.getLatitude());
++            longitude=String.valueOf(location.getLongitude());
++
++            farmer.setLatitude(latitude);
++            farmer.setLongitude(longitude);
++
++            updateFarmLocation(longitude, latitude);
++
++            Log.d(TAG, "latitude : " + latitude);
++            Log.d(TAG, "longitude : " + longitude);
++            if(latitude !=null && longitude != null){
++                String lastDigitInLong = longitude.substring(longitude.length() - 1, longitude.length());
++                String longCompare = longitude.substring(0, longitude.length() - 1) + String.valueOf(Integer.parseInt(lastDigitInLong) + 1);
++
++                String lastDigitInLat = latitude.substring(latitude.length() - 1, latitude.length());
++                String latCompare = latitude.substring(0, latitude.length() - 1) + String.valueOf(Integer.parseInt(lastDigitInLat) + 1);
++
++                float[] accuracy = new float[1];
++                double lat1 = Double.parseDouble(latitude);
++                double lon1 = Double.parseDouble(longitude);
++                double lat2 = Double.parseDouble(latCompare);
++                double lon2 = Double.parseDouble(longCompare);
++                Location.distanceBetween(lat1, lon1, lat2, lon2, accuracy);
++
++                int accuracyInM =(int) (accuracy[0] * 0.000621371192f);
++                Log.d(TAG, "Accuracy at "+String.valueOf(accuracyInM));
++
++                gpsProgressDialog.setMessage(Locale.getStringInLocale("accuracy", this) + " : " + String.valueOf(accuracyInM) + " M");
++
++                if(accuracyInM < 4){
++                    locationGotten = true;
++                    locationManager.removeUpdates(this);
++                    gpsProgressDialog.dismiss();
++                }
++            }
++        }
++    }
++
++    @Override
++    public void onStatusChanged(String provider, int status, Bundle extras) {
++
++    }
++
++    @Override
++    public void onProviderEnabled(String provider) {
++
++    }
++
++    @Override
++    public void onProviderDisabled(String provider) {
++
++    }
++
++    public void updateFarmLocation(String longitude, String latitude){
++        String farmLoc = Locale.getStringInLocale("farm_location", this);
++        if(DataHandler.isNull(farmer.getLongitude()) || farmer.getLongitude().length() == 0){
++            farmLoc = farmLoc + "\n \t Longitude: " + Locale.getStringInLocale("not_set", this);
++        }
++        else{
++            farmLoc = farmLoc + "\n \t Longitude: " + longitude;
++        }
++
++        if(DataHandler.isNull(farmer.getLatitude()) || farmer.getLatitude().length() == 0){
++            farmLoc = farmLoc + "\n \t Latitude: " + Locale.getStringInLocale("not_set", this);
++        }
++        else{
++            farmLoc = farmLoc + "\n \t Latitude: " + latitude;
++        }
++        farmLocTV.setText(farmLoc);
++    }
++
++    private boolean validateInput()
++    {
++        String nameText=fullNameET.getText().toString();
++        if(nameText==null || nameText.equals(""))
++        {
++            Toast.makeText(this,Locale.getStringInLocale("enter_farmer_name", this),Toast.LENGTH_LONG).show();
++            return false;
++        }
++        else if(nameText.split(" ").length < 2){
++            Toast.makeText(this, Locale.getStringInLocale("enter_two_names", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++
++        String mobileNumberText=mobileNumberET.getText().toString();
++        if(mobileNumberText==null||mobileNumberText.equals(""))
++        {
++            Toast.makeText(this,Locale.getStringInLocale("enter_farmer_mobile_no", this),Toast.LENGTH_LONG).show();
++            return false;
++        }
++        else if(mobileNumberText.length() != 10){
++            Toast.makeText(this, Locale.getStringInLocale("phone_number_not_valid", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++
++        if(vetNames == null){
++            Toast.makeText(this, Locale.getStringInLocale("epersonnel_tshoot", this), Toast.LENGTH_LONG).show();
++            return false;
++        }
++        else if(extensionPersonnelS.getSelectedItemPosition() == -1 || vetNames.get(extensionPersonnelS.getSelectedItemPosition()).length() == 0){
++            Toast.makeText(this, Locale.getStringInLocale("select_epersonnel", this), Toast.LENGTH_LONG).show();
++            return  false;
++        }
++        return true;
+     }
+ 
+     private class FetchVetsThread extends AsyncTask<Integer, Integer, String> {
+@@ -268,4 +505,52 @@ public class EditFarmer extends SherlockActivity implements MistroActivity, View
+             }
+         }
+     }
++
++    private class EditFarmerThread extends AsyncTask<String, Integer, String>{
++        private ProgressDialog progressDialog;
++
++        @Override
++        protected void onPreExecute() {
++            super.onPreExecute();
++            progressDialog = ProgressDialog.show(EditFarmer.this, "", Locale.getStringInLocale("loading_please_wait", EditFarmer.this), true);
++        }
++
++        @Override
++        protected String doInBackground(String... params) {
++            return DataHandler.sendDataToServer(EditFarmer.this, params[0], DataHandler.ADMIN_EDIT_FARMER_URL, true);
++        }
++
++        @Override
++        protected void onPostExecute(String result) {
++            super.onPostExecute(result);
++            progressDialog.dismiss();
++
++            if(result == null) {
++                String httpError = DataHandler.getSharedPreference(EditFarmer.this, "http_error", "No Error thrown to application. Something must be really wrong");
++                Toast.makeText(EditFarmer.this,httpError,Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_GENERIC_FAILURE)){
++                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("generic_sms_error", EditFarmer.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_NO_SERVICE)){
++                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("no_service", EditFarmer.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_RADIO_OFF)){
++                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("radio_off", EditFarmer.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.SMS_ERROR_RESULT_CANCELLED)){
++                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("server_not_receive_sms", EditFarmer.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.CODE_NUMBER_IN_USE)){
++                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("number_in_use", EditFarmer.this), Toast.LENGTH_LONG).show();
++            }
++            else if(result.equals(DataHandler.ACKNOWLEDGE_OK)) {
++                Toast.makeText(EditFarmer.this, Locale.getStringInLocale("farmer_profile_updated", EditFarmer.this), Toast.LENGTH_LONG).show();
++
++                Intent intent = new Intent(EditFarmer.this, FarmerSelection.class);
++                intent.putExtra(FarmerSelection.KEY_ADMIN_DATA, adminData);
++                startActivity(intent);
++            }
++        }
++    }
+ }
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+index ac5b85f..b2d9180 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/backend/DataHandler.java
+@@ -88,6 +88,7 @@ public class DataHandler
+     public static final String FARMER_ADD_CACHED_DATA_URL="/php/farmer/add_cached_data.php";
+ 
+     public static final String ADMIN_AUTHENTICATION_URL="/php/admin/authentication.php";
++    public static final String ADMIN_EDIT_FARMER_URL="/php/admin/edit_farmer.php";
+ 
+     public static final String SP_KEY_LOCALE = "locale";
+     public static final String SP_KEY_MILK_QUANTITY_TYPE = "milkQuantityTYpe";
+diff --git a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
+index 828d2ad..236459c 100644
+--- a/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
++++ b/MistroFarmer/src/main/java/org/cgiar/ilri/mistro/farmer/carrier/Farmer.java
+@@ -21,6 +21,9 @@ public class Farmer implements Parcelable, Serializable
+     public static final String PARCELABLE_KEY="farmer";
+     public static final String MODE_INITIAL_REGISTRATION = "initialRegistration";
+     public static final String MODE_NEW_COW_REGISTRATION = "newCowRegistration";
++    public static final String MODE_EDIT_FARMER = "editFarmer";
++    public static final String MODE_EDIT_COW = "editCow";
++    private int id;
+     private String fullName;
+     private String extensionPersonnel;
+     private String mobileNumber;
+@@ -44,6 +47,7 @@ public class Farmer implements Parcelable, Serializable
+         mode = "";
+         preferredLocale = "";
+         isInFarm = false;
++        id = -1;
+     }
+ 
+     public Farmer(Parcel source)
+@@ -55,6 +59,7 @@ public class Farmer implements Parcelable, Serializable
+     public Farmer(JSONObject farmerJsonObject, String extensionPersonnel){
+         try{
+             Log.d(TAG, "Json for this farmer = "+farmerJsonObject.toString());
++            id = farmerJsonObject.getInt("id");
+             fullName = farmerJsonObject.getString("name");
+             this.extensionPersonnel = extensionPersonnel;
+             mobileNumber = farmerJsonObject.getString("mobile_no");
+@@ -225,6 +230,7 @@ public class Farmer implements Parcelable, Serializable
+     @Override
+     public void writeToParcel(Parcel dest, int flags)
+     {
++        dest.writeInt(id);
+         dest.writeString(fullName);
+         dest.writeString(extensionPersonnel);
+         dest.writeString(mobileNumber);
+@@ -240,6 +246,7 @@ public class Farmer implements Parcelable, Serializable
+ 
+     public void readFromParcel(Parcel in)
+     {
++        this.id = in.readInt();
+         this.fullName=in.readString();
+         this.extensionPersonnel=in.readString();
+         this.mobileNumber=in.readString();
+@@ -275,6 +282,7 @@ public class Farmer implements Parcelable, Serializable
+         JSONObject jsonObject=new JSONObject();
+         try
+         {
++            jsonObject.put("id", id);
+             jsonObject.put("fullName",((fullName==null) ? "":fullName));
+             jsonObject.put("extensionPersonnel",((extensionPersonnel==null) ? "":extensionPersonnel));
+             jsonObject.put("mobileNumber",((mobileNumber==null) ? "":mobileNumber));
+diff --git a/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml b/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml
+index ccace5b..afc16f7 100644
+--- a/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml
++++ b/MistroFarmer/src/main/res/layout/activity_edit_farmer.xml
+@@ -70,15 +70,28 @@
+             android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
+             android:textSize="@dimen/normal_text_size"
+             android:textColor="@color/text_input_color" />
++        <TextView
++            android:id="@+id/farm_loc_tv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:textSize="@dimen/normal_text_size"
++            android:layout_marginTop="@dimen/activity_f_r_text_view_margin_top"/>
++        <Button
++            android:id="@+id/record_loc_b"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/activity_f_r_edit_text_margin_top"
++            android:layout_marginLeft="@dimen/activity_f_r_edit_text_margin_left"
++            android:layout_marginRight="@dimen/activity_f_r_edit_text_margin_left"/>
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
++            android:layout_marginTop="15dp"
+             android:orientation="horizontal">
+             <Button
+                 android:id="@+id/cancel_b"
+                 android:layout_width="wrap_content"
+                 android:layout_height="@dimen/normal_button_layout_height"
+-                android:layout_marginTop="15dp"
+                 android:layout_gravity="bottom|right"
+                 android:paddingLeft="@dimen/normal_button_padding_side"
+                 android:paddingRight="@dimen/normal_button_padding_side"
+@@ -88,7 +101,6 @@
+                 android:id="@+id/edit_b"
+                 android:layout_width="wrap_content"
+                 android:layout_height="@dimen/normal_button_layout_height"
+-                android:layout_marginTop="15dp"
+                 android:layout_gravity="bottom|right"
+                 android:paddingLeft="@dimen/normal_button_padding_side"
+                 android:paddingRight="@dimen/normal_button_padding_side"
+diff --git a/MistroFarmer/src/main/res/values/strings_en.xml b/MistroFarmer/src/main/res/values/strings_en.xml
+index 2ac28fc..326be99 100644
+--- a/MistroFarmer/src/main/res/values/strings_en.xml
++++ b/MistroFarmer/src/main/res/values/strings_en.xml
+@@ -320,4 +320,13 @@
+     <string name="select_farmer_en">Select a farmer</string>
+     <string name="select_en">Select</string>
+     <string name="phone_number_en">Phone Number</string>
++    <string name="farmer_profile_updated_en">Farmer\'s profile successfully updated</string>
++    <string name="enter_farmer_name_en">Please enter farmer\'s name</string>
++    <string name="enter_farmer_mobile_no_en">Please enter farmer\'s phone number</string>
++    <string name="farm_location_en">Farm location</string>
++    <string name="rec_farm_loc_en">Record farm\'s GPS location</string>
++    <string name="not_set_en">Not set</string>
++    <string name="are_you_in_farmers_farm_en">Are you currently in the farmer\'s farm?</string>
++    <string name="accuracy_en">Accuracy</string>
++    <string name="unknown_en">unknown</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kp.xml b/MistroFarmer/src/main/res/values/strings_kp.xml
+index ce32f77..5234b6f 100644
+--- a/MistroFarmer/src/main/res/values/strings_kp.xml
++++ b/MistroFarmer/src/main/res/values/strings_kp.xml
+@@ -318,4 +318,13 @@
+     <string name="select_farmer_kp">Select a farmer</string>
+     <string name="select_kp">Select</string>
+     <string name="phone_number_kp">Phone Number</string>
++    <string name="farmer_profile_updated_kp">Farmer\'s profile successfully updated</string>
++    <string name="enter_farmer_name_kp">Please enter farmer\'s name</string>
++    <string name="enter_farmer_mobile_no_kp">Please enter farmer\'s phone number</string>
++    <string name="farm_location_kp">Farm location</string>
++    <string name="rec_farm_loc_kp">Record farm\'s GPS location</string>
++    <string name="not_set_kp">Not set</string>
++    <string name="are_you_in_farmers_farm_kp">Are you currently in the farmer\'s farm?</string>
++    <string name="accuracy_kp">Accuracy</string>
++    <string name="unknown_kp">unknown</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_kr.xml b/MistroFarmer/src/main/res/values/strings_kr.xml
+index 2618cc0..76a31e5 100644
+--- a/MistroFarmer/src/main/res/values/strings_kr.xml
++++ b/MistroFarmer/src/main/res/values/strings_kr.xml
+@@ -317,4 +317,13 @@
+     <string name="select_farmer_kr">Select a farmer</string>
+     <string name="select_kr">Select</string>
+     <string name="phone_number_kr">Phone Number</string>
++    <string name="farmer_profile_updated_kr">Farmer\'s profile successfully updated</string>
++    <string name="enter_farmer_name_kr">Please enter farmer\'s name</string>
++    <string name="enter_farmer_mobile_no_kr">Please enter farmer\'s phone number</string>
++    <string name="farm_location_kr">Farm location</string>
++    <string name="rec_farm_loc_kr">Record farm\'s GPS location</string>
++    <string name="not_set_kr">Not set</string>
++    <string name="are_you_in_farmers_farm_kr">Are you currently in the farmer\'s farm?</string>
++    <string name="accuracy_kr">Accuracy</string>
++    <string name="unknown_kr">unknown</string>
+ </resources>
+\ No newline at end of file
+diff --git a/MistroFarmer/src/main/res/values/strings_lu.xml b/MistroFarmer/src/main/res/values/strings_lu.xml
+index 4f2b899..11914a6 100644
+--- a/MistroFarmer/src/main/res/values/strings_lu.xml
++++ b/MistroFarmer/src/main/res/values/strings_lu.xml
+@@ -320,4 +320,13 @@
+     <string name="select_farmer_lu">Select a farmer</string>
+     <string name="select_lu">Select</string>
+     <string name="phone_number_lu">Phone Number</string>
++    <string name="farmer_profile_updated_lu">Farmer\'s profile successfully updated</string>
++    <string name="enter_farmer_name_lu">Please enter farmer\'s name</string>
++    <string name="enter_farmer_mobile_no_lu">Please enter farmer\'s phone number</string>
++    <string name="farm_location_lu">Farm location</string>
++    <string name="rec_farm_loc_lu">Record farm\'s GPS location</string>
++    <string name="not_set_lu">Not set</string>
++    <string name="are_you_in_farmers_farm_lu">Are you currently in the farmer\'s farm?</string>
++    <string name="accuracy_lu">Accuracy</string>
++    <string name="unknown_lu">unknown</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_nn.xml b/MistroFarmer/src/main/res/values/strings_nn.xml
+index 9c679cb..5b47564 100644
+--- a/MistroFarmer/src/main/res/values/strings_nn.xml
++++ b/MistroFarmer/src/main/res/values/strings_nn.xml
+@@ -318,4 +318,13 @@
+     <string name="select_farmer_nn">Select a farmer</string>
+     <string name="select_nn">Select</string>
+     <string name="phone_number_nn">Phone Number</string>
++    <string name="farmer_profile_updated_nn">Farmer\'s profile successfully updated</string>
++    <string name="enter_farmer_name_nn">Please enter farmer\'s name</string>
++    <string name="enter_farmer_mobile_no_nn">Please enter farmer\'s phone number</string>
++    <string name="farm_location_nn">Farm location</string>
++    <string name="rec_farm_loc_nn">Record farm\'s GPS location</string>
++    <string name="not_set_nn">Not set</string>
++    <string name="are_you_in_farmers_farm_nn">Are you currently in the farmer\'s farm?</string>
++    <string name="accuracy_nn">Accuracy</string>
++    <string name="unknown_nn">unknown</string>
+ </resources>
+diff --git a/MistroFarmer/src/main/res/values/strings_sw.xml b/MistroFarmer/src/main/res/values/strings_sw.xml
+index 31423e5..e51d6c9 100644
+--- a/MistroFarmer/src/main/res/values/strings_sw.xml
++++ b/MistroFarmer/src/main/res/values/strings_sw.xml
+@@ -318,4 +318,13 @@
+     <string name="select_farmer_sw">Select a farmer</string>
+     <string name="select_sw">Select</string>
+     <string name="phone_number_sw">Phone Number</string>
++    <string name="farmer_profile_updated_sw">Farmer\'s profile successfully updated</string>
++    <string name="enter_farmer_name_sw">Please enter farmer\'s name</string>
++    <string name="enter_farmer_mobile_no_sw">Please enter farmer\'s phone number</string>
++    <string name="farm_location_sw">Farm location</string>
++    <string name="rec_farm_loc_sw">Record farm\'s GPS location</string>
++    <string name="not_set_sw">Not set</string>
++    <string name="are_you_in_farmers_farm_sw">Are you currently in the farmer\'s farm?</string>
++    <string name="accuracy_sw">Accuracy</string>
++    <string name="unknown_sw">unknown</string>
+ </resources>
+-- 
+2.7.1
+
