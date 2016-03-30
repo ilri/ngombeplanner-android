@@ -1,0 +1,49 @@
+<html>
+   <head>
+      <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+      <meta name="Description" content="Ng'ombe Planner is a farmer centric mobile based data collection system" />
+      <meta name="robots" content="index,follow" />
+      <title>Ng'ombe Planner</title>
+      <link rel='stylesheet' type='text/css' href='/common/bootstrap/css/bootstrap.css'/>
+	   <link rel="stylesheet" type="text/css" href="/azizi/css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="css/ngombe_planner.css" />
+      <link rel="stylesheet" href="/common/jquery/jqwidgets/styles/jqx.base.css" type="text/css" />
+   </head>
+
+   <body>
+      <!--[if lt IE 7]>
+       <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+   <![endif]-->
+
+   <div id="viz">
+      <div id="tabs">
+
+        <ul style='margin-left: 30px;'>
+            <li>Enrolled Users</li>
+            <li>Average Milk Production per Site</li>
+            <li>Milk Usage</li>
+            <li>Milk Buyers</li>
+            <li>Watering</li>
+            <li>Feeding</li>
+        </ul>
+
+         <div id="users"></div>
+         <div id="milk_prod"></div>
+         <div id="milk_usage"></div>
+         <div id="milk_buyers"></div>
+         <div id="watering"></div>
+         <div id="feeding"></div>
+
+      </div>
+   </div>
+   <script type='text/javascript' src='/common/jquery/jquery-1.8.3.min.js'></script>
+   <script type='text/javascript' src='/common/sprintf.js'></script>
+
+      <!-- jQuery widgets -->
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxchart.js"></script>
+
+   <script src="js/viz.js"></script>
+</body>

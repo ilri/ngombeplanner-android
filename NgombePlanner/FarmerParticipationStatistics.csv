@@ -1,0 +1,121 @@
+
+
+Country, Hub, Parameters, 2015-07,2015-08,2015-09,2015-10,2015-11,2015-12,2016-01,2016-02
+eadd_ug,Balawoli,Number of Farmers,15,8,11,9,8,12,5,2
+,,Number of Cows,19,10,16,12,12,19,8,2
+,,Number of Records,28,52,184,94,62,143,86,8
+,,Average Milk Production,4.13,2.83,3.52,3.78,6.36,3.73,3.65,3.25
+,,StdDev,2.62,1.49,1.25,1.25,7.71,2.88,3.13,0.66
+,Bisheshe,Number of Farmers,17,17,13,9,13,13,5,2
+,,Number of Cows,30,33,24,17,24,24,8,4
+,,Number of Records,46,132,127,76,100,101,21,4
+,,Average Milk Production,4.86,4.78,4.55,5.02,6.65,8.06,12.14,3.75
+,,StdDev,2.85,2.73,4.48,3.83,11.36,9.79,14.95,1.64
+,Buyende,Number of Farmers,16,15,14,12,13,13,5,1
+,,Number of Cows,24,24,25,21,23,24,8,2
+,,Number of Records,49,88,158,93,80,147,33,4
+,,Average Milk Production,4.61,3.99,3.40,2.81,2.72,2.78,1.94,1.50
+,,StdDev,5.06,4.67,3.16,1.59,1.99,2.23,1.35,1.12
+,Endiizi,Number of Farmers,17,20,11,9,17,20,7,3
+,,Number of Cows,28,35,19,15,27,34,12,4
+,,Number of Records,42,74,49,37,72,113,39,4
+,,Average Milk Production,5.21,4.59,3.80,4.51,6.06,7.05,8.03,9.25
+,,StdDev,2.92,2.35,1.77,2.11,2.54,2.97,4.15,3.96
+,Ishongorolo,Number of Farmers,5,10,9,7,9,9,3,2
+,,Number of Cows,9,18,17,13,15,13,4,3
+,,Number of Records,17,116,112,87,53,57,9,3
+,,Average Milk Production,4.29,4.47,5.45,4.91,4.75,4.14,2.56,3.67
+,,StdDev,2.16,2.09,8.81,1.86,2.26,2.10,1.89,0.47
+,Kabujogera,Number of Farmers,4,9,5,9,6,10,1,1
+,,Number of Cows,5,16,9,14,11,16,2,1
+,,Number of Records,5,68,77,88,72,71,25,5
+,,Average Milk Production,8.20,3.76,3.30,3.14,3.08,3.27,2.40,2.40
+,,StdDev,4.02,2.06,1.52,1.29,1.09,1.29,1.30,0.80
+,Kagulu,Number of Farmers,11,12,12,11,12,11,4,1
+,,Number of Cows,14,19,19,20,20,19,6,2
+,,Number of Records,20,72,78,78,58,99,16,3
+,,Average Milk Production,2.70,1.99,2.31,2.13,2.22,1.97,2.19,1.67
+,,StdDev,2.12,1.47,2.01,1.84,1.82,1.41,1.07,0.94
+,Kanyanya,Number of Farmers,16,3,3,2,11,7,5,1
+,,Number of Cows,25,5,6,4,15,13,5,1
+,,Number of Records,39,17,26,25,36,41,12,1
+,,Average Milk Production,4.45,2.09,1.88,2.72,4.92,5.38,5.88,6.00
+,,StdDev,3.06,1.09,1.27,1.83,3.84,3.03,2.60,0.00
+,Namwendwa,Number of Farmers,14,16,18,15,13,17,11,5
+,,Number of Cows,17,28,31,26,23,30,19,9
+,,Number of Records,27,101,172,118,76,132,58,11
+,,Average Milk Production,3.91,3.19,3.49,2.67,2.64,2.41,3.52,3.36
+,,StdDev,2.86,1.82,1.69,1.70,2.25,2.26,2.90,3.20
+,Nyabuhikye,Number of Farmers,17,8,8,6,5,4,4,
+,,Number of Cows,26,16,14,11,8,8,6,
+,,Number of Records,44,74,82,39,22,40,13,
+,,Average Milk Production,4.32,3.24,3.52,3.92,4.64,3.48,5.31,
+,,StdDev,2.34,1.59,5.10,2.46,2.35,2.66,3.38,
+,Nyamisindo,Number of Farmers,11,10,11,9,12,11,4,2
+,,Number of Cows,18,20,21,17,20,18,6,3
+,,Number of Records,28,94,118,68,61,74,21,6
+,,Average Milk Production,4.53,2.95,3.05,3.44,3.42,3.60,3.52,4.33
+,,StdDev,2.02,1.44,1.38,3.59,1.29,1.96,2.26,1.80
+,Sanga,Number of Farmers,20,5,4,1,11,7,1,
+,,Number of Cows,33,8,7,2,15,11,1,
+,,Number of Records,56,23,16,5,29,20,1,
+,,Average Milk Production,5.25,4.00,4.38,7.20,4.48,5.35,3.00,
+,,StdDev,2.89,1.84,1.62,2.32,2.46,2.21,0.00,
+,Country Summary,Number of Farmers,165,135,121,100,131,135,55,20
+,,Number of Cows,251,236,212,175,216,232,85,31
+,,Number of Records,405,917,1212,811,732,1067,334,49
+,,Average Milk Production,4.61,3.68,3.63,3.51,4.32,4.09,4.44,3.69
+,,StdDev,3.17,2.54,3.79,2.41,5.38,4.19,5.34,2.84
+
+
+Country, Hub, Parameters, 2015-07,2015-08,2015-09,2015-10,2015-11,2015-12,2016-01,2016-02
+eadd_ke,Butere,Number of Farmers,,,,,,,,
+,,Number of Cows,,,,,,,,
+,,Number of Records,,,,,,,,
+,,Average Milk Production,,,,,,,,
+,,StdDev,,,,,,,,
+,Cherobu,Number of Farmers,,24,19,12,9,7,4,5
+,,Number of Cows,,40,29,18,15,12,7,7
+,,Number of Records,,223,189,129,71,77,21,11
+,,Average Milk Production,,3.24,2.91,2.52,2.39,2.21,1.74,4.05
+,,StdDev,,1.54,1.74,1.30,1.06,0.97,0.84,3.00
+,Kapchen,Number of Farmers,11,16,11,8,6,6,3,2
+,,Number of Cows,15,23,15,11,9,10,4,2
+,,Number of Records,16,164,201,122,74,86,41,5
+,,Average Milk Production,5.00,2.52,2.29,2.20,2.30,1.97,2.90,3.00
+,,StdDev,2.57,1.46,1.37,1.06,1.14,1.24,1.54,0.63
+,Kaptumo,Number of Farmers,5,8,1,,,,,
+,,Number of Cows,11,12,1,,,,,
+,,Number of Records,17,21,8,,,,,
+,,Average Milk Production,7.06,4.83,3.50,,,,,
+,,StdDev,6.20,2.17,0.71,,,,,
+,Kokiche,Number of Farmers,,19,14,9,7,4,4,4
+,,Number of Cows,,31,24,16,13,7,7,6
+,,Number of Records,,163,165,130,90,65,61,9
+,,Average Milk Production,,4.82,4.19,4.13,4.39,3.78,3.97,3.11
+,,StdDev,,2.41,2.04,1.81,1.72,1.68,1.58,0.99
+,Naitiri,Number of Farmers,11,15,14,13,14,14,13,11
+,,Number of Cows,12,23,20,19,19,20,18,16
+,,Number of Records,19,226,261,212,220,220,182,40
+,,Average Milk Production,4.76,3.90,3.88,5.17,6.16,5.64,3.98,4.08
+,,StdDev,2.38,3.14,2.60,7.32,5.29,7.49,2.73,3.04
+,Ndanai,Number of Farmers,,20,15,9,9,7,5,5
+,,Number of Cows,,31,23,13,13,10,7,7
+,,Number of Records,,243,225,123,88,80,63,23
+,,Average Milk Production,,4.62,4.23,4.06,3.83,4.15,3.56,3.83
+,,StdDev,,1.89,1.94,2.01,1.84,1.97,1.86,2.10
+,Sot,Number of Farmers,,20,16,17,14,11,9,5
+,,Number of Cows,,32,26,27,20,16,12,6
+,,Number of Records,,236,288,228,164,100,77,11
+,,Average Milk Production,,3.35,2.78,2.97,3.00,3.35,3.22,3.91
+,,StdDev,,1.53,1.58,1.58,1.17,1.49,1.20,1.62
+,Torongo,Number of Farmers,2,15,10,7,5,3,2,1
+,,Number of Cows,2,21,16,12,8,4,3,1
+,,Number of Records,3,79,102,43,39,45,23,2
+,,Average Milk Production,3.33,3.46,2.88,3.65,4.14,3.67,3.67,4.00
+,,StdDev,0.47,1.62,2.12,2.71,2.92,2.88,3.24,1.00
+,Country Summary,Number of Farmers,29,137,100,75,64,52,40,33
+,,Number of Cows,40,213,154,116,97,79,58,45
+,,Number of Records,55,1355,1439,987,746,673,468,101
+,,Average Milk Production,5.46,3.76,3.33,3.61,4.13,3.95,3.59,3.86
+,,StdDev,4.13,2.20,2.07,3.85,3.48,4.70,2.23,2.48

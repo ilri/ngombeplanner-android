@@ -1,0 +1,223 @@
+<html>
+   <head>
+      <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+      <meta name="Description" content="Ng'ombe Planner is a farmer centric mobile based data collection system" />
+      <meta name="robots" content="index,follow" />
+      <title>Ng'ombe Planner</title>
+      <link rel='stylesheet' type='text/css' href='/common/bootstrap/css/bootstrap.css'/>
+	   <link rel="stylesheet" type="text/css" href="/azizi/css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="css/ngombe_planner.css" />
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css' />
+      <link rel="stylesheet" href="/common/jquery/jqwidgets/styles/jqx.base.css" type="text/css" />
+   </head>
+
+   <body>
+      <!--[if lt IE 7]>
+       <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+   <![endif]-->
+
+   <div id="header">
+      <div id='navigation'>
+      <ul>
+         <li class='nav'><a href='#home_slide'>Home</a></a></li>
+         <!-- li class='nav'><a href=''>About Us</a></li>
+         <li class='nav'><a href=''>Blog</a></li -->
+         <li class='nav'><a href='#stats_slide'>Statistics</a></li>
+         <li class='nav'><a class="login" href='javascript:;'>Login</a></li>
+      </ul>
+      </div>
+   </div>
+   <div id='login_div'>
+      <div class="form-horizontal" role='form'>
+         <div class='form-group'><label class='control-label col-sm-10' for='usernameId'>username</label><div><input class="form-control" type='text' id='usernameId' name='username' placeholder="username" /></div></div>
+         <div class='form-group'><label class='control-label col-sm-10' for='passwordId'>password</label><div><input class="form-control" type='password' id='passwordId' name='password' placeholder="password" /></div></div>
+         <div class='buttons'><input type="submit" name="login" value="Log In" /></div>
+      </div>
+   </div>
+   <section id="home_slide" data-type="background" data-speed="10" class="slides">
+      <div class='parallax-overlay overlay-pattern'></div>
+      <article>
+         <div class='title'>|<span class='cyan'>N</span>g'ombe <span class='cyan'>P</span>lanner|</div>
+         <div class='caption'>a farmer centric data collection and feedback system</div>
+      </article>
+   </section>
+
+   <section id="info_slide" data-type="background" data-speed="5" class="slides">
+      <div>
+         <div id='desc'>
+            <span class='header'>Description<br /></span>
+            <p>Ng'ombe Planner is <span style="font-weight: bolder;">a more efficient data collection system for researchers</span>. It relies on the farmers to record their farm production and incidences using their mobile phones and site coordinators to do a follow up of any cases or incidences.</p>
+            <ol>
+               <li>A data collection system</li>
+               <li>By the farmers</li>
+               <li>Using their own mobile devices</li>
+               <li>For research purposes</li>
+            </ol>
+         </div>
+         <div id='why'>
+            <span class='header'>Why<br /></span>
+            <p>There was the need of research projects collect longitudinal data in a fast, accurate and efficient way and the paper based system was riddled with so much challenges.</p>
+            <ol>
+               <li>Need to collect extensive longitudinal data</li>
+               <li>Too much errors in traditional paper based data collection systems</li>
+            </ol>
+         </div>
+         <div id='platform'>
+            <span class='header'>Platform</span><br />
+            <p>Ng'ombe Planner can be accessed via;</p>
+            <ol>
+               <li>The USSD platform from any phone, by dialling <u>*384*4564#</u></li>
+               <li>A Java Enabled Phones <a href="http://azizi.ilri.org/downloads/NgombePlanner.jar">[Download App]</a></li>
+               <li>A Phone running on Android OS <a href="http://azizi.ilri.org/downloads/NgombePlanner.jar">[Download App]</a></li>
+               <li>The Web (Only for Analytics)</li>
+            </ol>
+         </div>
+      </div>
+   </section>
+
+   <section id="about_us" data-type="background" data-speed="25" class="slides">
+      <div class=''></div>
+      <article>
+         <div>
+            <ol>
+               <li><h6>Sample Storage</h6><p></p></li>
+               <li><h6>The Team</h6><p></p></li>
+               <li><h6>Data Collection</h6><p></p></li>
+               <li><h6></h6><p></p></li>
+               <li>
+                  <ul>
+                     <li>cgiar</li>
+                     <li>ilri</li>
+                     <li>Biosciences</li>
+                     <li>Liverpool</li>
+                     <li>crp 3.7</li>
+                     <li>crp 4.3</li>
+                  </ul>
+               </li>
+            </ol>
+         </div>
+      </article>
+   </section>
+
+   <section id="stats_slide" data-type="background" data-speed="5" class="slides">
+      <div class='center header'>Live Statistics</div>
+      <div id='stats'>
+         <input id="button-1" type="radio" name="radio-set" class="sp-selector-1" checked="checked" />
+         <label for="button-1" class="button-label-1"></label>
+
+         <input id="button-2" type="radio" name="radio-set" class="sp-selector-2" />
+         <label for="button-2" class="button-label-2"></label>
+
+         <input id="button-3" type="radio" name="radio-set" class="sp-selector-3" />
+         <label for="button-3" class="button-label-3"></label>
+
+         <input id="button-4" type="radio" name="radio-set" class="sp-selector-4" />
+         <label for="button-4" class="button-label-4"></label>
+
+         <label for="button-1" class="sp-arrow sp-a1"></label>
+         <label for="button-2" class="sp-arrow sp-a2"></label>
+         <label for="button-3" class="sp-arrow sp-a3"></label>
+         <label for="button-4" class="sp-arrow sp-a4"></label>
+
+         <div id='stats-content'>
+            <div id="stats-parallax-bg"></div>
+            <ul class="stats-slider">
+               <li id='records'>
+                  <div class="li_content">
+                     <div id='total_farmers' style="width:550px; height:430px"></div>
+                     <div id='site_farmers' style="width:550px; height:430px"></div>
+                  </div>
+               </li>
+               <li id='costs'>
+                  <div class="li_content">
+                     <div id='active_farmers' style="width:550px; height:430px"></div>
+                     <div id='active_cows' style="width:550px; height:430px"></div>
+                  </div>
+               </li>
+               <li id='milk'>
+                  <div class="li_content">
+                     <div id='milk_times' style="width:550px; height:430px"></div>
+                     <div id='record_times' style="width:550px; height:430px"></div>
+                  </div>
+               </li>
+               <li id='ussd_stats'>
+                  <div class="li_content">
+                     <div id='day_sessions' style="width:550px; height:430px"></div> <!-- Sessions per day -->
+                     <div id='day_costs' style="width:550px; height:430px"></div> <!-- Costs per day -->
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </section>
+
+   <div id="summary">
+      <div id="top_panel">
+         <ul>
+            <!-- li><a href="javascript:;">Logout</a></li -->
+         </ul>
+      </div>
+      <div id="farmer_panel">
+         <a class="latest_stats">Generate Latest Statistics</a>
+         <div id="left_panel">
+            <div id="sites_tree"></div>
+         </div>
+         <div id="right_panel">
+            <div id="farm_details">
+               <ul>
+                  <li>
+                     <div id="details" class="form-horizontal" role="form">
+                        <div class='form-group'><label class='control-label'>Farmer Name:</label><div><div class="farmer_name extra_info"></div></div></div>
+                        <div class='form-group'><label class='control-label'>Enrolled Date:</label><div><div class="enroll_date extra_info"></div></div></div>
+                        <div class='form-group'><label class='control-label'>No of Cows:</label><div><div class="enrolled_cows extra_info"></div></div></div>
+                        <div class='form-group'><label class='control-label'>Site Average:</label><div><div class="site_average extra_info"></div></div></div>
+                        <div class='form-group'><label class='control-label'>Records:</label><div class="records extra_info"></div></div>
+                     </div>
+                  </li>
+                  <li>
+                     <div id="tops">
+                        <span>Top Farmers and cows</span>
+                        <div class="tops"></div>
+                     </div>
+                  </li>
+                  <li>
+                     <div id="map">Site Area and farm location</div>
+                  </li>
+               </ul>
+               <div><label id='rating-class' class='control-label'>Rating:</label><div id='rating' class="rating extra_info"></div></div>
+            </div>
+            <div id="cows"></div>
+            <div id="curves" style="width:930px; height:430px"></div>
+            <div id="all-records"></div>
+         </div>
+      </div>
+      <div id="print" class="hidden"><a href="javascript:;" id='print'>Print</a></div>
+   </div>
+   <script type='text/javascript' src='/common/jquery/jquery-1.8.3.min.js'></script>
+   <script type='text/javascript' src='/common/sprintf.js'></script>
+
+      <!-- jQuery widgets -->
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxchart.js"></script>
+
+    <script type='text/javascript' src='/common/bootstrap/js/bootstrap.js'></script>
+
+    <!-- These files to be loaded at run time -->
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="/common/jquery/jqwidgets/jqxdata.js"></script>
+    <script src="/common/raty-2.7.0/lib/jquery.raty.js"></script>
+    <script src="/common/notification.js"></script>
+    <!-- These files to be loaded at run time -->
+
+   <script src="js/ngombe_planner.js"></script>
+</body>
+</html>

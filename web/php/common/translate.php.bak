@@ -1,0 +1,915 @@
+<?php
+class Translator{
+   public static $PLEASE_REDIAL = array(
+       "en" => "Please redial then Ng'ombe Planner number",
+       "sw" => "Tafadhali piga simu ya Ng'ombe Planner tena",
+       "lu" => "Khupa inamba ino khandi khu Ng'ombe Planner",
+       "kr" => "Noyanza kalushila okhupa enamba yolusimu ya Ng'ombe Planner",
+       "nn" => "Tiem yaat Ng'ombe Planner",
+       "kp" => "Tiem yaat Ng'ombe Planner"
+   );
+   public static $SOMETHING_WRONG_NGOMBE_PLANNER = array(
+       "en" => "Something's wrong with the way you are trying to access Ng'ombe Planner",
+       "sw" => "Kuna kitu mbaya na venye unajaribu kufikia mtandao wa Ng'ombe Planner",
+       "lu" => "Ishida iliho mwowinjila mumutambo kuno kwa Ng'ombe Planner",
+       "kr" => "Eshindu shifwana shishili obulayi tawe khuli olajaribanga okhwinjila mumutandao kwa Ng'ombe planner",
+       "nn" => "Tako kele mi kiy ne kayait  itieme iyaat",
+       "kp" => "Tako kele mi kiy ne kayait  itieme iyaat"
+   );
+   
+   public static $WELCOME = array(
+       "en" => "Welcome",
+       "sw" => "Karibu",
+       "lu" => "Karibu",
+       "kr" => "Karibu",
+       "nn" => "Itagat",
+       "kp" => "Itagat"
+   );
+   
+   public static $PRESS_1_MILK_DATA = array(
+       "en" => "1. Record milk data",
+       "sw" => "1. Rekodi maziwa",
+       "lu" => "1. Handichisia amabere",
+       "kr" => "1. Esabu ya amabele",
+       "nn" => "1. Sir chego",
+       "kp" => "1. Sir chego"
+   );
+   
+   public static $PRESS_3_SOH = array(
+       "en" => "3. Record Heat",
+       "sw" => "3. Rekodi Joto",
+       "lu" => "3. Khwinya okhwirukha",
+       "kr" => "3. Okhwenya esulusi",
+       "nn" => "3. Maketab kirgit",
+       "kp" => "3. Maketab kirgit"
+   );
+   
+   public static $PRESS_4_SERVICING = array(
+       "en" => "4. Breeding",
+       "sw" => "4. Kupandwa",
+       "lu" => "4. Okhwirusia",
+       "kr" => "4. Okhwirusia",
+       "nn" => "4. Keswot",
+       "kp" => "4. Keswot"
+   );
+   
+   public static $PRESS_2_SICKNESS = array(
+       "en" => "2. Report sickness",
+       "sw" => "2. Ripoti ugonjwa",
+       "lu" => "2. Handichisia okhulwala",
+       "kr" => "2. Bola niva yalwala",
+       "nn" => "2. Sir miendo",
+       "kp" => "2. Sir miendo"
+   );
+   
+   public static $PRESS_5_CALVING = array(
+       "en" => "5. Record Calving",
+       "sw" => "5. Record Kuzaliwa",
+       "lu" => "5. Handichisia okhwibula",
+       "kr" => "5. Andichisia okhwibula",
+       "nn" => "5. Sir iet",
+       "kp" => "5. Sir iet"
+   );
+   
+   public static $PRESS_6_VACCINATION = array(
+       "en" => "6. Vaccination",
+       "sw" => "6. Kuchanjwa",
+       "lu" => "6. Khuchanja",
+       "kr" => "6. Okhucanja",
+       "nn" => "6. ",
+       "nn" => "6. "
+   );
+   
+   public static $PRESS_7_ACQ = array(
+       "en" => "7. Acquisitions",
+       "sw" => "7. Kuingia",
+       "lu" => "7. Ing'ombe imbiakha",
+       "kr" => "7. Okhwinjisia",
+       "nn" => "7. Sir toot",
+       "kp" => "7. Sir toot"
+   );
+   
+   public static $PRESS_8_DISPOSAL = array(
+       "en" => "8. Disposals",
+       "sw" => "8. Kutoka",
+       "lu" => "8. Okhurusia ing'ombe",
+       "kr" => "8. Okhurusia",
+       "nn" => "8. Sir aldaet",
+       "kp" => "8. Sir aldaet"
+   );
+   
+   public static $NOT_REGISTERED = array(
+       "en" => "You are not registered with Ng'ombe Planner. Enter your old mobile number if you are using a new one",
+       "sw" => "Haujasajiliwa katika mtandao wa Ng'ombe Planner. Ingiza namba yako ya kitambo kama unatumia namba mpya",
+       "lu" => "Oshili khwiyandichisia mu Ng'ombe Planner. Handichisia inamba ikhulu ya isimu kaba orumishira inamba imbiakha",
+       "kr" => "Shiwayandichiswa mu 'Ng'ombe planner' tawe.Injisia enamba eikhulu niva olarumishilanga enamba eyimbia",
+       "nn" => "Maisirat eng ng'ombe planner. Sir nambaritab simet nekitai ngot koter cheiboishe",
+       "kp" => "Maisirat eng ng'ombe planner. Sir nambaritab simet nekitai ngot koter cheiboishe"
+   );
+   
+   public static $NUMBER_CHANGED = array(
+       "en" => "Your number has been changed in the system. Please redial the Ngombe Planner number",
+       "sw" => "Namba yako imebadilishwa kwenye mtandao. Tafadhali piga tena namba ya mtandao",
+       "lu" => "Inamba ya isimu ikalukhasibwe mu Ng'ombe Planner. Khupa khandi",
+       "kr" => "Enamba yiyo yakalukhasivwa mumashini.Kalushila okhupa olusimu lwa Ng'ombe Planner",
+       "nn" => "Kakewalun nambarit eng mashinit.tiem yaat tetutietab ripetab teta",
+       "kp" => "Kakewalun nambarit eng mashinit.tiem yaat tetutietab ripetab teta"
+   );
+   
+   public static $NUMBER_NOT_EXIST = array(
+       "en" => "The number you prvided does not exist in the Ngombe Planner system",
+       "sw" => "Nambari uliyopatiana haijasajiliwa kwa mtandao",
+       "lu" => "Inamba yohanire shiili mu-mutambo tawe",
+       "kr" => "Enamba yiwanile shiyinyolekhanga mumashini ka 'Ng'ombe planner' tawe",
+       "nn" => "Nambarit  nekekonu komami  mashinitab tetutietab ripetab teta",
+       "kp" => "Nambarit  nekekonu komami  mashinitab tetutietab ripetab teta"
+   );
+   
+   public static $NO_COWS = array(
+       "en" => "You have no cows",
+       "sw" => "Hauna ng'ombe",
+       "lu" => "Sholi ne tsing'ombe tawe",
+       "kr" => "Obula etsing'ombe",
+       "nn" => "Tuga ata",
+       "kp" => "Tuga ata"
+   );
+   
+   public static $COWS_TOO_YOUNG = array(
+       "en" => "All your cows are too young",
+       "sw" => "Ng'ombe wako wote ni wachanga",
+       "lu" => "Tsing'ombe tsishili khutukha",
+       "kr" => "Etsing'ombe tsitsyo netsindoro sana",
+       "nn" => "Takomengech tuga tugul",
+       "kp" => "Takomengech tuga tugul"
+   );
+   
+   public static $MORE = array(
+       "en" => "More",
+       "sw" => "Zaidi",
+       "lu" => "Akandi",
+       "kr" => "Akandi",
+       "nn" => "Takomi",
+       "kp" => "Takomi"
+   );
+   
+   public static $PREVIOUS = array(
+       "en" => "Previous",
+       "sw" => "Ya mbele",
+       "lu" => "Yabere",
+       "kr" => "Anyuma",
+       "nn" => "Chekitai",
+       "kp" => "Chekitai"
+   );
+   
+   public static $TO_GO_BACK = array(
+       "en" => "to go back",
+       "sw" => "kuridi nyuma",
+       "lu" => "kalukha inyuma",
+       "kr" => "okhukalukha anyuma",
+       "nn" => "Weke let",
+       "kp" => "Weke let"
+   );
+   
+   public static $MILK_PROD_INSTR = array(
+       "en" => "Enter the quantity of milk in litres for",
+       "sw" => "Ingiza kiasi ya maziwa ukitumia lita ya",
+       "lu" => "Handichisia amabere mu-tsilitre nende bise",
+       "kr" => "Injisia esabu ya amabele mutsilita nende etsisaa tsiokhukhama",
+       "nn" => "Sir litainikab chego chekekei eng",
+       "kp" => "Sir litainikab chego chekekei eng"
+   );
+   
+   public static $MORNING = array(
+       "en" => "Morning",
+       "sw" => "Asubuhi",
+       "lu" => "Asubuhi",
+       "kr" => "Mabwibwi",
+       "nn" => "Karon",
+       "kp" => "Karon"
+   );
+   
+   public static $AFTERNOON = array(
+       "en" => "Afternoon",
+       "sw" => "Mchana",
+       "lu" => "Eshitere",
+       "kr" => "mushitere",
+       "nn" => "Beet",
+       "kp" => "Beet"
+   );
+   
+   public static $EVENING = array(
+       "en" => "Evening",
+       "sw" => "Jioni",
+       "lu" => "Amukoloba",
+       "kr" => "Angolove",
+       "nn" => "Koskoliny",
+       "kp" => "Koskoliny"
+   );
+   
+   public static $COMBINED = array(
+       "en" => "Combined",
+       "sw" => "Jumla",
+       "lu" => "Khutsukhasia",
+       "kr" => "Kosi alala",
+       "nn" => "Chebo betut tugul",
+       "kp" => "Chebo betut tugul"
+   );
+   
+   public static $Y_MORNING = array(
+       "en" => "Y'day Morning",
+       "sw" => "Jana Asubuhi",
+       "lu" => "Mungolobe asubuhi",
+       "kr" => "Mungolove mabwibwi",
+       "nn" => "Amut karon",
+       "kp" => "Amut karon"
+   );
+   
+   public static $Y_AFTERNOON = array(
+       "en" => "Y'day Afternoon",
+       "sw" => "Jana Mchana",
+       "lu" => "Mungolobe eshitere",
+       "kr" => "Mungolove mushitere",
+       "nn" => "Amut beet",
+       "kp" => "Amut beet"
+   );
+   
+   public static $Y_EVENING = array(
+       "en" => "Y'day Evening",
+       "sw" => "Jana Jioni",
+       "lu" => "Mungolobe amukoloba",
+       "kr" => "Mungolove angolove",
+       "nn" => "Amut koskoliny",
+       "kp" => "Amut koskoliny"
+   );
+   
+   public static $Y_COMBINED = array(
+       "en" => "Y'day Combined",
+       "sw" => "Jana Jumla",
+       "lu" => "Mungolobe khutsukasia",
+       "kr" => "Ka mungolove kosi alala",
+       "nn" => "Chebo amut tugul",
+       "kp" => "Chebo amut tugul"
+   );
+   
+   public static $UNABLE_GET_SELECTED_COW = array(
+       "en" => "Unable to get the cow you selected. Try that again",
+       "sw" => "Ng'ombe uliyechagua hapatikani",
+       "lu" => "Shiinyolile ing'ombe yowaule tawe. Tema khandi",
+       "kr" => "Ing'ombe yo chakule shiyinyolekhanga tawe.Tema khandi",
+       "nn" => "Maimuch kenyor tete nekelewen.tiem kokeny",
+       "kp" => "Maimuch kenyor tete nekelewen.tiem kokeny"
+   );
+   
+   public static $WRONG_OPTION_SELECTED = array(//TODO: translate again
+       "en" => "Sorry, try that again...",
+       "sw" => "Pole, jaribu tena...",
+       "lu" => "Pole, jaribu tena...",
+       "kr" => "Pole, jaribu tena...",
+       "nn" => "Pole, jaribu tena...",
+       "kp" => "Pole, jaribu tena..."
+   );
+   
+   public static $ADDING_MILK_RECORDS = array(
+       "en" => "Adding Milk records: Please select a cow",
+       "sw" => "Kurekodi maziwa: Chagua ng'ombe",
+       "lu" => "Khumeta amabere: yaula ing'ombe",
+       "kr" => "Tesa esabu ya amabele.Noyanza chakula ingombe",
+       "nn" => "Sir chego che kekei.lewen teta",
+       "kp" => "Sir chego che kekei.lewen teta"
+   );
+   
+   public static $RECORDING_CALVING = array(
+       "en" => "Recording a calving: Please select a cow",
+       "sw" => "Kurekodi kuzaliwa: Chagua ng'ombe mama",
+       "lu" => "Handichisia okhwibula/okhurula:yaula ing'ombe",
+       "kr" => "Khulandichisianga okhwibula.Noyanza chakula ing'ombe",
+       "nn" => "Sir ietab moita.lewen teta nekaiye",
+       "kp" => "Sir ietab moita.lewen teta nekaiye"
+   );
+   
+   public static $RECORDING_DISPOSAL = array(
+       "en" => "Recording a disposal: Please select a cow",
+       "sw" => "Kurekodi kutoka: Chagua ng'ombe",
+       "lu" => "Handichisia oburusi: yaula ing'ombe",
+       "kr" => "Khulandichisianga okhurusia.Noyanza chakula ing'ombe",
+       "nn" => "Sir teta nekemande",
+       "kp" => "Sir teta nekemande"
+   );
+   
+   public static $RECORDING_SERVICING = array(
+       "en" => "Recording a servicing: Please select a cow",
+       "sw" => "Kurekodi kupandwa: Chagua ng'ombe",
+       "lu" => "Handichisia okhilusia: yaula ing'ombe",
+       "kr" => "Khulandichisianga okhwirusia.Noyanza chakula ing'ombe",
+       "nn" => "Sir teta nekakilany",
+       "kp" => "Sir teta nekakilany"
+   );
+   
+   public static $SELECT_SERVICE_TYPE = array(
+       "en" => "Select the type of servicing",
+       "sw" => "Chagua aina",
+       "lu" => "Yaula kabila yo khwilusia",
+       "kr" => "Chakula okhwirusia.",
+       "nn" => "Lewen kalanyetab teta",
+       "kp" => "Lewen kalanyetab teta"
+   );
+   
+    public static $RECORDING_SICKNESS = array(
+       "en" => "Reporting sickness: Please select a cow",
+       "sw" => "Kuripoti ugonjwa: Chagua ng'ombe",
+       "lu" => "Handichisia okhulwala: yaula ing'ombe",
+       "kr" => "Khularepotanga obulwale.Niyanza chakule ing'ombe",
+       "nn" => "Sir teta ne kamian",
+       "kp" => "Sir teta ne kamian"
+   );
+    
+    public static $RECORDING_SOH = array(
+       "en" => "Recording Heat: Please select a cow",
+       "sw" => "Kurekodi joto: Chagua ng'ombe",
+       "lu" => "Handichisia khwinya echirushi: yaula ing'ombe",
+       "kr" => "Khulandichisianga edalili yo khwirukha.Noyanza chakula ing'ombe",
+       "nn" => "Sir teta nemache  kirgit",
+       "kp" => "Sir teta nemache  kirgit"
+   );
+   
+   public static $SELECT_VALID_OPTION = array(
+       "en" => "Please select a valid option",
+       "sw" => "Tafadhali chagua chaguo sahihi",
+       "lu" => "Yaula shikhole shikhoyere",
+       "kr" => "Noyanza chakula elijibu lia toto",
+       "nn" => "Lewen tuguk cheyonotin",
+       "kp" => "Lewen tuguk cheyonotin"
+   );
+   
+   public static $WRONG_FORMAT_COW_DATA = array(
+       "en" => "The format you used for the milk data was wrong. Try again",
+       "sw" => "",
+       "lu" => "Shiwandichisiye amabere bulai tawe. Kalushira",
+       "kr" => "Einjila yorumishile okhwinjisia esabu amabele shiyili ya toto tawe",
+       "nn" => "Olekesirte chego chekekei komaunot.tiem kokeny",
+       "kp" => "Olekesirte chego chekekei komaunot.tiem kokeny"
+   );
+   
+   public static $MILK_DATA_ALREADY_THERE = array(
+       "en" => "You have already entered milk data for the cow for the time selected",
+       "sw" => "Umekwisha rekodi kiwango ya maziwa kwa wakati uliochagua",
+       "lu" => "Wandichisiye khale amabere ke-ing'ombe ino khu bise bio-yaule",
+       "kr" => "Winjisiye khale esabu ya amabele ke ing'ombe khu wakati yo chakule",
+       "nn" => "Kaisir chegoab tanyi eng saait ne lewenot",
+       "kp" => "Kaisir chegoab tanyi eng saait ne lewenot"
+   );
+   
+   public static $INFO_RECORDED = array(
+       "en" => "Information successfully recorded",
+       "sw" => "Habari imarekodiwa",
+       "lu" => "Wandichisiye obulai",
+       "kr" => "Amakhuba kandichisivwe obulayi",
+       "nn" => "Kakosulda tuguk chekesir",
+       "kp" => "Kakosulda tuguk chekesir"
+   );
+   
+   public static $SERVICING_INSTR = array(
+       "en" => "Enter the name of the servicing bull and the owner of the bull",
+       "sw" => "",
+       "lu" => "Handichisia elira lie echirushi nende amera ka mwene echirushi",
+       "kr" => "Injisia elira liesulusi nende mwene sulusi",
+       "nn" => "Sir kainetab kirgit nekaristoe ak chitoab koba kirgit",
+       "kp" => "Sir kainetab kirgit nekaristoe ak chitoab koba kirgit"
+   );
+   
+   public static $AI_INSTR = array(
+       "en" => "Enter the straw number and the vet used",
+       "sw" => "",
+       "lu" => "Handichisia inamba yolutseshe nende amera komusilishi",
+       "kr" => "Injisia enamba yilikhumpira nende vetnari wetsa",
+       "nn" => "Sir nambaritab mbiret ak chito nekelanyi",
+       "kp" => "Sir nambaritab mbiret ak chito nekelanyi"
+   );
+   
+   public static $CALVING_INSTR = array(
+       "en" => "Enter the type of birth",
+       "sw" => "Ingiza aina ya kujifungua",
+       "lu" => "Handichisia aina yokhwibula",
+       "kr" => "Injisia khuliyebula",
+       "nn" => "Sir olekaito moita",
+       "kp" => "Sir olekaito moita"
+   );
+   
+   public static $BULL_SERVICING = array(
+       "en" => "Bull Servicing",
+       "sw" => "Kupandwa na ndume",
+       "lu" => "Khwirusia nende echirushi",
+       "kr" => "Okhwirusia nende esulusi",
+       "nn" => "Kakilany kirgit",
+       "kp" => "Kakilany kirgit"
+   );
+   
+   public static $ARTIFICIAL_INSEMINATION = array(
+       "en" => "Artificial Insemination",
+       "sw" => "Mbegu ya kuuzwa (AI)",
+       "lu" => "Khwurusia nende omupira",
+       "kr" => "Okhwirusia nende omupira",
+       "nn" => "Kakilany mbiret",
+       "kp" => "Kakilany mbiret"
+   );
+   
+   public static $UNKNOWN_OPTION_SELECTED = array(
+       "en" => "Unknown option selected",
+       "sw" => "Chaguo uliochagua haijulikani",
+       "lu" => "Shikhole shoyaule sishimanyishe tawe",
+       "kr" => "Ochakule eshipindi shikhali shawene tawe",
+       "nn" => "Kelewen kit nemami",
+       "kp" => "Kelewen kit nemami"
+   );
+   
+   public static $NORMAL = array(
+       "en" => "Normal",
+       "sw" => "Kawaida",
+       "lu" => "Kawaida",
+       "kr" => "shebulwa eshilamu",
+       "nn" => "Moita nekakaran",
+       "kp" => "Moita nekakaran"
+   );
+   
+   public static $STILL = array(
+       "en" => "Still",
+       "sw" => "Kama imefia",
+       "lu" => "Khuhusia",
+       "kr" => "Shebulwa nishifwile",
+       "nn" => "Moita meat",
+       "kp" => "Moita meat"
+   );
+   
+   public static $PREMATURE = array(
+       "en" => "Premature",
+       "sw" => "Kuzaliwa mapema",
+       "lu" => "Khwibula olulashiaba",
+       "kr" => "Shebulwa tsisiku nitsishili",
+       "nn" => "Moita netoma koit betushek",
+       "kp" => "Moita netoma koit betushek"
+   );
+   
+   public static $ABORTION = array(
+       "en" => "Abortion",
+       "sw" => "Utoaji mimba",
+       "lu" => "Okhwirulutsa",
+       "kr" => "Okhuwulula",
+       "nn" => "Kaos moita",
+       "kp" => "Kaos moita"
+   );
+   
+   public static $PURCHASE = array(
+       "en" => "Purchase",
+       "sw" => "Kununua",
+       "lu" => "Okhukula",
+       "kr" => "okukula",
+       "nn" => "Keal tany",
+       "kp" => "Keal tany"
+   );
+   
+   public static $DOWRY = array(
+       "en" => "Dowry",
+       "sw" => "Mahari",
+       "lu" => "Obukhwe",
+       "kr" => "Eikhwe",
+       "nn" => "Kaniok",
+       "kp" => "Kaniok"
+   );
+   
+   public static $GIFT = array(
+       "en" => "Gift",
+       "sw" => "Zawadi",
+       "lu" => "Eshihanwa",
+       "kr" => "Eshihanwa",
+       "nn" => "Konunutiet",
+       "kp" => "Konunutiet"
+   );
+
+   public static $ACQ_INSTR = array(
+       "en" => "Recording an aquisition: Select the type of acquisition",
+       "sw" => "Kurekodi kuingia: Chagua aina ya kuingia",
+       "lu" => "Handichisia ing'ombe imbiakha: yaula shinga wainyola",
+       "kr" => "Khulandichisianga okhukula.Noyanza andichisia wakula oriena",
+       "nn" => "Kenyorunde ano tanyi",
+       "kp" => "Kenyorunde ano tanyi"
+   );
+   
+   public static $ACQ_NO_INSTR = array(
+       "en" => "Please enter the number of cattle acquired",
+       "sw" => "Ingiza idadi ya ng'ombe wapya",
+       "lu" => "Handichisia inamba yetsing'ombe tsimbiakha",
+       "kr" => "Noyanza injisia esabu ye tsing'ombe tsiakulwa",
+       "nn" => "Ata tuga che toek",
+       "kp" => "Ata tuga che toek"
+   );
+   
+   public static $ENTER_NUMBER = array(
+       "en" => "Please enter a number",
+       "sw" => "Tafadhali ingiza nambari",
+       "lu" => "Handika inamba",
+       "kr" => "Noyanza injisia esabu",
+       "nn" => "Sir nambarit",
+       "kp" => "Sir nambarit"
+   );
+   
+   public static $NUMBER_GT_ZERO = array(
+       "en" => "Number should be greater than 0",
+       "sw" => "Namba inafaa kuwa zaidi ya 0",
+       "lu" => "Inamba ishile 0",
+       "kr" => "Esabu kenyanga ivure 0",
+       "nn" => "Nyalu kosir 0",
+       "kp" => "Nyalu kosir 0"
+   );
+   
+   public static $DISPOSAL_INSTR = array(
+       "en" => "Select the method of disposal",
+       "sw" => "Chagua aina ya kutoka",
+       "lu" => "Yaula injira yokhurusia ing'ombe",
+       "kr" => "Chakula einjira yokhurusia",
+       "nn" => "Kemandaite ano",
+       "kp" => "Kemandaite ano"
+   );
+   
+   public static $SALE = array(
+       "en" => "Sale",
+       "sw" => "Kuuzwa",
+       "lu" => "Khukusia",
+       "kr" => "Okhukusia",
+       "nn" => "Kealde",
+       "kp" => "Kealde"
+   );
+   
+   public static $DEATH = array(
+       "en" => "Death",
+       "sw" => "Kifo",
+       "lu" => "Khufwa",
+       "kr" => "Okhufwa",
+       "nn" => "Kame",
+       "kp" => "Kame"
+   );
+   
+   public static $MILK_DATA_INCONSISTENT = array(
+       "en" => "Quantity of milk provided is inconsistent with past records",
+       "sw" => "Kiasi ya maziwa ulioigiza haiendani. Uko na uhakika",
+       "lu" => "Shichero shia amabere kowandichisiye sikafwanane nende efichero fia khale tawe",
+       "kr" => "Esabu ya amabele shiyifwanane nende etsirekodi tsia khale",
+       "nn" => "Manamekey chego chekisir ak chebotai",
+       "kp" => "Manamekey chego chekisir ak chebotai"
+   );
+   
+   public static $OKAY = array(
+       "en" => "Okay",
+       "sw" => "Sawa",
+       "lu" => "Abwene",
+       "kr" => "Obulayi",
+       "nn" => "Unoto",
+       "kp" => "Unoto"
+   );
+   
+   public static $CANCEL = array(
+       "en" => "Cancel",
+       "sw" => "Futa",
+       "lu" => "Kenzula",
+       "kr" => "Futa",
+       "nn" => "Til",
+       "kp" => "Til"
+   );
+   
+   public static $MILK_DATA_FOR_COW_ENTERED = array(
+       "en" => "You have already entered all milk data for this cow",
+       "sw" => "Umeingiza idadi zote za maziwa za ng'ombe huyu",
+       "lu" => "Omalile okhuhandichisia amabere keing'ombe ino",
+       "kr" => "Omalile okhuhandichisia amabere keing'ombe ino",
+       "nn" => "Kaisir chego tugul chebo tanyi",
+       "kp" => "Kaisir chego tugul chebo tanyi"
+   );
+   
+   public static $RECORDING_VACCINATION = array(
+       "en" => "Recording vaccination: Please select a cow",
+       "sw" => "Kurekodi kuchanjwa: Chagua ng'ombe",
+       "lu" => "Handichisia okhuhana echanjo.Yaula ing'ombe",
+       "kr" => "Handichisia okhuhana echanjo.Yaula ing'ombe",
+       "nn" => "Kurekodi kuchanjwa: Chagua ng'ombe",
+       "kp" => "Kurekodi kuchanjwa: Chagua ng'ombe"
+   );
+   
+   public static $RECORD_SOH = array(
+       "en" => "Record Heat",
+       "sw" => "Rekodi Joto",
+       "lu" => "Khwinya okhwirukha",
+       "kr" => "Okhwenya esulusi",
+       "nn" => "Maketab kirgit",
+       "kp" => "Maketab kirgit"
+   );
+   
+   public static  $PRESS_3_REP = array(//TODO: translate
+       "en" => "3. Reproduction",
+       "sw" => "3. Reproduction",
+       "lu" => "3. Reproduction",
+       "kr" => "3. Reproduction",
+       "nn" => "3. Reproduction",
+       "kp" => "3. Reproduction"
+   );
+   
+   public static $PRESS_4_RECORDS = array(
+       "en" => "4. Get Records",
+       "sw" => "4. Get Records",
+       "lu" => "4. Get Records",
+       "kr" => "4. Get Records",
+       "nn" => "4. Get Records",
+       "kp" => "4. Get Records"
+   );
+   
+   public static $PRESS_5_EVENTS = array(
+       "en" => "5. Other Events",
+       "sw" => "5. Other Events",
+       "lu" => "5. Other Events",
+       "kr" => "5. Other Events",
+       "nn" => "5. Other Events",
+       "kp" => "5. Other Events"
+   );
+   
+   public static $PRESS_6_P_MEASURES = array(
+       "en" => "6. Prevention",
+       "sw" => "6. Prevention",
+       "lu" => "6. Prevention",
+       "kr" => "6. Prevention",
+       "nn" => "6. Prevention",
+       "kp" => "6. Prevention"
+   );
+   
+   public static $RECORD_SERVICING = array(//TODO: translate
+       "en" => "Record Serving",
+       "sw" => "Rekodi Kupandwa",
+       "lu" => "Rekodi Kupandwa",
+       "kr" => "Rekodi Kupandwa",
+       "nn" => "Rekodi Kupandwa",
+       "kp" => "Rekodi Kupandwa"
+   );
+   
+   public static $RECORD_CALVING = array(
+       "en" => "Record Calving",
+       "sw" => "Record Kuzaliwa",
+       "lu" => "Handichisia okhwibula",
+       "kr" => "Andichisia okhwibula",
+       "nn" => "Sir iet",
+       "kp" => "Sir iet"
+   );
+   
+   public static $RECORD_PREG_CONF = array(
+       "en" => "Confirm Pregnancy",
+       "sw" => "Confirm Pregnancy",
+       "lu" => "Confirm Pregnancy",
+       "kr" => "Confirm Pregnancy",
+       "nn" => "Confirm Pregnancy",
+       "kp" => "Confirm Pregnancy"
+   );
+   
+   public static $RECORDING_PREG_CONF = array(
+       "en" => "Recording pregnancy confirmation: Please select a cow",
+       "sw" => "Recording pregnancy confirmation: Please select a cow",
+       "lu" => "Recording pregnancy confirmation: Please select a cow",
+       "kr" => "Recording pregnancy confirmation: Please select a cow",
+       "nn" => "Recording pregnancy confirmation: Please select a cow",
+       "kp" => "Recording pregnancy confirmation: Please select a cow"
+   );
+   
+   public static $YDAY_MILK_RECORDS = array(
+       "en" => "Y'day's Milk Records",
+       "sw" => "Y'day's Milk Records",
+       "lu" => "Y'day's Milk Records",
+       "kr" => "Y'day's Milk Records",
+       "nn" => "Y'day's Milk Records",
+       "kp" => "Y'day's Milk Records"
+   );
+   
+   public static $MONTH_MILK_RECORDS = array(
+       "en" => "Months's Milk Records",
+       "sw" => "Months's Milk Records",
+       "lu" => "Months's Milk Records",
+       "kr" => "Months's Milk Records",
+       "nn" => "Months's Milk Records",
+       "kp" => "Months's Milk Records"
+   );
+   
+   public static $WEEK_MILK_RECORDS = array(
+       "en" => "Week's Milk Records",
+       "sw" => "Week's Milk Records",
+       "lu" => "Week's Milk Records",
+       "kr" => "Week's Milk Records",
+       "nn" => "Week's Milk Records",
+       "kp" => "Week's Milk Records"
+   );
+   
+   public static $MONTH_EVENT_RECORDS = array(
+       "en" => "Month's Event Records",
+       "sw" => "Month's Event Records",
+       "lu" => "Month's Event Records",
+       "kr" => "Month's Event Records",
+       "nn" => "Month's Event Records",
+       "kp" => "Month's Event Records"
+   );
+   
+   public static $INFO_WILL_BE_SENT = array(
+       "en" => "Records will be sent to you",
+       "sw" => "Records will be sent to you",
+       "lu" => "Records will be sent to you",
+       "kr" => "Records will be sent to you",
+       "nn" => "Records will be sent to you",
+       "kp" => "Records will be sent to you"
+   );
+   
+   public static $START_OF_LACT = array(
+       "en" => "Start of Lactation",
+       "sw" => "Start of Lactation",
+       "lu" => "Start of Lactation",
+       "kr" => "Start of Lactation",
+       "nn" => "Start of Lactation",
+       "kp" => "Start of Lactation"
+   );
+   
+   public static $RECORDING_START_OF_LACT = array(
+       "en" => "Recording Start of Lactation: Please select a cow ",
+       "sw" => "Recording Start of Lactation: Please select a cow ",
+       "lu" => "Recording Start of Lactation: Please select a cow ",
+       "kr" => "Recording Start of Lactation: Please select a cow ",
+       "nn" => "Recording Start of Lactation: Please select a cow ",
+       "kp" => "Recording Start of Lactation: Please select a cow "
+   );
+   
+   public static $RECORDING_DRY_OFF = array(
+       "en" => "Recording Dry Off: Please select a cow ",
+       "sw" => "Recording Dry Off: Please select a cow ",
+       "lu" => "Recording Dry Off: Please select a cow ",
+       "kr" => "Recording Dry Off: Please select a cow ",
+       "nn" => "Recording Dry Off: Please select a cow ",
+       "kp" => "Recording Dry Off: Please select a cow "
+   );
+   
+   public static $DRY_OFF = array(
+       "en" => "Dry Off",
+       "sw" => "Dry Off",
+       "lu" => "Dry Off",
+       "kr" => "Dry Off",
+       "nn" => "Dry Off",
+       "kp" => "Dry Off"
+   );
+   
+   public static $DIPPING_SPRAYING = array(
+       "en" => "Dipping/Spraying",
+       "sw" => "Dipping/Spraying",
+       "lu" => "Dipping/Spraying",
+       "kr" => "Dipping/Spraying",
+       "nn" => "Dipping/Spraying",
+       "kp" => "Dipping/Spraying"
+   );
+   
+   public static $DEWORMING = array(
+       "en" => "Deworming",
+       "sw" => "Deworming",
+       "lu" => "Deworming",
+       "kr" => "Deworming",
+       "nn" => "Deworming",
+       "kp" => "Deworming"
+   );
+   
+   public static $VACCINATION = array(
+       "en" => "Vaccination",
+       "sw" => "Kuchanjwa",
+       "lu" => "Khuchanja",
+       "kr" => "Okhucanja",
+       "nn" => "Kuchanjwa",
+       "kp" => "Kuchanjwa"
+   );
+   
+   public static $MILK_RECORDS_YDAY = array(
+       "en" => "Milk records for yesterday:",
+       "sw" => "Milk records for yesterday:",
+       "lu" => "Milk records for yesterday:",
+       "kr" => "Milk records for yesterday:",
+       "nn" => "Milk records for yesterday:",
+       "kp" => "Milk records for yesterday:"
+   );
+   
+   public static $NO_YDAY_MILK_RECORDS = array(
+       "en" => "You do not have any milk records from yesterday",
+       "sw" => "You do not have any milk records from yesterday",
+       "lu" => "You do not have any milk records from yesterday",
+       "kr" => "You do not have any milk records from yesterday",
+       "nn" => "You do not have any milk records from yesterday",
+       "kp" => "You do not have any milk records from yesterday"
+   );
+   
+   public static $MILK_RECORDS_WEEK = array(
+       "en" => "Milk records for this week:",
+       "sw" => "Milk records for this week:",
+       "lu" => "Milk records for this week:",
+       "kr" => "Milk records for this week:",
+       "nn" => "Milk records for this week:",
+       "kp" => "Milk records for this week:"
+   );
+   
+   public static $NO_WEEK_MILK_RECORDS = array(
+       "en" => "You do not have any milk records from the past week",
+       "sw" => "You do not have any milk records from the past week",
+       "lu" => "You do not have any milk records from the past week",
+       "kr" => "You do not have any milk records from the past week",
+       "nn" => "You do not have any milk records from the past week",
+       "kp" => "You do not have any milk records from the past week"
+   );
+   
+   public static $MILK_RECORDS_MONTH = array(
+       "en" => "Milk records for this month:",
+       "sw" => "Milk records for this month:",
+       "lu" => "Milk records for this month:",
+       "kr" => "Milk records for this month:",
+       "nn" => "Milk records for this month:",
+       "kp" => "Milk records for this month:"
+   );
+   
+   public static $NO_MONTH_MILK_RECORDS = array(
+       "en" => "You do not have any milk records from the past month",
+       "sw" => "You do not have any milk records from the past month",
+       "lu" => "You do not have any milk records from the past month",
+       "kr" => "You do not have any milk records from the past month",
+       "nn" => "You do not have any milk records from the past month",
+       "kp" => "You do not have any milk records from the past month"
+   );
+   
+   public static $EVENT_RECORDS_MONTH = array(
+       "en" => "Events from this month:",
+       "sw" => "Events from this month:",
+       "lu" => "Events from this month:",
+       "kr" => "Events from this month:",
+       "nn" => "Events from this month:",
+       "kp" => "Events from this month:"
+   );
+   
+   public static $NO_MONTH_EVENT_RECORDS = array(
+       "en" => "You do not have any events from the past month",
+       "sw" => "You do not have any events from the past month",
+       "lu" => "You do not have any events from the past month",
+       "kr" => "You do not have any events from the past month",
+       "nn" => "You do not have any events from the past month",
+       "kp" => "You do not have any events from the past month"
+   );
+
+   private $TAG = "Translator";
+   private $locale;
+   private $logHandler;
+   private $database;
+   
+   public function __construct($logHandler, $database, $locale = -1){
+      $this->logHandler = $logHandler;
+      $this->locale = $locale;
+      $this->database = $database;
+      
+      $this->logHandler->log(3, $this->TAG, "Initialized translator");
+   }
+   
+   public function isLocaleSet(){
+      if($this->locale == -1){
+         return false;
+      }
+      return true;
+   }
+   
+   public function getLocale(){
+      $locale = $this->locale;
+      if($locale == -1){
+         $this->logHandler->log(2, $this->TAG, "Locale not set, defaulting to english");
+         $locale = "en";
+      }
+      return $locale;
+   }
+
+   public function setLocale($phoneNumber){
+      $query = "SELECT pref_locale FROM farmer WHERE mobile_no LIKE '%{$phoneNumber}'";
+      $result = $this->database->runMySQLQuery($query, true);
+      if(is_array($result) && $result[0]['pref_locale'] != null && strlen($result[0]['pref_locale']) > 0){
+         $this->logHandler->log(3, $this->TAG, "Setting the locale for " . $phoneNumber . " = ".$result[0]['pref_locale']);
+         $this->locale = $result[0]['pref_locale'];
+      }
+      else{
+         $this->logHandler->log(2, $this->TAG, "No prefered locale found for " . $phoneNumber . ". Defaulting to english");
+         $this->locale = "en";
+      }
+   }
+   
+   public function getText($textContainer, $locale = -1){
+      if($locale == -1)
+         $locale = $this->locale;
+      
+      if($locale != -1){
+         $translatedText = $textContainer[$locale];
+         $this->logHandler->log(4, $this->TAG, "Translated text to " . $translatedText);//switch to debug
+         return $translatedText;
+      }
+      else{
+         $defaultText = $this->getText($textContainer, "eng");
+         $this->logHandler->log(2,  $this->TAG, "No prefered locale provided for ".print_r($textContainer, true).". Returning ".$defaultText);
+         return $defaultText;
+      }
+   }
+}
+?>

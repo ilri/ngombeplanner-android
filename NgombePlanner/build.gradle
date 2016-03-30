@@ -3,7 +3,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+<<<<<<< HEAD
+        classpath 'com.android.tools.build:gradle:1.5.0'
+=======
         classpath 'com.android.tools.build:gradle:0.12.+'
+>>>>>>> github/master
     }
 }
 apply plugin: 'android'
